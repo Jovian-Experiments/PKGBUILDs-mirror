@@ -86,17 +86,23 @@ minimum_free_disk_space_needed_megs=500
 
 if [[ "$free_disk_space_megs" -lt "$minimum_free_disk_space_needed_megs" ]]; then
 	echo >&2 "gamescope-session: not enough disk space to proceed, trying to find game to delete"
-	# */ syntax lets you only find directories
-	oldest_installed_game=$(ls -dart ~/.local/share/Steam/steamapps/common/*/ | sed -n '1 p')
-	acf=$(grep "$(basename "$oldest_installed_game")" ~/.local/share/Steam/steamapps/*.acf | grep installdir | cut -d: -f1)
 
-	if [[ -e "$acf" ]]; then
-		echo >&2 "gamescope-session: deleting $(basename "$oldest_installed_game")"
+	find ~/.local/share/Steam/steamapps/common/ -mindepth 1 -maxdepth 1 -type d -printf "%T@ %p\0" | sort -n -z | while read -r -d $'\0' timestamp game_folder; do
+		[[ -d $game_folder ]]  || continue
+
+		acf=$(grep "$(basename "$game_folder")" ~/.local/share/Steam/steamapps/*.acf | grep installdir | cut -d: -f1)
+		[[ -e "$acf" ]] || continue
+
+		echo >&2 "gamescope-session: deleting $(basename "$game_folder")"
 		appid=$(basename "$acf" | cut -d_ -f2 | cut -d. -f1)
-		# intentionally leave compatdata there, could be unclouded save files there
-		rm -rf --one-file-system "$oldest_installed_game" "$acf" ~/.local/share/Steam/steamapps/shadercache/$appid
+
 		# TODO leave a note for Steam to display UI to explain what happened, if this logic stays
-	fi
+		# intentionally leave compatdata; could be unclouded save files there
+		rm -rf --one-file-system "$game_folder" "$acf" ~/.local/share/Steam/steamapps/shadercache/"$appid"
+
+		free_disk_space_megs=$(df ~/ --output=avail -B1048576 | sed -n '2 p' | xargs)
+		[[ "$free_disk_space_megs" -lt "$minimum_free_disk_space_needed_megs" ]] || break
+	done
 fi
 
 export GAMESCOPE_STATS="$stats"
