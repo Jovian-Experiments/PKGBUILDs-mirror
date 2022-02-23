@@ -1,9 +1,9 @@
 # Maintainer: Collabora Ltd <gael.portay@collabora.com>
 
 pkgname=steamos-customizations-jupiter
-_srctag=jupiter-20220221.2
+_srctag=jupiter-20220222.1
 pkgver=${_srctag#jupiter-}
-pkgrel=2.1
+pkgrel=1
 pkgdesc='SteamOS customizations (Jupiter fork) - This package installs various SteamOS-specific files'
 arch=('any')
 url='http://repo.steampowered.com'
