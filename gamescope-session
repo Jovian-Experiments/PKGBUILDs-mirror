@@ -122,7 +122,18 @@ else
 	echo >&2 "!! Failed to claim global gamescope stats session"
 fi
 
-gamescope --generate-drm-mode fixed --xwayland-count 2 -w 1280 -h 800 --default-touch-mode 4 --hide-cursor-delay 3000 --max-scale 2 --fade-out-duration 200 -e -R "$socket" -T "$stats" -O DP-1,eDP-1 --cursor-hotspot 5,3 --cursor /usr/share/steamos/steamos-cursor.png &
+gamescope \
+	--generate-drm-mode fixed \
+	--xwayland-count 2 \
+	-w 1280 -h 800 \
+	--default-touch-mode 4 \
+	--hide-cursor-delay 3000 \
+	--max-scale 2 \
+	--fade-out-duration 200 \
+	-e -R "$socket" -T "$stats" \
+	-O '*',eDP-1 \
+	--cursor-hotspot 5,3 --cursor /usr/share/steamos/steamos-cursor.png \
+	&
 gamescope_pid="$!"
 
 if read -r -t 3 response_x_display response_wl_display <> "$socket"; then
