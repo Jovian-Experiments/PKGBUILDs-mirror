@@ -1,9 +1,9 @@
 # Maintainer: Pierre-Loup A. Griffais <pgriffais@valvesoftware.com>
 
 pkgname=gamescope
-_srctag=3.11.23
+_srctag=3.11.24-beta2
 pkgver=${_srctag//-/.}
-pkgrel=4
+pkgrel=1
 pkgdesc="gaming shell based on Xwayland, powered by Vulkan and DRM"
 arch=(x86_64)
 url="https://github.com/Plagman/gamescope"
@@ -21,11 +21,11 @@ source=("gamescope-session"
         # FIXME Upstream gamescope is just selecting master branch at build time, so we are arbitrarily snapshotting a
         #       revision when bumping the version here such that the build is reproducible.
         "git+https://github.com/nothings/stb.git#commit=af1a5bc352164740c1cc1354942b1c6b72eacb8a")
-sha256sums=('f7bd9c1842721218377e29cca48dbb9a5876a2ba1dade49b15721028bc3a324d'
+sha256sums=('9ed3fc9948954bc79fd40337331ca2ecf24de3911dbb9a4fa3690d94bf9f5ca2'
             '9e36028b3459f4566b2d6a469f96728aaea8b9f9ea6e205b03d464c8077bd68c'
-            'd81ff0942863e055d7ccf81c6568fda7f0eb6dcb4f87ee00350a674282d14841'
+            '0661f81cb268c7f4452534eb1ae59620b9311061a7d45c2d7eef4a5b8bc9666d'
             '525060896abef2da9db8d8294253b7444d60e48cf6cc0496ca48fc7084cc8590'
-            '713a724a88776156d2926ad4815a2d24e5d0e5f4b36833651e6fbc8d41476a98'
+            'e55f8f2ca167ce3c4615d2e423f7eb6ed02019e37e0bbaa3b050a85b25468849'
             'SKIP'
             'SKIP'
             'SKIP'
