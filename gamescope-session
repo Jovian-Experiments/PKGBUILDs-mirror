@@ -62,7 +62,8 @@ export GTK_IM_MODULE=Steam
 
 # To play nice with the short term callback-based limiter for now
 export vblank_mode=1
-export MESA_VK_WSI_PRESENT_MODE=fifo
+
+export GAMESCOPE_LIMITER_FILE=$(mktemp /tmp/gamescope-limiter.XXXXXXXX)
 
 export XCURSOR_THEME=steam
 
