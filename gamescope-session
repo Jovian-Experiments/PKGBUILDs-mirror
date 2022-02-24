@@ -48,6 +48,10 @@ export STEAM_MULTIPLE_XWAYLANDS=1
 # Don't wait for buffers to idle on the client side before sending them to gamescope
 export vk_xwayland_wait_ready=false
 
+# Set input method modules for Qt/GTK that will show the Steam keyboard
+export QT_IM_MODULE=steam
+export GTK_IM_MODULE=Steam
+
 # TODO!
 # Bring this back when gamescope side is more complete
 #
