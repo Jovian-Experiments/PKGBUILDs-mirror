@@ -30,7 +30,8 @@ export WINEDLLOVERRIDES=dxgi=n
 export STEAMOS_STEAM_REBOOT_SENTINEL="/tmp/steamos-reboot-sentinel"
 if [[ -e "$STEAMOS_STEAM_REBOOT_SENTINEL" ]]; then
 	rm -f "$STEAMOS_STEAM_REBOOT_SENTINEL"
-	sudo reboot
+	/usr/bin/steamos-polkit-helpers/steamos-reboot-now
+	sudo -n reboot
 fi
 
 # Enable volume key management via steam for this session
