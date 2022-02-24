@@ -1,0 +1,10 @@
+[Unit]
+Description="SteamOS Devkit Service"
+
+[Service]
+ExecStart=/usr/bin/steamos-devkit-service
+# FIXME: will not survive the shipping username transition!
+User=doorstop
+
+[Install]
+WantedBy=multi-user.target
