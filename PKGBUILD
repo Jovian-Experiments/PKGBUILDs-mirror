@@ -3,7 +3,7 @@
 pkgname=gamescope
 _srctag=3.11.24-beta2
 pkgver=${_srctag//-/.}
-pkgrel=5
+pkgrel=5.1
 pkgdesc="gaming shell based on Xwayland, powered by Vulkan and DRM"
 arch=(x86_64)
 url="https://github.com/Plagman/gamescope"
