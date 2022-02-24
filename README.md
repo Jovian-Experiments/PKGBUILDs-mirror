@@ -1,5 +1,5 @@
 
-`release @ 20220223.1`
+`release @ 20220223.2`
 ======================
 
 Valve packages
@@ -748,7 +748,7 @@ Arch Linux packages
  * [`which/2.21-5`](https://gitlab.archlinux.org/archlinux/packaging/packages/which/-/tree/2.21-5)
  * [`wireless-regdb/2021.08.28-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/wireless-regdb/-/tree/2021.08.28-1)
  * [`wireless_tools/30.pre9-3`](https://gitlab.archlinux.org/archlinux/packaging/packages/wireless_tools/-/tree/30.pre9-3)
- * [`wireplumber/0.4.7-1.5`](https://gitlab.archlinux.org/archlinux/packaging/packages/wireplumber/-/tree/0.4.7-1.5)
+ * [`wireplumber/0.4.7-1.6`](https://gitlab.archlinux.org/archlinux/packaging/packages/wireplumber/-/tree/0.4.7-1.6)
  * [`wpa_supplicant/2:2.10-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/wpa_supplicant/-/tree/2:2.10-1)
  * [`x264/3:0.163.r3060.5db6aa6-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/x264/-/tree/3:0.163.r3060.5db6aa6-1)
  * [`x265/3.5-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/x265/-/tree/3.5-1)
