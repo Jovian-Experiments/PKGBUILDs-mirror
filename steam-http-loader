@@ -1,0 +1,21 @@
+#!/bin/env python
+import urllib.parse
+import os.path
+import argparse
+import subprocess
+
+parser = argparse.ArgumentParser(description='Launch a link in the steam browser.')
+
+parser.add_argument('uri')
+args = parser.parse_args()
+
+url = urllib.parse.urlparse(args.uri, "file")
+
+if (url.scheme == "file" and not os.path.isabs(url.path)):
+    absolute_path = os.path.abspath(url.path)
+    url = url._replace(path=absolute_path)
+
+action = "openurl_external"
+
+final_url = "steam://{0}/{1}".format(action, url.geturl())
+subprocess.run(["steam", final_url])
