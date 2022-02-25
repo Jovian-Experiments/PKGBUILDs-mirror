@@ -1,5 +1,5 @@
 
-`release @ 20220223.2`
+`release @ 20220224.1`
 ======================
 
 Valve packages
@@ -15,7 +15,7 @@ Valve packages
  * [`linux-neptune` — `jupiter-rel/linux-neptune-5.13.0.valve10.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-rel/linux-neptune-5.13.0.valve10.1-1)
  * [`mangohud` — `jupiter-rel/mangohud-0.6.6.1.r123.g93f389d-3`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-rel/mangohud-0.6.6.1.r123.g93f389d-3)
  * [`steamos-customizations-jupiter` — `jupiter-rel/steamos-customizations-jupiter-20220221.2-2.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-rel/steamos-customizations-jupiter-20220221.2-2.1)
- * [`vpower` — `jupiter-rel/vpower-1.2.5-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-rel/vpower-1.2.5-2)
+ * [`vpower` — `jupiter-rel/vpower-1.2.6-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-rel/vpower-1.2.6-2)
 
 Arch Linux packages
 -------------------
@@ -437,7 +437,7 @@ Arch Linux packages
  * [`libutempter/1.2.1-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/libutempter/-/tree/1.2.1-1)
  * [`libva/2.13.0-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/libva/-/tree/2.13.0-1)
  * [`libva-intel-driver/2.4.1-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/libva-intel-driver/-/tree/2.4.1-1)
- * [`libva-mesa-driver/22.0.0_devel.148037.radeonsi_20220124-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/mesa/-/tree/22.0.0_devel.148037.radeonsi_20220124-1)
+ * [`libva-mesa-driver/22.0.0_devel.148040.radeonsi_20220217-5`](https://gitlab.archlinux.org/archlinux/packaging/packages/mesa/-/tree/22.0.0_devel.148040.radeonsi_20220217-5)
  * [`libvdpau/1.4-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/libvdpau/-/tree/1.4-1)
  * [`libvisual/0.4.0-8`](https://gitlab.archlinux.org/archlinux/packaging/packages/libvisual/-/tree/0.4.0-8)
  * [`libvorbis/1.3.7-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/libvorbis/-/tree/1.3.7-2)
@@ -500,9 +500,9 @@ Arch Linux packages
  * [`md4c/0.4.8-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/md4c/-/tree/0.4.8-1)
  * [`mdadm/4.2-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/mdadm/-/tree/4.2-1)
  * [`media-player-info/24-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/media-player-info/-/tree/24-2)
- * [`mesa/22.0.0_devel.148037.radeonsi_20220124-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/mesa/-/tree/22.0.0_devel.148037.radeonsi_20220124-1)
+ * [`mesa/22.0.0_devel.148040.radeonsi_20220217-5`](https://gitlab.archlinux.org/archlinux/packaging/packages/mesa/-/tree/22.0.0_devel.148040.radeonsi_20220217-5)
  * [`mesa-utils/8.4.0-6`](https://gitlab.archlinux.org/archlinux/packaging/packages/mesa-utils/-/tree/8.4.0-6)
- * [`mesa-vdpau/22.0.0_devel.148037.radeonsi_20220124-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/mesa/-/tree/22.0.0_devel.148037.radeonsi_20220124-1)
+ * [`mesa-vdpau/22.0.0_devel.148040.radeonsi_20220217-5`](https://gitlab.archlinux.org/archlinux/packaging/packages/mesa/-/tree/22.0.0_devel.148040.radeonsi_20220217-5)
  * [`milou/5.23.5-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/milou/-/tree/5.23.5-1)
  * [`minizip/1:1.2.11-5`](https://gitlab.archlinux.org/archlinux/packaging/packages/minizip/-/tree/1:1.2.11-5)
  * [`mobile-broadband-provider-info/20210805-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/mobile-broadband-provider-info/-/tree/20210805-1)
@@ -530,7 +530,7 @@ Arch Linux packages
  * [`ocl-icd/2.3.1-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/ocl-icd/-/tree/2.3.1-1)
  * [`oniguruma/6.9.7.1-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/oniguruma/-/tree/6.9.7.1-1)
  * [`openal/1.21.1-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/openal/-/tree/1.21.1-2)
- * [`opencl-mesa/22.0.0_devel.148037.radeonsi_20220124-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/mesa/-/tree/22.0.0_devel.148037.radeonsi_20220124-1)
+ * [`opencl-mesa/22.0.0_devel.148040.radeonsi_20220217-5`](https://gitlab.archlinux.org/archlinux/packaging/packages/mesa/-/tree/22.0.0_devel.148040.radeonsi_20220217-5)
  * [`opencore-amr/0.1.5-5`](https://gitlab.archlinux.org/archlinux/packaging/packages/opencore-amr/-/tree/0.1.5-5)
  * [`openjpeg2/2.4.0-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/openjpeg2/-/tree/2.4.0-1)
  * [`openssh/8.8p1-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/openssh/-/tree/8.8p1-1)
@@ -740,7 +740,7 @@ Arch Linux packages
  * [`vmaf/1.5.3-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/vmaf/-/tree/1.5.3-1)
  * [`volume_key/0.3.12-7`](https://gitlab.archlinux.org/archlinux/packaging/packages/volume_key/-/tree/0.3.12-7)
  * [`vulkan-icd-loader/1.2.203-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/vulkan-icd-loader/-/tree/1.2.203-1)
- * [`vulkan-radeon/22.0.0_devel.148759.jupiter_22.0.3-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/vulkan-radeon/-/tree/22.0.0_devel.148759.jupiter_22.0.3-1)
+ * [`vulkan-radeon/22.0.0_devel.148765.jupiter_22.0.5-5`](https://gitlab.archlinux.org/archlinux/packaging/packages/vulkan-radeon/-/tree/22.0.0_devel.148765.jupiter_22.0.5-5)
  * [`vulkan-tools/1.2.203-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/vulkan-tools/-/tree/1.2.203-1)
  * [`wayland/1.20.0-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/wayland/-/tree/1.20.0-1)
  * [`wayland-utils/1.0.0-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/wayland-utils/-/tree/1.0.0-2)
