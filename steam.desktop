@@ -1,0 +1,9 @@
+[Desktop Entry]
+TryExec=steam
+Type=Service
+Actions=addToSteam
+
+[Desktop Action addToSteam]
+Exec=sh -c 'xdg-open "steam://addnonsteamgame/"$(python3 -c "import urllib.parse;print(urllib.parse.quote_plus(\\"$0\\"))")' %u
+Icon=steam
+Name=Add to Steam
