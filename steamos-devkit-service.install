@@ -1,0 +1,14 @@
+post_install() {
+    echo ":: Enabling and starting SteamOS Devkit Service and its avahi dependency."
+    systemctl enable avahi-daemon
+    systemctl start avahi-daemon
+
+    systemctl enable steamos-devkit-service
+    systemctl start steamos-devkit-service
+}
+
+post_upgrade() {
+    echo ":: Restarting SteamOS Devkit Service."
+    systemctl daemon-reload
+    systemctl restart steamos-devkit-service
+}
