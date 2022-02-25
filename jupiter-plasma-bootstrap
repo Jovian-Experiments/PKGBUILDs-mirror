@@ -34,27 +34,12 @@ kscreen-doctor output.eDP.rotation.right \
   || kscreen-doctor output.1.rotation.right \
   || true
 
-# Force decent theme once.
-config=${XDG_CONFIG_DIR:-~/.config}/jupiter-bootstrap.once
-if [[ ! -e $config || $(cat "$config") != *"Version: 2" ]]; then
+# Set our global theme once
+if [[ ! -e $config || $(cat "$config") != *"Version: 3" ]]; then
   echo "# This file is created to inhibit repeating the jupiter desktop bootstrap, remove it to re-trigger." > "$config"
-  echo "Version: 2" >> "$config"
-  lookandfeeltool -a org.kde.breezedark.desktop || true
-  # And wallpaper. There's no actual CLI utility for messing with plasmashell I guess? But you can run scripts against
-  # it's api.
-  qdbus org.kde.plasmashell /PlasmaShell org.kde.PlasmaShell.evaluateScript "
-    var allDesktops = desktops();
-    print (allDesktops);
-    for (i=0;i<allDesktops.length;i++) {
-        d = allDesktops[i];
-        d.wallpaperPlugin = 'org.kde.image';
-        d.currentConfigGroup = Array('Wallpaper',
-                                    'org.kde.image',
-                                    'General');
-        d.writeConfig('Image', 'file:///usr/share/wallpapers/MilkyWay/contents/images/5120x2880.png')
-    }" || true
+  echo "Version: 3" >> "$config"
+  plasma-apply-lookandfeel -a com.valve.vapor.desktop
 fi
-
 
 ## Finally, for test purposes, we're going to keep our desktop shortcuts in sync with /etc/skel - this is e.g. the RTST
 ## launcher script and such that should get regenerated on re-image.
