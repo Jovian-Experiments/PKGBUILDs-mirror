@@ -1,6 +1,6 @@
 pkgname=steamos-devkit-service
 pkgver=0.20220224.0
-pkgrel=1
+pkgrel=2
 arch=('any')
 url="https://gitlab.steamos.cloud/steam/steamos-devkit-service"
 license=('LGPL-2.1+')
