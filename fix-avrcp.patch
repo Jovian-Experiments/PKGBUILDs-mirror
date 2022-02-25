@@ -1,0 +1,14 @@
+diff -ru bluez-5.63.orig/profiles/audio/avrcp.c bluez-5.63/profiles/audio/avrcp.c
+--- bluez-5.63.orig/profiles/audio/avrcp.c	2021-10-13 11:38:34.000000000 -0700
++++ bluez-5.63/profiles/audio/avrcp.c	2022-02-24 23:58:05.659212251 -0800
+@@ -1207,6 +1207,10 @@
+ 					GUINT_TO_POINTER(str_to_metadata(key)));
+ 	}
+ 
++	if (attrs == NULL)
++		return g_list_prepend(NULL,
++				GUINT_TO_POINTER(AVRCP_MEDIA_ATTRIBUTE_TITLE));
++
+ 	return attrs;
+ }
+ 
