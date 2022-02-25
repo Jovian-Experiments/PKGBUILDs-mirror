@@ -1,0 +1,221 @@
+#!/bin/bash
+
+set -eu
+
+die() { echo >&2 "!! $*"; exit 1; }
+readvar() { IFS= read -r -d '' "$1" || true; }
+
+# Disk to format
+DISK="${1-/dev/nvme0n1}"
+# 'p' For disks that label partitions /dev/foop1, or '' for disks that do not
+# E.g. /dev/sda1 vs /dev/nvme0n1p1
+DISK_SUFFIX="${2-p}"
+
+ESP_PRESERVE=(foxnet_dmi.json foxnet.conf)
+
+# Partition table, sfdisk format
+readvar PARTITION_TABLE <<END_PARTITION_TABLE
+  label: gpt
+  ${DISK}${DISK_SUFFIX}1: name="esp",      size=    64MiB, type=C12A7328-F81F-11D2-BA4B-00A0C93EC93B
+  ${DISK}${DISK_SUFFIX}2: name="efi-A",    size=    32MiB, type=EBD0A0A2-B9E5-4433-87C0-68B6B72699C7
+  ${DISK}${DISK_SUFFIX}3: name="efi-B",    size=    32MiB, type=EBD0A0A2-B9E5-4433-87C0-68B6B72699C7
+  ${DISK}${DISK_SUFFIX}4: name="rootfs-A", size=  5120MiB, type=4F68BCE3-E8CD-4DB1-96E7-FBCAF984B709
+  ${DISK}${DISK_SUFFIX}5: name="rootfs-B", size=  5120MiB, type=4F68BCE3-E8CD-4DB1-96E7-FBCAF984B709
+  ${DISK}${DISK_SUFFIX}6: name="var-A",    size=   256MiB, type=4D21B016-B534-45C2-A9FB-5C16E091FD2D
+  ${DISK}${DISK_SUFFIX}7: name="var-B",    size=   256MiB, type=4D21B016-B534-45C2-A9FB-5C16E091FD2D
+  ${DISK}${DISK_SUFFIX}8: name="home",                     type=933AC7E1-2EB4-4F13-B844-0E14E2AEF915
+END_PARTITION_TABLE
+
+# Partition #s to format or image rootfs to by index
+FS_ESP=1
+FS_EFI_A=2
+FS_EFI_B=3
+FS_ROOT_A=4
+FS_ROOT_B=5
+FS_VAR_A=6
+FS_VAR_B=7
+FS_HOME=8
+
+##
+## Util colors and such
+##
+
+err() {
+  echo >&2
+  eerr "Imaging error occured, see above and restart process."
+  sleep infinity
+}
+trap err ERR
+
+_sh_c_colors=0
+[[ -n $TERM && -t 1 && ${TERM,,} != dumb ]] && _sh_c_colors="$(tput colors 2>/dev/null || echo 0)"
+sh_c() { [[ $_sh_c_colors -le 0 ]] || ( IFS=\; && echo -n $'\e['"${*:-0}m"; ); }
+
+sh_quote() { echo "${@@Q}"; }
+estat()    { echo >&2 "$(sh_c 32 1)::$(sh_c) $*"; }
+emsg()     { echo >&2 "$(sh_c 34 1)::$(sh_c) $*"; }
+ewarn()    { echo >&2 "$(sh_c 33 1);;$(sh_c) $*"; }
+einfo()    { echo >&2 "$(sh_c 30 1)::$(sh_c) $*"; }
+eerr()     { echo >&2 "$(sh_c 31 1)!!$(sh_c) $*"; }
+die() { local msg="$*"; [[ -n $msg ]] || msg="script terminated"; eerr "$msg"; exit 1; }
+showcmd() { showcmd_unquoted "${@@Q}"; }
+showcmd_unquoted() { echo >&2 "$(sh_c 30 1)+$(sh_c) $*"; }
+cmd() { showcmd "$@"; "$@"; }
+
+_eprompt() {
+  local msg="$1" args=("${@:2}")
+  local reply
+  echo >&2 ""
+  read -e -p "$(sh_c 33 1)?$(sh_c) ${msg:+$msg }$(sh_c 33)»$(sh_c) " -r "${args[@]}" reply
+  echo -n "$reply"
+}
+eprompt() { _eprompt "$*"; }
+eprompt_yn() {
+  local reply; reply="$(_eprompt "${*:+$* }[y/N]")"
+  [[ ${reply,,} = yes || ${reply,,} = y ]] || return 1
+}
+
+prompt_step() {
+  local msg="$1"
+  local prompt="${2-Proceed?}"
+  while true; do
+    emsg
+    emsg "$msg"
+    emsg
+    eprompt_yn "$prompt" && break
+  done
+}
+
+diskpart() { echo "$DISK$DISK_SUFFIX$1"; }
+
+##
+## Main
+##
+
+onexit=()
+exithandler() {
+  for func in "${onexit[@]}"; do
+    "$func"
+  done
+}
+trap exithandler EXIT
+
+unset tmpdir
+cleanup_tmp() { [[ -z ${tmpdir-} || ! -d ${tmpdir-} ]] || rm -rf --one-file-system -- "$tmpdir"; }
+onexit+=(cleanup_tmp)
+tmpdir=$(mktemp -d --tmpdir jupiter-factoryinstall-XXX)
+[[ -d $tmpdir ]] || die "Couldn't create temporary directory"
+
+# Attempt to find/preserve foxnet.conf/foxnet_dmi.json
+oldesp_part=$(diskpart 1)
+if [[ -e $(diskpart 1) ]]; then
+  oldesp="$tmpdir"/oldesp
+  unmount_oldesp() { [[ -z ${oldesp-} ]] || umount "$oldesp" || true; }
+  onexit+=(unmount_oldesp)
+  mkdir "$oldesp"
+  if mount "$oldesp_part" "$oldesp"; then
+    for preserve in "${ESP_PRESERVE[@]}"; do
+      if [[ -f "$oldesp/$preserve" ]]; then
+        mkdir -p "$tmpdir"/preserve
+        cp -v "$oldesp/$preserve" "$tmpdir"/preserve
+        estat "Found previous $preserve, perserving"
+      fi
+    done
+    umount "$oldesp"
+  fi
+  unset oldesp
+fi
+
+# Helper to format
+fmt_ext4()  { [[ $# -eq 2 && -n $1 && -n $2 ]] || die; cmd sudo mkfs.ext4 -F -L "$1" "$2"; }
+fmt_fat32() { [[ $# -eq 2 && -n $1 && -n $2 ]] || die; cmd sudo mkfs.vfat -n"$1" "$2"; }
+
+# Format target disk
+if [[ ! -e "$DISK" ]]; then
+  eerr "$DISK does not exist -- no nvme drive detected?"
+  sleep infinity
+  exit 1
+fi
+
+# Find rootfs
+rootdevice="$(cat /proc/self/mounts | awk '$2 == "/" { print $1 }' | head -n 1)"
+if [[ -z $rootdevice || ! -e $rootdevice ]]; then
+  eerr "Could not find USB installer root -- usb hub issue?"
+  sleep infinity
+  exit 1
+fi
+
+prompt_step "Ready to image $DISK"
+
+# Partition
+estat "Partitioning"
+echo "$PARTITION_TABLE" | sfdisk "$DISK"
+
+
+# Format clean partitions
+estat "Creating data partitions"
+fmt_fat32 esp  "$(diskpart $FS_ESP)"
+fmt_fat32 efi  "$(diskpart $FS_EFI_A)"
+fmt_fat32 efi  "$(diskpart $FS_EFI_B)"
+fmt_ext4  var  "$(diskpart $FS_VAR_A)"
+fmt_ext4  var  "$(diskpart $FS_VAR_B)"
+fmt_ext4  home "$(diskpart $FS_HOME)"
+
+# Remove the reserved blocks on the home partition
+tune2fs -m 0 "$(diskpart $FS_HOME)"
+
+# Freeze our rootfs
+estat "Freezing rootfs"
+unfreeze() { fsfreeze -u /; }
+onexit+=(unfreeze)
+cmd fsfreeze -f /
+
+# Image rootfs
+imageroot()
+{
+  local newroot="$1"
+  cmd dd if="$rootdevice" of="$newroot" bs=128M status=progress oflag=sync
+  # Randomize UUID. tune2fs insists the drive have just passed an e2fsck -f for safety.
+  cmd e2fsck -f "$newroot"
+  yes | cmd tune2fs -U random "$newroot"
+}
+
+estat "Imaging OS partition A"
+imageroot "$(diskpart $FS_ROOT_A)"
+
+estat "Imaging OS partition B"
+imageroot "$(diskpart $FS_ROOT_B)"
+
+# Finalize
+estat "Finalizing install"
+finalize_part() {
+  cmd steamos-chroot --disk "$DISK" --partset "$1" -- mkdir /boot/efi/SteamOS
+  cmd steamos-chroot --disk "$DISK" --partset "$1" -- mkdir -p /boot/esp/SteamOS/conf
+  # this puts the partset info under /boot/efi which is a prerequisite for steamos-bootconf
+  cmd steamos-chroot --disk "$DISK" --partset "$1" -- steamos-partsets /boot/efi/SteamOS/partsets
+  # this needs the partset info to be present under /boot/efi
+  cmd steamos-chroot --disk "$DISK" --partset "$1" -- steamos-bootconf create -image "$1" --conf-dir /boot/esp/SteamOS/conf --efi-dir /boot/efi config --set title "$1"
+  cmd steamos-chroot --disk "$DISK" --partset "$1" -- grub-mkimage
+  cmd steamos-chroot --disk "$DISK" --partset "$1" -- update-grub
+}
+finalize_part A
+finalize_part B
+# Only needs to happen once, sets up shared esp partition
+cmd steamos-chroot --disk "$DISK" --partset A -- steamcl-install --flags restricted --force-extra-removable
+
+# Restore any old ESP certificates
+if [[ -d "$tmpdir"/preserve ]]; then
+  estat "Restoring preserved ESP files"
+  newesp="$tmpdir"/newesp
+  unmount_newesp() { [[ -z ${newesp-} ]] || umount "$newesp" || true; }
+  onexit+=(unmount_newesp)
+  mkdir "$newesp"
+  mount "$(diskpart $FS_ESP)" "$newesp"
+  cp -v "$tmpdir"/preserve/* "$newesp"
+  umount "$newesp"
+  unset newesp
+fi
+
+prompt_step "Imaging complete.  Device will shut down."
+
+cmd systemctl poweroff
