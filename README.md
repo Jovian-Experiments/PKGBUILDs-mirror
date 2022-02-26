@@ -1,5 +1,5 @@
 
-`release @ 20220224.1`
+`release @ 20220226.1`
 ======================
 
 Valve packages
@@ -9,11 +9,10 @@ Valve packages
  * [`bluez` — `jupiter-rel/bluez-5.63-1.3`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-rel/bluez-5.63-1.3)
  * [`bluez-libs` — `jupiter-rel/bluez-5.63-1.3`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-rel/bluez-5.63-1.3)
  * [`bluez-utils` — `jupiter-rel/bluez-5.63-1.3`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-rel/bluez-5.63-1.3)
- * [`gamescope` — `jupiter-rel/gamescope-3.11.23-4`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-rel/gamescope-3.11.23-4)
- * [`jupiter-hw-support` — `jupiter-rel/jupiter-hw-support-20220221.3-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-rel/jupiter-hw-support-20220221.3-1)
- * [`jupiter-legacy-support` — `jupiter-rel/jupiter-legacy-support-1.103-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-rel/jupiter-legacy-support-1.103-1)
+ * [`jupiter-legacy-support` — `jupiter-rel/jupiter-legacy-support-1.106-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-rel/jupiter-legacy-support-1.106-1)
  * [`linux-neptune` — `jupiter-rel/linux-neptune-5.13.0.valve10.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-rel/linux-neptune-5.13.0.valve10.1-1)
  * [`mangohud` — `jupiter-rel/mangohud-0.6.6.1.r123.g93f389d-3`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-rel/mangohud-0.6.6.1.r123.g93f389d-3)
+ * [`steam-jupiter-stable` — `jupiter-rel/steam-jupiter-stable-1.0.0.74-2.12`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-rel/steam-jupiter-stable-1.0.0.74-2.12)
  * [`steamos-customizations-jupiter` — `jupiter-rel/steamos-customizations-jupiter-20220221.2-2.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-rel/steamos-customizations-jupiter-20220221.2-2.1)
  * [`vpower` — `jupiter-rel/vpower-1.2.6-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-rel/vpower-1.2.6-2)
 
@@ -148,6 +147,7 @@ Arch Linux packages
  * [`fuse2/2.9.9-4`](https://gitlab.archlinux.org/archlinux/packaging/packages/fuse2/-/tree/2.9.9-4)
  * [`fuse3/3.10.5-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/fuse3/-/tree/3.10.5-1)
  * [`gamemode/1.6.1-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/gamemode/-/tree/1.6.1-1)
+ * [`gamescope/3.11.23-5.1`](https://gitlab.archlinux.org/archlinux/packaging/packages/gamescope/-/tree/3.11.23-5.1)
  * [`gawk/5.1.1-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/gawk/-/tree/5.1.1-1)
  * [`gc/8.2.0-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/gc/-/tree/8.2.0-2)
  * [`gcab/1.4-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/gcab/-/tree/1.4-1)
@@ -223,6 +223,7 @@ Arch Linux packages
  * [`js78/78.15.0-3`](https://gitlab.archlinux.org/archlinux/packaging/packages/js78/-/tree/78.15.0-3)
  * [`json-c/0.15-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/json-c/-/tree/0.15-2)
  * [`json-glib/1.6.6-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/json-glib/-/tree/1.6.6-1)
+ * [`jupiter-hw-support/20220224.1-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/jupiter-hw-support/-/tree/20220224.1-1)
  * [`kaccounts-integration/21.12.1-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/kaccounts-integration/-/tree/21.12.1-1)
  * [`kactivities/5.90.0-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/kactivities/-/tree/5.90.0-1)
  * [`kactivities-stats/5.90.0-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/kactivities-stats/-/tree/5.90.0-1)
@@ -690,7 +691,6 @@ Arch Linux packages
  * [`srt/1.4.4-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/srt/-/tree/1.4.4-1)
  * [`sshfs/3.7.2-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/sshfs/-/tree/3.7.2-2)
  * [`steam-devkit-hooks/0.20211102.2.r6.g5faca5f-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/steam-devkit-hooks/-/tree/0.20211102.2.r6.g5faca5f-1)
- * [`steam-jupiter-stable/1.0.0.74-2.11`](https://gitlab.archlinux.org/archlinux/packaging/packages/steam-jupiter-stable/-/tree/1.0.0.74-2.11)
  * [`steamos-atomupd-client-git/r157.4d50d6d-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/steamos-atomupd-client-git/-/tree/r157.4d50d6d-1)
  * [`steamos-devkit-service/0.20211020.1.r15.gad51de1-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/steamos-devkit-service/-/tree/0.20211020.1.r15.gad51de1-1)
  * [`steamos-efi-git/r273.1d19109-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/steamos-efi-git/-/tree/r273.1d19109-1)
