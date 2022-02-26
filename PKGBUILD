@@ -1,7 +1,7 @@
 # Maintainer: Your Name <youremail@domain.com>
 pkgname=jupiter-legacy-support
-pkgver=1.104
-pkgrel=3
+pkgver=1.106
+pkgrel=1
 pkgdesc="Legacy support files from foxnet that haven't been split to their own thing"
 arch=(any)
 depends=(python3 python-psutil python-aiohttp nvme-cli)
