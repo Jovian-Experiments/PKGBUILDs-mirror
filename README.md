@@ -1,5 +1,5 @@
 
-`main @ 20220226.1000`
+`main @ 20220226.1001`
 ======================
 
 Valve packages
@@ -14,7 +14,7 @@ Valve packages
  * [`bluez-utils` — `jupiter-main/bluez-5.63-1.4`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/bluez-5.63-1.4)
  * [`gamescope` — `jupiter-main/gamescope-3.11.24.beta2-5.4`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/gamescope-3.11.24.beta2-5.4)
  * [`gpu-trace` — `jupiter-main/gpu-trace-2.7-3`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/gpu-trace-2.7-3)
- * [`jupiter-hw-support` — `jupiter-main/jupiter-hw-support-20220224.100-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-hw-support-20220224.100-1)
+ * [`jupiter-hw-support` — `jupiter-main/jupiter-hw-support-20220224.102-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-hw-support-20220224.102-1)
  * [`jupiter-legacy-support` — `jupiter-main/jupiter-legacy-support-1.106-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-legacy-support-1.106-1)
  * [`libva-mesa-driver` — `jupiter-main/mesa-22.0.0_devel.148041.radeonsi_20220224-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/mesa-22.0.0_devel.148041.radeonsi_20220224-1)
  * [`linux-firmware-neptune` — `jupiter-main/linux-firmware-neptune-20211216.ae6f5a8-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/linux-firmware-neptune-20211216.ae6f5a8-1)
@@ -26,6 +26,7 @@ Valve packages
  * [`plasma-workspace` — `jupiter-main/plasma-workspace-5.23.5-3`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/plasma-workspace-5.23.5-3)
  * [`python-crcmod` — `jupiter-main/python-crcmod-1.7-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/python-crcmod-1.7-1)
  * [`steam-im-modules` — `jupiter-main/steam-im-modules-jupiter.20220223-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steam-im-modules-jupiter.20220223-1)
+ * [`steam-jupiter-stable` — `jupiter-main/steam-jupiter-stable-1.0.0.74-2.13`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steam-jupiter-stable-1.0.0.74-2.13)
  * [`steamdeck-kde-presets` — `jupiter-main/steamdeck-kde-presets-0.4-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steamdeck-kde-presets-0.4-1)
  * [`steamos-customizations-jupiter` — `jupiter-main/steamos-customizations-jupiter-20220226.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steamos-customizations-jupiter-20220226.1-1)
  * [`steamos-devkit-service` — `jupiter-main/steamos-devkit-service-0.20220224.0-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steamos-devkit-service-0.20220224.0-2)
@@ -697,7 +698,6 @@ Arch Linux packages
  * [`sratom/0.6.8-3`](https://gitlab.archlinux.org/archlinux/packaging/packages/sratom/-/tree/0.6.8-3)
  * [`srt/1.4.4-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/srt/-/tree/1.4.4-1)
  * [`sshfs/3.7.2-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/sshfs/-/tree/3.7.2-2)
- * [`steam-jupiter-stable/1.0.0.74-2.11`](https://gitlab.archlinux.org/archlinux/packaging/packages/steam-jupiter-stable/-/tree/1.0.0.74-2.11)
  * [`steamos-atomupd-client-git/r157.4d50d6d-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/steamos-atomupd-client-git/-/tree/r157.4d50d6d-1)
  * [`steamos-efi-git/r273.1d19109-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/steamos-efi-git/-/tree/r273.1d19109-1)
  * [`steamos-netrc/2022.01.18-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/steamos-netrc/-/tree/2022.01.18-2)
@@ -745,7 +745,7 @@ Arch Linux packages
  * [`volume_key/0.3.12-7`](https://gitlab.archlinux.org/archlinux/packaging/packages/volume_key/-/tree/0.3.12-7)
  * [`vpower/1.2.6-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/vpower/-/tree/1.2.6-2)
  * [`vulkan-icd-loader/1.2.203-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/vulkan-icd-loader/-/tree/1.2.203-1)
- * [`vulkan-radeon/22.1.0_devel.150440.jupiter_22.1.1-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/vulkan-radeon/-/tree/22.1.0_devel.150440.jupiter_22.1.1-1)
+ * [`vulkan-radeon/22.1.0_devel.150443.jupiter_22.1.2-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/vulkan-radeon/-/tree/22.1.0_devel.150443.jupiter_22.1.2-1)
  * [`vulkan-tools/1.2.203-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/vulkan-tools/-/tree/1.2.203-1)
  * [`wayland/1.20.0-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/wayland/-/tree/1.20.0-1)
  * [`wayland-utils/1.0.0-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/wayland-utils/-/tree/1.0.0-2)
