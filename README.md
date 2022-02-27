@@ -1,5 +1,5 @@
 
-`release @ 20220226.1`
+`release @ 20220226.2`
 ======================
 
 Valve packages
@@ -9,7 +9,7 @@ Valve packages
  * [`bluez` — `jupiter-rel/bluez-5.63-1.3`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-rel/bluez-5.63-1.3)
  * [`bluez-libs` — `jupiter-rel/bluez-5.63-1.3`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-rel/bluez-5.63-1.3)
  * [`bluez-utils` — `jupiter-rel/bluez-5.63-1.3`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-rel/bluez-5.63-1.3)
- * [`jupiter-legacy-support` — `jupiter-rel/jupiter-legacy-support-1.106-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-rel/jupiter-legacy-support-1.106-1)
+ * [`jupiter-legacy-support` — `jupiter-rel/jupiter-legacy-support-1.107-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-rel/jupiter-legacy-support-1.107-1)
  * [`linux-neptune` — `jupiter-rel/linux-neptune-5.13.0.valve10.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-rel/linux-neptune-5.13.0.valve10.1-1)
  * [`mangohud` — `jupiter-rel/mangohud-0.6.6.1.r123.g93f389d-3`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-rel/mangohud-0.6.6.1.r123.g93f389d-3)
  * [`steam-jupiter-stable` — `jupiter-rel/steam-jupiter-stable-1.0.0.74-2.12`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-rel/steam-jupiter-stable-1.0.0.74-2.12)
