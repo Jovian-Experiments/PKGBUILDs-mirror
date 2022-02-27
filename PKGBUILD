@@ -1,6 +1,6 @@
 # Maintainer: Your Name <youremail@domain.com>
 pkgname=jupiter-legacy-support
-pkgver=1.106
+pkgver=1.107
 pkgrel=1
 pkgdesc="Legacy support files from foxnet that haven't been split to their own thing"
 arch=(any)
@@ -60,6 +60,8 @@ package() {
   install -D -m644 {,"$pkgdir"/}usr/share/X11/xorg.conf.d/41-touchscreenrotate.conf
 
   install -D -m644 {,"$pkgdir"/}usr/share/xsessions/plasma-steamos-oneshot.desktop
+
+  install -D -m644 -t "$pkgdir"/usr/share/steamos-update/ usr/share/steamos-update/*
 
   install -D -m644 {,"$pkgdir"/}etc/sddm.conf.d/steamos.conf
   # install -D -m644 {,"$pkgdir"/}etc/pulse/default.pa
