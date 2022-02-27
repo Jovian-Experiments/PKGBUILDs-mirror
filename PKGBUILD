@@ -1,12 +1,12 @@
 # Maintainer: Your Name <youremail@domain.com>
 pkgname=jupiter-legacy-support
-pkgver=1.108
+pkgver=1.109
 pkgrel=1
 pkgdesc="Legacy support files from foxnet that haven't been split to their own thing"
 arch=(any)
 depends=(python3 python-psutil python-aiohttp nvme-cli)
-source=(jupiter-factoryinstall
-        jupiter-plasma-bootstrap
+source=(
+	jupiter-plasma-bootstrap
         jupiter-plasma-bootstrap.desktop
         steam-web-debug-portforward.service
         91-dracut-install-vanilla.hook
@@ -15,8 +15,7 @@ source=(jupiter-factoryinstall
         flathub-beta.flatpakrepo
         black_800x1280.png
         white_800x1280.png)
-sha256sums=('60921ba59c5b1923264e7aa931eb86ff0b55d09df390f429993b76269ee6f1a0'
-            '9e9e4884a64eb4eb784305d932726ab89beee0edd60600f9b13878cea7a7671f'
+sha256sums=('9e9e4884a64eb4eb784305d932726ab89beee0edd60600f9b13878cea7a7671f'
             '9ca42095d379a8b8089cd704c2351cc36a0c85cfc0813fcbb3aebd35105f1365'
             'a1a2c6cb5ebdba68b79ab90649f894e1136f72af9e4daacbcb71d134383bd797'
             '78b1749684bf3c60a5769002d98008772145385566ab68d7218c3850ec2dc653'
@@ -50,7 +49,6 @@ package() {
 
   install -D -m644 "$srcdir"/steam-web-debug-portforward.service "$pkgdir"/etc/systemd/system/steam-web-debug-portforward.service
 
-  install -D -m755 "$srcdir"/jupiter-factoryinstall "$pkgdir"/usr/bin/jupiter-factoryinstall
   install -D -m644 xbindkeysrc "$pkgdir"/etc/xbindkeysrc
 
   # Stats daemon will be enabled/started by bootstrap
