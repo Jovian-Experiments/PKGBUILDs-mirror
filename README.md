@@ -1,5 +1,5 @@
 
-`main @ 20220226.1001`
+`main @ 20220226.1002`
 ======================
 
 Valve packages
@@ -15,7 +15,7 @@ Valve packages
  * [`gamescope` — `jupiter-main/gamescope-3.11.24.beta2-5.4`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/gamescope-3.11.24.beta2-5.4)
  * [`gpu-trace` — `jupiter-main/gpu-trace-2.7-3`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/gpu-trace-2.7-3)
  * [`jupiter-hw-support` — `jupiter-main/jupiter-hw-support-20220224.102-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-hw-support-20220224.102-1)
- * [`jupiter-legacy-support` — `jupiter-main/jupiter-legacy-support-1.106-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-legacy-support-1.106-1)
+ * [`jupiter-legacy-support` — `jupiter-main/jupiter-legacy-support-1.107-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-legacy-support-1.107-1)
  * [`libva-mesa-driver` — `jupiter-main/mesa-22.0.0_devel.148041.radeonsi_20220224-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/mesa-22.0.0_devel.148041.radeonsi_20220224-1)
  * [`linux-firmware-neptune` — `jupiter-main/linux-firmware-neptune-20211216.ae6f5a8-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/linux-firmware-neptune-20211216.ae6f5a8-1)
  * [`linux-neptune` — `jupiter-main/linux-neptune-5.13.0.valve10.3-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/linux-neptune-5.13.0.valve10.3-1)
