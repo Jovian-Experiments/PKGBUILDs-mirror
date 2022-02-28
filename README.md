@@ -1,5 +1,5 @@
 
-`release @ 20220227.2`
+`release @ 20220227.3`
 ======================
 
 Valve packages
@@ -17,6 +17,7 @@ Valve packages
  * [`steam-jupiter-stable` — `jupiter-rel/steam-jupiter-stable-1.0.0.74-2.13`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-rel/steam-jupiter-stable-1.0.0.74-2.13)
  * [`steamdeck-kde-presets` — `jupiter-rel/steamdeck-kde-presets-0.5-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-rel/steamdeck-kde-presets-0.5-1)
  * [`steamos-customizations-jupiter` — `jupiter-rel/steamos-customizations-jupiter-20220227.2-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-rel/steamos-customizations-jupiter-20220227.2-1)
+ * [`steamos-devkit-service` — `jupiter-rel/steamos-devkit-service-0.20220224.0-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-rel/steamos-devkit-service-0.20220224.0-2)
  * [`vpower` — `jupiter-rel/vpower-1.2.6-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-rel/vpower-1.2.6-2)
 
 Arch Linux packages
@@ -693,9 +694,7 @@ Arch Linux packages
  * [`sratom/0.6.8-3`](https://gitlab.archlinux.org/archlinux/packaging/packages/sratom/-/tree/0.6.8-3)
  * [`srt/1.4.4-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/srt/-/tree/1.4.4-1)
  * [`sshfs/3.7.2-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/sshfs/-/tree/3.7.2-2)
- * [`steam-devkit-hooks/0.20211102.2.r6.g5faca5f-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/steam-devkit-hooks/-/tree/0.20211102.2.r6.g5faca5f-1)
  * [`steamos-atomupd-client-git/r157.4d50d6d-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/steamos-atomupd-client-git/-/tree/r157.4d50d6d-1)
- * [`steamos-devkit-service/0.20211020.1.r15.gad51de1-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/steamos-devkit-service/-/tree/0.20211020.1.r15.gad51de1-1)
  * [`steamos-efi-git/r273.1d19109-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/steamos-efi-git/-/tree/r273.1d19109-1)
  * [`steamos-netrc/2022.01.18-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/steamos-netrc/-/tree/2022.01.18-2)
  * [`strace/5.16-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/strace/-/tree/5.16-1)
