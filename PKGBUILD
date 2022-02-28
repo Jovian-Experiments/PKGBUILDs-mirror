@@ -1,12 +1,11 @@
 # Maintainer: Your Name <youremail@domain.com>
 pkgname=jupiter-legacy-support
-pkgver=1.109
+pkgver=1.110
 pkgrel=1
 pkgdesc="Legacy support files from foxnet that haven't been split to their own thing"
 arch=(any)
 depends=(python3 python-psutil python-aiohttp nvme-cli)
-source=(
-	jupiter-plasma-bootstrap
+source=(jupiter-plasma-bootstrap
         jupiter-plasma-bootstrap.desktop
         steam-web-debug-portforward.service
         91-dracut-install-vanilla.hook
