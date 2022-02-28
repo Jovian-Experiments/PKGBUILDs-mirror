@@ -1,5 +1,5 @@
 
-`release @ 20220227.1`
+`release @ 20220227.2`
 ======================
 
 Valve packages
@@ -9,14 +9,14 @@ Valve packages
  * [`bluez` — `jupiter-rel/bluez-5.63-1.4`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-rel/bluez-5.63-1.4)
  * [`bluez-libs` — `jupiter-rel/bluez-5.63-1.4`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-rel/bluez-5.63-1.4)
  * [`bluez-utils` — `jupiter-rel/bluez-5.63-1.4`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-rel/bluez-5.63-1.4)
- * [`jupiter-legacy-support` — `jupiter-rel/jupiter-legacy-support-1.109-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-rel/jupiter-legacy-support-1.109-1)
+ * [`jupiter-legacy-support` — `jupiter-rel/jupiter-legacy-support-1.110-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-rel/jupiter-legacy-support-1.110-1)
  * [`linux-neptune` — `jupiter-rel/linux-neptune-5.13.0.valve10.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-rel/linux-neptune-5.13.0.valve10.1-1)
  * [`mangohud` — `jupiter-rel/mangohud-0.6.6.1.r123.g93f389d-3`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-rel/mangohud-0.6.6.1.r123.g93f389d-3)
  * [`plasma-wayland-session` — `jupiter-rel/plasma-workspace-5.23.5-3.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-rel/plasma-workspace-5.23.5-3.1)
  * [`plasma-workspace` — `jupiter-rel/plasma-workspace-5.23.5-3.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-rel/plasma-workspace-5.23.5-3.1)
  * [`steam-jupiter-stable` — `jupiter-rel/steam-jupiter-stable-1.0.0.74-2.13`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-rel/steam-jupiter-stable-1.0.0.74-2.13)
- * [`steamdeck-kde-presets` — `jupiter-rel/steamdeck-kde-presets-0.4-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-rel/steamdeck-kde-presets-0.4-1)
- * [`steamos-customizations-jupiter` — `jupiter-rel/steamos-customizations-jupiter-20220227.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-rel/steamos-customizations-jupiter-20220227.1-1)
+ * [`steamdeck-kde-presets` — `jupiter-rel/steamdeck-kde-presets-0.5-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-rel/steamdeck-kde-presets-0.5-1)
+ * [`steamos-customizations-jupiter` — `jupiter-rel/steamos-customizations-jupiter-20220227.2-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-rel/steamos-customizations-jupiter-20220227.2-1)
  * [`vpower` — `jupiter-rel/vpower-1.2.6-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-rel/vpower-1.2.6-2)
 
 Arch Linux packages
@@ -224,7 +224,7 @@ Arch Linux packages
  * [`js78/78.15.0-3`](https://gitlab.archlinux.org/archlinux/packaging/packages/js78/-/tree/78.15.0-3)
  * [`json-c/0.15-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/json-c/-/tree/0.15-2)
  * [`json-glib/1.6.6-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/json-glib/-/tree/1.6.6-1)
- * [`jupiter-hw-support/20220224.1-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/jupiter-hw-support/-/tree/20220224.1-1)
+ * [`jupiter-hw-support/20220224.1.2-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/jupiter-hw-support/-/tree/20220224.1.2-1)
  * [`kaccounts-integration/21.12.1-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/kaccounts-integration/-/tree/21.12.1-1)
  * [`kactivities/5.90.0-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/kactivities/-/tree/5.90.0-1)
  * [`kactivities-stats/5.90.0-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/kactivities-stats/-/tree/5.90.0-1)
