@@ -11,11 +11,19 @@ export HOMETEST_DESKTOP_SESSION=plasma
 export STEAM_USE_MANGOAPP=1
 export MANGOHUD_CONFIGFILE=$(mktemp /tmp/mangohud.XXXXXXXX)
 
+export STEAM_USE_DYNAMIC_VRS=1
+export RADV_FORCE_VRS_CONFIG_FILE=$(mktemp /tmp/radv_vrs.XXXXXXXX)
+
 # Initially write no_display to our config file
 # so we don't get mangoapp showing up before Steam initializes
 # on OOBE and stuff.
 mkdir -p "$(dirname "$MANGOHUD_CONFIGFILE")"
 echo "no_display" > "$MANGOHUD_CONFIGFILE"
+
+# Prepare our initial VRS config file
+# for dynamic VRS in Mesa.
+mkdir -p "$(dirname "$RADV_FORCE_VRS_CONFIG_FILE")"
+echo "1x1" > "$RADV_FORCE_VRS_CONFIG_FILE"
 
 # Let's try this across the board to see if it breaks anything
 # Helps performance in HZD, Cyberpunk, at least
@@ -34,6 +42,15 @@ if [[ -e "$STEAMOS_STEAM_REBOOT_SENTINEL" ]]; then
 	sudo -n reboot
 fi
 
+# Workaround for steam getting killed immediatly during shutdown
+# Same idea as reboot sentinel above
+export STEAMOS_STEAM_SHUTDOWN_SENTINEL="/tmp/steamos-shutdown-sentinel"
+if [[ -e "$STEAMOS_STEAM_SHUTDOWN_SENTINEL" ]]; then
+	rm -f "$STEAMOS_STEAM_SHUTDOWN_SENTINEL"
+	/usr/bin/steamos-polkit-helpers/steamos-poweroff-now
+	sudo -n poweroff
+fi
+
 # Enable volume key management via steam for this session
 export STEAM_ENABLE_VOLUME_HANDLER=1
 
@@ -45,6 +62,9 @@ export STEAM_DISABLE_AUDIO_DEVICE_SWITCHING=1
 
 # Enable support for xwayland isolation per-game in Steam
 export STEAM_MULTIPLE_XWAYLANDS=1
+
+# We have the Mesa integration for the fifo-based dynamic fps-limiter
+export STEAM_GAMESCOPE_DYNAMIC_FPSLIMITER=1
 
 # Don't wait for buffers to idle on the client side before sending them to gamescope
 export vk_xwayland_wait_ready=false
