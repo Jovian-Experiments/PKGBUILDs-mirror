@@ -1,19 +1,22 @@
 
-`release @ 20220226.3`
+`release @ 20220227.1`
 ======================
 
 Valve packages
 --------------
 
 ### `jupiter-rel`
- * [`bluez` — `jupiter-rel/bluez-5.63-1.3`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-rel/bluez-5.63-1.3)
- * [`bluez-libs` — `jupiter-rel/bluez-5.63-1.3`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-rel/bluez-5.63-1.3)
- * [`bluez-utils` — `jupiter-rel/bluez-5.63-1.3`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-rel/bluez-5.63-1.3)
- * [`jupiter-legacy-support` — `jupiter-rel/jupiter-legacy-support-1.108-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-rel/jupiter-legacy-support-1.108-1)
+ * [`bluez` — `jupiter-rel/bluez-5.63-1.4`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-rel/bluez-5.63-1.4)
+ * [`bluez-libs` — `jupiter-rel/bluez-5.63-1.4`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-rel/bluez-5.63-1.4)
+ * [`bluez-utils` — `jupiter-rel/bluez-5.63-1.4`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-rel/bluez-5.63-1.4)
+ * [`jupiter-legacy-support` — `jupiter-rel/jupiter-legacy-support-1.109-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-rel/jupiter-legacy-support-1.109-1)
  * [`linux-neptune` — `jupiter-rel/linux-neptune-5.13.0.valve10.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-rel/linux-neptune-5.13.0.valve10.1-1)
  * [`mangohud` — `jupiter-rel/mangohud-0.6.6.1.r123.g93f389d-3`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-rel/mangohud-0.6.6.1.r123.g93f389d-3)
- * [`steam-jupiter-stable` — `jupiter-rel/steam-jupiter-stable-1.0.0.74-2.12`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-rel/steam-jupiter-stable-1.0.0.74-2.12)
- * [`steamos-customizations-jupiter` — `jupiter-rel/steamos-customizations-jupiter-20220221.2-2.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-rel/steamos-customizations-jupiter-20220221.2-2.1)
+ * [`plasma-wayland-session` — `jupiter-rel/plasma-workspace-5.23.5-3.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-rel/plasma-workspace-5.23.5-3.1)
+ * [`plasma-workspace` — `jupiter-rel/plasma-workspace-5.23.5-3.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-rel/plasma-workspace-5.23.5-3.1)
+ * [`steam-jupiter-stable` — `jupiter-rel/steam-jupiter-stable-1.0.0.74-2.13`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-rel/steam-jupiter-stable-1.0.0.74-2.13)
+ * [`steamdeck-kde-presets` — `jupiter-rel/steamdeck-kde-presets-0.4-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-rel/steamdeck-kde-presets-0.4-1)
+ * [`steamos-customizations-jupiter` — `jupiter-rel/steamos-customizations-jupiter-20220227.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-rel/steamos-customizations-jupiter-20220227.1-1)
  * [`vpower` — `jupiter-rel/vpower-1.2.6-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-rel/vpower-1.2.6-2)
 
 Arch Linux packages
@@ -137,8 +140,6 @@ Arch Linux packages
  * [`flac/1.3.3-3`](https://gitlab.archlinux.org/archlinux/packaging/packages/flac/-/tree/1.3.3-3)
  * [`flatpak/1.12.4-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/flatpak/-/tree/1.12.4-1)
  * [`fontconfig/2:2.13.94-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/fontconfig/-/tree/2:2.13.94-2)
- * [`foxnet/1.1-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/foxnet/-/tree/1.1-1)
- * [`foxnetstatsd/1.1-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/foxnetstatsd/-/tree/1.1-1)
  * [`frameworkintegration/5.90.0-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/frameworkintegration/-/tree/5.90.0-2)
  * [`freerdp/2:2.5.0-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/freerdp/-/tree/2:2.5.0-1)
  * [`freetype2/2.11.1-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/freetype2/-/tree/2.11.1-1)
@@ -234,6 +235,7 @@ Arch Linux packages
  * [`kbookmarks/5.90.0-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/kbookmarks/-/tree/5.90.0-1)
  * [`kcmutils/5.90.0-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/kcmutils/-/tree/5.90.0-1)
  * [`kcodecs/5.90.0-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/kcodecs/-/tree/5.90.0-1)
+ * [`kcolorpicker/0.1.6-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/kcolorpicker/-/tree/0.1.6-1)
  * [`kcompletion/5.90.0-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/kcompletion/-/tree/5.90.0-1)
  * [`kconfig/5.90.0-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/kconfig/-/tree/5.90.0-1)
  * [`kconfigwidgets/5.90.1-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/kconfigwidgets/-/tree/5.90.1-1)
@@ -262,6 +264,7 @@ Arch Linux packages
  * [`ki18n/5.90.0-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/ki18n/-/tree/5.90.0-1)
  * [`kiconthemes/5.90.0-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/kiconthemes/-/tree/5.90.0-1)
  * [`kidletime/5.90.0-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/kidletime/-/tree/5.90.0-1)
+ * [`kimageannotator/0.5.3-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/kimageannotator/-/tree/0.5.3-1)
  * [`kinfocenter/5.23.5-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/kinfocenter/-/tree/5.23.5-1)
  * [`kio/5.90.0-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/kio/-/tree/5.90.0-1)
  * [`kio-extras/21.12.1-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/kio-extras/-/tree/21.12.1-1)
@@ -364,6 +367,7 @@ Arch Linux packages
  * [`libinih/53-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/libinih/-/tree/53-1)
  * [`libinput/1.19.3-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/libinput/-/tree/1.19.3-2)
  * [`libjpeg-turbo/2.1.2-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/libjpeg-turbo/-/tree/2.1.2-1)
+ * [`libkipi/21.12.1-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/libkipi/-/tree/21.12.1-1)
  * [`libksba/1.6.0-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/libksba/-/tree/1.6.0-1)
  * [`libkscreen/5.23.5-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/libkscreen/-/tree/5.23.5-1)
  * [`libksysguard/5.23.5-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/libksysguard/-/tree/5.23.5-1)
@@ -585,8 +589,6 @@ Arch Linux packages
  * [`plasma-thunderbolt/5.23.5-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/plasma-thunderbolt/-/tree/5.23.5-1)
  * [`plasma-vault/5.23.5-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/plasma-vault/-/tree/5.23.5-1)
  * [`plasma-wayland-protocols/1.6.0-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/plasma-wayland-protocols/-/tree/1.6.0-1)
- * [`plasma-wayland-session/5.23.5-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/plasma-workspace/-/tree/5.23.5-2)
- * [`plasma-workspace/5.23.5-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/plasma-workspace/-/tree/5.23.5-2)
  * [`plasma-workspace-wallpapers/5.23.5-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/plasma-workspace-wallpapers/-/tree/5.23.5-1)
  * [`plymouth/22.02.122-1.2`](https://gitlab.archlinux.org/archlinux/packaging/packages/plymouth/-/tree/22.02.122-1.2)
  * [`polkit/0.120-4`](https://gitlab.archlinux.org/archlinux/packaging/packages/polkit/-/tree/0.120-4)
@@ -683,6 +685,7 @@ Arch Linux packages
  * [`sord/0.16.8-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/sord/-/tree/0.16.8-1)
  * [`sound-theme-freedesktop/0.8-4`](https://gitlab.archlinux.org/archlinux/packaging/packages/sound-theme-freedesktop/-/tree/0.8-4)
  * [`source-highlight/3.1.9-7`](https://gitlab.archlinux.org/archlinux/packaging/packages/source-highlight/-/tree/3.1.9-7)
+ * [`spectacle/21.12.1-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/spectacle/-/tree/21.12.1-1)
  * [`speex/1.2.0-3`](https://gitlab.archlinux.org/archlinux/packaging/packages/speex/-/tree/1.2.0-3)
  * [`speexdsp/1.2.0-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/speexdsp/-/tree/1.2.0-2)
  * [`sqlite/3.37.2-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/sqlite/-/tree/3.37.2-1)
