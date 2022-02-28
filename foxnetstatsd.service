@@ -1,0 +1,13 @@
+[Unit]
+Description=Foxnet Stats Daemon
+
+[Service]
+User=deck
+Group=deck
+ExecStart=/usr/bin/foxnet-stats-daemon
+Restart=on-failure
+RestartSec=30
+PAMName=systemd-user
+
+[Install]
+WantedBy=multi-user.target
