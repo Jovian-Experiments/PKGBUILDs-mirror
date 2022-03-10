@@ -1,0 +1,3240 @@
+From 374c1db453d86e87b2a13b059857260b8353afee Mon Sep 17 00:00:00 2001
+From: Marco Martin <notmart@gmail.com>
+Date: Wed, 23 Feb 2022 12:58:57 +0100
+Subject: [PATCH] Big backport of the new ScreenPool logic
+
+---
+ CMakeLists.txt                                |   2 +-
+ shell/CMakeLists.txt                          |  12 +
+ shell/autotests/CMakeLists.txt                |  12 +-
+ shell/autotests/mockserver/CMakeLists.txt     |  47 ++
+ shell/autotests/mockserver/corecompositor.cpp | 136 ++++++
+ shell/autotests/mockserver/corecompositor.h   | 229 +++++++++
+ shell/autotests/mockserver/coreprotocol.cpp   |  88 ++++
+ shell/autotests/mockserver/coreprotocol.h     | 117 +++++
+ shell/autotests/mockserver/mockcompositor.cpp |  47 ++
+ shell/autotests/mockserver/mockcompositor.h   |  98 ++++
+ shell/autotests/mockserver/primaryoutput.cpp  |  53 +++
+ shell/autotests/mockserver/primaryoutput.h    |  57 +++
+ shell/autotests/mockserver/xdgoutputv1.cpp    |  59 +++
+ shell/autotests/mockserver/xdgoutputv1.h      |  89 ++++
+ shell/autotests/screenpooltest.cpp            | 382 +++++++++++++--
+ shell/panelview.cpp                           |   3 +
+ shell/primaryoutputwatcher.cpp                | 159 +++++++
+ shell/primaryoutputwatcher.h                  |  54 +++
+ shell/screenpool.cpp                          | 445 ++++++++++++++++--
+ shell/screenpool.h                            |  53 ++-
+ shell/shellcorona.cpp                         | 347 ++++++--------
+ shell/shellcorona.h                           |  15 +-
+ 22 files changed, 2213 insertions(+), 291 deletions(-)
+ create mode 100644 shell/autotests/mockserver/CMakeLists.txt
+ create mode 100644 shell/autotests/mockserver/corecompositor.cpp
+ create mode 100644 shell/autotests/mockserver/corecompositor.h
+ create mode 100644 shell/autotests/mockserver/coreprotocol.cpp
+ create mode 100644 shell/autotests/mockserver/coreprotocol.h
+ create mode 100644 shell/autotests/mockserver/mockcompositor.cpp
+ create mode 100644 shell/autotests/mockserver/mockcompositor.h
+ create mode 100644 shell/autotests/mockserver/primaryoutput.cpp
+ create mode 100644 shell/autotests/mockserver/primaryoutput.h
+ create mode 100644 shell/autotests/mockserver/xdgoutputv1.cpp
+ create mode 100644 shell/autotests/mockserver/xdgoutputv1.h
+ create mode 100644 shell/primaryoutputwatcher.cpp
+ create mode 100644 shell/primaryoutputwatcher.h
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 3552dde76..3bf983c89 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -126,7 +126,7 @@ find_package(QtWaylandScanner REQUIRED)
+ find_package(Qt5WaylandClient)
+ find_package(Qt5XkbCommonSupport)
+ find_package(PlasmaWaylandProtocols REQUIRED)
+-find_package(Wayland REQUIRED COMPONENTS Client)
++find_package(Wayland REQUIRED COMPONENTS Client Server)
+ 
+ if(FONTCONFIG_FOUND)
+   # kfontinst
+diff --git a/shell/CMakeLists.txt b/shell/CMakeLists.txt
+index 31bfab573..468298d72 100644
+--- a/shell/CMakeLists.txt
++++ b/shell/CMakeLists.txt
+@@ -23,6 +23,11 @@ ecm_qt_declare_logging_category(plasmashell HEADER debug.h
+                                                CATEGORY_NAME kde.plasmashell
+                                                DEFAULT_SEVERITY Info)
+ 
++ecm_qt_declare_logging_category(plasmashell HEADER screenpool-debug.h
++                                               IDENTIFIER SCREENPOOL
++                                               CATEGORY_NAME kde.plasmashell.screenpool
++                                               DEFAULT_SEVERITY Info)
++
+ set (plasma_shell_SRCS
+     alternativeshelper.cpp
+     main.cpp
+@@ -31,6 +36,7 @@ set (plasma_shell_SRCS
+     desktopview.cpp
+     panelview.cpp
+     panelconfigview.cpp
++    primaryoutputwatcher.cpp
+     panelshadows.cpp
+     shellcorona.cpp
+     standaloneappcorona.cpp
+@@ -38,6 +44,7 @@ set (plasma_shell_SRCS
+     coronatesthelper.cpp
+     strutmanager.cpp
+     debug.cpp
++    screenpool-debug.cpp
+     screenpool.cpp
+     softwarerendernotifier.cpp
+     ${scripting_SRC}
+@@ -50,6 +57,10 @@ if (TARGET KUserFeedbackCore)
+     )
+ endif()
+ 
++ecm_add_qtwayland_client_protocol(plasma_shell_SRCS
++    PROTOCOL ${PLASMA_WAYLAND_PROTOCOLS_DIR}/kde-primary-output-v1.xml
++    BASENAME kde-primary-output-v1 )
++
+ set(krunner_xml ${plasma-workspace_SOURCE_DIR}/krunner/dbus/org.kde.krunner.App.xml)
+ qt_add_dbus_interface(plasma_shell_SRCS ${krunner_xml} krunner_interface)
+ 
+@@ -79,6 +90,7 @@ target_link_libraries(plasmashell
+  KF5::WaylandClient
+  KF5::Notifications
+  PW::KWorkspace
++ Wayland::Client
+ )
+ if (TARGET KUserFeedbackCore)
+     target_link_libraries(plasmashell KUserFeedbackCore)
+diff --git a/shell/autotests/CMakeLists.txt b/shell/autotests/CMakeLists.txt
+index 0323623f6..d01367527 100644
+--- a/shell/autotests/CMakeLists.txt
++++ b/shell/autotests/CMakeLists.txt
+@@ -1,15 +1,25 @@
++add_subdirectory(mockserver)
++
+ include(ECMAddTests)
+ 
+ include_directories(${CMAKE_CURRENT_BINARY_DIR}/.. ${CMAKE_CURRENT_SOURCE_DIR}/..)
+ 
+ MACRO(PLASMASHELL_UNIT_TESTS)
+        FOREACH(_testname ${ARGN})
+-               add_executable(${_testname} ${_testname}.cpp ../screenpool.cpp )
++                set(test_SRCS
++                    ${_testname}.cpp ../screenpool.cpp ${CMAKE_CURRENT_BINARY_DIR}/../screenpool-debug.cpp ../primaryoutputwatcher.cpp
++                        )
++               include_directories(${CMAKE_CURRENT_BINARY_DIR}/../mockserver)
++               add_executable(${_testname} ${test_SRCS})
+                target_link_libraries(${_testname}
+                             Qt::Test
+                             Qt::Gui
+                             KF5::Service
++                            KF5::WaylandClient
+                             KF5::WindowSystem
++                            Wayland::Client
++                            Wayland::Server
++                            SharedClientTest
+                                      )
+                if(HAVE_X11)
+                   target_link_libraries(${_testname} XCB::XCB XCB::RANDR)
+diff --git a/shell/autotests/mockserver/CMakeLists.txt b/shell/autotests/mockserver/CMakeLists.txt
+new file mode 100644
+index 000000000..b01661b6a
+--- /dev/null
++++ b/shell/autotests/mockserver/CMakeLists.txt
+@@ -0,0 +1,47 @@
++project(waylandmockservertest)
++
++find_package(WaylandProtocols 1.24)
++set_package_properties(WaylandProtocols PROPERTIES TYPE REQUIRED)
++find_package(Threads)
++
++set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -D_GLIBCXX_USE_NANOSLEEP" )
++
++set(SharedClientTest_LIB_SRCS
++    corecompositor.cpp corecompositor.h
++    coreprotocol.cpp coreprotocol.h
++    mockcompositor.cpp mockcompositor.h
++    xdgoutputv1.cpp xdgoutputv1.h
++    primaryoutput.cpp primaryoutput.h
++)
++
++ecm_add_qtwayland_server_protocol(SharedClientTest_LIB_SRCS
++    PROTOCOL ${Wayland_DATADIR}/wayland.xml
++    BASENAME wayland
++)
++
++ecm_add_qtwayland_server_protocol(SharedClientTest_LIB_SRCS
++    PROTOCOL ${WaylandProtocols_DATADIR}/unstable/xdg-output/xdg-output-unstable-v1.xml
++    BASENAME xdg-output-unstable-v1
++)
++
++ecm_add_qtwayland_client_protocol(SharedClientTest_LIB_SRCS
++    PROTOCOL ${PLASMA_WAYLAND_PROTOCOLS_DIR}/kde-primary-output-v1.xml
++    BASENAME kde-primary-output-v1
++)
++ecm_add_qtwayland_server_protocol(SharedClientTest_LIB_SRCS
++    PROTOCOL ${PLASMA_WAYLAND_PROTOCOLS_DIR}/kde-primary-output-v1.xml
++    BASENAME kde-primary-output-v1
++)
++
++add_library(SharedClientTest OBJECT ${SharedClientTest_LIB_SRCS})
++
++target_link_libraries(SharedClientTest
++    PUBLIC
++        Qt::Test
++        Qt::Gui
++        Qt::WaylandClientPrivate
++        Wayland::Server
++        Threads::Threads
++)
++
++target_include_directories(SharedClientTest PUBLIC ${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR})
+diff --git a/shell/autotests/mockserver/corecompositor.cpp b/shell/autotests/mockserver/corecompositor.cpp
+new file mode 100644
+index 000000000..c29261987
+--- /dev/null
++++ b/shell/autotests/mockserver/corecompositor.cpp
+@@ -0,0 +1,136 @@
++/****************************************************************************
++**
++** Copyright (C) 2018 The Qt Company Ltd.
++** Contact: https://www.qt.io/licensing/
++**
++** This file is part of the test suite of the Qt Toolkit.
++**
++** $QT_BEGIN_LICENSE:GPL-EXCEPT$
++** Commercial License Usage
++** Licensees holding valid commercial Qt licenses may use this file in
++** accordance with the commercial license agreement provided with the
++** Software or, alternatively, in accordance with the terms contained in
++** a written agreement between you and The Qt Company. For licensing terms
++** and conditions see https://www.qt.io/terms-conditions. For further
++** information use the contact form at https://www.qt.io/contact-us.
++**
++** GNU General Public License Usage
++** Alternatively, this file may be used under the terms of the GNU
++** General Public License version 3 as published by the Free Software
++** Foundation with exceptions as appearing in the file LICENSE.GPL3-EXCEPT
++** included in the packaging of this file. Please review the following
++** information to ensure the GNU General Public License requirements will
++** be met: https://www.gnu.org/licenses/gpl-3.0.html.
++**
++** $QT_END_LICENSE$
++**
++****************************************************************************/
++
++#include "corecompositor.h"
++#include <thread>
++
++namespace MockCompositor
++{
++CoreCompositor::CoreCompositor()
++    : m_display(wl_display_create())
++    , m_socketName(wl_display_add_socket_auto(m_display))
++    , m_eventLoop(wl_display_get_event_loop(m_display))
++
++    // Start dispatching
++    , m_dispatchThread([this]() {
++        while (m_running) {
++            std::this_thread::sleep_for(std::chrono::milliseconds(20));
++            dispatch();
++        }
++    })
++{
++    qputenv("WAYLAND_DISPLAY", m_socketName);
++    Q_ASSERT(isClean());
++}
++
++CoreCompositor::~CoreCompositor()
++{
++    m_running = false;
++    m_dispatchThread.join();
++    wl_display_destroy(m_display);
++}
++
++bool CoreCompositor::isClean()
++{
++    Lock lock(this);
++    for (auto *global : qAsConst(m_globals)) {
++        if (!global->isClean())
++            return false;
++    }
++    return true;
++}
++
++QString CoreCompositor::dirtyMessage()
++{
++    Lock lock(this);
++    QStringList messages;
++    for (auto *global : qAsConst(m_globals)) {
++        if (!global->isClean())
++            messages << (global->metaObject()->className() % QLatin1String(": ") % global->dirtyMessage());
++    }
++    return messages.join(", ");
++}
++
++void CoreCompositor::dispatch()
++{
++    Lock lock(this);
++    wl_display_flush_clients(m_display);
++    constexpr int timeout = 0; // immediate return
++    wl_event_loop_dispatch(m_eventLoop, timeout);
++}
++
++/*!
++ * \brief Adds a new global interface for the compositor
++ *
++ * Takes ownership of \a global
++ */
++void CoreCompositor::add(Global *global)
++{
++    warnIfNotLockedByThread(Q_FUNC_INFO);
++    m_globals.append(global);
++}
++
++void CoreCompositor::remove(Global *global)
++{
++    warnIfNotLockedByThread(Q_FUNC_INFO);
++    m_globals.removeAll(global);
++    delete global;
++}
++
++uint CoreCompositor::nextSerial()
++{
++    warnIfNotLockedByThread(Q_FUNC_INFO);
++    return wl_display_next_serial(m_display);
++}
++
++wl_client *CoreCompositor::client(int index)
++{
++    warnIfNotLockedByThread(Q_FUNC_INFO);
++    wl_list *clients = wl_display_get_client_list(m_display);
++    wl_client *client = nullptr;
++    int i = 0;
++    wl_client_for_each(client, clients)
++    {
++        if (i++ == index)
++            return client;
++    }
++    return nullptr;
++}
++
++void CoreCompositor::warnIfNotLockedByThread(const char *caller)
++{
++    if (!m_lock || !m_lock->isOwnedByCurrentThread()) {
++        qWarning() << caller << "called without locking the compositor to the current thread."
++                   << "This means the compositor can start dispatching at any moment,"
++                   << "potentially leading to threading issues."
++                   << "Unless you know what you are doing you should probably fix the test"
++                   << "by locking the compositor before accessing it (see mutex()).";
++    }
++}
++
++} // namespace MockCompositor
+diff --git a/shell/autotests/mockserver/corecompositor.h b/shell/autotests/mockserver/corecompositor.h
+new file mode 100644
+index 000000000..fffd11452
+--- /dev/null
++++ b/shell/autotests/mockserver/corecompositor.h
+@@ -0,0 +1,229 @@
++/****************************************************************************
++**
++** Copyright (C) 2018 The Qt Company Ltd.
++** Contact: https://www.qt.io/licensing/
++**
++** This file is part of the test suite of the Qt Toolkit.
++**
++** $QT_BEGIN_LICENSE:GPL-EXCEPT$
++** Commercial License Usage
++** Licensees holding valid commercial Qt licenses may use this file in
++** accordance with the commercial license agreement provided with the
++** Software or, alternatively, in accordance with the terms contained in
++** a written agreement between you and The Qt Company. For licensing terms
++** and conditions see https://www.qt.io/terms-conditions. For further
++** information use the contact form at https://www.qt.io/contact-us.
++**
++** GNU General Public License Usage
++** Alternatively, this file may be used under the terms of the GNU
++** General Public License version 3 as published by the Free Software
++** Foundation with exceptions as appearing in the file LICENSE.GPL3-EXCEPT
++** included in the packaging of this file. Please review the following
++** information to ensure the GNU General Public License requirements will
++** be met: https://www.gnu.org/licenses/gpl-3.0.html.
++**
++** $QT_END_LICENSE$
++**
++****************************************************************************/
++
++#ifndef MOCKCOMPOSITOR_CORECOMPOSITOR_H
++#define MOCKCOMPOSITOR_CORECOMPOSITOR_H
++
++#include <QtTest/QtTest>
++
++#include <wayland-server-core.h>
++
++struct wl_resource;
++
++namespace MockCompositor
++{
++class Global : public QObject
++{
++    Q_OBJECT
++public:
++    virtual bool isClean()
++    {
++        return true;
++    }
++    virtual QString dirtyMessage()
++    {
++        return isClean() ? "clean" : "dirty";
++    }
++};
++
++class CoreCompositor
++{
++public:
++    explicit CoreCompositor();
++    ~CoreCompositor();
++    bool isClean();
++    QString dirtyMessage();
++    void dispatch();
++
++    template<typename function_type, typename... arg_types>
++    auto exec(function_type func, arg_types &&...args) -> decltype(func())
++    {
++        Lock lock(this);
++        return func(std::forward<arg_types>(args)...);
++    }
++
++    // Unsafe section below, YOU are responsible that the compositor is locked or
++    // this is run through the mutex() method!
++
++    void add(Global *global);
++    void remove(Global *global);
++
++    /*!
++     * \brief Constructs and adds a new global with the given parameters
++     *
++     * Convenience function. i.e.
++     *
++     *     compositor->add(new MyGlobal(compositor, version);
++     *
++     * can be written as:
++     *
++     *     compositor->add<MyGlobal>(version);
++     *
++     * Returns the new global
++     */
++    template<typename global_type, typename... arg_types>
++    global_type *add(arg_types &&...args)
++    {
++        warnIfNotLockedByThread(Q_FUNC_INFO);
++        auto *global = new global_type(this, std::forward<arg_types>(args)...);
++        m_globals.append(global);
++        return global;
++    }
++
++    /*!
++     * \brief Removes all globals of the given type
++     *
++     * Convenience function
++     */
++    template<typename global_type, typename... arg_types>
++    void removeAll()
++    {
++        const auto globals = getAll<global_type>();
++        for (auto global : globals)
++            remove(global);
++    }
++
++    /*!
++     * \brief Returns a global with the given type, if any
++     */
++    template<typename global_type>
++    global_type *get()
++    {
++        warnIfNotLockedByThread(Q_FUNC_INFO);
++        for (auto *global : qAsConst(m_globals)) {
++            if (auto *casted = qobject_cast<global_type *>(global))
++                return casted;
++        }
++        return nullptr;
++    }
++
++    /*!
++     * \brief Returns the nth global with the given type, if any
++     */
++    template<typename global_type>
++    global_type *get(int index)
++    {
++        warnIfNotLockedByThread(Q_FUNC_INFO);
++        for (auto *global : qAsConst(m_globals)) {
++            if (auto *casted = qobject_cast<global_type *>(global)) {
++                if (index--)
++                    continue;
++                return casted;
++            }
++        }
++        return nullptr;
++    }
++
++    /*!
++     * \brief Returns all globals with the given type, if any
++     */
++    template<typename global_type>
++    QVector<global_type *> getAll()
++    {
++        warnIfNotLockedByThread(Q_FUNC_INFO);
++        QVector<global_type *> matching;
++        for (auto *global : qAsConst(m_globals)) {
++            if (auto *casted = qobject_cast<global_type *>(global))
++                matching.append(casted);
++        }
++        return matching;
++    }
++
++    uint nextSerial();
++    wl_client *client(int index = 0);
++    void warnIfNotLockedByThread(const char *caller = "warnIfNotLockedbyThread");
++
++public:
++    // Only use this carefully from the test thread (i.e. lock first)
++    wl_display *m_display = nullptr;
++
++protected:
++    class Lock
++    {
++    public:
++        explicit Lock(CoreCompositor *compositor)
++            : m_compositor(compositor)
++            , m_threadId(std::this_thread::get_id())
++        {
++            // Can't use a QMutexLocker here, as it's not movable
++            compositor->m_mutex.lock();
++            Q_ASSERT(compositor->m_lock == nullptr);
++            compositor->m_lock = this;
++        }
++        ~Lock()
++        {
++            Q_ASSERT(m_compositor->m_lock == this);
++            m_compositor->m_lock = nullptr;
++            m_compositor->m_mutex.unlock();
++        }
++
++        // Move semantics
++        Lock(Lock &&) = default;
++        Lock &operator=(Lock &&) = default;
++
++        // Disable copying
++        Lock(const Lock &) = delete;
++        Lock &operator=(const Lock &) = delete;
++
++        bool isOwnedByCurrentThread() const
++        {
++            return m_threadId == std::this_thread::get_id();
++        }
++
++    private:
++        CoreCompositor *m_compositor = nullptr;
++        std::thread::id m_threadId;
++    };
++    QByteArray m_socketName;
++    wl_event_loop *m_eventLoop = nullptr;
++    bool m_running = true;
++    QVector<Global *> m_globals;
++
++private:
++    Lock *m_lock = nullptr;
++    QMutex m_mutex;
++    std::thread m_dispatchThread;
++};
++
++template<typename container_type>
++QByteArray toByteArray(container_type container)
++{
++    return QByteArray(reinterpret_cast<const char *>(container.data()), sizeof(container[0]) * container.size());
++}
++
++template<typename return_type>
++return_type *fromResource(::wl_resource *resource)
++{
++    if (auto *r = return_type::Resource::fromResource(resource))
++        return static_cast<return_type *>(r->object());
++    return nullptr;
++}
++
++} // namespace MockCompositor
++
++#endif // MOCKCOMPOSITOR_CORECOMPOSITOR_H
+diff --git a/shell/autotests/mockserver/coreprotocol.cpp b/shell/autotests/mockserver/coreprotocol.cpp
+new file mode 100644
+index 000000000..70207a807
+--- /dev/null
++++ b/shell/autotests/mockserver/coreprotocol.cpp
+@@ -0,0 +1,88 @@
++/****************************************************************************
++**
++** Copyright (C) 2018 The Qt Company Ltd.
++** Contact: https://www.qt.io/licensing/
++**
++** This file is part of the test suite of the Qt Toolkit.
++**
++** $QT_BEGIN_LICENSE:GPL-EXCEPT$
++** Commercial License Usage
++** Licensees holding valid commercial Qt licenses may use this file in
++** accordance with the commercial license agreement provided with the
++** Software or, alternatively, in accordance with the terms contained in
++** a written agreement between you and The Qt Company. For licensing terms
++** and conditions see https://www.qt.io/terms-conditions. For further
++** information use the contact form at https://www.qt.io/contact-us.
++**
++** GNU General Public License Usage
++** Alternatively, this file may be used under the terms of the GNU
++** General Public License version 3 as published by the Free Software
++** Foundation with exceptions as appearing in the file LICENSE.GPL3-EXCEPT
++** included in the packaging of this file. Please review the following
++** information to ensure the GNU General Public License requirements will
++** be met: https://www.gnu.org/licenses/gpl-3.0.html.
++**
++** $QT_END_LICENSE$
++**
++****************************************************************************/
++
++#include "coreprotocol.h"
++
++namespace MockCompositor
++{
++void Output::sendGeometry()
++{
++    const auto resources = resourceMap().values();
++    for (auto r : resources)
++        sendGeometry(r);
++}
++
++void Output::sendGeometry(Resource *resource)
++{
++    wl_output::send_geometry(resource->handle,
++                             m_data.position.x(),
++                             m_data.position.y(),
++                             m_data.physicalSize.width(),
++                             m_data.physicalSize.height(),
++                             m_data.subpixel,
++                             m_data.make,
++                             m_data.model,
++                             m_data.transform);
++}
++
++void Output::sendScale(int factor)
++{
++    m_data.scale = factor;
++    const auto resources = resourceMap().values();
++    for (auto r : resources)
++        sendScale(r);
++}
++
++void Output::sendScale(Resource *resource)
++{
++    wl_output::send_scale(resource->handle, m_data.scale);
++}
++
++void Output::sendDone(wl_client *client)
++{
++    auto resources = resourceMap().values(client);
++    for (auto *r : resources)
++        wl_output::send_done(r->handle);
++}
++
++void Output::sendDone()
++{
++    const auto resources = resourceMap().values();
++    for (auto r : resources)
++        wl_output::send_done(r->handle);
++}
++
++void Output::output_bind_resource(QtWaylandServer::wl_output::Resource *resource)
++{
++    sendGeometry(resource);
++    send_mode(resource->handle, mode_preferred | mode_current, m_data.mode.resolution.width(), m_data.mode.resolution.height(), m_data.mode.refreshRate);
++    sendScale(resource);
++    wl_output::send_done(resource->handle);
++}
++
++} // namespace MockCompositor
+diff --git a/shell/autotests/mockserver/coreprotocol.h b/shell/autotests/mockserver/coreprotocol.h
+new file mode 100644
+index 000000000..76485bc7c
+--- /dev/null
++++ b/shell/autotests/mockserver/coreprotocol.h
+@@ -0,0 +1,117 @@
++/****************************************************************************
++**
++** Copyright (C) 2018 The Qt Company Ltd.
++** Contact: https://www.qt.io/licensing/
++**
++** This file is part of the test suite of the Qt Toolkit.
++**
++** $QT_BEGIN_LICENSE:GPL-EXCEPT$
++** Commercial License Usage
++** Licensees holding valid commercial Qt licenses may use this file in
++** accordance with the commercial license agreement provided with the
++** Software or, alternatively, in accordance with the terms contained in
++** a written agreement between you and The Qt Company. For licensing terms
++** and conditions see https://www.qt.io/terms-conditions. For further
++** information use the contact form at https://www.qt.io/contact-us.
++**
++** GNU General Public License Usage
++** Alternatively, this file may be used under the terms of the GNU
++** General Public License version 3 as published by the Free Software
++** Foundation with exceptions as appearing in the file LICENSE.GPL3-EXCEPT
++** included in the packaging of this file. Please review the following
++** information to ensure the GNU General Public License requirements will
++** be met: https://www.gnu.org/licenses/gpl-3.0.html.
++**
++** $QT_END_LICENSE$
++**
++****************************************************************************/
++
++#ifndef MOCKCOMPOSITOR_COREPROTOCOL_H
++#define MOCKCOMPOSITOR_COREPROTOCOL_H
++
++#include "corecompositor.h"
++
++#include <qwayland-server-wayland.h>
++
++namespace MockCompositor
++{
++class WlCompositor;
++class Output;
++class Pointer;
++class Touch;
++class Keyboard;
++class CursorRole;
++class ShmPool;
++class ShmBuffer;
++class DataDevice;
++
++struct OutputMode {
++    explicit OutputMode() = default;
++    explicit OutputMode(const QSize &resolution, int refreshRate = 60000)
++        : resolution(resolution)
++        , refreshRate(refreshRate)
++    {
++    }
++    QSize resolution = QSize(1920, 1080);
++    int refreshRate = 60000; // In mHz
++    // TODO: flags (they're currently hard-coded)
++
++    // in mm
++    QSize physicalSizeForDpi(int dpi)
++    {
++        return (QSizeF(resolution) * 25.4 / dpi).toSize();
++    }
++};
++
++struct OutputData {
++    using Subpixel = QtWaylandServer::wl_output::subpixel;
++    using Transform = QtWaylandServer::wl_output::transform;
++    explicit OutputData() = default;
++
++    // for geometry event
++    QPoint position;
++    QSize physicalSize = QSize(0, 0); // means unknown physical size
++    QString make = "Make";
++    QString model = "Model";
++    Subpixel subpixel = Subpixel::subpixel_unknown;
++    Transform transform = Transform::transform_normal;
++
++    int scale = 1; // for scale event
++    OutputMode mode; // for mode event
++};
++
++class Output : public Global, public QtWaylandServer::wl_output
++{
++    Q_OBJECT
++public:
++    explicit Output(CoreCompositor *compositor, OutputData data = OutputData())
++        : QtWaylandServer::wl_output(compositor->m_display, 2)
++        , m_data(std::move(data))
++    {
++    }
++
++    void send_geometry() = delete;
++    void sendGeometry();
++    void sendGeometry(Resource *resource); // Sends to only one client
++
++    void send_scale(int32_t factor) = delete;
++    void sendScale(int factor);
++    void sendScale(Resource *resource); // Sends current scale to only one client
++
++    void sendDone(wl_client *client);
++    void sendDone();
++
++    int scale() const
++    {
++        return m_data.scale;
++    }
++
++    OutputData m_data;
++
++protected:
++    void output_bind_resource(Resource *resource) override;
++};
++
++} // namespace MockCompositor
++
++#endif // MOCKCOMPOSITOR_COREPROTOCOL_H
+diff --git a/shell/autotests/mockserver/mockcompositor.cpp b/shell/autotests/mockserver/mockcompositor.cpp
+new file mode 100644
+index 000000000..5df653639
+--- /dev/null
++++ b/shell/autotests/mockserver/mockcompositor.cpp
+@@ -0,0 +1,47 @@
++/****************************************************************************
++**
++** Copyright (C) 2018 The Qt Company Ltd.
++** Contact: https://www.qt.io/licensing/
++**
++** This file is part of the test suite of the Qt Toolkit.
++**
++** $QT_BEGIN_LICENSE:GPL-EXCEPT$
++** Commercial License Usage
++** Licensees holding valid commercial Qt licenses may use this file in
++** accordance with the commercial license agreement provided with the
++** Software or, alternatively, in accordance with the terms contained in
++** a written agreement between you and The Qt Company. For licensing terms
++** and conditions see https://www.qt.io/terms-conditions. For further
++** information use the contact form at https://www.qt.io/contact-us.
++**
++** GNU General Public License Usage
++** Alternatively, this file may be used under the terms of the GNU
++** General Public License version 3 as published by the Free Software
++** Foundation with exceptions as appearing in the file LICENSE.GPL3-EXCEPT
++** included in the packaging of this file. Please review the following
++** information to ensure the GNU General Public License requirements will
++** be met: https://www.gnu.org/licenses/gpl-3.0.html.
++**
++** $QT_END_LICENSE$
++**
++****************************************************************************/
++
++#include "mockcompositor.h"
++
++namespace MockCompositor
++{
++DefaultCompositor::DefaultCompositor()
++{
++    {
++        Lock l(this);
++
++        add<XdgOutputManagerV1>();
++        auto *output = add<Output>();
++        auto *primaryOutput = add<PrimaryOutputV1>();
++        output->m_data.physicalSize = output->m_data.mode.physicalSizeForDpi(96);
++        primaryOutput->setPrimaryOutputName("WL-1");
++    }
++    Q_ASSERT(isClean());
++}
++
++} // namespace MockCompositor
+diff --git a/shell/autotests/mockserver/mockcompositor.h b/shell/autotests/mockserver/mockcompositor.h
+new file mode 100644
+index 000000000..eabb3bf82
+--- /dev/null
++++ b/shell/autotests/mockserver/mockcompositor.h
+@@ -0,0 +1,98 @@
++/****************************************************************************
++**
++** Copyright (C) 2018 The Qt Company Ltd.
++** Contact: https://www.qt.io/licensing/
++**
++** This file is part of the test suite of the Qt Toolkit.
++**
++** $QT_BEGIN_LICENSE:GPL-EXCEPT$
++** Commercial License Usage
++** Licensees holding valid commercial Qt licenses may use this file in
++** accordance with the commercial license agreement provided with the
++** Software or, alternatively, in accordance with the terms contained in
++** a written agreement between you and The Qt Company. For licensing terms
++** and conditions see https://www.qt.io/terms-conditions. For further
++** information use the contact form at https://www.qt.io/contact-us.
++**
++** GNU General Public License Usage
++** Alternatively, this file may be used under the terms of the GNU
++** General Public License version 3 as published by the Free Software
++** Foundation with exceptions as appearing in the file LICENSE.GPL3-EXCEPT
++** included in the packaging of this file. Please review the following
++** information to ensure the GNU General Public License requirements will
++** be met: https://www.gnu.org/licenses/gpl-3.0.html.
++**
++** $QT_END_LICENSE$
++**
++****************************************************************************/
++
++#ifndef MOCKCOMPOSITOR_H
++#define MOCKCOMPOSITOR_H
++
++#include "corecompositor.h"
++#include "coreprotocol.h"
++#include "primaryoutput.h"
++#include "xdgoutputv1.h"
++
++#include <QtGui/QGuiApplication>
++
++namespace MockCompositor
++{
++class DefaultCompositor : public CoreCompositor
++{
++public:
++    explicit DefaultCompositor();
++    // Convenience functions
++    Output *output(int i = 0)
++    {
++        return getAll<Output>().value(i, nullptr);
++    }
++    XdgOutputV1 *xdgOutput(Output *out)
++    {
++        return get<XdgOutputManagerV1>()->getXdgOutput(out);
++    }
++    PrimaryOutputV1 *primaryOutput()
++    {
++        auto *primary = get<PrimaryOutputV1>();
++        Q_ASSERT(primary);
++        return primary;
++    }
++};
++
++// addOutput(OutputData)
++// setPrimary()
++
++} // namespace MockCompositor
++
++#define QCOMPOSITOR_VERIFY(expr)                                                                                                                               \
++    QVERIFY(exec([&] {                                                                                                                                         \
++        return expr;                                                                                                                                           \
++    }))
++#define QCOMPOSITOR_TRY_VERIFY(expr)                                                                                                                           \
++    QTRY_VERIFY(exec([&] {                                                                                                                                     \
++        return expr;                                                                                                                                           \
++    }))
++#define QCOMPOSITOR_COMPARE(expr, expr2)                                                                                                                       \
++    QCOMPARE(exec([&] {                                                                                                                                        \
++                 return expr;                                                                                                                                  \
++             }),                                                                                                                                               \
++             expr2)
++#define QCOMPOSITOR_TRY_COMPARE(expr, expr2)                                                                                                                   \
++    QTRY_COMPARE(exec([&] {                                                                                                                                    \
++                     return expr;                                                                                                                              \
++                 }),                                                                                                                                           \
++                 expr2)
++
++#define QCOMPOSITOR_TEST_MAIN(test)                                                                                                                            \
++    int main(int argc, char **argv)                                                                                                                            \
++    {                                                                                                                                                          \
++        QTemporaryDir tmpRuntimeDir;                                                                                                                           \
++        setenv("XDG_RUNTIME_DIR", tmpRuntimeDir.path().toLocal8Bit(), 1);                                                                                      \
++        setenv("XDG_CURRENT_DESKTOP", "qtwaylandtests", 1);                                                                                                    \
++        setenv("QT_QPA_PLATFORM", "wayland", 1);                                                                                                               \
++        test tc;                                                                                                                                               \
++        QGuiApplication app(argc, argv);                                                                                                                       \
++        return QTest::qExec(&tc, argc, argv);                                                                                                                  \
++    }
++
++#endif
+diff --git a/shell/autotests/mockserver/primaryoutput.cpp b/shell/autotests/mockserver/primaryoutput.cpp
+new file mode 100644
+index 000000000..a31cf4a9d
+--- /dev/null
++++ b/shell/autotests/mockserver/primaryoutput.cpp
+@@ -0,0 +1,53 @@
++/****************************************************************************
++**
++** Copyright (C) 2022 Marco Martin <mart@kde.org>
++** Copyright (C) 2019 The Qt Company Ltd.
++** Contact: https://www.qt.io/licensing/
++**
++** This file is part of the test suite of the Qt Toolkit.
++**
++** $QT_BEGIN_LICENSE:GPL-EXCEPT$
++** Commercial License Usage
++** Licensees holding valid commercial Qt licenses may use this file in
++** accordance with the commercial license agreement provided with the
++** Software or, alternatively, in accordance with the terms contained in
++** a written agreement between you and The Qt Company. For licensing terms
++** and conditions see https://www.qt.io/terms-conditions. For further
++** information use the contact form at https://www.qt.io/contact-us.
++**
++** GNU General Public License Usage
++** Alternatively, this file may be used under the terms of the GNU
++** General Public License version 3 as published by the Free Software
++** Foundation with exceptions as appearing in the file LICENSE.GPL3-EXCEPT
++** included in the packaging of this file. Please review the following
++** information to ensure the GNU General Public License requirements will
++** be met: https://www.gnu.org/licenses/gpl-3.0.html.
++**
++** $QT_END_LICENSE$
++**
++****************************************************************************/
++
++#include "primaryoutput.h"
++
++namespace MockCompositor
++{
++PrimaryOutputV1::PrimaryOutputV1(CoreCompositor *compositor, int version)
++    : QtWaylandServer::kde_primary_output_v1(compositor->m_display, version)
++{
++}
++
++void PrimaryOutputV1::setPrimaryOutputName(const QString &primaryName)
++{
++    m_primaryName = primaryName;
++    const auto resources = resourceMap();
++    for (auto *resource : resources) {
++        send_primary_output(resource->handle, primaryName);
++    }
++}
++
++void PrimaryOutputV1::kde_primary_output_v1_bind_resource(Resource *resource)
++{
++    send_primary_output(resource->handle, m_primaryName);
++}
++
++} // namespace MockCompositor
+diff --git a/shell/autotests/mockserver/primaryoutput.h b/shell/autotests/mockserver/primaryoutput.h
+new file mode 100644
+index 000000000..e858ad25c
+--- /dev/null
++++ b/shell/autotests/mockserver/primaryoutput.h
+@@ -0,0 +1,57 @@
++/****************************************************************************
++**
++** Copyright (C) 2022 Marco Martin <mart@kde.org>
++** Copyright (C) 2019 The Qt Company Ltd.
++** Contact: https://www.qt.io/licensing/
++**
++** This file is part of the test suite of the Qt Toolkit.
++**
++** $QT_BEGIN_LICENSE:GPL-EXCEPT$
++** Commercial License Usage
++** Licensees holding valid commercial Qt licenses may use this file in
++** accordance with the commercial license agreement provided with the
++** Software or, alternatively, in accordance with the terms contained in
++** a written agreement between you and The Qt Company. For licensing terms
++** and conditions see https://www.qt.io/terms-conditions. For further
++** information use the contact form at https://www.qt.io/contact-us.
++**
++** GNU General Public License Usage
++** Alternatively, this file may be used under the terms of the GNU
++** General Public License version 3 as published by the Free Software
++** Foundation with exceptions as appearing in the file LICENSE.GPL3-EXCEPT
++** included in the packaging of this file. Please review the following
++** information to ensure the GNU General Public License requirements will
++** be met: https://www.gnu.org/licenses/gpl-3.0.html.
++**
++** $QT_END_LICENSE$
++**
++****************************************************************************/
++
++#ifndef MOCKCOMPOSITOR_PRIMARYOUTPUT_H
++#define MOCKCOMPOSITOR_PRIMARYOUTPUT_H
++
++#include "coreprotocol.h"
++#include <qwayland-server-kde-primary-output-v1.h>
++
++#include <QtGui/qpa/qplatformnativeinterface.h>
++
++namespace MockCompositor
++{
++class PrimaryOutputV1 : public Global, public QtWaylandServer::kde_primary_output_v1
++{
++    Q_OBJECT
++public:
++    explicit PrimaryOutputV1(CoreCompositor *compositor, int version = 1);
++
++    void setPrimaryOutputName(const QString &primaryName);
++
++protected:
++    void kde_primary_output_v1_bind_resource(Resource *resource) override;
++
++private:
++    QString m_primaryName;
++};
++
++} // namespace MockCompositor
++
++#endif // MOCKCOMPOSITOR_PRIMARYOUTPUT_H
+diff --git a/shell/autotests/mockserver/xdgoutputv1.cpp b/shell/autotests/mockserver/xdgoutputv1.cpp
+new file mode 100644
+index 000000000..de8434cff
+--- /dev/null
++++ b/shell/autotests/mockserver/xdgoutputv1.cpp
+@@ -0,0 +1,59 @@
++/****************************************************************************
++**
++** Copyright (C) 2020 The Qt Company Ltd.
++** Contact: https://www.qt.io/licensing/
++**
++** This file is part of the test suite of the Qt Toolkit.
++**
++** $QT_BEGIN_LICENSE:GPL-EXCEPT$
++** Commercial License Usage
++** Licensees holding valid commercial Qt licenses may use this file in
++** accordance with the commercial license agreement provided with the
++** Software or, alternatively, in accordance with the terms contained in
++** a written agreement between you and The Qt Company. For licensing terms
++** and conditions see https://www.qt.io/terms-conditions. For further
++** information use the contact form at https://www.qt.io/contact-us.
++**
++** GNU General Public License Usage
++** Alternatively, this file may be used under the terms of the GNU
++** General Public License version 3 as published by the Free Software
++** Foundation with exceptions as appearing in the file LICENSE.GPL3-EXCEPT
++** included in the packaging of this file. Please review the following
++** information to ensure the GNU General Public License requirements will
++** be met: https://www.gnu.org/licenses/gpl-3.0.html.
++**
++** $QT_END_LICENSE$
++**
++****************************************************************************/
++
++#include "xdgoutputv1.h"
++
++namespace MockCompositor
++{
++int XdgOutputV1::s_nextId = 1;
++
++void XdgOutputV1::sendLogicalSize(const QSize &size)
++{
++    m_logicalGeometry.setSize(size);
++    for (auto *resource : resourceMap())
++        zxdg_output_v1::send_logical_size(resource->handle, size.width(), size.height());
++}
++
++void XdgOutputV1::addResource(wl_client *client, int id, int version)
++{
++    auto *resource = add(client, id, version)->handle;
++    zxdg_output_v1::send_logical_size(resource, m_logicalGeometry.width(), m_logicalGeometry.height());
++    send_logical_position(resource, m_logicalGeometry.x(), m_logicalGeometry.y());
++    if (version >= ZXDG_OUTPUT_V1_NAME_SINCE_VERSION)
++        send_name(resource, m_name);
++    if (version >= ZXDG_OUTPUT_V1_DESCRIPTION_SINCE_VERSION)
++        send_description(resource, m_description);
++
++    if (version < 3) // zxdg_output_v1.done has been deprecated
++        zxdg_output_v1::send_done(resource);
++    else {
++        m_output->sendDone(client);
++    }
++}
++
++} // namespace MockCompositor
+diff --git a/shell/autotests/mockserver/xdgoutputv1.h b/shell/autotests/mockserver/xdgoutputv1.h
+new file mode 100644
+index 000000000..db292f4b0
+--- /dev/null
++++ b/shell/autotests/mockserver/xdgoutputv1.h
+@@ -0,0 +1,89 @@
++/****************************************************************************
++**
++** Copyright (C) 2020 The Qt Company Ltd.
++** Contact: https://www.qt.io/licensing/
++**
++** This file is part of the test suite of the Qt Toolkit.
++**
++** $QT_BEGIN_LICENSE:GPL-EXCEPT$
++** Commercial License Usage
++** Licensees holding valid commercial Qt licenses may use this file in
++** accordance with the commercial license agreement provided with the
++** Software or, alternatively, in accordance with the terms contained in
++** a written agreement between you and The Qt Company. For licensing terms
++** and conditions see https://www.qt.io/terms-conditions. For further
++** information use the contact form at https://www.qt.io/contact-us.
++**
++** GNU General Public License Usage
++** Alternatively, this file may be used under the terms of the GNU
++** General Public License version 3 as published by the Free Software
++** Foundation with exceptions as appearing in the file LICENSE.GPL3-EXCEPT
++** included in the packaging of this file. Please review the following
++** information to ensure the GNU General Public License requirements will
++** be met: https://www.gnu.org/licenses/gpl-3.0.html.
++**
++** $QT_END_LICENSE$
++**
++****************************************************************************/
++
++#ifndef MOCKCOMPOSITOR_XDGOUTPUTV1_H
++#define MOCKCOMPOSITOR_XDGOUTPUTV1_H
++
++#include "coreprotocol.h"
++
++#include <qwayland-server-xdg-output-unstable-v1.h>
++
++namespace MockCompositor
++{
++class XdgOutputV1 : public QObject, public QtWaylandServer::zxdg_output_v1
++{
++    Q_OBJECT
++public:
++    explicit XdgOutputV1(Output *output)
++        : m_output(output)
++        , m_logicalGeometry(m_output->m_data.position, QSize(m_output->m_data.mode.resolution / m_output->m_data.scale))
++        , m_name(QString("WL-%1").arg(s_nextId++))
++    {
++    }
++
++    void send_logical_size(int32_t width, int32_t height) = delete;
++    void sendLogicalSize(const QSize &size);
++
++    void send_done() = delete; // zxdg_output_v1.done has been deprecated (in protocol version 3)
++
++    void addResource(wl_client *client, int id, int version);
++    Output *m_output = nullptr;
++    QRect m_logicalGeometry;
++    QString m_name;
++    QString m_description = "This is an Xdg Output description";
++    static int s_nextId;
++};
++
++class XdgOutputManagerV1 : public Global, public QtWaylandServer::zxdg_output_manager_v1
++{
++    Q_OBJECT
++public:
++    explicit XdgOutputManagerV1(CoreCompositor *compositor)
++        : QtWaylandServer::zxdg_output_manager_v1(compositor->m_display, 3)
++    {
++    }
++    QMap<Output *, XdgOutputV1 *> m_xdgOutputs;
++    XdgOutputV1 *getXdgOutput(Output *output)
++    {
++        if (auto *xdgOutput = m_xdgOutputs.value(output))
++            return xdgOutput;
++        return m_xdgOutputs[output] = new XdgOutputV1(output); // TODO: free memory
++    }
++
++protected:
++    void zxdg_output_manager_v1_get_xdg_output(Resource *resource, uint32_t id, wl_resource *outputResource) override
++    {
++        auto *output = fromResource<Output>(outputResource);
++        auto *xdgOutput = getXdgOutput(output);
++        xdgOutput->addResource(resource->client(), id, resource->version());
++    }
++};
++
++} // namespace MockCompositor
++
++#endif // MOCKCOMPOSITOR_XDGOUTPUTV1_H
+diff --git a/shell/autotests/screenpooltest.cpp b/shell/autotests/screenpooltest.cpp
+index 39eeece24..74f166168 100644
+--- a/shell/autotests/screenpooltest.cpp
++++ b/shell/autotests/screenpooltest.cpp
+@@ -8,13 +8,18 @@
+ 
+ #include <QDir>
+ #include <QScreen>
++#include <QSignalSpy>
+ #include <QStandardPaths>
+ #include <QTemporaryDir>
+ #include <QTest>
+ 
+ #include "../screenpool.h"
++#include "mockcompositor.h"
++#include "xdgoutputv1.h"
+ 
+-class ScreenPoolTest : public QObject
++using namespace MockCompositor;
++
++class ScreenPoolTest : public QObject, DefaultCompositor
+ {
+     Q_OBJECT
+ 
+@@ -23,7 +28,17 @@ private Q_SLOTS:
+     void cleanupTestCase();
+ 
+     void testScreenInsertion();
++    void testRedundantScreenInsertion();
++    void testMoveOutOfRedundant();
++    void testMoveInRedundant();
+     void testPrimarySwap();
++    void testPrimarySwapToRedundant();
++    void testMoveRedundantToMakePrimary();
++    void testMoveInRedundantToLosePrimary();
++    void testSecondScreenRemoval();
++    void testThirdScreenRemoval();
++    void testLastScreenRemoval();
++    void testFakeToRealScreen();
+ 
+ private:
+     ScreenPool *m_screenPool;
+@@ -32,16 +47,29 @@ private:
+ void ScreenPoolTest::initTestCase()
+ {
+     QStandardPaths::setTestModeEnabled(true);
++    qRegisterMetaType<QScreen *>();
+ 
+     KConfigGroup cg(KSharedConfig::openConfig(), QStringLiteral("ScreenConnectors"));
+     cg.deleteGroup();
+     cg.sync();
+     m_screenPool = new ScreenPool(KSharedConfig::openConfig(), this);
+     m_screenPool->load();
++
++    QTRY_COMPARE(QGuiApplication::screens().size(), 1);
++    QCOMPARE(m_screenPool->screens().size(), 1);
++    QCOMPARE(QGuiApplication::screens().first()->name(), QStringLiteral("WL-1"));
++    QCOMPARE(QGuiApplication::primaryScreen(), QGuiApplication::screens().first());
++    QCOMPARE(QGuiApplication::primaryScreen(), m_screenPool->primaryScreen());
++    QCOMPARE(m_screenPool->id(m_screenPool->primaryScreen()->name()), 0);
++    QCOMPARE(m_screenPool->connector(0), QStringLiteral("WL-1"));
+ }
+ 
+ void ScreenPoolTest::cleanupTestCase()
+ {
++    QCOMPOSITOR_COMPARE(getAll<Output>().size(), 1); // Only the default output should be left
++    QTRY_COMPARE(QGuiApplication::screens().size(), 1);
++    QTRY_VERIFY2(isClean(), qPrintable(dirtyMessage()));
++
+     KConfigGroup cg(KSharedConfig::openConfig(), QStringLiteral("ScreenConnectors"));
+     cg.deleteGroup();
+     cg.sync();
+@@ -49,40 +77,340 @@ void ScreenPoolTest::cleanupTestCase()
+ 
+ void ScreenPoolTest::testScreenInsertion()
+ {
+-    int firstScreen = 0;
+-    if (QGuiApplication::primaryScreen()) {
+-        ++firstScreen;
+-    }
+-    qWarning() << "Known ids" << m_screenPool->knownIds();
+-    m_screenPool->insertScreenMapping(firstScreen, QStringLiteral("FAKE-0"));
+-    QCOMPARE(m_screenPool->knownIds().count(), firstScreen + 1);
+-    QCOMPARE(m_screenPool->connector(firstScreen), QStringLiteral("FAKE-0"));
+-    QCOMPARE(m_screenPool->id(QStringLiteral("FAKE-0")), firstScreen);
+-
+-    qWarning() << "Known ids" << m_screenPool->knownIds();
+-    m_screenPool->insertScreenMapping(firstScreen + 1, QStringLiteral("FAKE-1"));
+-    QCOMPARE(m_screenPool->knownIds().count(), firstScreen + 2);
+-    QCOMPARE(m_screenPool->connector(firstScreen + 1), QStringLiteral("FAKE-1"));
+-    QCOMPARE(m_screenPool->id(QStringLiteral("FAKE-1")), firstScreen + 1);
++    QSignalSpy addedSpy(m_screenPool, SIGNAL(screenAdded(QScreen *)));
++
++    // Add a new output
++    exec([=] {
++        OutputData data;
++        data.mode.resolution = {1920, 1080};
++        data.position = {1920, 0};
++        data.physicalSize = data.mode.physicalSizeForDpi(96);
++        // NOTE: assumes that when a screen is added it will already have the final geometry
++        add<Output>(data);
++    });
++
++    addedSpy.wait();
++    QCOMPARE(QGuiApplication::screens().size(), 2);
++    QCOMPARE(m_screenPool->screens().size(), 2);
++    QCOMPARE(addedSpy.size(), 1);
++
++    QScreen *newScreen = addedSpy.takeFirst().at(0).value<QScreen *>();
++    QCOMPARE(newScreen->name(), QStringLiteral("WL-2"));
++    QCOMPARE(newScreen->geometry(), QRect(1920, 0, 1920, 1080));
++    // Check mapping
++    QCOMPARE(m_screenPool->id(newScreen->name()), 1);
++    QCOMPARE(m_screenPool->connector(1), QStringLiteral("WL-2"));
++}
++
++void ScreenPoolTest::testRedundantScreenInsertion()
++{
++    QSignalSpy addedSpy(m_screenPool, SIGNAL(screenAdded(QScreen *)));
++    QSignalSpy addedFromAppSpy(qGuiApp, SIGNAL(screenAdded(QScreen *)));
++
++    // Add a new output
++    exec([=] {
++        OutputData data;
++        data.mode.resolution = {1280, 720};
++        data.position = {1920, 0};
++        data.physicalSize = data.mode.physicalSizeForDpi(96);
++        // NOTE: assumes that when a screen is added it will already have the final geometry
++        add<Output>(data);
++    });
++
++    addedFromAppSpy.wait();
++    addedSpy.wait(250);
++    // only addedFromAppSpy will have registered something, nothing in addedSpy,
++    // on ScreenPool API POV is like this new screen doesn't exist, because is redundant to WL-2
++    QCOMPARE(QGuiApplication::screens().size(), 3);
++    QCOMPARE(m_screenPool->screens().size(), 2);
++    QCOMPARE(addedFromAppSpy.size(), 1);
++    QCOMPARE(addedSpy.size(), 0);
++
++    QScreen *newScreen = addedFromAppSpy.takeFirst().at(0).value<QScreen *>();
++    QCOMPARE(newScreen->name(), QStringLiteral("WL-3"));
++    QCOMPARE(newScreen->geometry(), QRect(1920, 0, 1280, 720));
++    QVERIFY(!m_screenPool->screens().contains(newScreen));
++
++    QCOMPARE(m_screenPool->id(newScreen->name()), 2);
++    QCOMPARE(m_screenPool->connector(2), QStringLiteral("WL-3"));
++}
++
++void ScreenPoolTest::testMoveOutOfRedundant()
++{
++    QSignalSpy addedSpy(m_screenPool, SIGNAL(screenAdded(QScreen *)));
++
++    exec([=] {
++        auto *out = output(2);
++        auto *xdgOut = xdgOutput(out);
++        out->m_data.mode.resolution = {1280, 2048};
++        xdgOut->sendLogicalSize(QSize(1280, 2048));
++        out->sendDone();
++    });
++
++    addedSpy.wait();
++    QCOMPARE(addedSpy.size(), 1);
++    QScreen *newScreen = addedSpy.takeFirst().at(0).value<QScreen *>();
++    QCOMPARE(newScreen->name(), QStringLiteral("WL-3"));
++    QCOMPARE(newScreen->geometry(), QRect(1920, 0, 1280, 2048));
++    QVERIFY(m_screenPool->screens().contains(newScreen));
++}
++
++void ScreenPoolTest::testMoveInRedundant()
++{
++    QSignalSpy removedSpy(m_screenPool, SIGNAL(screenRemoved(QScreen *)));
++
++    exec([=] {
++        auto *out = output(2);
++        auto *xdgOut = xdgOutput(out);
++        out->m_data.mode.resolution = {1280, 720};
++        xdgOut->sendLogicalSize(QSize(1280, 720));
++        out->sendDone();
++    });
++
++    removedSpy.wait();
++    QCOMPARE(removedSpy.size(), 1);
++    QScreen *oldScreen = removedSpy.takeFirst().at(0).value<QScreen *>();
++    QCOMPARE(oldScreen->name(), QStringLiteral("WL-3"));
++    QCOMPARE(oldScreen->geometry(), QRect(1920, 0, 1280, 720));
++    QVERIFY(!m_screenPool->screens().contains(oldScreen));
+ }
+ 
+ void ScreenPoolTest::testPrimarySwap()
+ {
+-    const QString oldPrimary = QGuiApplication::primaryScreen()->name();
+-    QCOMPARE(m_screenPool->primaryConnector(), oldPrimary);
+-    const int oldScreenCount = m_screenPool->knownIds().count();
+-    const int oldIdOfFake1 = m_screenPool->id(QStringLiteral("FAKE-1"));
+-    m_screenPool->setPrimaryConnector(QStringLiteral("FAKE-1"));
++    QSignalSpy primaryChangeSpy(m_screenPool, SIGNAL(primaryScreenChanged(QScreen *, QScreen *)));
++
++    // Check ScreenPool mapping before switch
++    QCOMPARE(m_screenPool->primaryConnector(), QStringLiteral("WL-1"));
++    QCOMPARE(m_screenPool->primaryScreen()->name(), m_screenPool->primaryConnector());
++    QCOMPARE(m_screenPool->id(QStringLiteral("WL-1")), 0);
++    QCOMPARE(m_screenPool->id(QStringLiteral("WL-2")), 1);
++
++    // Set a primary screen
++    exec([=] {
++        primaryOutput()->setPrimaryOutputName("WL-2");
++    });
++
++    primaryChangeSpy.wait();
++
++    QCOMPARE(primaryChangeSpy.size(), 1);
++    QScreen *oldPrimary = primaryChangeSpy[0].at(0).value<QScreen *>();
++    QScreen *newPrimary = primaryChangeSpy[0].at(1).value<QScreen *>();
++    QCOMPARE(oldPrimary->name(), QStringLiteral("WL-1"));
++    QCOMPARE(oldPrimary->geometry(), QRect(0, 0, 1920, 1080));
++    QCOMPARE(newPrimary->name(), QStringLiteral("WL-2"));
++    QCOMPARE(newPrimary->geometry(), QRect(1920, 0, 1920, 1080));
++
++    // Check ScreenPool mapping
++    QCOMPARE(m_screenPool->primaryConnector(), QStringLiteral("WL-2"));
++    QCOMPARE(m_screenPool->primaryConnector(), newPrimary->name());
++    QCOMPARE(m_screenPool->primaryScreen()->name(), m_screenPool->primaryConnector());
++    QCOMPARE(m_screenPool->id(newPrimary->name()), 0);
++    QCOMPARE(m_screenPool->id(oldPrimary->name()), 1);
++}
++
++void ScreenPoolTest::testPrimarySwapToRedundant()
++{
++    QSignalSpy primaryChangeSpy(m_screenPool, SIGNAL(primaryScreenChanged(QScreen *, QScreen *)));
++
++    // Set a primary screen
++    exec([=] {
++        primaryOutput()->setPrimaryOutputName("WL-3");
++    });
++
++    primaryChangeSpy.wait(250);
++    // Nothing will happen, is like WL3 doesn't exist
++    QCOMPARE(primaryChangeSpy.size(), 0);
++}
++
++void ScreenPoolTest::testMoveRedundantToMakePrimary()
++{
++    QSignalSpy addedSpy(m_screenPool, SIGNAL(screenAdded(QScreen *)));
++    QSignalSpy primaryChangeSpy(m_screenPool, SIGNAL(primaryScreenChanged(QScreen *, QScreen *)));
++
++    exec([=] {
++        auto *out = output(2);
++        auto *xdgOut = xdgOutput(out);
++        out->m_data.mode.resolution = {1280, 2048};
++        xdgOut->sendLogicalSize(QSize(1280, 2048));
++        out->sendDone();
++    });
++
++    // Having multiple spies, when the wait of one will exit both signals will already have been emitted
++    QTRY_COMPARE(addedSpy.size(), 1);
++    QTRY_COMPARE(primaryChangeSpy.size(), 1);
++    QScreen *newScreen = addedSpy.takeFirst().at(0).value<QScreen *>();
++    QCOMPARE(newScreen->name(), QStringLiteral("WL-3"));
++    QCOMPARE(newScreen->geometry(), QRect(1920, 0, 1280, 2048));
++    QVERIFY(m_screenPool->screens().contains(newScreen));
++
++    // Test the new primary
++    QScreen *oldPrimary = primaryChangeSpy[0].at(0).value<QScreen *>();
++    QScreen *newPrimary = primaryChangeSpy[0].at(1).value<QScreen *>();
++    QCOMPARE(oldPrimary->name(), QStringLiteral("WL-2"));
++    QCOMPARE(oldPrimary->geometry(), QRect(1920, 0, 1920, 1080));
++    QCOMPARE(newPrimary->name(), QStringLiteral("WL-3"));
++    QCOMPARE(newPrimary->geometry(), QRect(1920, 0, 1280, 2048));
++
++    // Check ScreenPool mapping
++    QCOMPARE(m_screenPool->primaryConnector(), QStringLiteral("WL-3"));
++    QCOMPARE(m_screenPool->primaryConnector(), newPrimary->name());
++    QCOMPARE(m_screenPool->primaryScreen()->name(), m_screenPool->primaryConnector());
++    QCOMPARE(m_screenPool->id(newPrimary->name()), 0);
++    QCOMPARE(m_screenPool->id(oldPrimary->name()), 2);
++}
++
++void ScreenPoolTest::testMoveInRedundantToLosePrimary()
++{
++    QSignalSpy removedSpy(m_screenPool, SIGNAL(screenRemoved(QScreen *)));
++    QSignalSpy primaryChangeSpy(m_screenPool, SIGNAL(primaryScreenChanged(QScreen *, QScreen *)));
++
++    exec([=] {
++        auto *out = output(2);
++        auto *xdgOut = xdgOutput(out);
++        xdgOut->sendLogicalSize(QSize(1280, 720));
++        out->m_data.mode.resolution = {1280, 720};
++        out->sendDone();
++    });
++
++    QTRY_COMPARE(primaryChangeSpy.size(), 1);
++    // Test the new primary
++    QScreen *oldPrimary = primaryChangeSpy[0].at(0).value<QScreen *>();
++    QScreen *newPrimary = primaryChangeSpy[0].at(1).value<QScreen *>();
++    QCOMPARE(oldPrimary->name(), QStringLiteral("WL-3"));
++    QCOMPARE(oldPrimary->geometry(), QRect(1920, 0, 1280, 720));
++    QCOMPARE(newPrimary->name(), QStringLiteral("WL-2"));
++    QCOMPARE(newPrimary->geometry(), QRect(1920, 0, 1920, 1080));
++
++    // Check ScreenPool mapping
++    QCOMPARE(m_screenPool->primaryConnector(), QStringLiteral("WL-2"));
++    QCOMPARE(m_screenPool->primaryConnector(), newPrimary->name());
++    QCOMPARE(m_screenPool->primaryScreen()->name(), m_screenPool->primaryConnector());
++    QCOMPARE(m_screenPool->id(newPrimary->name()), 0);
++    QCOMPARE(m_screenPool->id(oldPrimary->name()), 2);
++
++    QTRY_COMPARE(removedSpy.size(), 1);
++    QScreen *oldScreen = removedSpy.takeFirst().at(0).value<QScreen *>();
++    QCOMPARE(oldScreen->name(), QStringLiteral("WL-3"));
++    QCOMPARE(oldScreen->geometry(), QRect(1920, 0, 1280, 720));
++    QVERIFY(!m_screenPool->screens().contains(oldScreen));
++}
++
++void ScreenPoolTest::testSecondScreenRemoval()
++{
++    QSignalSpy addedSpy(m_screenPool, SIGNAL(screenAdded(QScreen *)));
++    QSignalSpy primaryChangeSpy(m_screenPool, SIGNAL(primaryScreenChanged(QScreen *, QScreen *)));
++    QSignalSpy removedSpy(m_screenPool, SIGNAL(screenRemoved(QScreen *)));
++
++    // Check ScreenPool mapping before switch
++    QCOMPARE(m_screenPool->primaryConnector(), QStringLiteral("WL-2"));
++    QCOMPARE(m_screenPool->primaryScreen()->name(), m_screenPool->primaryConnector());
++    QCOMPARE(m_screenPool->id(QStringLiteral("WL-2")), 0);
++    QCOMPARE(m_screenPool->id(QStringLiteral("WL-1")), 1);
++
++    // Remove an output
++    exec([=] {
++        remove(output(1));
++    });
++
++    // Removing the primary screen, will change a primaryChange signal beforehand
++    QTRY_COMPARE(primaryChangeSpy.size(), 1);
++    QCOMPARE(primaryChangeSpy.size(), 1);
++    QScreen *newPrimary = primaryChangeSpy[0].at(1).value<QScreen *>();
++    QCOMPARE(newPrimary->name(), QStringLiteral("WL-3"));
++    QCOMPARE(newPrimary->geometry(), QRect(1920, 0, 1280, 720));
++
++    // Check ScreenPool mapping
++    QCOMPARE(m_screenPool->primaryConnector(), QStringLiteral("WL-3"));
++    QCOMPARE(m_screenPool->primaryScreen()->name(), m_screenPool->primaryConnector());
++    QCOMPARE(m_screenPool->id(newPrimary->name()), 0);
++    QCOMPARE(m_screenPool->id("WL-2"), 2);
++
++    // NOTE: we can neither access the data of removedSpy nor oldPrimary because at this point will be dangling
++    QTRY_COMPARE(removedSpy.size(), 1);
++    QTRY_COMPARE(addedSpy.size(), 1);
++
++    QCOMPARE(QGuiApplication::screens().size(), 2);
++    QCOMPARE(m_screenPool->screens().size(), 2);
++    QScreen *firstScreen = m_screenPool->screens().at(1);
++    QCOMPARE(firstScreen, newPrimary);
++    QCOMPARE(m_screenPool->primaryScreen(), newPrimary);
++
++    // We'll get an added signal for the screen WL-3 that was previously redundant to WL-2
++    QScreen *newScreen = addedSpy[0].at(0).value<QScreen *>();
++    QCOMPARE(newScreen->name(), QStringLiteral("WL-3"));
++    QCOMPARE(newScreen->geometry(), QRect(1920, 0, 1280, 720));
++    QCOMPARE(m_screenPool->screens().at(1), newScreen);
++}
++
++void ScreenPoolTest::testThirdScreenRemoval()
++{
++    QSignalSpy removedSpy(m_screenPool, SIGNAL(screenRemoved(QScreen *)));
++
++    // Remove an output
++    exec([=] {
++        // NOTE: Assume the server will always do the right thing to change the primary screen before deleting one
++        primaryOutput()->setPrimaryOutputName("WL-1");
++
++        remove(output(1));
++    });
++
++    // NOTE: we can neither access the data of removedSpy nor oldPrimary because at this point will be dangling
++    removedSpy.wait();
++    QCOMPARE(QGuiApplication::screens().size(), 1);
++    QCOMPARE(m_screenPool->screens().size(), 1);
++    QScreen *lastScreen = m_screenPool->screens().first();
++    QCOMPARE(lastScreen->name(), QStringLiteral("WL-1"));
++    QCOMPARE(lastScreen->geometry(), QRect(0, 0, 1920, 1080));
++    QCOMPARE(m_screenPool->screens().first(), lastScreen);
++    // This shouldn't have changed after removing a non primary screen
++    QCOMPARE(m_screenPool->primaryConnector(), QStringLiteral("WL-1"));
++}
++
++void ScreenPoolTest::testLastScreenRemoval()
++{
++    QSignalSpy removedSpy(m_screenPool, SIGNAL(screenRemoved(QScreen *)));
++
++    // Remove an output
++    exec([=] {
++        remove(output(0));
++    });
++
++    // NOTE: we can neither access the data of removedSpy nor oldPrimary because at this point will be dangling
++    removedSpy.wait();
++    QCOMPARE(QGuiApplication::screens().size(), 1);
++    QCOMPARE(m_screenPool->screens().size(), 0);
++    QScreen *fakeScreen = QGuiApplication::screens().first();
++    QCOMPARE(fakeScreen->name(), QString());
++    QCOMPARE(fakeScreen->geometry(), QRect(0, 0, 0, 0));
++}
++
++void ScreenPoolTest::testFakeToRealScreen()
++{
++    QSignalSpy addedSpy(m_screenPool, SIGNAL(screenAdded(QScreen *)));
++
++    // Add a new output
++    exec([=] {
++        OutputData data;
++        data.mode.resolution = {1920, 1080};
++        data.position = {0, 0};
++        data.physicalSize = data.mode.physicalSizeForDpi(96);
++        auto *out = add<Output>(data);
++        auto *xdgOut = xdgOutput(out);
++        xdgOut->m_name = QStringLiteral("WL-1");
++    });
+ 
+-    QCOMPARE(m_screenPool->knownIds().count(), oldScreenCount);
++    addedSpy.wait();
++    QCOMPARE(QGuiApplication::screens().size(), 1);
++    QCOMPARE(m_screenPool->screens().size(), 1);
++    QCOMPARE(addedSpy.size(), 1);
+ 
+-    QCOMPARE(m_screenPool->connector(0), QStringLiteral("FAKE-1"));
+-    QCOMPARE(m_screenPool->id(QStringLiteral("FAKE-1")), 0);
++    QScreen *newScreen = addedSpy.takeFirst().at(0).value<QScreen *>();
++    QCOMPARE(newScreen->name(), QStringLiteral("WL-1"));
++    QCOMPARE(newScreen->geometry(), QRect(0, 0, 1920, 1080));
+ 
+-    QCOMPARE(m_screenPool->connector(oldIdOfFake1), oldPrimary);
+-    QCOMPARE(m_screenPool->id(oldPrimary), oldIdOfFake1);
++    QCOMPARE(m_screenPool->id(newScreen->name()), 0);
+ }
+ 
+-QTEST_MAIN(ScreenPoolTest)
++QCOMPOSITOR_TEST_MAIN(ScreenPoolTest)
+ 
+ #include "screenpooltest.moc"
+diff --git a/shell/panelview.cpp b/shell/panelview.cpp
+index 93d2293e2..1b62bcde4 100644
+--- a/shell/panelview.cpp
++++ b/shell/panelview.cpp
+@@ -794,6 +794,9 @@ void PanelView::moveEvent(QMoveEvent *ev)
+     updateEnabledBorders();
+     m_strutsTimer.start(STRUTSTIMERDELAY);
+     PlasmaQuick::ContainmentView::moveEvent(ev);
++    if (!m_screenToFollow->geometry().contains(geometry())) {
++        positionPanel();
++    }
+ }
+ 
+ void PanelView::integrateScreen()
+diff --git a/shell/primaryoutputwatcher.cpp b/shell/primaryoutputwatcher.cpp
+new file mode 100644
+index 000000000..0b13e2575
+--- /dev/null
++++ b/shell/primaryoutputwatcher.cpp
+@@ -0,0 +1,159 @@
++/*
++    SPDX-FileCopyrightText: 2013 Marco Martin <mart@kde.org>
++    SPDX-FileCopyrightText: 2021 Aleix Pol Gonzalez <aleixpol@kde.org>
++
++    SPDX-License-Identifier: LGPL-2.0-or-later
++*/
++
++#include "primaryoutputwatcher.h"
++
++#include "debug.h"
++#include <KWindowSystem>
++#include <QGuiApplication>
++#include <QScreen>
++
++#include "qwayland-kde-primary-output-v1.h"
++#include <KWayland/Client/connection_thread.h>
++#include <KWayland/Client/registry.h>
++
++#include <config-plasma.h>
++#if HAVE_X11
++#include <QTimer> //Used only in x11 case
++#include <QX11Info>
++#include <xcb/randr.h>
++#include <xcb/xcb.h>
++#include <xcb/xcb_event.h>
++#endif
++
++class WaylandPrimaryOutput : public QObject, public QtWayland::kde_primary_output_v1
++{
++    Q_OBJECT
++public:
++    WaylandPrimaryOutput(struct ::wl_registry *registry, int id, int version, QObject *parent)
++        : QObject(parent)
++        , QtWayland::kde_primary_output_v1(registry, id, version)
++    {
++    }
++
++    void kde_primary_output_v1_primary_output(const QString &outputName) override
++    {
++        Q_EMIT primaryOutputChanged(outputName);
++    }
++
++Q_SIGNALS:
++    void primaryOutputChanged(const QString &outputName);
++};
++
++PrimaryOutputWatcher::PrimaryOutputWatcher(QObject *parent)
++    : QObject(parent)
++{
++#if HAVE_X11
++    if (KWindowSystem::isPlatformX11()) {
++        m_primaryOutputName = qGuiApp->primaryScreen()->name();
++        qGuiApp->installNativeEventFilter(this);
++        const xcb_query_extension_reply_t *reply = xcb_get_extension_data(QX11Info::connection(), &xcb_randr_id);
++        m_xrandrExtensionOffset = reply->first_event;
++        setPrimaryOutputName(qGuiApp->primaryScreen()->name());
++        connect(qGuiApp, &QGuiApplication::primaryScreenChanged, this, [this](QScreen *newPrimary) {
++            setPrimaryOutputName(newPrimary->name());
++        });
++    }
++#endif
++    if (KWindowSystem::isPlatformWayland()) {
++        setupRegistry();
++    }
++}
++
++void PrimaryOutputWatcher::setPrimaryOutputName(const QString &newOutputName)
++{
++    if (newOutputName != m_primaryOutputName) {
++        const QString oldOutputName = m_primaryOutputName;
++        m_primaryOutputName = newOutputName;
++        Q_EMIT primaryOutputNameChanged(oldOutputName, newOutputName);
++    }
++}
++
++void PrimaryOutputWatcher::setupRegistry()
++{
++    auto m_connection = KWayland::Client::ConnectionThread::fromApplication(this);
++    if (!m_connection) {
++        return;
++    }
++
++    // Asking for primaryOutputName() before this happened, will return qGuiApp->primaryScreen()->name() anyways, so set it so the primaryOutputNameChange will
++    // have parameters that are coherent
++    m_primaryOutputName = qGuiApp->primaryScreen()->name();
++    m_registry = new KWayland::Client::Registry(this);
++    connect(m_registry, &KWayland::Client::Registry::interfaceAnnounced, this, [this](const QByteArray &interface, quint32 name, quint32 version) {
++        if (interface == WaylandPrimaryOutput::interface()->name) {
++            auto m_outputManagement = new WaylandPrimaryOutput(m_registry->registry(), name, version, this);
++            connect(m_outputManagement, &WaylandPrimaryOutput::primaryOutputChanged, this, [this](const QString &outputName) {
++                m_primaryOutputWayland = outputName;
++                // Only set the outputName when there's a QScreen attached to it
++                if (screenForName(outputName)) {
++                    setPrimaryOutputName(outputName);
++                }
++            });
++        }
++    });
++
++    // In case the outputName was received before Qt reported the screen
++    connect(qGuiApp, &QGuiApplication::screenAdded, this, [this](QScreen *screen) {
++        if (screen->name() == m_primaryOutputWayland) {
++            setPrimaryOutputName(m_primaryOutputWayland);
++        }
++    });
++
++    m_registry->create(m_connection);
++    m_registry->setup();
++}
++
++bool PrimaryOutputWatcher::nativeEventFilter(const QByteArray &eventType, void *message, long int *result)
++{
++    Q_UNUSED(result);
++#if HAVE_X11
++    // a particular edge case: when we switch the only enabled screen
++    // we don't have any signal about it, the primary screen changes but we have the same old QScreen* getting recycled
++    // see https://bugs.kde.org/show_bug.cgi?id=373880
++    // if this slot will be invoked many times, their//second time on will do nothing as name and primaryOutputName will be the same by then
++    if (eventType[0] != 'x') {
++        return false;
++    }
++
++    xcb_generic_event_t *ev = static_cast<xcb_generic_event_t *>(message);
++
++    const auto responseType = XCB_EVENT_RESPONSE_TYPE(ev);
++
++    if (responseType == m_xrandrExtensionOffset + XCB_RANDR_SCREEN_CHANGE_NOTIFY) {
++        QTimer::singleShot(0, this, [this]() {
++            setPrimaryOutputName(qGuiApp->primaryScreen()->name());
++        });
++    }
++#endif
++    return false;
++}
++
++QScreen *PrimaryOutputWatcher::screenForName(const QString &outputName) const
++{
++    const auto screens = qGuiApp->screens();
++    for (auto screen : screens) {
++        if (screen->name() == outputName) {
++            return screen;
++        }
++    }
++    return nullptr;
++}
++
++QScreen *PrimaryOutputWatcher::primaryScreen() const
++{
++    auto screen = screenForName(m_primaryOutputName);
++    if (!screen) {
++#ifdef PLASMASHELL
++        qCWarning(PLASMASHELL) << "could not find primary screen" << m_primaryOutputName;
++#endif
++        return qGuiApp->primaryScreen();
++    }
++    return screen;
++}
++
++#include "primaryoutputwatcher.moc"
+diff --git a/shell/primaryoutputwatcher.h b/shell/primaryoutputwatcher.h
+new file mode 100644
+index 000000000..bbfffce57
+--- /dev/null
++++ b/shell/primaryoutputwatcher.h
+@@ -0,0 +1,54 @@
++/*
++    SPDX-FileCopyrightText: 2021 Aleix Pol Gonzalez <aleixpol@kde.org>
++
++    SPDX-License-Identifier: LGPL-2.0-or-later
++*/
++
++#ifndef PRIMARYOUTPUTWATCHER_H
++#define PRIMARYOUTPUTWATCHER_H
++
++#include <QAbstractNativeEventFilter>
++#include <QObject>
++
++namespace KWayland
++{
++namespace Client
++{
++class Registry;
++class ConnectionThread;
++}
++}
++
++class QScreen;
++
++class PrimaryOutputWatcher : public QObject, public QAbstractNativeEventFilter
++{
++    Q_OBJECT
++public:
++    PrimaryOutputWatcher(QObject *parent);
++    QScreen *primaryScreen() const;
++    QScreen *screenForName(const QString &outputName) const;
++
++Q_SIGNALS:
++    void primaryOutputNameChanged(const QString &oldOutputName, const QString &newOutputName);
++
++protected:
++    friend class WaylandOutputDevice;
++    void setPrimaryOutputName(const QString &outputName);
++
++private:
++    void setupRegistry();
++    bool nativeEventFilter(const QByteArray &eventType, void *message, long *result) override;
++
++    // All
++    QString m_primaryOutputName;
++
++    // Wayland
++    KWayland::Client::Registry *m_registry = nullptr;
++    QString m_primaryOutputWayland;
++
++    // Xrandr
++    int m_xrandrExtensionOffset;
++};
++
++#endif // PRIMARYOUTPUTWATCHER_H
+diff --git a/shell/screenpool.cpp b/shell/screenpool.cpp
+index b41a2fd7f..40734c8e8 100644
+--- a/shell/screenpool.cpp
++++ b/shell/screenpool.cpp
+@@ -5,44 +5,46 @@
+ */
+ 
+ #include "screenpool.h"
+-#include <config-plasma.h>
++#include "primaryoutputwatcher.h"
++#include "screenpool-debug.h"
+ 
+ #include <KWindowSystem>
++#include <QDebug>
+ #include <QGuiApplication>
+ #include <QScreen>
+ 
+-#if HAVE_X11
+-#include <QX11Info>
+-#include <xcb/randr.h>
+-#include <xcb/xcb.h>
+-#include <xcb/xcb_event.h>
++#ifndef NDEBUG
++#define CHECK_SCREEN_INVARIANTS screenInvariants();
++#else
++#define CHECK_SCREEN_INVARIANTS
+ #endif
+ 
+ ScreenPool::ScreenPool(const KSharedConfig::Ptr &config, QObject *parent)
+     : QObject(parent)
+     , m_configGroup(KConfigGroup(config, QStringLiteral("ScreenConnectors")))
++    , m_primaryWatcher(new PrimaryOutputWatcher(this))
+ {
++    connect(qGuiApp, &QGuiApplication::screenAdded, this, &ScreenPool::handleScreenAdded);
++    connect(qGuiApp, &QGuiApplication::screenRemoved, this, &ScreenPool::handleScreenRemoved);
++    connect(m_primaryWatcher, &PrimaryOutputWatcher::primaryOutputNameChanged, this, &ScreenPool::handlePrimaryOutputNameChanged);
++
++    m_reconsiderOutputsTimer.setSingleShot(true);
++    m_reconsiderOutputsTimer.setInterval(250);
++    connect(&m_reconsiderOutputsTimer, &QTimer::timeout, this, &ScreenPool::reconsiderOutputs);
++
+     m_configSaveTimer.setSingleShot(true);
+     connect(&m_configSaveTimer, &QTimer::timeout, this, [this]() {
+         m_configGroup.sync();
+     });
+-
+-#if HAVE_X11
+-    if (KWindowSystem::isPlatformX11()) {
+-        qApp->installNativeEventFilter(this);
+-        const xcb_query_extension_reply_t *reply = xcb_get_extension_data(QX11Info::connection(), &xcb_randr_id);
+-        m_xrandrExtensionOffset = reply->first_event;
+-    }
+-#endif
+ }
+ 
+ void ScreenPool::load()
+ {
++    QScreen *primary = m_primaryWatcher->primaryScreen();
+     m_primaryConnector = QString();
+     m_connectorForId.clear();
+     m_idForConnector.clear();
+ 
+-    QScreen *primary = qGuiApp->primaryScreen();
+     if (primary) {
+         m_primaryConnector = primary->name();
+         if (!m_primaryConnector.isEmpty()) {
+@@ -56,6 +58,7 @@ void ScreenPool::load()
+     for (const QString &key : keys) {
+         QString connector = m_configGroup.readEntry(key, QString());
+         const int currentId = key.toInt();
++
+         if (!key.isEmpty() && !connector.isEmpty() && !m_connectorForId.contains(currentId) && !m_idForConnector.contains(connector)) {
+             m_connectorForId[currentId] = connector;
+             m_idForConnector[connector] = currentId;
+@@ -64,16 +67,16 @@ void ScreenPool::load()
+         }
+     }
+ 
+-    // if there are already connected unknown screens, map those
+-    // all needs to be populated as soon as possible, otherwise
+-    // containment->screen() will return an incorrect -1
+-    // at startup, if it' asked before corona::addOutput()
+-    // is performed, driving to the creation of a new containment
++    // Populate allthe screen based on what's connected at startup
+     for (QScreen *screen : qGuiApp->screens()) {
+-        if (!m_idForConnector.contains(screen->name())) {
++        // On some devices QGuiApp::screenAdded is always emitted for some screens at startup so at this point that screen would already be managed
++        if (!m_allSortedScreens.contains(screen)) {
++            handleScreenAdded(screen);
++        } else if (!m_idForConnector.contains(screen->name())) {
+             insertScreenMapping(firstAvailableId(), screen->name());
+         }
+     }
++    CHECK_SCREEN_INVARIANTS
+ }
+ 
+ ScreenPool::~ScreenPool()
+@@ -96,7 +99,6 @@ void ScreenPool::setPrimaryConnector(const QString &primary)
+     if (oldIdForPrimary == -1) {
+         // move old primary to new free id
+         oldIdForPrimary = firstAvailableId();
+-        insertScreenMapping(oldIdForPrimary, m_primaryConnector);
+     }
+ 
+     m_idForConnector[primary] = 0;
+@@ -163,34 +165,395 @@ QList<int> ScreenPool::knownIds() const
+     return m_connectorForId.keys();
+ }
+ 
+-bool ScreenPool::nativeEventFilter(const QByteArray &eventType, void *message, long int *result)
++QList<QScreen *> ScreenPool::screens() const
++{
++    return m_availableScreens;
++}
++
++QScreen *ScreenPool::primaryScreen() const
++{
++    QScreen *primary = m_primaryWatcher->primaryScreen();
++    if (m_redundantScreens.contains(primary)) {
++        return m_redundantScreens[primary];
++    } else {
++        return primary;
++    }
++}
++
++QScreen *ScreenPool::screenForId(int id) const
+ {
+-    Q_UNUSED(result);
+-#if HAVE_X11
+-    // a particular edge case: when we switch the only enabled screen
+-    // we don't have any signal about it, the primary screen changes but we have the same old QScreen* getting recycled
+-    // see https://bugs.kde.org/show_bug.cgi?id=373880
+-    // if this slot will be invoked many times, their//second time on will do nothing as name and primaryconnector will be the same by then
+-    if (eventType[0] != 'x') {
++    if (!m_connectorForId.contains(id)) {
++        return nullptr;
++    }
++
++    // TODO: do QScreen bookeeping completely in screenpool, cache also available QScreens
++    const QString name = m_connectorForId.value(id);
++    for (QScreen *screen : m_availableScreens) {
++        if (screen->name() == name) {
++            return screen;
++        }
++    }
++    return nullptr;
++}
++
++QScreen *ScreenPool::screenForConnector(const QString &connector)
++{
++    for (QScreen *screen : m_availableScreens) {
++        if (screen->name() == connector) {
++            return screen;
++        }
++    }
++    return nullptr;
++}
++
++bool ScreenPool::noRealOutputsConnected() const
++{
++    if (qApp->screens().count() > 1) {
+         return false;
+     }
+ 
+-    xcb_generic_event_t *ev = static_cast<xcb_generic_event_t *>(message);
++    return isOutputFake(m_primaryWatcher->primaryScreen());
++}
++
++bool ScreenPool::isOutputFake(QScreen *screen) const
++{
++    Q_ASSERT(screen);
++    // On X11 the output named :0.0 is fake (the geometry is usually valid and whatever the geometry
++    // of the last connected screen was), on wayland the fake output has no name and no geometry
++    const bool fake = screen->name() == QStringLiteral(":0.0") || screen->geometry().isEmpty() || screen->name().isEmpty();
++    // If there is a fake output we can only have one screen left (the fake one)
++    //    Q_ASSERT(!fake || fake == (qGuiApp->screens().count() == 1));
++    return fake;
++}
++
++QScreen *ScreenPool::outputRedundantTo(QScreen *screen) const
++{
++    Q_ASSERT(screen);
++    // Manage separatedly fake screens
++    if (isOutputFake(screen)) {
++        return nullptr;
++    }
++    const QRect thisGeometry = screen->geometry();
++
++    const int thisId = id(screen->name());
++
++    // FIXME: QScreen doesn't have any idea of "this qscreen is clone of this other one
++    // so this ultra inefficient heuristic has to stay until we have a slightly better api
++    // logic is:
++    // a screen is redundant if:
++    //* its geometry is contained in another one
++    //* if their resolutions are different, the "biggest" one wins
++    //* if they have the same geometry, the one with the lowest id wins (arbitrary, but gives reproducible behavior and makes the primary screen win)
++    for (QScreen *s : m_allSortedScreens) {
++        // don't compare with itself
++        if (screen == s) {
++            continue;
++        }
++
++        const QRect otherGeometry = s->geometry();
++
++        if (otherGeometry.isNull()) {
++            continue;
++        }
++
++        const int otherId = id(s->name());
++
++        if (otherGeometry.contains(thisGeometry, false)
++            && ( // since at this point contains is true, if either
++                 // measure of othergeometry is bigger, has a bigger area
++                otherGeometry.width() > thisGeometry.width() || otherGeometry.height() > thisGeometry.height() ||
++                // ids not -1 are considered in descending order of importance
++                //-1 means that is a screen not known yet, just arrived and
++                // not yet in screenpool: this happens for screens that
++                // are hotplugged and weren't known. it does NOT happen
++                // at first startup, as screenpool populates on load with all screens connected at the moment before the rest of the shell starts up
++                (thisId == -1 && otherId != -1) || (thisId > otherId && otherId != -1))) {
++            return s;
++        }
++    }
++
++    return nullptr;
++}
+ 
+-    const auto responseType = XCB_EVENT_RESPONSE_TYPE(ev);
++void ScreenPool::reconsiderOutputs()
++{
++    QScreen *oldPrimaryScreen = primaryScreen();
++    for (QScreen *screen : m_allSortedScreens) {
++        if (m_redundantScreens.contains(screen)) {
++            if (QScreen *toScreen = outputRedundantTo(screen)) {
++                // Insert again, redndantTo may have changed
++                m_fakeScreens.remove(screen);
++                m_redundantScreens.insert(screen, toScreen);
++            } else {
++                qCDebug(SCREENPOOL) << "not redundant anymore" << screen << (isOutputFake(screen) ? "but is a fake screen" : "");
++                Q_ASSERT(!m_availableScreens.contains(screen));
++                m_redundantScreens.remove(screen);
++                if (isOutputFake(screen)) {
++                    m_fakeScreens.insert(screen);
++                } else {
++                    m_fakeScreens.remove(screen);
++                    m_availableScreens.append(screen);
++                    if (!m_idForConnector.contains(screen->name())) {
++                        insertScreenMapping(firstAvailableId(), screen->name());
++                    }
++                    Q_EMIT screenAdded(screen);
++                    QScreen *newPrimaryScreen = primaryScreen();
++                    if (newPrimaryScreen != oldPrimaryScreen) {
++                        // Primary screen was redundant, not anymore
++                        setPrimaryConnector(newPrimaryScreen->name());
++                        Q_EMIT primaryScreenChanged(oldPrimaryScreen, newPrimaryScreen);
++                    }
++                }
++            }
++        } else if (QScreen *toScreen = outputRedundantTo(screen)) {
++            qCDebug(SCREENPOOL) << "new redundant screen" << screen << "with primary screen" << m_primaryWatcher->primaryScreen();
+ 
+-    if (responseType == m_xrandrExtensionOffset + XCB_RANDR_SCREEN_CHANGE_NOTIFY) {
+-        if (qGuiApp->primaryScreen()->name() != primaryConnector()) {
+-            // new screen?
+-            if (id(qGuiApp->primaryScreen()->name()) < 0) {
+-                insertScreenMapping(firstAvailableId(), qGuiApp->primaryScreen()->name());
++            m_fakeScreens.remove(screen);
++            m_redundantScreens.insert(screen, toScreen);
++            if (!m_idForConnector.contains(screen->name())) {
++                insertScreenMapping(firstAvailableId(), screen->name());
+             }
+-            // switch the primary screen in the pool
+-            setPrimaryConnector(qGuiApp->primaryScreen()->name());
++            if (m_availableScreens.contains(screen)) {
++                QScreen *newPrimaryScreen = primaryScreen();
++                if (newPrimaryScreen != oldPrimaryScreen) {
++                    // Primary screen became redundant
++                    setPrimaryConnector(newPrimaryScreen->name());
++                    Q_EMIT primaryScreenChanged(oldPrimaryScreen, newPrimaryScreen);
++                }
++                m_availableScreens.removeAll(screen);
++                Q_EMIT screenRemoved(screen);
++            }
++        } else if (isOutputFake(screen)) {
++            // NOTE: order of operations is important
++            qCDebug(SCREENPOOL) << "new fake screen" << screen;
++            m_redundantScreens.remove(screen);
++            m_fakeScreens.insert(screen);
++            if (m_availableScreens.contains(screen)) {
++                QScreen *newPrimaryScreen = primaryScreen();
++                if (newPrimaryScreen != oldPrimaryScreen) {
++                    // Primary screen became fake
++                    setPrimaryConnector(newPrimaryScreen->name());
++                    Q_EMIT primaryScreenChanged(oldPrimaryScreen, newPrimaryScreen);
++                }
++                m_availableScreens.removeAll(screen);
++                Q_EMIT screenRemoved(screen);
++            }
++        } else if (m_fakeScreens.contains(screen)) {
++            Q_ASSERT(!m_availableScreens.contains(screen));
++            m_fakeScreens.remove(screen);
++            m_availableScreens.append(screen);
++            if (!m_idForConnector.contains(screen->name())) {
++                insertScreenMapping(firstAvailableId(), screen->name());
++            }
++            Q_EMIT screenAdded(screen);
++            QScreen *newPrimaryScreen = primaryScreen();
++            if (newPrimaryScreen != oldPrimaryScreen) {
++                // Primary screen was redundant, not anymore
++                setPrimaryConnector(newPrimaryScreen->name());
++                Q_EMIT primaryScreenChanged(oldPrimaryScreen, newPrimaryScreen);
++            }
++        } else {
++            qCDebug(SCREENPOOL) << "fine screen" << screen;
+         }
+     }
+-#endif
+-    return false;
++
++    // updateStruts();
++
++    CHECK_SCREEN_INVARIANTS
++}
++
++void ScreenPool::insertSortedScreen(QScreen *screen)
++{
++    if (m_allSortedScreens.contains(screen)) {
++        // This should happen only when a fake screen isn't anymore
++        return;
++    }
++    auto before = std::find_if(m_allSortedScreens.begin(), m_allSortedScreens.end(), [this, screen](QScreen *otherScreen) {
++        return (screen->geometry().width() > otherScreen->geometry().width() && screen->geometry().height() > otherScreen->geometry().height())
++            || id(screen->name()) < id(otherScreen->name());
++    });
++    m_allSortedScreens.insert(before, screen);
++}
++
++void ScreenPool::handleScreenAdded(QScreen *screen)
++{
++    qCDebug(SCREENPOOL) << "handleScreenAdded" << screen << screen->geometry();
++    connect(
++        screen,
++        &QScreen::geometryChanged,
++        this,
++        [this, screen]() {
++            m_allSortedScreens.removeAll(screen);
++            insertSortedScreen(screen);
++            m_reconsiderOutputsTimer.start();
++        },
++        Qt::UniqueConnection);
++    insertSortedScreen(screen);
++
++    if (isOutputFake(screen)) {
++        m_fakeScreens.insert(screen);
++        return;
++    } else if (!m_idForConnector.contains(screen->name())) {
++        insertScreenMapping(firstAvailableId(), screen->name());
++    }
++
++    if (QScreen *toScreen = outputRedundantTo(screen)) {
++        m_redundantScreens.insert(screen, toScreen);
++        return;
++    }
++
++    if (m_fakeScreens.contains(screen)) {
++        qCDebug(SCREENPOOL) << "not fake anymore" << screen;
++        m_fakeScreens.remove(screen);
++    }
++
++    m_reconsiderOutputsTimer.start();
++    Q_ASSERT(!m_availableScreens.contains(screen));
++    m_availableScreens.append(screen);
++    Q_EMIT screenAdded(screen);
++}
++
++void ScreenPool::handleScreenRemoved(QScreen *screen)
++{
++    qCDebug(SCREENPOOL) << "handleScreenRemoved" << screen;
++    m_allSortedScreens.removeAll(screen);
++    if (m_redundantScreens.contains(screen)) {
++        Q_ASSERT(!m_fakeScreens.contains(screen));
++        Q_ASSERT(!m_availableScreens.contains(screen));
++        m_redundantScreens.remove(screen);
++    } else if (m_fakeScreens.contains(screen)) {
++        Q_ASSERT(!m_redundantScreens.contains(screen));
++        Q_ASSERT(!m_availableScreens.contains(screen));
++        m_fakeScreens.remove(screen);
++    } else if (isOutputFake(screen)) {
++        // This happens when an output is recicled because it was the last one and became fake
++        Q_ASSERT(m_availableScreens.contains(screen));
++        Q_ASSERT(!m_redundantScreens.contains(screen));
++        Q_ASSERT(!m_fakeScreens.contains(screen));
++        Q_ASSERT(m_allSortedScreens.isEmpty());
++        m_allSortedScreens.append(screen);
++        m_availableScreens.removeAll(screen);
++        m_fakeScreens.insert(screen);
++    } else {
++        Q_ASSERT(m_availableScreens.contains(screen));
++        Q_ASSERT(!m_redundantScreens.contains(screen));
++        Q_ASSERT(!m_fakeScreens.contains(screen));
++        m_availableScreens.removeAll(screen);
++        reconsiderOutputs();
++        Q_EMIT screenRemoved(screen);
++    }
++    CHECK_SCREEN_INVARIANTS
++}
++
++void ScreenPool::handlePrimaryOutputNameChanged(const QString &oldOutputName, const QString &newOutputName)
++{
++    // when the appearance of a new primary screen *moves*
++    // the position of the now secondary, the two screens will appear overlapped for an instant, and a spurious output redundant would happen here if checked
++    // immediately
++    m_reconsiderOutputsTimer.start();
++
++    QScreen *oldPrimary = screenForConnector(oldOutputName);
++    QScreen *newPrimary = m_primaryWatcher->primaryScreen();
++    // First check if the data arrived is correct, then set the new peimary considering redundants
++    Q_ASSERT(newPrimary && newPrimary->name() == newOutputName);
++    newPrimary = primaryScreen();
++
++    // This happens when a screen that was primary because the real primary was redundant becomes the real primary
++    if (m_primaryConnector == newPrimary->name()) {
++        return;
++    }
++
++    if (!newPrimary || newPrimary == oldPrimary || newPrimary->geometry().isNull()) {
++        return;
++    }
++
++    // On X11 we get fake screens as primary
++
++    // Special case: we are in "no connectors" mode, there is only a (recycled) QScreen instance which is not attached to any output. Treat this as a screen
++    // removed This happens only on X, wayland doesn't seem to be getting fake screens
++    if (noRealOutputsConnected()) {
++        qCDebug(SCREENPOOL) << "EMITTING SCREEN REMOVED" << newPrimary;
++        handleScreenRemoved(newPrimary);
++        return;
++        // On X11, the output named :0.0 is fake
++    } else if (oldOutputName == ":0.0" || oldOutputName.isEmpty()) {
++        setPrimaryConnector(newOutputName);
++        // NOTE: when we go from 0 to 1 screen connected, screens can be renamed in those two followinf cases
++        // * last output connected/disconnected -> we go between the fake screen and the single output, renamed
++        // * external screen connected to a closed lid laptop, disconnecting the qscreen instance will be recycled from external output to internal
++        // In the latter case m_availableScreens will aready contain newPrimary
++        // We'll go here also once at startup, for which we don't need to do anything besides setting internally the primary conector name
++        handleScreenAdded(newPrimary);
++        return;
++    } else {
++        Q_ASSERT(newPrimary);
++        qCDebug(SCREENPOOL) << "PRIMARY CHANGED" << oldPrimary << "-->" << newPrimary;
++        setPrimaryConnector(newOutputName);
++        Q_EMIT primaryScreenChanged(oldPrimary, newPrimary);
++    }
++}
++
++void ScreenPool::screenInvariants()
++{
++    // Is the primary connector in sync with the actual primaryScreen? The only way it can get out of sync with primaryConnector() is the single fake screen/no
++    // real outputs scenario
++    Q_ASSERT(noRealOutputsConnected() || primaryScreen()->name() == primaryConnector());
++    // Is the primary screen available? TODO: it can be redundant
++    // Q_ASSERT(m_availableScreens.contains(primaryScreen()));
++
++    // QScreen bookeeping integrity
++    auto allScreens = qGuiApp->screens();
++    // Do we actually track every screen?
++
++    Q_ASSERT((m_availableScreens.count() + m_redundantScreens.count() + m_fakeScreens.count()) == allScreens.count());
++    Q_ASSERT(allScreens.count() == m_allSortedScreens.count());
++
++    // At most one fake output
++    Q_ASSERT(m_fakeScreens.count() <= 1);
++    if (m_fakeScreens.count() == 1) {
++        // If we have a fake output we can't have anything else
++        Q_ASSERT(m_availableScreens.count() == 0);
++        Q_ASSERT(m_redundantScreens.count() == 0);
++    } else {
++        for (QScreen *screen : allScreens) {
++            if (m_availableScreens.contains(screen)) {
++                // If available can't be redundant
++                Q_ASSERT(!m_redundantScreens.contains(screen));
++            } else if (m_redundantScreens.contains(screen)) {
++                // If redundant can't be available
++                Q_ASSERT(!m_availableScreens.contains(screen));
++            } else {
++                // We can't have a screen unaccounted for
++                Q_ASSERT(false);
++            }
++            // Is every screen mapped to an id?
++            Q_ASSERT(m_idForConnector.contains(screen->name()));
++            // Are the two maps symmetrical?
++            Q_ASSERT(connector(id(screen->name())) == screen->name());
++        }
++    }
++    for (QScreen *screen : m_redundantScreens.keys()) {
++        Q_ASSERT(outputRedundantTo(screen) != nullptr);
++    }
++}
++
++QDebug operator<<(QDebug debug, const ScreenPool *pool)
++{
++    debug << pool->metaObject()->className() << '(' << static_cast<const void *>(pool) << ") Internal state:\n";
++    debug << "Connector Mapping:\n";
++    auto it = pool->m_idForConnector.constBegin();
++    while (it != pool->m_idForConnector.constEnd()) {
++        debug << it.key() << "\t-->\t" << it.value() << '\n';
++        it++;
++    }
++    debug << "Platform primary screen:\t" << pool->m_primaryWatcher->primaryScreen() << '\n';
++    debug << "Actual primary screen:\t" << pool->primaryScreen() << '\n';
++    debug << "Available screens:\t" << pool->m_availableScreens << '\n';
++    debug << "\"Fake\" screens:\t" << pool->m_fakeScreens << '\n';
++    debug << "Redundant screens covered by other ones:\t" << pool->m_redundantScreens << '\n';
++    debug << "All screens, ordered by size:\t" << pool->m_allSortedScreens << '\n';
++    debug << "All screen that QGuiApplication knows:\t" << qGuiApp->screens() << '\n';
++    return debug;
+ }
+ 
+ #include "moc_screenpool.cpp"
+diff --git a/shell/screenpool.h b/shell/screenpool.h
+index 278821cc4..3615e7f04 100644
+--- a/shell/screenpool.h
++++ b/shell/screenpool.h
+@@ -9,13 +9,17 @@
+ #include <QAbstractNativeEventFilter>
+ #include <QHash>
+ #include <QObject>
++#include <QSet>
+ #include <QString>
+ #include <QTimer>
+ 
+ #include <KConfigGroup>
+ #include <KSharedConfig>
+ 
+-class ScreenPool : public QObject, public QAbstractNativeEventFilter
++class QScreen;
++class PrimaryOutputWatcher;
++
++class ScreenPool : public QObject
+ {
+     Q_OBJECT
+ 
+@@ -25,24 +29,43 @@ public:
+     ~ScreenPool() override;
+ 
+     QString primaryConnector() const;
+-    void setPrimaryConnector(const QString &primary);
+-
+-    void insertScreenMapping(int id, const QString &connector);
+ 
+     int id(const QString &connector) const;
+ 
+     QString connector(int id) const;
+ 
+-    int firstAvailableId() const;
+-
+     // all ids that are known, included screens not enabled at the moment
+     QList<int> knownIds() const;
+ 
+-protected:
+-    bool nativeEventFilter(const QByteArray &eventType, void *message, long *result) override;
++    // QScreen API
++    QList<QScreen *> screens() const;
++    QScreen *primaryScreen() const;
++    QScreen *screenForId(int id) const;
++    QScreen *screenForConnector(const QString &connector);
++
++    bool noRealOutputsConnected() const;
++
++Q_SIGNALS:
++    void screenAdded(QScreen *screen);
++    void screenRemoved(QScreen *screen);
++    void primaryScreenChanged(QScreen *oldPrimary, QScreen *newPrimary);
+ 
+ private:
+     void save();
++    void setPrimaryConnector(const QString &primary);
++    void insertScreenMapping(int id, const QString &connector);
++    int firstAvailableId() const;
++
++    QScreen *outputRedundantTo(QScreen *screen) const;
++    void reconsiderOutputs();
++    bool isOutputFake(QScreen *screen) const;
++
++    void insertSortedScreen(QScreen *screen);
++    void handleScreenAdded(QScreen *screen);
++    void handleScreenRemoved(QScreen *screen);
++    void handlePrimaryOutputNameChanged(const QString &oldOutputName, const QString &newOutputName);
++
++    void screenInvariants();
+ 
+     KConfigGroup m_configGroup;
+     QString m_primaryConnector;
+@@ -50,6 +73,18 @@ private:
+     QMap<int, QString> m_connectorForId;
+     QHash<QString, int> m_idForConnector;
+ 
++    // List correspondent to qGuiApp->screens(), but sorted first by size then by Id,
++    // determines the screen importance while figuring out the reduntant ones
++    QList<QScreen *> m_allSortedScreens;
++    // m_availableScreens + m_redundantOutputs + m_fakeOutputs == qGuiApp->screens()
++    QList<QScreen *> m_availableScreens; // Those are all the screen that are available to Corona
++    QHash<QScreen *, QScreen *> m_redundantScreens;
++    QSet<QScreen *> m_fakeScreens;
++
++    QTimer m_reconsiderOutputsTimer;
+     QTimer m_configSaveTimer;
+-    int m_xrandrExtensionOffset;
++    PrimaryOutputWatcher *const m_primaryWatcher;
++    friend QDebug operator<<(QDebug d, const ScreenPool *pool);
+ };
++
++QDebug operator<<(QDebug d, const ScreenPool *pool);
+diff --git a/shell/shellcorona.cpp b/shell/shellcorona.cpp
+index 08f43f0f5..bc0692ed8 100644
+--- a/shell/shellcorona.cpp
++++ b/shell/shellcorona.cpp
+@@ -112,9 +112,11 @@ void ShellCorona::init()
+     m_waitingPanelsTimer.setInterval(250);
+     connect(&m_waitingPanelsTimer, &QTimer::timeout, this, &ShellCorona::createWaitingPanels);
+ 
+-    m_reconsiderOutputsTimer.setSingleShot(true);
+-    m_reconsiderOutputsTimer.setInterval(1000);
+-    connect(&m_reconsiderOutputsTimer, &QTimer::timeout, this, &ShellCorona::reconsiderOutputs);
++#ifndef NDEBUG
++    m_invariantsTimer.setSingleShot(true);
++    m_invariantsTimer.setInterval(250);
++    connect(&m_invariantsTimer, &QTimer::timeout, this, &ShellCorona::screenInvariants);
++#endif
+ 
+     m_desktopDefaultsConfig = KConfigGroup(KSharedConfig::openConfig(kPackage().filePath("defaults")), "Desktop");
+     m_lnfDefaultsConfig = KConfigGroup(KSharedConfig::openConfig(m_lookAndFeelPackage.filePath("defaults")), "Desktop");
+@@ -263,11 +265,7 @@ void ShellCorona::setShell(const QString &shell)
+ 
+     if (themeName.isEmpty()) {
+         KConfigGroup shellCfg = KConfigGroup(KSharedConfig::openConfig(package.filePath("defaults")), "Theme");
+-
+-        themeName = shellCfg.readEntry("name", "default");
+-        KConfigGroup lnfCfg = KConfigGroup(KSharedConfig::openConfig(m_lookAndFeelPackage.filePath("defaults")), "plasmarc");
+-        lnfCfg = KConfigGroup(&lnfCfg, themeGroupKey);
+-        themeName = lnfCfg.readEntry(themeNameKey, themeName);
++        themeName = shellCfg.readEntry(themeNameKey, "default");
+     }
+ 
+     if (!themeName.isEmpty()) {
+@@ -676,17 +674,17 @@ void ShellCorona::load()
+     // NOTE: this is needed in case loadLayout() did *not* call loadDefaultLayout()
+     // it needs to be after of loadLayout() as it would always create new
+     // containments on each startup otherwise
+-    const auto screens = qGuiApp->screens();
++    const auto screens = m_screenPool->screens();
+     for (QScreen *screen : screens) {
+         // the containments may have been created already by the startup script
+         // check their existence in order to not have duplicated desktopviews
+-        if (!m_desktopViewforId.contains(m_screenPool->id(screen->name()))) {
++        if (!m_desktopViewForScreen.contains(screen)) {
+             addOutput(screen);
+         }
+     }
+-    connect(qGuiApp, &QGuiApplication::screenAdded, this, &ShellCorona::addOutput, Qt::UniqueConnection);
+-    connect(qGuiApp, &QGuiApplication::primaryScreenChanged, this, &ShellCorona::primaryOutputChanged, Qt::UniqueConnection);
+-    connect(qGuiApp, &QGuiApplication::screenRemoved, this, &ShellCorona::handleScreenRemoved, Qt::UniqueConnection);
++    connect(m_screenPool, &ScreenPool::screenAdded, this, &ShellCorona::addOutput, Qt::UniqueConnection);
++    connect(m_screenPool, &ScreenPool::screenRemoved, this, &ShellCorona::handleScreenRemoved, Qt::UniqueConnection);
++    connect(m_screenPool, &ScreenPool::primaryScreenChanged, this, &ShellCorona::primaryScreenChanged, Qt::UniqueConnection);
+ 
+     if (!m_waitingPanels.isEmpty()) {
+         m_waitingPanelsTimer.start();
+@@ -700,44 +698,24 @@ void ShellCorona::load()
+     }
+ }
+ 
+-void ShellCorona::primaryOutputChanged()
++void ShellCorona::primaryScreenChanged(QScreen *oldPrimary, QScreen *newPrimary)
+ {
+-    if (!m_desktopViewforId.contains(0)) {
+-        return;
+-    }
+-
+     // when the appearance of a new primary screen *moves*
+     // the position of the now secondary, the two screens will appear overlapped for an instant, and a spurious output redundant would happen here if checked
+     // immediately
+-    m_reconsiderOutputsTimer.start();
+-
+-    QScreen *oldPrimary = m_desktopViewforId.value(0)->screen();
+-    QScreen *newPrimary = qGuiApp->primaryScreen();
+-    if (!newPrimary || newPrimary == oldPrimary || newPrimary->geometry().isNull()) {
+-        return;
+-    }
+-
+-    qWarning() << "Old primary output:" << oldPrimary << "New primary output:" << newPrimary;
+-    const int oldIdOfPrimary = m_screenPool->id(newPrimary->name());
+-    m_screenPool->setPrimaryConnector(newPrimary->name());
+-    // swap order in m_desktopViewforId
+-    if (m_desktopViewforId.contains(0) && m_desktopViewforId.contains(oldIdOfPrimary)) {
+-        DesktopView *primaryDesktop = m_desktopViewforId.value(0);
+-        DesktopView *oldDesktopOfPrimary = m_desktopViewforId.value(oldIdOfPrimary);
+-
++#ifndef NDEBUG
++    m_invariantsTimer.start();
++#endif
++    // swap order in m_desktopViewForScreen
++    if (m_desktopViewForScreen.contains(oldPrimary) && m_desktopViewForScreen.contains(newPrimary)) {
++        DesktopView *primaryDesktop = m_desktopViewForScreen.value(oldPrimary);
++        DesktopView *oldDesktopOfPrimary = m_desktopViewForScreen.value(newPrimary);
+         primaryDesktop->setScreenToFollow(newPrimary);
+-        oldDesktopOfPrimary->setScreenToFollow(oldPrimary);
++        m_desktopViewForScreen[newPrimary] = primaryDesktop;
+         primaryDesktop->show();
++        oldDesktopOfPrimary->setScreenToFollow(oldPrimary);
++        m_desktopViewForScreen[oldPrimary] = oldDesktopOfPrimary;
+         oldDesktopOfPrimary->show();
+-        // corner case: the new primary screen was added into redundant outputs when appeared, *and* !m_desktopViewforId.contains(oldIdOfPrimary)
+-        // meaning that we had only one screen, connected a new oone that
+-        // a) is now primary and
+-        // b) is at 0,0 position, moving the current screen out of the way
+-        // and this will always happen in two events
+-    } else if (m_desktopViewforId.contains(0) && m_redundantOutputs.contains(newPrimary)) {
+-        m_desktopViewforId[0]->setScreenToFollow(newPrimary);
+-        m_redundantOutputs.remove(newPrimary);
+-        m_redundantOutputs.insert(oldPrimary);
+     }
+ 
+     for (PanelView *panel : qAsConst(m_panelViews)) {
+@@ -755,15 +733,22 @@ void ShellCorona::primaryOutputChanged()
+ #ifndef NDEBUG
+ void ShellCorona::screenInvariants() const
+ {
+-    const QList<int> keys = m_desktopViewforId.keys();
+-    Q_ASSERT(keys.count() <= QGuiApplication::screens().count());
++    if (m_screenPool->noRealOutputsConnected()) {
++        Q_ASSERT(m_desktopViewForScreen.isEmpty());
++        Q_ASSERT(m_panelViews.isEmpty());
++        return;
++    }
++    const QList<const QScreen *> screenKeys = m_desktopViewForScreen.keys();
++
++    Q_ASSERT(screenKeys.count() <= m_screenPool->screens().count());
+ 
+     QSet<QScreen *> screens;
+-    for (const int id : keys) {
+-        const DesktopView *view = m_desktopViewforId.value(id);
++    for (const QScreen *screenKey : screenKeys) {
++        const int id = m_screenPool->id(screenKey->name());
++        const DesktopView *view = m_desktopViewForScreen.value(screenKey);
+         QScreen *screen = view->screenToFollow();
++        Q_ASSERT(screenKey == screen);
+         Q_ASSERT(!screens.contains(screen));
+-        Q_ASSERT(!m_redundantOutputs.contains(screen));
+         //         commented out because a different part of the code-base is responsible for this
+         //         and sometimes is not yet called here.
+         //         Q_ASSERT(!view->fillScreen() || view->geometry() == screen->geometry());
+@@ -786,11 +771,7 @@ void ShellCorona::screenInvariants() const
+         screens.insert(screen);
+     }
+ 
+-    foreach (QScreen *out, m_redundantOutputs) {
+-        Q_ASSERT(isOutputRedundant(out));
+-    }
+-
+-    if (m_desktopViewforId.isEmpty()) {
++    if (m_desktopViewForScreen.isEmpty()) {
+         qWarning() << "no screens!!";
+     }
+ }
+@@ -837,8 +818,8 @@ void ShellCorona::unload()
+     if (m_shell.isEmpty()) {
+         return;
+     }
+-    qDeleteAll(m_desktopViewforId);
+-    m_desktopViewforId.clear();
++    qDeleteAll(m_desktopViewForScreen);
++    m_desktopViewForScreen.clear();
+     qDeleteAll(m_panelViews);
+     m_panelViews.clear();
+     m_waitingPanels.clear();
+@@ -891,7 +872,7 @@ void ShellCorona::loadDefaultLayout()
+     // NOTE: Is important the containments already exist for each screen
+     // at the moment of the script execution,the same loop in :load()
+     // is executed too late
+-    const auto screens = qGuiApp->screens();
++    const auto screens = m_screenPool->screens();
+     for (QScreen *screen : screens) {
+         addOutput(screen);
+     }
+@@ -963,15 +944,16 @@ void ShellCorona::processUpdateScripts()
+ 
+ int ShellCorona::numScreens() const
+ {
+-    return qGuiApp->screens().count();
++    return m_screenPool->screens().count();
+ }
+ 
+ QRect ShellCorona::screenGeometry(int id) const
+ {
+-    DesktopView *view = m_desktopViewforId.value(id);
+-    if (!view) {
++    QScreen *screen = m_screenPool->screenForId(id);
++    DesktopView *view = screen ? m_desktopViewForScreen.value(screen) : nullptr;
++    if (!screen || !view) {
+         qWarning() << "requesting unexisting screen" << id;
+-        QScreen *s = qGuiApp->primaryScreen();
++        QScreen *s = m_screenPool->primaryScreen();
+         return s ? s->geometry() : QRect();
+     }
+     return view->geometry();
+@@ -984,11 +966,12 @@ QRegion ShellCorona::availableScreenRegion(int id) const
+ 
+ QRegion ShellCorona::_availableScreenRegion(int id) const
+ {
+-    DesktopView *view = m_desktopViewforId.value(id);
+-    if (!view) {
++    QScreen *screen = m_screenPool->screenForId(id);
++    DesktopView *view = screen ? m_desktopViewForScreen.value(screen) : nullptr;
++    if (!screen || !view) {
+         // each screen should have a view
+         qWarning() << "requesting unexisting screen" << id;
+-        QScreen *s = qGuiApp->primaryScreen();
++        QScreen *s = m_screenPool->primaryScreen();
+         return s ? s->availableGeometry() : QRegion();
+     }
+ 
+@@ -1009,11 +992,12 @@ QRect ShellCorona::availableScreenRect(int id) const
+ 
+ QRect ShellCorona::_availableScreenRect(int id) const
+ {
+-    DesktopView *view = m_desktopViewforId.value(id);
+-    if (!view) {
++    QScreen *screen = m_screenPool->screenForId(id);
++    DesktopView *view = screen ? m_desktopViewForScreen.value(screen) : nullptr;
++    if (!screen || !view) {
+         // each screen should have a view
+         qWarning() << "requesting unexisting screen" << id;
+-        QScreen *s = qGuiApp->primaryScreen();
++        QScreen *s = m_screenPool->primaryScreen();
+         return s ? s->availableGeometry() : QRect();
+     }
+ 
+@@ -1049,11 +1033,18 @@ void ShellCorona::removeDesktop(DesktopView *desktopView)
+ {
+     const int idx = m_screenPool->id(desktopView->screenToFollow()->name());
+ 
+-    auto itDesktop = m_desktopViewforId.find(idx);
+-    if (itDesktop == m_desktopViewforId.end()) {
+-        return;
++    // Iterate instead of going by index: QScreen can be recyced to be the "fake" output
++    // so searching by id won't work anymore
++    auto deskIt = m_desktopViewForScreen.begin();
++    while (deskIt != m_desktopViewForScreen.end()) {
++        DesktopView *view = deskIt.value();
++
++        if (view == desktopView) {
++            break;
++        }
++        ++deskIt;
+     }
+-    Q_ASSERT(m_desktopViewforId.value(idx) == desktopView);
++    Q_ASSERT(deskIt != m_desktopViewForScreen.end());
+ 
+     QMutableHashIterator<const Plasma::Containment *, PanelView *> it(m_panelViews);
+     while (it.hasNext()) {
+@@ -1063,14 +1054,14 @@ void ShellCorona::removeDesktop(DesktopView *desktopView)
+         if (panelView->containment()->screen() == idx) {
+             m_waitingPanels << panelView->containment();
+             it.remove();
+-            delete panelView;
++            panelView->destroy();
+         }
+     }
+ 
+-    m_desktopViewforId.erase(itDesktop);
+-    delete desktopView;
++    m_desktopViewForScreen.erase(deskIt);
++    desktopView->destroy();
+ 
+-    emit screenRemoved(idx);
++    Q_EMIT screenRemoved(idx);
+ }
+ 
+ PanelView *ShellCorona::panelView(Plasma::Containment *containment) const
+@@ -1093,7 +1084,18 @@ QList<PanelView *> ShellCorona::panelsForScreen(QScreen *screen) const
+ 
+ DesktopView *ShellCorona::desktopForScreen(QScreen *screen) const
+ {
+-    return m_desktopViewforId.value(m_screenPool->id(screen->name()));
++    DesktopView *view = m_desktopViewForScreen.value(screen);
++    // An output may have been renamed, fall back to a linear check
++    if (view) {
++        return view;
++    } else {
++        for (DesktopView *v : m_desktopViewForScreen) {
++            if (v->screenToFollow() == screen) { // FIXME: whe should never hit this?
++                return v;
++            }
++        }
++    }
++    return nullptr;
+ }
+ 
+ void ShellCorona::handleScreenRemoved(QScreen *screen)
+@@ -1101,103 +1103,24 @@ void ShellCorona::handleScreenRemoved(QScreen *screen)
+     if (DesktopView *v = desktopForScreen(screen)) {
+         removeDesktop(v);
+     }
+-
+-    m_reconsiderOutputsTimer.start();
+-    m_redundantOutputs.remove(screen);
+-}
+-
+-bool ShellCorona::isOutputRedundant(QScreen *screen) const
+-{
+-    Q_ASSERT(screen);
+-    const QRect thisGeometry = screen->geometry();
+-
+-    const int thisId = m_screenPool->id(screen->name());
+-
+-    // FIXME: QScreen doesn't have any idea of "this qscreen is clone of this other one
+-    // so this ultra inefficient heuristic has to stay until we have a slightly better api
+-    // logic is:
+-    // a screen is redundant if:
+-    //* its geometry is contained in another one
+-    //* if their resolutions are different, the "biggest" one wins
+-    //* if they have the same geometry, the one with the lowest id wins (arbitrary, but gives reproducible behavior and makes the primary screen win)
+-    const auto screens = qGuiApp->screens();
+-    for (QScreen *s : screens) {
+-        // don't compare with itself
+-        if (screen == s) {
+-            continue;
+-        }
+-        if (s->geometry().isNull()) {
+-            return false;
+-        }
+-
+-        const QRect otherGeometry = s->geometry();
+-
+-        const int otherId = m_screenPool->id(s->name());
+-
+-        if (otherGeometry.contains(thisGeometry, false)
+-            && ( // since at this point contains is true, if either
+-                 // measure of othergeometry is bigger, has a bigger area
+-                otherGeometry.width() > thisGeometry.width() || otherGeometry.height() > thisGeometry.height() ||
+-                // ids not -1 are considered in descending order of importance
+-                //-1 means that is a screen not known yet, just arrived and
+-                // not yet in screenpool: this happens for screens that
+-                // are hotplugged and weren't known. it does NOT happen
+-                // at first startup, as screenpool populates on load with all screens connected at the moment before the rest of the shell starts up
+-                (thisId == -1 && otherId != -1) || (thisId > otherId && otherId != -1))) {
+-            return true;
+-        }
+-    }
+-
+-    return false;
+-}
+-
+-void ShellCorona::reconsiderOutputs()
+-{
+-    const auto screens = qGuiApp->screens();
+-    for (QScreen *screen : screens) {
+-        if (m_redundantOutputs.contains(screen)) {
+-            if (!isOutputRedundant(screen)) {
+-                // qDebug() << "not redundant anymore" << screen;
+-                addOutput(screen);
+-            }
+-        } else if (isOutputRedundant(screen)) {
+-            qDebug() << "new redundant screen" << screen << "with primary screen" << qGuiApp->primaryScreen();
+-
+-            if (DesktopView *v = desktopForScreen(screen))
+-                removeDesktop(v);
+-
+-            m_redundantOutputs.insert(screen);
+-        }
+-        //         else
+-        //             qDebug() << "fine screen" << out;
+-    }
+-
+-    updateStruts();
+-
+-    CHECK_SCREEN_INVARIANTS
++#ifndef NDEBUG
++    m_invariantsTimer.start();
++#endif
+ }
+ 
+ void ShellCorona::addOutput(QScreen *screen)
+ {
+     Q_ASSERT(screen);
+ 
+-    if (screen->geometry().isNull()) {
+-        return;
+-    }
+-
+-    connect(screen, &QScreen::geometryChanged, &m_reconsiderOutputsTimer, static_cast<void (QTimer::*)()>(&QTimer::start), Qt::UniqueConnection);
+-
+-    if (isOutputRedundant(screen)) {
+-        m_redundantOutputs.insert(screen);
++    if (m_desktopViewForScreen.contains(screen)) {
+         return;
+-    } else {
+-        m_redundantOutputs.remove(screen);
+     }
+-
++    Q_ASSERT(!screen->geometry().isNull());
++#ifndef NDEBUG
++    connect(screen, &QScreen::geometryChanged, &m_invariantsTimer, static_cast<void (QTimer::*)()>(&QTimer::start), Qt::UniqueConnection);
++#endif
+     int insertPosition = m_screenPool->id(screen->name());
+-    if (insertPosition < 0) {
+-        insertPosition = m_screenPool->firstAvailableId();
+-    }
++    Q_ASSERT(insertPosition >= 0);
+ 
+     DesktopView *view = new DesktopView(this, screen);
+ 
+@@ -1207,9 +1130,9 @@ void ShellCorona::addOutput(QScreen *screen)
+     connect(view, &DesktopView::geometryChanged, this, [=]() {
+         const int id = m_screenPool->id(view->screen()->name());
+         if (id >= 0) {
+-            emit screenGeometryChanged(id);
+-            emit availableScreenRegionChanged();
+-            emit availableScreenRectChanged();
++            Q_EMIT screenGeometryChanged(id);
++            Q_EMIT availableScreenRegionChanged();
++            Q_EMIT availableScreenRectChanged();
+         }
+     });
+ 
+@@ -1223,8 +1146,7 @@ void ShellCorona::addOutput(QScreen *screen)
+ 
+     connect(containment, &Plasma::Containment::uiReadyChanged, this, &ShellCorona::checkAllDesktopsUiReady);
+ 
+-    m_screenPool->insertScreenMapping(insertPosition, screen->name());
+-    m_desktopViewforId[insertPosition] = view;
++    m_desktopViewForScreen[screen] = view;
+     view->setContainment(containment);
+     view->show();
+     Q_ASSERT(screen == view->screen());
+@@ -1238,17 +1160,18 @@ void ShellCorona::addOutput(QScreen *screen)
+         m_waitingPanelsTimer.start();
+     }
+ 
+-    emit availableScreenRectChanged();
+-    emit screenAdded(m_screenPool->id(screen->name()));
+-
+-    CHECK_SCREEN_INVARIANTS
++    Q_EMIT availableScreenRectChanged();
++    Q_EMIT screenAdded(m_screenPool->id(screen->name()));
++#ifndef NDEBUG
++    m_invariantsTimer.start();
++#endif
+ }
+ 
+ void ShellCorona::checkAllDesktopsUiReady(bool ready)
+ {
+     if (!ready)
+         return;
+-    for (auto v : qAsConst(m_desktopViewforId)) {
++    for (auto v : qAsConst(m_desktopViewForScreen)) {
+         if (!v->containment()->isUiReady())
+             return;
+ 
+@@ -1303,15 +1226,15 @@ void ShellCorona::createWaitingPanels()
+             requestedScreen = 0;
+         }
+ 
+-        DesktopView *desktopView = m_desktopViewforId.value(requestedScreen);
+-        if (!desktopView) {
++        QScreen *screen = m_screenPool->screenForId(requestedScreen);
++        DesktopView *desktopView = screen ? m_desktopViewForScreen.value(screen) : nullptr;
++        if (!screen || !desktopView) {
+             stillWaitingPanels << cont;
+             continue;
+         }
+ 
+         // TODO: does a similar check make sense?
+         // Q_ASSERT(qBound(0, requestedScreen, m_screenPool->count() - 1) == requestedScreen);
+-        QScreen *screen = desktopView->screenToFollow();
+         PanelView *panel = new PanelView(this, screen);
+         if (panel->rendererInterface()->graphicsApi() != QSGRendererInterface::Software) {
+             connect(panel, &QQuickWindow::sceneGraphError, this, &ShellCorona::glInitializationFailed);
+@@ -1329,7 +1252,7 @@ void ShellCorona::createWaitingPanels()
+         connect(cont, &QObject::destroyed, this, &ShellCorona::panelContainmentDestroyed);
+     }
+     m_waitingPanels = stillWaitingPanels;
+-    emit availableScreenRectChanged();
++    Q_EMIT availableScreenRectChanged();
+ }
+ 
+ void ShellCorona::panelContainmentDestroyed(QObject *cont)
+@@ -1339,7 +1262,7 @@ void ShellCorona::panelContainmentDestroyed(QObject *cont)
+     // don't make things relayout when the application is quitting
+     // NOTE: qApp->closingDown() is still false here
+     if (!m_closingDown) {
+-        emit availableScreenRectChanged();
++        Q_EMIT availableScreenRectChanged();
+     }
+ }
+ 
+@@ -1392,8 +1315,9 @@ void ShellCorona::executeSetupPlasmoidScript(Plasma::Containment *containment, P
+ 
+ void ShellCorona::toggleWidgetExplorer()
+ {
++    // FIXME: This does not work on wayland
+     const QPoint cursorPos = QCursor::pos();
+-    for (DesktopView *view : qAsConst(m_desktopViewforId)) {
++    for (DesktopView *view : qAsConst(m_desktopViewForScreen)) {
+         if (view->screen()->geometry().contains(cursorPos)) {
+             // The view QML has to provide something to display the widget explorer
+             view->rootObject()->metaObject()->invokeMethod(view->rootObject(), "toggleWidgetExplorer", Q_ARG(QVariant, QVariant::fromValue(sender())));
+@@ -1405,7 +1329,7 @@ void ShellCorona::toggleWidgetExplorer()
+ void ShellCorona::toggleActivityManager()
+ {
+     const QPoint cursorPos = QCursor::pos();
+-    for (DesktopView *view : qAsConst(m_desktopViewforId)) {
++    for (DesktopView *view : qAsConst(m_desktopViewForScreen)) {
+         if (view->screen()->geometry().contains(cursorPos)) {
+             // The view QML has to provide something to display the activity explorer
+             view->rootObject()->metaObject()->invokeMethod(view->rootObject(), "toggleActivityManager", Qt::QueuedConnection);
+@@ -1499,8 +1423,8 @@ void ShellCorona::currentActivityChanged(const QString &newActivity)
+ {
+     //     qDebug() << "Activity changed:" << newActivity;
+ 
+-    for (auto it = m_desktopViewforId.constBegin(); it != m_desktopViewforId.constEnd(); ++it) {
+-        Plasma::Containment *c = createContainmentForActivity(newActivity, it.key());
++    for (auto it = m_desktopViewForScreen.constBegin(); it != m_desktopViewForScreen.constEnd(); ++it) {
++        Plasma::Containment *c = createContainmentForActivity(newActivity, m_screenPool->id(it.key()->name()));
+ 
+         QAction *removeAction = c->actions()->action(QStringLiteral("remove"));
+         if (removeAction) {
+@@ -1551,10 +1475,10 @@ void ShellCorona::insertActivity(const QString &id, const QString &plugin)
+     }
+ 
+     m_activityContainmentPlugins.insert(id, plugin);
+-    for (auto it = m_desktopViewforId.constBegin(); it != m_desktopViewforId.constEnd(); ++it) {
+-        Plasma::Containment *c = createContainmentForActivity(id, it.key());
++    for (auto it = m_desktopViewForScreen.constBegin(); it != m_desktopViewForScreen.constEnd(); ++it) {
++        Plasma::Containment *c = createContainmentForActivity(id, m_screenPool->id(it.key()->name()));
+         if (c) {
+-            c->config().writeEntry("lastScreen", it.key());
++            c->config().writeEntry("lastScreen", m_screenPool->id(it.key()->name()));
+         }
+     }
+ }
+@@ -1574,7 +1498,7 @@ Plasma::Containment *ShellCorona::setContainmentTypeForScreen(int screen, const
+     }
+ 
+     DesktopView *view = nullptr;
+-    for (DesktopView *v : qAsConst(m_desktopViewforId)) {
++    for (DesktopView *v : qAsConst(m_desktopViewForScreen)) {
+         if (v->containment() == oldContainment) {
+             view = v;
+             break;
+@@ -1628,7 +1552,7 @@ Plasma::Containment *ShellCorona::setContainmentTypeForScreen(int screen, const
+     newContainment->restore(newCg);
+     newContainment->updateConstraints(Plasma::Types::StartupCompletedConstraint);
+     newContainment->flushPendingConstraintsEvents();
+-    emit containmentAdded(newContainment);
++    Q_EMIT containmentAdded(newContainment);
+ 
+     // Move the applets
+     const auto applets = oldContainment->applets();
+@@ -1654,7 +1578,7 @@ Plasma::Containment *ShellCorona::setContainmentTypeForScreen(int screen, const
+     // Save now as we now have a screen, so lastScreen will not be -1
+     newContainment->save(newCg);
+     requestConfigSync();
+-    emit availableScreenRectChanged();
++    Q_EMIT availableScreenRectChanged();
+ 
+     return newContainment;
+ }
+@@ -1670,7 +1594,7 @@ void ShellCorona::checkAddPanelAction()
+ 
+     auto filter = [](const KPluginMetaData &md) -> bool {
+         return !md.rawData().value(QStringLiteral("NoDisplay")).toBool()
+-            && KPluginMetaData::readStringList(md.rawData(), QStringLiteral("X-Plasma-ContainmentCategories")).contains(QLatin1String("panel"));
++            && md.value(QStringLiteral("X-Plasma-ContainmentCategories"), QStringList()).contains(QLatin1String("panel"));
+     };
+     QList<KPluginMetaData> templates = KPackage::PackageLoader::self()->findPackages(QStringLiteral("Plasma/LayoutTemplate"), QString(), filter);
+ 
+@@ -1709,7 +1633,7 @@ void ShellCorona::populateAddPanelsMenu()
+ 
+     auto filter = [](const KPluginMetaData &md) -> bool {
+         return !md.rawData().value(QStringLiteral("NoDisplay")).toBool()
+-            && KPluginMetaData::readStringList(md.rawData(), QStringLiteral("X-Plasma-ContainmentCategories")).contains(QLatin1String("panel"));
++            && md.value(QStringLiteral("X-Plasma-ContainmentCategories"), QStringList()).contains(QLatin1String("panel"));
+     };
+     const QList<KPluginMetaData> templates = KPackage::PackageLoader::self()->findPackages(QStringLiteral("Plasma/LayoutTemplate"), QString(), filter);
+     for (const auto &tpl : templates) {
+@@ -1778,7 +1702,7 @@ Plasma::Containment *ShellCorona::addPanel(const QString &plugin)
+     }
+ 
+     // find out what screen this panel should go on
+-    QScreen *wantedScreen = qGuiApp->focusWindow() ? qGuiApp->focusWindow()->screen() : qGuiApp->primaryScreen();
++    QScreen *wantedScreen = qGuiApp->focusWindow() ? qGuiApp->focusWindow()->screen() : m_screenPool->primaryScreen();
+ 
+     QList<Plasma::Types::Location> availableLocations;
+     availableLocations << Plasma::Types::LeftEdge << Plasma::Types::TopEdge << Plasma::Types::RightEdge << Plasma::Types::BottomEdge;
+@@ -1831,9 +1755,9 @@ int ShellCorona::screenForContainment(const Plasma::Containment *containment) co
+     }
+ 
+     // if the desktop views already exist, base the decision upon them
+-    for (auto it = m_desktopViewforId.constBegin(), end = m_desktopViewforId.constEnd(); it != end; ++it) {
++    for (auto it = m_desktopViewForScreen.constBegin(), end = m_desktopViewForScreen.constEnd(); it != end; ++it) {
+         if (it.value()->containment() == containment && containment->activity() == m_activityController->currentActivity()) {
+-            return it.key();
++            return m_screenPool->id(it.value()->screenToFollow()->name());
+         }
+     }
+ 
+@@ -1850,7 +1774,7 @@ int ShellCorona::screenForContainment(const Plasma::Containment *containment) co
+     // won't be associated to a screen
+     //     qDebug() << "ShellCorona screenForContainment: " << containment << " Last screen is " << containment->lastScreen();
+ 
+-    const auto screens = qGuiApp->screens();
++    const auto screens = m_screenPool->screens();
+     for (auto screen : screens) {
+         // containment->lastScreen() == m_screenPool->id(screen->name()) to check if the lastScreen refers to a screen that exists/it's known
+         if (containment->lastScreen() == m_screenPool->id(screen->name())
+@@ -2033,7 +1957,7 @@ ScreenPool *ShellCorona::screenPool() const
+ 
+ QList<int> ShellCorona::screenIds() const
+ {
+-    return m_desktopViewforId.keys();
++    return m_screenPool->knownIds();
+ }
+ 
+ QString ShellCorona::defaultContainmentPlugin() const
+@@ -2061,17 +1985,32 @@ void ShellCorona::configurationChanged(const QString &path)
+ 
+ void ShellCorona::activateLauncherMenu()
+ {
++    auto activateLauncher = [](Plasma::Applet *applet) -> bool {
++        const auto provides = applet->pluginMetaData().value(QStringLiteral("X-Plasma-Provides"), QStringList());
++        if (provides.contains(QLatin1String("org.kde.plasma.launchermenu"))) {
++            if (!applet->globalShortcut().isEmpty()) {
++                Q_EMIT applet->activated();
++                return true;
++            }
++        }
++        return false;
++    };
++
+     for (auto it = m_panelViews.constBegin(), end = m_panelViews.constEnd(); it != end; ++it) {
+         const auto applets = it.key()->applets();
+         for (auto applet : applets) {
+-            const auto provides = KPluginMetaData::readStringList(applet->pluginMetaData().rawData(), QStringLiteral("X-Plasma-Provides"));
+-            if (provides.contains(QLatin1String("org.kde.plasma.launchermenu"))) {
+-                if (!applet->globalShortcut().isEmpty()) {
+-                    emit applet->activated();
+-                    return;
+-                }
++            if (activateLauncher(applet)) {
++                return;
+             }
+         }
++        if (activateLauncher((*it)->containment())) {
++            return;
++        }
++    }
++    for (auto it = m_desktopViewForScreen.constBegin(), itEnd = m_desktopViewForScreen.constEnd(); it != itEnd; ++it) {
++        if (activateLauncher((*it)->containment())) {
++            return;
++        }
+     }
+ }
+ 
+@@ -2080,7 +2019,7 @@ void ShellCorona::activateTaskManagerEntry(int index)
+     auto activateTaskManagerEntryOnContainment = [](const Plasma::Containment *c, int index) {
+         const auto &applets = c->applets();
+         for (auto *applet : applets) {
+-            const auto &provides = KPluginMetaData::readStringList(applet->pluginMetaData().rawData(), QStringLiteral("X-Plasma-Provides"));
++            const auto &provides = applet->pluginMetaData().value(QStringLiteral("X-Plasma-Provides"), QStringList());
+             if (provides.contains(QLatin1String("org.kde.plasma.multitasking"))) {
+                 if (QQuickItem *appletInterface = applet->property("_plasma_graphicObject").value<QQuickItem *>()) {
+                     const auto &childItems = appletInterface->childItems();
+@@ -2116,7 +2055,7 @@ void ShellCorona::activateTaskManagerEntry(int index)
+     // which is activating a task on the task manager on a panel on the primary screen.
+ 
+     for (auto it = m_panelViews.constBegin(), end = m_panelViews.constEnd(); it != end; ++it) {
+-        if (it.value()->screen() != qGuiApp->primaryScreen()) {
++        if (it.value()->screen() != m_screenPool->primaryScreen()) {
+             continue;
+         }
+         if (activateTaskManagerEntryOnContainment(it.key(), index)) {
+diff --git a/shell/shellcorona.h b/shell/shellcorona.h
+index 18c0b5b3e..db0b34fa2 100644
+--- a/shell/shellcorona.h
++++ b/shell/shellcorona.h
+@@ -201,7 +201,7 @@ private Q_SLOTS:
+     void populateAddPanelsMenu();
+ 
+     void addOutput(QScreen *screen);
+-    void primaryOutputChanged();
++    void primaryScreenChanged(QScreen *oldScreen, QScreen *newScreen);
+ 
+     void panelContainmentDestroyed(QObject *cont);
+     void handleScreenRemoved(QScreen *screen);
+@@ -211,8 +211,6 @@ private Q_SLOTS:
+ private:
+     void updateStruts();
+     void configurationChanged(const QString &path);
+-    bool isOutputRedundant(QScreen *screen) const;
+-    void reconsiderOutputs();
+     QList<PanelView *> panelsForScreen(QScreen *screen) const;
+     DesktopView *desktopForScreen(QScreen *screen) const;
+     void setupWaylandIntegration();
+@@ -231,9 +229,10 @@ private:
+     ScreenPool *m_screenPool;
+     QString m_shell;
+     KActivities::Controller *m_activityController;
+-    // map from screen number to desktop view, qmap as order is important
+-    QMap<int, DesktopView *> m_desktopViewforId;
+     QHash<const Plasma::Containment *, PanelView *> m_panelViews;
++    // map from QScreen to desktop view
++    QHash<const QScreen *, DesktopView *> m_desktopViewForScreen;
++    QHash<const Plasma::Containment *, int> m_pendingScreenChanges;
+     KConfigGroup m_desktopDefaultsConfig;
+     KConfigGroup m_lnfDefaultsConfig;
+     QList<Plasma::Containment *> m_waitingPanels;
+@@ -241,12 +240,12 @@ private:
+     QAction *m_addPanelAction;
+     QScopedPointer<QMenu> m_addPanelsMenu;
+     KPackage::Package m_lookAndFeelPackage;
+-    QSet<QScreen *> m_redundantOutputs;
+ 
+     QTimer m_waitingPanelsTimer;
+     QTimer m_appConfigSyncTimer;
+-    QTimer m_reconsiderOutputsTimer;
+-
++#ifndef NDEBUG
++    QTimer m_invariantsTimer;
++#endif
+     KWayland::Client::PlasmaShell *m_waylandPlasmaShell;
+     bool m_closingDown : 1;
+     QString m_testModeLayout;
+-- 
+2.31.1
+
