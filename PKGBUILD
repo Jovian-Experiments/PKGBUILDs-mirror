@@ -2,7 +2,7 @@
 # Maintainer: Jan Alexander Steffens (heftig) <heftig@archlinux.org>
 
 pkgbase=linux-neptune
-_tag=5.13.0-valve10.3
+_tag=5.13.0-valve12
 pkgver=${_tag//-/.}
 pkgrel=1
 pkgdesc='Linux'
