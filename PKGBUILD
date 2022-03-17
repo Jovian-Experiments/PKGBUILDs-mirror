@@ -1,37 +1,22 @@
 # Maintainer: Thomas Bächler <thomas@archlinux.org>
 
 pkgbase=linux-firmware-neptune
-pkgname=(linux-firmware-neptune-whence linux-firmware-neptune) # amd-ucode
-#         linux-firmware-{nfp,mellanox,marvell,qcom,liquidio,qlogic,bnx2x}
-#)
+pkgname=(linux-firmware-neptune) # amd-ucode)
 _tag=jupiter-20211216
 pkgver=20211216.ae6f5a8
-pkgrel=1
+pkgrel=2
 pkgdesc="Firmware files for Linux"
 url="https://gitlab.steamos.cloud/jupiter/linux-firmware-neptune"
 license=('GPL2' 'GPL3' 'custom')
 arch=('any')
 makedepends=('git')
 options=(!strip !debug)
-source=("git+ssh://git@gitlab.internal.steamos.cloud/jupiter/linux-firmware-neptune.git#tag=$_tag"
-         0001-Add-support-for-compressing-firmware-in-copy-firmware.patch)
-sha256sums=('SKIP'
-            '41c73f88ac68a3aef01fd406ce6cdb87555c65e4816dab12df10740875551aa7')
+source=("git+ssh://git@gitlab.steamos.cloud/jupiter/linux-firmware-neptune.git#tag=$_tag")
+sha256sums=('SKIP')
 validpgpkeys=('4CDE8575E547BF835FE15807A31B6BD72486CFD6') # Josh Boyer <jwboyer@fedoraproject.org>
 
 _backports=(
 )
-
-
-_pick() {
-  local p="$1" f d; shift
-  for f; do
-    d="$srcdir/$p/${f#$pkgdir/}"
-    mkdir -p "$(dirname "$d")"
-    mv "$f" "$d"
-    rmdir -p --ignore-fail-on-non-empty "$(dirname "$f")"
-  done
-}
 
 prepare() {
   cd ${pkgbase}
@@ -41,9 +26,6 @@ prepare() {
     git log --oneline -1 "${_c}"
     git cherry-pick -n "${_c}"
   done
-
-  # add firmware compression support - patch taken from Fedora
-  patch -Np1 -i ../0001-Add-support-for-compressing-firmware-in-copy-firmware.patch
 }
 
 pkgver() {
@@ -68,51 +50,34 @@ build() {
     bsdtar --null -cf - --format=newc @- > amd-ucode.img
 }
 
-package_linux-firmware-neptune-whence() {
-  pkgdesc+=" - contains the WHENCE license file which documents the vendor license details"
-  provides=('linux-firmware-whence')
-  conflicts=('linux-firmware-whence')
-  replaces=('linux-firmware-whence')
-  cd "$pkgbase"
-  install -Dt "${pkgdir}/usr/share/licenses/${pkgname}" -m644 WHENCE
-}
-
 package_linux-firmware-neptune() {
-  depends=('linux-firmware-whence')
   provides=('linux-firmware')
   conflicts=('linux-firmware')
   replaces=('linux-firmware')
 
   cd ${pkgbase}
 
-  make DESTDIR="${pkgdir}" FIRMWAREDIR=/usr/lib/firmware installcompress
+  make DESTDIR="${pkgdir}" FIRMWAREDIR=/usr/lib/firmware install
 
   # Trigger a microcode reload for configurations not using early updates
   echo 'w /sys/devices/system/cpu/microcode/reload - - - - 1' |
     install -Dm644 /dev/stdin "${pkgdir}/usr/lib/tmpfiles.d/${pkgname}.conf"
 
-  install -Dt "${pkgdir}/usr/share/licenses/${pkgname}" -m644 LICEN*
+  install -Dt "${pkgdir}/usr/share/licenses/${pkgname}" -m644 LICEN* WHENCE
 
-  # split
-  cd "$pkgdir"
-  _pick linux-firmware-nfp usr/lib/firmware/netronome
-  _pick linux-firmware-nfp usr/share/licenses/${pkgname}/LICENCE.Netronome
-   
-  _pick linux-firmware-mellanox usr/lib/firmware/mellanox
-  
-  _pick linux-firmware-marvell usr/lib/firmware/{libertas,mwl8k,mwlwifi,mrvl}
-  _pick linux-firmware-marvell usr/share/licenses/${pkgname}/LICENCE.{Marvell,NXP}
-  
-  _pick linux-firmware-qcom usr/lib/firmware/{qcom,a300_*}
-  _pick linux-firmware-qcom usr/share/licenses/${pkgname}/LICENSE.qcom
-  
-  _pick linux-firmware-liquidio usr/lib/firmware/liquidio
-  _pick linux-firmware-liquidio usr/share/licenses/${pkgname}/LICENCE.cavium_liquidio
-  
-  _pick linux-firmware-qlogic usr/lib/firmware/{qlogic,qed,ql2???_*,c{b,t,t2}fw-*}
-  _pick linux-firmware-qlogic usr/share/licenses/${pkgname}/LICENCE.{qla1280,qla2xxx}
-  
-  _pick linux-firmware-bnx2x usr/lib/firmware/bnx2x*
+  # Jupiter: remove unused/unneeded firmware files, bloating the package.
+  # Listed in decreasing size, mainly server NIC and non-AMD gpu
+  local -r _unused_firmware="netronome qcom mellanox liquidio qed i915 dpaa2 radeon nvidia"
+  for folder in ${_unused_firmware}; do
+    rm -rf "${pkgdir}/usr/lib/firmware/$folder"
+  done
+
+  # In addition, nuke all amdgpu firmware but VanGogh which we need
+  for amdgpu in "${pkgdir}/usr/lib/firmware/amdgpu/"*; do
+    _file=$(basename $amdgpu)
+    [[ "$_file" = vangogh* ]] && continue
+    rm -rf "$amdgpu"
+  done
 }
 
 package_amd-ucode() {
@@ -122,55 +87,6 @@ package_amd-ucode() {
   install -Dt "${pkgdir}/boot" -m644 amd-ucode.img
 
   install -Dt "${pkgdir}/usr/share/licenses/${pkgname}" -m644 ${pkgbase}/LICENSE.amd-ucode
-}
-
-package_linux-firmware-nfp() {
-  pkgdesc+=" - nfp / Firmware for Netronome Flow Processors"
-  depends=('linux-firmware-whence')
-
-  mv -v linux-firmware-nfp/* "${pkgdir}"
-}
-
-package_linux-firmware-mellanox() {
-  pkgdesc+=" - mellanox / Firmware for Mellanox Spectrum switches"
-  depends=('linux-firmware-whence')
-
-  mv -v linux-firmware-mellanox/* "${pkgdir}"
-}
-
-package_linux-firmware-marvell() {
-  pkgdesc+=" - marvell / Firmware for Marvell devices"
-  depends=('linux-firmware-whence')
-
-  mv -v linux-firmware-marvell/* "${pkgdir}"
-}
-
-package_linux-firmware-qcom() {
-  pkgdesc+=" - qcom / Firmware for Qualcomm SoCs"
-  depends=('linux-firmware-whence')
-
-  mv -v linux-firmware-qcom/* "${pkgdir}"
-}
-
-package_linux-firmware-liquidio() {
-  pkgdesc+=" - liquidio / Firmware for Cavium LiquidIO server adapters"
-  depends=('linux-firmware-whence')
-
-  mv -v linux-firmware-liquidio/* "${pkgdir}"
-}
-
-package_linux-firmware-qlogic() {
-  pkgdesc+=" - qlogic / Firmware for QLogic devices"
-  depends=('linux-firmware-whence')
-
-  mv -v linux-firmware-qlogic/* "${pkgdir}"
-}
-
-package_linux-firmware-bnx2x() {
-  pkgdesc+=" - bnx2x / Firmware for Broadcom NetXtreme II 10Gb ethernet adapters"
-  depends=('linux-firmware-whence')
-
-  mv -v linux-firmware-bnx2x/* "${pkgdir}"
 }
 
 # vim:set sw=2 et:
