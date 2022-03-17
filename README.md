@@ -1,5 +1,5 @@
 
-`main @ 20220310.1000`
+`main @ 20220316.1000`
 ======================
 
 Valve packages
@@ -12,14 +12,14 @@ Valve packages
  * [`bluez` — `jupiter-main/bluez-5.63-1.4`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/bluez-5.63-1.4)
  * [`bluez-libs` — `jupiter-main/bluez-5.63-1.4`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/bluez-5.63-1.4)
  * [`bluez-utils` — `jupiter-main/bluez-5.63-1.4`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/bluez-5.63-1.4)
- * [`gamescope` — `jupiter-main/gamescope-3.11.26-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/gamescope-3.11.26-1)
+ * [`gamescope` — `jupiter-main/gamescope-3.11.27-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/gamescope-3.11.27-1)
  * [`gpu-trace` — `jupiter-main/gpu-trace-2.7-3`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/gpu-trace-2.7-3)
  * [`jupiter-hw-support` — `jupiter-main/jupiter-hw-support-20220310.1000-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-hw-support-20220310.1000-1)
- * [`jupiter-legacy-support` — `jupiter-main/jupiter-legacy-support-1.111-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-legacy-support-1.111-1)
+ * [`jupiter-legacy-support` — `jupiter-main/jupiter-legacy-support-1.112-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-legacy-support-1.112-1)
  * [`kscreen` — `jupiter-main/kscreen-5.23.5-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/kscreen-5.23.5-2)
  * [`libva-mesa-driver` — `jupiter-main/mesa-22.0.0_devel.148041.radeonsi_20220224-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/mesa-22.0.0_devel.148041.radeonsi_20220224-1)
- * [`linux-firmware-neptune` — `jupiter-main/linux-firmware-neptune-20211216.ae6f5a8-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/linux-firmware-neptune-20211216.ae6f5a8-1)
- * [`linux-neptune` — `jupiter-main/linux-neptune-5.13.0.valve10.3-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/linux-neptune-5.13.0.valve10.3-1)
+ * [`linux-firmware-neptune` — `jupiter-main/linux-firmware-neptune-20211216.ae6f5a8-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/linux-firmware-neptune-20211216.ae6f5a8-2)
+ * [`linux-neptune` — `jupiter-main/linux-neptune-5.13.0.valve12-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/linux-neptune-5.13.0.valve12-1)
  * [`mangohud` — `jupiter-main/mangohud-0.6.6.1.r156.g8b801e8-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/mangohud-0.6.6.1.r156.g8b801e8-1)
  * [`mesa` — `jupiter-main/mesa-22.0.0_devel.148041.radeonsi_20220224-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/mesa-22.0.0_devel.148041.radeonsi_20220224-1)
  * [`mesa-vdpau` — `jupiter-main/mesa-22.0.0_devel.148041.radeonsi_20220224-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/mesa-22.0.0_devel.148041.radeonsi_20220224-1)
@@ -36,6 +36,7 @@ Valve packages
  * [`steamos-efi` — `jupiter-main/steamos-efi-20220202.2-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steamos-efi-20220202.2-1)
  * [`ttf-twemoji-default` — `jupiter-main/ttf-twemoji-default-13.1.0-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/ttf-twemoji-default-13.1.0-1)
  * [`upower` — `jupiter-main/upower-0.99.15.jupiter-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/upower-0.99.15.jupiter-1)
+ * [`vpower` — `jupiter-main/vpower-1.3.0-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/vpower-1.3.0-1)
 
 Arch Linux packages
 -------------------
@@ -103,8 +104,8 @@ Arch Linux packages
  * [`casync-git/2.r227.g99559cd-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/casync-git/-/tree/2.r227.g99559cd-2)
  * [`cdparanoia/10.2-8`](https://gitlab.archlinux.org/archlinux/packaging/packages/cdparanoia/-/tree/10.2-8)
  * [`cifs-utils/6.14-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/cifs-utils/-/tree/6.14-1)
- * [`clang/13.0.0-4`](https://gitlab.archlinux.org/archlinux/packaging/packages/clang/-/tree/13.0.0-4)
- * [`clang-libs/13.0.0-4`](https://gitlab.archlinux.org/archlinux/packaging/packages/clang/-/tree/13.0.0-4)
+ * [`clang/13.0.0-4.3`](https://gitlab.archlinux.org/archlinux/packaging/packages/clang/-/tree/13.0.0-4.3)
+ * [`clang-libs/13.0.0-4.3`](https://gitlab.archlinux.org/archlinux/packaging/packages/clang/-/tree/13.0.0-4.3)
  * [`compiler-rt/13.0.0-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/compiler-rt/-/tree/13.0.0-2)
  * [`convertlit/1.8-10`](https://gitlab.archlinux.org/archlinux/packaging/packages/convertlit/-/tree/1.8-10)
  * [`coreutils/9.0-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/coreutils/-/tree/9.0-2)
@@ -219,6 +220,7 @@ Arch Linux packages
  * [`holo-sudo/r667.d02b4b6-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/steamos-customizations-git/-/tree/r667.d02b4b6-1)
  * [`holo-wireplumber/r667.d02b4b6-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/steamos-customizations-git/-/tree/r667.d02b4b6-1)
  * [`htop/3.1.2-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/htop/-/tree/3.1.2-1)
+ * [`hunspell/1.7.0-3`](https://gitlab.archlinux.org/archlinux/packaging/packages/hunspell/-/tree/1.7.0-3)
  * [`hwdata/0.355-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/hwdata/-/tree/0.355-1)
  * [`iana-etc/20220110-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/iana-etc/-/tree/20220110-1)
  * [`ibus/1.5.25-5`](https://gitlab.archlinux.org/archlinux/packaging/packages/ibus/-/tree/1.5.25-5)
@@ -319,6 +321,7 @@ Arch Linux packages
  * [`kwidgetsaddons/5.90.0-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/kwidgetsaddons/-/tree/5.90.0-1)
  * [`kwin/5.23.5-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/kwin/-/tree/5.23.5-1)
  * [`kwindowsystem/5.90.0-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/kwindowsystem/-/tree/5.90.0-1)
+ * [`kwrite/21.12.1-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/kwrite/-/tree/21.12.1-1)
  * [`kwrited/5.23.5-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/kwrited/-/tree/5.23.5-1)
  * [`kxmlgui/5.90.0-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/kxmlgui/-/tree/5.90.0-1)
  * [`l-smash/2.14.5-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/l-smash/-/tree/2.14.5-2)
@@ -512,6 +515,8 @@ Arch Linux packages
  * [`lzo/2.10-3`](https://gitlab.archlinux.org/archlinux/packaging/packages/lzo/-/tree/2.10-3)
  * [`mailcap/2.1.53-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/mailcap/-/tree/2.1.53-1)
  * [`make/4.3-3`](https://gitlab.archlinux.org/archlinux/packaging/packages/make/-/tree/4.3-3)
+ * [`maliit-framework/2.1.1-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/maliit-framework/-/tree/2.1.1-1)
+ * [`maliit-keyboard/2.1.0-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/maliit-keyboard/-/tree/2.1.0-1)
  * [`man-db/2.9.4-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/man-db/-/tree/2.9.4-2)
  * [`md4c/0.4.8-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/md4c/-/tree/0.4.8-1)
  * [`mdadm/4.2-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/mdadm/-/tree/4.2-1)
@@ -610,6 +615,7 @@ Arch Linux packages
  * [`powerdevil/5.23.5-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/powerdevil/-/tree/5.23.5-1)
  * [`powertop/2.14-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/powertop/-/tree/2.14-1)
  * [`ppp/2.4.9-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/ppp/-/tree/2.4.9-1)
+ * [`presage/0.9.1-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/presage/-/tree/0.9.1-1)
  * [`prison/5.90.0-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/prison/-/tree/5.90.0-1)
  * [`procps-ng/3.3.17-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/procps-ng/-/tree/3.3.17-1)
  * [`psmisc/23.4-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/psmisc/-/tree/23.4-1)
@@ -647,6 +653,7 @@ Arch Linux packages
  * [`qrencode/4.1.1-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/qrencode/-/tree/4.1.1-1)
  * [`qt5-base/5.15.2+kde+r294-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/qt5-base/-/tree/5.15.2+kde+r294-1)
  * [`qt5-declarative/5.15.2+kde+r43-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/qt5-declarative/-/tree/5.15.2+kde+r43-1)
+ * [`qt5-feedback/0.0.0.20150918-4`](https://gitlab.archlinux.org/archlinux/packaging/packages/qt5-feedback/-/tree/0.0.0.20150918-4)
  * [`qt5-graphicaleffects/5.15.2-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/qt5-graphicaleffects/-/tree/5.15.2-1)
  * [`qt5-location/5.15.2-4`](https://gitlab.archlinux.org/archlinux/packaging/packages/qt5-location/-/tree/5.15.2-4)
  * [`qt5-multimedia/5.15.2-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/qt5-multimedia/-/tree/5.15.2-1)
@@ -743,7 +750,6 @@ Arch Linux packages
  * [`vkmark-git/r129.cf45f2f-3`](https://gitlab.archlinux.org/archlinux/packaging/packages/vkmark-git/-/tree/r129.cf45f2f-3)
  * [`vmaf/1.5.3-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/vmaf/-/tree/1.5.3-1)
  * [`volume_key/0.3.12-7`](https://gitlab.archlinux.org/archlinux/packaging/packages/volume_key/-/tree/0.3.12-7)
- * [`vpower/1.2.6-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/vpower/-/tree/1.2.6-2)
  * [`vulkan-icd-loader/1.2.203-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/vulkan-icd-loader/-/tree/1.2.203-1)
  * [`vulkan-radeon/22.1.0_devel.150443.jupiter_22.1.2-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/vulkan-radeon/-/tree/22.1.0_devel.150443.jupiter_22.1.2-1)
  * [`vulkan-tools/1.2.203-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/vulkan-tools/-/tree/1.2.203-1)
