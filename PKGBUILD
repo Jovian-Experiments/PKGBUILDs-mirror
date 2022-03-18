@@ -1,8 +1,8 @@
 # Maintainer: Jo Bates <jo@valvesoftware.com>
 
 pkgname=vpower
-pkgver=1.2.6
-pkgrel=2
+pkgver=1.3.0
+pkgrel=1
 pkgdesc="Service that calculates battery metrics and handles critical battery scenarios"
 url=https://gitlab.steamos.cloud/jupiter/vpower
 arch=(x86_64)
