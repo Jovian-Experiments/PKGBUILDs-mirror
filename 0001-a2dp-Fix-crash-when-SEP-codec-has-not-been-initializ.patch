@@ -1,0 +1,54 @@
+From 3d501e66dd875b4725ab1941d3d4b11856753d6e Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Fr=C3=A9d=C3=A9ric=20Danis?= <frederic.danis@collabora.com>
+Date: Wed, 23 Mar 2022 12:08:38 +0100
+Subject: [PATCH 1/2] a2dp: Fix crash when SEP codec has not been initialized
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+
+If SEP has not been properly discovered avdtp_get_codec may return NULL
+thus causing crashes such as when running AVRCP/TG/VLH/BI-01-C after
+AVRCP/TG/RCR/BV-04-C
+---
+ profiles/audio/a2dp.c | 17 ++++++++++++++---
+ 1 file changed, 14 insertions(+), 3 deletions(-)
+
+diff --git a/profiles/audio/a2dp.c b/profiles/audio/a2dp.c
+index d0808c77a..9c615c536 100644
+--- a/profiles/audio/a2dp.c
++++ b/profiles/audio/a2dp.c
+@@ -1986,7 +1986,12 @@ static gboolean get_codec(const GDBusPropertyTable *property,
+ {
+ 	struct a2dp_remote_sep *sep = data;
+ 	struct avdtp_service_capability *cap = avdtp_get_codec(sep->sep);
+-	struct avdtp_media_codec_capability *codec = (void *) cap->data;
++	struct avdtp_media_codec_capability *codec;
++
++	if (!cap)
++		return FALSE;
++
++	codec = (void *) cap->data;
+ 
+ 	dbus_message_iter_append_basic(iter, DBUS_TYPE_BYTE,
+ 						&codec->media_codec_type);
+@@ -1999,10 +2004,16 @@ static gboolean get_capabilities(const GDBusPropertyTable *property,
+ {
+ 	struct a2dp_remote_sep *sep = data;
+ 	struct avdtp_service_capability *service = avdtp_get_codec(sep->sep);
+-	struct avdtp_media_codec_capability *codec = (void *) service->data;
+-	uint8_t *caps = codec->data;
++	struct avdtp_media_codec_capability *codec;
++	uint8_t *caps;
+ 	DBusMessageIter array;
+ 
++	if (!service)
++		return FALSE;
++
++	codec = (void *) service->data;
++	caps = codec->data;
++
+ 	dbus_message_iter_open_container(iter, DBUS_TYPE_ARRAY,
+ 					DBUS_TYPE_BYTE_AS_STRING, &array);
+ 
+-- 
+2.25.1
+
