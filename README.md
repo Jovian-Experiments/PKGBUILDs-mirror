@@ -1,5 +1,5 @@
 
-`main @ 20220324.1000`
+`main @ 20220328.1000`
 ======================
 
 Valve packages
@@ -13,9 +13,9 @@ Valve packages
  * [`bluez-libs` — `jupiter-main/bluez-5.63-1.5`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/bluez-5.63-1.5)
  * [`bluez-utils` — `jupiter-main/bluez-5.63-1.5`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/bluez-5.63-1.5)
  * [`f3` — `jupiter-main/f3-8.0-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/f3-8.0-2)
- * [`gamescope` — `jupiter-main/gamescope-3.11.28.beta2-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/gamescope-3.11.28.beta2-1)
+ * [`gamescope` — `jupiter-main/gamescope-3.11.28.beta4-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/gamescope-3.11.28.beta4-2)
  * [`gpu-trace` — `jupiter-main/gpu-trace-2.7-3`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/gpu-trace-2.7-3)
- * [`jupiter-hw-support` — `jupiter-main/jupiter-hw-support-20220310.1000-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-hw-support-20220310.1000-1)
+ * [`jupiter-hw-support` — `jupiter-main/jupiter-hw-support-20220325.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-hw-support-20220325.1-1)
  * [`jupiter-legacy-support` — `jupiter-main/jupiter-legacy-support-1.112-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-legacy-support-1.112-1)
  * [`kscreen` — `jupiter-main/kscreen-5.23.5-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/kscreen-5.23.5-2)
  * [`libva-mesa-driver` — `jupiter-main/mesa-22.0.0_devel.148041.radeonsi_20220224-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/mesa-22.0.0_devel.148041.radeonsi_20220224-1)
@@ -92,6 +92,7 @@ Arch Linux packages
  * [`breeze-gtk/5.23.5-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/breeze-gtk/-/tree/5.23.5-1)
  * [`breeze-icons/5.90.0-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/breeze-icons/-/tree/5.90.0-1)
  * [`brotli/1.0.9-7`](https://gitlab.archlinux.org/archlinux/packaging/packages/brotli/-/tree/1.0.9-7)
+ * [`btop/1.2.0-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/btop/-/tree/1.2.0-1)
  * [`btrfs-progs/5.16-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/btrfs-progs/-/tree/5.16-1)
  * [`bubblewrap/0.5.0-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/bubblewrap/-/tree/0.5.0-1)
  * [`bzip2/1.0.8-4`](https://gitlab.archlinux.org/archlinux/packaging/packages/bzip2/-/tree/1.0.8-4)
@@ -817,5 +818,6 @@ Arch Linux packages
  * [`zimg/3.0.3-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/zimg/-/tree/3.0.3-1)
  * [`zip/3.0-9`](https://gitlab.archlinux.org/archlinux/packaging/packages/zip/-/tree/3.0-9)
  * [`zlib/1:1.2.11-5`](https://gitlab.archlinux.org/archlinux/packaging/packages/zlib/-/tree/1:1.2.11-5)
+ * [`zsh/5.8-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/zsh/-/tree/5.8-1)
  * [`zstd/1.5.2-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/zstd/-/tree/1.5.2-1)
  * [`zxing-cpp/1.2.0-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/zxing-cpp/-/tree/1.2.0-1)
