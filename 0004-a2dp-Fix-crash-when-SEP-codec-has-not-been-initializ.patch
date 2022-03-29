@@ -1,22 +1,37 @@
-From 3d501e66dd875b4725ab1941d3d4b11856753d6e Mon Sep 17 00:00:00 2001
+From 009aa8bae291120dd56832dc7ec2edcee93e14a7 Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Fr=C3=A9d=C3=A9ric=20Danis?= <frederic.danis@collabora.com>
 Date: Wed, 23 Mar 2022 12:08:38 +0100
-Subject: [PATCH 1/2] a2dp: Fix crash when SEP codec has not been initialized
+Subject: [PATCH 4/5] a2dp: Fix crash when SEP codec has not been initialized
 Content-Type: text/plain; charset="utf-8"
 Content-Transfer-Encoding: 8bit
 
 If SEP has not been properly discovered avdtp_get_codec may return NULL
 thus causing crashes such as when running AVRCP/TG/VLH/BI-01-C after
-AVRCP/TG/RCR/BV-04-C
+AVRCP/TG/RCR/BV-04-C.
+
+The endpoint should not be registered if its codec is not available.
+
+Remove A2DP channel seps queue empty check in store_remote_seps() as it
+prevent to remove invalidated checkpoint if this is the only one saved.
 ---
- profiles/audio/a2dp.c | 17 ++++++++++++++---
- 1 file changed, 14 insertions(+), 3 deletions(-)
+ profiles/audio/a2dp.c | 25 +++++++++++++++++++------
+ 1 file changed, 19 insertions(+), 6 deletions(-)
 
 diff --git a/profiles/audio/a2dp.c b/profiles/audio/a2dp.c
-index d0808c77a..9c615c536 100644
+index 0aa7af058..2f54d68b6 100644
 --- a/profiles/audio/a2dp.c
 +++ b/profiles/audio/a2dp.c
-@@ -1986,7 +1986,12 @@ static gboolean get_codec(const GDBusPropertyTable *property,
+@@ -820,9 +820,6 @@ static void store_remote_seps(struct a2dp_channel *chan)
+ 	char *data;
+ 	gsize length = 0;
+ 
+-	if (queue_isempty(chan->seps))
+-		return;
+-
+ 	ba2str(device_get_address(device), dst_addr);
+ 
+ 	snprintf(filename, PATH_MAX, STORAGEDIR "/%s/cache/%s",
+@@ -1984,7 +1981,12 @@ static gboolean get_codec(const GDBusPropertyTable *property,
  {
  	struct a2dp_remote_sep *sep = data;
  	struct avdtp_service_capability *cap = avdtp_get_codec(sep->sep);
@@ -30,7 +45,7 @@ index d0808c77a..9c615c536 100644
  
  	dbus_message_iter_append_basic(iter, DBUS_TYPE_BYTE,
  						&codec->media_codec_type);
-@@ -1999,10 +2004,16 @@ static gboolean get_capabilities(const GDBusPropertyTable *property,
+@@ -1997,10 +1999,16 @@ static gboolean get_capabilities(const GDBusPropertyTable *property,
  {
  	struct a2dp_remote_sep *sep = data;
  	struct avdtp_service_capability *service = avdtp_get_codec(sep->sep);
@@ -49,6 +64,18 @@ index d0808c77a..9c615c536 100644
  	dbus_message_iter_open_container(iter, DBUS_TYPE_ARRAY,
  					DBUS_TYPE_BYTE_AS_STRING, &array);
  
+@@ -2065,6 +2073,11 @@ static struct a2dp_remote_sep *register_remote_sep(void *data, void *user_data)
+ 	if (sep)
+ 		return sep;
+ 
++	if (!avdtp_get_codec(rsep)) {
++		error("Unable to get remote sep codec");
++		return NULL;
++	}
++
+ 	sep = new0(struct a2dp_remote_sep, 1);
+ 	sep->chan = chan;
+ 	sep->sep = rsep;
 -- 
 2.25.1
 
