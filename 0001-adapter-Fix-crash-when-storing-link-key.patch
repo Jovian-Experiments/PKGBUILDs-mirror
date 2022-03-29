@@ -1,0 +1,66 @@
+From 18868006d8fa9263cd2aca117e85c3c60e335380 Mon Sep 17 00:00:00 2001
+From: Luiz Augusto von Dentz <luiz.von.dentz@intel.com>
+Date: Wed, 9 Feb 2022 15:56:11 -0800
+Subject: [PATCH 1/5] adapter: Fix crash when storing link key
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+
+The following trace can be observed sometimes when pairing 2 emulator
+instances:
+
+ src/adapter.c:store_link_key() Unable to load key file from
+ /var/lib/bluetooth/9C:DA:3E:F2:8E:46/9C:B6:D0:8A:A0:0C/info: (No
+such file or directory)
+ GLib: g_file_set_contents: assertion 'error == NULL ||
+*error == NULL' failed
+ ++++++++ backtrace ++++++++
+ #1  btd_backtrace+0x28a (src/backtrace.c:59) [0x7f65bb5ab53a]
+ #2  g_logv+0x21c (/usr/lib/x86_64-linux-gnu/libglib-2.0.so.0.6400.6)
+ [0x7f65ba3f955c]
+ #3  g_log+0x93 (/usr/lib/x86_64-linux-gnu/libglib-2.0.so.0.6400.6)
+ [0x7f65ba3f9743]
+ #4  g_file_set_contents+0x68
+(/usr/lib/x86_64-linux-gnu/libglib-2.0.so.0.6400.6) [0x7f65ba3dca68]
+ #5  store_link_key+0x30a (src/adapter.c:8235) [0x7f65bb61839a]
+ #6  new_link_key_callback+0x474 (src/adapter.c:8285) [0x7f65bb62c904]
+ #7  queue_foreach+0x164 (src/shared/queue.c:203) [0x7f65bb722e34]
+ #8  can_read_data+0x59f (src/shared/mgmt.c:343) [0x7f65bb72e09f]
+ #9  watch_callback+0x112 (src/shared/io-glib.c:162) [0x7f65bb78acb2]
+ #10 g_main_context_dispatch+0x14e
+(/usr/lib/x86_64-linux-gnu/libglib-2.0.so.0.6400.6) [0x7f65ba3f204e]
+---
+ src/adapter.c | 6 ++++--
+ 1 file changed, 4 insertions(+), 2 deletions(-)
+
+diff --git a/src/adapter.c b/src/adapter.c
+index c49f42cfb..d2649079b 100644
+--- a/src/adapter.c
++++ b/src/adapter.c
+@@ -8348,11 +8348,15 @@ static void store_link_key(struct btd_adapter *adapter,
+ 
+ 	snprintf(filename, PATH_MAX, STORAGEDIR "/%s/%s/info",
+ 			btd_adapter_get_storage_dir(adapter), device_addr);
++	create_file(filename, 0600);
++
+ 	key_file = g_key_file_new();
+ 	if (!g_key_file_load_from_file(key_file, filename, 0, &gerr)) {
+ 		error("Unable to load key file from %s: (%s)", filename,
+ 								gerr->message);
+ 		g_error_free(gerr);
++		g_key_file_free(key_file);
++		return;
+ 	}
+ 
+ 	for (i = 0; i < 16; i++)
+@@ -8363,8 +8367,6 @@ static void store_link_key(struct btd_adapter *adapter,
+ 	g_key_file_set_integer(key_file, "LinkKey", "Type", type);
+ 	g_key_file_set_integer(key_file, "LinkKey", "PINLength", pin_length);
+ 
+-	create_file(filename, 0600);
+-
+ 	str = g_key_file_to_data(key_file, &length, NULL);
+ 	if (!g_file_set_contents(filename, str, length, &gerr)) {
+ 		error("Unable set contents for %s: (%s)", filename,
+-- 
+2.25.1
+
