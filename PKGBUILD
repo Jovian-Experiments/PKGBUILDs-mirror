@@ -1,5 +1,5 @@
 pkgname=steamos-devkit-service
-pkgver=0.20220303.0
+pkgver=0.20220328.0
 pkgrel=1
 arch=('any')
 url="https://gitlab.steamos.cloud/devkit/steamos-devkit-service"
@@ -12,25 +12,19 @@ sha512sums=(
     SKIP
     SKIP
 )
-makedepends=('git' 'meson' 'json-glib' 'libsoup' 'avahi' 'systemd')
-
-build() {
-    cd "${pkgname}"
-    meson --prefix=/usr --buildtype=plain src build
-    meson compile -C build
-}
+makedepends=('git' 'avahi' 'dbus-python' 'systemd')
 
 package() {
-    depends=('avahi' 'systemd')
+    depends=('avahi' 'dbus-python' 'systemd')
     pkgdesc="SteamOS Devkit Service"
     install=steamos-devkit-service.install
 
     cd "${pkgname}"
-    meson install -C build --destdir "$pkgdir"
 
     mkdir -p "${pkgdir}"/usr/lib/systemd/system
     cp "${srcdir}"/steamos-devkit-service.service "${pkgdir}"/usr/lib/systemd/system/
 
     mkdir -p "${pkgdir}"/usr/share/steamos-devkit
     cp -r "${srcdir}"/${pkgname}/hooks "${pkgdir}"/usr/share/steamos-devkit
+    cp "${srcdir}"/${pkgname}/src/steamos-devkit-service.py "${pkgdir}"/usr/share/steamos-devkit
 }

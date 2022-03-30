@@ -2,7 +2,7 @@
 Description="SteamOS Devkit Service"
 
 [Service]
-ExecStart=/usr/bin/steamos-devkit-service
+ExecStart=/usr/bin/python /usr/share/steamos-devkit/steamos-devkit-service.py
 User=deck
 
 [Install]
