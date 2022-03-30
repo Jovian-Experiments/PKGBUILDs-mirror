@@ -1,11 +1,12 @@
 pkgname=steamos-devkit-service
-pkgver=0.20220328.0
+pkgver=0.20220330.0
 pkgrel=1
 arch=('any')
 url="https://gitlab.steamos.cloud/devkit/steamos-devkit-service"
 license=('LGPL-2.1+')
+_commit=98827f53939e715feedb49b576b68db4087e3bce # tags/v0.20220330.1
 source=(
-    git+https://gitlab.steamos.cloud/devkit/steamos-devkit-service.git
+    git+https://gitlab.steamos.cloud/devkit/steamos-devkit-service.git#commit=$_commit
     steamos-devkit-service.service
 )
 sha512sums=(
