@@ -6,7 +6,7 @@
 pkgbase=plasma-workspace
 pkgname=(plasma-workspace plasma-wayland-session)
 pkgver=5.23.5
-pkgrel=4
+pkgrel=5
 pkgdesc='KDE Plasma Workspace'
 arch=(x86_64)
 url='https://kde.org/plasma-desktop/'
@@ -20,6 +20,7 @@ source=(https://download.kde.org/stable/plasma/$pkgver/$pkgbase-$pkgver.tar.xz{,
         https://invent.kde.org/plasma/plasma-workspace/-/commit/70d23b89.patch
         https://invent.kde.org/plasma/plasma-workspace/-/commit/926f8647.patch
         0001-Load-additional-actions-for-app-entries-in-applicati.patch
+        0003-Backport-fixing-the-writing-of-lnf-defaults.patch
         steam.desktop)
 sha256sums=('2ebee6ab2f10cabc350e0f75a0d8462ae0b7616a795d078f6bb5765396052575'
             'SKIP'
@@ -27,6 +28,7 @@ sha256sums=('2ebee6ab2f10cabc350e0f75a0d8462ae0b7616a795d078f6bb5765396052575'
             '810660c3d7948c21c61f8d4c7d604ca7cb51c85e1a41c6225d1f39c72feae808'
             'fe5ae91bc2c5e1b9021523efec60dc7740285e2c74684639e8238e9df9f58572'
             '20617818d22a655236a30b7ec75ddf3c9917e2efa696884b84d9a27fa3159dab'
+            '4965f42f2294c1143457c0ec2b6f1ab406a33e12a3fe2edea59b23db06ffa0e6'
             '72af031bed09455bd8c8625a6549b6bd130797be7ab4f0ba2283c34b9fdbedaf')
 validpgpkeys=('E0A3EB202F8E57528E13E72FD7574483BB57B18D'  # Jonathan Esk-Riddell <jr@jriddell.org>
               '0AAC775BB6437A8D9AF7A3ACFE0784117FBCE11D'  # Bhushan Shah <bshah@kde.org>
@@ -37,6 +39,7 @@ prepare() {
   patch -d $pkgbase-$pkgver -p1 < 70d23b89.patch # Remove implicit kinit dependency on shell runner
   patch -d $pkgbase-$pkgver -p1 < 926f8647.patch # Fix missing taskbar thumbnails on Wayland
   patch -d $pkgbase-$pkgver -p1 --input="${srcdir}/0001-Load-additional-actions-for-app-entries-in-applicati.patch"
+  patch -d $pkgbase-$pkgver -p1 --input="${srcdir}/0003-Backport-fixing-the-writing-of-lnf-defaults.patch"
 }
 
 build() {
