@@ -3,9 +3,9 @@
 # Contributor: Jerome Leclanche <jerome@leclan.ch>
 
 _pkgbase="sddm"
-_srccommit="c257a40ba95f56b5f3830b923b1c56aa055cf8ea"
+_srccommit="d19813cb03c7d71b896aead28e5285bc131500a9"
 pkgname="$_pkgbase-wayland"
-pkgver="v0.19.0.valve3.${_srccommit#v}"
+pkgver="v0.19.0.valve4.${_srccommit#v}"
 pkgrel=1
 pkgdesc="The Simple Desktop Display Manager - development branch"
 arch=("x86_64")
