@@ -1,5 +1,5 @@
 
-`main @ 20220407.1000`
+`main @ 20220418.1000`
 ======================
 
 Valve packages
@@ -28,7 +28,7 @@ Valve packages
  * [`plasma-wayland-session` — `jupiter-main/plasma-workspace-5.23.5-5`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/plasma-workspace-5.23.5-5)
  * [`plasma-workspace` — `jupiter-main/plasma-workspace-5.23.5-5`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/plasma-workspace-5.23.5-5)
  * [`python-crcmod` — `jupiter-main/python-crcmod-1.7-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/python-crcmod-1.7-1)
- * [`sddm-wayland` — `jupiter-main/sddm-wayland-v0.19.0.valve3.c257a40ba95f56b5f3830b923b1c56aa055cf8ea-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/sddm-wayland-v0.19.0.valve3.c257a40ba95f56b5f3830b923b1c56aa055cf8ea-1)
+ * [`sddm-wayland` — `jupiter-main/sddm-wayland-v0.19.0.valve4.d19813cb03c7d71b896aead28e5285bc131500a9-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/sddm-wayland-v0.19.0.valve4.d19813cb03c7d71b896aead28e5285bc131500a9-1)
  * [`steam-im-modules` — `jupiter-main/steam-im-modules-jupiter.20220223-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steam-im-modules-jupiter.20220223-1)
  * [`steam-jupiter-stable` — `jupiter-main/steam-jupiter-stable-1.0.0.74-2.13`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steam-jupiter-stable-1.0.0.74-2.13)
  * [`steamdeck-kde-presets` — `jupiter-main/steamdeck-kde-presets-0.6-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steamdeck-kde-presets-0.6-1)
@@ -124,7 +124,7 @@ Arch Linux packages
  * [`dbus-python/1.2.18-3`](https://gitlab.archlinux.org/archlinux/packaging/packages/dbus-python/-/tree/1.2.18-3)
  * [`dconf/0.40.0-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/dconf/-/tree/0.40.0-1)
  * [`desktop-file-utils/0.26-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/desktop-file-utils/-/tree/0.26-1)
- * [`desync-git/0.9.2.r14.g16ddd74-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/desync-git/-/tree/0.9.2.r14.g16ddd74-1)
+ * [`desync-git/0.9.2.r19.gb545768-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/desync-git/-/tree/0.9.2.r19.gb545768-1)
  * [`device-mapper/2.03.14-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/device-mapper/-/tree/2.03.14-2)
  * [`diffutils/3.8-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/diffutils/-/tree/3.8-1)
  * [`discount/2.2.7-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/discount/-/tree/2.2.7-1)
@@ -134,6 +134,7 @@ Arch Linux packages
  * [`dmraid/1.0.0.rc16.3-13`](https://gitlab.archlinux.org/archlinux/packaging/packages/dmraid/-/tree/1.0.0.rc16.3-13)
  * [`dnssec-anchors/20190629-3`](https://gitlab.archlinux.org/archlinux/packaging/packages/dnssec-anchors/-/tree/20190629-3)
  * [`dolphin/21.12.1-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/dolphin/-/tree/21.12.1-1)
+ * [`dos2unix/7.4.2-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/dos2unix/-/tree/7.4.2-1)
  * [`dosfstools/4.2-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/dosfstools/-/tree/4.2-1)
  * [`double-conversion/3.2.0-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/double-conversion/-/tree/3.2.0-1)
  * [`dracut/055-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/dracut/-/tree/055-2)
@@ -151,7 +152,6 @@ Arch Linux packages
  * [`exiv2/0.27.5-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/exiv2/-/tree/0.27.5-1)
  * [`expat/2.4.3-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/expat/-/tree/2.4.3-1)
  * [`fatresize/1.1.0-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/fatresize/-/tree/1.1.0-1)
- * [`fbida/2.14-3`](https://gitlab.archlinux.org/archlinux/packaging/packages/fbida/-/tree/2.14-3)
  * [`fd/8.3.1-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/fd/-/tree/8.3.1-1)
  * [`ffmpeg/2:4.4.1-1.2`](https://gitlab.archlinux.org/archlinux/packaging/packages/ffmpeg/-/tree/2:4.4.1-1.2)
  * [`file/5.41-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/file/-/tree/5.41-1)
@@ -368,7 +368,6 @@ Arch Linux packages
  * [`libepoxy/1.5.9-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/libepoxy/-/tree/1.5.9-1)
  * [`libevdev/1.12.0-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/libevdev/-/tree/1.12.0-1)
  * [`libevent/2.1.12-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/libevent/-/tree/2.1.12-1)
- * [`libexif/0.6.24-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/libexif/-/tree/0.6.24-1)
  * [`libfdk-aac/2.0.2-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/libfdk-aac/-/tree/2.0.2-1)
  * [`libffi/3.4.2-4`](https://gitlab.archlinux.org/archlinux/packaging/packages/libffi/-/tree/3.4.2-4)
  * [`libfontenc/1.1.4-3`](https://gitlab.archlinux.org/archlinux/packaging/packages/libfontenc/-/tree/1.1.4-3)
@@ -617,7 +616,6 @@ Arch Linux packages
  * [`polkit-qt5/0.114.0-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/polkit-qt5/-/tree/0.114.0-1)
  * [`ponymix/5-3`](https://gitlab.archlinux.org/archlinux/packaging/packages/ponymix/-/tree/5-3)
  * [`poppler/22.01.0-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/poppler/-/tree/22.01.0-1)
- * [`poppler-glib/22.01.0-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/poppler-glib/-/tree/22.01.0-1)
  * [`poppler-qt5/22.01.0-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/poppler-qt5/-/tree/22.01.0-1)
  * [`popt/1.18-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/popt/-/tree/1.18-2)
  * [`powerdevil/5.23.5-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/powerdevil/-/tree/5.23.5-1)
@@ -746,6 +744,7 @@ Arch Linux packages
  * [`ttf-hack/3.003-3`](https://gitlab.archlinux.org/archlinux/packaging/packages/ttf-hack/-/tree/3.003-3)
  * [`tzdata/2021e-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/tzdata/-/tree/2021e-1)
  * [`udisks2/2.9.4-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/udisks2/-/tree/2.9.4-1)
+ * [`unrar/1:6.1.4-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/unrar/-/tree/1:6.1.4-1)
  * [`unzip/6.0-16`](https://gitlab.archlinux.org/archlinux/packaging/packages/unzip/-/tree/6.0-16)
  * [`usbmuxd/1.1.1-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/usbmuxd/-/tree/1.1.1-1)
  * [`usbutils/014-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/usbutils/-/tree/014-2)
@@ -764,6 +763,7 @@ Arch Linux packages
  * [`wayland/1.20.0-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/wayland/-/tree/1.20.0-1)
  * [`wayland-utils/1.0.0-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/wayland-utils/-/tree/1.0.0-2)
  * [`webrtc-audio-processing/0.3.1-3`](https://gitlab.archlinux.org/archlinux/packaging/packages/webrtc-audio-processing/-/tree/0.3.1-3)
+ * [`wget/1.21.2-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/wget/-/tree/1.21.2-1)
  * [`which/2.21-5`](https://gitlab.archlinux.org/archlinux/packaging/packages/which/-/tree/2.21-5)
  * [`wireless-regdb/2021.08.28-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/wireless-regdb/-/tree/2021.08.28-1)
  * [`wireless_tools/30.pre9-3`](https://gitlab.archlinux.org/archlinux/packaging/packages/wireless_tools/-/tree/30.pre9-3)
