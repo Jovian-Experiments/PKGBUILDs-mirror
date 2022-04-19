@@ -1,9 +1,9 @@
 # Maintainer: Pierre-Loup A. Griffais (pgriffais@valvesoftware.com)
 
 pkgname=jupiter-hw-support
-_srctag=jupiter-20220413.100
+_srctag=jupiter-20220419.100
 pkgver=${_srctag#jupiter-}
-pkgrel=2
+pkgrel=1
 arch=('any')
 url="https://gitlab.steamos.cloud/jupiter/jupiter-hw-support"
 pkgdesc="Jupiter HW support package"
