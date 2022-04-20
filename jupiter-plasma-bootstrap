@@ -40,7 +40,3 @@ if [[ ! -e $config || $(cat "$config") != *"Version: 3" ]]; then
   echo "Version: 3" >> "$config"
   plasma-apply-lookandfeel -a com.valve.vapor.desktop
 fi
-
-## Finally, for test purposes, we're going to keep our desktop shortcuts in sync with /etc/skel - this is e.g. the RTST
-## launcher script and such that should get regenerated on re-image.
-cp -v /etc/skel/Desktop/*.desktop ~/Desktop/
