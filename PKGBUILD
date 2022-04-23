@@ -6,20 +6,28 @@
 pkgbase=bluez
 pkgname=('bluez' 'bluez-utils' 'bluez-libs' 'bluez-cups' 'bluez-hid2hci' 'bluez-plugins')
 pkgver=5.63
-pkgrel=1.4
+pkgrel=1.7
 url="http://www.bluez.org/"
 arch=('x86_64')
 license=('GPL2')
 makedepends=('dbus' 'libical' 'systemd' 'alsa-lib' 'json-c' 'ell' 'python-docutils')
 source=(https://www.kernel.org/pub/linux/bluetooth/${pkgname}-${pkgver}.tar.{xz,sign}
         bluetooth.modprobe
-	fix-avrcp.patch
+	AVRCP_TG_MDI_BV-04-C.patch
+	0001-adapter-Fix-crash-when-storing-link-key.patch
+	0002-a2dp-Don-t-initialize-a2dp_sep-destroy-until-properl.patch
+	0003-a2dp-Always-invalidate-the-cache-if-its-configuratio.patch
+	0004-a2dp-Fix-crash-when-SEP-codec-has-not-been-initializ.patch
 )
 # see https://www.kernel.org/pub/linux/bluetooth/sha256sums.asc
 sha256sums=('9349e11e8160bb3d720835d271250d8a7424d3690f5289e6db6fe07cc66c6d76'
             'SKIP'
             '46c021be659c9a1c4e55afd04df0c059af1f3d98a96338236412e449bf7477b4'
-            'd64d7518a571251fc8cdb945a8f22aa4ef9f65864a46491034f561a1e5c54e37')
+            'd64d7518a571251fc8cdb945a8f22aa4ef9f65864a46491034f561a1e5c54e37'
+	    'fd73c3c80971a33d5ce8856c42e0abedfd5acd22da70a067a7a945ce475e1b7b'
+	    'd5139c0359b8afd7db3471372f4f771ab12adc2c04ddc41d050284d27df5ea56'
+	    '8d61267d77733997d20bafa1dd9fb7bc1f72fadaffa198aaebe287b6de96cd1a'
+	    'c88f065634e314074e0af68ddb49cd7b8a6adc211ed5fd8d093181d1a2c64e4e')
 validpgpkeys=('E932D120BC2AEC444E558F0106CA9F5D1DCF2659') # Marcel Holtmann <marcel@holtmann.org>
 
 build() {
@@ -49,7 +57,11 @@ check() {
 }
 
 prepare() {
-  patch -d "${pkgname}"-${pkgver} -p1 -i "${srcdir}"/fix-avrcp.patch
+  patch -d "${pkgname}"-${pkgver} -p1 -i "${srcdir}"/AVRCP_TG_MDI_BV-04-C.patch
+  patch -d "${pkgname}"-${pkgver} -p1 -i "${srcdir}"/0001-adapter-Fix-crash-when-storing-link-key.patch
+  patch -d "${pkgname}"-${pkgver} -p1 -i "${srcdir}"/0002-a2dp-Don-t-initialize-a2dp_sep-destroy-until-properl.patch
+  patch -d "${pkgname}"-${pkgver} -p1 -i "${srcdir}"/0003-a2dp-Always-invalidate-the-cache-if-its-configuratio.patch
+  patch -d "${pkgname}"-${pkgver} -p1 -i "${srcdir}"/0004-a2dp-Fix-crash-when-SEP-codec-has-not-been-initializ.patch
 }
 
 package_bluez() {
