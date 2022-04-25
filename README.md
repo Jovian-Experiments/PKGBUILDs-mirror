@@ -1,5 +1,5 @@
 
-`main @ 20220422.1000`
+`main @ 20220425.1001`
 ======================
 
 Valve packages
@@ -15,6 +15,7 @@ Valve packages
  * [`f3` — `jupiter-main/f3-8.0-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/f3-8.0-2)
  * [`gamescope` — `jupiter-main/gamescope-3.11.28-3`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/gamescope-3.11.28-3)
  * [`gpu-trace` — `jupiter-main/gpu-trace-2.7-3`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/gpu-trace-2.7-3)
+ * [`jupiter-fan-control` — `jupiter-main/jupiter-fan-control-20220421.2-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-fan-control-20220421.2-1)
  * [`jupiter-hw-support` — `jupiter-main/jupiter-hw-support-20220421.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-hw-support-20220421.1-1)
  * [`jupiter-legacy-support` — `jupiter-main/jupiter-legacy-support-1.113-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-legacy-support-1.113-1)
  * [`kscreen` — `jupiter-main/kscreen-5.23.5-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/kscreen-5.23.5-2)
@@ -645,12 +646,14 @@ Arch Linux packages
  * [`python-multidict/5.2.0-3`](https://gitlab.archlinux.org/archlinux/packaging/packages/python-multidict/-/tree/5.2.0-3)
  * [`python-progressbar/4.0.0-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/python-progressbar/-/tree/4.0.0-1)
  * [`python-psutil/5.9.0-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/python-psutil/-/tree/5.9.0-1)
+ * [`python-pyaml/21.8.3-3`](https://gitlab.archlinux.org/archlinux/packaging/packages/python-pyaml/-/tree/21.8.3-3)
  * [`python-semantic-version/2.8.5-5`](https://gitlab.archlinux.org/archlinux/packaging/packages/python-semantic-version/-/tree/2.8.5-5)
  * [`python-six/1.16.0-5`](https://gitlab.archlinux.org/archlinux/packaging/packages/python-six/-/tree/1.16.0-5)
  * [`python-systemd/234-11`](https://gitlab.archlinux.org/archlinux/packaging/packages/python-systemd/-/tree/234-11)
  * [`python-sysv_ipc/1.1.0-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/python-sysv_ipc/-/tree/1.1.0-2)
  * [`python-typing_extensions/4.0.1-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/python-typing_extensions/-/tree/4.0.1-1)
  * [`python-utils/3.1.0-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/python-utils/-/tree/3.1.0-1)
+ * [`python-yaml/5.4.1.1-4`](https://gitlab.archlinux.org/archlinux/packaging/packages/python-yaml/-/tree/5.4.1.1-4)
  * [`python-yarl/1.7.2-3`](https://gitlab.archlinux.org/archlinux/packaging/packages/python-yarl/-/tree/1.7.2-3)
  * [`python-zipp/3.7.0-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/python-zipp/-/tree/3.7.0-1)
  * [`pyzy/1.0-6`](https://gitlab.archlinux.org/archlinux/packaging/packages/pyzy/-/tree/1.0-6)
