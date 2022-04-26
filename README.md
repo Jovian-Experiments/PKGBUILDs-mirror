@@ -1,5 +1,5 @@
 
-`main @ 20220425.1003`
+`main @ 20220425.1004`
 ======================
 
 Valve packages
@@ -15,7 +15,7 @@ Valve packages
  * [`f3` — `jupiter-main/f3-8.0-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/f3-8.0-2)
  * [`gamescope` — `jupiter-main/gamescope-3.11.28-3`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/gamescope-3.11.28-3)
  * [`gpu-trace` — `jupiter-main/gpu-trace-2.7-3`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/gpu-trace-2.7-3)
- * [`jupiter-fan-control` — `jupiter-main/jupiter-fan-control-20220421.2-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-fan-control-20220421.2-1)
+ * [`jupiter-fan-control` — `jupiter-main/jupiter-fan-control-20220425.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-fan-control-20220425.1-1)
  * [`jupiter-hw-support` — `jupiter-main/jupiter-hw-support-20220421.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-hw-support-20220421.1-1)
  * [`jupiter-legacy-support` — `jupiter-main/jupiter-legacy-support-1.113-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-legacy-support-1.113-1)
  * [`kscreen` — `jupiter-main/kscreen-5.23.5-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/kscreen-5.23.5-2)
@@ -33,7 +33,7 @@ Valve packages
  * [`steam-im-modules` — `jupiter-main/steam-im-modules-jupiter.20220223-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steam-im-modules-jupiter.20220223-1)
  * [`steam-jupiter-stable` — `jupiter-main/steam-jupiter-stable-1.0.0.74-2.13`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steam-jupiter-stable-1.0.0.74-2.13)
  * [`steamdeck-kde-presets` — `jupiter-main/steamdeck-kde-presets-0.6-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steamdeck-kde-presets-0.6-1)
- * [`steamos-customizations-jupiter` — `jupiter-main/steamos-customizations-jupiter-20220323.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steamos-customizations-jupiter-20220323.1-1)
+ * [`steamos-customizations-jupiter` — `jupiter-main/steamos-customizations-jupiter-20220425.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steamos-customizations-jupiter-20220425.1-1)
  * [`steamos-devkit-service` — `jupiter-main/steamos-devkit-service-0.20220401.0-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steamos-devkit-service-0.20220401.0-1)
  * [`steamos-efi` — `jupiter-main/steamos-efi-20220202.2-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steamos-efi-20220202.2-1)
  * [`ttf-twemoji-default` — `jupiter-main/ttf-twemoji-default-13.1.0-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/ttf-twemoji-default-13.1.0-1)
@@ -317,7 +317,6 @@ Arch Linux packages
  * [`ktexteditor/5.90.0-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/ktexteditor/-/tree/5.90.0-1)
  * [`ktextwidgets/5.90.0-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/ktextwidgets/-/tree/5.90.0-1)
  * [`kunitconversion/5.90.0-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/kunitconversion/-/tree/5.90.0-1)
- * [`kupdate-notifier-git/r59.7e34c35-3`](https://gitlab.archlinux.org/archlinux/packaging/packages/kupdate-notifier-git/-/tree/r59.7e34c35-3)
  * [`kuserfeedback/1.0.0-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/kuserfeedback/-/tree/1.0.0-1)
  * [`kwallet/5.90.0-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/kwallet/-/tree/5.90.0-1)
  * [`kwallet-pam/5.23.5-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/kwallet-pam/-/tree/5.23.5-1)
