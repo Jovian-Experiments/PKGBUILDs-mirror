@@ -1,5 +1,5 @@
 
-`release @ 20220425.1`
+`release @ 20220425.2`
 ======================
 
 Valve packages
@@ -10,7 +10,7 @@ Valve packages
  * [`bluez-libs` — `jupiter-rel/bluez-5.63-1.7`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-rel/bluez-5.63-1.7)
  * [`bluez-utils` — `jupiter-rel/bluez-5.63-1.7`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-rel/bluez-5.63-1.7)
  * [`f3` — `jupiter-rel/f3-8.0-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-rel/f3-8.0-2)
- * [`gamescope` — `jupiter-rel/gamescope-3.11.28-3`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-rel/gamescope-3.11.28-3)
+ * [`gamescope` — `jupiter-rel/gamescope-3.11.30-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-rel/gamescope-3.11.30-1)
  * [`jupiter-hw-support` — `jupiter-rel/jupiter-hw-support-20220421.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-rel/jupiter-hw-support-20220421.1-1)
  * [`jupiter-legacy-support` — `jupiter-rel/jupiter-legacy-support-1.110-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-rel/jupiter-legacy-support-1.110-1)
  * [`kscreen` — `jupiter-rel/kscreen-5.23.5-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-rel/kscreen-5.23.5-2)
@@ -25,7 +25,6 @@ Valve packages
  * [`steam-im-modules` — `jupiter-rel/steam-im-modules-jupiter.20220223-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-rel/steam-im-modules-jupiter.20220223-1)
  * [`steam-jupiter-stable` — `jupiter-rel/steam-jupiter-stable-1.0.0.74-2.13`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-rel/steam-jupiter-stable-1.0.0.74-2.13)
  * [`steamdeck-kde-presets` — `jupiter-rel/steamdeck-kde-presets-0.6-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-rel/steamdeck-kde-presets-0.6-1)
- * [`steamos-customizations-jupiter` — `jupiter-rel/steamos-customizations-jupiter-20220323.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-rel/steamos-customizations-jupiter-20220323.1-1)
  * [`steamos-devkit-service` — `jupiter-rel/steamos-devkit-service-0.20220224.0-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-rel/steamos-devkit-service-0.20220224.0-2)
  * [`steamos-efi` — `jupiter-rel/steamos-efi-20220202.2-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-rel/steamos-efi-20220202.2-1)
  * [`vpower` — `jupiter-rel/vpower-1.3.0-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-rel/vpower-1.3.0-1)
@@ -304,7 +303,6 @@ Arch Linux packages
  * [`ktexteditor/5.90.0-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/ktexteditor/-/tree/5.90.0-1)
  * [`ktextwidgets/5.90.0-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/ktextwidgets/-/tree/5.90.0-1)
  * [`kunitconversion/5.90.0-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/kunitconversion/-/tree/5.90.0-1)
- * [`kupdate-notifier-git/r59.7e34c35-3`](https://gitlab.archlinux.org/archlinux/packaging/packages/kupdate-notifier-git/-/tree/r59.7e34c35-3)
  * [`kuserfeedback/1.0.0-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/kuserfeedback/-/tree/1.0.0-1)
  * [`kwallet/5.90.0-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/kwallet/-/tree/5.90.0-1)
  * [`kwallet-pam/5.23.5-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/kwallet-pam/-/tree/5.23.5-1)
@@ -698,6 +696,7 @@ Arch Linux packages
  * [`srt/1.4.4-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/srt/-/tree/1.4.4-1)
  * [`sshfs/3.7.2-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/sshfs/-/tree/3.7.2-2)
  * [`steamos-atomupd-client-git/r157.4d50d6d-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/steamos-atomupd-client-git/-/tree/r157.4d50d6d-1)
+ * [`steamos-customizations-jupiter/3.1.20220425.1-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/steamos-customizations-jupiter/-/tree/3.1.20220425.1-1)
  * [`steamos-netrc/2022.01.18-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/steamos-netrc/-/tree/2022.01.18-2)
  * [`strace/5.16-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/strace/-/tree/5.16-1)
  * [`stressapptest/1.0.9-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/stressapptest/-/tree/1.0.9-1)
