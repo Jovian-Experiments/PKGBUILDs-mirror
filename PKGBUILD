@@ -1,6 +1,6 @@
 # Maintainer: Your Name <youremail@domain.com>
 pkgname=jupiter-legacy-support
-pkgver=1.113
+pkgver=1.114
 pkgrel=1
 pkgdesc="Legacy support files from foxnet that haven't been split to their own thing"
 arch=(any)
