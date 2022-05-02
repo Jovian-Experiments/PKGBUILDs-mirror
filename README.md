@@ -1,5 +1,5 @@
 
-`main @ 20220427.1001`
+`main @ 20220502.1000`
 ======================
 
 Valve packages
@@ -11,17 +11,18 @@ Valve packages
 ### `jupiter-main`
  * [`bluez` — `jupiter-main/bluez-5.63-1.7`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/bluez-5.63-1.7)
  * [`bluez-libs` — `jupiter-main/bluez-5.63-1.7`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/bluez-5.63-1.7)
+ * [`bluez-plugins` — `jupiter-main/bluez-5.63-1.7`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/bluez-5.63-1.7)
  * [`bluez-utils` — `jupiter-main/bluez-5.63-1.7`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/bluez-5.63-1.7)
  * [`f3` — `jupiter-main/f3-8.0-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/f3-8.0-2)
- * [`gamescope` — `jupiter-main/gamescope-3.11.31.beta1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/gamescope-3.11.31.beta1-1)
+ * [`gamescope` — `jupiter-main/gamescope-3.11.31.beta2-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/gamescope-3.11.31.beta2-2)
  * [`gpu-trace` — `jupiter-main/gpu-trace-2.7-3`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/gpu-trace-2.7-3)
- * [`jupiter-fan-control` — `jupiter-main/jupiter-fan-control-20220426.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-fan-control-20220426.1-1)
- * [`jupiter-hw-support` — `jupiter-main/jupiter-hw-support-20220427.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-hw-support-20220427.1-1)
- * [`jupiter-legacy-support` — `jupiter-main/jupiter-legacy-support-1.113-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-legacy-support-1.113-1)
+ * [`jupiter-fan-control` — `jupiter-main/jupiter-fan-control-20220428.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-fan-control-20220428.1-1)
+ * [`jupiter-hw-support` — `jupiter-main/jupiter-hw-support-20220502.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-hw-support-20220502.1-1)
+ * [`jupiter-legacy-support` — `jupiter-main/jupiter-legacy-support-1.115-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-legacy-support-1.115-1)
  * [`kscreen` — `jupiter-main/kscreen-5.23.5-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/kscreen-5.23.5-2)
  * [`libva-mesa-driver` — `jupiter-main/mesa-22.0.0_devel.148041.radeonsi_20220224-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/mesa-22.0.0_devel.148041.radeonsi_20220224-1)
  * [`linux-firmware-neptune` — `jupiter-main/linux-firmware-neptune-20211216.ae6f5a8-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/linux-firmware-neptune-20211216.ae6f5a8-2)
- * [`linux-neptune` — `jupiter-main/linux-neptune-5.13.0.valve13-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/linux-neptune-5.13.0.valve13-1)
+ * [`linux-neptune` — `jupiter-main/linux-neptune-5.13.0.valve14-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/linux-neptune-5.13.0.valve14-1)
  * [`mangohud` — `jupiter-main/mangohud-0.6.6.1.r221.g350dca5-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/mangohud-0.6.6.1.r221.g350dca5-1)
  * [`mesa` — `jupiter-main/mesa-22.0.0_devel.148041.radeonsi_20220224-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/mesa-22.0.0_devel.148041.radeonsi_20220224-1)
  * [`mesa-vdpau` — `jupiter-main/mesa-22.0.0_devel.148041.radeonsi_20220224-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/mesa-22.0.0_devel.148041.radeonsi_20220224-1)
@@ -156,7 +157,7 @@ Arch Linux packages
  * [`fd/8.3.1-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/fd/-/tree/8.3.1-1)
  * [`ffmpeg/2:4.4.1-1.2`](https://gitlab.archlinux.org/archlinux/packaging/packages/ffmpeg/-/tree/2:4.4.1-1.2)
  * [`file/5.41-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/file/-/tree/5.41-1)
- * [`filesystem/2021.12.07-1.5`](https://gitlab.archlinux.org/archlinux/packaging/packages/filesystem/-/tree/2021.12.07-1.5)
+ * [`filesystem/2021.12.07-1.6`](https://gitlab.archlinux.org/archlinux/packaging/packages/filesystem/-/tree/2021.12.07-1.6)
  * [`findutils/4.8.0-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/findutils/-/tree/4.8.0-1)
  * [`firefox/96.0.3-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/firefox/-/tree/96.0.3-1)
  * [`fish/3.3.1-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/fish/-/tree/3.3.1-1)
