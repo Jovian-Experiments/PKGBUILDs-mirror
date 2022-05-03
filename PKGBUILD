@@ -1,6 +1,6 @@
 # Maintainer: Your Name <youremail@domain.com>
 pkgname=jupiter-legacy-support
-pkgver=1.115
+pkgver=1.116
 pkgrel=1
 pkgdesc="Legacy support files from foxnet that haven't been split to their own thing"
 arch=(any)
@@ -14,7 +14,7 @@ source=(jupiter-plasma-bootstrap
         flathub-beta.flatpakrepo
         black_800x1280.png
         white_800x1280.png)
-sha256sums=('b2439250cf701744484269cb535fa5f2a41cdd0b516e3ddb007efcd9b760e50f'
+sha256sums=('b31fc36e455b0848fd5f02eaf9107a40f5bfa972674fb57e48aa8cad17d3f5db'
             '9ca42095d379a8b8089cd704c2351cc36a0c85cfc0813fcbb3aebd35105f1365'
             'a1a2c6cb5ebdba68b79ab90649f894e1136f72af9e4daacbcb71d134383bd797'
             '78b1749684bf3c60a5769002d98008772145385566ab68d7218c3850ec2dc653'

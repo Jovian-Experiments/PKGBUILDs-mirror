@@ -35,6 +35,7 @@ kscreen-doctor output.eDP.rotation.right \
   || true
 
 # Set our global theme once
+config=${XDG_CONFIG_DIR:-~/.config}/jupiter-bootstrap.once
 if [[ ! -e $config || $(cat "$config") != *"Version: 3" ]]; then
   echo "# This file is created to inhibit repeating the jupiter desktop bootstrap, remove it to re-trigger." > "$config"
   echo "Version: 3" >> "$config"
