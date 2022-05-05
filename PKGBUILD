@@ -4,7 +4,7 @@
 pkgbase=linux-neptune
 _tag=5.13.0-valve14
 pkgver=${_tag//-/.}
-pkgrel=1
+pkgrel=3
 pkgdesc='Linux'
 url="https://gitlab.steamos.cloud/jupiter/linux-integration/-/tree/$_tag"
 arch=(x86_64)
@@ -30,7 +30,7 @@ validpgpkeys=(
   'A2FF3A36AAA56654109064AB19802F8B0D70FC30'  # Jan Alexander Steffens (heftig)
 )
 sha256sums=('SKIP'
-            '7aa24f7adc4343a29f793a3c750f5dac01ba9fbcb509c66f37fc7146a912bbf9'
+            '042d6f6f9cee7e9bfe2285b82c163eca11e9715400b6a86dcaf3ab6263e7d7cf'
             'b2779035c049c363808e3ba238be685884206a4a5b1c0500b707faf12eef6996'
             '6098e453286c58b25a257d22e1c7098b00a0afe3b718e4869bccff9432491c3f'
             'aa67dff7d47ecdd8cbb8e9b41650a60f4da54b7e1a1e841cbddc2efbd7cfb2b4')
