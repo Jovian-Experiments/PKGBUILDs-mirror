@@ -1,5 +1,5 @@
 
-`main @ 20220506.1000`
+`main @ 20220506.1001`
 ======================
 
 Valve packages
@@ -17,7 +17,7 @@ Valve packages
  * [`gamescope` — `jupiter-main/gamescope-3.11.31.beta2-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/gamescope-3.11.31.beta2-2)
  * [`gpu-trace` — `jupiter-main/gpu-trace-2.7-3`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/gpu-trace-2.7-3)
  * [`jupiter-fan-control` — `jupiter-main/jupiter-fan-control-20220428.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-fan-control-20220428.1-1)
- * [`jupiter-hw-support` — `jupiter-main/jupiter-hw-support-20220505.1001-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-hw-support-20220505.1001-1)
+ * [`jupiter-hw-support` — `jupiter-main/jupiter-hw-support-20220505.1001-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-hw-support-20220505.1001-2)
  * [`jupiter-legacy-support` — `jupiter-main/jupiter-legacy-support-1.116-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-legacy-support-1.116-1)
  * [`kscreen` — `jupiter-main/kscreen-5.23.5-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/kscreen-5.23.5-2)
  * [`libva-mesa-driver` — `jupiter-main/mesa-22.0.0_devel.148041.radeonsi_20220224-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/mesa-22.0.0_devel.148041.radeonsi_20220224-1)
@@ -684,6 +684,7 @@ Arch Linux packages
  * [`rest/0.8.1+r4+ge5ee6ef-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/rest/-/tree/0.8.1+r4+ge5ee6ef-1)
  * [`ripgrep/13.0.0-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/ripgrep/-/tree/13.0.0-2)
  * [`rsync/3.2.3-4`](https://gitlab.archlinux.org/archlinux/packaging/packages/rsync/-/tree/3.2.3-4)
+ * [`rtkit/0.13-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/rtkit/-/tree/0.13-1)
  * [`rxvt-unicode-terminfo/9.26-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/rxvt-unicode-terminfo/-/tree/9.26-2)
  * [`sbc/1.5-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/sbc/-/tree/1.5-2)
  * [`sddm-kcm/5.23.5-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/sddm-kcm/-/tree/5.23.5-1)
