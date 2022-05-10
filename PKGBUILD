@@ -2,7 +2,7 @@
 # Maintainer: Christian Marcheselli <christianm@valvesoftware.com>
 
 pkgname=jupiter-fan-control
-_srctag=20220428.1
+_srctag=20220510.2
 pkgver=${_srctag//-/.}
 pkgrel=1
 arch=('any')
