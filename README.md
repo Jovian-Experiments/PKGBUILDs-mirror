@@ -1,5 +1,5 @@
 
-`main @ 20220510.1000`
+`main @ 20220518.1000`
 ======================
 
 Valve packages
@@ -14,19 +14,19 @@ Valve packages
  * [`bluez-plugins` — `jupiter-main/bluez-5.63-1.7`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/bluez-5.63-1.7)
  * [`bluez-utils` — `jupiter-main/bluez-5.63-1.7`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/bluez-5.63-1.7)
  * [`f3` — `jupiter-main/f3-8.0-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/f3-8.0-2)
- * [`gamescope` — `jupiter-main/gamescope-3.11.31.beta3-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/gamescope-3.11.31.beta3-2)
+ * [`gamescope` — `jupiter-main/gamescope-3.11.31.beta5-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/gamescope-3.11.31.beta5-2)
  * [`gpu-trace` — `jupiter-main/gpu-trace-2.7-3`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/gpu-trace-2.7-3)
- * [`jupiter-fan-control` — `jupiter-main/jupiter-fan-control-20220510.2-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-fan-control-20220510.2-1)
- * [`jupiter-hw-support` — `jupiter-main/jupiter-hw-support-20220505.1001-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-hw-support-20220505.1001-2)
+ * [`jupiter-fan-control` — `jupiter-main/jupiter-fan-control-20220512.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-fan-control-20220512.1-1)
+ * [`jupiter-hw-support` — `jupiter-main/jupiter-hw-support-20220518.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-hw-support-20220518.1-1)
  * [`jupiter-legacy-support` — `jupiter-main/jupiter-legacy-support-1.116-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-legacy-support-1.116-1)
  * [`kscreen` — `jupiter-main/kscreen-5.23.5-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/kscreen-5.23.5-2)
- * [`libva-mesa-driver` — `jupiter-main/mesa-22.0.0_devel.148041.radeonsi_20220224-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/mesa-22.0.0_devel.148041.radeonsi_20220224-1)
+ * [`libva-mesa-driver` — `jupiter-main/mesa-22.0.2.150118.radeonsi_20220427-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/mesa-22.0.2.150118.radeonsi_20220427-1)
  * [`linux-firmware-neptune` — `jupiter-main/linux-firmware-neptune-20211216.ae6f5a8-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/linux-firmware-neptune-20211216.ae6f5a8-2)
  * [`linux-neptune` — `jupiter-main/linux-neptune-5.13.0.valve14-3`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/linux-neptune-5.13.0.valve14-3)
- * [`mangohud` — `jupiter-main/mangohud-0.6.6.1.r222.gae85730-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/mangohud-0.6.6.1.r222.gae85730-1)
- * [`mesa` — `jupiter-main/mesa-22.0.0_devel.148041.radeonsi_20220224-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/mesa-22.0.0_devel.148041.radeonsi_20220224-1)
- * [`mesa-vdpau` — `jupiter-main/mesa-22.0.0_devel.148041.radeonsi_20220224-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/mesa-22.0.0_devel.148041.radeonsi_20220224-1)
- * [`opencl-mesa` — `jupiter-main/mesa-22.0.0_devel.148041.radeonsi_20220224-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/mesa-22.0.0_devel.148041.radeonsi_20220224-1)
+ * [`mangohud` — `jupiter-main/mangohud-0.6.7.r7.g17d4c1d-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/mangohud-0.6.7.r7.g17d4c1d-1)
+ * [`mesa` — `jupiter-main/mesa-22.0.2.150118.radeonsi_20220427-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/mesa-22.0.2.150118.radeonsi_20220427-1)
+ * [`mesa-vdpau` — `jupiter-main/mesa-22.0.2.150118.radeonsi_20220427-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/mesa-22.0.2.150118.radeonsi_20220427-1)
+ * [`opencl-mesa` — `jupiter-main/mesa-22.0.2.150118.radeonsi_20220427-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/mesa-22.0.2.150118.radeonsi_20220427-1)
  * [`plasma-wayland-session` — `jupiter-main/plasma-workspace-5.23.5-5`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/plasma-workspace-5.23.5-5)
  * [`plasma-workspace` — `jupiter-main/plasma-workspace-5.23.5-5`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/plasma-workspace-5.23.5-5)
  * [`python-crcmod` — `jupiter-main/python-crcmod-1.7-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/python-crcmod-1.7-1)
@@ -40,6 +40,7 @@ Valve packages
  * [`ttf-twemoji-default` — `jupiter-main/ttf-twemoji-default-13.1.0-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/ttf-twemoji-default-13.1.0-1)
  * [`upower` — `jupiter-main/upower-0.99.15.jupiter-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/upower-0.99.15.jupiter-1)
  * [`vpower` — `jupiter-main/vpower-1.4.0-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/vpower-1.4.0-1)
+ * [`xorg-xwayland-jupiter` — `jupiter-main/xorg-xwayland-jupiter-jupiter.20220512.c838945c6-3`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/xorg-xwayland-jupiter-jupiter.20220512.c838945c6-3)
 
 Arch Linux packages
 -------------------
@@ -762,7 +763,7 @@ Arch Linux packages
  * [`vmaf/1.5.3-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/vmaf/-/tree/1.5.3-1)
  * [`volume_key/0.3.12-7`](https://gitlab.archlinux.org/archlinux/packaging/packages/volume_key/-/tree/0.3.12-7)
  * [`vulkan-icd-loader/1.2.203-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/vulkan-icd-loader/-/tree/1.2.203-1)
- * [`vulkan-radeon/22.1.0_devel.150449.jupiter_22.1.4-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/vulkan-radeon/-/tree/22.1.0_devel.150449.jupiter_22.1.4-1)
+ * [`vulkan-radeon/22.2.0_devel.152949.jupiter_22.2.0-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/vulkan-radeon/-/tree/22.2.0_devel.152949.jupiter_22.2.0-2)
  * [`vulkan-tools/1.2.203-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/vulkan-tools/-/tree/1.2.203-1)
  * [`wayland/1.20.0-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/wayland/-/tree/1.20.0-1)
  * [`wayland-utils/1.0.0-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/wayland-utils/-/tree/1.0.0-2)
@@ -809,7 +810,6 @@ Arch Linux packages
  * [`xorg-xrdb/1.2.1-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/xorg-xrdb/-/tree/1.2.1-1)
  * [`xorg-xset/1.2.4-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/xorg-xset/-/tree/1.2.4-2)
  * [`xorg-xsetroot/1.1.2-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/xorg-xsetroot/-/tree/1.1.2-2)
- * [`xorg-xwayland-jupiter/jupiter.20211214.4de9666b6-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/xorg-xwayland-jupiter/-/tree/jupiter.20211214.4de9666b6-1)
  * [`xorg-xwininfo/1.1.5-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/xorg-xwininfo/-/tree/1.1.5-2)
  * [`xorgproto/2021.5-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/xorgproto/-/tree/2021.5-1)
  * [`xterm/370-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/xterm/-/tree/370-1)
