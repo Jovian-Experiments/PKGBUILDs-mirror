@@ -7,7 +7,7 @@
 _basename=steam
 pkgname=steam-jupiter-stable
 pkgver=1.0.0.74
-pkgrel=2.13
+pkgrel=2.14
 pkgdesc="Valve's digital software delivery system - Jupiter bootstrapped packaging"
 url='https://steampowered.com/'
 arch=('x86_64')
@@ -16,8 +16,9 @@ depends=('bash' 'desktop-file-utils' 'diffutils' 'hicolor-icon-theme' 'curl' 'db
          'freetype2' 'gdk-pixbuf2' 'ttf-font' 'zenity' 'lsb-release' 'nss' 'usbutils'
          'xorg-xrandr' 'vulkan-driver' 'vulkan-icd-loader' 'lsof' 'python')
 depends_x86_64=('lib32-libgl' 'lib32-gcc-libs' 'lib32-libx11' 'lib32-libxss'
-                'lib32-alsa-plugins' 'lib32-libgpg-error'
-                'lib32-nss' 'lib32-vulkan-driver' 'lib32-vulkan-icd-loader')
+                'lib32-alsa-plugins' 'lib32-libgpg-error' 'lib32-fontconfig'
+                'lib32-nss' 'lib32-vulkan-driver' 'lib32-vulkan-icd-loader'
+                'lib32-pipewire')
 provides=('steam')
 conflicts=('steam')
 
@@ -28,7 +29,7 @@ conflicts=('steam')
 _fat_bootstrap=steam_jupiter_stable_bootstrapped_20220226.1.tar.xz
 noextract=("$_fat_bootstrap")
 source=(https://repo.steampowered.com/${_basename}/pool/${_basename}/s/${_basename}/${_basename}_${pkgver}{.tar.gz,.dsc}
-        http://images.internal.steamos.cloud/misc/steam-snapshots/"$_fat_bootstrap"
+        http://latest-pacman.internal.steamos.cloud/misc/steam-snapshots/"$_fat_bootstrap"
         70-steam-jupiter-input.rules
         steam-jupiter.sh
         steam-runtime.sh)
