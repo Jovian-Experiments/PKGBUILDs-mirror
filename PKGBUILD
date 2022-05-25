@@ -2,8 +2,9 @@
 
 pkgbase=linux-firmware-neptune
 pkgname=(linux-firmware-neptune-rtw-debug) # amd-ucode)
-_tag=jupiter-20220504-rtw-debug
-pkgver=20220504.d1d4650
+_tag=jupiter-20220524-rtw-debug
+_srctag=${_tag#jupiter-}
+pkgver=${_srctag%-rtw-debug}
 pkgrel=1
 pkgdesc="Firmware files for Linux"
 url="https://gitlab.steamos.cloud/jupiter/linux-firmware-neptune"
@@ -26,13 +27,6 @@ prepare() {
     git log --oneline -1 "${_c}"
     git cherry-pick -n "${_c}"
   done
-}
-
-pkgver() {
-  cd ${pkgbase}
-
-  # Commit date + short rev
-  echo $(TZ=UTC git show -s --pretty=%cd --date=format-local:%Y%m%d HEAD).$(git rev-parse --short HEAD)
 }
 
 build() {
