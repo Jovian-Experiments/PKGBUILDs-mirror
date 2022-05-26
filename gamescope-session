@@ -52,6 +52,9 @@ if [[ -e "$STEAMOS_STEAM_SHUTDOWN_SENTINEL" ]]; then
 	sudo -n poweroff
 fi
 
+# Enabled fan control toggle in steam
+export STEAM_ENABLE_FAN_CONTROL=1
+
 # Enable volume key management via steam for this session
 export STEAM_ENABLE_VOLUME_HANDLER=1
 
