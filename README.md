@@ -1,5 +1,5 @@
 
-`main @ 20220525.1000`
+`main @ 20220526.1000`
 ======================
 
 Valve packages
@@ -17,7 +17,7 @@ Valve packages
  * [`gamescope` — `jupiter-main/gamescope-3.11.31.beta5-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/gamescope-3.11.31.beta5-2)
  * [`gpu-trace` — `jupiter-main/gpu-trace-2.7-3`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/gpu-trace-2.7-3)
  * [`jupiter-fan-control` — `jupiter-main/jupiter-fan-control-20220426.1-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-fan-control-20220426.1-2)
- * [`jupiter-hw-support` — `jupiter-main/jupiter-hw-support-20220524.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-hw-support-20220524.1-1)
+ * [`jupiter-hw-support` — `jupiter-main/jupiter-hw-support-20220526.01-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-hw-support-20220526.01-1)
  * [`jupiter-legacy-support` — `jupiter-main/jupiter-legacy-support-1.116-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-legacy-support-1.116-1)
  * [`kscreen` — `jupiter-main/kscreen-5.23.5-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/kscreen-5.23.5-2)
  * [`libva-mesa-driver` — `jupiter-main/mesa-22.0.2.150118.radeonsi_20220427-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/mesa-22.0.2.150118.radeonsi_20220427-1)
