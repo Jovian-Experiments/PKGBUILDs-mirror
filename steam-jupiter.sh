@@ -29,7 +29,7 @@ REGISTRY_BAK="$HOME"/.local/share/steam_registry_oobe.vdf
   # For beta lifecycle, we need to be on a steampal branch.
   if cd ~/.steam/root/package || cd ~/.local/share/Steam/package; then
     if [[ ! -e beta || $(cat beta) = *neptune || $(cat beta) = publicbeta || $(cat beta) = "steampal_stable_d89c8fc0c37b9f06864d20456852ed2eb7e350b3" ]]; then
-      echo -n "steampal_stable_9a24a2bf68596b860cb6710d9ea307a76c29a04d" > beta
+      echo -n "steamdeck_stable" > beta
     fi
   fi
 )
