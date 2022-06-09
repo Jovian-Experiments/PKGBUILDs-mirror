@@ -191,6 +191,9 @@ xbindkeys -f /etc/xbindkeysrc
 
 steamargs=("-steamos3" "-steampal" "-steamdeck" "-gamepadui")
 
+# Input method support
+/usr/bin/ibus-daemon -d -r --panel=disable --emoji-extension=disable
+
 # steamargs+=("-steamfs")
 
 (while true; do
