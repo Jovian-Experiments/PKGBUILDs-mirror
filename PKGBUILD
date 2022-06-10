@@ -4,7 +4,7 @@
 pkgbase=linux-neptune
 _tag=5.13.0-valve16
 pkgver=${_tag//-/.}
-pkgrel=3
+pkgrel=4
 pkgdesc='Linux'
 url="https://gitlab.steamos.cloud/jupiter/linux-integration/-/tree/$_tag"
 arch=(x86_64)
@@ -23,6 +23,7 @@ source=(
   90-splash.hook
   splash
   max_map_count.patch # Set vm.max_map_count to some giant value
+  disable-backlight-event.patch
 )
 validpgpkeys=(
   'ABAF11C65A2970B130ABE3C479BE3E4300411886'  # Linus Torvalds
@@ -33,7 +34,8 @@ sha256sums=('SKIP'
             '042d6f6f9cee7e9bfe2285b82c163eca11e9715400b6a86dcaf3ab6263e7d7cf'
             'b2779035c049c363808e3ba238be685884206a4a5b1c0500b707faf12eef6996'
             '6098e453286c58b25a257d22e1c7098b00a0afe3b718e4869bccff9432491c3f'
-            'aa67dff7d47ecdd8cbb8e9b41650a60f4da54b7e1a1e841cbddc2efbd7cfb2b4')
+            'aa67dff7d47ecdd8cbb8e9b41650a60f4da54b7e1a1e841cbddc2efbd7cfb2b4'
+            'a23eb2d2643b81074b4c7d46758852247cb40ed29e9ca5791db5358fbab309b3')
 
 export KBUILD_BUILD_HOST=archlinux
 export KBUILD_BUILD_USER=$pkgbase
