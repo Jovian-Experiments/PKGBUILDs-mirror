@@ -1,5 +1,5 @@
 
-`main @ 20220608.1000`
+`main @ 20220613.1000`
 ======================
 
 Valve packages
@@ -14,15 +14,16 @@ Valve packages
  * [`bluez-plugins` — `jupiter-main/bluez-5.63-1.8`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/bluez-5.63-1.8)
  * [`bluez-utils` — `jupiter-main/bluez-5.63-1.8`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/bluez-5.63-1.8)
  * [`f3` — `jupiter-main/f3-8.0-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/f3-8.0-2)
- * [`gamescope` — `jupiter-main/gamescope-3.11.31.beta7-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/gamescope-3.11.31.beta7-1)
+ * [`gamescope` — `jupiter-main/gamescope-3.11.31.beta7-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/gamescope-3.11.31.beta7-2)
  * [`gpu-trace` — `jupiter-main/gpu-trace-2.7-3`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/gpu-trace-2.7-3)
+ * [`ibus-anthy` — `jupiter-main/ibus-anthy-1.5.14-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/ibus-anthy-1.5.14-2)
  * [`jupiter-fan-control` — `jupiter-main/jupiter-fan-control-20220602.1-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-fan-control-20220602.1-2)
  * [`jupiter-hw-support` — `jupiter-main/jupiter-hw-support-20220526.01-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-hw-support-20220526.01-1)
  * [`jupiter-legacy-support` — `jupiter-main/jupiter-legacy-support-1.116-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-legacy-support-1.116-1)
  * [`kscreen` — `jupiter-main/kscreen-5.23.5-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/kscreen-5.23.5-2)
  * [`libva-mesa-driver` — `jupiter-main/mesa-22.0.2.150118.radeonsi_20220427-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/mesa-22.0.2.150118.radeonsi_20220427-1)
  * [`linux-firmware-neptune` — `jupiter-main/linux-firmware-neptune-20211216.ae6f5a8-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/linux-firmware-neptune-20211216.ae6f5a8-2)
- * [`linux-neptune` — `jupiter-main/linux-neptune-5.13.0.valve16-3`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/linux-neptune-5.13.0.valve16-3)
+ * [`linux-neptune` — `jupiter-main/linux-neptune-5.13.0.valve16-4`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/linux-neptune-5.13.0.valve16-4)
  * [`mangohud` — `jupiter-main/mangohud-0.6.7.1.r16.gf81369b-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/mangohud-0.6.7.1.r16.gf81369b-1)
  * [`mesa` — `jupiter-main/mesa-22.0.2.150118.radeonsi_20220427-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/mesa-22.0.2.150118.radeonsi_20220427-1)
  * [`mesa-vdpau` — `jupiter-main/mesa-22.0.2.150118.radeonsi_20220427-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/mesa-22.0.2.150118.radeonsi_20220427-1)
@@ -40,6 +41,7 @@ Valve packages
  * [`ttf-twemoji-default` — `jupiter-main/ttf-twemoji-default-13.1.0-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/ttf-twemoji-default-13.1.0-1)
  * [`upower` — `jupiter-main/upower-0.99.15.jupiter-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/upower-0.99.15.jupiter-1)
  * [`vpower` — `jupiter-main/vpower-1.4.0-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/vpower-1.4.0-1)
+ * [`xdg-desktop-portal` — `jupiter-main/xdg-desktop-portal-1.12.1-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/xdg-desktop-portal-1.12.1-1.1)
  * [`xorg-xwayland-jupiter` — `jupiter-main/xorg-xwayland-jupiter-jupiter.20220512.c838945c6-3`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/xorg-xwayland-jupiter-jupiter.20220512.c838945c6-3)
 
 Arch Linux packages
@@ -231,7 +233,6 @@ Arch Linux packages
  * [`hwdata/0.355-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/hwdata/-/tree/0.355-1)
  * [`iana-etc/20220110-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/iana-etc/-/tree/20220110-1)
  * [`ibus/1.5.25-5`](https://gitlab.archlinux.org/archlinux/packaging/packages/ibus/-/tree/1.5.25-5)
- * [`ibus-anthy/1.5.14-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/ibus-anthy/-/tree/1.5.14-1)
  * [`ibus-hangul/1.5.4-3`](https://gitlab.archlinux.org/archlinux/packaging/packages/ibus-hangul/-/tree/1.5.4-3)
  * [`ibus-pinyin/1.5.0-8`](https://gitlab.archlinux.org/archlinux/packaging/packages/ibus-pinyin/-/tree/1.5.0-8)
  * [`icu/70.1-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/icu/-/tree/70.1-1)
@@ -787,7 +788,6 @@ Arch Linux packages
  * [`xcb-util-renderutil/0.3.9-3`](https://gitlab.archlinux.org/archlinux/packaging/packages/xcb-util-renderutil/-/tree/0.3.9-3)
  * [`xcb-util-wm/0.4.1-3`](https://gitlab.archlinux.org/archlinux/packaging/packages/xcb-util-wm/-/tree/0.4.1-3)
  * [`xdg-dbus-proxy/0.1.2-3`](https://gitlab.archlinux.org/archlinux/packaging/packages/xdg-dbus-proxy/-/tree/0.1.2-3)
- * [`xdg-desktop-portal/1.12.1-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/xdg-desktop-portal/-/tree/1.12.1-1)
  * [`xdg-desktop-portal-kde/5.23.5-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/xdg-desktop-portal-kde/-/tree/5.23.5-1)
  * [`xdg-user-dirs/0.17-3`](https://gitlab.archlinux.org/archlinux/packaging/packages/xdg-user-dirs/-/tree/0.17-3)
  * [`xdg-utils/1.1.3+19+g9816ebb-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/xdg-utils/-/tree/1.1.3+19+g9816ebb-1)
