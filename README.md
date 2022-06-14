@@ -1,5 +1,5 @@
 
-`main @ 20220613.1000`
+`main @ 20220614.1000`
 ======================
 
 Valve packages
@@ -14,7 +14,7 @@ Valve packages
  * [`bluez-plugins` — `jupiter-main/bluez-5.63-1.8`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/bluez-5.63-1.8)
  * [`bluez-utils` — `jupiter-main/bluez-5.63-1.8`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/bluez-5.63-1.8)
  * [`f3` — `jupiter-main/f3-8.0-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/f3-8.0-2)
- * [`gamescope` — `jupiter-main/gamescope-3.11.31.beta7-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/gamescope-3.11.31.beta7-2)
+ * [`gamescope` — `jupiter-main/gamescope-3.11.31.beta8-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/gamescope-3.11.31.beta8-1)
  * [`gpu-trace` — `jupiter-main/gpu-trace-2.7-3`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/gpu-trace-2.7-3)
  * [`ibus-anthy` — `jupiter-main/ibus-anthy-1.5.14-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/ibus-anthy-1.5.14-2)
  * [`jupiter-fan-control` — `jupiter-main/jupiter-fan-control-20220602.1-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-fan-control-20220602.1-2)
@@ -23,7 +23,7 @@ Valve packages
  * [`kscreen` — `jupiter-main/kscreen-5.23.5-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/kscreen-5.23.5-2)
  * [`libva-mesa-driver` — `jupiter-main/mesa-22.0.2.150118.radeonsi_20220427-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/mesa-22.0.2.150118.radeonsi_20220427-1)
  * [`linux-firmware-neptune` — `jupiter-main/linux-firmware-neptune-20211216.ae6f5a8-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/linux-firmware-neptune-20211216.ae6f5a8-2)
- * [`linux-neptune` — `jupiter-main/linux-neptune-5.13.0.valve16-4`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/linux-neptune-5.13.0.valve16-4)
+ * [`linux-neptune` — `jupiter-main/linux-neptune-5.13.0.valve17-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/linux-neptune-5.13.0.valve17-1)
  * [`mangohud` — `jupiter-main/mangohud-0.6.7.1.r16.gf81369b-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/mangohud-0.6.7.1.r16.gf81369b-1)
  * [`mesa` — `jupiter-main/mesa-22.0.2.150118.radeonsi_20220427-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/mesa-22.0.2.150118.radeonsi_20220427-1)
  * [`mesa-vdpau` — `jupiter-main/mesa-22.0.2.150118.radeonsi_20220427-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/mesa-22.0.2.150118.radeonsi_20220427-1)
@@ -208,7 +208,7 @@ Arch Linux packages
  * [`graphite/1:1.3.14-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/graphite/-/tree/1:1.3.14-1)
  * [`grep/3.7-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/grep/-/tree/3.7-1)
  * [`groff/1.22.4-6`](https://gitlab.archlinux.org/archlinux/packaging/packages/groff/-/tree/1.22.4-6)
- * [`grub/2:2.06-4.2`](https://gitlab.archlinux.org/archlinux/packaging/packages/grub/-/tree/2:2.06-4.2)
+ * [`grub/2:2.06-4.4`](https://gitlab.archlinux.org/archlinux/packaging/packages/grub/-/tree/2:2.06-4.4)
  * [`gsettings-desktop-schemas/41.0-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/gsettings-desktop-schemas/-/tree/41.0-1)
  * [`gsm/1.0.19-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/gsm/-/tree/1.0.19-1)
  * [`gst-plugins-base/1.18.5-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/gst-plugins-base/-/tree/1.18.5-1)
