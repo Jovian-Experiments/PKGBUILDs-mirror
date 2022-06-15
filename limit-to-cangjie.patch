@@ -1,0 +1,42 @@
+diff -r -c ibus-table-chinese.orig/tables/CMakeLists.txt ibus-table-chinese.new/tables/CMakeLists.txt
+*** ibus-table-chinese.orig/tables/CMakeLists.txt	2022-06-14 15:48:47.301292231 -0700
+--- ibus-table-chinese.new/tables/CMakeLists.txt	2022-06-14 16:22:10.091464411 -0700
+***************
+*** 147,164 ****
+  	DESTINATION ${ICON_INSTALL_DIRECTORY})
+  ENDMACRO(CONVERT_DB targetName)
+  
+! ADD_SUBDIRECTORY(array)
+  ADD_SUBDIRECTORY(cangjie)
+! ADD_SUBDIRECTORY(cantonese)
+! ADD_SUBDIRECTORY(easy)
+! ADD_SUBDIRECTORY(erbi)
+! ADD_SUBDIRECTORY(quick)
+! ADD_SUBDIRECTORY(scj)
+! ADD_SUBDIRECTORY(stroke5)
+! ADD_SUBDIRECTORY(wu)
+! ADD_SUBDIRECTORY(wubi-haifeng)
+! ADD_SUBDIRECTORY(wubi-jidian)
+! ADD_SUBDIRECTORY(yong)
+  
+  #CONVERT_DB(yong "yong/yong.txt")
+  
+--- 147,164 ----
+  	DESTINATION ${ICON_INSTALL_DIRECTORY})
+  ENDMACRO(CONVERT_DB targetName)
+  
+! #ADD_SUBDIRECTORY(array)
+  ADD_SUBDIRECTORY(cangjie)
+! #ADD_SUBDIRECTORY(cantonese)
+! #ADD_SUBDIRECTORY(easy)
+! #ADD_SUBDIRECTORY(erbi)
+! #ADD_SUBDIRECTORY(quick)
+! #ADD_SUBDIRECTORY(scj)
+! #ADD_SUBDIRECTORY(stroke5)
+! #ADD_SUBDIRECTORY(wu)
+! #ADD_SUBDIRECTORY(wubi-haifeng)
+! #ADD_SUBDIRECTORY(wubi-jidian)
+! #ADD_SUBDIRECTORY(yong)
+  
+  #CONVERT_DB(yong "yong/yong.txt")
+  
