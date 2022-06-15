@@ -1,5 +1,5 @@
 
-`main @ 20220614.1000`
+`main @ 20220614.1001`
 ======================
 
 Valve packages
@@ -17,6 +17,7 @@ Valve packages
  * [`gamescope` — `jupiter-main/gamescope-3.11.31.beta8-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/gamescope-3.11.31.beta8-1)
  * [`gpu-trace` — `jupiter-main/gpu-trace-2.7-3`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/gpu-trace-2.7-3)
  * [`ibus-anthy` — `jupiter-main/ibus-anthy-1.5.14-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/ibus-anthy-1.5.14-2)
+ * [`ibus-table-cangjie-lite` — `jupiter-main/ibus-table-cangjie-lite-1.8.8-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/ibus-table-cangjie-lite-1.8.8-1)
  * [`jupiter-fan-control` — `jupiter-main/jupiter-fan-control-20220602.1-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-fan-control-20220602.1-2)
  * [`jupiter-hw-support` — `jupiter-main/jupiter-hw-support-20220526.01-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-hw-support-20220526.01-1)
  * [`jupiter-legacy-support` — `jupiter-main/jupiter-legacy-support-1.116-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-legacy-support-1.116-1)
@@ -34,10 +35,10 @@ Valve packages
  * [`sddm-wayland` — `jupiter-main/sddm-wayland-v0.19.0.valve4.d19813cb03c7d71b896aead28e5285bc131500a9-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/sddm-wayland-v0.19.0.valve4.d19813cb03c7d71b896aead28e5285bc131500a9-1)
  * [`steam-im-modules` — `jupiter-main/steam-im-modules-jupiter.20220223-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steam-im-modules-jupiter.20220223-1)
  * [`steam-jupiter-stable` — `jupiter-main/steam-jupiter-stable-1.0.0.74-2.17`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steam-jupiter-stable-1.0.0.74-2.17)
- * [`steamdeck-kde-presets` — `jupiter-main/steamdeck-kde-presets-0.6-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steamdeck-kde-presets-0.6-1)
- * [`steamos-customizations-jupiter` — `jupiter-main/steamos-customizations-jupiter-20220425.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steamos-customizations-jupiter-20220425.1-1)
+ * [`steamdeck-kde-presets` — `jupiter-main/steamdeck-kde-presets-0.7-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steamdeck-kde-presets-0.7-1)
+ * [`steamos-customizations-jupiter` — `jupiter-main/steamos-customizations-jupiter-20220615.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steamos-customizations-jupiter-20220615.1-1)
  * [`steamos-devkit-service` — `jupiter-main/steamos-devkit-service-0.20220401.0-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steamos-devkit-service-0.20220401.0-1)
- * [`steamos-efi` — `jupiter-main/steamos-efi-20220527.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steamos-efi-20220527.1-1)
+ * [`steamos-efi` — `jupiter-main/steamos-efi-20220615.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steamos-efi-20220615.1-1)
  * [`ttf-twemoji-default` — `jupiter-main/ttf-twemoji-default-13.1.0-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/ttf-twemoji-default-13.1.0-1)
  * [`upower` — `jupiter-main/upower-0.99.15.jupiter-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/upower-0.99.15.jupiter-1)
  * [`vpower` — `jupiter-main/vpower-1.4.0-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/vpower-1.4.0-1)
@@ -70,6 +71,8 @@ Arch Linux packages
  * [`archlinux-keyring/20220125-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/archlinux-keyring/-/tree/20220125-1)
  * [`argon2/20190702-4`](https://gitlab.archlinux.org/archlinux/packaging/packages/argon2/-/tree/20190702-4)
  * [`ark/21.12.1-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/ark/-/tree/21.12.1-1)
+ * [`aspell/0.60.8-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/aspell/-/tree/0.60.8-2)
+ * [`aspell-en/2020.12.07-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/aspell-en/-/tree/2020.12.07-1)
  * [`assimp/5.1.4-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/assimp/-/tree/5.1.4-1)
  * [`at-spi2-atk/2.38.0-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/at-spi2-atk/-/tree/2.38.0-1)
  * [`at-spi2-core/2.42.0-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/at-spi2-core/-/tree/2.42.0-1)
@@ -152,6 +155,7 @@ Arch Linux packages
  * [`efivar/38-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/efivar/-/tree/38-2)
  * [`elfutils/0.186-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/elfutils/-/tree/0.186-2)
  * [`ell/0.48-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/ell/-/tree/0.48-1)
+ * [`enchant/2.3.2-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/enchant/-/tree/2.3.2-1)
  * [`evtest/1.34-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/evtest/-/tree/1.34-2)
  * [`exfat-utils/1.3.0-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/exfat-utils/-/tree/1.3.0-2)
  * [`exiv2/0.27.5-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/exiv2/-/tree/0.27.5-1)
@@ -235,6 +239,7 @@ Arch Linux packages
  * [`ibus/1.5.25-5`](https://gitlab.archlinux.org/archlinux/packaging/packages/ibus/-/tree/1.5.25-5)
  * [`ibus-hangul/1.5.4-3`](https://gitlab.archlinux.org/archlinux/packaging/packages/ibus-hangul/-/tree/1.5.4-3)
  * [`ibus-pinyin/1.5.0-8`](https://gitlab.archlinux.org/archlinux/packaging/packages/ibus-pinyin/-/tree/1.5.0-8)
+ * [`ibus-table/1.15.0-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/ibus-table/-/tree/1.15.0-1)
  * [`icu/70.1-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/icu/-/tree/70.1-1)
  * [`iniparser/4.1-4`](https://gitlab.archlinux.org/archlinux/packaging/packages/iniparser/-/tree/4.1-4)
  * [`iotop/0.6-9`](https://gitlab.archlinux.org/archlinux/packaging/packages/iotop/-/tree/0.6-9)
@@ -649,6 +654,7 @@ Arch Linux packages
  * [`python-progressbar/4.0.0-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/python-progressbar/-/tree/4.0.0-1)
  * [`python-psutil/5.9.0-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/python-psutil/-/tree/5.9.0-1)
  * [`python-pyaml/21.8.3-3`](https://gitlab.archlinux.org/archlinux/packaging/packages/python-pyaml/-/tree/21.8.3-3)
+ * [`python-pyenchant/3.2.2-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/python-pyenchant/-/tree/3.2.2-1)
  * [`python-semantic-version/2.8.5-5`](https://gitlab.archlinux.org/archlinux/packaging/packages/python-semantic-version/-/tree/2.8.5-5)
  * [`python-six/1.16.0-5`](https://gitlab.archlinux.org/archlinux/packaging/packages/python-six/-/tree/1.16.0-5)
  * [`python-systemd/234-11`](https://gitlab.archlinux.org/archlinux/packaging/packages/python-systemd/-/tree/234-11)
