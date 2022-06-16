@@ -1,6 +1,6 @@
 pkgname=steamos-devkit-service
 pkgver=0.20220401.0
-pkgrel=1
+pkgrel=2
 arch=('any')
 url="https://gitlab.steamos.cloud/devkit/steamos-devkit-service"
 license=('LGPL-2.1+')
@@ -18,7 +18,6 @@ makedepends=('git' 'avahi' 'dbus-python' 'systemd')
 package() {
     depends=('avahi' 'dbus-python' 'systemd')
     pkgdesc="SteamOS Devkit Service"
-    install=steamos-devkit-service.install
 
     cd "${pkgname}"
 
