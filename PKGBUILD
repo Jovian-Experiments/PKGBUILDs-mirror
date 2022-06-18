@@ -5,14 +5,14 @@
 
 pkgname=ibus-anthy
 pkgver=1.5.14
-_commit=d96c6553bce597312ced23a5f22db76376cb8c84  # Valve specific changes not yet upstream
-pkgrel=2
+_commit=5ab156d8a54edd220473435bfe8af9c44e986ea8  # Valve specific changes not yet upstream
+pkgrel=3
 pkgdesc='Japanese input method Anthy IMEngine for IBus Framework'
 arch=('x86_64')
 license=('LGPL')
 url='https://github.com/ibus/ibus-anthy'
-depends=('ibus' 'anthy' 'python' 'gtk-update-icon-cache' 'python-gobject' 'git')
-makedepends=('intltool' 'gobject-introspection')
+depends=('ibus' 'anthy' 'python' 'gtk-update-icon-cache' 'python-gobject')
+makedepends=('intltool' 'gobject-introspection' 'git')
 source=("git+https://github.com/bjj/ibus-anthy.git#commit=$_commit")
 sha512sums=('SKIP')
 
