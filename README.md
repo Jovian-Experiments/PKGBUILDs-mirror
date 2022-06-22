@@ -1,5 +1,5 @@
 
-`main @ 20220621.1000`
+`main @ 20220622.1000`
 ======================
 
 Valve packages
@@ -18,13 +18,14 @@ Valve packages
  * [`gpu-trace` — `jupiter-main/gpu-trace-2.7-3`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/gpu-trace-2.7-3)
  * [`ibus-anthy` — `jupiter-main/ibus-anthy-1.5.14-4`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/ibus-anthy-1.5.14-4)
  * [`ibus-table-cangjie-lite` — `jupiter-main/ibus-table-cangjie-lite-1.8.8-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/ibus-table-cangjie-lite-1.8.8-1)
+ * [`jupiter-dock-updater-bin` — `jupiter-main/jupiter-dock-updater-bin-20220615.02-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-dock-updater-bin-20220615.02-1)
  * [`jupiter-fan-control` — `jupiter-main/jupiter-fan-control-20220602.1-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-fan-control-20220602.1-2)
- * [`jupiter-hw-support` — `jupiter-main/jupiter-hw-support-20220526.01-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-hw-support-20220526.01-1)
- * [`jupiter-legacy-support` — `jupiter-main/jupiter-legacy-support-1.116-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-legacy-support-1.116-1)
+ * [`jupiter-hw-support` — `jupiter-main/jupiter-hw-support-3.3.20220622.1-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-hw-support-3.3.20220622.1-2)
+ * [`jupiter-legacy-support` — `jupiter-main/jupiter-legacy-support-1.117-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-legacy-support-1.117-1)
  * [`kscreen` — `jupiter-main/kscreen-5.23.5-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/kscreen-5.23.5-2)
  * [`libva-mesa-driver` — `jupiter-main/mesa-22.0.2.150118.radeonsi_20220427-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/mesa-22.0.2.150118.radeonsi_20220427-1)
  * [`linux-firmware-neptune` — `jupiter-main/linux-firmware-neptune-20211216.ae6f5a8-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/linux-firmware-neptune-20211216.ae6f5a8-2)
- * [`linux-neptune` — `jupiter-main/linux-neptune-5.13.0.valve18-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/linux-neptune-5.13.0.valve18-1)
+ * [`linux-neptune` — `jupiter-main/linux-neptune-5.13.0.valve20-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/linux-neptune-5.13.0.valve20-1)
  * [`mangohud` — `jupiter-main/mangohud-0.6.7.1.r16.gf81369b-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/mangohud-0.6.7.1.r16.gf81369b-1)
  * [`mesa` — `jupiter-main/mesa-22.0.2.150118.radeonsi_20220427-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/mesa-22.0.2.150118.radeonsi_20220427-1)
  * [`mesa-vdpau` — `jupiter-main/mesa-22.0.2.150118.radeonsi_20220427-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/mesa-22.0.2.150118.radeonsi_20220427-1)
@@ -35,7 +36,7 @@ Valve packages
  * [`sddm-wayland` — `jupiter-main/sddm-wayland-v0.19.0.valve4.d19813cb03c7d71b896aead28e5285bc131500a9-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/sddm-wayland-v0.19.0.valve4.d19813cb03c7d71b896aead28e5285bc131500a9-1)
  * [`steam-im-modules` — `jupiter-main/steam-im-modules-jupiter.20220223-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steam-im-modules-jupiter.20220223-1)
  * [`steam-jupiter-stable` — `jupiter-main/steam-jupiter-stable-1.0.0.74-2.17`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steam-jupiter-stable-1.0.0.74-2.17)
- * [`steamdeck-kde-presets` — `jupiter-main/steamdeck-kde-presets-0.7-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steamdeck-kde-presets-0.7-1)
+ * [`steamdeck-kde-presets` — `jupiter-main/steamdeck-kde-presets-0.8-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steamdeck-kde-presets-0.8-1)
  * [`steamos-customizations-jupiter` — `jupiter-main/steamos-customizations-jupiter-20220617.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steamos-customizations-jupiter-20220617.1-1)
  * [`steamos-devkit-service` — `jupiter-main/steamos-devkit-service-0.20220401.0-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steamos-devkit-service-0.20220401.0-2)
  * [`steamos-efi` — `jupiter-main/steamos-efi-20220615.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steamos-efi-20220615.1-1)
@@ -166,7 +167,6 @@ Arch Linux packages
  * [`file/5.41-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/file/-/tree/5.41-1)
  * [`filesystem/2021.12.07-1.6`](https://gitlab.archlinux.org/archlinux/packaging/packages/filesystem/-/tree/2021.12.07-1.6)
  * [`findutils/4.8.0-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/findutils/-/tree/4.8.0-1)
- * [`firefox/96.0.3-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/firefox/-/tree/96.0.3-1)
  * [`fish/3.3.1-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/fish/-/tree/3.3.1-1)
  * [`flac/1.3.3-3`](https://gitlab.archlinux.org/archlinux/packaging/packages/flac/-/tree/1.3.3-3)
  * [`flatpak/1.12.4-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/flatpak/-/tree/1.12.4-1)
@@ -527,7 +527,6 @@ Arch Linux packages
  * [`lvm2/2.03.14-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/lvm2/-/tree/2.03.14-2)
  * [`lz4/1:1.9.3-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/lz4/-/tree/1:1.9.3-2)
  * [`lzo/2.10-3`](https://gitlab.archlinux.org/archlinux/packaging/packages/lzo/-/tree/2.10-3)
- * [`mailcap/2.1.53-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/mailcap/-/tree/2.1.53-1)
  * [`make/4.3-3`](https://gitlab.archlinux.org/archlinux/packaging/packages/make/-/tree/4.3-3)
  * [`maliit-framework/2.1.1-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/maliit-framework/-/tree/2.1.1-1)
  * [`maliit-keyboard/2.1.0-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/maliit-keyboard/-/tree/2.1.0-1)
