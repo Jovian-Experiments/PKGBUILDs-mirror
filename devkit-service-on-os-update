@@ -29,7 +29,14 @@ if __name__ == '__main__':
 
     if os.path.exists(CANARY):
         LOG.info(f'{CANARY} exists.')
-        # this shouldn't happen, but if the service is still running, disable it again
+        # this shouldn't happen, but if ths one-off service is still running, disable it again
+        seppuku()
+        sys.exit(0)
+
+    if os.path.exists( os.path.expanduser( '/home/deck/devkit-game' ) ):
+        LOG.info(f'This system has been used as devkit before, making sure {DEVKIT_SERVICE} is enabled.')
+        # see https://gitlab.steamos.cloud/jupiter/tasks/-/issues/580#note_56679
+        subprocess.check_call(f'systemctl enable --now avahi-daemon && systemctl enable --now {DEVKIT_SERVICE}')
         seppuku()
         sys.exit(0)
 
@@ -39,12 +46,7 @@ if __name__ == '__main__':
         seppuku()
         sys.exit(0)
 
-    if os.path.exists( os.path.expanduser( '/home/deck/devkit-game' ) ):
-        LOG.info(f'This system has been used as devkit before, not touching {DEVKIT_SERVICE}.')
-        seppuku()
-        sys.exit(0)
-
-    LOG.info(f'Disabling {DEVKIT_SERVICE} (one time).')
+    LOG.info(f'Disabling {DEVKIT_SERVICE} to meet the new OS configuration (one time).')
     cp = subprocess.run(f'systemctl disable --now {DEVKIT_SERVICE} && systemctl disable --now avahi-daemon', shell=True)
     if cp.returncode == 0:
         # only do this if everything looks fine, give us a chance to run again otherwise
