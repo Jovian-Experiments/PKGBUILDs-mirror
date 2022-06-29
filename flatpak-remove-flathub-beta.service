@@ -1,0 +1,11 @@
+[Unit]
+Description=Remove flathub beta repo
+After=flatpak-workaround.service
+ConditionPathExists=|!/var/lib/flatpak/.flatpak-remove-flathub-beta-once
+
+[Service]
+Type=oneshot
+
+ExecStart=flatpak remote-modify --no-enumerate flathub-beta
+# We only run this command once, success or fail
+ExecStart=touch /var/lib/flatpak/.flatpak-remove-flathub-beta-once
