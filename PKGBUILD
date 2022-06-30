@@ -1,6 +1,6 @@
 pkgname=steamos-devkit-service
 pkgver=0.20220401.0
-pkgrel=6
+pkgrel=7
 arch=('any')
 url="https://gitlab.steamos.cloud/devkit/steamos-devkit-service"
 license=('LGPL-2.1+')
@@ -14,7 +14,7 @@ source=(
 sha512sums=(
     SKIP
     a563dbb7452859d2632c6291eebf12547f484fcb1db4fe14044d3aea06c1c0e53c92dd9c5082ef91833af8158b9cde97e6f2fa271df45ed63b70bf95987385cd
-    c3bd10ed99bbbaabb4a2daa6218a6773bebd2ef3bef3ab9f1d02d08fc940711090745e9c3b342701ac6cbc04f943e7af12d50ccae5448681892029a61e60c346
+    aa1eb0ce2e4a00e23d13efc649fcd3467567eeac95b6c1e108ce67289b5acb0928275bcc15b8960e673ac25b7c4cb91d9f31e8e3b53198ab16d2d0b54481cac5
     ad3443d62396dfbf8204e6575cccfab79b5d7090f096ffbff80fa534e27012c39c3a26cfd38b335b438be9c9f2ea3c3d185f5c15ebb2f509adfd7850a236ab0c
 )
 makedepends=('git' 'avahi' 'dbus-python' 'systemd')
