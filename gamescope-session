@@ -59,6 +59,9 @@ if [[ -e "$STEAMOS_STEAM_SHUTDOWN_SENTINEL" ]]; then
 	sudo -n poweroff
 fi
 
+# Enable dynamic backlight, we have the kernel patch to disable events
+export STEAM_ENABLE_DYNAMIC_BACKLIGHT=1
+
 # Enabled fan control toggle in steam
 export STEAM_ENABLE_FAN_CONTROL=1
 
