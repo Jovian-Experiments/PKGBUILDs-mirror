@@ -6,7 +6,7 @@ import subprocess
 
 import logging
 
-CANARY='/etc/devkit-service-on-os-update'
+CANARY='/etc/.devkit-service-on-os-update'
 OS_UPDATE_SERVICE='devkit-service-os-update'
 DEVKIT_SERVICE='steamos-devkit-service'
 
