@@ -1,5 +1,5 @@
 
-`main @ 20220628.1000`
+`main @ 20220629.1000`
 ======================
 
 Valve packages
@@ -14,14 +14,14 @@ Valve packages
  * [`bluez-plugins` — `jupiter-main/bluez-5.63-1.8`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/bluez-5.63-1.8)
  * [`bluez-utils` — `jupiter-main/bluez-5.63-1.8`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/bluez-5.63-1.8)
  * [`f3` — `jupiter-main/f3-8.0-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/f3-8.0-2)
- * [`gamescope` — `jupiter-main/gamescope-3.11.33.beta1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/gamescope-3.11.33.beta1-1)
+ * [`gamescope` — `jupiter-main/gamescope-3.11.33.beta1-3`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/gamescope-3.11.33.beta1-3)
  * [`gpu-trace` — `jupiter-main/gpu-trace-2.7-3`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/gpu-trace-2.7-3)
  * [`ibus-anthy` — `jupiter-main/ibus-anthy-1.5.14-4`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/ibus-anthy-1.5.14-4)
  * [`ibus-table-cangjie-lite` — `jupiter-main/ibus-table-cangjie-lite-1.8.8-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/ibus-table-cangjie-lite-1.8.8-1)
  * [`jupiter-dock-updater-bin` — `jupiter-main/jupiter-dock-updater-bin-20220615.02-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-dock-updater-bin-20220615.02-1)
  * [`jupiter-fan-control` — `jupiter-main/jupiter-fan-control-20220602.1-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-fan-control-20220602.1-2)
  * [`jupiter-hw-support` — `jupiter-main/jupiter-hw-support-20220628.1-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-hw-support-20220628.1-2)
- * [`jupiter-legacy-support` — `jupiter-main/jupiter-legacy-support-1.118-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-legacy-support-1.118-1)
+ * [`jupiter-legacy-support` — `jupiter-main/jupiter-legacy-support-1.121-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-legacy-support-1.121-1)
  * [`kscreen` — `jupiter-main/kscreen-5.23.5-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/kscreen-5.23.5-2)
  * [`libva-mesa-driver` — `jupiter-main/mesa-22.0.2.150118.radeonsi_20220427-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/mesa-22.0.2.150118.radeonsi_20220427-1)
  * [`linux-firmware-neptune` — `jupiter-main/linux-firmware-neptune-20220624.650ab31-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/linux-firmware-neptune-20220624.650ab31-1)
