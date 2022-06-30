@@ -1,6 +1,6 @@
 # Maintainer: Your Name <youremail@domain.com>
 pkgname=jupiter-legacy-support
-pkgver=1.121
+pkgver=1.122
 pkgrel=1
 pkgdesc="Legacy support files from foxnet that haven't been split to their own thing"
 arch=(any)
@@ -20,7 +20,7 @@ sha256sums=('b31fc36e455b0848fd5f02eaf9107a40f5bfa972674fb57e48aa8cad17d3f5db'
             '78b1749684bf3c60a5769002d98008772145385566ab68d7218c3850ec2dc653'
             'e34a9dc905771bd99cd04cdf88262481cab7a7808d99dfaa968366fcb1b99a0b'
             'a1896990eb3aac319603bef9febc19d4819349e280a47d32af72d53f438b08be'
-            '90251c94cc1e9180ba128ae87c60faa7845eb406f651df8a2799290678d01896'
+            'ab5420d0c47da3192f291c27bfb95bdcb4fb523546d1a270eabc865f39cab8f5'
             '942fbb9436835bdb3a87aa8d73b3461f4cee0bc2f58bfa308eeb1be6b52ccb39'
             'fd55e252b11a0b0d48b7147298f159b0470f29ccb6118a79a5692cc8c4635f5b')
 
