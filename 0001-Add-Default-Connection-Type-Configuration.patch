@@ -1,0 +1,551 @@
+diff --git a/libs/configuration.cpp b/libs/configuration.cpp
+index f9640896..d171a11f 100644
+--- a/libs/configuration.cpp
++++ b/libs/configuration.cpp
+@@ -171,3 +171,15 @@ bool Configuration::showPasswordDialog()
+ 
+     return true;
+ }
++
++bool Configuration::systemConnectionsByDefault() const
++{
++    KSharedConfigPtr config = KSharedConfig::openConfig(QStringLiteral("plasma-nm"));
++    KConfigGroup grp(config, QStringLiteral("General"));
++
++    if (grp.isValid()) {
++        return grp.readEntry(QStringLiteral("SystemConnectionsByDefault"), false);
++    }
++
++    return false;
++}
+diff --git a/libs/configuration.h b/libs/configuration.h
+index 0e0414cf..2f9feb94 100644
+--- a/libs/configuration.h
++++ b/libs/configuration.h
+@@ -45,6 +45,8 @@ public:
+ 
+     bool showPasswordDialog();
+ 
++    bool systemConnectionsByDefault() const;
++
+     static Configuration &self();
+ };
+ 
+diff --git a/libs/editor/connectioneditorbase.cpp b/libs/editor/connectioneditorbase.cpp
+index eab9e2d2..7ecc9bf1 100644
+--- a/libs/editor/connectioneditorbase.cpp
++++ b/libs/editor/connectioneditorbase.cpp
+@@ -26,6 +26,7 @@
+ #include "settings/wiredconnectionwidget.h"
+ #include "settings/wiredsecurity.h"
+ #include "settings/wireguardinterfacewidget.h"
++#include "uiutils.h"
+ #include "vpnuiplugin.h"
+ 
+ #include <NetworkManagerQt/ActiveConnection>
+@@ -188,12 +189,13 @@ void ConnectionEditorBase::initialize()
+     const NetworkManager::ConnectionSettings::ConnectionType type = m_connection->connectionType();
+ 
+     if (emptyConnection) {
+-        m_connection->addToPermissions(KUser().loginName(), QString());
++        UiUtils::setConnectionDefaultPermissions(m_connection);
+     }
+ 
+     // General configuration common to all connection types
+     ConnectionWidget *connectionWidget = new ConnectionWidget(m_connection);
+     addConnectionWidget(connectionWidget, i18nc("General", "General configuration"));
++    connect(connectionWidget, &ConnectionWidget::allUsersChanged, this, &ConnectionEditorBase::onAllUsersChanged);
+ 
+     // Add the rest of widgets
+     QString serviceType;
+@@ -212,6 +214,7 @@ void ConnectionEditorBase::initialize()
+                              this);
+         addSettingWidget(wifiSecurity, i18n("Wi-Fi Security"));
+         connect(wifiWidget, QOverload<const QString &>::of(&WifiConnectionWidget::ssidChanged), wifiSecurity, &WifiSecurity::onSsidChanged);
++        m_wifiSecurity = wifiSecurity;
+     } else if (type == NetworkManager::ConnectionSettings::Pppoe) { // DSL
+         PppoeWidget *pppoeWidget = new PppoeWidget(m_connection->setting(NetworkManager::Setting::Pppoe), this);
+         addSettingWidget(pppoeWidget, i18n("DSL"));
+@@ -514,3 +517,13 @@ void ConnectionEditorBase::validChanged(bool valid)
+     m_valid = true;
+     Q_EMIT validityChanged(true);
+ }
++
++void ConnectionEditorBase::onAllUsersChanged()
++{
++    if (!m_wifiSecurity) {
++        return;
++    }
++
++    auto allUsers = m_connectionWidget->allUsers();
++    m_wifiSecurity->setStoreSecretsSystemWide(allUsers);
++}
+diff --git a/libs/editor/connectioneditorbase.h b/libs/editor/connectioneditorbase.h
+index 6efb3113..070c3218 100644
+--- a/libs/editor/connectioneditorbase.h
++++ b/libs/editor/connectioneditorbase.h
+@@ -14,6 +14,7 @@
+ 
+ class ConnectionWidget;
+ class SettingWidget;
++class WifiSecurity;
+ 
+ class Q_DECL_EXPORT ConnectionEditorBase : public QWidget
+ {
+@@ -45,6 +46,7 @@ Q_SIGNALS:
+ private Q_SLOTS:
+     void replyFinished(QDBusPendingCallWatcher *watcher);
+     void validChanged(bool valid);
++    void onAllUsersChanged();
+ 
+ protected:
+     // Subclassed widget is supposed to take care of layouting for setting widgets
+@@ -63,6 +65,7 @@ private:
+     NetworkManager::ConnectionSettings::Ptr m_connection;
+     ConnectionWidget *m_connectionWidget;
+     QList<SettingWidget *> m_settingWidgets;
++    WifiSecurity *m_wifiSecurity = nullptr;
+ 
+     void addConnectionWidget(ConnectionWidget *widget, const QString &text);
+     void addSettingWidget(SettingWidget *widget, const QString &text);
+diff --git a/libs/editor/settings/connectionwidget.cpp b/libs/editor/settings/connectionwidget.cpp
+index 98be5242..e902828b 100644
+--- a/libs/editor/settings/connectionwidget.cpp
++++ b/libs/editor/settings/connectionwidget.cpp
+@@ -53,6 +53,7 @@ ConnectionWidget::ConnectionWidget(const NetworkManager::ConnectionSettings::Ptr
+ 
+     connect(m_widget->autoconnect, &QCheckBox::stateChanged, this, &ConnectionWidget::settingChanged);
+     connect(m_widget->allUsers, &QCheckBox::stateChanged, this, &ConnectionWidget::settingChanged);
++    connect(m_widget->allUsers, &QCheckBox::stateChanged, this, &ConnectionWidget::allUsersChanged);
+     connect(m_widget->autoconnectVpn, &QCheckBox::stateChanged, this, &ConnectionWidget::settingChanged);
+     connect(m_widget->pushButtonPermissions, &QPushButton::clicked, this, &ConnectionWidget::settingChanged);
+     connect(m_widget->firewallZone, QOverload<int>::of(&QComboBox::currentIndexChanged), this, &ConnectionWidget::settingChanged);
+@@ -141,6 +142,11 @@ NMVariantMapMap ConnectionWidget::setting() const
+     return settings.toMap();
+ }
+ 
++bool ConnectionWidget::allUsers() const
++{
++    return m_widget->allUsers->isChecked();
++}
++
+ void ConnectionWidget::autoVpnToggled(bool on)
+ {
+     m_widget->vpnCombobox->setEnabled(on);
+diff --git a/libs/editor/settings/connectionwidget.h b/libs/editor/settings/connectionwidget.h
+index 1bf334bb..7d9a5c6b 100644
+--- a/libs/editor/settings/connectionwidget.h
++++ b/libs/editor/settings/connectionwidget.h
+@@ -30,12 +30,15 @@ public:
+ 
+     NMVariantMapMap setting() const;
+ 
++    bool allUsers() const;
++
+ private Q_SLOTS:
+     void autoVpnToggled(bool on);
+     void openAdvancedPermissions();
+ 
+ Q_SIGNALS:
+     void settingChanged();
++    void allUsersChanged();
+ 
+ private:
+     // list of VPN: UUID, name
+diff --git a/libs/editor/settings/security802-1x.cpp b/libs/editor/settings/security802-1x.cpp
+index 24ee5f13..ea7b4916 100644
+--- a/libs/editor/settings/security802-1x.cpp
++++ b/libs/editor/settings/security802-1x.cpp
+@@ -124,17 +124,17 @@ void Security8021x::loadConfig(const NetworkManager::Setting::Ptr &setting)
+     const QList<NetworkManager::Security8021xSetting::EapMethod> eapMethods = securitySetting->eapMethods();
+     const NetworkManager::Security8021xSetting::AuthMethod phase2AuthMethod = securitySetting->phase2AuthMethod();
+ 
++    if (securitySetting->passwordFlags().testFlag(NetworkManager::Setting::None)) {
++        setPasswordOption(PasswordField::StoreForAllUsers);
++    } else if (securitySetting->passwordFlags().testFlag(NetworkManager::Setting::AgentOwned)) {
++        setPasswordOption(PasswordField::StoreForUser);
++    } else {
++        setPasswordOption(PasswordField::AlwaysAsk);
++    }
++
+     if (eapMethods.contains(NetworkManager::Security8021xSetting::EapMethodMd5)) {
+         m_ui->auth->setCurrentIndex(m_ui->auth->findData(NetworkManager::Security8021xSetting::EapMethodMd5));
+         m_ui->md5UserName->setText(securitySetting->identity());
+-
+-        if (securitySetting->passwordFlags().testFlag(NetworkManager::Setting::None)) {
+-            m_ui->md5Password->setPasswordOption(PasswordField::StoreForAllUsers);
+-        } else if (securitySetting->passwordFlags().testFlag(NetworkManager::Setting::AgentOwned)) {
+-            m_ui->md5Password->setPasswordOption(PasswordField::StoreForUser);
+-        } else {
+-            m_ui->md5Password->setPasswordOption(PasswordField::AlwaysAsk);
+-        }
+     } else if (eapMethods.contains(NetworkManager::Security8021xSetting::EapMethodTls)) {
+         QStringList servers;
+         m_ui->auth->setCurrentIndex(m_ui->auth->findData(NetworkManager::Security8021xSetting::EapMethodTls));
+@@ -151,35 +151,12 @@ void Security8021x::loadConfig(const NetworkManager::Setting::Ptr &setting)
+         }
+         m_ui->leTlsConnectToServers->setText(servers.join(QLatin1String(", ")));
+         m_ui->tlsPrivateKey->setUrl(QUrl::fromLocalFile(securitySetting->privateKey()));
+-        if (securitySetting->passwordFlags().testFlag(NetworkManager::Setting::None)) {
+-            m_ui->tlsPrivateKeyPassword->setPasswordOption(PasswordField::StoreForAllUsers);
+-        } else if (securitySetting->passwordFlags().testFlag(NetworkManager::Setting::AgentOwned)) {
+-            m_ui->tlsPrivateKeyPassword->setPasswordOption(PasswordField::StoreForUser);
+-        } else {
+-            m_ui->tlsPrivateKeyPassword->setPasswordOption(PasswordField::AlwaysAsk);
+-        }
+     } else if (eapMethods.contains(NetworkManager::Security8021xSetting::EapMethodLeap)) {
+         m_ui->auth->setCurrentIndex(m_ui->auth->findData(NetworkManager::Security8021xSetting::EapMethodLeap));
+         m_ui->leapUsername->setText(securitySetting->identity());
+-        if (securitySetting->passwordFlags().testFlag(NetworkManager::Setting::None)) {
+-            m_ui->leapPassword->setPasswordOption(PasswordField::StoreForAllUsers);
+-        } else if (securitySetting->passwordFlags().testFlag(NetworkManager::Setting::AgentOwned)) {
+-            m_ui->leapPassword->setPasswordOption(PasswordField::StoreForUser);
+-        } else {
+-            m_ui->leapPassword->setPasswordOption(PasswordField::AlwaysAsk);
+-        }
+-
+     } else if (eapMethods.contains(NetworkManager::Security8021xSetting::EapMethodPwd)) {
+         m_ui->auth->setCurrentIndex(m_ui->auth->findData(NetworkManager::Security8021xSetting::EapMethodPwd));
+         m_ui->pwdUsername->setText(securitySetting->identity());
+-
+-        if (securitySetting->passwordFlags().testFlag(NetworkManager::Setting::None)) {
+-            m_ui->pwdPassword->setPasswordOption(PasswordField::StoreForAllUsers);
+-        } else if (securitySetting->passwordFlags().testFlag(NetworkManager::Setting::AgentOwned)) {
+-            m_ui->pwdPassword->setPasswordOption(PasswordField::StoreForUser);
+-        } else {
+-            m_ui->pwdPassword->setPasswordOption(PasswordField::AlwaysAsk);
+-        }
+     } else if (eapMethods.contains(NetworkManager::Security8021xSetting::EapMethodFast)) {
+         m_ui->auth->setCurrentIndex(m_ui->auth->findData(NetworkManager::Security8021xSetting::EapMethodFast));
+         m_ui->fastAnonIdentity->setText(securitySetting->anonymousIdentity());
+@@ -192,13 +169,6 @@ void Security8021x::loadConfig(const NetworkManager::Setting::Ptr &setting)
+             m_ui->fastInnerAuth->setCurrentIndex(1);
+         }
+         m_ui->fastUsername->setText(securitySetting->identity());
+-        if (securitySetting->passwordFlags().testFlag(NetworkManager::Setting::None)) {
+-            m_ui->fastPassword->setPasswordOption(PasswordField::StoreForAllUsers);
+-        } else if (securitySetting->passwordFlags().testFlag(NetworkManager::Setting::AgentOwned)) {
+-            m_ui->fastPassword->setPasswordOption(PasswordField::StoreForUser);
+-        } else {
+-            m_ui->fastPassword->setPasswordOption(PasswordField::AlwaysAsk);
+-        }
+     } else if (eapMethods.contains(NetworkManager::Security8021xSetting::EapMethodTtls)) {
+         m_ui->auth->setCurrentIndex(m_ui->auth->findData(NetworkManager::Security8021xSetting::EapMethodTtls));
+         m_ui->ttlsAnonIdentity->setText(securitySetting->anonymousIdentity());
+@@ -214,13 +184,6 @@ void Security8021x::loadConfig(const NetworkManager::Setting::Ptr &setting)
+             m_ui->ttlsInnerAuth->setCurrentIndex(3);
+         }
+         m_ui->ttlsUsername->setText(securitySetting->identity());
+-        if (securitySetting->passwordFlags().testFlag(NetworkManager::Setting::None)) {
+-            m_ui->ttlsPassword->setPasswordOption(PasswordField::StoreForAllUsers);
+-        } else if (securitySetting->passwordFlags().testFlag(NetworkManager::Setting::AgentOwned)) {
+-            m_ui->ttlsPassword->setPasswordOption(PasswordField::StoreForUser);
+-        } else {
+-            m_ui->ttlsPassword->setPasswordOption(PasswordField::AlwaysAsk);
+-        }
+     } else if (eapMethods.contains(NetworkManager::Security8021xSetting::EapMethodPeap)) {
+         m_ui->auth->setCurrentIndex(m_ui->auth->findData(NetworkManager::Security8021xSetting::EapMethodPeap));
+         m_ui->peapAnonIdentity->setText(securitySetting->anonymousIdentity());
+@@ -235,13 +198,6 @@ void Security8021x::loadConfig(const NetworkManager::Setting::Ptr &setting)
+             m_ui->peapInnerAuth->setCurrentIndex(2);
+         }
+         m_ui->peapUsername->setText(securitySetting->identity());
+-        if (securitySetting->passwordFlags().testFlag(NetworkManager::Setting::None)) {
+-            m_ui->peapPassword->setPasswordOption(PasswordField::StoreForAllUsers);
+-        } else if (securitySetting->passwordFlags().testFlag(NetworkManager::Setting::AgentOwned)) {
+-            m_ui->peapPassword->setPasswordOption(PasswordField::StoreForUser);
+-        } else {
+-            m_ui->peapPassword->setPasswordOption(PasswordField::AlwaysAsk);
+-        }
+     }
+ 
+     loadSecrets(setting);
+@@ -507,6 +463,17 @@ QVariantMap Security8021x::setting() const
+     return setting.toMap();
+ }
+ 
++void Security8021x::setPasswordOption(PasswordField::PasswordOption option)
++{
++    m_ui->fastPassword->setPasswordOption(option);
++    m_ui->leapPassword->setPasswordOption(option);
++    m_ui->md5Password->setPasswordOption(option);
++    m_ui->peapPassword->setPasswordOption(option);
++    m_ui->pwdPassword->setPasswordOption(option);
++    m_ui->tlsPrivateKeyPassword->setPasswordOption(option);
++    m_ui->ttlsPassword->setPasswordOption(option);
++}
++
+ void Security8021x::altSubjectMatchesButtonClicked()
+ {
+     QPointer<EditListDialog> editor = new EditListDialog(this);
+diff --git a/libs/editor/settings/security802-1x.h b/libs/editor/settings/security802-1x.h
+index 6bd4a431..f65132b6 100644
+--- a/libs/editor/settings/security802-1x.h
++++ b/libs/editor/settings/security802-1x.h
+@@ -12,6 +12,7 @@
+ 
+ #include <NetworkManagerQt/Security8021xSetting>
+ 
++#include "passwordfield.h"
+ #include "settingwidget.h"
+ 
+ namespace Ui
+@@ -36,6 +37,8 @@ public:
+ 
+     bool isValid() const override;
+ 
++    void setPasswordOption(PasswordField::PasswordOption option);
++
+ private Q_SLOTS:
+     void altSubjectMatchesButtonClicked();
+     void connectToServersButtonClicked();
+diff --git a/libs/editor/settings/wifisecurity.cpp b/libs/editor/settings/wifisecurity.cpp
+index ba70da16..29dbd4aa 100644
+--- a/libs/editor/settings/wifisecurity.cpp
++++ b/libs/editor/settings/wifisecurity.cpp
+@@ -109,6 +109,23 @@ bool WifiSecurity::isValid() const
+     return true;
+ }
+ 
++void WifiSecurity::setStoreSecretsSystemWide(bool system)
++{
++    if (system) {
++        m_ui->wepKey->setPasswordOption(PasswordField::StoreForAllUsers);
++        m_ui->leapPassword->setPasswordOption(PasswordField::StoreForAllUsers);
++        m_ui->psk->setPasswordOption(PasswordField::StoreForAllUsers);
++        m_8021xWidget->setPasswordOption(PasswordField::StoreForAllUsers);
++        m_WPA2Widget->setPasswordOption(PasswordField::StoreForAllUsers);
++    } else {
++        m_ui->wepKey->setPasswordOption(PasswordField::StoreForUser);
++        m_ui->leapPassword->setPasswordOption(PasswordField::StoreForUser);
++        m_ui->psk->setPasswordOption(PasswordField::StoreForUser);
++        m_8021xWidget->setPasswordOption(PasswordField::StoreForUser);
++        m_WPA2Widget->setPasswordOption(PasswordField::StoreForUser);
++    }
++}
++
+ void WifiSecurity::loadConfig(const NetworkManager::Setting::Ptr &setting)
+ {
+     NetworkManager::WirelessSecuritySetting::Ptr wifiSecurity = setting.staticCast<NetworkManager::WirelessSecuritySetting>();
+diff --git a/libs/editor/settings/wifisecurity.h b/libs/editor/settings/wifisecurity.h
+index 2fd3b2d5..d428c73a 100644
+--- a/libs/editor/settings/wifisecurity.h
++++ b/libs/editor/settings/wifisecurity.h
+@@ -44,6 +44,8 @@ public:
+ 
+     bool isValid() const override;
+ 
++    void setStoreSecretsSystemWide(bool system);
++
+ public Q_SLOTS:
+     void onSsidChanged(const QString &ssid);
+ 
+@@ -56,6 +58,7 @@ private:
+     Security8021x *m_8021xWidget;
+     Security8021x *m_WPA2Widget;
+     NetworkManager::WirelessSecuritySetting::Ptr m_wifiSecurity;
++    bool m_systemWideDefault = false;
+ };
+ 
+ #endif // PLASMA_NM_WIFI_SECURITY_H
+diff --git a/libs/handler.cpp b/libs/handler.cpp
+index 73238d6e..597891a3 100644
+--- a/libs/handler.cpp
++++ b/libs/handler.cpp
+@@ -70,7 +70,6 @@ Handler::Handler(QObject *parent)
+     }
+ 
+     m_hotspotSupported = checkHotspotSupported();
+-    m_runningLiveImage = checkRunningLiveImage();
+ 
+     if (NetworkManager::checkVersion(1, 16, 0)) {
+         connect(NetworkManager::notifier(), &NetworkManager::Notifier::primaryConnectionTypeChanged, this, &Handler::primaryConnectionTypeChanged);
+@@ -239,7 +238,8 @@ void Handler::addAndActivateConnection(const QString &device, const QString &spe
+     settings->setId(ap->ssid());
+     settings->setUuid(NetworkManager::ConnectionSettings::createNewUuid());
+     settings->setAutoconnect(true);
+-    settings->addToPermissions(KUser().loginName(), QString());
++
++    UiUtils::setConnectionDefaultPermissions(settings);
+ 
+     NetworkManager::WirelessSetting::Ptr wifiSetting = settings->setting(NetworkManager::Setting::Wireless).dynamicCast<NetworkManager::WirelessSetting>();
+     wifiSetting->setInitialized(true);
+@@ -297,9 +297,6 @@ void Handler::addAndActivateConnection(const QString &device, const QString &spe
+         if (securityType == NetworkManager::StaticWep) {
+             wifiSecurity->setKeyMgmt(NetworkManager::WirelessSecuritySetting::Wep);
+             wifiSecurity->setWepKey0(password);
+-            if (KWallet::Wallet::isEnabled() && !m_runningLiveImage) {
+-                wifiSecurity->setWepKeyFlags(NetworkManager::Setting::AgentOwned);
+-            }
+         } else {
+             if (ap->mode() == NetworkManager::AccessPoint::Adhoc) {
+                 wifiSecurity->setKeyMgmt(NetworkManager::WirelessSecuritySetting::WpaNone);
+@@ -307,9 +304,6 @@ void Handler::addAndActivateConnection(const QString &device, const QString &spe
+                 wifiSecurity->setKeyMgmt(NetworkManager::WirelessSecuritySetting::WpaPsk);
+             }
+             wifiSecurity->setPsk(password);
+-            if (KWallet::Wallet::isEnabled() && !m_runningLiveImage) {
+-                wifiSecurity->setPskFlags(NetworkManager::Setting::AgentOwned);
+-            }
+         }
+         QDBusPendingReply<QDBusObjectPath> reply = NetworkManager::addAndActivateConnection(settings->toMap(), device, specificObject);
+         QDBusPendingCallWatcher *watcher = new QDBusPendingCallWatcher(reply, this);
+@@ -699,25 +693,6 @@ bool Handler::checkHotspotSupported()
+     return false;
+ }
+ 
+-bool Handler::checkRunningLiveImage()
+-{
+-    QFile cmdFile(QStringLiteral("/proc/cmdline"));
+-    cmdFile.open(QIODevice::ReadOnly);
+-
+-    if (!cmdFile.isOpen()) {
+-        return false;
+-    }
+-
+-    const QString cmdFileOutput = cmdFile.readAll();
+-    cmdFile.close();
+-
+-    if (cmdFileOutput.contains(QStringLiteral("rd.live.image"))) {
+-        return true;
+-    }
+-
+-    return false;
+-}
+-
+ void Handler::scheduleRequestScan(const QString &interface, int timeout)
+ {
+     QTimer *timer;
+diff --git a/libs/handler.h b/libs/handler.h
+index a9e12c89..db3c0c8a 100644
+--- a/libs/handler.h
++++ b/libs/handler.h
+@@ -130,7 +130,6 @@ Q_SIGNALS:
+ 
+ private:
+     bool m_hotspotSupported;
+-    bool m_runningLiveImage;
+     bool m_tmpWirelessEnabled;
+     bool m_tmpWwanEnabled;
+ #if WITH_MODEMMANAGER_SUPPORT
+@@ -146,7 +145,6 @@ private:
+     void scanRequestFailed(const QString &interface);
+     bool checkRequestScanRateLimit(const NetworkManager::WirelessDevice::Ptr &wifiDevice);
+     bool checkHotspotSupported();
+-    bool checkRunningLiveImage();
+     void scheduleRequestScan(const QString &interface, int timeout);
+ };
+ 
+diff --git a/libs/uiutils.cpp b/libs/uiutils.cpp
+index 55f44d6e..499e7e36 100644
+--- a/libs/uiutils.cpp
++++ b/libs/uiutils.cpp
+@@ -15,8 +15,11 @@
+ #include <KConfigGroup>
+ #include <KLocalizedString>
+ #include <KSharedConfig>
++#include <KUser>
++#include <KWallet>
+ 
+ #include <NetworkManagerQt/Manager>
++#include <NetworkManagerQt/Security8021xSetting>
+ 
+ #if WITH_MODEMMANAGER_SUPPORT
+ #include <ModemManagerQt/manager.h>
+@@ -31,6 +34,8 @@
+ 
+ #include <QString>
+ 
++#include <optional>
++
+ using namespace NetworkManager;
+ 
+ UiUtils::SortedConnectionType UiUtils::connectionTypeToSortedType(NetworkManager::ConnectionSettings::ConnectionType type)
+@@ -670,3 +675,56 @@ QString UiUtils::formatLastUsedDateRelative(const QDateTime &lastUsed)
+     }
+     return lastUsedText;
+ }
++
++bool UiUtils::isLiveImage()
++{
++    static std::optional<bool> liveImage = std::nullopt;
++    if (liveImage.has_value()) {
++        return liveImage.value();
++    }
++
++    QFile cmdFile(QStringLiteral("/proc/cmdline"));
++    cmdFile.open(QIODevice::ReadOnly);
++
++    if (!cmdFile.isOpen()) {
++        return false;
++    }
++
++    const QString cmdFileOutput = cmdFile.readAll();
++    cmdFile.close();
++
++    if (cmdFileOutput.contains(QStringLiteral("rd.live.image"))) {
++        liveImage = true;
++        return true;
++    }
++
++    liveImage = false;
++    return false;
++}
++
++void UiUtils::setConnectionDefaultPermissions(NetworkManager::ConnectionSettings::Ptr &settings)
++{
++    auto wifiSecurity = settings->setting(NetworkManager::Setting::WirelessSecurity).dynamicCast<NetworkManager::WirelessSecuritySetting>();
++    auto security8021x = settings->setting(NetworkManager::Setting::Security8021x).dynamicCast<NetworkManager::Security8021xSetting>();
++
++    if (!wifiSecurity || !security8021x) {
++        return;
++    }
++
++    if (Configuration::self().systemConnectionsByDefault() || !KWallet::Wallet::isEnabled() || isLiveImage()) {
++        auto modifySystem = NetworkManager::permissions().value(QStringLiteral("org.freedesktop.NetworkManager.settings.modify.system"));
++        if (modifySystem == QLatin1String("yes")) {
++            wifiSecurity->setLeapPasswordFlags(NetworkManager::Setting::SecretFlagType::None);
++            wifiSecurity->setPskFlags(NetworkManager::Setting::SecretFlagType::None);
++            wifiSecurity->setWepKeyFlags(NetworkManager::Setting::SecretFlagType::None);
++            security8021x->setPasswordFlags(NetworkManager::Setting::SecretFlagType::None);
++            return;
++        }
++    }
++
++    settings->addToPermissions(KUser().loginName(), QString());
++    wifiSecurity->setLeapPasswordFlags(NetworkManager::Setting::SecretFlagType::AgentOwned);
++    wifiSecurity->setPskFlags(NetworkManager::Setting::SecretFlagType::AgentOwned);
++    wifiSecurity->setWepKeyFlags(NetworkManager::Setting::SecretFlagType::AgentOwned);
++    security8021x->setPasswordFlags(NetworkManager::Setting::SecretFlagType::AgentOwned);
++}
+diff --git a/libs/uiutils.h b/libs/uiutils.h
+index 5ff5da59..e7cce436 100644
+--- a/libs/uiutils.h
++++ b/libs/uiutils.h
+@@ -110,6 +110,26 @@ public:
+      */
+     static QString wirelessBandToString(NetworkManager::WirelessSetting::FrequencyBand band);
+ 
++    /**
++     * Check whether we're running in a live image session.
++     */
++    static bool isLiveImage();
++
++    /**
++     * Setup default permissions for a new connection.
++     *
++     * This determines whether we should use system connections or user
++     * connections by default and sets the default permissions accordingly.
++     * System connections are preferred if either the preference for that is
++     * set, KWallet is not enabled or we're running in a live image. However, if
++     * we do not have permissions to create system connections, we fall back to
++     * user connections.
++     *
++     * @param settings The connection settings to setup.
++     * @param liveSession Whether we are running a session from a live disk image.
++     */
++    static void setConnectionDefaultPermissions(NetworkManager::ConnectionSettings::Ptr &settings);
++
+ #if WITH_MODEMMANAGER_SUPPORT
+     static QString convertAllowedModeToString(ModemManager::Modem::ModemModes mode);
+     static QString convertAccessTechnologyToString(ModemManager::Modem::AccessTechnologies tech);
