@@ -1,5 +1,5 @@
 
-`main @ 20220707.1000`
+`main @ 20220711.1000`
 ======================
 
 Valve packages
@@ -20,16 +20,19 @@ Valve packages
  * [`ibus-table-cangjie-lite` — `jupiter-main/ibus-table-cangjie-lite-1.8.8-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/ibus-table-cangjie-lite-1.8.8-1)
  * [`jupiter-dock-updater-bin` — `jupiter-main/jupiter-dock-updater-bin-20220615.02-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-dock-updater-bin-20220615.02-1)
  * [`jupiter-fan-control` — `jupiter-main/jupiter-fan-control-20220705.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-fan-control-20220705.1-1)
- * [`jupiter-hw-support` — `jupiter-main/jupiter-hw-support-20220628.1-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-hw-support-20220628.1-2)
- * [`jupiter-legacy-support` — `jupiter-main/jupiter-legacy-support-1.124-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-legacy-support-1.124-1)
+ * [`jupiter-hw-support` — `jupiter-main/jupiter-hw-support-20220708.1-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-hw-support-20220708.1-2)
+ * [`jupiter-legacy-support` — `jupiter-main/jupiter-legacy-support-1.125-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-legacy-support-1.125-1)
  * [`kscreen` — `jupiter-main/kscreen-5.23.5-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/kscreen-5.23.5-2)
+ * [`libnm` — `jupiter-main/networkmanager-1.34.0-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/networkmanager-1.34.0-1.1)
  * [`libva-mesa-driver` — `jupiter-main/mesa-22.0.2.150118.radeonsi_20220427-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/mesa-22.0.2.150118.radeonsi_20220427-1)
  * [`linux-firmware-neptune` — `jupiter-main/linux-firmware-neptune-20220624.650ab31-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/linux-firmware-neptune-20220624.650ab31-1)
  * [`linux-neptune` — `jupiter-main/linux-neptune-5.13.0.valve21-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/linux-neptune-5.13.0.valve21-1)
- * [`mangohud` — `jupiter-main/mangohud-0.6.7.1.r16.gf81369b-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/mangohud-0.6.7.1.r16.gf81369b-1)
+ * [`mangohud` — `jupiter-main/mangohud-0.6.7.1.r38.g421ca3b-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/mangohud-0.6.7.1.r38.g421ca3b-1)
  * [`mesa` — `jupiter-main/mesa-22.0.2.150118.radeonsi_20220427-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/mesa-22.0.2.150118.radeonsi_20220427-1)
  * [`mesa-vdpau` — `jupiter-main/mesa-22.0.2.150118.radeonsi_20220427-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/mesa-22.0.2.150118.radeonsi_20220427-1)
+ * [`networkmanager` — `jupiter-main/networkmanager-1.34.0-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/networkmanager-1.34.0-1.1)
  * [`opencl-mesa` — `jupiter-main/mesa-22.0.2.150118.radeonsi_20220427-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/mesa-22.0.2.150118.radeonsi_20220427-1)
+ * [`plasma-nm` — `jupiter-main/plasma-nm-5.23.5-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/plasma-nm-5.23.5-1.1)
  * [`plasma-wayland-session` — `jupiter-main/plasma-workspace-5.23.5-5`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/plasma-workspace-5.23.5-5)
  * [`plasma-workspace` — `jupiter-main/plasma-workspace-5.23.5-5`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/plasma-workspace-5.23.5-5)
  * [`python-crcmod` — `jupiter-main/python-crcmod-1.7-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/python-crcmod-1.7-1)
@@ -418,7 +421,6 @@ Arch Linux packages
  * [`libnftnl/1.2.1-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/libnftnl/-/tree/1.2.1-1)
  * [`libnghttp2/1.46.0-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/libnghttp2/-/tree/1.46.0-1)
  * [`libnl/3.5.0-3`](https://gitlab.archlinux.org/archlinux/packaging/packages/libnl/-/tree/3.5.0-3)
- * [`libnm/1.34.0-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/networkmanager/-/tree/1.34.0-1)
  * [`libnotify/0.7.9-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/libnotify/-/tree/0.7.9-2)
  * [`libnsl/2.0.0-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/libnsl/-/tree/2.0.0-1)
  * [`libogg/1.3.5-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/libogg/-/tree/1.3.5-1)
@@ -548,7 +550,6 @@ Arch Linux packages
  * [`ndctl/72.1-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/ndctl/-/tree/72.1-1)
  * [`nethogs/0.8.6-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/nethogs/-/tree/0.8.6-1)
  * [`nettle/3.7.3-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/nettle/-/tree/3.7.3-1)
- * [`networkmanager/1.34.0-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/networkmanager/-/tree/1.34.0-1)
  * [`networkmanager-qt/5.90.0-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/networkmanager-qt/-/tree/5.90.0-1)
  * [`noise-suppression-for-voice-git/0.91.r8.g6922453-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/noise-suppression-for-voice-git/-/tree/0.91.r8.g6922453-1)
  * [`noto-fonts/20201226-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/noto-fonts/-/tree/20201226-2)
@@ -611,7 +612,6 @@ Arch Linux packages
  * [`plasma-framework/5.90.0-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/plasma-framework/-/tree/5.90.0-1)
  * [`plasma-integration/5.23.5-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/plasma-integration/-/tree/5.23.5-1)
  * [`plasma-meta/5.23-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/plasma-meta/-/tree/5.23-2)
- * [`plasma-nm/5.23.5-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/plasma-nm/-/tree/5.23.5-1)
  * [`plasma-pa/5.23.5-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/plasma-pa/-/tree/5.23.5-1)
  * [`plasma-systemmonitor/5.23.5-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/plasma-systemmonitor/-/tree/5.23.5-1)
  * [`plasma-thunderbolt/5.23.5-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/plasma-thunderbolt/-/tree/5.23.5-1)
