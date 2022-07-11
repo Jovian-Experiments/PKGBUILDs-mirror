@@ -1,0 +1,70 @@
+commit 62e9e7d196188648c7de5558e66711e31c64daee
+Author: Arjen Hiemstra <ahiemstra@heimr.nl>
+Date:   Wed Jun 22 13:08:51 2022 +0200
+
+    Don't forget to activate a connection if we show a dialog when activating
+    
+    addAndActivate in some cases will show the connection editor dialog. In
+    that case, once the dialog is confirmed, we would call "addConnection"
+    rather than "addAndActivateConnection", so one would need to manually
+    connect to the now correctly configured network again. Instead, move the
+    "addAndActivate" dbus call to its own method so we can call it in the
+    signal handler rather than calling only addConnection.
+
+diff --git a/libs/handler.cpp b/libs/handler.cpp
+index 597891a3..b2248167 100644
+--- a/libs/handler.cpp
++++ b/libs/handler.cpp
+@@ -283,8 +283,8 @@ void Handler::addAndActivateConnection(const QString &device, const QString &spe
+         editor->show();
+         KWindowSystem::setState(editor->winId(), NET::KeepAbove);
+         KWindowSystem::forceActiveWindow(editor->winId());
+-        connect(editor.data(), &ConnectionEditorDialog::accepted, [editor, this]() {
+-            addConnection(editor->setting());
++        connect(editor.data(), &ConnectionEditorDialog::accepted, [editor, device, specificObject, this]() { //
++            addAndActivateConnectionDBus(editor->setting(), device, specificObject);
+         });
+         connect(editor.data(), &ConnectionEditorDialog::finished, [editor]() {
+             if (editor) {
+@@ -305,11 +305,7 @@ void Handler::addAndActivateConnection(const QString &device, const QString &spe
+             }
+             wifiSecurity->setPsk(password);
+         }
+-        QDBusPendingReply<QDBusObjectPath> reply = NetworkManager::addAndActivateConnection(settings->toMap(), device, specificObject);
+-        QDBusPendingCallWatcher *watcher = new QDBusPendingCallWatcher(reply, this);
+-        watcher->setProperty("action", Handler::AddAndActivateConnection);
+-        watcher->setProperty("connection", settings->name());
+-        connect(watcher, &QDBusPendingCallWatcher::finished, this, &Handler::replyFinished);
++        addAndActivateConnectionDBus(settings->toMap(), device, specificObject);
+     }
+ 
+     settings.clear();
+@@ -324,6 +320,15 @@ void Handler::addConnection(const NMVariantMapMap &map)
+     connect(watcher, &QDBusPendingCallWatcher::finished, this, &Handler::replyFinished);
+ }
+ 
++void Handler::addAndActivateConnectionDBus(const NMVariantMapMap &map, const QString &device, const QString &specificObject)
++{
++    QDBusPendingReply<QDBusObjectPath> reply = NetworkManager::addAndActivateConnection(map, device, specificObject);
++    auto watcher = new QDBusPendingCallWatcher(reply, this);
++    watcher->setProperty("action", AddAndActivateConnection);
++    watcher->setProperty("connection", map.value(QStringLiteral("connection")).value(QStringLiteral("id")));
++    connect(watcher, &QDBusPendingCallWatcher::finished, this, &Handler::replyFinished);
++}
++
+ void Handler::deactivateConnection(const QString &connection, const QString &device)
+ {
+     NetworkManager::Connection::Ptr con = NetworkManager::findConnection(connection);
+diff --git a/libs/handler.h b/libs/handler.h
+index db3c0c8a..e931e39a 100644
+--- a/libs/handler.h
++++ b/libs/handler.h
+@@ -129,6 +129,8 @@ Q_SIGNALS:
+     void hotspotSupportedChanged(bool hotspotSupported);
+ 
+ private:
++    void addAndActivateConnectionDBus(const NMVariantMapMap &map, const QString &device, const QString &specificObject);
++
+     bool m_hotspotSupported;
+     bool m_tmpWirelessEnabled;
+     bool m_tmpWwanEnabled;
