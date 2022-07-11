@@ -1,0 +1,89 @@
+From 90ac76515dacea6fe8beeb2abc3bd6b85a038b64 Mon Sep 17 00:00:00 2001
+From: Emil Velikov <emil.velikov@collabora.com>
+Date: Thu, 16 Jun 2022 14:19:01 +0100
+Subject: [PATCH] iwd: remove 8021X "unknown network" restrictions
+
+Removing these restrictions gets 8021X networks (WPA-Enterprise +
+PEAP/MsCHAPv2) working on the Steam Deck.
+
+So the inline comments are not 100% correct and the restrictions seem
+dubious. Drop them.
+
+Signed-off-by: Emil Velikov <emil.velikov@collabora.com>
+---
+ src/core/devices/wifi/nm-device-iwd.c | 44 +++------------------------
+ 1 file changed, 4 insertions(+), 40 deletions(-)
+
+diff --git a/src/core/devices/wifi/nm-device-iwd.c b/src/core/devices/wifi/nm-device-iwd.c
+index ab37cbec91..c83840854c 100644
+--- a/src/core/devices/wifi/nm-device-iwd.c
++++ b/src/core/devices/wifi/nm-device-iwd.c
+@@ -790,19 +790,11 @@ check_connection_compatible(NMDevice *device, NMConnection *connection, GError *
+     }
+ 
+     if (NM_IN_STRSET(mode, NULL, NM_SETTING_WIRELESS_MODE_INFRA)) {
+-        /* 8021x networks can only be used if they've been provisioned on the IWD side and
+-         * thus are Known Networks.
+-         */
+-        if (security == NM_IWD_NETWORK_SECURITY_8021X) {
+-            if (!is_connection_known_network(connection)) {
+-                nm_utils_error_set_literal(error,
+-                                           NM_UTILS_ERROR_CONNECTION_AVAILABLE_INCOMPATIBLE,
+-                                           "802.1x connections must have IWD provisioning files");
+-                return FALSE;
+-            }
+-        } else if (!NM_IN_SET(security,
++        if (!NM_IN_SET(security,
+                               NM_IWD_NETWORK_SECURITY_OPEN,
+-                              NM_IWD_NETWORK_SECURITY_PSK)) {
++                              NM_IWD_NETWORK_SECURITY_PSK,
++                              NM_IWD_NETWORK_SECURITY_8021X)) {
++
+             nm_utils_error_set_literal(error,
+                                        NM_UTILS_ERROR_CONNECTION_AVAILABLE_INCOMPATIBLE,
+                                        "IWD backend only supports Open, PSK and 802.1x network "
+@@ -922,20 +914,6 @@ check_connection_available(NMDevice                      *device,
+         return FALSE;
+     }
+ 
+-    /* 8021x networks can only be used if they've been provisioned on the IWD side and
+-     * thus are Known Networks.
+-     */
+-    if (nm_wifi_connection_get_iwd_ssid_and_security(connection, NULL, &security)
+-        && security == NM_IWD_NETWORK_SECURITY_8021X) {
+-        if (!is_ap_known_network(ap)) {
+-            nm_utils_error_set_literal(
+-                error,
+-                NM_UTILS_ERROR_CONNECTION_AVAILABLE_TEMPORARY,
+-                "802.1x network is not an IWD Known Network (missing provisioning file?)");
+-            return FALSE;
+-        }
+-    }
+-
+     return TRUE;
+ }
+ 
+@@ -2306,20 +2284,6 @@ act_stage2_config(NMDevice *device, NMDeviceStateReason *out_failure_reason)
+             return NM_ACT_STAGE_RETURN_POSTPONE;
+         }
+ 
+-        /* 802.1x networks that are not IWD Known Networks will definitely
+-         * fail, for other combinations we will let the Connect call fail
+-         * or ask us for any missing secrets through the Agent.
+-         */
+-        if (nm_connection_get_setting_802_1x(connection) && !is_ap_known_network(ap)) {
+-            _LOGI(LOGD_DEVICE | LOGD_WIFI,
+-                  "Activation: (wifi) access point '%s' has 802.1x security but is not configured "
+-                  "in IWD.",
+-                  nm_connection_get_id(connection));
+-
+-            NM_SET_OUT(out_failure_reason, NM_DEVICE_STATE_REASON_NO_SECRETS);
+-            goto out_fail;
+-        }
+-
+         priv->secrets_failed = FALSE;
+ 
+         if (nm_wifi_ap_get_fake(ap)) {
+-- 
+2.36.1
+
