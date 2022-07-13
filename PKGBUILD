@@ -1,10 +1,10 @@
 # Maintainer: Collabora Ltd <gael.portay@collabora.com>
 
 pkgname=steamos-customizations-jupiter
-_srctag=jupiter-20220617.1
+_srctag=jupiter-20220713.1
 _srcver=${_srctag#jupiter-}
 pkgver=${_srcver//-/.}
-pkgrel=1
+pkgrel=2
 pkgdesc='SteamOS customizations (Jupiter fork) - This package installs various SteamOS-specific files'
 arch=('any')
 url='http://repo.steampowered.com'
@@ -33,4 +33,8 @@ package() {
 	rm -rf "${pkgdir}"/usr/lib/systemd/system/{multi-user.target.wants/,}pacman-{init,cleanup}.service
 	# The sudo settings live in separate package
 	rm -rf "${pkgdir}/etc/sudoers.d"
+
+	# https://gitlab.steamos.cloud/jupiter/tasks/-/issues/576
+	echo "LIBVA_DRIVER_NAME=radeonsi" > "${pkgdir}/etc/profile.d/libva.sh"
+	echo "export LIBVA_DRIVER_NAME" >> "${pkgdir}/etc/profile.d/libva.sh"
 }
