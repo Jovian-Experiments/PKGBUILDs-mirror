@@ -7,7 +7,7 @@
 _basename=steam
 pkgname=steam-jupiter-stable
 pkgver=1.0.0.74
-pkgrel=2.17
+pkgrel=2.18
 pkgdesc="Valve's digital software delivery system - Jupiter bootstrapped packaging"
 url='https://steampowered.com/'
 arch=('x86_64')
@@ -15,15 +15,20 @@ license=('custom')
 depends=('bash' 'desktop-file-utils' 'diffutils' 'hicolor-icon-theme' 'curl' 'dbus'
          'freetype2' 'gdk-pixbuf2' 'ttf-font' 'zenity' 'lsb-release' 'nss' 'usbutils'
          'xorg-xrandr' 'vulkan-driver' 'vulkan-icd-loader' 'lsof' 'python')
+# lib32-pipewire: https://bugs.archlinux.org/task/75155
+# lib32-fontconfig: https://bugs.archlinux.org/task/74827
+# lib32-systemd, lib32-libxinerama: https://bugs.archlinux.org/task/75156
+# lib32-libnm, lib32-libva:  https://bugs.archlinux.org/task/75157
 depends_x86_64=('lib32-libgl' 'lib32-gcc-libs' 'lib32-libx11' 'lib32-libxss'
                 'lib32-alsa-plugins' 'lib32-libgpg-error' 'lib32-fontconfig'
                 'lib32-nss' 'lib32-vulkan-driver' 'lib32-vulkan-icd-loader'
-                'lib32-pipewire')
+                'lib32-pipewire' 'lib32-systemd' 'lib32-libxinerama' 'lib32-libva')
 provides=('steam')
 conflicts=('steam')
 
 # Jupiter: Drops native-runtime patches
 # optdepends=('steam-native-runtime: steam native runtime support')
+optdepends=('lib32-libnm: integration with networkmanager')
 
 # Jupiter: Including fully bootstrapped steam image on expected branch
 _fat_bootstrap=steam_jupiter_stable_bootstrapped_20220525.1.tar.xz
@@ -50,9 +55,17 @@ validpgpkeys=('BA1816EF8E75005FCF5E27A1F24AEA9FB05498B7') # linux@steampowered.c
 
 prepare() {
   cd ${_basename}-launcher
+  # Drop: https://bugs.archlinux.org/task/75143
+  # apply roundups for udev rules
+  sed -r 's|("0666")|"0660", TAG+="uaccess"|g' -i subprojects/steam-devices/60-steam-input.rules
+  sed -r 's|("misc")|\1, OPTIONS+="static_node=uinput"|g' -i subprojects/steam-devices/60-steam-input.rules
+  sed -r 's|(, TAG\+="uaccess")|, MODE="0660"\1|g' -i subprojects/steam-devices/60-steam-vr.rules
 
-  # Jupiter
-  # No preparation necessary
+  # Drop: https://bugs.archlinux.org/task/75145
+  # Jupiter: No please
+  # separated runtime/native desktop files
+  #   sed -r 's|(Name=Steam)|\1 (Runtime)|' -i steam.desktop
+  #   sed -r 's|(/usr/bin/steam)|\1-runtime|' -i steam.desktop
 }
 
 package() {
