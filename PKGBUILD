@@ -1,7 +1,7 @@
 pkgname=ibus-table-cangjie-lite
 pkgver=1.8.8
-pkgrel=1
-_commit=d0f98492ffac6046d03ba052e585db99b7d27cc0   # Some Valve specific changes not yet upstreamed
+pkgrel=2
+_commit=cc4a17fde8904c6e60ded3558c551c90d9b72454   # Some Valve specific changes not yet upstreamed
 pkgdesc="Some table-based input method of tables engines for IBus"
 arch=('any')
 url="https://github.com/mike-fabian/ibus-table-chinese"
@@ -9,12 +9,12 @@ license=('GPL3')
 depends=('ibus-table')
 makedepends=('cmake' 'python' 'noto-fonts-cjk' 'fontconfig' 'git')
 source=("git+https://github.com/bjj/ibus-table-chinese.git#commit=$_commit"
-  limit-to-cangjie.patch)
+  limit-tables.patch)
 sha256sums=('SKIP'
-  'cea245fec5c1775a2ade6717c1ac15965b247d1ac768835c94abea1c193dfa13')
+  '3c75b1b182019b3ee69ea934626a62eb0e0a018b0757f32e0c1912041b9073d5')
 
 prepare() {
-  patch -d ibus-table-chinese -p1 -i ../limit-to-cangjie.patch
+  patch -d ibus-table-chinese -p1 -i ../limit-tables.patch
 }
 
 build() {
