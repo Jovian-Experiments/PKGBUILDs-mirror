@@ -7,14 +7,14 @@ pkgbase=mesa-radv
 # Jupiter: only build RADV, the rest comes from upstream/Arch Mesa
 pkgname=('vulkan-radeon')
 pkgdesc="An open-source implementation of the OpenGL specification"
-_tag=jupiter-22.1.4
-pkgver=22.1.0_devel.150449.jupiter_22.1.4
+_tag=jupiter-22.2.1
+pkgver=22.2.0_devel.152969.jupiter_22.2.1
 pkgrel=1
 arch=('x86_64')
 makedepends=('git' 'python-mako' 'libxml2' 'libx11' 'xorgproto' 'libdrm' 'libxshmfence'
              'wayland' 'wayland-protocols' 'zstd' 'elfutils' 'llvm'
              'libunwind' 'libxrandr'
-             'valgrind' 'meson')
+             'valgrind' 'meson' 'glslang')
 url="https://www.mesa3d.org/"
 license=('custom')
 source=("jupiter-mesa::git+ssh://git@gitlab.steamos.cloud/jupiter/mesa.git#tag=$_tag"
@@ -134,6 +134,7 @@ package_vulkan-radeon() {
   optdepends=('vulkan-mesa-layers: additional vulkan layers')
   provides=('vulkan-driver')
 
+  _install fakeinstall/usr/share/drirc.d/00-radv-defaults.conf
   _install fakeinstall/usr/share/vulkan/icd.d/radeon_icd*.json
   _install fakeinstall/usr/lib/libvulkan_radeon.so
 
