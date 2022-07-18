@@ -1,5 +1,5 @@
 
-`release @ 20220526.1`
+`release @ 20220718.1`
 ======================
 
 Valve packages
@@ -11,8 +11,7 @@ Valve packages
  * [`bluez-utils` — `jupiter-rel/bluez-5.63-1.7`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-rel/bluez-5.63-1.7)
  * [`f3` — `jupiter-rel/f3-8.0-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-rel/f3-8.0-2)
  * [`gamescope` — `jupiter-rel/gamescope-3.11.31.beta4-3`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-rel/gamescope-3.11.31.beta4-3)
- * [`jupiter-fan-control` — `jupiter-rel/jupiter-fan-control-20220426.1-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-rel/jupiter-fan-control-20220426.1-2)
- * [`jupiter-hw-support` — `jupiter-rel/jupiter-hw-support-3.2.20220526.01-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-rel/jupiter-hw-support-3.2.20220526.01-1)
+ * [`jupiter-fan-control` — `jupiter-rel/jupiter-fan-control-20220705.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-rel/jupiter-fan-control-20220705.1-1)
  * [`jupiter-legacy-support` — `jupiter-rel/jupiter-legacy-support-1.116-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-rel/jupiter-legacy-support-1.116-1)
  * [`kscreen` — `jupiter-rel/kscreen-5.23.5-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-rel/kscreen-5.23.5-2)
  * [`libva-mesa-driver` — `jupiter-rel/mesa-22.0.0_devel.148041.radeonsi_20220224-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-rel/mesa-22.0.0_devel.148041.radeonsi_20220224-1)
@@ -194,7 +193,7 @@ Arch Linux packages
  * [`graphite/1:1.3.14-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/graphite/-/tree/1:1.3.14-1)
  * [`grep/3.7-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/grep/-/tree/3.7-1)
  * [`groff/1.22.4-6`](https://gitlab.archlinux.org/archlinux/packaging/packages/groff/-/tree/1.22.4-6)
- * [`grub/2:2.06-4.2`](https://gitlab.archlinux.org/archlinux/packaging/packages/grub/-/tree/2:2.06-4.2)
+ * [`grub/2:2.06-4.5`](https://gitlab.archlinux.org/archlinux/packaging/packages/grub/-/tree/2:2.06-4.5)
  * [`gsettings-desktop-schemas/41.0-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/gsettings-desktop-schemas/-/tree/41.0-1)
  * [`gsm/1.0.19-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/gsm/-/tree/1.0.19-1)
  * [`gst-plugins-base/1.18.5-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/gst-plugins-base/-/tree/1.18.5-1)
@@ -238,6 +237,7 @@ Arch Linux packages
  * [`js78/78.15.0-3`](https://gitlab.archlinux.org/archlinux/packaging/packages/js78/-/tree/78.15.0-3)
  * [`json-c/0.15-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/json-c/-/tree/0.15-2)
  * [`json-glib/1.6.6-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/json-glib/-/tree/1.6.6-1)
+ * [`jupiter-hw-support/3.2.20220627.1-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/jupiter-hw-support/-/tree/3.2.20220627.1-1)
  * [`kaccounts-integration/21.12.1-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/kaccounts-integration/-/tree/21.12.1-1)
  * [`kactivities/5.90.0-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/kactivities/-/tree/5.90.0-1)
  * [`kactivities-stats/5.90.0-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/kactivities-stats/-/tree/5.90.0-1)
