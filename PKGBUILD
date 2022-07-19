@@ -4,7 +4,7 @@
 # PKGBUILD we only have access to prebuilt binaries.
 
 pkgname=jupiter-dock-updater-bin
-_srctag=jupiter-20220715.02
+_srctag=jupiter-20220719.01
 _srcver=${_srctag#jupiter-}
 pkgver=${_srcver//-/.}
 pkgrel=1
