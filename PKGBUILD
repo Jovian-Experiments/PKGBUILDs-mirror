@@ -2,8 +2,8 @@
 # Contributor: AndyRTR <andyrtr@archlinux.org>
 
 pkgname=xorg-xwayland-jupiter
-pkgver=jupiter.20220512.c838945c6
-_tag=jupiter-20220512
+pkgver=jupiter.20220720.9a2055dd6
+_tag=jupiter-20220720
 pkgrel=3
 arch=('x86_64')
 license=('custom')
