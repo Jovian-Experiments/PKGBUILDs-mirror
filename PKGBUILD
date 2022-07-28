@@ -1,7 +1,7 @@
 # Maintainer: Collabora Ltd <gael.portay@collabora.com>
 
 pkgname=steamos-customizations-jupiter
-_srctag=jupiter-20220713.1
+_srctag=jupiter-20220727.1
 _srcver=${_srctag#jupiter-}
 pkgver=${_srcver//-/.}
 pkgrel=2
@@ -10,10 +10,10 @@ arch=('any')
 url='http://repo.steampowered.com'
 license=('LGPLv2+')
 depends=('e2fsprogs' 'gptfdisk' 'rsync' 'util-linux')
-makedepends=('git')
+makedepends=('git' 'openssh')
 provides=("${pkgname%-git}")
 conflicts=("${pkgname%-git}")
-source=("${pkgname%-git}::git+ssh://git@gitlab.internal.steamos.cloud:/steam/steamos-customizations.git#tag=${_srctag}")
+source=("${pkgname%-git}::git+ssh://git@gitlab.steamos.cloud:/steam/steamos-customizations.git#tag=${_srctag}")
 md5sums=('SKIP')
 
 package() {
