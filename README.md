@@ -1,5 +1,5 @@
 
-`main @ 20220727.1000`
+`main @ 20220729.1000`
 ======================
 
 Valve packages
@@ -20,7 +20,7 @@ Valve packages
  * [`ibus-table-cangjie-lite` — `jupiter-main/ibus-table-cangjie-lite-1.8.8-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/ibus-table-cangjie-lite-1.8.8-2)
  * [`jupiter-dock-updater-bin` — `jupiter-main/jupiter-dock-updater-bin-20220719.01-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-dock-updater-bin-20220719.01-1)
  * [`jupiter-fan-control` — `jupiter-main/jupiter-fan-control-20220705.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-fan-control-20220705.1-1)
- * [`jupiter-hw-support` — `jupiter-main/jupiter-hw-support-20220727.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-hw-support-20220727.1-1)
+ * [`jupiter-hw-support` — `jupiter-main/jupiter-hw-support-20220729.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-hw-support-20220729.1-1)
  * [`jupiter-legacy-support` — `jupiter-main/jupiter-legacy-support-1.125-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-legacy-support-1.125-1)
  * [`kscreen` — `jupiter-main/kscreen-5.23.5-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/kscreen-5.23.5-2)
  * [`libnm` — `jupiter-main/networkmanager-1.34.0-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/networkmanager-1.34.0-1.1)
@@ -40,9 +40,9 @@ Valve packages
  * [`steam-im-modules` — `jupiter-main/steam-im-modules-jupiter.20220223-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steam-im-modules-jupiter.20220223-1)
  * [`steam-jupiter-stable` — `jupiter-main/steam-jupiter-stable-1.0.0.74-2.18`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steam-jupiter-stable-1.0.0.74-2.18)
  * [`steamdeck-kde-presets` — `jupiter-main/steamdeck-kde-presets-0.11-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steamdeck-kde-presets-0.11-1)
- * [`steamos-customizations-jupiter` — `jupiter-main/steamos-customizations-jupiter-20220713.1-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steamos-customizations-jupiter-20220713.1-2)
+ * [`steamos-customizations-jupiter` — `jupiter-main/steamos-customizations-jupiter-20220727.1-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steamos-customizations-jupiter-20220727.1-2)
  * [`steamos-devkit-service` — `jupiter-main/steamos-devkit-service-0.20220401.0-7`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steamos-devkit-service-0.20220401.0-7)
- * [`steamos-efi` — `jupiter-main/steamos-efi-20220615.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steamos-efi-20220615.1-1)
+ * [`steamos-efi` — `jupiter-main/steamos-efi-20220727.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steamos-efi-20220727.1-1)
  * [`ttf-twemoji-default` — `jupiter-main/ttf-twemoji-default-13.1.0-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/ttf-twemoji-default-13.1.0-2)
  * [`upower` — `jupiter-main/upower-0.99.15.jupiter-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/upower-0.99.15.jupiter-1)
  * [`vpower` — `jupiter-main/vpower-1.4.0-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/vpower-1.4.0-1)
