@@ -10,7 +10,6 @@ export HOMETEST_DESKTOP_SESSION=plasma
 
 export STEAM_USE_MANGOAPP=1
 export MANGOHUD_CONFIGFILE=$(mktemp /tmp/mangohud.XXXXXXXX)
-export MANGOAPP=1
 
 export STEAM_USE_DYNAMIC_VRS=1
 export RADV_FORCE_VRS_CONFIG_FILE=$(mktemp /tmp/radv_vrs.XXXXXXXX)
@@ -91,6 +90,9 @@ export vk_xwayland_wait_ready=false
 
 # Set refresh rate range and enable refresh rate switching
 export STEAM_DISPLAY_REFRESH_LIMITS=40,60
+
+# Let steam know it can unmount drives without superuser privileges
+export STEAM_ALLOW_DRIVE_UNMOUNT=1
 
 # Set input method modules for Qt/GTK that will show the Steam keyboard
 export QT_IM_MODULE=steam
