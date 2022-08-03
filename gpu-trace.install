@@ -1,0 +1,11 @@
+post_install() {
+    echo ":: Enabling and starting the gpu-trace service."
+    systemctl enable gpu-trace 
+    systemctl start gpu-trace 
+}
+
+post_upgrade() {
+    echo ":: Restarting gpu-trace service..."
+    systemctl daemon-reload
+    systemctl restart gpu-trace
+}
