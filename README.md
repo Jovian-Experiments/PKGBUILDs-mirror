@@ -1,5 +1,5 @@
 
-`release @ 20220802.1`
+`release @ 20220803.1`
 ======================
 
 Valve packages
@@ -7,7 +7,6 @@ Valve packages
 
 ### `jupiter-rel`
  * [`f3` — `jupiter-rel/f3-8.0-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-rel/f3-8.0-2)
- * [`gamescope` — `jupiter-rel/gamescope-3.11.33.beta1-3`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-rel/gamescope-3.11.33.beta1-3)
  * [`ibus-anthy` — `jupiter-rel/ibus-anthy-1.5.14-4`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-rel/ibus-anthy-1.5.14-4)
  * [`ibus-table-cangjie-lite` — `jupiter-rel/ibus-table-cangjie-lite-1.8.8-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-rel/ibus-table-cangjie-lite-1.8.8-2)
  * [`jupiter-dock-updater-bin` — `jupiter-rel/jupiter-dock-updater-bin-20220615.02-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-rel/jupiter-dock-updater-bin-20220615.02-1)
@@ -166,6 +165,7 @@ Arch Linux packages
  * [`fuse2/2.9.9-4`](https://gitlab.archlinux.org/archlinux/packaging/packages/fuse2/-/tree/2.9.9-4)
  * [`fuse3/3.10.5-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/fuse3/-/tree/3.10.5-1)
  * [`gamemode/1.6.1-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/gamemode/-/tree/1.6.1-1)
+ * [`gamescope/3.11.33.jupiter.3.3.1-4`](https://gitlab.archlinux.org/archlinux/packaging/packages/gamescope/-/tree/3.11.33.jupiter.3.3.1-4)
  * [`gawk/5.1.1-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/gawk/-/tree/5.1.1-1)
  * [`gc/8.2.0-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/gc/-/tree/8.2.0-2)
  * [`gcab/1.4-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/gcab/-/tree/1.4-1)
