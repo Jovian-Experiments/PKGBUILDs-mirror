@@ -1,8 +1,12 @@
-# Maintainer: Your Name <youremail@domain.com>
+# Maintainer: John Schoenick <johns@valvesoftware.com>
+
+# This traces back to the older incarnation of holo/steamos3 that didn't have things split cleanly into packages.
+# Everything still in here should be either removed or re-homed to a proper package.
+
 pkgname=jupiter-legacy-support
-pkgver=1.125
+pkgver=1.130
 pkgrel=1
-pkgdesc="Legacy support files from foxnet that haven't been split to their own thing"
+pkgdesc="Legacy jupiter-specific support files that haven't been split to their own package or removed."
 arch=(any)
 depends=(python3 python-psutil python-aiohttp nvme-cli)
 source=(jupiter-plasma-bootstrap
@@ -13,6 +17,9 @@ source=(jupiter-plasma-bootstrap
         flathub-beta.flatpakrepo
         flatpak-workaround.service
         flatpak-modify-flathub-beta.service
+        steamos-prepare-oobe-test
+        sudoers.d-wheel-prepare-oobe-test
+        org.valve.steamos.jupiter-legacy-support.policy
         black_800x1280.png
         white_800x1280.png)
 sha256sums=('b31fc36e455b0848fd5f02eaf9107a40f5bfa972674fb57e48aa8cad17d3f5db'
@@ -23,6 +30,9 @@ sha256sums=('b31fc36e455b0848fd5f02eaf9107a40f5bfa972674fb57e48aa8cad17d3f5db'
             '582cae3c9f9d4639f027defafe6fa33bda0a3a4d441290d926ad85a2be0f7206'
             'a1896990eb3aac319603bef9febc19d4819349e280a47d32af72d53f438b08be'
             'a7b8b21e285dac1f255546d1acc46d4423a1fa0e964153a96118b884001d0648'
+            'd8f2a3fcdd5dd3181694c5935079ffb020150be6a0665eab2531d86874e6fda1'
+            '3f3491c7ccf72b62094379495c73e6fdecd182d5aa30072b3b2407e331b96806'
+            '27739fb50e5c2dd50e3373b22b5ceabb6eb2f6f34b723794cf9a2f911a483f65'
             '942fbb9436835bdb3a87aa8d73b3461f4cee0bc2f58bfa308eeb1be6b52ccb39'
             'fd55e252b11a0b0d48b7147298f159b0470f29ccb6118a79a5692cc8c4635f5b')
 
@@ -42,6 +52,11 @@ package() {
 
   install -D -m644 "$srcdir"/flatpak-modify-flathub-beta.service "$pkgdir"/usr/lib/systemd/system/flatpak-modify-flathub-beta.service
   ln -sv ../flatpak-modify-flathub-beta.service "$pkgdir"/usr/lib/systemd/system/multi-user.target.wants/
+
+  # janky OOBE test utility
+  install -D -m755 "$srcdir"/steamos-prepare-oobe-test "$pkgdir"/usr/bin/steamos-prepare-oobe-test
+  install -D -m440 "$srcdir"/sudoers.d-wheel-prepare-oobe-test "$pkgdir"/etc/sudoers.d/wheel-prepare-oobe-test
+  install -D -m755 "$srcdir"/org.valve.steamos.jupiter-legacy-support.policy "$pkgdir"/usr/share/polkit-1/actions/org.valve.steamos.jupiter-legacy-support.policy
 
   # Plasma autostart helper
   install -D -m755 "$srcdir"/jupiter-plasma-bootstrap "$pkgdir"/usr/bin/jupiter-plasma-bootstrap
