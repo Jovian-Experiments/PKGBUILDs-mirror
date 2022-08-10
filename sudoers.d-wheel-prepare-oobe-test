@@ -1,0 +1,7 @@
+# This whitelists the exact invocations of the old OOBE test tool steam used prior to ~2022-08
+# to unblock testing without requiring everyone switch to main
+#
+# The updated script will self-elevate with policykit, so these can be dropped fairly shortly
+# once steam updates to not attempt to invoke with sudo
+%wheel ALL=(root) NOPASSWD: /usr/bin/steamos-prepare-oobe-test
+%wheel ALL=(root) NOPASSWD: /usr/bin/steamos-chroot --partset other -- rm -rf /var/lib/overlays/etc/upper/NetworkManager/
