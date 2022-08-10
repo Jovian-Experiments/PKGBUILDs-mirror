@@ -14,4 +14,5 @@ STEAM_DIR="$HOME"/.local/share/Steam
   mkdir -pv "$STEAM_DIR"
   echo -e "# OOBE Inhibit\nBootStrapperInhibitAll = enable" > "$STEAM_DIR"/Steam.cfg
 )
-exec /usr/lib/steam/steam "$@"
+
+exec /usr/lib/steam/steam -steamdeck "$@"
