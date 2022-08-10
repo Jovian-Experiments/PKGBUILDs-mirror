@@ -7,7 +7,8 @@
 _basename=steam
 pkgname=steam-jupiter-oobe
 pkgver=1.0.0.74
-pkgrel=2.19
+# based on upstream steam 1.0.0.74-2, based on steam-jupiter-stable rel 2.19.  Really overloading pkgrel's meaning here.
+pkgrel=2.1901
 pkgdesc="Valve's digital software delivery system - Jupiter bootstrapped packaging"
 url='https://steampowered.com/'
 arch=('x86_64')
@@ -31,7 +32,7 @@ conflicts=('steam')
 optdepends=('lib32-libnm: integration with networkmanager')
 
 # Jupiter: Including fully bootstrapped steam image on expected branch
-_fat_bootstrap=steam_jupiter_goldmaster_bootstrapped_20211122.tar.xz
+_fat_bootstrap=steam_jupiter_goldmaster_bootstrapped_20220810.tar.xz
 noextract=("$_fat_bootstrap")
 source=(https://repo.steampowered.com/${_basename}/pool/${_basename}/s/${_basename}/${_basename}_${pkgver}{.tar.gz,.dsc}
         http://latest-pacman.internal.steamos.cloud/misc/steam-snapshots/"$_fat_bootstrap"
@@ -40,15 +41,15 @@ source=(https://repo.steampowered.com/${_basename}/pool/${_basename}/s/${_basena
         steam-runtime.sh)
 sha512sums=('2a08d9bb6e17a481c577b6aad7d53b51c7d9f6638aaccffc6b9f750dca4a1f9d12c02fd1446c174e979605ef29bdc10fc8249fd97fe79d62934efe26f4ac7369'
             '754161985b7a2dc5b10c06ec88f6a4eeef9b4dc0daddeb33c27d01a948223b3b2b17da6d14144f772f7b3156665b10543ad9a860b471c72e2d6bd543f143d964'
-            'e39cf7a5df37687f9bf2034b1dd9318e1db46be5d30e3c84eed68b0ad1791ae780363e95731ffda5e113f1a24484fcbb14c876846e8116e7aae9729f06f53889'
+            'af18a571bdca17fc5d404e2332cc1f593931a3514d760ed36e95ba515142290f7391bd33cf5d0ad34b39c8e63b0bc3f745b2b1e444ca04002bc170cb28150db7'
             '85c66db5619fc70553fb4daa4bb9d7784f40586c771853d91147de99c48c58ac5727f2bae4e165a8fa898e9bcf4fb3bcce6c1409cc8edcf85a3965572456990d'
-            '39ec325b406cb53f80c2a8eaa68ab0c65effa3ebb427ffbc112f848c70f7ae3766b3ce1c4f6541fe9dc8c84507bb1946f601c11aa5ac0557e03e1e50e408ebd5'
+            'da89061db6d4bf61b395339442483570c0c9c5889d609d9d84aed07d8e7995621929e3c82450059304a770f6429744dce68b0d939dc4ebe5b6b1c5d4eed33b62'
             '5e75c019e9fe8c67d686c4e3343dac1180a69a4bdb7d39b333415c63201eef9b98da5619dbf6fd8daa6884e65bc7f8afc9e52778682425e5a75987d527eae6f0')
 b2sums=('dbe02066d08530378ff922daf8733ad373c0eae9be94479aba94077a0f5c093afc39a95c6770494655af1c33895c981219418f8d4024c391a337d16ec32253c1'
         '3e82229128b10edf8d11a2130490e8f75b2ec91ccaf7e103d7c734b123791285c805bfb303aa374e04087ffdb501510eab9b2a02953e1ec78c656677786eeff9'
-        'b97d702bba7106fa68fce546a4af3caed1f85c24a987a413b59e489abc13075d099a7e9fe6e75285edf23ff2e221b2deb7876835ae93f53d4a267da6e9e347ed'
+        '976d1b204755224028f48d6115c8fc00c040b9b5bb978c7ee88da57877b700e60706874142a6e965c7830cf57e9e5c84b62b7e1643c6d6fc47e0eb8e8726c7ca'
         '8ae0bfdf6bc62460a64d84acb3dbd5d95257749f2560938eefd68a58727f310c8450ce756ed938ebe46a3074860d1abdd744689caf9bde01c89ae02f8c63179e'
-        '66c11b243d0c6bdc61c4977e789261ffd3054ba295110814a1cc4453c3f7145c1490f84905233b9de44701c24f882cefa1d6b227664e86782aa4105e376e5d16'
+        'bc9998406c08107e5a1f3d8cb3f2bd8f568c86af0841408244bc3b28c5a6cb78b6ac9aa6fb6ea05decb7894bb68d0c28f10b438a2a7bc58fd57780c40f4b22f1'
         'c6bac99336b7c30fec7cdbaf9e949555c687dd9dff50bcae136134d6314f4b841f5fc66ddb2caac1b003690b926fd4afbdc11da143b4674db4b75f27709fdd23')
 
 validpgpkeys=('BA1816EF8E75005FCF5E27A1F24AEA9FB05498B7') # linux@steampowered.com
