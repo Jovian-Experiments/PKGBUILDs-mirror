@@ -1,0 +1,102 @@
+#!/bin/bash
+
+## This service is development-only, and will not persist to production units.  It enrolls the unit in a private
+## 'foxnet' wireguard VPN, exposes SSH access to it, allows remote administration, as well as submission of telemetry if
+## the `foxnetstatsd` service is available.
+##
+## This service will only function if this unit has been given a foxnet certificate manually.  To disable it entirely,
+## disable the `foxnet` service if enabled, and remove the 'foxnet' NetworkManager connection, if present.
+##
+##   systemctl disable --now foxnet
+##   nmcli connection delete foxnet  # If it has run once already
+##
+## The certificate is stored at /esp/foxnet.conf -- deleting this will ensure the script has no way to gain access or
+## run.
+##
+## Earlier builds of the OS had a mechanism to attempt to auto-obtain a certificate, but this is no longer possible and
+## was removed below.
+
+set -eux
+
+die() { echo >&2 "!! $*"; exit 1; }
+
+LOCAL_CONF=/esp/foxnet.conf
+FOXNET=foxnet@foxnet-control.steamos.cloud
+
+# Check explicit inhibit file and bail
+BOOTSTRAP_INHIBIT=/home/.steamos/inhibit-foxnet
+if [[ -e $BOOTSTRAP_INHIBIT ]]; then
+  echo "\"$BOOTSTRAP_INHIBIT\" inhibits foxnet bootstrapping, done"
+  exit 0
+fi
+
+# Do nothing if there is no certificate.
+if [[ ! -f $LOCAL_CONF ]]; then
+  echo "No foxnet certificate at $LOCAL_CONF - exiting"
+  exit 0
+fi
+
+# If there is a certificate, setup connections
+
+# For foxnet-enabled devices, start ssh
+systemctl start sshd || true
+
+# Bake in initial test wifi for these units
+if ! nmcli connection show VC &>/dev/null; then
+  nmcli connection add type wifi con-name VC ssid VC ifname "" -- +wifi-sec.key-mgmt wpa-psk +wifi-sec.psk thecakeisalie
+fi
+
+# Create the foxnet wireguard connection
+if ! nmcli connection show foxnet &>/dev/null; then
+  echo "Registering wireguard"
+  # Some network manager bug (?) causes it to use this connection's DNS (nothing) if it is started before wifi, despite
+  # not providing any.  Giving it lower dns-priority than normal connections fixes this.
+  #
+  # It seems some network manager change defaulted new VPN connections to -10 priority, triggering this.  It is
+  # non-deterministic and seems to only occur reliably on initial connection creation.
+  echo "Registering wireguard config..."
+  nmcli connection import type wireguard file "$LOCAL_CONF"
+  nmcli connection modify foxnet +ipv4.dns-priority 99 +ipv6.dns-priority 99
+  # Because importing the connection started it, nmcli is going to basically refuse to fix DNS until all connections
+  # restart.
+  nmcli networking off && nmcli networking on
+fi
+
+# Read hostname from config if known
+hostname="$(sed -r 's/^# *Name: (.*)$/\1/;t;d' "$LOCAL_CONF")"
+
+# Set hostname if it is a vanilla image hostname
+if [[ $(cat /etc/hostname) = steamos ]]; then
+  # If this unit has a bad hostname stop sending bogus stats.
+  systemctl disable --now foxnetstatsd || true
+  if [[ -n $hostname ]]; then
+    echo >&2 "Setting hostname to: \"$hostname\""
+    # Changing hostname while logged in murders X sessions, just write to config for next boot
+    echo "$hostname" > /etc/hostname
+  else
+    echo >&2 "!! No hostname in our certificate, not changing"
+  fi
+fi
+
+# Temporary work around for steamos-session-select
+# https://gitlab.steamos.cloud/jupiter/tasks/-/issues/83
+[[ -e /usr/bin/steamos-session-select ]] || ln -sv ../local/bin/steamos-session-select /usr/bin/steamos-session-select
+
+# Start the stats daemon only after we have done initial setup once
+# (assuming we found a hostname, don't start as 'steamos')
+[[ $(cat /etc/hostname) = steamos ]] || systemctl enable --now foxnetstatsd
+
+# Try to accept a foxnet command
+while true; do
+  echo "Checking for available command"
+  if [[ -e /dev/disk/by-label/ev1command ]]; then
+    mount LABEL="ev1command" /mnt
+    exec /mnt/ev1command.sh
+  elif curl -f -o /tmp/ev1command.sh 'http://10.77.77.1/ev1command.sh'; then
+    echo "Got ev1command.sh from 10.77.77.1"
+    exec bash /tmp/ev1command.sh
+  fi
+  echo "Found no command, retrying in 30 seconds"
+  sleep 30
+done
+

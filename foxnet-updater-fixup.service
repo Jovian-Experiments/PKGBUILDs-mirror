@@ -1,0 +1,9 @@
+[Unit]
+Description=Foxnet update configuration update
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/foxnet-updater-fixup
+
+[Install]
+WantedBy=multi-user.target
