@@ -1,0 +1,9 @@
+[Unit]
+Description=Foxnet service
+After=network-online.target
+
+[Service]
+ExecStart=/usr/bin/foxnet-init
+
+[Install]
+WantedBy=multi-user.target
