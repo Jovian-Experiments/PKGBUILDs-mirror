@@ -1,5 +1,5 @@
 
-`main @ 20220812.1000`
+`main @ 20220812.1001`
 ======================
 
 Valve packages
@@ -21,7 +21,7 @@ Valve packages
  * [`jupiter-dock-updater-bin` — `jupiter-main/jupiter-dock-updater-bin-20220813.01-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-dock-updater-bin-20220813.01-1)
  * [`jupiter-fan-control` — `jupiter-main/jupiter-fan-control-20220705.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-fan-control-20220705.1-1)
  * [`jupiter-hw-support` — `jupiter-main/jupiter-hw-support-20220812.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-hw-support-20220812.1-1)
- * [`jupiter-legacy-support` — `jupiter-main/jupiter-legacy-support-1.130-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-legacy-support-1.130-1)
+ * [`jupiter-legacy-support` — `jupiter-main/jupiter-legacy-support-1.131-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-legacy-support-1.131-1)
  * [`kscreen` — `jupiter-main/kscreen-5.23.5-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/kscreen-5.23.5-2)
  * [`libnm` — `jupiter-main/networkmanager-1.34.0-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/networkmanager-1.34.0-1.1)
  * [`libva-mesa-driver` — `jupiter-main/mesa-22.0.2.150118.radeonsi_20220427-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/mesa-22.0.2.150118.radeonsi_20220427-1)
