@@ -1,5 +1,5 @@
 
-`main @ 20220810.1000`
+`main @ 20220812.1000`
 ======================
 
 Valve packages
@@ -20,8 +20,8 @@ Valve packages
  * [`ibus-table-cangjie-lite` — `jupiter-main/ibus-table-cangjie-lite-1.8.8-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/ibus-table-cangjie-lite-1.8.8-2)
  * [`jupiter-dock-updater-bin` — `jupiter-main/jupiter-dock-updater-bin-20220813.01-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-dock-updater-bin-20220813.01-1)
  * [`jupiter-fan-control` — `jupiter-main/jupiter-fan-control-20220705.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-fan-control-20220705.1-1)
- * [`jupiter-hw-support` — `jupiter-main/jupiter-hw-support-20220810.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-hw-support-20220810.1-1)
- * [`jupiter-legacy-support` — `jupiter-main/jupiter-legacy-support-1.125-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-legacy-support-1.125-1)
+ * [`jupiter-hw-support` — `jupiter-main/jupiter-hw-support-20220812.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-hw-support-20220812.1-1)
+ * [`jupiter-legacy-support` — `jupiter-main/jupiter-legacy-support-1.130-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-legacy-support-1.130-1)
  * [`kscreen` — `jupiter-main/kscreen-5.23.5-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/kscreen-5.23.5-2)
  * [`libnm` — `jupiter-main/networkmanager-1.34.0-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/networkmanager-1.34.0-1.1)
  * [`libva-mesa-driver` — `jupiter-main/mesa-22.0.2.150118.radeonsi_20220427-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/mesa-22.0.2.150118.radeonsi_20220427-1)
@@ -557,6 +557,7 @@ Arch Linux packages
  * [`npth/1.6-3`](https://gitlab.archlinux.org/archlinux/packaging/packages/npth/-/tree/1.6-3)
  * [`nspr/4.33-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/nspr/-/tree/4.33-1)
  * [`nss/3.74-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/nss/-/tree/3.74-1)
+ * [`nss-mdns/0.15.1-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/nss-mdns/-/tree/0.15.1-1)
  * [`ntfs-3g/2021.8.22-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/ntfs-3g/-/tree/2021.8.22-1)
  * [`ntp/4.2.8.p15-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/ntp/-/tree/4.2.8.p15-1)
  * [`numactl/2.0.14-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/numactl/-/tree/2.0.14-1)
