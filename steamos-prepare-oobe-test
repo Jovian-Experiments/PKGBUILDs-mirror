@@ -64,7 +64,7 @@ cmd steamos-atomupd-client -d --update-from-url="$url" || die "Install failed, s
 
 if [[ -n $arg_clean ]]; then
   log "--clean specified, removing network configurations from remote side"
-  cmd steamos-chroot --partset other -- rm -rf /var/lib/overlays/etc/upper/NetworkManager/
+  cmd steamos-chroot --partset other -- rm -rf /var/lib/overlays/etc/upper/NetworkManager/ /var/lib/iwd/
 fi
 
 log "Other slot has been updated to version $ver and ready to be used as a OOBE image test"
