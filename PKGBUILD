@@ -2,9 +2,9 @@
 # Contributor: AndyRTR <andyrtr@archlinux.org>
 
 pkgname=xorg-xwayland-jupiter
-pkgver=jupiter.20220720.9a2055dd6
-_tag=jupiter-20220720
-pkgrel=3
+pkgver=jupiter.20220815.ce24a1213
+_tag=jupiter-20220815
+pkgrel=1
 arch=('x86_64')
 license=('custom')
 groups=('xorg')
@@ -12,7 +12,7 @@ url="https://xorg.freedesktop.org"
 pkgdesc="Run X clients under Wayland (git version)"
 depends=('nettle' 'libegl' 'libepoxy' 'systemd-libs' 'libxfont2'
          'pixman' 'xorg-server-common' 'libxcvt')
-makedepends=('meson' 'git'
+makedepends=('meson' 'git' 'openssh'
              'xorgproto' 'xtrans'
              'pixman' 'libxkbfile' 'libxfont2' 'dbus'
              'xorg-font-util'
@@ -21,7 +21,7 @@ makedepends=('meson' 'git'
              'systemd'
              'egl-wayland'
 )
-source=("xserver-jupiter::git+ssh://git@gitlab.internal.steamos.cloud/jupiter/xserver.git#tag=$_tag")
+source=("xserver-jupiter::git+ssh://git@gitlab.steamos.cloud/jupiter/xserver.git#tag=$_tag")
 sha256sums=('SKIP')
 provides=('xorg-xwayland' 'xorg-server-xwayland' 'xorg-server-xwayland-jupiter')
 conflicts=('xorg-xwayland' 'xorg-server-xwayland' 'xorg-server-xwayland-jupiter')
