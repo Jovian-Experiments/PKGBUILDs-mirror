@@ -1,5 +1,5 @@
 
-`main @ 20220812.1001`
+`main @ 20220816.1000`
 ======================
 
 Valve packages
@@ -14,7 +14,7 @@ Valve packages
  * [`bluez-plugins` — `jupiter-main/bluez-5.63-1.8`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/bluez-5.63-1.8)
  * [`bluez-utils` — `jupiter-main/bluez-5.63-1.8`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/bluez-5.63-1.8)
  * [`f3` — `jupiter-main/f3-8.0-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/f3-8.0-2)
- * [`gamescope` — `jupiter-main/gamescope-3.11.33.beta1-4`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/gamescope-3.11.33.beta1-4)
+ * [`gamescope` — `jupiter-main/gamescope-3.11.35-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/gamescope-3.11.35-1)
  * [`gpu-trace` — `jupiter-main/gpu-trace-2.7-3`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/gpu-trace-2.7-3)
  * [`ibus-anthy` — `jupiter-main/ibus-anthy-1.5.14-4`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/ibus-anthy-1.5.14-4)
  * [`ibus-table-cangjie-lite` — `jupiter-main/ibus-table-cangjie-lite-1.8.8-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/ibus-table-cangjie-lite-1.8.8-2)
@@ -26,7 +26,7 @@ Valve packages
  * [`libnm` — `jupiter-main/networkmanager-1.34.0-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/networkmanager-1.34.0-1.1)
  * [`libva-mesa-driver` — `jupiter-main/mesa-22.0.2.150118.radeonsi_20220427-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/mesa-22.0.2.150118.radeonsi_20220427-1)
  * [`linux-firmware-neptune` — `jupiter-main/linux-firmware-neptune-20220624.650ab31-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/linux-firmware-neptune-20220624.650ab31-1)
- * [`linux-neptune` — `jupiter-main/linux-neptune-5.13.0.valve22.final2-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/linux-neptune-5.13.0.valve22.final2-1)
+ * [`linux-neptune` — `jupiter-main/linux-neptune-5.13.0.valve23-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/linux-neptune-5.13.0.valve23-1)
  * [`mangohud` — `jupiter-main/mangohud-0.6.7.1.r38.g421ca3b-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/mangohud-0.6.7.1.r38.g421ca3b-1)
  * [`mesa` — `jupiter-main/mesa-22.0.2.150118.radeonsi_20220427-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/mesa-22.0.2.150118.radeonsi_20220427-1)
  * [`mesa-vdpau` — `jupiter-main/mesa-22.0.2.150118.radeonsi_20220427-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/mesa-22.0.2.150118.radeonsi_20220427-1)
@@ -48,7 +48,7 @@ Valve packages
  * [`vpower` — `jupiter-main/vpower-1.4.0-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/vpower-1.4.0-1)
  * [`wireplumber` — `jupiter-main/wireplumber-0.4.10.5.dv1-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/wireplumber-0.4.10.5.dv1-2)
  * [`xdg-desktop-portal` — `jupiter-main/xdg-desktop-portal-1.12.1-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/xdg-desktop-portal-1.12.1-1.1)
- * [`xorg-xwayland-jupiter` — `jupiter-main/xorg-xwayland-jupiter-jupiter.20220720.9a2055dd6-3`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/xorg-xwayland-jupiter-jupiter.20220720.9a2055dd6-3)
+ * [`xorg-xwayland-jupiter` — `jupiter-main/xorg-xwayland-jupiter-jupiter.20220815.ce24a1213-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/xorg-xwayland-jupiter-jupiter.20220815.ce24a1213-1)
 
 Arch Linux packages
 -------------------
