@@ -2,7 +2,7 @@
 # Maintainer: Jan Alexander Steffens (heftig) <heftig@archlinux.org>
 
 pkgbase=linux-neptune
-_tag=5.13.0-valve22-final2
+_tag=5.13.0-valve23
 pkgver=${_tag//-/.}
 pkgrel=1
 pkgdesc='Linux'
@@ -18,7 +18,7 @@ makedepends=(
 options=('!strip' '!debug')
 _srcname=archlinux-linux-neptune
 source=(
-  "$_srcname::git+ssh://git@gitlab.internal.steamos.cloud/jupiter/linux-integration.git#tag=$_tag"
+  "$_srcname::git+ssh://git@gitlab.steamos.cloud/jupiter/linux-integration.git#tag=$_tag"
   config         # the main kernel config file
   90-splash.hook
   splash
