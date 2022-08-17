@@ -1,5 +1,5 @@
 
-`main @ 20220816.1000`
+`main @ 20220817.1000`
 ======================
 
 Valve packages
@@ -14,7 +14,7 @@ Valve packages
  * [`bluez-plugins` — `jupiter-main/bluez-5.63-1.8`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/bluez-5.63-1.8)
  * [`bluez-utils` — `jupiter-main/bluez-5.63-1.8`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/bluez-5.63-1.8)
  * [`f3` — `jupiter-main/f3-8.0-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/f3-8.0-2)
- * [`gamescope` — `jupiter-main/gamescope-3.11.35-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/gamescope-3.11.35-1)
+ * [`gamescope` — `jupiter-main/gamescope-3.11.36-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/gamescope-3.11.36-1)
  * [`gpu-trace` — `jupiter-main/gpu-trace-2.7-3`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/gpu-trace-2.7-3)
  * [`ibus-anthy` — `jupiter-main/ibus-anthy-1.5.14-4`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/ibus-anthy-1.5.14-4)
  * [`ibus-table-cangjie-lite` — `jupiter-main/ibus-table-cangjie-lite-1.8.8-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/ibus-table-cangjie-lite-1.8.8-2)
