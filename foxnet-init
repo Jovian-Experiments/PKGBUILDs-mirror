@@ -59,7 +59,7 @@ if ! nmcli connection show foxnet &>/dev/null; then
   nmcli connection modify foxnet +ipv4.dns-priority 99 +ipv6.dns-priority 99
   # Because importing the connection started it, nmcli is going to basically refuse to fix DNS until all connections
   # restart.
-  nmcli networking off && nmcli networking on
+  nmcli networking off && nmcli networking on && nmcli connection up foxnet
 fi
 
 # Read hostname from config if known
