@@ -2,7 +2,7 @@
 # Maintainer: Jan Alexander Steffens (heftig) <heftig@archlinux.org>
 
 pkgbase=linux-neptune
-_tag=5.13.0-valve23
+_tag=5.13.0-valve23-plus-tearing-experimental-for-main
 pkgver=${_tag//-/.}
 pkgrel=1
 pkgdesc='Linux'
