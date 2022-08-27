@@ -1,8 +1,13 @@
 # Maintainer: Joshua Ashton <joshua@froggi.es>
 
+# This package provides a minimal instance of RenderDoc
+# that simply provides capturing and replay server facilities.
+#
+# If you need a GUI, grab that from renderdoc, as it provides qrenderdoc.
+
 pkgname=renderdoc-minimal
 pkgver=1.21
-pkgrel=2
+pkgrel=4
 pkgdesc="OpenGL and Vulkan debugging tool"
 arch=(x86_64)
 url="https://github.com/baldurk/renderdoc"
@@ -33,8 +38,8 @@ build() {
 
 package() {
   make DESTDIR="${pkgdir}" -C "${srcdir}/renderdoc-${pkgver}"/build install
-  mkdir -p "${pkgdir}/usr/share/licenses/renderdoc"
-  install -Dm644 "${srcdir}/renderdoc-${pkgver}/LICENSE.md" "${pkgdir}/usr/share/licenses/renderdoc/LICENSE"
+  mkdir -p "${pkgdir}/usr/share/licenses/${pkgname}"
+  install -Dm644 "${srcdir}/renderdoc-${pkgver}/LICENSE.md" "${pkgdir}/usr/share/licenses/${pkgname}/LICENSE"
 }
 
 # vim:set ts=2 sw=2 et:
