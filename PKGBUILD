@@ -1,9 +1,14 @@
 # Maintainer: Joshua Ashton <joshua@froggi.es>
 
+# This package provides a minimal instance of RenderDoc
+# that simply provides capturing and replay server facilities.
+#
+# If you need a GUI, grab that from renderdoc, as it provides qrenderdoc.
+
 pkgname=renderdoc-minimal
 pkgver=1.21
-pkgrel=3
-pkgdesc="OpenGL and Vulkan debugging tool"
+pkgrel=6
+pkgdesc="OpenGL and Vulkan debugging tool (minimal, capture + replay server only)"
 arch=(x86_64)
 url="https://github.com/baldurk/renderdoc"
 license=("MIT")
