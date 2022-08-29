@@ -1,5 +1,5 @@
 
-`main @ 20220825.1000`
+`main @ 20220829.1000`
 ======================
 
 Valve packages
@@ -36,6 +36,7 @@ Valve packages
  * [`plasma-wayland-session` — `jupiter-main/plasma-workspace-5.23.5-5`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/plasma-workspace-5.23.5-5)
  * [`plasma-workspace` — `jupiter-main/plasma-workspace-5.23.5-5`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/plasma-workspace-5.23.5-5)
  * [`python-crcmod` — `jupiter-main/python-crcmod-1.7-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/python-crcmod-1.7-1)
+ * [`renderdoc-minimal` — `jupiter-main/renderdoc-minimal-1.21-6`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/renderdoc-minimal-1.21-6)
  * [`sddm-wayland` — `jupiter-main/sddm-wayland-v0.19.0.valve4.d19813cb03c7d71b896aead28e5285bc131500a9-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/sddm-wayland-v0.19.0.valve4.d19813cb03c7d71b896aead28e5285bc131500a9-1)
  * [`steam-im-modules` — `jupiter-main/steam-im-modules-jupiter.20220223-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steam-im-modules-jupiter.20220223-1)
  * [`steam-jupiter-stable` — `jupiter-main/steam-jupiter-stable-1.0.0.74-2.19`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steam-jupiter-stable-1.0.0.74-2.19)
