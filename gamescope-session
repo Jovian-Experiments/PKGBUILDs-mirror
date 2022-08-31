@@ -79,6 +79,9 @@ export STEAM_MULTIPLE_XWAYLANDS=1
 # We have the Mesa integration for the fifo-based dynamic fps-limiter
 export STEAM_GAMESCOPE_DYNAMIC_FPSLIMITER=1
 
+# Support for gamescope tearing with GAMESCOPE_ALLOW_TEARING atom
+export STEAM_GAMESCOPE_HAS_TEARING_SUPPORT=1
+
 # We have gamma/degamma exponent support
 export STEAM_GAMESCOPE_COLOR_TOYS=1
 
