@@ -1,7 +1,7 @@
 # Maintainer: Pierre-Loup A. Griffais (pgriffais@valvesoftware.com)
 
 pkgname=jupiter-hw-support
-_srctag=jupiter-20220909.1
+_srctag=jupiter-20220912.1
 _srcver=${_srctag#jupiter-}
 pkgver=${_srcver//-/.}
 pkgrel=1
