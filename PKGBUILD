@@ -7,8 +7,8 @@ pkgbase=mesa-radv
 # Jupiter: only build RADV, the rest comes from upstream/Arch Mesa
 pkgname=('vulkan-radeon')
 pkgdesc="An open-source implementation of the OpenGL specification"
-_tag=jupiter-22.2.1.2
-pkgver=22.2.0_devel.152971.jupiter_22.2.1.2
+_tag=jupiter-22.2.1.3
+pkgver=22.2.0_devel.152974.jupiter_22.2.1.3
 pkgrel=1
 arch=('x86_64')
 makedepends=('git' 'python-mako' 'libxml2' 'libx11' 'xorgproto' 'libdrm' 'libxshmfence'
