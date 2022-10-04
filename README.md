@@ -1,5 +1,5 @@
 
-`main @ 20220927.1000`
+`main @ 20221004.1000`
 ======================
 
 Valve packages
@@ -14,13 +14,14 @@ Valve packages
  * [`bluez-plugins` — `jupiter-main/bluez-5.63-1.8`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/bluez-5.63-1.8)
  * [`bluez-utils` — `jupiter-main/bluez-5.63-1.8`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/bluez-5.63-1.8)
  * [`f3` — `jupiter-main/f3-8.0-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/f3-8.0-2)
- * [`gamescope` — `jupiter-main/gamescope-3.11.45.2-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/gamescope-3.11.45.2-1)
+ * [`flatpak` — `jupiter-main/flatpak-1.12.4-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/flatpak-1.12.4-1.1)
+ * [`gamescope` — `jupiter-main/gamescope-3.11.47-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/gamescope-3.11.47-1)
  * [`gpu-trace` — `jupiter-main/gpu-trace-2.7-3`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/gpu-trace-2.7-3)
  * [`ibus-anthy` — `jupiter-main/ibus-anthy-1.5.14-4`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/ibus-anthy-1.5.14-4)
  * [`ibus-table-cangjie-lite` — `jupiter-main/ibus-table-cangjie-lite-1.8.8-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/ibus-table-cangjie-lite-1.8.8-2)
  * [`jupiter-dock-updater-bin` — `jupiter-main/jupiter-dock-updater-bin-20220921.01-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-dock-updater-bin-20220921.01-1)
  * [`jupiter-fan-control` — `jupiter-main/jupiter-fan-control-20220705.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-fan-control-20220705.1-1)
- * [`jupiter-hw-support` — `jupiter-main/jupiter-hw-support-20220923.2-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-hw-support-20220923.2-1)
+ * [`jupiter-hw-support` — `jupiter-main/jupiter-hw-support-20221004.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-hw-support-20221004.1-1)
  * [`jupiter-legacy-support` — `jupiter-main/jupiter-legacy-support-1.131-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-legacy-support-1.131-1)
  * [`kscreen` — `jupiter-main/kscreen-5.23.5-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/kscreen-5.23.5-2)
  * [`libnm` — `jupiter-main/networkmanager-1.34.0-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/networkmanager-1.34.0-1.1)
@@ -169,7 +170,6 @@ Arch Linux packages
  * [`findutils/4.8.0-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/findutils/-/tree/4.8.0-1)
  * [`fish/3.3.1-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/fish/-/tree/3.3.1-1)
  * [`flac/1.3.3-3`](https://gitlab.archlinux.org/archlinux/packaging/packages/flac/-/tree/1.3.3-3)
- * [`flatpak/1.12.4-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/flatpak/-/tree/1.12.4-1)
  * [`fontconfig/2:2.13.94-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/fontconfig/-/tree/2:2.13.94-2)
  * [`frameworkintegration/5.90.0-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/frameworkintegration/-/tree/5.90.0-2)
  * [`freerdp/2:2.5.0-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/freerdp/-/tree/2:2.5.0-1)
