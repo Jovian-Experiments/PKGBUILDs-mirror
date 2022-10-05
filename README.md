@@ -1,5 +1,5 @@
 
-`release @ 20220817.1`
+`release @ 20221005.1`
 ======================
 
 Valve packages
@@ -7,17 +7,18 @@ Valve packages
 
 ### `jupiter-rel`
  * [`f3` — `jupiter-rel/f3-8.0-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-rel/f3-8.0-2)
- * [`gamescope` — `jupiter-rel/gamescope-3.11.33.jupiter.3.3.2-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-rel/gamescope-3.11.33.jupiter.3.3.2-1)
+ * [`gamescope` — `jupiter-rel/gamescope-3.11.47.minimal.jupiter.3.3.2-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-rel/gamescope-3.11.47.minimal.jupiter.3.3.2-1)
  * [`ibus-anthy` — `jupiter-rel/ibus-anthy-1.5.14-4`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-rel/ibus-anthy-1.5.14-4)
  * [`ibus-table-cangjie-lite` — `jupiter-rel/ibus-table-cangjie-lite-1.8.8-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-rel/ibus-table-cangjie-lite-1.8.8-2)
- * [`jupiter-dock-updater-bin` — `jupiter-rel/jupiter-dock-updater-bin-20220813.01-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-rel/jupiter-dock-updater-bin-20220813.01-1)
+ * [`jupiter-dock-updater-bin` — `jupiter-rel/jupiter-dock-updater-bin-20220921.01-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-rel/jupiter-dock-updater-bin-20220921.01-1)
  * [`jupiter-fan-control` — `jupiter-rel/jupiter-fan-control-20220705.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-rel/jupiter-fan-control-20220705.1-1)
- * [`jupiter-hw-support` — `jupiter-rel/jupiter-hw-support-3.3.1.20220812.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-rel/jupiter-hw-support-3.3.1.20220812.1-1)
+ * [`jupiter-hw-support` — `jupiter-rel/jupiter-hw-support-3.3.2.20220926.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-rel/jupiter-hw-support-3.3.2.20220926.1-1)
  * [`jupiter-legacy-support` — `jupiter-rel/jupiter-legacy-support-1.12402-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-rel/jupiter-legacy-support-1.12402-1)
  * [`kscreen` — `jupiter-rel/kscreen-5.23.5-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-rel/kscreen-5.23.5-2)
  * [`linux-firmware-neptune` — `jupiter-rel/linux-firmware-neptune-20220624.650ab31-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-rel/linux-firmware-neptune-20220624.650ab31-1)
- * [`linux-neptune` — `jupiter-rel/linux-neptune-5.13.0.valve21.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-rel/linux-neptune-5.13.0.valve21.1-1)
+ * [`linux-neptune` — `jupiter-rel/linux-neptune-5.13.0.valve21.3-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-rel/linux-neptune-5.13.0.valve21.3-1)
  * [`mangohud` — `jupiter-rel/mangohud-0.6.7.1.r16.gf81369b-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-rel/mangohud-0.6.7.1.r16.gf81369b-1)
+ * [`renderdoc-minimal` — `jupiter-rel/renderdoc-minimal-1.22-6`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-rel/renderdoc-minimal-1.22-6)
  * [`steam-im-modules` — `jupiter-rel/steam-im-modules-jupiter.20220223-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-rel/steam-im-modules-jupiter.20220223-1)
  * [`steamdeck-kde-presets` — `jupiter-rel/steamdeck-kde-presets-0.11-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-rel/steamdeck-kde-presets-0.11-1)
  * [`steamos-customizations-jupiter` — `jupiter-rel/steamos-customizations-jupiter-20220617.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-rel/steamos-customizations-jupiter-20220617.1-1)
@@ -25,6 +26,7 @@ Valve packages
  * [`steamos-efi` — `jupiter-rel/steamos-efi-20220615.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-rel/steamos-efi-20220615.1-1)
  * [`ttf-twemoji-default` — `jupiter-rel/ttf-twemoji-default-13.1.0-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-rel/ttf-twemoji-default-13.1.0-2)
  * [`vpower` — `jupiter-rel/vpower-1.4.0-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-rel/vpower-1.4.0-1)
+ * [`wayland` — `jupiter-rel/wayland-1.21.0-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-rel/wayland-1.21.0-1)
  * [`wireplumber` — `jupiter-rel/wireplumber-0.4.10.5.dv1-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-rel/wireplumber-0.4.10.5.dv1-2)
  * [`xdg-desktop-portal` — `jupiter-rel/xdg-desktop-portal-1.12.1-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-rel/xdg-desktop-portal-1.12.1-1.1)
  * [`xorg-xwayland-jupiter` — `jupiter-rel/xorg-xwayland-jupiter-jupiter.20220512.c838945c6-3`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-rel/xorg-xwayland-jupiter-jupiter.20220512.c838945c6-3)
@@ -768,9 +770,8 @@ Arch Linux packages
  * [`vmaf/1.5.3-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/vmaf/-/tree/1.5.3-1)
  * [`volume_key/0.3.12-7`](https://gitlab.archlinux.org/archlinux/packaging/packages/volume_key/-/tree/0.3.12-7)
  * [`vulkan-icd-loader/1.2.203-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/vulkan-icd-loader/-/tree/1.2.203-1)
- * [`vulkan-radeon/22.2.0_devel.152971.jupiter_22.2.1.2-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/vulkan-radeon/-/tree/22.2.0_devel.152971.jupiter_22.2.1.2-1)
+ * [`vulkan-radeon/22.2.0_devel.152974.jupiter_22.2.1.3-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/vulkan-radeon/-/tree/22.2.0_devel.152974.jupiter_22.2.1.3-1)
  * [`vulkan-tools/1.2.203-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/vulkan-tools/-/tree/1.2.203-1)
- * [`wayland/1.20.0-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/wayland/-/tree/1.20.0-1)
  * [`wayland-utils/1.0.0-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/wayland-utils/-/tree/1.0.0-2)
  * [`webrtc-audio-processing/0.3.1-3`](https://gitlab.archlinux.org/archlinux/packaging/packages/webrtc-audio-processing/-/tree/0.3.1-3)
  * [`wget/1.21.2-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/wget/-/tree/1.21.2-1)
