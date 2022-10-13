@@ -105,6 +105,9 @@ export STEAM_DISPLAY_REFRESH_LIMITS=40,60
 # Let steam know it can unmount drives without superuser privileges
 export STEAM_ALLOW_DRIVE_UNMOUNT=1
 
+# We no longer need to set GAMESCOPE_EXTERNAL_OVERLAY from steam, mangoapp now does it itself
+export STEAM_DISABLE_MANGOAPP_ATOM_WORKAROUND=1
+
 # Set input method modules for Qt/GTK that will show the Steam keyboard
 export QT_IM_MODULE=steam
 export GTK_IM_MODULE=Steam
