@@ -1,0 +1,27 @@
+From 3de9246579cfb6cd2c1c036c40e22ca7382a5147 Mon Sep 17 00:00:00 2001
+From: Harald Sitter <sitter@kde.org>
+Date: Tue, 2 Aug 2022 16:02:05 +0200
+Subject: [PATCH 2/3] when loading defaults don't forget to set enablement
+
+by default we'll want outputs to get enabled unless we know that they
+shouldn't be. otherwise the user has a bunch of useless(ly) disabled
+screens if we fail to load configs.
+---
+ kded/output.cpp | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/kded/output.cpp b/kded/output.cpp
+index 7463b8a..515dbc7 100644
+--- a/kded/output.cpp
++++ b/kded/output.cpp
+@@ -91,6 +91,7 @@ void Output::readInGlobalPartFromInfo(KScreen::OutputPtr output, const QVariantM
+     output->setVrrPolicy(config.vrrPolicy.value_or(KScreen::Output::VrrPolicy::Automatic));
+     output->setOverscan(config.overscan.value_or(0));
+     output->setRgbRange(config.rgbRange.value_or(KScreen::Output::RgbRange::Automatic));
++    output->setEnabled(true); // gets disabled later if necessary
+ 
+     KScreen::ModePtr matchingMode;
+     if (config.modeId) {
+-- 
+2.34.1
+

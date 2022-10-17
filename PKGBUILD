@@ -5,7 +5,8 @@
 
 pkgname=kscreen
 pkgver=5.23.5
-pkgrel=2
+pkgrel=3
+# backport unplug/replug fixes from 5.26.0
 pkgdesc='KDE screen management software'
 arch=(x86_64)
 url='https://kde.org/plasma-desktop/'
@@ -14,10 +15,16 @@ depends=(libkscreen plasma-framework qt5-sensors)
 makedepends=(extra-cmake-modules kcmutils)
 groups=(plasma)
 source=(https://download.kde.org/stable/plasma/$pkgver/$pkgname-$pkgver.tar.xz{,.sig}
-        0001-X11-align-touchscreen-to-internal-display.patch)
+        0001-X11-align-touchscreen-to-internal-display.patch
+        0002-when-loading-defaults-don-t-forget-to-set-enablement.patch
+        0003-loosen-the-duplication-check-a-tad.patch
+        0004-fix-refresh-rate-list-not-being-updated.patch)
 sha256sums=('d1032cfd442ee872db714522d8874a48050723ac22c47783c7478a11e47fb948'
             'SKIP'
-            'df5c4b339697a9f24eeef528ff543cc34719c0ac03f6ad40341a5c7c4767ffa8')
+            'SKIP'
+            'SKIP'
+            'SKIP'
+            'SKIP')
 validpgpkeys=('E0A3EB202F8E57528E13E72FD7574483BB57B18D'  # Jonathan Esk-Riddell <jr@jriddell.org>
               '0AAC775BB6437A8D9AF7A3ACFE0784117FBCE11D'  # Bhushan Shah <bshah@kde.org>
               'D07BD8662C56CB291B316EB2F5675605C74E02CF'  # David Edmundson <davidedmundson@kde.org>
@@ -26,6 +33,9 @@ options=(debug)
 
 prepare() {
     patch -d $pkgbase-$pkgver -p1 < "${srcdir}/0001-X11-align-touchscreen-to-internal-display.patch"
+    patch -d $pkgbase-$pkgver -p1 < "${srcdir}/0002-when-loading-defaults-don-t-forget-to-set-enablement.patch"
+    patch -d $pkgbase-$pkgver -p1 < "${srcdir}/0003-loosen-the-duplication-check-a-tad.patch"
+    patch -d $pkgbase-$pkgver -p1 < "${srcdir}/0004-fix-refresh-rate-list-not-being-updated.patch"
 }
 
 build() {
