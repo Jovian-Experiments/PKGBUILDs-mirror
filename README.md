@@ -1,5 +1,5 @@
 
-`main @ 20221010.1000`
+`main @ 20221017.1000`
 ======================
 
 Valve packages
@@ -15,15 +15,15 @@ Valve packages
  * [`bluez-utils` — `jupiter-main/bluez-5.63-1.8`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/bluez-5.63-1.8)
  * [`f3` — `jupiter-main/f3-8.0-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/f3-8.0-2)
  * [`flatpak` — `jupiter-main/flatpak-1.12.4-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/flatpak-1.12.4-1.1)
- * [`gamescope` — `jupiter-main/gamescope-3.11.47-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/gamescope-3.11.47-1)
- * [`gpu-trace` — `jupiter-main/gpu-trace-2.7-3`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/gpu-trace-2.7-3)
+ * [`gamescope` — `jupiter-main/gamescope-3.11.47-3`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/gamescope-3.11.47-3)
+ * [`gpu-trace` — `jupiter-main/gpu-trace-2.8-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/gpu-trace-2.8-1)
  * [`ibus-anthy` — `jupiter-main/ibus-anthy-1.5.14-4`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/ibus-anthy-1.5.14-4)
  * [`ibus-table-cangjie-lite` — `jupiter-main/ibus-table-cangjie-lite-1.8.8-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/ibus-table-cangjie-lite-1.8.8-2)
  * [`jupiter-dock-updater-bin` — `jupiter-main/jupiter-dock-updater-bin-20220921.01-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-dock-updater-bin-20220921.01-1)
  * [`jupiter-fan-control` — `jupiter-main/jupiter-fan-control-20220705.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-fan-control-20220705.1-1)
  * [`jupiter-hw-support` — `jupiter-main/jupiter-hw-support-20221010.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-hw-support-20221010.1-1)
- * [`jupiter-legacy-support` — `jupiter-main/jupiter-legacy-support-1.132-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-legacy-support-1.132-1)
- * [`kscreen` — `jupiter-main/kscreen-5.23.5-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/kscreen-5.23.5-2)
+ * [`jupiter-legacy-support` — `jupiter-main/jupiter-legacy-support-1.133-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-legacy-support-1.133-1)
+ * [`kscreen` — `jupiter-main/kscreen-5.23.5-3`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/kscreen-5.23.5-3)
  * [`libnm` — `jupiter-main/networkmanager-1.34.0-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/networkmanager-1.34.0-1.1)
  * [`libva-mesa-driver` — `jupiter-main/mesa-22.0.2.150118.radeonsi_20220427-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/mesa-22.0.2.150118.radeonsi_20220427-1)
  * [`linux-firmware-neptune` — `jupiter-main/linux-firmware-neptune-20220624.650ab31-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/linux-firmware-neptune-20220624.650ab31-1)
@@ -285,7 +285,9 @@ Arch Linux packages
  * [`kdnssd/5.90.0-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/kdnssd/-/tree/5.90.0-1)
  * [`kdsoap/2.0.0-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/kdsoap/-/tree/2.0.0-1)
  * [`kdsoap-ws-discovery-client/git20200927-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/kdsoap-ws-discovery-client/-/tree/git20200927-2)
+ * [`kdump-steamos/0.7-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/kdump-steamos/-/tree/0.7-1)
  * [`kemoticons/5.90.0-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/kemoticons/-/tree/5.90.0-1)
+ * [`kexec-tools/2.0.23-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/kexec-tools/-/tree/2.0.23-1)
  * [`keyutils/1.6.3-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/keyutils/-/tree/1.6.3-1)
  * [`kfilemetadata/5.90.0-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/kfilemetadata/-/tree/5.90.0-1)
  * [`kgamma5/5.23.5-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/kgamma5/-/tree/5.23.5-1)
@@ -528,6 +530,7 @@ Arch Linux packages
  * [`lvm2/2.03.14-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/lvm2/-/tree/2.03.14-2)
  * [`lz4/1:1.9.3-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/lz4/-/tree/1:1.9.3-2)
  * [`lzo/2.10-3`](https://gitlab.archlinux.org/archlinux/packaging/packages/lzo/-/tree/2.10-3)
+ * [`makedumpfile/1.7.0-3`](https://gitlab.archlinux.org/archlinux/packaging/packages/makedumpfile/-/tree/1.7.0-3)
  * [`maliit-framework/2.1.1-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/maliit-framework/-/tree/2.1.1-1)
  * [`maliit-keyboard/2.1.0-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/maliit-keyboard/-/tree/2.1.0-1)
  * [`man-db/2.9.4-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/man-db/-/tree/2.9.4-2)
