@@ -1,0 +1,46 @@
+From cb31a71202d75f16568cc7a9db85544c21cfdc3b Mon Sep 17 00:00:00 2001
+From: Harald Sitter <sitter@kde.org>
+Date: Tue, 2 Aug 2022 16:52:41 +0200
+Subject: [PATCH 3/3] loosen the duplication check a tad
+
+we can generally expect the ids to be different unless the manufacturer
+hasn't obeyed the spec. with that in mind let's only prime the
+duplication detection tech when multiple duplicated outputs are actually
+connected. outputs may be temporarily duplicated for reasons other than
+duplicated ids. e.g. some devices change output names (DP-1 to DP-2) on
+hotplugs and we'd incorrectly handled them as duplicates even when the
+old name wasn't connected and bound to go away
+---
+ kded/output.cpp | 12 ++++++++----
+ 1 file changed, 8 insertions(+), 4 deletions(-)
+
+diff --git a/kded/output.cpp b/kded/output.cpp
+index 515dbc7..452bf65 100644
+--- a/kded/output.cpp
++++ b/kded/output.cpp
+@@ -352,14 +352,18 @@ void Output::readInOutputs(KScreen::ConfigPtr config, const QVariantList &output
+     // to be able to tell apart multiple identical outputs, these need special treatment
+     QStringList duplicateIds;
+     {
+-        QStringList allIds;
+-        allIds.reserve(outputs.count());
++        QStringList allConnectedIds;
++        allConnectedIds.reserve(outputs.count());
+         for (const KScreen::OutputPtr &output : outputs) {
++            if (!output->isConnected()) {
++                // Duplicated IDs only matter if the duplicates are actually connected. Duplicates may also be transient.
++                continue;
++            }
+             const auto outputId = output->hash();
+-            if (allIds.contains(outputId) && !duplicateIds.contains(outputId)) {
++            if (allConnectedIds.contains(outputId) && !duplicateIds.contains(outputId)) {
+                 duplicateIds << outputId;
+             }
+-            allIds << outputId;
++            allConnectedIds << outputId;
+         }
+     }
+ 
+-- 
+2.34.1
+
