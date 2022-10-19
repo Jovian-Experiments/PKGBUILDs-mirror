@@ -3,8 +3,6 @@
 ##
 ## Session globals
 ##
-export XDG_SESSION_TYPE=x11
-
 export SDL_VIDEO_MINIMIZE_ON_FOCUS_LOSS=0
 
 export HOMETEST_DESKTOP=1
