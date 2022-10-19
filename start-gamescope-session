@@ -1,0 +1,17 @@
+#!/bin/sh
+
+# SDDM sets this to wayland but apps using Gamescope must use x11
+export XDG_SESSION_TYPE=x11
+
+# Update the enviroment with DESKTOP_SESSION and all XDG variables
+dbus-update-activation-environment --systemd DESKTOP_SESSION `env | grep ^XDG_ | cut -d = -f 1`
+
+# Remove these as they prevent gamescope-session from starting correctly
+systemctl --user unset-environment DISPLAY XAUTHORITY
+
+# If this shell script is killed then stop gamescope-session
+trap 'systemctl --user stop gamescope-session.service' HUP INT TERM
+
+# Start gamescope-session and wait
+systemctl --user --wait start gamescope-session.service &
+wait
