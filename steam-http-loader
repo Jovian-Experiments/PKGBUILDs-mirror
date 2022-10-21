@@ -4,18 +4,29 @@ import os.path
 import argparse
 import subprocess
 
-parser = argparse.ArgumentParser(description='Launch a link in the steam browser.')
+def run(action, arg):
+    final_url = "steam://{0}/{1}".format(action, arg)
+    subprocess.run(["steam", final_url])
 
-parser.add_argument('uri')
-args = parser.parse_args()
+def main():
+    parser = argparse.ArgumentParser(description='Launch a link in the steam browser.')
+    parser.add_argument('uri')
+    args = parser.parse_args()
 
-url = urllib.parse.urlparse(args.uri, "file")
+    uri = args.uri
 
-if (url.scheme == "file" and not os.path.isabs(url.path)):
-    absolute_path = os.path.abspath(url.path)
-    url = url._replace(path=absolute_path)
+    url = urllib.parse.urlparse(uri, "file")
 
-action = "openurl_external"
+    # convert mailto://A@b.com to steam://mailto/A@b.com
+    if (url.scheme == 'mailto'):
+        run('mailto', url.netloc)
+        return
 
-final_url = "steam://{0}/{1}".format(action, url.geturl())
-subprocess.run(["steam", final_url])
+    # open any other URL, converting paths to full file URIs
+    if (url.scheme == 'file' and not os.path.isabs(url.path)):
+        absolute_path = os.path.abspath(url.path)
+        url = url._replace(path=absolute_path)
+    run('openurl_external', url.geturl())
+    return
+
+main()
