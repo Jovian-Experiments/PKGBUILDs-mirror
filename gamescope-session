@@ -96,6 +96,15 @@ export STEAM_GAMESCOPE_COLOR_TOYS=1
 # We have NIS support
 export STEAM_GAMESCOPE_NIS_SUPPORTED=1
 
+# Enable tearing controls in steam
+export STEAM_GAMESCOPE_TEARING_SUPPORTED=1
+
+# Enable VRR controls in steam
+export STEAM_GAMESCOPE_VRR_SUPPORTED=1
+
+# When set to 1, a toggle will show up in the steamui to control whether dynamic refresh rate is applied to the steamui
+export STEAM_GAMESCOPE_DYNAMIC_REFRESH_IN_STEAM_SUPPORTED=0
+
 # Don't wait for buffers to idle on the client side before sending them to gamescope
 export vk_xwayland_wait_ready=false
 
@@ -107,6 +116,9 @@ export STEAM_ALLOW_DRIVE_UNMOUNT=1
 
 # We no longer need to set GAMESCOPE_EXTERNAL_OVERLAY from steam, mangoapp now does it itself
 export STEAM_DISABLE_MANGOAPP_ATOM_WORKAROUND=1
+
+# Enable horizontal mangoapp bar
+export STEAM_MANGOAPP_HORIZONTAL_SUPPORTED=1
 
 # Set input method modules for Qt/GTK that will show the Steam keyboard
 export QT_IM_MODULE=steam
