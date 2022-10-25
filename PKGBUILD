@@ -7,11 +7,11 @@ pkgbase=mesa
 # Jupiter: drop radv vulkan driver - separate sources and package
 pkgname=('vulkan-mesa-layers' 'opencl-mesa' 'vulkan-intel' 'vulkan-swrast' 'libva-mesa-driver' 'mesa-vdpau' 'mesa')
 pkgdesc="An open-source implementation of the OpenGL specification"
-_tag=radeonsi-20220427
-pkgver=22.0.2.150118.radeonsi_20220427
-pkgrel=1
+_tag=radeonsi-3.4.0
+pkgver=22.2.0.157819.radeonsi_3.4.0
+pkgrel=3
 arch=('x86_64')
-makedepends=('git' 'python-mako' 'libxml2' 'libx11' 'xorgproto' 'libdrm' 'libxshmfence' 'libxxf86vm'
+makedepends=('git' 'openssh' 'python-mako' 'libxml2' 'libx11' 'xorgproto' 'libdrm' 'libxshmfence' 'libxxf86vm'
              'libxdamage' 'libvdpau' 'libva' 'wayland' 'wayland-protocols' 'zstd' 'elfutils' 'llvm'
              'libomxil-bellagio' 'libclc' 'clang' 'libglvnd' 'libunwind' 'lm_sensors' 'libxrandr'
              'valgrind' 'glslang' 'vulkan-icd-loader' 'cmake' 'meson')
@@ -31,7 +31,7 @@ validpgpkeys=('8703B6700E7EE06D7A39B8D6EDAE37B02CEB490D'  # Emil Velikov <emil.l
 pkgver() {
   cd jupiter-mesa
 
-  read -r _ver <VERSION
+  _ver=$(cat VERSION)
   #echo ${_ver/-/_}.$(git rev-list --count HEAD).$(git rev-parse --short HEAD)
   echo "${_ver/-/_}.$(git rev-list --count HEAD).${_tag//-/_}"
 }
