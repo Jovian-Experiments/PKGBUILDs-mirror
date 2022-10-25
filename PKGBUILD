@@ -1,7 +1,7 @@
 # Maintainer: Simon Hallsten <flightlessmangoyt@gmail.com>
 pkgname=('mangohud' 'lib32-mangohud')
 pkgver=0.6.8.r17.gebb0f96
-pkgrel=1
+pkgrel=2
 pkgdesc="Vulkan and OpenGL overlay to display performance information"
 arch=('x86_64')
 makedepends=('dbus' 'gcc' 'meson' 'python-mako' 'libx11' 'lib32-libx11' 'git' 'pkgconf' 'vulkan-headers' 'appstream')
@@ -35,7 +35,7 @@ prepare() {
   cd "${srcdir}/mangohud"
   git submodule init
   git config submodule.modules/minhook.url "$srcdir/mangohud-minhook"
-  git submodule update
+  git -c protocol.file.allow=always submodule update
 
   # meson subprojects
   ln -sv "$srcdir/imgui-1.81" subprojects
