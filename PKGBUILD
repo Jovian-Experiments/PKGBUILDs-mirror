@@ -3,7 +3,7 @@
 pkgname=gamescope
 _srctag=3.11.47
 pkgver=${_srctag//-/.}
-pkgrel=6
+pkgrel=7
 pkgdesc="gaming shell based on Xwayland, powered by Vulkan and DRM"
 arch=(x86_64)
 url="https://github.com/Plagman/gamescope"
@@ -44,7 +44,7 @@ prepare() {
 	git submodule init
 	git config submodule.subprojects/wlroots.url "$srcdir/wlroots"
 	git config submodule.subprojects/libliftoff.url "$srcdir/libliftoff"
-	git submodule update
+	git -c protocol.file.allow=always submodule update
 
 	# meson subprojects
 	rm -rf subprojects/stb
