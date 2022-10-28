@@ -3,7 +3,7 @@
 pkgname=gamescope
 _srctag=3.11.48
 pkgver=${_srctag//-/.}
-pkgrel=1
+pkgrel=2
 pkgdesc="gaming shell based on Xwayland, powered by Vulkan and DRM"
 arch=(x86_64)
 url="https://github.com/Plagman/gamescope"
@@ -27,7 +27,7 @@ sha256sums=('89b0a3e0a2ec5bac2a73b42de4f639c6ff3e75d180499e7a601ea704e221d66f'
             'fe515fce8f151a6c03a89e043044bfddf8cd6ee89027d2cfbcf6f6706c78ca76'
             'e37ba6107f3a84cf47c2799b537a88583e6cb8951167a9c6a48fa1d85996206b'
             '01eff0f21fcfcc26ad6efdc8291eb771eb81f07eec2723571954294fba50af32'
-            '2dbfae36a05044dbe931762203003e0aa4e3d883518f737f9af7b8979fc2104b'
+            'beabd15da2a15ef22c20de2be3b023029254d93c55784e628928ec0324ffe1b7'
             '525060896abef2da9db8d8294253b7444d60e48cf6cc0496ca48fc7084cc8590'
             'dea09abb47c3d907c00ff7f36967b599f3caca554ac6eb7b7dc6d2d78651dd44'
             'SKIP'
