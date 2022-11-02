@@ -1,5 +1,5 @@
 
-`main @ 20221101.1000`
+`main @ 20221101.1001`
 ======================
 
 Valve packages
@@ -30,6 +30,7 @@ Valve packages
  * [`bluez-libs` — `jupiter-main/bluez-5.63-1.8`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/bluez-5.63-1.8)
  * [`bluez-plugins` — `jupiter-main/bluez-5.63-1.8`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/bluez-5.63-1.8)
  * [`bluez-utils` — `jupiter-main/bluez-5.63-1.8`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/bluez-5.63-1.8)
+ * [`ds-inhibit` — `jupiter-main/ds-inhibit-0.1.0-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/ds-inhibit-0.1.0-1)
  * [`f3` — `jupiter-main/f3-8.0-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/f3-8.0-2)
  * [`flatpak` — `jupiter-main/flatpak-1.12.4-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/flatpak-1.12.4-1.1)
  * [`gamescope` — `jupiter-main/gamescope-3.11.48-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/gamescope-3.11.48-2)
@@ -38,7 +39,7 @@ Valve packages
  * [`ibus-table-cangjie-lite` — `jupiter-main/ibus-table-cangjie-lite-1.8.8-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/ibus-table-cangjie-lite-1.8.8-2)
  * [`jupiter-dock-updater-bin` — `jupiter-main/jupiter-dock-updater-bin-20221026.01-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-dock-updater-bin-20221026.01-1)
  * [`jupiter-fan-control` — `jupiter-main/jupiter-fan-control-20221031.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-fan-control-20221031.1-1)
- * [`jupiter-hw-support` — `jupiter-main/jupiter-hw-support-20221101.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-hw-support-20221101.1-1)
+ * [`jupiter-hw-support` — `jupiter-main/jupiter-hw-support-20221101.3-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-hw-support-20221101.3-1)
  * [`jupiter-legacy-support` — `jupiter-main/jupiter-legacy-support-1.133-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-legacy-support-1.133-1)
  * [`libnm` — `jupiter-main/networkmanager-1.34.0-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/networkmanager-1.34.0-1.1)
  * [`libva-mesa-driver` — `jupiter-main/mesa-22.2.0.157819.radeonsi_3.4.0-3`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/mesa-22.2.0.157819.radeonsi_3.4.0-3)
@@ -679,6 +680,7 @@ Arch Linux packages
  * [`python-psutil/5.9.2-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/python-psutil/-/tree/5.9.2-1)
  * [`python-pyaml/21.10.1-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/python-pyaml/-/tree/21.10.1-1)
  * [`python-pyenchant/3.2.2-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/python-pyenchant/-/tree/3.2.2-1)
+ * [`python-pyinotify/0.9.6-11`](https://gitlab.archlinux.org/archlinux/packaging/packages/python-pyinotify/-/tree/0.9.6-11)
  * [`python-semantic-version/2.10.0-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/python-semantic-version/-/tree/2.10.0-1)
  * [`python-systemd/235-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/python-systemd/-/tree/235-1)
  * [`python-sysv_ipc/1.1.0-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/python-sysv_ipc/-/tree/1.1.0-2)
