@@ -124,6 +124,10 @@ export STEAM_MANGOAPP_HORIZONTAL_SUPPORTED=1
 export QT_IM_MODULE=steam
 export GTK_IM_MODULE=Steam
 
+# Make Qt apps use the styling and behaviour of the desktop session
+# This fixes some missing icons and unreadable text with Qt desktop apps in gamescope
+export QT_QPA_PLATFORM_THEME=kde
+
 # TODO!
 # Bring this back when gamescope side is more complete
 #
