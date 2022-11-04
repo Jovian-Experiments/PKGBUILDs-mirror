@@ -3,16 +3,18 @@
 
 pkgbase=wireplumber
 pkgname=(wireplumber wireplumber-docs)
-_commit=0792b2674447b7ef786948c881cf67f1404d33fb  # tags/0.4.10-dv1
-pkgver=0.4.10.5.dv1
-pkgrel=2
+_commit=c3a243939d73962268ced7ac1be7829b534ceb0a  # tags/0.4.12-dv
+pkgver=0.4.12.4.dv
+pkgrel=1
 pkgdesc="Session / policy manager implementation for PipeWire"
 url="https://pipewire.pages.freedesktop.org/wireplumber/"
 arch=(x86_64)
 license=(MIT)
 makedepends=(git meson doxygen graphviz 'pipewire>=0.3.43' systemd glib2 lua
              gobject-introspection python-sphinx python-sphinx_rtd_theme
-             python-breathe python-lxml)
+             python-breathe python-lxml
+             # In individual package dependencies below, but needs to be installed at build time for the check() step.
+             pipewire-audio)
 options=(debug)
 source=("$pkgbase::git+https://gitlab.steamos.cloud/jupiter/wireplumber.git#commit=$_commit")
 sha256sums=('SKIP')
@@ -47,7 +49,7 @@ _pick() {
 }
 
 package_wireplumber() {
-  depends=('pipewire>=0.3.43' lua libpipewire-0.3.so libsystemd.so
+  depends=('pipewire>=0.3.43' pipewire-audio lua libpipewire-0.3.so libsystemd.so
            libg{lib,module,object,io}-2.0.so)
   optdepends=('wireplumber-docs: Documentation')
   provides=(pipewire-session-manager libwireplumber-0.4.so)
