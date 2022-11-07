@@ -1,5 +1,5 @@
 
-`main @ 20221104.1000`
+`main @ 20221107.1000`
 ======================
 
 Valve packages
@@ -17,9 +17,8 @@ Valve packages
  * [`holo-sudo` — `holo-main/steamos-customizations-git-r667.d02b4b6-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-customizations-git-r667.d02b4b6-2)
  * [`holo-wireplumber` — `holo-main/steamos-customizations-git-r667.d02b4b6-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-customizations-git-r667.d02b4b6-2)
  * [`kdump-steamos` — `holo-main/kdump-steamos-0.7-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/kdump-steamos-0.7-2)
- * [`kmod` — `holo-main/kmod-29-1.3`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/kmod-29-1.3)
+ * [`kmod` — `holo-main/kmod-30-1.2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/kmod-30-1.2)
  * [`lsb-release` — `holo-main/lsb-release-1.4-18.4`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/lsb-release-1.4-18.4)
- * [`pacman-system-update` — `holo-main/pacman-system-update-1.1-3`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/pacman-system-update-1.1-3)
  * [`paru` — `holo-main/paru-1.11.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/paru-1.11.1-1)
  * [`plymouth` — `holo-main/plymouth-22.02.122-1.3`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/plymouth-22.02.122-1.3)
  * [`rauc` — `holo-main/rauc-1.4-6`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/rauc-1.4-6)
@@ -34,18 +33,18 @@ Valve packages
  * [`ds-inhibit` — `jupiter-main/ds-inhibit-0.1.0-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/ds-inhibit-0.1.0-1)
  * [`f3` — `jupiter-main/f3-8.0-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/f3-8.0-2)
  * [`flatpak` — `jupiter-main/flatpak-1.12.4-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/flatpak-1.12.4-1.1)
- * [`gamescope` — `jupiter-main/gamescope-3.11.48-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/gamescope-3.11.48-2)
+ * [`gamescope` — `jupiter-main/gamescope-3.11.48-3`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/gamescope-3.11.48-3)
  * [`gpu-trace` — `jupiter-main/gpu-trace-2.8-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/gpu-trace-2.8-1)
  * [`ibus-anthy` — `jupiter-main/ibus-anthy-1.5.14-4`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/ibus-anthy-1.5.14-4)
  * [`ibus-table-cangjie-lite` — `jupiter-main/ibus-table-cangjie-lite-1.8.8-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/ibus-table-cangjie-lite-1.8.8-2)
  * [`jupiter-dock-updater-bin` — `jupiter-main/jupiter-dock-updater-bin-20221026.01-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-dock-updater-bin-20221026.01-1)
- * [`jupiter-fan-control` — `jupiter-main/jupiter-fan-control-20221031.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-fan-control-20221031.1-1)
+ * [`jupiter-fan-control` — `jupiter-main/jupiter-fan-control-20221107.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-fan-control-20221107.1-1)
  * [`jupiter-hw-support` — `jupiter-main/jupiter-hw-support-20221104.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-hw-support-20221104.1-1)
- * [`jupiter-legacy-support` — `jupiter-main/jupiter-legacy-support-1.133-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-legacy-support-1.133-1)
+ * [`jupiter-legacy-support` — `jupiter-main/jupiter-legacy-support-1.134-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-legacy-support-1.134-1)
  * [`libnm` — `jupiter-main/networkmanager-1.34.0-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/networkmanager-1.34.0-1.1)
  * [`libva-mesa-driver` — `jupiter-main/mesa-22.2.0.157819.radeonsi_3.4.0-3`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/mesa-22.2.0.157819.radeonsi_3.4.0-3)
  * [`linux-firmware-neptune` — `jupiter-main/linux-firmware-neptune-20220624.650ab31-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/linux-firmware-neptune-20220624.650ab31-1)
- * [`linux-neptune` — `jupiter-main/linux-neptune-5.13.0.valve29-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/linux-neptune-5.13.0.valve29-1)
+ * [`linux-neptune` — `jupiter-main/linux-neptune-5.13.0.valve30-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/linux-neptune-5.13.0.valve30-1)
  * [`mangohud` — `jupiter-main/mangohud-0.6.8.r17.gebb0f96-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/mangohud-0.6.8.r17.gebb0f96-2)
  * [`mesa` — `jupiter-main/mesa-22.2.0.157819.radeonsi_3.4.0-3`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/mesa-22.2.0.157819.radeonsi_3.4.0-3)
  * [`mesa-vdpau` — `jupiter-main/mesa-22.2.0.157819.radeonsi_3.4.0-3`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/mesa-22.2.0.157819.radeonsi_3.4.0-3)
@@ -62,6 +61,7 @@ Valve packages
  * [`steamos-efi` — `jupiter-main/steamos-efi-20220727.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steamos-efi-20220727.1-1)
  * [`ttf-twemoji-default` — `jupiter-main/ttf-twemoji-default-13.1.0-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/ttf-twemoji-default-13.1.0-2)
  * [`upower` — `jupiter-main/upower-0.99.15.jupiter-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/upower-0.99.15.jupiter-1)
+ * [`usbhid-gadget-passthru` — `jupiter-main/usbhid-gadget-passthru-0.1.0-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/usbhid-gadget-passthru-0.1.0-1)
  * [`vpower` — `jupiter-main/vpower-1.4.0-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/vpower-1.4.0-1)
  * [`wayland` — `jupiter-main/wayland-1.21.0-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/wayland-1.21.0-1)
  * [`wireplumber` — `jupiter-main/wireplumber-0.4.12.4.dv-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/wireplumber-0.4.12.4.dv-1)
