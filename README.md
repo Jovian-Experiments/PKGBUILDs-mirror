@@ -1,5 +1,5 @@
 
-`main @ 20221107.1001`
+`main @ 20221110.1000`
 ======================
 
 Valve packages
@@ -10,15 +10,16 @@ Valve packages
  * [`clang-libs` — `holo-main/clang-14.0.6-3.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/clang-14.0.6-3.1)
  * [`desync-git` — `holo-main/desync-git-0.9.2.r19.gb545768-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/desync-git-0.9.2.r19.gb545768-2)
  * [`drm_info` — `holo-main/drm_info-2.4.0-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/drm_info-2.4.0-1)
- * [`filesystem` — `holo-main/filesystem-2021.12.07-1.8`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/filesystem-2021.12.07-1.8)
+ * [`filesystem` — `holo-main/filesystem-2021.12.07-1.9`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/filesystem-2021.12.07-1.9)
  * [`holo-desync` — `holo-main/steamos-customizations-git-r667.d02b4b6-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-customizations-git-r667.d02b4b6-2)
  * [`holo-keyring` — `holo-main/holo-keyring-20220203-4`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/holo-keyring-20220203-4)
  * [`holo-pipewire` — `holo-main/steamos-customizations-git-r667.d02b4b6-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-customizations-git-r667.d02b4b6-2)
  * [`holo-sudo` — `holo-main/steamos-customizations-git-r667.d02b4b6-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-customizations-git-r667.d02b4b6-2)
  * [`holo-wireplumber` — `holo-main/steamos-customizations-git-r667.d02b4b6-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-customizations-git-r667.d02b4b6-2)
+ * [`iwd` — `holo-main/iwd-1.30-1.2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/iwd-1.30-1.2)
  * [`kdump-steamos` — `holo-main/kdump-steamos-0.7-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/kdump-steamos-0.7-2)
  * [`kmod` — `holo-main/kmod-30-1.2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/kmod-30-1.2)
- * [`lsb-release` — `holo-main/lsb-release-1.4-18.4`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/lsb-release-1.4-18.4)
+ * [`lsb-release` — `holo-main/lsb-release-2.0.r48.3cf5103-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/lsb-release-2.0.r48.3cf5103-1.1)
  * [`paru` — `holo-main/paru-1.11.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/paru-1.11.1-1)
  * [`plymouth` — `holo-main/plymouth-22.02.122-1.3`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/plymouth-22.02.122-1.3)
  * [`rauc` — `holo-main/rauc-1.4-6`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/rauc-1.4-6)
@@ -39,12 +40,12 @@ Valve packages
  * [`ibus-table-cangjie-lite` — `jupiter-main/ibus-table-cangjie-lite-1.8.8-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/ibus-table-cangjie-lite-1.8.8-2)
  * [`jupiter-dock-updater-bin` — `jupiter-main/jupiter-dock-updater-bin-20221026.01-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-dock-updater-bin-20221026.01-1)
  * [`jupiter-fan-control` — `jupiter-main/jupiter-fan-control-20221107.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-fan-control-20221107.1-1)
- * [`jupiter-hw-support` — `jupiter-main/jupiter-hw-support-20221104.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-hw-support-20221104.1-1)
- * [`jupiter-legacy-support` — `jupiter-main/jupiter-legacy-support-1.134-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-legacy-support-1.134-1)
+ * [`jupiter-hw-support` — `jupiter-main/jupiter-hw-support-20221109.3-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-hw-support-20221109.3-1)
+ * [`jupiter-legacy-support` — `jupiter-main/jupiter-legacy-support-1.135-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-legacy-support-1.135-1)
  * [`libnm` — `jupiter-main/networkmanager-1.34.0-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/networkmanager-1.34.0-1.1)
  * [`libva-mesa-driver` — `jupiter-main/mesa-22.2.0.157819.radeonsi_3.4.0-3`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/mesa-22.2.0.157819.radeonsi_3.4.0-3)
  * [`linux-firmware-neptune` — `jupiter-main/linux-firmware-neptune-20220624.650ab31-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/linux-firmware-neptune-20220624.650ab31-1)
- * [`linux-neptune` — `jupiter-main/linux-neptune-5.13.0.valve30-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/linux-neptune-5.13.0.valve30-1)
+ * [`linux-neptune` — `jupiter-main/linux-neptune-5.13.0.valve31-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/linux-neptune-5.13.0.valve31-1)
  * [`mangohud` — `jupiter-main/mangohud-0.6.8.r17.gebb0f96-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/mangohud-0.6.8.r17.gebb0f96-2)
  * [`mesa` — `jupiter-main/mesa-22.2.0.157819.radeonsi_3.4.0-3`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/mesa-22.2.0.157819.radeonsi_3.4.0-3)
  * [`mesa-vdpau` — `jupiter-main/mesa-22.2.0.157819.radeonsi_3.4.0-3`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/mesa-22.2.0.157819.radeonsi_3.4.0-3)
@@ -261,7 +262,6 @@ Arch Linux packages
  * [`iputils/20211215-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/iputils/-/tree/20211215-1)
  * [`iso-codes/4.11.0-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/iso-codes/-/tree/4.11.0-2)
  * [`iw/5.19-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/iw/-/tree/5.19-1)
- * [`iwd/1.30-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/iwd/-/tree/1.30-1)
  * [`jansson/2.14-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/jansson/-/tree/2.14-2)
  * [`jasper/3.0.6-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/jasper/-/tree/3.0.6-1)
  * [`jbig2dec/0.19-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/jbig2dec/-/tree/0.19-1)
