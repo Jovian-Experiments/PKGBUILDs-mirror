@@ -18,7 +18,7 @@ pkgname=(
 )
 _commit=f54a72fd9a67eeb8d1502d6d75979dbddb00fdf2  # tags/0.3.59
 pkgver=0.3.59
-pkgrel=2.1
+pkgrel=2.2
 epoch=1
 pkgdesc="Low-latency audio/video router and processor"
 url="https://pipewire.org"
@@ -57,7 +57,7 @@ makedepends=(
 )
 checkdepends=(desktop-file-utils)
 options=(debug)
-source=(git+https://gitlab.freedesktop.org/pipewire/pipewire.git#commit=$_commit)
+source=(git+https://gitlab.freedesktop.org/julian/pipewire.git#commit=$_commit)
 sha256sums=('SKIP')
 
 pkgver() {
@@ -73,6 +73,14 @@ prepare() {
   # https://gitlab.steamos.cloud/jupiter/tasks/-/issues/688
   git cherry-pick -n 94a64268613adac8ef6f3e6c1f04468220540d00
   git cherry-pick -n 94a857550b566472e5ab51191e1b34098e5a9506
+
+  # add monitor mode for echo-cancel module
+  # https://gitlab.freedesktop.org/pipewire/pipewire/-/merge_requests/1436
+  git cherry-pick -n bab8004c3fe94a66bb21fd24ab94c6f7ab5f7979
+
+  # enable monitor mode by default (not needed once we use echo-cancel.conf)
+  # https://gitlab.steamos.cloud/jupiter/tasks/-/issues/673
+  git cherry-pick -n fc7df6c137ab5633fabb2be3e9afdfe73148a082
 
   # remove export of LD_LIBRARY_PATH for pw-jack as it would add /usr/lib
   sed -i '/LD_LIBRARY_PATH/d' pipewire-jack/src/pw-jack.in
