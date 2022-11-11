@@ -100,7 +100,7 @@ export STEAM_GAMESCOPE_NIS_SUPPORTED=1
 export STEAM_GAMESCOPE_TEARING_SUPPORTED=1
 
 # Enable VRR controls in steam
-export STEAM_GAMESCOPE_VRR_SUPPORTED=1
+#export STEAM_GAMESCOPE_VRR_SUPPORTED=1
 
 # When set to 1, a toggle will show up in the steamui to control whether dynamic refresh rate is applied to the steamui
 export STEAM_GAMESCOPE_DYNAMIC_REFRESH_IN_STEAM_SUPPORTED=0
