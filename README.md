@@ -1,5 +1,5 @@
 
-`main @ 20221111.1002`
+`main @ 20221114.1000`
 ======================
 
 Valve packages
@@ -22,6 +22,7 @@ Valve packages
  * [`lsb-release` — `holo-main/lsb-release-2.0.r48.3cf5103-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/lsb-release-2.0.r48.3cf5103-1.1)
  * [`paru` — `holo-main/paru-1.11.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/paru-1.11.1-1)
  * [`plymouth` — `holo-main/plymouth-22.02.122-1.3`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/plymouth-22.02.122-1.3)
+ * [`pyzy` — `holo-main/pyzy-1.1-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/pyzy-1.1-1.1)
  * [`rauc` — `holo-main/rauc-1.4-6`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/rauc-1.4-6)
  * [`steamos-atomupd-client-git` — `holo-main/steamos-atomupd-client-git-r157.4d50d6d-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-atomupd-client-git-r157.4d50d6d-2)
  * [`vkmark-git` — `holo-main/vkmark-git-r133.30d2cd3-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/vkmark-git-r133.30d2cd3-2)
@@ -689,7 +690,6 @@ Arch Linux packages
  * [`python-utils/3.3.3-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/python-utils/-/tree/3.3.3-1)
  * [`python-yaml/6.0-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/python-yaml/-/tree/6.0-1)
  * [`python-yarl/1.8.1-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/python-yarl/-/tree/1.8.1-1)
- * [`pyzy/1.1-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/pyzy/-/tree/1.1-1)
  * [`qca-qt5/2.3.5-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/qca-qt5/-/tree/2.3.5-1)
  * [`qqc2-desktop-style/5.99.0-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/qqc2-desktop-style/-/tree/5.99.0-1)
  * [`qrencode/4.1.1-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/qrencode/-/tree/4.1.1-1)
