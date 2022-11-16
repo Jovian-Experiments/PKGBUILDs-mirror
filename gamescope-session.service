@@ -7,3 +7,8 @@ After=graphical-session-pre.target
 
 [Service]
 ExecStart=/usr/bin/gamescope-session
+# This is a temporary workaround for the some proton apps becoming
+# confused by the AF_UNIX socket they get for the stdout when the
+# service outputs to the journal. (e.g.  Vampire Survivors).
+StandardOutput=append:%t/gamescope-session.log
+StandardError=append:%t/gamescope-session.log
