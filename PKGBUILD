@@ -7,11 +7,11 @@ pkgbase=mesa-radv
 # Jupiter: only build RADV, the rest comes from upstream/Arch Mesa
 pkgname=('vulkan-radeon')
 pkgdesc="An open-source implementation of the OpenGL specification"
-_tag=jupiter-22.2.1.3
-pkgver=22.2.0_devel.152974.jupiter_22.2.1.3
+_tag=jupiter-22.3.3
+pkgver=22.2.0_devel.156805.jupiter_22.3.3
 pkgrel=1
 arch=('x86_64')
-makedepends=('git' 'python-mako' 'libxml2' 'libx11' 'xorgproto' 'libdrm' 'libxshmfence'
+makedepends=('git' 'openssh' 'python-mako' 'libxml2' 'libx11' 'xorgproto' 'libdrm' 'libxshmfence'
              'wayland' 'wayland-protocols' 'zstd' 'elfutils' 'llvm'
              'libunwind' 'libxrandr'
              'valgrind' 'meson' 'glslang')
@@ -66,7 +66,8 @@ build() {
     -D lmsensors=disabled \
     -D osmesa=false \
     -D microsoft-clc=disabled \
-    -D valgrind=enabled
+    -D valgrind=enabled \
+    -D radv-build-id="fb4b7078fc42615d086bf41d4b99b94a1df3789e"
 
   # Print config
   meson configure build
