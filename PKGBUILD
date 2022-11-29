@@ -4,7 +4,7 @@
 pkgbase=linux-neptune-60
 _tag=6.0.9-valve1
 pkgver=${_tag//-/.}
-pkgrel=1
+pkgrel=2
 pkgdesc='Linux'
 url="https://gitlab.steamos.cloud/jupiter/linux-integration/-/tree/$_tag"
 arch=(x86_64)
@@ -23,7 +23,6 @@ source=(
   config-neptune    # the neptune kernel fragment file
   90-splash.hook
   splash
-  max_map_count.patch # Set vm.max_map_count to some giant value
 )
 validpgpkeys=(
   'ABAF11C65A2970B130ABE3C479BE3E4300411886'  # Linus Torvalds
@@ -34,8 +33,7 @@ sha256sums=('SKIP'
             '05168cbbeb6378eec6c84fe3300cede4fa5cf6130c39fb8af95040529bd390a6'
             'c17f9f9c87098b9e59bb1866ce6d148724e179b5991f7445d6f96e2cc46c9ebf'
             'b2779035c049c363808e3ba238be685884206a4a5b1c0500b707faf12eef6996'
-            '6098e453286c58b25a257d22e1c7098b00a0afe3b718e4869bccff9432491c3f'
-            'aa67dff7d47ecdd8cbb8e9b41650a60f4da54b7e1a1e841cbddc2efbd7cfb2b4')
+            '6098e453286c58b25a257d22e1c7098b00a0afe3b718e4869bccff9432491c3f')
 
 export KBUILD_BUILD_HOST=archlinux
 export KBUILD_BUILD_USER=$pkgbase
