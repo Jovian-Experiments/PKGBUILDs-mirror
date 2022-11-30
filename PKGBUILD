@@ -1,6 +1,6 @@
 # Maintainer: Laurent Carlier <lordheavym@gmail.com>
 # Maintainer: Felix Yan <felixonmars@archlinux.org>
-# Maintainer: Jan de Groot <jgc@archlinux.org>
+# Contributor: Jan de Groot <jgc@archlinux.org>
 # Contributor: Andreas Radke <andyrtr@archlinux.org>
 
 pkgbase=mesa
@@ -9,14 +9,15 @@ pkgname=('vulkan-mesa-layers' 'opencl-mesa' 'vulkan-intel' 'vulkan-swrast' 'libv
 pkgdesc="An open-source implementation of the OpenGL specification"
 _tag=radeonsi-3.4.0
 pkgver=22.2.0.157819.radeonsi_3.4.0
-pkgrel=3
+pkgrel=4
 arch=('x86_64')
 makedepends=('git' 'openssh' 'python-mako' 'libxml2' 'libx11' 'xorgproto' 'libdrm' 'libxshmfence' 'libxxf86vm'
              'libxdamage' 'libvdpau' 'libva' 'wayland' 'wayland-protocols' 'zstd' 'elfutils' 'llvm'
              'libomxil-bellagio' 'libclc' 'clang' 'libglvnd' 'libunwind' 'lm_sensors' 'libxrandr'
-             'valgrind' 'glslang' 'vulkan-icd-loader' 'cmake' 'meson')
+             'systemd' 'valgrind' 'glslang' 'vulkan-icd-loader' 'directx-headers' 'cmake' 'meson')
 url="https://www.mesa3d.org/"
 license=('custom')
+options=('debug' '!lto')
 source=("jupiter-mesa::git+ssh://git@gitlab.steamos.cloud/jupiter/mesa.git#tag=$_tag"
         LICENSE)
 sha512sums=('SKIP'
@@ -37,14 +38,18 @@ pkgver() {
 }
 
 build() {
+  # Build only minimal debug info to reduce size
+  CFLAGS+=' -g1'
+  CXXFLAGS+=' -g1'
+
   # Jupiter:
   #  - drop all dri drivers
   #  - drop most gallium drivers but radeonsi, swrast and zink
   #  - drop radv vulkan driver - separate sources and package
   #  - disable xa - unused by our gallium drivers
   arch-meson jupiter-mesa build \
-    -D b_lto=true \
     -D b_ndebug=true \
+    -D b_lto=false \
     -D platforms=x11,wayland \
     -D dri-drivers= \
     -D gallium-drivers=radeonsi,swrast,zink \
@@ -71,6 +76,7 @@ build() {
     -D osmesa=true \
     -D shared-glapi=enabled \
     -D microsoft-clc=disabled \
+    -D video-codecs=vc1dec,h264dec,h264enc,h265dec,h265enc \
     -D valgrind=enabled
 
   # Print config
@@ -111,7 +117,7 @@ package_vulkan-mesa-layers() {
 package_opencl-mesa() {
   pkgdesc="OpenCL support for AMD/ATI Radeon mesa drivers"
   # Jupiter: clang-libs is a local thing, which we should upstream in Arch
-  depends=('libdrm' 'libclc' 'clang-libs')
+  depends=('libdrm' 'libclc' 'clang-libs' 'expat')
   optdepends=('opencl-headers: headers necessary for OpenCL development')
   provides=('opencl-driver')
 
@@ -124,7 +130,7 @@ package_opencl-mesa() {
 
 package_vulkan-intel() {
   pkgdesc="Intel's Vulkan mesa driver"
-  depends=('wayland' 'libx11' 'libxshmfence' 'libdrm' 'zstd')
+  depends=('wayland' 'libx11' 'libxshmfence' 'libdrm' 'zstd' 'systemd-libs')
   optdepends=('vulkan-mesa-layers: additional vulkan layers')
   provides=('vulkan-driver')
 
@@ -136,7 +142,7 @@ package_vulkan-intel() {
 
 package_vulkan-radeon() {
   pkgdesc="Radeon's Vulkan mesa driver"
-  depends=('wayland' 'libx11' 'libxshmfence' 'libelf' 'libdrm' 'llvm-libs')
+  depends=('wayland' 'libx11' 'libxshmfence' 'libelf' 'libdrm' 'llvm-libs' 'systemd-libs')
   optdepends=('vulkan-mesa-layers: additional vulkan layers')
   provides=('vulkan-driver')
 
@@ -148,7 +154,7 @@ package_vulkan-radeon() {
 
 package_vulkan-swrast() {
   pkgdesc="Vulkan software rasteriser driver"
-  depends=('wayland' 'libx11' 'libxshmfence' 'libdrm' 'zstd' 'llvm-libs')
+  depends=('wayland' 'libx11' 'libxshmfence' 'libdrm' 'zstd' 'llvm-libs' 'systemd-libs' 'libunwind')
   optdepends=('vulkan-mesa-layers: additional vulkan layers')
   conflicts=('vulkan-mesa')
   replaces=('vulkan-mesa')
