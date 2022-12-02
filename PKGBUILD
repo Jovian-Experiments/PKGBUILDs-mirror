@@ -1,7 +1,7 @@
 # Maintainer: John Schoenick <johns@valvesoftware.com>
 
 pkgname=foxnet
-pkgver=1.3
+pkgver=1.4
 pkgrel=1
 pkgdesc="Foxnet and various paraphernalia"
 arch=(any)
@@ -12,7 +12,7 @@ source=(foxnet.service
         foxnet-updater-fixup.service)
 sha256sums=('0200d280e1c7acf67f7856014dd2fb2b3e2425f2d486752a583c24defa275680'
             '518db678d2f36bb13c869b6a02cde1fe4eec306045c331a42a903f37ca678bef'
-            '4e07aef852bd826fdb7d299c57f75ed3c50dd501a8bf485ba4e910080725228a'
+            '67280f01668e63c6d1ee426616b3b60f4fedc39068d4cf1853b077b69133e944'
             '1cf0f6e640fbe9eb63c46ff168a52f87f701c38afa102b63046ba28591ee458e')
 
 package() {
