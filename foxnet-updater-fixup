@@ -2,15 +2,11 @@
 
 set -xeuo pipefail
 
-# This script fixes up and removes old references to the update-via-foxnet mechanism in /etc/hosts and /root/.netrc --
-# both of which may have post-factory-image changes causing bad settings to persist.
+# This script fixes up and removes old references to the update-via-foxnet mechanism in /etc/hosts --
+# which may have post-factory-image changes causing bad settings to persist.
 #
 # This is a kludge to ensure dev units that were on pre-202110x images don't inadvertently break their connectivity to
 # the update server by retaining bad config changes due to local edits.
-
-# While the other kludge of requiring http auth tokens in /root/.netrc exists, require it is in sync with the factory
-# file.
-cp -av /usr/share/factory/root/.netrc /root/.netrc
 
 # Check for old /etc/hosts lines.  If /etc/hosts has been edited, these would persist and not revert back to the factory
 # file on next update.
