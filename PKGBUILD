@@ -2,9 +2,9 @@
 # Maintainer: Jan Alexander Steffens (heftig) <heftig@archlinux.org>
 
 pkgbase=linux-neptune
-_tag=5.13.0-valve21.3
+_tag=5.13.0-valve32
 pkgver=${_tag//-/.}
-pkgrel=1
+pkgrel=2
 pkgdesc='Linux'
 url="https://gitlab.steamos.cloud/jupiter/linux-integration/-/tree/$_tag"
 arch=(x86_64)
@@ -18,11 +18,10 @@ makedepends=(
 options=('!strip' '!debug')
 _srcname=archlinux-linux-neptune
 source=(
-  "$_srcname::git+ssh://git@gitlab.internal.steamos.cloud/jupiter/linux-integration.git#tag=$_tag"
+  "$_srcname::git+ssh://git@gitlab.steamos.cloud/jupiter/linux-integration.git#tag=$_tag"
   config         # the main kernel config file
   90-splash.hook
   splash
-  max_map_count.patch # Set vm.max_map_count to some giant value
 )
 validpgpkeys=(
   'ABAF11C65A2970B130ABE3C479BE3E4300411886'  # Linus Torvalds
@@ -30,10 +29,9 @@ validpgpkeys=(
   'A2FF3A36AAA56654109064AB19802F8B0D70FC30'  # Jan Alexander Steffens (heftig)
 )
 sha256sums=('SKIP'
-            '042d6f6f9cee7e9bfe2285b82c163eca11e9715400b6a86dcaf3ab6263e7d7cf'
+            '5419a80575c6edc8323445a76003ca6b5f57355b3026231bac6472da0c9ed197'
             'b2779035c049c363808e3ba238be685884206a4a5b1c0500b707faf12eef6996'
-            '6098e453286c58b25a257d22e1c7098b00a0afe3b718e4869bccff9432491c3f'
-            'aa67dff7d47ecdd8cbb8e9b41650a60f4da54b7e1a1e841cbddc2efbd7cfb2b4')
+            '6098e453286c58b25a257d22e1c7098b00a0afe3b718e4869bccff9432491c3f')
 
 export KBUILD_BUILD_HOST=archlinux
 export KBUILD_BUILD_USER=$pkgbase
