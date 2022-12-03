@@ -1,11 +1,12 @@
 
-`main @ 20221130.1000`
+`main @ 20221202.1000`
 ======================
 
 Valve packages
 --------------
 
 ### `holo-main`
+ * [`archlinux-keyring` — `holo-main/archlinux-keyring-20221123-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/archlinux-keyring-20221123-1.1)
  * [`casync-git` — `holo-main/casync-git-2.r227.g99559cd-4`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/casync-git-2.r227.g99559cd-4)
  * [`clang-libs` — `holo-main/clang-14.0.6-3.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/clang-14.0.6-3.1)
  * [`desync-git` — `holo-main/desync-git-0.9.2.r19.gb545768-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/desync-git-0.9.2.r19.gb545768-2)
@@ -46,7 +47,7 @@ Valve packages
  * [`libnm` — `jupiter-main/networkmanager-1.34.0-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/networkmanager-1.34.0-1.1)
  * [`libva-mesa-driver` — `jupiter-main/mesa-22.2.0.157819.radeonsi_3.4.0-4`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/mesa-22.2.0.157819.radeonsi_3.4.0-4)
  * [`linux-firmware-neptune` — `jupiter-main/linux-firmware-neptune-20220624.650ab31-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/linux-firmware-neptune-20220624.650ab31-1)
- * [`linux-neptune` — `jupiter-main/linux-neptune-5.13.0.valve31-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/linux-neptune-5.13.0.valve31-2)
+ * [`linux-neptune` — `jupiter-main/linux-neptune-5.13.0.valve34-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/linux-neptune-5.13.0.valve34-1)
  * [`mangohud` — `jupiter-main/mangohud-0.6.8.r17.gebb0f96-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/mangohud-0.6.8.r17.gebb0f96-2)
  * [`mesa` — `jupiter-main/mesa-22.2.0.157819.radeonsi_3.4.0-4`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/mesa-22.2.0.157819.radeonsi_3.4.0-4)
  * [`mesa-vdpau` — `jupiter-main/mesa-22.2.0.157819.radeonsi_3.4.0-4`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/mesa-22.2.0.157819.radeonsi_3.4.0-4)
@@ -95,7 +96,6 @@ Arch Linux packages
  * [`appstream-qt/0.15.5-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/appstream-qt/-/tree/0.15.5-1)
  * [`arch-install-scripts/27-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/arch-install-scripts/-/tree/27-1)
  * [`archlinux-appstream-data/20221014-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/archlinux-appstream-data/-/tree/20221014-1)
- * [`archlinux-keyring/20220927-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/archlinux-keyring/-/tree/20220927-1)
  * [`argon2/20190702-4`](https://gitlab.archlinux.org/archlinux/packaging/packages/argon2/-/tree/20190702-4)
  * [`ark/22.08.2-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/ark/-/tree/22.08.2-1)
  * [`aspell/0.60.8-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/aspell/-/tree/0.60.8-2)
@@ -231,7 +231,7 @@ Arch Linux packages
  * [`graphite/1:1.3.14-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/graphite/-/tree/1:1.3.14-2)
  * [`grep/3.8-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/grep/-/tree/3.8-2)
  * [`groff/1.22.4-7`](https://gitlab.archlinux.org/archlinux/packaging/packages/groff/-/tree/1.22.4-7)
- * [`grub/2:2.06-4.5`](https://gitlab.archlinux.org/archlinux/packaging/packages/grub/-/tree/2:2.06-4.5)
+ * [`grub/2:2.06-4.6`](https://gitlab.archlinux.org/archlinux/packaging/packages/grub/-/tree/2:2.06-4.6)
  * [`gsettings-desktop-schemas/42.0-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/gsettings-desktop-schemas/-/tree/42.0-1)
  * [`gsm/1.0.22-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/gsm/-/tree/1.0.22-1)
  * [`gst-plugins-base/1.20.4-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/gst-plugins-base/-/tree/1.20.4-1)
