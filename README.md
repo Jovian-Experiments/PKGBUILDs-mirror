@@ -1,5 +1,5 @@
 
-`main @ 20221202.1001`
+`main @ 20221205.1000`
 ======================
 
 Valve packages
@@ -141,7 +141,7 @@ Arch Linux packages
  * [`convertlit/1.8-10`](https://gitlab.archlinux.org/archlinux/packaging/packages/convertlit/-/tree/1.8-10)
  * [`coreutils/9.1-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/coreutils/-/tree/9.1-1)
  * [`cpio/2.13-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/cpio/-/tree/2.13-2)
- * [`cpupower/5.13-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/cpupower/-/tree/5.13-1)
+ * [`cpupower/6.0-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/cpupower/-/tree/6.0-1)
  * [`cryptsetup/2.5.0-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/cryptsetup/-/tree/2.5.0-1)
  * [`curl/7.85.0-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/curl/-/tree/7.85.0-2)
  * [`dav1d/1.0.0-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/dav1d/-/tree/1.0.0-1)
