@@ -1,15 +1,16 @@
 # Maintainer: Thomas Bächler <thomas@archlinux.org>
 
 pkgbase=linux-firmware-neptune
-pkgname=(linux-firmware-neptune) # amd-ucode)
-_tag=jupiter-20220624
-pkgver=20220624.650ab31
+pkgname=(linux-firmware-neptune-rtw-debug) # amd-ucode)
+_tag=jupiter-20221209-rtw-debug
+_srctag=${_tag#jupiter-}
+pkgver=${_srctag%-rtw-debug}
 pkgrel=1
 pkgdesc="Firmware files for Linux"
 url="https://gitlab.steamos.cloud/jupiter/linux-firmware-neptune"
 license=('GPL2' 'GPL3' 'custom')
 arch=('any')
-makedepends=('git')
+makedepends=('git' 'openssh')
 options=(!strip !debug)
 source=("git+ssh://git@gitlab.steamos.cloud/jupiter/linux-firmware-neptune.git#tag=$_tag")
 sha256sums=('SKIP')
@@ -28,13 +29,6 @@ prepare() {
   done
 }
 
-pkgver() {
-  cd ${pkgbase}
-
-  # Commit date + short rev
-  echo $(TZ=UTC git show -s --pretty=%cd --date=format-local:%Y%m%d HEAD).$(git rev-parse --short HEAD)
-}
-
 build() {
   mkdir -p kernel/x86/microcode
   cat ${pkgbase}/amd-ucode/microcode_amd*.bin > kernel/x86/microcode/AuthenticAMD.bin
@@ -50,7 +44,7 @@ build() {
     bsdtar --null -cf - --format=newc @- > amd-ucode.img
 }
 
-package_linux-firmware-neptune() {
+package_linux-firmware-neptune-rtw-debug() {
   provides=('linux-firmware')
   conflicts=('linux-firmware')
   replaces=('linux-firmware')
