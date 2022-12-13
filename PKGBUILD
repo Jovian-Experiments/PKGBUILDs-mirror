@@ -7,8 +7,12 @@ pkgbase=mesa-radv
 # Jupiter: only build RADV, the rest comes from upstream/Arch Mesa
 pkgname=('vulkan-radeon')
 pkgdesc="An open-source implementation of the OpenGL specification"
-_tag=jupiter-22.3.3
-pkgver=22.2.0_devel.156805.jupiter_22.3.3
+
+# When updating the tag, consider if you are adding any shader compiler changes. If so,
+# or if you are not sure, regenerate the radv-build-id below. To update, see
+# https://gitlab.steamos.cloud/jupiter/docs/-/wikis/How-to-make-a-new-Mesa-release#updating-the-radv-build-id
+_tag=jupiter-22.3.4
+pkgver=22.2.0_devel.156809.jupiter_22.3.4
 pkgrel=1
 arch=('x86_64')
 makedepends=('git' 'openssh' 'python-mako' 'libxml2' 'libx11' 'xorgproto' 'libdrm' 'libxshmfence'
@@ -67,7 +71,7 @@ build() {
     -D osmesa=false \
     -D microsoft-clc=disabled \
     -D valgrind=enabled \
-    -D radv-build-id="fb4b7078fc42615d086bf41d4b99b94a1df3789e"
+    -D radv-build-id="27d8cb8e2802d1a25d71d2832c16ac0b017f28c6"
 
   # Print config
   meson configure build
