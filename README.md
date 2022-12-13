@@ -1,9 +1,12 @@
 
-`release @ 20221005.1`
+`release @ 20221213.1`
 ======================
 
 Valve packages
 --------------
+
+### `holo-rel`
+ * [`archlinux-keyring` — `holo-rel/archlinux-keyring-20221123-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-rel/archlinux-keyring-20221123-1.1)
 
 ### `jupiter-rel`
  * [`f3` — `jupiter-rel/f3-8.0-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-rel/f3-8.0-2)
@@ -12,7 +15,6 @@ Valve packages
  * [`ibus-table-cangjie-lite` — `jupiter-rel/ibus-table-cangjie-lite-1.8.8-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-rel/ibus-table-cangjie-lite-1.8.8-2)
  * [`jupiter-dock-updater-bin` — `jupiter-rel/jupiter-dock-updater-bin-20220921.01-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-rel/jupiter-dock-updater-bin-20220921.01-1)
  * [`jupiter-fan-control` — `jupiter-rel/jupiter-fan-control-20220705.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-rel/jupiter-fan-control-20220705.1-1)
- * [`jupiter-hw-support` — `jupiter-rel/jupiter-hw-support-3.3.2.20220926.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-rel/jupiter-hw-support-3.3.2.20220926.1-1)
  * [`jupiter-legacy-support` — `jupiter-rel/jupiter-legacy-support-1.12402-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-rel/jupiter-legacy-support-1.12402-1)
  * [`kscreen` — `jupiter-rel/kscreen-5.23.5-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-rel/kscreen-5.23.5-2)
  * [`linux-firmware-neptune` — `jupiter-rel/linux-firmware-neptune-20220624.650ab31-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-rel/linux-firmware-neptune-20220624.650ab31-1)
@@ -54,7 +56,6 @@ Arch Linux packages
  * [`appstream-qt/0.15.1-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/appstream-qt/-/tree/0.15.1-2)
  * [`arch-install-scripts/24-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/arch-install-scripts/-/tree/24-2)
  * [`archlinux-appstream-data/20220107-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/archlinux-appstream-data/-/tree/20220107-1)
- * [`archlinux-keyring/20220125-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/archlinux-keyring/-/tree/20220125-1)
  * [`argon2/20190702-4`](https://gitlab.archlinux.org/archlinux/packaging/packages/argon2/-/tree/20190702-4)
  * [`ark/21.12.1-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/ark/-/tree/21.12.1-1)
  * [`aspell/0.60.8-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/aspell/-/tree/0.60.8-2)
@@ -246,6 +247,7 @@ Arch Linux packages
  * [`js78/78.15.0-3`](https://gitlab.archlinux.org/archlinux/packaging/packages/js78/-/tree/78.15.0-3)
  * [`json-c/0.15-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/json-c/-/tree/0.15-2)
  * [`json-glib/1.6.6-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/json-glib/-/tree/1.6.6-1)
+ * [`jupiter-hw-support/3.3.3.20221213.1-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/jupiter-hw-support/-/tree/3.3.3.20221213.1-1)
  * [`kaccounts-integration/21.12.1-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/kaccounts-integration/-/tree/21.12.1-1)
  * [`kactivities/5.90.0-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/kactivities/-/tree/5.90.0-1)
  * [`kactivities-stats/5.90.0-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/kactivities-stats/-/tree/5.90.0-1)
