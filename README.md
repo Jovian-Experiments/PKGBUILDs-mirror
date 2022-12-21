@@ -1,5 +1,5 @@
 
-`release @ 20221220.1`
+`release @ 20221220.2`
 ======================
 
 Valve packages
@@ -11,10 +11,10 @@ Valve packages
 
 ### `jupiter-rel`
  * [`f3` — `jupiter-rel/f3-8.0-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-rel/f3-8.0-2)
- * [`gamescope` — `jupiter-rel/gamescope-3.11.48-4.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-rel/gamescope-3.11.48-4.1)
+ * [`gamescope` — `jupiter-rel/gamescope-3.11.48-4.2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-rel/gamescope-3.11.48-4.2)
  * [`ibus-anthy` — `jupiter-rel/ibus-anthy-1.5.14-4`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-rel/ibus-anthy-1.5.14-4)
  * [`ibus-table-cangjie-lite` — `jupiter-rel/ibus-table-cangjie-lite-1.8.8-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-rel/ibus-table-cangjie-lite-1.8.8-2)
- * [`jupiter-hw-support` — `jupiter-rel/jupiter-hw-support-3.4.20221220.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-rel/jupiter-hw-support-3.4.20221220.1-1)
+ * [`jupiter-hw-support` — `jupiter-rel/jupiter-hw-support-3.4.20221220.2-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-rel/jupiter-hw-support-3.4.20221220.2-1)
  * [`libva-mesa-driver` — `jupiter-rel/mesa-22.2.0.157821.radeonsi_3.4.0_2-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-rel/mesa-22.2.0.157821.radeonsi_3.4.0_2-1)
  * [`linux-firmware-neptune` — `jupiter-rel/linux-firmware-neptune-20220624.650ab31-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-rel/linux-firmware-neptune-20220624.650ab31-1)
  * [`linux-neptune` — `jupiter-rel/linux-neptune-5.13.0.valve36-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-rel/linux-neptune-5.13.0.valve36-1)
