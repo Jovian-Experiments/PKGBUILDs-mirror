@@ -267,6 +267,10 @@ if [[ "$short_session_count" -ge "$short_session_count_before_reset" ]]; then
 	rm "$short_session_tracker_file"
 fi
 
+# This will re-send automount notifications for steam, and has a builtin timeout to wait for steam to come up.
+# _eventually_ steam should learn to talk to udisks so we don't have to rube goldberg this info to it.
+/usr/bin/steamos-polkit-helpers/steamos-retrigger-automounts
+
 if [[ -x $HOME/devkit-game/devkit-steam ]]; then
 	mangoapp &
 	"$HOME"/devkit-game/devkit-steam "${steamargs[@]}"
