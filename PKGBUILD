@@ -3,7 +3,7 @@
 pkgname=gamescope
 _srctag=3.11.48
 pkgver=${_srctag//-/.}
-pkgrel=4.1
+pkgrel=4.2
 pkgdesc="gaming shell based on Xwayland, powered by Vulkan and DRM"
 arch=(x86_64)
 url="https://github.com/Plagman/gamescope"
@@ -23,7 +23,7 @@ source=("gamescope-session"
         # FIXME Upstream gamescope is just selecting master branch at build time, so we are arbitrarily snapshotting a
         #       revision when bumping the version here such that the build is reproducible.
         "git+https://github.com/nothings/stb.git#commit=af1a5bc352164740c1cc1354942b1c6b72eacb8a")
-sha256sums=('fb102e7ab962044780983f92d83219c057ee723f12cae193d74f011a374b5c91'
+sha256sums=('be443ff4c3834dbb81be3e16f6ba8ce4a44bd4e83c338ce5b1177eb1fb0f5bf2'
             'fe515fce8f151a6c03a89e043044bfddf8cd6ee89027d2cfbcf6f6706c78ca76'
             'e37ba6107f3a84cf47c2799b537a88583e6cb8951167a9c6a48fa1d85996206b'
             '281d892e32c2c31e9df94c5e712a1fde46c0a2f3214aa2df5b7253c6db47977c'
