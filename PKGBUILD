@@ -1,7 +1,7 @@
 # Maintainer: Collabora Ltd <gael.portay@collabora.com>
 
 pkgname=steamos-customizations-jupiter
-_srctag=jupiter-20220617.1
+_srctag=jupiter-20220713.1
 _srcver=${_srctag#jupiter-}
 pkgver=${_srcver//-/.}
 pkgrel=1
@@ -10,10 +10,10 @@ arch=('any')
 url='http://repo.steampowered.com'
 license=('LGPLv2+')
 depends=('e2fsprogs' 'gptfdisk' 'rsync' 'util-linux')
-makedepends=('git')
+makedepends=('git' 'openssh')
 provides=("${pkgname%-git}")
 conflicts=("${pkgname%-git}")
-source=("${pkgname%-git}::git+ssh://git@gitlab.internal.steamos.cloud:/steam/steamos-customizations.git#tag=${_srctag}")
+source=("${pkgname%-git}::git+ssh://git@gitlab.steamos.cloud:/steam/steamos-customizations.git#tag=${_srctag}")
 md5sums=('SKIP')
 
 package() {
@@ -33,4 +33,8 @@ package() {
 	rm -rf "${pkgdir}"/usr/lib/systemd/system/{multi-user.target.wants/,}pacman-{init,cleanup}.service
 	# The sudo settings live in separate package
 	rm -rf "${pkgdir}/etc/sudoers.d"
+
+	# https://gitlab.steamos.cloud/jupiter/tasks/-/issues/576
+	echo "LIBVA_DRIVER_NAME=radeonsi" > "${pkgdir}/etc/profile.d/libva.sh"
+	echo "export LIBVA_DRIVER_NAME" >> "${pkgdir}/etc/profile.d/libva.sh"
 }
