@@ -1,5 +1,5 @@
 
-`release @ 20221222.1`
+`release @ 20221228.1`
 ======================
 
 Valve packages
@@ -11,7 +11,7 @@ Valve packages
 
 ### `jupiter-rel`
  * [`f3` — `jupiter-rel/f3-8.0-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-rel/f3-8.0-2)
- * [`gamescope` — `jupiter-rel/gamescope-3.11.48.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-rel/gamescope-3.11.48.1-1)
+ * [`gamescope` — `jupiter-rel/gamescope-3.11.48-4.3`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-rel/gamescope-3.11.48-4.3)
  * [`ibus-anthy` — `jupiter-rel/ibus-anthy-1.5.14-4`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-rel/ibus-anthy-1.5.14-4)
  * [`ibus-table-cangjie-lite` — `jupiter-rel/ibus-table-cangjie-lite-1.8.8-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-rel/ibus-table-cangjie-lite-1.8.8-2)
  * [`jupiter-hw-support` — `jupiter-rel/jupiter-hw-support-3.4.20221221.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-rel/jupiter-hw-support-3.4.20221221.1-1)
@@ -23,7 +23,7 @@ Valve packages
  * [`opencl-mesa` — `jupiter-rel/mesa-22.2.0.157821.radeonsi_3.4.0_2-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-rel/mesa-22.2.0.157821.radeonsi_3.4.0_2-2)
  * [`renderdoc-minimal` — `jupiter-rel/renderdoc-minimal-1.22-6`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-rel/renderdoc-minimal-1.22-6)
  * [`steam-im-modules` — `jupiter-rel/steam-im-modules-jupiter.20220223-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-rel/steam-im-modules-jupiter.20220223-1)
- * [`steam-jupiter-stable` — `jupiter-rel/steam-jupiter-stable-1.0.0.75-1.3`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-rel/steam-jupiter-stable-1.0.0.75-1.3)
+ * [`steam-jupiter-stable` — `jupiter-rel/steam-jupiter-stable-1.0.0.75-1.4`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-rel/steam-jupiter-stable-1.0.0.75-1.4)
  * [`steamos-customizations-jupiter` — `jupiter-rel/steamos-customizations-jupiter-20220713.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-rel/steamos-customizations-jupiter-20220713.1-1)
  * [`steamos-devkit-service` — `jupiter-rel/steamos-devkit-service-0.20220401.0-7`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-rel/steamos-devkit-service-0.20220401.0-7)
  * [`ttf-twemoji-default` — `jupiter-rel/ttf-twemoji-default-13.1.0-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-rel/ttf-twemoji-default-13.1.0-2)
