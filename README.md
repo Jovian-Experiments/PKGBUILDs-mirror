@@ -1,5 +1,5 @@
 
-`release @ 20221228.1`
+`release @ 20221228.2`
 ======================
 
 Valve packages
@@ -11,7 +11,7 @@ Valve packages
 
 ### `jupiter-rel`
  * [`f3` — `jupiter-rel/f3-8.0-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-rel/f3-8.0-2)
- * [`gamescope` — `jupiter-rel/gamescope-3.11.48-4.3`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-rel/gamescope-3.11.48-4.3)
+ * [`gamescope` — `jupiter-rel/gamescope-3.11.48.1-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-rel/gamescope-3.11.48.1-1.1)
  * [`ibus-anthy` — `jupiter-rel/ibus-anthy-1.5.14-4`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-rel/ibus-anthy-1.5.14-4)
  * [`ibus-table-cangjie-lite` — `jupiter-rel/ibus-table-cangjie-lite-1.8.8-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-rel/ibus-table-cangjie-lite-1.8.8-2)
  * [`jupiter-hw-support` — `jupiter-rel/jupiter-hw-support-3.4.20221221.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-rel/jupiter-hw-support-3.4.20221221.1-1)
