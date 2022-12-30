@@ -2,7 +2,7 @@
 # Contributor: Luis Martinez <luis dot martinez at tuta dot io>
 
 pkgname=gpu-trace
-pkgver=2.8
+pkgver=2.9
 pkgrel=1
 pkgdesc="GPU Trace capture tool"
 arch=('any')
@@ -12,7 +12,7 @@ depends=('python3' 'trace-cmd' 'perf')
 provides=('amdgpu-trace')
 conflicts=('amdgpu-trace')
 source=("$pkgname-$pkgver.tar.gz::$url/archive/v$pkgver.tar.gz")
-sha256sums=('d22f3198c06ca257f53eee38fbb7778a58069bed7a911ed88fb1830a5ab37317')
+sha256sums=('1e451b482644decf09ddfac13651c9c83797f07569533e028c74607d2d30f93e')
 
 #source=('gpu-trace::git+https://github.com/lostgoat/gpu-trace')
 
