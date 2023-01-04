@@ -1,5 +1,5 @@
 
-`main @ 20221223.1000`
+`main @ 20230104.1000`
 ======================
 
 Valve packages
@@ -37,7 +37,7 @@ Valve packages
  * [`f3` — `jupiter-main/f3-8.0-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/f3-8.0-2)
  * [`flatpak` — `jupiter-main/flatpak-1.12.4-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/flatpak-1.12.4-1.1)
  * [`gamescope` — `jupiter-main/gamescope-3.11.51-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/gamescope-3.11.51-2)
- * [`gpu-trace` — `jupiter-main/gpu-trace-2.8-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/gpu-trace-2.8-1)
+ * [`gpu-trace` — `jupiter-main/gpu-trace-2.9-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/gpu-trace-2.9-1)
  * [`ibus-anthy` — `jupiter-main/ibus-anthy-1.5.14-4`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/ibus-anthy-1.5.14-4)
  * [`ibus-table-cangjie-lite` — `jupiter-main/ibus-table-cangjie-lite-1.8.8-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/ibus-table-cangjie-lite-1.8.8-2)
  * [`jupiter-dock-updater-bin` — `jupiter-main/jupiter-dock-updater-bin-20221026.01-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-dock-updater-bin-20221026.01-1)
@@ -57,7 +57,7 @@ Valve packages
  * [`renderdoc-minimal` — `jupiter-main/renderdoc-minimal-1.22-6`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/renderdoc-minimal-1.22-6)
  * [`sddm-wayland` — `jupiter-main/sddm-wayland-v0.19.0.valve4.d19813cb03c7d71b896aead28e5285bc131500a9-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/sddm-wayland-v0.19.0.valve4.d19813cb03c7d71b896aead28e5285bc131500a9-1)
  * [`steam-im-modules` — `jupiter-main/steam-im-modules-jupiter.20220223-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steam-im-modules-jupiter.20220223-1)
- * [`steam-jupiter-stable` — `jupiter-main/steam-jupiter-stable-1.0.0.75-1.3`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steam-jupiter-stable-1.0.0.75-1.3)
+ * [`steam-jupiter-stable` — `jupiter-main/steam-jupiter-stable-1.0.0.75-1.4`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steam-jupiter-stable-1.0.0.75-1.4)
  * [`steamdeck-kde-presets` — `jupiter-main/steamdeck-kde-presets-0.17-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steamdeck-kde-presets-0.17-1)
  * [`steamos-customizations-jupiter` — `jupiter-main/steamos-customizations-jupiter-20220727.1-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steamos-customizations-jupiter-20220727.1-2)
  * [`steamos-devkit-service` — `jupiter-main/steamos-devkit-service-0.20220401.0-7`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steamos-devkit-service-0.20220401.0-7)
@@ -67,7 +67,7 @@ Valve packages
  * [`usbhid-gadget-passthru` — `jupiter-main/usbhid-gadget-passthru-0.1.0-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/usbhid-gadget-passthru-0.1.0-1)
  * [`vpower` — `jupiter-main/vpower-1.4.0-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/vpower-1.4.0-1)
  * [`wayland` — `jupiter-main/wayland-1.21.0-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/wayland-1.21.0-1)
- * [`wireplumber` — `jupiter-main/wireplumber-0.4.12.4.dv-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/wireplumber-0.4.12.4.dv-1)
+ * [`wireplumber` — `jupiter-main/wireplumber-0.4.13.4.dv-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/wireplumber-0.4.13.4.dv-1)
  * [`xdg-desktop-portal` — `jupiter-main/xdg-desktop-portal-1.12.1-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/xdg-desktop-portal-1.12.1-1.1)
  * [`xorg-xwayland-jupiter` — `jupiter-main/xorg-xwayland-jupiter-jupiter.20220831.d4d883ad5-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/xorg-xwayland-jupiter-jupiter.20220831.d4d883ad5-1)
  * [`zenity-light` — `jupiter-main/zenity-light-3.32.0+55+gd7bedff6-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/zenity-light-3.32.0+55+gd7bedff6-1)
@@ -82,7 +82,7 @@ Arch Linux packages
  * [`adobe-source-code-pro-fonts/2.038ro+1.058it+1.018var-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/adobe-source-code-pro-fonts/-/tree/2.038ro+1.058it+1.018var-1)
  * [`adwaita-icon-theme/42.0+r1+gc144c3d75-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/adwaita-icon-theme/-/tree/42.0+r1+gc144c3d75-1)
  * [`aha/0.5.1-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/aha/-/tree/0.5.1-2)
- * [`alsa-card-profiles/1:0.3.59-2.2`](https://gitlab.archlinux.org/archlinux/packaging/packages/pipewire/-/tree/1:0.3.59-2.2)
+ * [`alsa-card-profiles/1:0.3.61.2.dv-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/pipewire/-/tree/1:0.3.61.2.dv-2)
  * [`alsa-lib/1.2.7.2-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/alsa-lib/-/tree/1.2.7.2-1)
  * [`alsa-plugins/1:1.2.7.1-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/alsa-plugins/-/tree/1:1.2.7.1-1)
  * [`alsa-topology-conf/1.2.5.1-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/alsa-topology-conf/-/tree/1.2.5.1-1)
@@ -623,11 +623,11 @@ Arch Linux packages
  * [`phonon-qt5/4.11.1-3`](https://gitlab.archlinux.org/archlinux/packaging/packages/phonon-qt5/-/tree/4.11.1-3)
  * [`phonon-qt5-gstreamer/4.10.0-3`](https://gitlab.archlinux.org/archlinux/packaging/packages/phonon-qt5-gstreamer/-/tree/4.10.0-3)
  * [`pinentry/1.2.1-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/pinentry/-/tree/1.2.1-1)
- * [`pipewire/1:0.3.59-2.2`](https://gitlab.archlinux.org/archlinux/packaging/packages/pipewire/-/tree/1:0.3.59-2.2)
- * [`pipewire-alsa/1:0.3.59-2.2`](https://gitlab.archlinux.org/archlinux/packaging/packages/pipewire/-/tree/1:0.3.59-2.2)
- * [`pipewire-audio/1:0.3.59-2.2`](https://gitlab.archlinux.org/archlinux/packaging/packages/pipewire/-/tree/1:0.3.59-2.2)
- * [`pipewire-jack/1:0.3.59-2.2`](https://gitlab.archlinux.org/archlinux/packaging/packages/pipewire/-/tree/1:0.3.59-2.2)
- * [`pipewire-pulse/1:0.3.59-2.2`](https://gitlab.archlinux.org/archlinux/packaging/packages/pipewire/-/tree/1:0.3.59-2.2)
+ * [`pipewire/1:0.3.61.2.dv-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/pipewire/-/tree/1:0.3.61.2.dv-2)
+ * [`pipewire-alsa/1:0.3.61.2.dv-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/pipewire/-/tree/1:0.3.61.2.dv-2)
+ * [`pipewire-audio/1:0.3.61.2.dv-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/pipewire/-/tree/1:0.3.61.2.dv-2)
+ * [`pipewire-jack/1:0.3.61.2.dv-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/pipewire/-/tree/1:0.3.61.2.dv-2)
+ * [`pipewire-pulse/1:0.3.61.2.dv-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/pipewire/-/tree/1:0.3.61.2.dv-2)
  * [`pixman/0.40.0-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/pixman/-/tree/0.40.0-2)
  * [`pkcs11-helper/1.29.0-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/pkcs11-helper/-/tree/1.29.0-1)
  * [`pkgconf/1.8.0-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/pkgconf/-/tree/1.8.0-1)
