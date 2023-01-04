@@ -16,9 +16,9 @@ pkgname=(
   pipewire-v4l2
   pipewire-x11-bell
 )
-_commit=f54a72fd9a67eeb8d1502d6d75979dbddb00fdf2  # tags/0.3.59
-pkgver=0.3.59
-pkgrel=2.2
+_commit=f33383088099ed41f76fb164def0be528101974e  # tags/0.3.61-2-dv
+pkgver=0.3.61.2.dv
+pkgrel=1
 epoch=1
 pkgdesc="Low-latency audio/video router and processor"
 url="https://pipewire.org"
@@ -73,10 +73,6 @@ prepare() {
   # https://gitlab.steamos.cloud/jupiter/tasks/-/issues/688
   git cherry-pick -n 94a64268613adac8ef6f3e6c1f04468220540d00
   git cherry-pick -n 94a857550b566472e5ab51191e1b34098e5a9506
-
-  # add monitor mode for echo-cancel module
-  # https://gitlab.freedesktop.org/pipewire/pipewire/-/merge_requests/1436
-  git cherry-pick -n bab8004c3fe94a66bb21fd24ab94c6f7ab5f7979
 
   # enable monitor mode by default (not needed once we use echo-cancel.conf)
   # https://gitlab.steamos.cloud/jupiter/tasks/-/issues/673
