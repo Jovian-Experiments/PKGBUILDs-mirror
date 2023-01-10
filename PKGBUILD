@@ -1,7 +1,7 @@
 # Maintainer: Vicki Pfau <vi@endrift.com>
 
 pkgname=usbhid-gadget-passthru
-_srctag=0.1.0
+_srctag=0.1.1
 pkgver=${_srctag}
 pkgrel=1
 pkgdesc="SteamOS Log Submitter"
