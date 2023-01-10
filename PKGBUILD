@@ -7,12 +7,14 @@
 _basename=steam
 pkgname=steam-jupiter-stable
 pkgver=1.0.0.75
-pkgrel=1.4
+pkgrel=1.5
 pkgdesc="Valve's digital software delivery system - Jupiter bootstrapped packaging"
 url='https://steampowered.com/'
 arch=('x86_64')
 license=('custom')
+# libxcrypt-compat, lib32-libxcrypt-compat: https://bugs.archlinux.org/task/75443
 depends=('bash' 'desktop-file-utils' 'diffutils' 'hicolor-icon-theme' 'curl' 'dbus'
+         'libxcrypt-compat'
          'freetype2' 'gdk-pixbuf2' 'ttf-font' 'zenity' 'lsb-release' 'nss' 'usbutils'
          'xorg-xrandr' 'vulkan-driver' 'vulkan-icd-loader' 'lsof' 'python')
 # lib32-pipewire: https://bugs.archlinux.org/task/75155
@@ -20,6 +22,7 @@ depends=('bash' 'desktop-file-utils' 'diffutils' 'hicolor-icon-theme' 'curl' 'db
 # lib32-systemd, lib32-libxinerama: https://bugs.archlinux.org/task/75156
 # lib32-libnm, lib32-libva:  https://bugs.archlinux.org/task/75157
 depends_x86_64=('lib32-libgl' 'lib32-gcc-libs' 'lib32-libx11' 'lib32-libxss'
+                'lib32-libxcrypt-compat'
                 'lib32-alsa-plugins' 'lib32-libgpg-error' 'lib32-fontconfig'
                 'lib32-nss' 'lib32-vulkan-driver' 'lib32-vulkan-icd-loader'
                 'lib32-pipewire' 'lib32-systemd' 'lib32-libxinerama' 'lib32-libva')
