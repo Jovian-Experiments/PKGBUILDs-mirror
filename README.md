@@ -1,5 +1,5 @@
 
-`main @ 20230109.1003`
+`main @ 20230110.1000`
 ======================
 
 Valve packages
@@ -46,7 +46,7 @@ Valve packages
  * [`jupiter-legacy-support` — `jupiter-main/jupiter-legacy-support-1.135-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-legacy-support-1.135-1)
  * [`libnm` — `jupiter-main/networkmanager-1.34.0-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/networkmanager-1.34.0-1.1)
  * [`libva-mesa-driver` — `jupiter-main/mesa-22.2.0.157821.radeonsi_3.4.0_2-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/mesa-22.2.0.157821.radeonsi_3.4.0_2-1)
- * [`linux-firmware-neptune` — `jupiter-main/linux-firmware-neptune-20230110.59a65c4-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/linux-firmware-neptune-20230110.59a65c4-1)
+ * [`linux-firmware-neptune` — `jupiter-main/linux-firmware-neptune-20230111.d4df75f-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/linux-firmware-neptune-20230111.d4df75f-1)
  * [`linux-neptune` — `jupiter-main/linux-neptune-5.13.0.valve37-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/linux-neptune-5.13.0.valve37-1)
  * [`mangohud` — `jupiter-main/mangohud-0.6.8.r17.gebb0f96-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/mangohud-0.6.8.r17.gebb0f96-2)
  * [`mesa` — `jupiter-main/mesa-22.2.0.157821.radeonsi_3.4.0_2-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/mesa-22.2.0.157821.radeonsi_3.4.0_2-1)
@@ -57,7 +57,7 @@ Valve packages
  * [`renderdoc-minimal` — `jupiter-main/renderdoc-minimal-1.22-6`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/renderdoc-minimal-1.22-6)
  * [`sddm-wayland` — `jupiter-main/sddm-wayland-v0.19.0.valve4.d19813cb03c7d71b896aead28e5285bc131500a9-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/sddm-wayland-v0.19.0.valve4.d19813cb03c7d71b896aead28e5285bc131500a9-1)
  * [`steam-im-modules` — `jupiter-main/steam-im-modules-jupiter.20220223-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steam-im-modules-jupiter.20220223-1)
- * [`steam-jupiter-stable` — `jupiter-main/steam-jupiter-stable-1.0.0.75-1.4`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steam-jupiter-stable-1.0.0.75-1.4)
+ * [`steam-jupiter-stable` — `jupiter-main/steam-jupiter-stable-1.0.0.75-1.5`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steam-jupiter-stable-1.0.0.75-1.5)
  * [`steamdeck-kde-presets` — `jupiter-main/steamdeck-kde-presets-0.17-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steamdeck-kde-presets-0.17-1)
  * [`steamos-customizations-jupiter` — `jupiter-main/steamos-customizations-jupiter-20220727.1-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steamos-customizations-jupiter-20220727.1-2)
  * [`steamos-devkit-service` — `jupiter-main/steamos-devkit-service-0.20220401.0-7`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steamos-devkit-service-0.20220401.0-7)
@@ -512,6 +512,7 @@ Arch Linux packages
  * [`libxcb/1.15-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/libxcb/-/tree/1.15-1)
  * [`libxcomposite/0.4.5-4`](https://gitlab.archlinux.org/archlinux/packaging/packages/libxcomposite/-/tree/0.4.5-4)
  * [`libxcrypt/4.4.28-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/libxcrypt/-/tree/4.4.28-2)
+ * [`libxcrypt-compat/4.4.28-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/libxcrypt-compat/-/tree/4.4.28-2)
  * [`libxcursor/1.2.1-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/libxcursor/-/tree/1.2.1-1)
  * [`libxcvt/0.1.2-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/libxcvt/-/tree/0.1.2-1)
  * [`libxdamage/1.1.5-4`](https://gitlab.archlinux.org/archlinux/packaging/packages/libxdamage/-/tree/1.1.5-4)
