@@ -2,8 +2,8 @@
 
 pkgbase=linux-firmware-neptune
 pkgname=(linux-firmware-neptune) # amd-ucode)
-_tag=jupiter-20230109
-pkgver=20230110.59a65c4
+_tag=jupiter-20230110
+pkgver=20230111.d4df75f
 pkgrel=1
 pkgdesc="Firmware files for Linux"
 url="https://gitlab.steamos.cloud/jupiter/linux-firmware-neptune"
