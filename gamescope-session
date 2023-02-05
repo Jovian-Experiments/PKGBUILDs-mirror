@@ -271,14 +271,12 @@ fi
 # _eventually_ steam should learn to talk to udisks so we don't have to rube goldberg this info to it.
 /usr/bin/steamos-polkit-helpers/steamos-retrigger-automounts
 
-notif_daemon_log_file="${XDG_RUNTIME_DIR:+$XDG_RUNTIME_DIR/}steam_notif_daemon.log"
-
 if [[ -x $HOME/devkit-game/devkit-steam ]]; then
-	steam_notif_daemon &> "$notif_daemon_log_file" &
+	steam_notif_daemon &
 	mangoapp &
 	"$HOME"/devkit-game/devkit-steam "${steamargs[@]}"
 else
-	steam_notif_daemon &> "$notif_daemon_log_file" &
+	steam_notif_daemon &
 	mangoapp &
 	steam "${steamargs[@]}"
 fi
