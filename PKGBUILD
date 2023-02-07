@@ -5,30 +5,22 @@
 
 pkgbase=bluez
 pkgname=('bluez' 'bluez-utils' 'bluez-libs' 'bluez-cups' 'bluez-hid2hci' 'bluez-plugins')
-pkgver=5.63
-pkgrel=1.8
+pkgver=5.66
+pkgrel=1.1
 url="http://www.bluez.org/"
 arch=('x86_64')
 license=('GPL2')
 makedepends=('dbus' 'libical' 'systemd' 'alsa-lib' 'json-c' 'ell' 'python-docutils')
 source=(https://www.kernel.org/pub/linux/bluetooth/${pkgname}-${pkgver}.tar.{xz,sign}
         bluetooth.modprobe
-	AVRCP_TG_MDI_BV-04-C.patch
-	0001-adapter-Fix-crash-when-storing-link-key.patch
-	0002-a2dp-Don-t-initialize-a2dp_sep-destroy-until-properl.patch
-	0003-a2dp-Always-invalidate-the-cache-if-its-configuratio.patch
-	0004-a2dp-Fix-crash-when-SEP-codec-has-not-been-initializ.patch
-	0005-valve-bluetooth-config.patch
+        AVRCP_TG_MDI_BV-04-C.patch         # SteamOS: For Bluetooth AVRCP certification test AVRCP/TG/MDI/BV-04-C, which requires a valid response from the get_element_attributes command.
+        0001-valve-bluetooth-config.patch  # SteamOS: Enable compatibility with devices like AirPods Pro
 )
 # see https://www.kernel.org/pub/linux/bluetooth/sha256sums.asc
-sha256sums=('9349e11e8160bb3d720835d271250d8a7424d3690f5289e6db6fe07cc66c6d76'
+sha256sums=('39fea64b590c9492984a0c27a89fc203e1cdc74866086efb8f4698677ab2b574'
             'SKIP'
             '46c021be659c9a1c4e55afd04df0c059af1f3d98a96338236412e449bf7477b4'
             'd64d7518a571251fc8cdb945a8f22aa4ef9f65864a46491034f561a1e5c54e37'
-            'fd73c3c80971a33d5ce8856c42e0abedfd5acd22da70a067a7a945ce475e1b7b'
-            'd5139c0359b8afd7db3471372f4f771ab12adc2c04ddc41d050284d27df5ea56'
-            '8d61267d77733997d20bafa1dd9fb7bc1f72fadaffa198aaebe287b6de96cd1a'
-            'c88f065634e314074e0af68ddb49cd7b8a6adc211ed5fd8d093181d1a2c64e4e'
             '8d585e6a52faeeb426b69a6110aca73823c734180e26bd334731cb13af75387d')
 validpgpkeys=('E932D120BC2AEC444E558F0106CA9F5D1DCF2659') # Marcel Holtmann <marcel@holtmann.org>
 
@@ -54,17 +46,12 @@ build() {
 
 check() {
   cd "$pkgname"-$pkgver
-  # tests segfault and hang
-#  make check || /bin/true # https://bugzilla.kernel.org/show_bug.cgi?id=196621
+  make check
 }
 
 prepare() {
   patch -d "${pkgname}"-${pkgver} -p1 -i "${srcdir}"/AVRCP_TG_MDI_BV-04-C.patch
-  patch -d "${pkgname}"-${pkgver} -p1 -i "${srcdir}"/0001-adapter-Fix-crash-when-storing-link-key.patch
-  patch -d "${pkgname}"-${pkgver} -p1 -i "${srcdir}"/0002-a2dp-Don-t-initialize-a2dp_sep-destroy-until-properl.patch
-  patch -d "${pkgname}"-${pkgver} -p1 -i "${srcdir}"/0003-a2dp-Always-invalidate-the-cache-if-its-configuratio.patch
-  patch -d "${pkgname}"-${pkgver} -p1 -i "${srcdir}"/0004-a2dp-Fix-crash-when-SEP-codec-has-not-been-initializ.patch
-  patch -d "${pkgname}"-${pkgver} -p1 -i "${srcdir}"/0005-valve-bluetooth-config.patch
+  patch -d "${pkgname}"-${pkgver} -p1 -i "${srcdir}"/0001-valve-bluetooth-config.patch
 }
 
 package_bluez() {
@@ -100,12 +87,19 @@ package_bluez() {
   
   # fix obex file transfer - https://bugs.archlinux.org/task/45816
   ln -fs /usr/lib/systemd/user/obex.service "${pkgdir}"/usr/lib/systemd/user/dbus-org.bluez.obex.service
+
+  # FS#74157 - bluez systemd service fails without localstatedir present
+  install -dm700 "${pkgdir}"/var/lib/bluetooth
+
+  # cleanup  - these libs go into bluez-libs
+  rm "${pkgdir}"/usr/lib/libbluetooth.so*
 }
 
 package_bluez-utils() {
   pkgdesc="Development and debugging utilities for the bluetooth protocol stack"
   depends=('dbus' 'systemd' 'glib2')
   optdepends=('ell: for btpclient')
+  backup=('etc/bluetooth/mesh-main.conf')
   conflicts=('bluez-hcidump')
   provides=('bluez-hcidump')
   replaces=('bluez-hcidump' 'bluez<=4.101')
@@ -121,6 +115,10 @@ package_bluez-utils() {
     filename=$(basename $files)
     install -Dm755 "${srcdir}"/"${pkgbase}"-${pkgver}/tools/$filename "${pkgdir}"/usr/bin/$filename
   done
+  
+  # ship upstream mesh config file
+  install -dm755 "${pkgdir}"/etc/bluetooth
+  install -Dm644 "${srcdir}"/"${pkgbase}"-${pkgver}/mesh/mesh-main.conf "${pkgdir}"/etc/bluetooth/mesh-main.conf
   
   # libbluetooth.so* are part of libLTLIBRARIES and binPROGRAMS targets
   #make DESTDIR=${pkgdir} uninstall-libLTLIBRARIES
@@ -150,6 +148,9 @@ package_bluez-cups() {
 
   cd "${pkgbase}"-${pkgver}
   make DESTDIR="${pkgdir}" install-cupsPROGRAMS
+
+  # cleanup  - these libs go into bluez-libs
+  rm "${pkgdir}"/usr/lib/libbluetooth.so*
 }
 
 package_bluez-hid2hci() {
@@ -163,6 +164,9 @@ package_bluez-hid2hci() {
   
   install -dm755 "${pkgdir}"/usr/share/man/man1
   mv "${srcdir}"/hid2hci.1 "${pkgdir}"/usr/share/man/man1/hid2hci.1
+ 
+  # cleanup  - these libs go into bluez-libs
+  rm "${pkgdir}"/usr/lib/libbluetooth.so*
 }
 
 package_bluez-plugins() {
@@ -172,4 +176,7 @@ package_bluez-plugins() {
   cd "${pkgbase}"-${pkgver}
   make DESTDIR="${pkgdir}" \
        install-pluginLTLIBRARIES
+
+  # cleanup  - these libs go into bluez-libs
+  rm "${pkgdir}"/usr/lib/libbluetooth.so*
 }
