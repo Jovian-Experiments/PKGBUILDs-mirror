@@ -1,15 +1,15 @@
 # Maintainer: Pierre-Loup A. Griffais <pgriffais@valvesoftware.com>
 
 pkgname=gamescope
-_srctag=3.11.51
+_srctag=3.11.52-beta1
 pkgver=${_srctag//-/.}
-pkgrel=4
+pkgrel=2
 pkgdesc="gaming shell based on Xwayland, powered by Vulkan and DRM"
 arch=(x86_64)
 url="https://github.com/Plagman/gamescope"
 license=('MIT')
-depends=('xorg-xwayland-jupiter' 'libxres' 'xcb-util-errors' 'freerdp' 'xcb-util-wm' 'libxcomposite' 'pixman' 'libinput' 'seatd' 'pipewire')
-makedepends=(git meson wayland-protocols ninja glslang vulkan-headers)
+depends=('xorg-xwayland-jupiter' 'libxres' 'xcb-util-errors' 'freerdp' 'xcb-util-wm' 'libxcomposite' 'pixman' 'libinput' 'seatd' 'pipewire' 'libxmu')
+makedepends=(git meson cmake wayland-protocols ninja glslang vulkan-headers)
 source=("gamescope-session"
         "gamescope-wayland.desktop"
         "gamescope-mimeapps.list"
@@ -23,7 +23,7 @@ source=("gamescope-session"
         # FIXME Upstream gamescope is just selecting master branch at build time, so we are arbitrarily snapshotting a
         #       revision when bumping the version here such that the build is reproducible.
         "git+https://github.com/nothings/stb.git#commit=af1a5bc352164740c1cc1354942b1c6b72eacb8a")
-sha256sums=('516185e81b7f8ed5068dd98b2680129045ef71cdba54012e5f7af6e71dceb6ff'
+sha256sums=('0e5d16abc2ec2c304ebc72254be3b70ab96c985b1e0f9c4cb416b4c61e10f0b4'
             'fe515fce8f151a6c03a89e043044bfddf8cd6ee89027d2cfbcf6f6706c78ca76'
             'e37ba6107f3a84cf47c2799b537a88583e6cb8951167a9c6a48fa1d85996206b'
             '281d892e32c2c31e9df94c5e712a1fde46c0a2f3214aa2df5b7253c6db47977c'
