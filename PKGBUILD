@@ -2,7 +2,7 @@
 # Maintainer: Jan Alexander Steffens (heftig) <heftig@archlinux.org>
 
 pkgbase=linux-neptune-61
-_tag=6.1.9-valve2
+_tag=6.1.12-valve2
 pkgver=${_tag//-/.}
 pkgrel=1
 pkgdesc='Linux'
@@ -30,8 +30,8 @@ validpgpkeys=(
   'A2FF3A36AAA56654109064AB19802F8B0D70FC30'  # Jan Alexander Steffens (heftig)
 )
 sha256sums=('SKIP'
-            '05168cbbeb6378eec6c84fe3300cede4fa5cf6130c39fb8af95040529bd390a6'
-            'c17f9f9c87098b9e59bb1866ce6d148724e179b5991f7445d6f96e2cc46c9ebf'
+            '81a9379fd2eac51bb2dc69d83737d7fbdd41fcaca5af4873e3666d3c706760d1'
+            'bbc3e5ee7524f9b27b5e9d6b8055db94008f025c4fe64e4c458fb3a42b7c66f8'
             'b2779035c049c363808e3ba238be685884206a4a5b1c0500b707faf12eef6996'
             '6098e453286c58b25a257d22e1c7098b00a0afe3b718e4869bccff9432491c3f')
 
