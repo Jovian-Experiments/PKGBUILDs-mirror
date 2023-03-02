@@ -1,14 +1,14 @@
 # Maintainer: Simon Hallsten <flightlessmangoyt@gmail.com>
 pkgname=('mangohud' 'lib32-mangohud')
-pkgver=0.6.8.r17.gebb0f96
-pkgrel=2
+pkgver=0.6.8.r72.g3190778
+pkgrel=1
 pkgdesc="Vulkan and OpenGL overlay to display performance information"
 arch=('x86_64')
 makedepends=('dbus' 'gcc' 'meson' 'python-mako' 'libx11' 'lib32-libx11' 'git' 'pkgconf' 'vulkan-headers' 'appstream')
 depends=('glslang' 'libglvnd' 'lib32-libglvnd' 'glew' 'glfw-x11')
 replaces=('vulkan-mesa-layer-mango')
 license=('MIT')
-source=("mangohud"::"git+https://github.com/flightlessmango/MangoHud.git#commit=ebb0f969dea2c5df1600e6e299cd5665920e0020"
+source=("mangohud"::"git+https://github.com/flightlessmango/MangoHud.git#commit=319077808668c589523853313d028cf81837ce72"
         "mangohud-minhook"::"git+https://github.com/flightlessmango/minhook.git"
         "imgui-v1.81.tar.gz::https://github.com/ocornut/imgui/archive/v1.81.tar.gz"
         "imgui-1.81-1-wrap.zip::https://wrapdb.mesonbuild.com/v1/projects/imgui/1.81/1/get_zip"
@@ -24,7 +24,7 @@ sha256sums=('SKIP'
             '3c38f275d5792b1286391102594329e98b17737924b344f98312ab09929b74be'
             'b94997df68856753b72f0d7a3703b7d484d4745c567f3584ef97c96c25a5798e')
 
-_build_args="-Dappend_libdir_mangohud=false -Dwith_xnvctrl=disabled -Duse_system_vulkan=enabled -Dmangoapp_layer=true -Dprepend_libdir_vk=false"
+_build_args="-Dappend_libdir_mangohud=false -Dwith_xnvctrl=disabled -Duse_system_vulkan=enabled -Dmangoapp_layer=true -Dprepend_libdir_vk=false -Dvulkan_datadir=/usr/share"
 
 pkgver() {
   cd "$srcdir/mangohud"
@@ -48,7 +48,7 @@ prepare() {
 }
 
 build() {
-  arch-meson mangohud build64 \
+  meson setup mangohud build64 \
     ${_build_args} -Dmangoapp=true -Dmangohudctl=true
 
   ninja -C build64
@@ -57,7 +57,7 @@ build() {
   export PKG_CONFIG_PATH="/usr/lib32/pkgconfig:/usr/lib/i386-linux-gnu/pkgconfig:/usr/lib/pkgconfig:${PKG_CONFIG_PATH_32}"
   export LLVM_CONFIG="/usr/bin/llvm-config32"
 
-  arch-meson mangohud build32 \
+  meson setup mangohud build32 \
     --libdir=lib32 \
     ${_build_args}
 
