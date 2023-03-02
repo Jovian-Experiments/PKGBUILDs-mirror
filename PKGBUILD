@@ -11,9 +11,9 @@ pkgdesc="An open-source implementation of the OpenGL specification"
 # When updating the tag, consider if you are adding any shader compiler changes. If so,
 # or if you are not sure, regenerate the radv-build-id below. To update, see
 # https://gitlab.steamos.cloud/jupiter/docs/-/wikis/How-to-make-a-new-Mesa-release#updating-the-radv-build-id
-_tag=jupiter-22.3.4
-pkgver=22.2.0_devel.156809.jupiter_22.3.4
-pkgrel=2
+_tag=steamos-3.5.1
+pkgver=23.1.0_devel.166652.steamos_3.5.1
+pkgrel=1
 arch=('x86_64')
 makedepends=('git' 'openssh' 'python-mako' 'libxml2' 'libx11' 'xorgproto' 'libdrm' 'libxshmfence'
              'wayland' 'wayland-protocols' 'zstd' 'elfutils' 'llvm'
@@ -59,8 +59,11 @@ build() {
     -D b_ndebug=true \
     -D b_lto=false \
     -D platforms=x11,wayland \
-    -D dri-drivers= \
     -D gallium-drivers= \
+    -D gallium-vdpau=disabled \
+    -D gallium-va=disabled \
+    -D gallium-xa=disabled \
+    -D android-libbacktrace=disabled \
     -D vulkan-drivers=amd \
     -D vulkan-layers= \
     -D dri3=enabled \
@@ -76,7 +79,7 @@ build() {
     -D osmesa=false \
     -D microsoft-clc=disabled \
     -D valgrind=enabled \
-    -D radv-build-id="27d8cb8e2802d1a25d71d2832c16ac0b017f28c6"
+    -D radv-build-id="89484cc7ee8903e8fcda0fff43b6290f24a400c0"
 
   # Print config
   meson configure build
