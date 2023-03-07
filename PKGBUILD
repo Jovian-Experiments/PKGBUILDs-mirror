@@ -4,7 +4,7 @@
 # Everything still in here should be either removed or re-homed to a proper package.
 
 pkgname=jupiter-legacy-support
-pkgver=1.135
+pkgver=1.136
 pkgrel=1
 pkgdesc="Legacy jupiter-specific support files that haven't been split to their own package or removed."
 arch=(any)
@@ -75,7 +75,6 @@ package() {
 
   install -D -m644 {,"$pkgdir"/}etc/sddm.conf.d/steamos.conf
   # install -D -m644 {,"$pkgdir"/}etc/pulse/default.pa
-  install -D -m644 {,"$pkgdir"/}etc/sysctl.d/swappiness.conf
 
   # FIXME reconcile with grub-steamos
   install -D -m644 etc/default/grub "$pkgdir"/etc/default/grub-legacy
