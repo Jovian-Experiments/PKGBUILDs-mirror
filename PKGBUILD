@@ -3,26 +3,49 @@
 # Contributor: Jan Alexander Steffens (heftig) <jan.steffens@gmail.com>
 
 pkgname=flatpak
-pkgver=1.12.4
+pkgver=1.14.3
 pkgrel=1.1
 pkgdesc="Linux application sandboxing and distribution framework (formerly xdg-app)"
 url="https://flatpak.org"
 arch=(x86_64)
 license=(LGPL)
-depends=(dbus glib2 libsoup polkit libxau ostree json-glib libseccomp libarchive
-         python bubblewrap appstream-glib xdg-dbus-proxy systemd)
-makedepends=(intltool gobject-introspection gtk-doc git docbook-xsl xmlto)
+depends=(
+  appstream
+  bubblewrap
+  dbus
+  fuse3
+  glib2
+  json-glib
+  libarchive
+  libmalcontent
+  libsoup
+  libseccomp
+  libxau
+  ostree
+  polkit
+  python
+  systemd
+  xdg-dbus-proxy
+)
+makedepends=(
+  docbook-xsl
+  git
+  gobject-introspection
+  gtk-doc
+  python-pyparsing
+  xmlto
+)
 checkdepends=(valgrind socat)
 provides=(libflatpak.so)
-_commit=103ed5c02c8453580fac19e5122d150f44f6774f  # tags/1.12.4^0
+_commit=ccafd8c1c81df267c4ef304d8e06d770e3909093  # tags/1.14.3^0
 source=("git+https://github.com/flatpak/flatpak#commit=$_commit"
         git+https://gitlab.gnome.org/GNOME/libglnx.git
         git+https://github.com/projectatomic/bubblewrap
         git+https://github.com/flatpak/xdg-dbus-proxy
         git+https://gitlab.gnome.org/alexl/variant-schema-compiler.git
         https://dl.flathub.org/repo/flathub.flatpakrepo
-        stop-portal-and-helper.patch
         allow-modify_ldt-in-multiarch.patch
+        fusermount3.diff
         flatpak-bindir.sh)
 sha256sums=('SKIP'
             'SKIP'
@@ -30,8 +53,8 @@ sha256sums=('SKIP'
             'SKIP'
             'SKIP'
             '3371dd250e61d9e1633630073fefda153cd4426f72f4afa0c3373ae2e8fea03a'
-            '24be4360aa48f040bc8660532305256e03c1d4779f971f026d28bc3107fb692e'
             'f0f6322318b51f9a92f35bdcf125a11cfe345518a3b9d48f9faf84189723762b'
+            '23e01650d60222082ffb67a16d3ea033192cc9e6932027cf0ea0c55ea17863af'
             '1824cb4eb1cc88702cb2b9f1c55b6dfdf20fca5eab83f6e8e532099281328745')
 
 pkgver() {
@@ -42,12 +65,8 @@ pkgver() {
 prepare() {
   cd flatpak
 
-  # Stop flatpak-session-helper / flatpak-portal when the session ends
-  # Remove after Flatpak > 1.14.0 is available
-  patch -p1 < "$srcdir/stop-portal-and-helper.patch"
-
   # Allow the modify_ldt syscall when using multiarch
-  # Remove after Flatpak > 1.14.0 is available
+  # Remove after Flatpak > 1.15.3 is available
   patch -p1 < "$srcdir/allow-modify_ldt-in-multiarch.patch"
 
   git submodule init
@@ -56,9 +75,6 @@ prepare() {
   git submodule set-url dbus-proxy "$srcdir/xdg-dbus-proxy"
   git submodule set-url variant-schema-compiler "$srcdir/variant-schema-compiler"
   git submodule update
-
-  # https://github.com/flatpak/flatpak/issues/267
-  sed -i '/locale\/C\./d' tests/make-test-runtime.sh
 
   NOCONFIGURE=1 ./autogen.sh
 }
