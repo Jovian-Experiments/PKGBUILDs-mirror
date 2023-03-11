@@ -1,7 +1,7 @@
 # Maintainer: Simon Hallsten <flightlessmangoyt@gmail.com>
 pkgname=('mangohud' 'lib32-mangohud')
 pkgver=0.6.8.r72.g3190778
-pkgrel=2
+pkgrel=3
 pkgdesc="Vulkan and OpenGL overlay to display performance information"
 arch=('x86_64')
 makedepends=('dbus' 'gcc' 'meson' 'python-mako' 'libx11' 'lib32-libx11' 'git' 'pkgconf' 'vulkan-headers' 'appstream')
@@ -24,7 +24,7 @@ sha256sums=('SKIP'
             '3c38f275d5792b1286391102594329e98b17737924b344f98312ab09929b74be'
             'b94997df68856753b72f0d7a3703b7d484d4745c567f3584ef97c96c25a5798e')
 
-_build_args="-Dappend_libdir_mangohud=false -Dwith_xnvctrl=disabled -Duse_system_vulkan=enabled -Dmangoapp_layer=true -Dprepend_libdir_vk=false -Dvulkan_datadir=/usr/share"
+_build_args="-Dappend_libdir_mangohud=false -Dwith_xnvctrl=disabled -Duse_system_vulkan=enabled -Dmangoapp_layer=true -Dprepend_libdir_vk=false"
 
 pkgver() {
   cd "$srcdir/mangohud"
@@ -48,18 +48,19 @@ prepare() {
 }
 
 build() {
-  meson setup mangohud build64 \
-    ${_build_args} -Dmangoapp=true -Dmangohudctl=true --prefix /usr
+  arch-meson mangohud build64 \
+    -D tests=disabled \
+    ${_build_args} -Dmangoapp=true -Dmangohudctl=true
 
   ninja -C build64
   export CC="gcc -m32"
   export CXX="g++ -m32"
   export PKG_CONFIG_PATH="/usr/lib32/pkgconfig:/usr/lib/i386-linux-gnu/pkgconfig:/usr/lib/pkgconfig:${PKG_CONFIG_PATH_32}"
-  export LLVM_CONFIG="/usr/bin/llvm-config32"
 
-  meson setup mangohud build32 \
+  arch-meson mangohud build32 \
+    -D tests=disabled \
     --libdir=lib32 \
-    ${_build_args} --prefix /usr
+    ${_build_args}
 
   ninja -C build32
 }
