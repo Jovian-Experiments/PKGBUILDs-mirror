@@ -1,5 +1,5 @@
 
-`main @ 20230306.1000`
+`main @ 20230313.1000`
 ======================
 
 Valve packages
@@ -35,7 +35,7 @@ Valve packages
  * [`bluez-utils` — `jupiter-main/bluez-5.66-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/bluez-5.66-1.1)
  * [`ds-inhibit` — `jupiter-main/ds-inhibit-0.1.0-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/ds-inhibit-0.1.0-1)
  * [`f3` — `jupiter-main/f3-8.0-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/f3-8.0-2)
- * [`flatpak` — `jupiter-main/flatpak-1.12.4-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/flatpak-1.12.4-1.1)
+ * [`flatpak` — `jupiter-main/flatpak-1.14.3-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/flatpak-1.14.3-1.1)
  * [`gamescope` — `jupiter-main/gamescope-3.11.52.beta6-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/gamescope-3.11.52.beta6-1)
  * [`gpu-trace` — `jupiter-main/gpu-trace-2.9-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/gpu-trace-2.9-1)
  * [`ibus-anthy` — `jupiter-main/ibus-anthy-1.5.14-4`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/ibus-anthy-1.5.14-4)
@@ -43,12 +43,12 @@ Valve packages
  * [`jupiter-dock-updater-bin` — `jupiter-main/jupiter-dock-updater-bin-20230126.01-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-dock-updater-bin-20230126.01-1)
  * [`jupiter-fan-control` — `jupiter-main/jupiter-fan-control-20230209.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-fan-control-20230209.1-1)
  * [`jupiter-hw-support` — `jupiter-main/jupiter-hw-support-20230201-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-hw-support-20230201-1)
- * [`jupiter-legacy-support` — `jupiter-main/jupiter-legacy-support-1.135-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-legacy-support-1.135-1)
+ * [`jupiter-legacy-support` — `jupiter-main/jupiter-legacy-support-1.138-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-legacy-support-1.138-1)
  * [`libnm` — `jupiter-main/networkmanager-1.34.0-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/networkmanager-1.34.0-1.1)
  * [`libva-mesa-driver` — `jupiter-main/mesa-22.2.0.157821.radeonsi_3.4.0_2-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/mesa-22.2.0.157821.radeonsi_3.4.0_2-1)
  * [`linux-firmware-neptune` — `jupiter-main/linux-firmware-neptune-20230121.1f01c88-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/linux-firmware-neptune-20230121.1f01c88-1)
  * [`linux-neptune-61` — `jupiter-main/linux-neptune-61-6.1.12.valve2-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/linux-neptune-61-6.1.12.valve2-1)
- * [`mangohud` — `jupiter-main/mangohud-0.6.8.r72.g3190778-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/mangohud-0.6.8.r72.g3190778-2)
+ * [`mangohud` — `jupiter-main/mangohud-0.6.8.r72.g3190778-3`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/mangohud-0.6.8.r72.g3190778-3)
  * [`mesa` — `jupiter-main/mesa-22.2.0.157821.radeonsi_3.4.0_2-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/mesa-22.2.0.157821.radeonsi_3.4.0_2-1)
  * [`mesa-vdpau` — `jupiter-main/mesa-22.2.0.157821.radeonsi_3.4.0_2-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/mesa-22.2.0.157821.radeonsi_3.4.0_2-1)
  * [`networkmanager` — `jupiter-main/networkmanager-1.34.0-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/networkmanager-1.34.0-1.1)
@@ -92,7 +92,6 @@ Arch Linux packages
  * [`anthy/9100h-6`](https://gitlab.archlinux.org/archlinux/packaging/packages/anthy/-/tree/9100h-6)
  * [`aom/3.5.0-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/aom/-/tree/3.5.0-1)
  * [`appstream/0.15.5-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/appstream/-/tree/0.15.5-1)
- * [`appstream-glib/0.8.1-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/appstream-glib/-/tree/0.8.1-1)
  * [`appstream-qt/0.15.5-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/appstream-qt/-/tree/0.15.5-1)
  * [`arch-install-scripts/27-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/arch-install-scripts/-/tree/27-1)
  * [`archlinux-appstream-data/20221014-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/archlinux-appstream-data/-/tree/20221014-1)
@@ -428,6 +427,7 @@ Arch Linux packages
  * [`libksysguard/5.26.1-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/libksysguard/-/tree/5.26.1-1)
  * [`libldac/2.0.2.3-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/libldac/-/tree/2.0.2.3-1)
  * [`libldap/2.6.3-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/libldap/-/tree/2.6.3-1)
+ * [`libmalcontent/0.10.5-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/libmalcontent/-/tree/0.10.5-1)
  * [`libmbim/1.26.4-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/libmbim/-/tree/1.26.4-1)
  * [`libmd/1.0.4-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/libmd/-/tree/1.0.4-1)
  * [`libmfx/22.4.4-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/libmfx/-/tree/22.4.4-1)
