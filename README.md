@@ -1,5 +1,5 @@
 
-`main @ 20230313.1000`
+`main @ 20230313.1001`
 ======================
 
 Valve packages
@@ -43,7 +43,7 @@ Valve packages
  * [`jupiter-dock-updater-bin` — `jupiter-main/jupiter-dock-updater-bin-20230126.01-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-dock-updater-bin-20230126.01-1)
  * [`jupiter-fan-control` — `jupiter-main/jupiter-fan-control-20230209.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-fan-control-20230209.1-1)
  * [`jupiter-hw-support` — `jupiter-main/jupiter-hw-support-20230201-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-hw-support-20230201-1)
- * [`jupiter-legacy-support` — `jupiter-main/jupiter-legacy-support-1.138-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-legacy-support-1.138-1)
+ * [`jupiter-legacy-support` — `jupiter-main/jupiter-legacy-support-1.139-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-legacy-support-1.139-1)
  * [`libnm` — `jupiter-main/networkmanager-1.34.0-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/networkmanager-1.34.0-1.1)
  * [`libva-mesa-driver` — `jupiter-main/mesa-22.2.0.157821.radeonsi_3.4.0_2-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/mesa-22.2.0.157821.radeonsi_3.4.0_2-1)
  * [`linux-firmware-neptune` — `jupiter-main/linux-firmware-neptune-20230121.1f01c88-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/linux-firmware-neptune-20230121.1f01c88-1)
