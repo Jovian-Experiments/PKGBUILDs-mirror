@@ -3,7 +3,7 @@
 # Contributor: Jan Alexander Steffens (heftig) <jan.steffens@gmail.com>
 
 pkgname=flatpak
-pkgver=1.14.3
+pkgver=1.14.4
 pkgrel=1.1
 pkgdesc="Linux application sandboxing and distribution framework (formerly xdg-app)"
 url="https://flatpak.org"
@@ -37,7 +37,7 @@ makedepends=(
 )
 checkdepends=(valgrind socat)
 provides=(libflatpak.so)
-_commit=ccafd8c1c81df267c4ef304d8e06d770e3909093  # tags/1.14.3^0
+_commit=8a1edceadfab936953e2ab947b0e7ae5b71e4173  # tags/1.14.4^0
 source=("git+https://github.com/flatpak/flatpak#commit=$_commit"
         git+https://gitlab.gnome.org/GNOME/libglnx.git
         git+https://github.com/projectatomic/bubblewrap
