@@ -1,0 +1,1 @@
+SUBSYSTEM=="cec", ENV{DEVNAME}=="/dev/cec0", TAG+="uaccess", TAG+="systemd"
