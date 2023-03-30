@@ -4,7 +4,7 @@
 
 pkgname=flatpak
 pkgver=1.14.4
-pkgrel=1.1
+pkgrel=2
 pkgdesc="Linux application sandboxing and distribution framework (formerly xdg-app)"
 url="https://flatpak.org"
 arch=(x86_64)
@@ -12,13 +12,13 @@ license=(LGPL)
 depends=(
   appstream
   bubblewrap
+  curl
   dbus
   fuse3
   glib2
   json-glib
   libarchive
   libmalcontent
-  libsoup
   libseccomp
   libxau
   ostree
@@ -36,7 +36,6 @@ makedepends=(
   xmlto
 )
 checkdepends=(valgrind socat)
-provides=(libflatpak.so)
 _commit=8a1edceadfab936953e2ab947b0e7ae5b71e4173  # tags/1.14.4^0
 source=("git+https://github.com/flatpak/flatpak#commit=$_commit"
         git+https://gitlab.gnome.org/GNOME/libglnx.git
@@ -67,35 +66,41 @@ prepare() {
 
   # Allow the modify_ldt syscall when using multiarch
   # Remove after Flatpak > 1.15.3 is available
-  patch -p1 < "$srcdir/allow-modify_ldt-in-multiarch.patch"
+  git apply -3 "$srcdir/allow-modify_ldt-in-multiarch.patch"
+
+  # Support fuse3
+  # https://bugs.archlinux.org/task/75623
+  git apply -3 "$srcdir/fusermount3.diff"
 
   git submodule init
   git submodule set-url bubblewrap "$srcdir/bubblewrap"
-  git submodule set-url libglnx "$srcdir/libglnx"
   git submodule set-url dbus-proxy "$srcdir/xdg-dbus-proxy"
+  git submodule set-url libglnx "$srcdir/libglnx"
   git submodule set-url variant-schema-compiler "$srcdir/variant-schema-compiler"
-  git submodule update
+  git -c protocol.file.allow=always submodule update
 
   NOCONFIGURE=1 ./autogen.sh
 }
 
 build() {
-  cd flatpak
-
-  ./configure \
-    --prefix=/usr \
-    --sysconfdir=/etc \
-    --localstatedir=/var \
-    --sbindir=/usr/bin \
-    --libexecdir=/usr/lib \
-    --disable-static \
-    --enable-gtk-doc \
-    --with-system-bubblewrap \
-    --with-system-dbus-proxy \
+  local configure_options=(
+    --prefix=/usr
+    --sysconfdir=/etc
+    --localstatedir=/var
+    --sbindir=/usr/bin
+    --libexecdir=/usr/lib
+    --disable-static
+    --enable-docbook-docs
+    --enable-gtk-doc
+    --with-curl
     --with-dbus-config-dir=/usr/share/dbus-1/system.d
+    --with-system-bubblewrap
+    --with-system-dbus-proxy
+  )
 
+  cd flatpak
+  ./configure "${configure_options[@]}"
   sed -i -e 's/ -shared / -Wl,-O1,--as-needed\0/g' libtool
-
   make
 }
 
@@ -105,7 +110,8 @@ check() {
 }
 
 package() {
-  depends+=(xdg-desktop-portal)
+  depends+=(xdg-desktop-portal libostree-1.so)
+  provides=(libflatpak.so)
 
   make -C flatpak DESTDIR="$pkgdir" install
 
