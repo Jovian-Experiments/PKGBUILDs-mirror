@@ -1,0 +1,10 @@
+[Unit]
+BindsTo=dev-cec0.device
+After=dev-cec0.device gamescope-session.service
+Requisite=gamescope-session.service
+
+[Install]
+WantedBy=dev-cec0.device gamescope-session.service
+
+[Service]
+ExecStart=/usr/bin/plasma-remotecontrollers --platform offscreen
