@@ -1,7 +1,7 @@
 # Maintainer: Antonio Rojas <arojas@archlinux.org>
 
 pkgname=plasma-remotecontrollers
-pkgver=5.27.3
+pkgver=5.27.4
 pkgrel=1.1
 pkgdesc='Translate various input device events into keyboard and pointer events'
 arch=(x86_64)
@@ -11,14 +11,20 @@ depends=(plasma-workspace)
 makedepends=(extra-cmake-modules plasma-wayland-protocols libcec)
 optdepends=('libcec: TV remotes support')
 source=(https://download.kde.org/stable/plasma/$pkgver/$pkgname-$pkgver.tar.xz{,.sig}
-        plasma-remotecontrollersrc.patch  # Patch the default config file to set the OSD name to "Steam Deck"
+        0001-Update-org.kde.plasma.remotecontrollers.CEC.xml.patch
+        0002-Add-a-signal-for-CEC-being-told-to-enter-standby.patch
+        0003-Add-a-signal-for-CEC-being-made-the-active-source.patch
         CMakeLists.txt.patch  # Disable installing the autostart entry
+        plasma-remotecontrollersrc.patch  # Patch the default config file to set the OSD name to "Steam Deck"
         systemd.service
         udev.rules)
-sha256sums=('3ce4c841fb538c012618f120922cb6595060a4208a0516bd41532004a12e5511'
+sha256sums=('368c29c42676b0e4d1e17e371d8ce09671081d4e37432e40f7401c1406063651'
             'SKIP'
-            'b844b24d1364632c874ec27b69fe1294d6dbdf778e9af4de90da93245edb0b42'
+            'c98ae85bf10dfb4fc1004833cbec58fcec2c7460585e981e992a1007813fa9e7'
+            'da75ca0a381ba9bb97c3dd5ad3a56b4f622e0df733c0237f12e150091f105b1e'
+            '208b7640475a0f7647e0952061a9176fed7a3fd4ce9bfd8a087d03ed97bf1f70'
             '17a81c30760b6fd297935ca5b633abbd2b13e2f24e5c26b660c8ee9ca37ed29f'
+            'b844b24d1364632c874ec27b69fe1294d6dbdf778e9af4de90da93245edb0b42'
             '963a23f6f362845a11ec2f4dd1b19c321837cce1a3c8fccd0c452bac2dcc8e0a'
             'd4dc16146515250a5a6f6d4a3b02ff05d5890474f27b1ee59cee5fa7b230d0e0')
 validpgpkeys=('E0A3EB202F8E57528E13E72FD7574483BB57B18D'  # Jonathan Esk-Riddell <jr@jriddell.org>
@@ -28,6 +34,9 @@ validpgpkeys=('E0A3EB202F8E57528E13E72FD7574483BB57B18D'  # Jonathan Esk-Riddell
 
 prepare() {
   cd "$srcdir"
+  patch -d $pkgname-$pkgver -p1 < 0001-Update-org.kde.plasma.remotecontrollers.CEC.xml.patch
+  patch -d $pkgname-$pkgver -p1 < 0002-Add-a-signal-for-CEC-being-told-to-enter-standby.patch
+  patch -d $pkgname-$pkgver -p1 < 0003-Add-a-signal-for-CEC-being-made-the-active-source.patch
   patch -d $pkgname-$pkgver -p1 < plasma-remotecontrollersrc.patch
   patch -d $pkgname-$pkgver -p1 < CMakeLists.txt.patch
 }

@@ -1,0 +1,75 @@
+From 5bb94c437374e9a37776637135ed57884bf5079b Mon Sep 17 00:00:00 2001
+From: Vicki Pfau <vi@endrift.com>
+Date: Tue, 4 Apr 2023 17:14:57 -0700
+Subject: [PATCH 2/3] Add a signal for CEC being told to enter standby
+
+---
+ src/libcec/ceccontroller.cpp                        | 8 ++++++--
+ src/libcec/ceccontroller.h                          | 3 +++
+ src/libcec/org.kde.plasma.remotecontrollers.CEC.xml | 2 ++
+ 3 files changed, 11 insertions(+), 2 deletions(-)
+
+diff --git a/src/libcec/ceccontroller.cpp b/src/libcec/ceccontroller.cpp
+index 63a28fe..5d2d6c5 100644
+--- a/src/libcec/ceccontroller.cpp
++++ b/src/libcec/ceccontroller.cpp
+@@ -59,8 +59,11 @@ void CECController::handleCecKeypress(void* param, const cec_keypress* key)
+ 
+ void CECController::handleCommandReceived(void* param, const cec_command* command)
+ {
+-    Q_UNUSED(param);
++    CECController* self = static_cast<CECController*>(param);
+     m_hitcommand = command->opcode;
++    if (m_hitcommand == CEC_OPCODE_STANDBY) {
++        QMetaObject::invokeMethod(self, "enterStandby");
++    }
+ }
+ 
+ void CECController::handleCompleteEvent(const int keycode, const int keyduration, const int opcode)
+@@ -102,7 +105,7 @@ CECController::CECController()
+ {
+     qDBusRegisterMetaType<cec_logical_address>();
+     QDBusConnection::sessionBus().registerService("org.kde.plasma.remotecontrollers");
+-    QDBusConnection::sessionBus().registerObject("/CEC", this, QDBusConnection::ExportScriptableSlots);
++    QDBusConnection::sessionBus().registerObject("/CEC", this, QDBusConnection::ExportScriptableSlots | QDBusConnection::ExportScriptableSignals);
+ 
+     KSharedConfigPtr config = KSharedConfig::openConfig();
+     KConfigGroup generalGroup = config->group("General");
+@@ -157,6 +160,7 @@ CECController::CECController()
+     cecConfig.clientVersion = LIBCEC_VERSION_CURRENT;
+     cecConfig.deviceTypes.Add(CEC_DEVICE_TYPE_RECORDING_DEVICE);
+     cecConfig.callbacks = &m_cecCallbacks;
++    cecConfig.callbackParam = this;
+ 
+     m_cecAdapter = LibCecInitialise(&cecConfig);
+ 
+diff --git a/src/libcec/ceccontroller.h b/src/libcec/ceccontroller.h
+index ad16e4a..87d218d 100644
+--- a/src/libcec/ceccontroller.h
++++ b/src/libcec/ceccontroller.h
+@@ -36,6 +36,9 @@ public Q_SLOTS:
+     Q_SCRIPTABLE bool makeActiveSource();
+     Q_SCRIPTABLE bool setOSDName(const QString&);
+ 
++Q_SIGNALS:
++    Q_SCRIPTABLE void enterStandby();
++
+ private:
+     ICECAdapter* m_cecAdapter = nullptr;
+     ICECCallbacks m_cecCallbacks;
+diff --git a/src/libcec/org.kde.plasma.remotecontrollers.CEC.xml b/src/libcec/org.kde.plasma.remotecontrollers.CEC.xml
+index 6f5e1ab..d909dfa 100644
+--- a/src/libcec/org.kde.plasma.remotecontrollers.CEC.xml
++++ b/src/libcec/org.kde.plasma.remotecontrollers.CEC.xml
+@@ -1,6 +1,8 @@
+ <!DOCTYPE node PUBLIC "-//freedesktop//DTD D-BUS Object Introspection 1.0//EN" "http://www.freedesktop.org/standards/dbus/1.0/introspect.dtd">
+ <node>
+   <interface name="org.kde.plasma.remotecontrollers.CEC">
++    <signal name="enterStandby">
++    </signal>
+     <method name="sendNextKey">
+       <arg type="i" direction="out"/>
+     </method>
+-- 
+2.40.0
+
