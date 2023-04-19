@@ -4,7 +4,7 @@ pkgname=jupiter-hw-support
 _srctag=jupiter-20230413.1
 _srcver=${_srctag#jupiter-}
 pkgver=${_srcver//-/.}
-pkgrel=1
+pkgrel=2
 arch=('any')
 url="https://gitlab.steamos.cloud/jupiter/jupiter-hw-support"
 pkgdesc="Jupiter HW support package"
@@ -15,6 +15,7 @@ depends=('python-evdev'
          'jq' # for jupiter-controller-update, jupiter-biosupdate
          'alsa-utils' # for the sound workarounds
          'parted' 'e2fsprogs' # for sdcard formatting
+         'udisks2>=2.9.4-1.1' # for mounting external drives with the 'as-user' option
         )
 optdepends=('grub-steamos')
 makedepends=('rsync' 'git' 'openssh' 'xorg-xcursorgen')
