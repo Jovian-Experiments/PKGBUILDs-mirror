@@ -1,10 +1,9 @@
 # Maintainer: Thomas Bächler <thomas@archlinux.org>
 
 pkgbase=linux-firmware-neptune
-pkgname=(linux-firmware-neptune-rtw-debug) # amd-ucode)
-_tag=jupiter-20230217-rtw-debug
-_srctag=${_tag#jupiter-}
-pkgver=${_srctag%-rtw-debug}
+pkgname=(linux-firmware-neptune) # amd-ucode)
+_tag=jupiter-20230420
+pkgver=${_tag//-/.}
 pkgrel=1
 pkgdesc="Firmware files for Linux"
 url="https://gitlab.steamos.cloud/jupiter/linux-firmware-neptune"
@@ -44,7 +43,7 @@ build() {
     bsdtar --null -cf - --format=newc @- > amd-ucode.img
 }
 
-package_linux-firmware-neptune-rtw-debug() {
+package_linux-firmware-neptune() {
   provides=('linux-firmware')
   conflicts=('linux-firmware')
   replaces=('linux-firmware')
