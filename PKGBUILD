@@ -16,9 +16,9 @@ pkgname=(
   pipewire-v4l2
   pipewire-x11-bell
 )
-_commit=f33383088099ed41f76fb164def0be528101974e  # tags/0.3.61-2-dv
-pkgver=0.3.61.2.dv
-pkgrel=3
+_commit=acf7c0af0bf31b937c41e916a73c67ae0a253632  # tags/0.3.61-2-dv
+pkgver=0.3.62.2.dv
+pkgrel=1
 epoch=1
 pkgdesc="Low-latency audio/video router and processor"
 url="https://pipewire.org"
@@ -162,7 +162,7 @@ package_pipewire() {
     _pick audio usr/lib/pipewire-$_ver/libpipewire-module-loopback.so
     _pick audio usr/lib/pipewire-$_ver/libpipewire-module-pipe-tunnel.so
     _pick audio usr/lib/pipewire-$_ver/libpipewire-module-protocol-simple.so
-    _pick audio usr/lib/spa-0.2/{aec,alsa,audio*,bluez5,volume}
+    _pick audio usr/lib/spa-0.2/{aec,alsa,audio*,bluez5}
     _pick audio usr/lib/systemd/user/filter-chain.service
     _pick audio usr/share/alsa
     _pick audio usr/share/man/man1/pw-{cat,mididump}.1
