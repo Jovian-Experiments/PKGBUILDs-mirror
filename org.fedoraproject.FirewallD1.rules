@@ -1,0 +1,13 @@
+polkit.addRule(function(action, subject) {
+        if ((action.id == "org.fedoraproject.FirewallD1.all" ||
+	     action.id == "org.fedoraproject.FirewallD1.info" ||
+	     action.id == "org.fedoraproject.FirewallD1.config" ||
+	     action.id == "org.fedoraproject.FirewallD1.config.info" ||
+	     action.id == "org.fedoraproject.FirewallD1.direct" ||
+	     action.id == "org.fedoraproject.FirewallD1.direct.info" ||
+	     action.id == "org.fedoraproject.FirewallD1.policies" ||
+	     action.id == "org.fedoraproject.FirewallD1.policies.info") &&
+	    subject.isInGroup("wheel")) {
+                return polkit.Result.YES;
+        }
+});
