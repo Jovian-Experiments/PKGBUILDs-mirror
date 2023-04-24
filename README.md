@@ -1,5 +1,5 @@
 
-`main @ 20230420.1000`
+`main @ 20230424.1000`
 ======================
 
 Valve packages
@@ -37,19 +37,20 @@ Valve packages
  * [`ds-inhibit` — `jupiter-main/ds-inhibit-0.1.0-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/ds-inhibit-0.1.0-1)
  * [`f3` — `jupiter-main/f3-8.0-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/f3-8.0-2)
  * [`flatpak` — `jupiter-main/flatpak-1.14.4-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/flatpak-1.14.4-2)
- * [`gamescope` — `jupiter-main/gamescope-3.11.52.beta6-4`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/gamescope-3.11.52.beta6-4)
+ * [`gamescope` — `jupiter-main/gamescope-3.11.52.beta6-5`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/gamescope-3.11.52.beta6-5)
  * [`gpu-trace` — `jupiter-main/gpu-trace-2.10-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/gpu-trace-2.10-1)
  * [`ibus-anthy` — `jupiter-main/ibus-anthy-1.5.14-4`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/ibus-anthy-1.5.14-4)
  * [`ibus-table-cangjie-lite` — `jupiter-main/ibus-table-cangjie-lite-1.8.8-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/ibus-table-cangjie-lite-1.8.8-2)
  * [`jupiter-dock-updater-bin` — `jupiter-main/jupiter-dock-updater-bin-20230126.01-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-dock-updater-bin-20230126.01-1)
  * [`jupiter-fan-control` — `jupiter-main/jupiter-fan-control-20230209.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-fan-control-20230209.1-1)
- * [`jupiter-hw-support` — `jupiter-main/jupiter-hw-support-20230413.1-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-hw-support-20230413.1-2)
+ * [`jupiter-firewall` — `jupiter-main/jupiter-firewall-0.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-firewall-0.1-1)
+ * [`jupiter-hw-support` — `jupiter-main/jupiter-hw-support-20230424.1-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-hw-support-20230424.1-2)
  * [`jupiter-legacy-support` — `jupiter-main/jupiter-legacy-support-1.139-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-legacy-support-1.139-1)
  * [`libnm` — `jupiter-main/networkmanager-1.34.0-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/networkmanager-1.34.0-1.1)
  * [`libva-mesa-driver` — `jupiter-main/mesa-22.2.0.157821.radeonsi_3.4.0_2-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/mesa-22.2.0.157821.radeonsi_3.4.0_2-1)
  * [`linux-firmware-neptune` — `jupiter-main/linux-firmware-neptune-jupiter.20230420-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/linux-firmware-neptune-jupiter.20230420-1)
  * [`linux-neptune-61` — `jupiter-main/linux-neptune-61-6.1.21.valve1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/linux-neptune-61-6.1.21.valve1-1)
- * [`mangohud` — `jupiter-main/mangohud-0.6.8.r148.g070fa1b-3`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/mangohud-0.6.8.r148.g070fa1b-3)
+ * [`mangohud` — `jupiter-main/mangohud-0.6.9.1.r16.g1093de8-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/mangohud-0.6.9.1.r16.g1093de8-1)
  * [`mesa` — `jupiter-main/mesa-22.2.0.157821.radeonsi_3.4.0_2-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/mesa-22.2.0.157821.radeonsi_3.4.0_2-1)
  * [`mesa-vdpau` — `jupiter-main/mesa-22.2.0.157821.radeonsi_3.4.0_2-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/mesa-22.2.0.157821.radeonsi_3.4.0_2-1)
  * [`networkmanager` — `jupiter-main/networkmanager-1.34.0-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/networkmanager-1.34.0-1.1)
@@ -186,6 +187,7 @@ Arch Linux packages
  * [`ffmpeg/2:5.1.2-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/ffmpeg/-/tree/2:5.1.2-1)
  * [`file/5.43-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/file/-/tree/5.43-1)
  * [`findutils/4.9.0-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/findutils/-/tree/4.9.0-1)
+ * [`firewalld/1.2.1-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/firewalld/-/tree/1.2.1-1)
  * [`fish/3.5.1-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/fish/-/tree/3.5.1-1)
  * [`flac/1.4.1-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/flac/-/tree/1.4.1-2)
  * [`flashrom/1.2-4`](https://gitlab.archlinux.org/archlinux/packaging/packages/flashrom/-/tree/1.2-4)
@@ -584,6 +586,7 @@ Arch Linux packages
  * [`networkmanager-qt/5.99.0-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/networkmanager-qt/-/tree/5.99.0-1)
  * [`nfs-utils/2.6.2-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/nfs-utils/-/tree/2.6.2-1)
  * [`nfsidmap/2.6.2-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/nfsidmap/-/tree/2.6.2-1)
+ * [`nftables/1:1.0.5-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/nftables/-/tree/1:1.0.5-1)
  * [`noise-suppression-for-voice/1.03-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/noise-suppression-for-voice/-/tree/1.03-1)
  * [`noto-fonts/20220810-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/noto-fonts/-/tree/20220810-1)
  * [`noto-fonts-cjk/20220126-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/noto-fonts-cjk/-/tree/20220126-1)
