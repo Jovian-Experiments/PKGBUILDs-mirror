@@ -1,15 +1,15 @@
 # Maintainer: Pierre-Loup A. Griffais <pgriffais@valvesoftware.com>
 
 pkgname=gamescope
-_srctag=3.11.52-beta6
+_srctag=3.12.0-beta1
 pkgver=${_srctag//-/.}
-pkgrel=5
+pkgrel=3
 pkgdesc="gaming shell based on Xwayland, powered by Vulkan and DRM"
 arch=(x86_64)
-url="https://github.com/Plagman/gamescope"
+url="https://github.com/ValveSoftware/gamescope"
 license=('MIT')
 depends=('xorg-xwayland-jupiter' 'libxres' 'xcb-util-errors' 'freerdp' 'xcb-util-wm' 'libxcomposite' 'pixman' 'libinput' 'seatd' 'pipewire' 'libxmu')
-makedepends=(git meson cmake wayland-protocols ninja glslang vulkan-headers)
+makedepends=(git meson cmake wayland-protocols ninja glslang glm vulkan-headers)
 source=("gamescope-session"
         "gamescope-wayland.desktop"
         "gamescope-mimeapps.list"
@@ -17,13 +17,13 @@ source=("gamescope-session"
         "start-gamescope-session"
         "steam_http_loader.desktop"
         "steam-http-loader"
-        "git+https://github.com/Plagman/gamescope.git#tag=$_srctag"
+        "git+https://github.com/ValveSoftware/gamescope.git#tag=$_srctag"
         "git+https://gitlab.freedesktop.org/wlroots/wlroots.git"
         "git+https://gitlab.freedesktop.org/emersion/libliftoff.git"
         # FIXME Upstream gamescope is just selecting master branch at build time, so we are arbitrarily snapshotting a
         #       revision when bumping the version here such that the build is reproducible.
         "git+https://github.com/nothings/stb.git#commit=af1a5bc352164740c1cc1354942b1c6b72eacb8a")
-sha256sums=('33feafe73d0e10befcaa88c237534483e85973559952dc655a799ade423f40a3'
+sha256sums=('97743d4fcc7d6fbc269421b07c5b08735ee96e17073f7bec85356f61cabc4281'
             'fe515fce8f151a6c03a89e043044bfddf8cd6ee89027d2cfbcf6f6706c78ca76'
             'e37ba6107f3a84cf47c2799b537a88583e6cb8951167a9c6a48fa1d85996206b'
             '281d892e32c2c31e9df94c5e712a1fde46c0a2f3214aa2df5b7253c6db47977c'
