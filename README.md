@@ -1,5 +1,5 @@
 
-`release @ 20230313.1`
+`release @ 20230425.1`
 ======================
 
 Valve packages
@@ -789,7 +789,7 @@ Arch Linux packages
  * [`vmaf/2.3.1-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/vmaf/-/tree/2.3.1-1)
  * [`volume_key/0.3.12-7`](https://gitlab.archlinux.org/archlinux/packaging/packages/volume_key/-/tree/0.3.12-7)
  * [`vulkan-icd-loader/1.3.226-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/vulkan-icd-loader/-/tree/1.3.226-1)
- * [`vulkan-radeon/23.1.0_devel.166652.steamos_3.5.1-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/vulkan-radeon/-/tree/23.1.0_devel.166652.steamos_3.5.1-1)
+ * [`vulkan-radeon/23.1.0_devel.166656.steamos_3.5.2-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/vulkan-radeon/-/tree/23.1.0_devel.166656.steamos_3.5.2-1)
  * [`vulkan-tools/1.3.226-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/vulkan-tools/-/tree/1.3.226-1)
  * [`wayland-utils/1.1.0-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/wayland-utils/-/tree/1.1.0-1)
  * [`webrtc-audio-processing/0.3.1-3`](https://gitlab.archlinux.org/archlinux/packaging/packages/webrtc-audio-processing/-/tree/0.3.1-3)
