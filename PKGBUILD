@@ -3,8 +3,8 @@
 
 pkgbase=wireplumber
 pkgname=(wireplumber wireplumber-docs)
-_commit=355fc397f6a2a7629199f0a39d655a8a41f31396  # tags/0.4.13-dv
-pkgver=0.4.13.5.dv
+_commit=318a0c0c1c9ec3ceda78c5b132cfb60bee9aa3d4  # tags/0.4.14-7-dv
+pkgver=0.4.14.dev7.dv
 pkgrel=1
 pkgdesc="Session / policy manager implementation for PipeWire"
 url="https://pipewire.pages.freedesktop.org/wireplumber/"
