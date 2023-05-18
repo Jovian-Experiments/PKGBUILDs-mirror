@@ -3,20 +3,19 @@
 # Contributor: Patrick Griffis <tingping@tingping.se>
 
 pkgname=xdg-desktop-portal
-pkgver=1.12.1
+pkgver=1.16.0
 pkgrel=1.1
 pkgdesc="Desktop integration portals for sandboxed apps"
 url="https://github.com/flatpak/xdg-desktop-portal"
 arch=(x86_64)
 license=(LGPL)
-depends=(glib2 pipewire fuse2 geoclue2)
-makedepends=(python xmlto docbook-xsl git flatpak libportal)
-checkdepends=(epiphany gedit gvfs)
-_commit=6241c5e8bfb60502ac3c7bc3babede22d35f3b1c  # tags/1.12.1^0
+depends=(glib2 pipewire fuse3 geoclue rtkit systemd)
+makedepends=(meson xmlto docbook-xsl git flatpak libportal)
+_commit=88af6c8ca4106fcf70925355350a669848e9fd5a  # tags/1.16.0^0
 source=("git+https://github.com/flatpak/xdg-desktop-portal#commit=$_commit"
-        stop-portal-on-session-exit.patch)
+        portal-configuration-file.patch)
 sha256sums=('SKIP'
-            e466fc4722d4169451064f4a147f9e6e827105938a844c10f78f8cb15cb7ec98)
+            '321a19c3236fc5f138808e2a9dd757c00b9a7cf381d02c1f1896a006cffa30f4')
 
 pkgver() {
   cd $pkgname
@@ -25,24 +24,25 @@ pkgver() {
 
 prepare() {
   cd $pkgname
-  patch -p1 -i "${srcdir}"/stop-portal-on-session-exit.patch
-  NOCONFIGURE=1 ./autogen.sh
+
+  # Add support for portals configuration; remove when upgrading to 1.18
+  # See: https://github.com/flatpak/xdg-desktop-portal/issues/906
+  git apply -3 "$srcdir/portal-configuration-file.patch"
 }
 
 build() {
-  cd $pkgname
-  ./configure --prefix=/usr --libexecdir=/usr/lib
-  make 
+  arch-meson $pkgname build
+  meson compile -C build
 }
 
 check() {
-  cd $pkgname
-  make check
+  meson test -C build --print-errorlogs
 }
 
 package() {
   depends+=(xdg-desktop-portal-impl)
 
-  cd $pkgname
-  make DESTDIR="$pkgdir" install
+  meson install -C build --destdir "$pkgdir"
 }
+
+# vim:set sw=2 sts=-1 et:
