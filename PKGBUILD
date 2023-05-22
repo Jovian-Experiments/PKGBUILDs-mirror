@@ -3,7 +3,7 @@
 pkgname=gamescope
 _srctag=3.12.0-beta5
 pkgver=${_srctag//-/.}
-pkgrel=4
+pkgrel=5
 pkgdesc="gaming shell based on Xwayland, powered by Vulkan and DRM"
 arch=(x86_64)
 url="https://github.com/ValveSoftware/gamescope"
@@ -14,6 +14,7 @@ source=("gamescope-session"
         "gamescope-wayland.desktop"
         "gamescope-mimeapps.list"
         "gamescope-session.service"
+        "gamescope-portals.conf"
         "start-gamescope-session"
         "steam_http_loader.desktop"
         "steam-http-loader"
@@ -27,7 +28,8 @@ sha256sums=('97743d4fcc7d6fbc269421b07c5b08735ee96e17073f7bec85356f61cabc4281'
             'fe515fce8f151a6c03a89e043044bfddf8cd6ee89027d2cfbcf6f6706c78ca76'
             'e37ba6107f3a84cf47c2799b537a88583e6cb8951167a9c6a48fa1d85996206b'
             '281d892e32c2c31e9df94c5e712a1fde46c0a2f3214aa2df5b7253c6db47977c'
-            'beabd15da2a15ef22c20de2be3b023029254d93c55784e628928ec0324ffe1b7'
+            'b74f4515a3ed793973b3be6eca145d7ba862dbf50218c694fb478ba725bfd025'
+            '2dbfae36a05044dbe931762203003e0aa4e3d883518f737f9af7b8979fc2104b'
             '525060896abef2da9db8d8294253b7444d60e48cf6cc0496ca48fc7084cc8590'
             'dea09abb47c3d907c00ff7f36967b599f3caca554ac6eb7b7dc6d2d78651dd44'
             'SKIP'
@@ -73,6 +75,9 @@ package() {
 	install -D -m 755 steam-http-loader "$pkgdir"/usr/bin/steam-http-loader
 
 	install -D -m 644 gamescope-session.service "$pkgdir"/usr/lib/systemd/user/gamescope-session.service
+
+        # portals
+	install -D -m 644 gamescope-portals.conf "$pkgdir"/etc/xdg-desktop-portal/gamescope-portals.conf
 
 	cd "$pkgname/build"
 
