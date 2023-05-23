@@ -2,7 +2,7 @@
 # Maintainer: Jan Alexander Steffens (heftig) <heftig@archlinux.org>
 
 pkgbase=linux-neptune-61
-_tag=6.1.21-joshcolor2
+_tag=6.1.21-saml
 pkgver=${_tag//-/.}
 pkgrel=3
 pkgdesc='Linux'
