@@ -1,5 +1,5 @@
 
-`release @ 20230531.1`
+`release @ 20230605.1`
 ======================
 
 Valve packages
@@ -19,6 +19,7 @@ Valve packages
  * [`linux-firmware-neptune` — `jupiter-rel/linux-firmware-neptune-20220624.650ab31-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-rel/linux-firmware-neptune-20220624.650ab31-1)
  * [`linux-neptune` — `jupiter-rel/linux-neptune-5.13.0.valve36-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-rel/linux-neptune-5.13.0.valve36-1)
  * [`mesa` — `jupiter-rel/mesa-22.2.0.157821.radeonsi_3.4.0_2-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-rel/mesa-22.2.0.157821.radeonsi_3.4.0_2-2)
+ * [`mesa-unstable` — `jupiter-rel/mesa-23.1.1.170090.radeonsi_3.5.0-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-rel/mesa-23.1.1.170090.radeonsi_3.5.0-2)
  * [`mesa-vdpau` — `jupiter-rel/mesa-22.2.0.157821.radeonsi_3.4.0_2-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-rel/mesa-22.2.0.157821.radeonsi_3.4.0_2-2)
  * [`opencl-mesa` — `jupiter-rel/mesa-22.2.0.157821.radeonsi_3.4.0_2-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-rel/mesa-22.2.0.157821.radeonsi_3.4.0_2-2)
  * [`renderdoc-minimal` — `jupiter-rel/renderdoc-minimal-1.22-6`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-rel/renderdoc-minimal-1.22-6)
