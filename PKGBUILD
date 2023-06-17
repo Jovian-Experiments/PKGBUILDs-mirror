@@ -2,9 +2,9 @@
 # Maintainer: Jan Alexander Steffens (heftig) <heftig@archlinux.org>
 
 pkgbase=linux-neptune-61
-_tag=6.1.21-saml
+_tag=6.1.29-valve4
 pkgver=${_tag//-/.}
-pkgrel=3
+pkgrel=1
 pkgdesc='Linux'
 url="https://gitlab.steamos.cloud/jupiter/linux-integration/-/tree/$_tag"
 arch=(x86_64)
@@ -31,7 +31,7 @@ validpgpkeys=(
 )
 sha256sums=('SKIP'
             '81a9379fd2eac51bb2dc69d83737d7fbdd41fcaca5af4873e3666d3c706760d1'
-            'bbc3e5ee7524f9b27b5e9d6b8055db94008f025c4fe64e4c458fb3a42b7c66f8'
+            'fe818e4ee3c6a666bc94adfe25583fb98e8007077d1a50f33d3dbf50ef115368'
             'b2779035c049c363808e3ba238be685884206a4a5b1c0500b707faf12eef6996'
             '6098e453286c58b25a257d22e1c7098b00a0afe3b718e4869bccff9432491c3f')
 
