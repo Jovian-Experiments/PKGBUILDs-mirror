@@ -18,7 +18,7 @@ pkgname=(
 )
 _commit=acf7c0af0bf31b937c41e916a73c67ae0a253632  # tags/0.3.61-2-dv
 pkgver=0.3.62.2.dv
-pkgrel=1
+pkgrel=2
 epoch=1
 pkgdesc="Low-latency audio/video router and processor"
 url="https://pipewire.org"
@@ -132,7 +132,8 @@ package_pipewire() {
     'realtime-privileges: realtime privileges with rt module'
     'rtkit: realtime privileges with rtkit module'
   )
-  provides=(libpipewire-$_ver.so)
+  provides=("libpipewire=$_ver" "libpipewire-$_ver.so")
+  conflicts=(libpipewire)
   install=pipewire.install
 
   meson install -C build --destdir "$pkgdir"
