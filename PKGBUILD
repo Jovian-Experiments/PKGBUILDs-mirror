@@ -5,7 +5,7 @@
 
 pkgname=jupiter-legacy-support
 pkgver=1.139
-pkgrel=1
+pkgrel=2
 pkgdesc="Legacy jupiter-specific support files that haven't been split to their own package or removed."
 arch=(any)
 depends=(python3 python-psutil python-aiohttp nvme-cli)
@@ -70,8 +70,6 @@ package() {
 
   install -D -m644 {,"$pkgdir"/}usr/share/xsessions/plasma-steamos-oneshot.desktop
   install -D -m644 {,"$pkgdir"/}usr/share/wayland-sessions/plasma-steamos-wayland-oneshot.desktop
-
-  install -D -m644 -t "$pkgdir"/usr/share/steamos-update/ usr/share/steamos-update/*
 
   install -D -m644 {,"$pkgdir"/}etc/sddm.conf.d/steamos.conf
   # install -D -m644 {,"$pkgdir"/}etc/pulse/default.pa
