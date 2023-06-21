@@ -4,7 +4,7 @@ pkgname=steamos-customizations-jupiter
 _srctag=jupiter-20230426.1
 _srcver=${_srctag#jupiter-}
 pkgver=${_srcver//-/.}
-pkgrel=1
+pkgrel=2
 pkgdesc='SteamOS customizations (Jupiter fork) - This package installs various SteamOS-specific files'
 arch=('any')
 url='http://repo.steampowered.com'
@@ -13,14 +13,16 @@ depends=('e2fsprogs' 'gptfdisk' 'rsync' 'util-linux')
 makedepends=('git' 'openssh')
 provides=("${pkgname%-git}")
 conflicts=("${pkgname%-git}")
-source=("${pkgname%-git}::git+ssh://git@gitlab.steamos.cloud:/steam/steamos-customizations.git#tag=${_srctag}")
+source=("${pkgname%-git}::git+ssh://git@gitlab.steamos.cloud/steam/steamos-customizations.git#tag=${_srctag}")
 md5sums=('SKIP')
 
 package() {
 	cd "${pkgname%-git}"
 	make DESTDIR="$pkgdir" prefix="/usr" sbindir="/usr/bin" libexecdir="/usr/lib" \
 		 ATOMUPD_QUERY_URL=https://steamdeck-atomupd.steamos.cloud/updates \
+		 ATOMUPD_META_URL=https://steamdeck-atomupd.steamos.cloud/meta \
 		 ATOMUPD_IMAGES_URL=https://steamdeck-images.steamos.cloud/ \
+		 ATOMUPD_VARIANTS_LIST='rel;rc;beta;bc;main' \
 		 install
 
 	echo "Symlink grub binaries using steamos helpers from libdir..."
