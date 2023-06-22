@@ -4,13 +4,12 @@
 # Everything still in here should be either removed or re-homed to a proper package.
 
 pkgname=jupiter-legacy-support
-pkgver=1.139
+pkgver=1.140
 pkgrel=2
 pkgdesc="Legacy jupiter-specific support files that haven't been split to their own package or removed."
 arch=(any)
 depends=(python3 python-psutil python-aiohttp nvme-cli)
 source=(steam-web-debug-portforward.service
-        91-dracut-install-vanilla.hook
         killuserprocesses.conf
         flathub-beta.flatpakrepo
         flatpak-workaround.service
@@ -21,7 +20,6 @@ source=(steam-web-debug-portforward.service
         black_800x1280.png
         white_800x1280.png)
 sha256sums=('a1a2c6cb5ebdba68b79ab90649f894e1136f72af9e4daacbcb71d134383bd797'
-            '78b1749684bf3c60a5769002d98008772145385566ab68d7218c3850ec2dc653'
             'e34a9dc905771bd99cd04cdf88262481cab7a7808d99dfaa968366fcb1b99a0b'
             '582cae3c9f9d4639f027defafe6fa33bda0a3a4d441290d926ad85a2be0f7206'
             'a1896990eb3aac319603bef9febc19d4819349e280a47d32af72d53f438b08be'
@@ -55,8 +53,6 @@ package() {
   install -D -m755 "$srcdir"/org.valve.steamos.jupiter-legacy-support.policy "$pkgdir"/usr/share/polkit-1/actions/org.valve.steamos.jupiter-legacy-support.policy
 
   install -D -m644 "$srcdir"/killuserprocesses.conf "$pkgdir"/etc/systemd/logind.conf.d/killuserprocesses.conf
-
-  install -D -m644 "$srcdir"/91-dracut-install-vanilla.hook "$pkgdir"/usr/share/libalpm/hooks/91-dracut-install-vanilla.hook
 
   install -D -m644 "$srcdir"/steam-web-debug-portforward.service "$pkgdir"/etc/systemd/system/steam-web-debug-portforward.service
 
