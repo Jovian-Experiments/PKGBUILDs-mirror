@@ -1,7 +1,7 @@
 # Maintainer: Collabora Ltd <gael.portay@collabora.com>
 
 pkgname=steamos-customizations-jupiter
-_srctag=jupiter-20230426.1
+_srctag=jupiter-20230615.2
 _srcver=${_srctag#jupiter-}
 pkgver=${_srcver//-/.}
 pkgrel=2
@@ -9,7 +9,7 @@ pkgdesc='SteamOS customizations (Jupiter fork) - This package installs various S
 arch=('any')
 url='http://repo.steampowered.com'
 license=('LGPLv2+')
-depends=('e2fsprogs' 'gptfdisk' 'rsync' 'util-linux')
+depends=('e2fsprogs' 'gptfdisk' 'rsync' 'util-linux' 'mkinitcpio')
 makedepends=('git' 'openssh')
 provides=("${pkgname%-git}")
 conflicts=("${pkgname%-git}")
@@ -24,6 +24,7 @@ package() {
 		 ATOMUPD_IMAGES_URL=https://steamdeck-images.steamos.cloud/ \
 		 ATOMUPD_VARIANTS_LIST='rel;rc;beta;bc;main' \
 		 install
+	make DESTDIR="$pkgdir" prefix="/usr" sbindir="/usr/bin" libexecdir="/usr/lib" -C mkinitcpio install
 
 	echo "Symlink grub binaries using steamos helpers from libdir..."
 	ln -sf "/usr/lib/steamos/steamos-grub-install" "${pkgdir}/usr/bin/grub-install"
