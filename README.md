@@ -1,5 +1,5 @@
 
-`main @ 20230621.1000`
+`main @ 20230621.1001`
 ======================
 
 Valve packages
@@ -7,7 +7,7 @@ Valve packages
 
 ### `holo-main`
  * [`atomupd-daemon-git` — `holo-main/atomupd-daemon-git-0.20230503.0.r0.gc7a0810-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/atomupd-daemon-git-0.20230503.0.r0.gc7a0810-1)
- * [`casync-git` — `holo-main/casync-git-2.r227.g99559cd-4`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/casync-git-2.r227.g99559cd-4)
+ * [`casync` — `holo-main/casync-2.r227.g99559cd-4.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/casync-2.r227.g99559cd-4.1)
  * [`clang-libs` — `holo-main/clang-15.0.7-9.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/clang-15.0.7-9.1)
  * [`drm_info` — `holo-main/drm_info-2.4.0-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/drm_info-2.4.0-1)
  * [`filesystem` — `holo-main/filesystem-2021.12.07-1.9`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/filesystem-2021.12.07-1.9)
@@ -23,7 +23,7 @@ Valve packages
  * [`paru` — `holo-main/paru-1.11.1-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/paru-1.11.1-1.1)
  * [`plymouth` — `holo-main/plymouth-22.02.122-1.4`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/plymouth-22.02.122-1.4)
  * [`pyzy` — `holo-main/pyzy-1.1-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/pyzy-1.1-1.1)
- * [`rauc` — `holo-main/rauc-1.8-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/rauc-1.8-1)
+ * [`rauc` — `holo-main/rauc-1.8-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/rauc-1.8-1.1)
  * [`steamos-atomupd-client-git` — `holo-main/steamos-atomupd-client-git-r301.e0c2c4d-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-atomupd-client-git-r301.e0c2c4d-2)
  * [`steamos-tweak-mtu-probing` — `holo-main/steamos-tweak-mtu-probing-1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-tweak-mtu-probing-1-1)
  * [`vkmark-git` — `holo-main/vkmark-git-r133.30d2cd3-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/vkmark-git-r133.30d2cd3-2)
