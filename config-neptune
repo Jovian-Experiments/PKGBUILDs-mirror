@@ -9,14 +9,6 @@
 # CONFIG_DRM_AMDGPU_SI is not set
 # CONFIG_DRM_RADEON is not set
 
-#
-# Use xz instead of zstd to save space
-#
-CONFIG_KERNEL_XZ=y
-# CONFIG_KERNEL_ZSTD is not set
-CONFIG_MODULE_COMPRESS_XZ=y
-# CONFIG_MODULE_COMPRESS_ZSTD is not set
-
 # Doesn't build on latest tag, not used in neptune hardware (?)
 CONFIG_SND_SOC_CS35L36=n
 # Update this to =y to workaround initialization issues and deadlocks when loaded as module

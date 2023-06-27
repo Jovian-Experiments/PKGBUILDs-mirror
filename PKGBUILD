@@ -4,43 +4,40 @@
 pkgbase=linux-neptune-61
 _tag=6.1.29-valve4
 pkgver=${_tag//-/.}
-pkgrel=1
+pkgrel=2
 pkgdesc='Linux'
 url="https://gitlab.steamos.cloud/jupiter/linux-integration/-/tree/$_tag"
 arch=(x86_64)
 license=(GPL2)
 makedepends=(
-  bc kmod libelf pahole cpio perl tar xz
-  # documentation dependencies, disabled for now
-  #xmlto python-sphinx python-sphinx_rtd_theme graphviz imagemagick
-  git openssh
+  bc libelf pahole cpio perl tar xz gettext
+  #xmlto python-sphinx python-sphinx_rtd_theme graphviz imagemagick texlive-latexextra # Jupiter: documentation dependencies, disabled for now
+  git
+  openssh # Jupiter: we're using ssh for the source
 )
 options=('!strip' '!debug')
 _srcname=archlinux-linux-neptune
 source=(
   "$_srcname::git+ssh://git@gitlab.steamos.cloud/jupiter/linux-integration.git#tag=$_tag"
-  config-arch       # the original Arch kernel config file
-  config-neptune    # the neptune kernel fragment file
-  90-splash.hook
-  splash
+  config         # the main kernel config file
+  config-neptune    # Jupiter: the neptune kernel fragment file
 )
 validpgpkeys=(
   'ABAF11C65A2970B130ABE3C479BE3E4300411886'  # Linus Torvalds
   '647F28654894E3BD457199BE38DBBDC86092693E'  # Greg Kroah-Hartman
   'A2FF3A36AAA56654109064AB19802F8B0D70FC30'  # Jan Alexander Steffens (heftig)
+  'C7E7849466FE2358343588377258734B41C31549'  # David Runge <dvzrv@archlinux.org>
 )
 sha256sums=('SKIP'
             '81a9379fd2eac51bb2dc69d83737d7fbdd41fcaca5af4873e3666d3c706760d1'
-            'fe818e4ee3c6a666bc94adfe25583fb98e8007077d1a50f33d3dbf50ef115368'
-            'b2779035c049c363808e3ba238be685884206a4a5b1c0500b707faf12eef6996'
-            '6098e453286c58b25a257d22e1c7098b00a0afe3b718e4869bccff9432491c3f')
+            '35f513f36eabff71fd70df2f84927be95c1c4dd38394402070795181338d9197')
 
 export KBUILD_BUILD_HOST=archlinux
 export KBUILD_BUILD_USER=$pkgbase
 export KBUILD_BUILD_TIMESTAMP="$(date -Ru${SOURCE_DATE_EPOCH:+d @$SOURCE_DATE_EPOCH})"
 
 prepare() {
-  cd "$_srcname"
+  cd $_srcname
 
   echo "Setting version..."
   scripts/setlocalversion --save-scmversion
@@ -57,8 +54,10 @@ prepare() {
   done
 
   echo "Setting config..."
-  scripts/kconfig/merge_config.sh -m ../config-arch ../config-neptune
+  cp ../config .config
+  scripts/kconfig/merge_config.sh -m ../config ../config-neptune # Jupiter: merge the extra frament
   make olddefconfig
+  diff -u ../config .config || :
 
   make -s kernelrelease > version
   echo "Prepared $pkgbase version $(<version)"
@@ -67,7 +66,7 @@ prepare() {
 build() {
   cd $_srcname
   make all
-#  make htmldocs
+#  make htmldocs # Jupiter: Don't build the docs
 }
 
 _package() {
@@ -91,16 +90,12 @@ _package() {
   echo "$pkgbase" | install -Dm644 /dev/stdin "$modulesdir/pkgbase"
 
   echo "Installing modules..."
-  make INSTALL_MOD_PATH="$pkgdir/usr" INSTALL_MOD_STRIP=1 modules_install
+  # Jupiter: compress modules better, https://bugs.archlinux.org/task/78894
+  make ZSTD_CLEVEL=19 INSTALL_MOD_PATH="$pkgdir/usr" INSTALL_MOD_STRIP=1 \
+    DEPMOD=/doesnt/exist modules_install  # Suppress depmod
 
   # remove build and source links
   rm "$modulesdir"/{source,build}
-
-  # install splashscreen pacman hook and script
-  sed -e "s|splash|${pkgbase}-splash|g" "${srcdir}"/90-splash.hook |
-    install -Dm644 /dev/stdin "${pkgdir}/usr/share/libalpm/hooks/90-${pkgbase}.hook"
-  sed -e "s|MODULESPATH|/usr/lib/modules/$_kernver|g" "${srcdir}"/splash |
-    install -Dm755 /dev/stdin "${pkgdir}/usr/share/libalpm/scripts/${pkgbase}-splash"
 }
 
 _package-headers() {
@@ -204,7 +199,7 @@ _package-docs() {
   ln -sr "$builddir/Documentation" "$pkgdir/usr/share/doc/$pkgbase"
 }
 
-#pkgname=("$pkgbase" "$pkgbase-headers" "$pkgbase-docs")
+#pkgname=("$pkgbase" "$pkgbase-headers" "$pkgbase-docs") # Jupiter: Don't package the docs
 pkgname=("$pkgbase" "$pkgbase-headers")
 for _p in "${pkgname[@]}"; do
   eval "package_$_p() {
