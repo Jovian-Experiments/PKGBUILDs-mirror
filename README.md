@@ -1,5 +1,5 @@
 
-`main @ 20230623.1000`
+`main @ 20230628.1000`
 ======================
 
 Valve packages
@@ -44,16 +44,16 @@ Valve packages
  * [`jupiter-dock-updater-bin` — `jupiter-main/jupiter-dock-updater-bin-20230126.01-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-dock-updater-bin-20230126.01-1)
  * [`jupiter-fan-control` — `jupiter-main/jupiter-fan-control-20230209.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-fan-control-20230209.1-1)
  * [`jupiter-firewall` — `jupiter-main/jupiter-firewall-0.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-firewall-0.1-1)
- * [`jupiter-hw-support` — `jupiter-main/jupiter-hw-support-20230622.1-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-hw-support-20230622.1-2)
+ * [`jupiter-hw-support` — `jupiter-main/jupiter-hw-support-20230623.1-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-hw-support-20230623.1-2)
  * [`jupiter-legacy-support` — `jupiter-main/jupiter-legacy-support-1.140-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-legacy-support-1.140-2)
  * [`libnm` — `jupiter-main/networkmanager-1.34.0-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/networkmanager-1.34.0-1.1)
- * [`libva-mesa-driver` — `jupiter-main/mesa-23.1.2.170169.radeonsi_3.5.0-3`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/mesa-23.1.2.170169.radeonsi_3.5.0-3)
+ * [`libva-mesa-driver` — `jupiter-main/mesa-23.1.3.170235.radeonsi_3.5.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/mesa-23.1.3.170235.radeonsi_3.5.1-1)
  * [`linux-firmware-neptune` — `jupiter-main/linux-firmware-neptune-jupiter.20230420-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/linux-firmware-neptune-jupiter.20230420-2)
  * [`linux-firmware-neptune-whence` — `jupiter-main/linux-firmware-neptune-jupiter.20230420-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/linux-firmware-neptune-jupiter.20230420-2)
- * [`linux-neptune-61` — `jupiter-main/linux-neptune-61-6.1.29.valve4-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/linux-neptune-61-6.1.29.valve4-1)
+ * [`linux-neptune-61` — `jupiter-main/linux-neptune-61-6.1.29.valve4-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/linux-neptune-61-6.1.29.valve4-2)
  * [`mangohud` — `jupiter-main/mangohud-0.6.9.1.r22.g1d8f9f6-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/mangohud-0.6.9.1.r22.g1d8f9f6-1)
- * [`mesa` — `jupiter-main/mesa-23.1.2.170169.radeonsi_3.5.0-3`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/mesa-23.1.2.170169.radeonsi_3.5.0-3)
- * [`mesa-vdpau` — `jupiter-main/mesa-23.1.2.170169.radeonsi_3.5.0-3`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/mesa-23.1.2.170169.radeonsi_3.5.0-3)
+ * [`mesa` — `jupiter-main/mesa-23.1.3.170235.radeonsi_3.5.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/mesa-23.1.3.170235.radeonsi_3.5.1-1)
+ * [`mesa-vdpau` — `jupiter-main/mesa-23.1.3.170235.radeonsi_3.5.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/mesa-23.1.3.170235.radeonsi_3.5.1-1)
  * [`networkmanager` — `jupiter-main/networkmanager-1.34.0-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/networkmanager-1.34.0-1.1)
  * [`plasma-remotecontrollers` — `jupiter-main/plasma-remotecontrollers-5.27.4-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/plasma-remotecontrollers-5.27.4-1.1)
  * [`python-crcmod` — `jupiter-main/python-crcmod-1.7-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/python-crcmod-1.7-1)
@@ -807,7 +807,7 @@ Arch Linux packages
  * [`vmaf/2.3.1-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/vmaf/-/tree/2.3.1-1)
  * [`volume_key/0.3.12-8`](https://gitlab.archlinux.org/archlinux/packaging/packages/volume_key/-/tree/0.3.12-8)
  * [`vulkan-icd-loader/1.3.251-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/vulkan-icd-loader/-/tree/1.3.251-1)
- * [`vulkan-radeon/23.2.0_devel.173192.radv_23.6.0-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/vulkan-radeon/-/tree/23.2.0_devel.173192.radv_23.6.0-1)
+ * [`vulkan-radeon/23.2.0_devel.173194.radv_23.6.1-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/vulkan-radeon/-/tree/23.2.0_devel.173194.radv_23.6.1-1)
  * [`vulkan-tools/1.3.245-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/vulkan-tools/-/tree/1.3.245-1)
  * [`wayland/1.22.0-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/wayland/-/tree/1.22.0-1)
  * [`wayland-utils/1.2.0-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/wayland-utils/-/tree/1.2.0-1)
