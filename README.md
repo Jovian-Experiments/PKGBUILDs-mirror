@@ -1,5 +1,5 @@
 
-`main @ 20230628.1000`
+`main @ 20230630.1000`
 ======================
 
 Valve packages
@@ -24,6 +24,9 @@ Valve packages
  * [`rauc` — `holo-main/rauc-1.8-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/rauc-1.8-1.1)
  * [`steamos-atomupd-client-git` — `holo-main/steamos-atomupd-client-git-r301.e0c2c4d-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-atomupd-client-git-r301.e0c2c4d-2)
  * [`steamos-tweak-mtu-probing` — `holo-main/steamos-tweak-mtu-probing-1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-tweak-mtu-probing-1-1)
+ * [`systemd` — `holo-main/systemd-253.5-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/systemd-253.5-2)
+ * [`systemd-libs` — `holo-main/systemd-253.5-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/systemd-253.5-2)
+ * [`systemd-sysvcompat` — `holo-main/systemd-253.5-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/systemd-253.5-2)
  * [`vkmark-git` — `holo-main/vkmark-git-r133.30d2cd3-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/vkmark-git-r133.30d2cd3-2)
 
 ### `jupiter-main`
@@ -62,7 +65,7 @@ Valve packages
  * [`steam-im-modules` — `jupiter-main/steam-im-modules-jupiter.20220223-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steam-im-modules-jupiter.20220223-1)
  * [`steam-jupiter-stable` — `jupiter-main/steam-jupiter-stable-1.0.0.76-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steam-jupiter-stable-1.0.0.76-1)
  * [`steam_notif_daemon` — `jupiter-main/steam_notif_daemon-v1.0.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steam_notif_daemon-v1.0.1-1)
- * [`steamdeck-kde-presets` — `jupiter-main/steamdeck-kde-presets-0.18-3`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steamdeck-kde-presets-0.18-3)
+ * [`steamdeck-kde-presets` — `jupiter-main/steamdeck-kde-presets-0.19-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steamdeck-kde-presets-0.19-1)
  * [`steamos-customizations-jupiter` — `jupiter-main/steamos-customizations-jupiter-20230623.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steamos-customizations-jupiter-20230623.1-1)
  * [`steamos-devkit-service` — `jupiter-main/steamos-devkit-service-0.20220401.0-7`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steamos-devkit-service-0.20220401.0-7)
  * [`steamos-efi` — `jupiter-main/steamos-efi-20220727.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steamos-efi-20220727.1-1)
@@ -774,10 +777,7 @@ Arch Linux packages
  * [`svt-av1/1.5.0-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/svt-av1/-/tree/1.5.0-1)
  * [`syndication/5.107.0-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/syndication/-/tree/5.107.0-1)
  * [`syntax-highlighting/5.107.0-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/syntax-highlighting/-/tree/5.107.0-1)
- * [`systemd/253.5-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/systemd/-/tree/253.5-1)
- * [`systemd-libs/253.5-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/systemd/-/tree/253.5-1)
  * [`systemd-swap/4.4.0-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/systemd-swap/-/tree/4.4.0-2)
- * [`systemd-sysvcompat/253.5-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/systemd/-/tree/253.5-1)
  * [`systemsettings/5.27.5-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/systemsettings/-/tree/5.27.5-1)
  * [`taglib/1.13-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/taglib/-/tree/1.13-1)
  * [`talloc/2.4.0-3`](https://gitlab.archlinux.org/archlinux/packaging/packages/talloc/-/tree/2.4.0-3)
