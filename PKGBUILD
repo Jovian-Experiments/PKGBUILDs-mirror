@@ -1,7 +1,7 @@
 # Maintainer: Vicki Pfau <vi@endrift.com>
 
 pkgname=ds-inhibit
-_srctag=0.1.0
+_srctag=0.1.1
 pkgver=${_srctag}
 pkgrel=1
 pkgdesc="DualShock 4/DualSense mouse inhibitor"
