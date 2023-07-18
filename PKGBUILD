@@ -2,7 +2,7 @@
 # Maintainer: Jan Alexander Steffens (heftig) <heftig@archlinux.org>
 
 pkgbase=linux-neptune-61
-_tag=6.1.29-valve6
+_tag=6.1.29-valve8
 pkgver=${_tag//-/.}
 pkgrel=2
 pkgdesc='Linux'
@@ -29,7 +29,7 @@ validpgpkeys=(
   'C7E7849466FE2358343588377258734B41C31549'  # David Runge <dvzrv@archlinux.org>
 )
 sha256sums=('SKIP'
-            '81a9379fd2eac51bb2dc69d83737d7fbdd41fcaca5af4873e3666d3c706760d1'
+            '5a90af5181bf7a626ed0862a8c28e94aadce8bab66813a54a61f796f706c76bf'
             '35f513f36eabff71fd70df2f84927be95c1c4dd38394402070795181338d9197')
 
 export KBUILD_BUILD_HOST=archlinux
