@@ -2,9 +2,9 @@
 # Maintainer: Jan Alexander Steffens (heftig) <heftig@archlinux.org>
 
 pkgbase=linux-neptune-61
-_tag=6.1.29-valve8
+_tag=6.1.39-valve1
 pkgver=${_tag//-/.}
-pkgrel=2
+pkgrel=1
 pkgdesc='Linux'
 url="https://gitlab.steamos.cloud/jupiter/linux-integration/-/tree/$_tag"
 arch=(x86_64)
@@ -19,18 +19,12 @@ options=('!strip' '!debug')
 _srcname=archlinux-linux-neptune
 source=(
   "$_srcname::git+ssh://git@gitlab.steamos.cloud/jupiter/linux-integration.git#tag=$_tag"
-  config         # the main kernel config file
-  config-neptune    # Jupiter: the neptune kernel fragment file
-)
-validpgpkeys=(
-  'ABAF11C65A2970B130ABE3C479BE3E4300411886'  # Linus Torvalds
-  '647F28654894E3BD457199BE38DBBDC86092693E'  # Greg Kroah-Hartman
-  'A2FF3A36AAA56654109064AB19802F8B0D70FC30'  # Jan Alexander Steffens (heftig)
-  'C7E7849466FE2358343588377258734B41C31549'  # David Runge <dvzrv@archlinux.org>
+  config          # Upstream Arch Linux kernel configuration file, DO NOT EDIT!!!
+  config-neptune  # Jupiter: the neptune kernel fragment file (overrides 'config' above)
 )
 sha256sums=('SKIP'
-            '5a90af5181bf7a626ed0862a8c28e94aadce8bab66813a54a61f796f706c76bf'
-            '35f513f36eabff71fd70df2f84927be95c1c4dd38394402070795181338d9197')
+            '81a9379fd2eac51bb2dc69d83737d7fbdd41fcaca5af4873e3666d3c706760d1' # DO NOT EDIT 'config'! Use 'config-neptune' for changes!
+            '7daf8525a2caea7b3b5ae9871781d88a8f5cacc567a9bf2febe5041312e78ee9')
 
 export KBUILD_BUILD_HOST=archlinux
 export KBUILD_BUILD_USER=$pkgbase
@@ -55,7 +49,7 @@ prepare() {
 
   echo "Setting config..."
   cp ../config .config
-  scripts/kconfig/merge_config.sh -m ../config ../config-neptune # Jupiter: merge the extra frament
+  scripts/kconfig/merge_config.sh -m ../config ../config-neptune # Jupiter: merge the extra fragment
   make olddefconfig
   diff -u ../config .config || :
 
