@@ -47,3 +47,6 @@ CONFIG_HYPERVISOR_GUEST=n
 # Disable some options enabled in ArchLinux 6.1.12-arch1 config
 CONFIG_X86_AMD_PSTATE=n
 CONFIG_HAVE_RUST=n
+
+# Build as module to experiment with toggling
+CONFIG_TCG_TPM=m
