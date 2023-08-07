@@ -1,7 +1,7 @@
-diff -ru bluez-5.63.orig/profiles/audio/avrcp.c bluez-5.63/profiles/audio/avrcp.c
---- bluez-5.63.orig/profiles/audio/avrcp.c	2021-10-13 11:38:34.000000000 -0700
-+++ bluez-5.63/profiles/audio/avrcp.c	2022-02-24 23:58:05.659212251 -0800
-@@ -1207,6 +1207,10 @@
+diff -ru bluez-5.66.orig/profiles/audio/avrcp.c bluez-5.66/profiles/audio/avrcp.c
+--- bluez-5.66.orig/profiles/audio/avrcp.c	2022-03-16 08:06:20.000000000 -0700
++++ bluez-5.66/profiles/audio/avrcp.c	2023-07-30 08:03:17.414213611 -0700
+@@ -1210,6 +1210,10 @@
  					GUINT_TO_POINTER(str_to_metadata(key)));
  	}
  
@@ -12,3 +12,4 @@ diff -ru bluez-5.63.orig/profiles/audio/avrcp.c bluez-5.63/profiles/audio/avrcp.
  	return attrs;
  }
  
+Only in bluez-5.66/profiles/audio: avrcp.c.orig
