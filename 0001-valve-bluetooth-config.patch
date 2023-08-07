@@ -11,7 +11,7 @@ diff --git a/src/main.conf b/src/main.conf
 index 198899541..6b9961d3f 100644
 --- a/src/main.conf
 +++ b/src/main.conf
-@@ -56,7 +56,7 @@
+@@ -60,7 +60,7 @@
  # or both Multiple Profiles Single Device (MPSD) and Multiple Profiles Multiple
  # Devices (MPMD) configurations.
  # Possible values: "off", "single", "multiple"

@@ -6,7 +6,7 @@
 pkgbase=bluez
 pkgname=('bluez' 'bluez-utils' 'bluez-libs' 'bluez-cups' 'bluez-hid2hci' 'bluez-plugins')
 pkgver=5.66
-pkgrel=1.1
+pkgrel=1.2
 url="http://www.bluez.org/"
 arch=('x86_64')
 license=('GPL2')
@@ -20,8 +20,8 @@ source=(https://www.kernel.org/pub/linux/bluetooth/${pkgname}-${pkgver}.tar.{xz,
 sha256sums=('39fea64b590c9492984a0c27a89fc203e1cdc74866086efb8f4698677ab2b574'
             'SKIP'
             '46c021be659c9a1c4e55afd04df0c059af1f3d98a96338236412e449bf7477b4'
-            'd64d7518a571251fc8cdb945a8f22aa4ef9f65864a46491034f561a1e5c54e37'
-            '8d585e6a52faeeb426b69a6110aca73823c734180e26bd334731cb13af75387d')
+            'd863bd52917e4f5819b23ae5e64a34c5b02a0cfdf3969290bfce0d26dfe137b4'
+            'ebd6fe4a00f3bc81442885d43c12101a672fccdaf4379a1c4ebdc5e80282b18d')
 validpgpkeys=('E932D120BC2AEC444E558F0106CA9F5D1DCF2659') # Marcel Holtmann <marcel@holtmann.org>
 
 build() {
