@@ -1,7 +1,7 @@
 # Maintainer: Vicki Pfau <vi@endrift.com>
 
 pkgname=steamos-log-submitter
-pkgver=0.0.3
+pkgver=0.0.4
 pkgrel=1
 pkgdesc="SteamOS Log Submitter"
 url="https://gitlab.steamos.cloud/jupiter/steamos-log-submitter"
