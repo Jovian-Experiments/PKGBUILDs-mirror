@@ -99,9 +99,6 @@ export STEAM_GAMESCOPE_DYNAMIC_FPSLIMITER=1
 # Support for gamescope tearing with GAMESCOPE_ALLOW_TEARING atom
 export STEAM_GAMESCOPE_HAS_TEARING_SUPPORT=1
 
-# We have gamma/degamma exponent support
-export STEAM_GAMESCOPE_COLOR_TOYS=1
-
 # We have NIS support
 export STEAM_GAMESCOPE_NIS_SUPPORTED=1
 
@@ -134,6 +131,7 @@ export STEAM_GAMESCOPE_FANCY_SCALING_SUPPORT=1
 
 # Color management support
 export STEAM_GAMESCOPE_COLOR_MANAGED=1
+export STEAM_GAMESCOPE_VIRTUAL_WHITE=1
 
 # Set input method modules for Qt/GTK that will show the Steam keyboard
 export QT_IM_MODULE=steam
