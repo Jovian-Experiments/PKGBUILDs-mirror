@@ -1,8 +1,8 @@
 # Maintainer: Collabora Ltd <gael.portay@collabora.com>
 
 pkgname=steamos-customizations-jupiter
-_srctag=jupiter-20220713.1
-_srcver=${_srctag#jupiter-}
+_srctag=jupiter-3.4-20230804.1
+_srcver=${_srctag#jupiter-3.4-}
 pkgver=${_srcver//-/.}
 pkgrel=1
 pkgdesc='SteamOS customizations (Jupiter fork) - This package installs various SteamOS-specific files'
@@ -13,7 +13,7 @@ depends=('e2fsprogs' 'gptfdisk' 'rsync' 'util-linux')
 makedepends=('git' 'openssh')
 provides=("${pkgname%-git}")
 conflicts=("${pkgname%-git}")
-source=("${pkgname%-git}::git+ssh://git@gitlab.steamos.cloud:/steam/steamos-customizations.git#tag=${_srctag}")
+source=("${pkgname%-git}::git+ssh://git@gitlab.steamos.cloud/steam/steamos-customizations.git#tag=${_srctag}")
 md5sums=('SKIP')
 
 package() {
