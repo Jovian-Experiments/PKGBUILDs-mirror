@@ -1,5 +1,5 @@
 
-`release @ 20230605.2`
+`release @ 20230817.1`
 ======================
 
 Valve packages
@@ -17,7 +17,7 @@ Valve packages
  * [`jupiter-hw-support` — `jupiter-rel/jupiter-hw-support-3.4.20221221.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-rel/jupiter-hw-support-3.4.20221221.1-1)
  * [`libva-mesa-driver` — `jupiter-rel/mesa-22.2.0.157821.radeonsi_3.4.0_2-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-rel/mesa-22.2.0.157821.radeonsi_3.4.0_2-2)
  * [`linux-firmware-neptune` — `jupiter-rel/linux-firmware-neptune-20220624.650ab31-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-rel/linux-firmware-neptune-20220624.650ab31-1)
- * [`linux-neptune` — `jupiter-rel/linux-neptune-5.13.0.valve36-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-rel/linux-neptune-5.13.0.valve36-1)
+ * [`linux-neptune` — `jupiter-rel/linux-neptune-5.13.0.valve37-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-rel/linux-neptune-5.13.0.valve37-1)
  * [`mesa` — `jupiter-rel/mesa-22.2.0.157821.radeonsi_3.4.0_2-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-rel/mesa-22.2.0.157821.radeonsi_3.4.0_2-2)
  * [`mesa-unstable` — `jupiter-rel/mesa-23.1.1.170090.radeonsi_3.5.0-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-rel/mesa-23.1.1.170090.radeonsi_3.5.0-2)
  * [`mesa-vdpau` — `jupiter-rel/mesa-22.2.0.157821.radeonsi_3.4.0_2-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-rel/mesa-22.2.0.157821.radeonsi_3.4.0_2-2)
@@ -25,7 +25,7 @@ Valve packages
  * [`renderdoc-minimal` — `jupiter-rel/renderdoc-minimal-1.22-6`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-rel/renderdoc-minimal-1.22-6)
  * [`steam-im-modules` — `jupiter-rel/steam-im-modules-jupiter.20220223-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-rel/steam-im-modules-jupiter.20220223-1)
  * [`steam-jupiter-stable` — `jupiter-rel/steam-jupiter-stable-1.0.0.75-1.4`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-rel/steam-jupiter-stable-1.0.0.75-1.4)
- * [`steamos-customizations-jupiter` — `jupiter-rel/steamos-customizations-jupiter-20220713.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-rel/steamos-customizations-jupiter-20220713.1-1)
+ * [`steamos-customizations-jupiter` — `jupiter-rel/steamos-customizations-jupiter-20230804.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-rel/steamos-customizations-jupiter-20230804.1-1)
  * [`steamos-devkit-service` — `jupiter-rel/steamos-devkit-service-0.20220401.0-7`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-rel/steamos-devkit-service-0.20220401.0-7)
  * [`ttf-twemoji-default` — `jupiter-rel/ttf-twemoji-default-13.1.0-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-rel/ttf-twemoji-default-13.1.0-2)
  * [`vpower` — `jupiter-rel/vpower-1.4.0-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-rel/vpower-1.4.0-1)
@@ -790,7 +790,7 @@ Arch Linux packages
  * [`vmaf/2.3.1-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/vmaf/-/tree/2.3.1-1)
  * [`volume_key/0.3.12-7`](https://gitlab.archlinux.org/archlinux/packaging/packages/volume_key/-/tree/0.3.12-7)
  * [`vulkan-icd-loader/1.3.226-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/vulkan-icd-loader/-/tree/1.3.226-1)
- * [`vulkan-radeon/23.1.0_devel.166658.steamos_3.5.3-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/vulkan-radeon/-/tree/23.1.0_devel.166658.steamos_3.5.3-1)
+ * [`vulkan-radeon/23.1.0_devel.166662.steamos_3.5.5-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/vulkan-radeon/-/tree/23.1.0_devel.166662.steamos_3.5.5-1)
  * [`vulkan-tools/1.3.226-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/vulkan-tools/-/tree/1.3.226-1)
  * [`wayland-utils/1.1.0-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/wayland-utils/-/tree/1.1.0-1)
  * [`webrtc-audio-processing/0.3.1-3`](https://gitlab.archlinux.org/archlinux/packaging/packages/webrtc-audio-processing/-/tree/0.3.1-3)
