@@ -1,0 +1,22 @@
+From 7c83bf4994f7c9fd56dbce25dded413097dfee27 Mon Sep 17 00:00:00 2001
+From: Vicki Pfau <vi@endrift.com>
+Date: Wed, 23 Aug 2023 15:48:53 -0700
+Subject: [PATCH] Fix systemd symlink path
+
+---
+ Makefile | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/Makefile b/Makefile
+index e119a13..e2594af 100644
+--- a/Makefile
++++ b/Makefile
+@@ -42,4 +42,4 @@ install: all $(infiles)
+ 	install -D -m0644 udev/steamos-log-submitter.rules $(DESTDIR)$(udevdir)/rules.d/79-steamos-log-submitter.rules
+ 	install -D -m0644 base.cfg $(DESTDIR)$(libdir)/steamos-log-submitter/base.cfg
+ 	mkdir -p $(DESTDIR)$(systemdunitsdir)/multi-user.target.wants
+-	ln -sf $(DESTDIR)$(systemdunitsdir)/steamos-log-submitter.service $(DESTDIR)$(systemdunitsdir)/multi-user.target.wants
++	ln -sf $(systemdunitsdir)/steamos-log-submitter.service $(DESTDIR)$(systemdunitsdir)/multi-user.target.wants
+-- 
+2.41.0
+
