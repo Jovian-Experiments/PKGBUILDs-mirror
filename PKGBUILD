@@ -1,8 +1,8 @@
 # Maintainer: Vicki Pfau <vi@endrift.com>
 
 pkgname=steamos-log-submitter
-pkgver=0.1.0
-pkgrel=1
+pkgver=0.1.1
+pkgrel=2
 pkgdesc="SteamOS Log Submitter"
 url="https://gitlab.steamos.cloud/jupiter/steamos-log-submitter"
 arch=('any')
@@ -22,5 +22,5 @@ package() {
 
 check() {
 	cd steamos-log-submitter
-	pytest
+	dbus-run-session pytest
 }
