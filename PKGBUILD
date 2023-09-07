@@ -7,28 +7,61 @@
 
 pkgbase=networkmanager
 pkgname=(networkmanager libnm nm-cloud-setup)
-pkgver=1.34.0
+pkgver=1.42.6
 pkgrel=1.1
 pkgdesc="Network connection manager and user applications"
 url="https://networkmanager.dev/"
 arch=(x86_64)
 license=(GPL)
 _pppver=2.4.9
+makedepends=(
+  audit
+  bluez-libs
+  curl
+  dhclient
+  dhcpcd
+  dnsmasq
+  git
+  glib2-docs
+  gobject-introspection
+  gtk-doc
+  iproute2
 # XXX: Change the iptables-nft -> iptables makedep.
 # See: https://bugs.archlinux.org/task/75101
-makedepends=(intltool dhclient dhcpcd iptables gobject-introspection gtk-doc
-             "ppp=$_pppver" modemmanager iproute2 nss polkit wpa_supplicant curl
-             systemd libmm-glib libnewt libndp libteam nftables vala perl-yaml
-             python-gobject git vala jansson bluez-libs glib2-docs iwd dnsmasq
-             openresolv libpsl audit meson)
-checkdepends=(libx11 python-dbus)
-_commit=9133a30c9deb3a003a20b09a617a25b07ada18ae  # tags/1.34.0^0
+  iptables
+  iwd
+  jansson
+  libmm-glib
+  libndp
+  libnewt
+  libpsl
+  libteam
+  meson
+  modemmanager
+  nftables
+  nss
+  openresolv
+  pacrunner
+  perl-yaml
+  polkit
+  "ppp=$_pppver"
+  python-gobject
+  systemd
+  vala
+  vala
+  wpa_supplicant
+)
+checkdepends=(
+  libx11
+  python-dbus
+)
+_commit=b6cc7c7e695ba3b1f2a5c95b0d6df418b8556e57  # tags/1.42.6^0
 source=("git+https://gitlab.freedesktop.org/NetworkManager/NetworkManager.git#commit=$_commit"
         # https://gitlab.steamos.cloud/jupiter/tasks/-/issues/520
         # https://gitlab.freedesktop.org/NetworkManager/NetworkManager/-/merge_requests/1264
         "0001-iwd-remove-8021X-unknown-network-restrictions.patch")
 b2sums=('SKIP'
-        '70edbe50dec9e2cd097478eed154680a56d0286ef34db03382e1b8747c2a8ba8e86e16cee1c77d983bf9b32495d9b4b2b04b9898d1851497572b9176f0910f47')
+        'acb84792effee07ff8853f85136d5fe2822f11810a82a6dbb071c9dba7051d9f5ad232e49442b78cf3b29f24caf9e947ee18941adbe3e1876c11f7212e055509')
 
 pkgver() {
   cd NetworkManager
@@ -70,6 +103,8 @@ build() {
 
     # configuration plugins
     -D config_plugins_default=keyfile
+    -D ifcfg_rh=false
+    -D ifupdown=false
 
     # handlers for resolv.conf
     -D netconfig=no
@@ -102,21 +137,35 @@ _pick() {
 }
 
 package_networkmanager() {
-  depends=(libnm iproute2 wpa_supplicant libmm-glib libnewt libndp libteam curl
-           bluez-libs libpsl audit mobile-broadband-provider-info)
+  depends=(
+    audit
+    bluez-libs
+    curl
+    iproute2
+    jansson
+    libmm-glib
+    libndp
+    libnewt
+    libnm
+    libpsl
+    libteam
+    mobile-broadband-provider-info
+    wpa_supplicant
+  )
   optdepends=(
-    'polkit: let non-root users control networking'
-    'dnsmasq: connection sharing'
-    'nftables: connection sharing'
-    'iptables: connection sharing'
     'bluez: Bluetooth support'
-    'ppp: dialup connection support'
-    'modemmanager: cellular network support'
-    'iwd: wpa_supplicant alternative'
     'dhclient: alternative DHCP client'
     'dhcpcd: alternative DHCP client'
-    'openresolv: alternative resolv.conf manager'
+    'dnsmasq: connection sharing'
     'firewalld: firewall support'
+    'iptables: connection sharing'
+    'iwd: wpa_supplicant alternative'
+    'modemmanager: cellular network support'
+    'nftables: connection sharing'
+    'openresolv: alternative resolv.conf manager'
+    'pacrunner: PAC proxy support'
+    'polkit: let non-root users control networking'
+    'ppp: dialup connection support'
   )
   backup=(etc/NetworkManager/NetworkManager.conf)
 
@@ -151,6 +200,9 @@ END
   _pick cloud usr/lib/**/*nm-cloud-setup*
   _pick cloud usr/share/man/*/nm-cloud-setup*
 
+  # Not actually packaged (https://bugs.archlinux.org/task/69138)
+  _pick ovs usr/lib/systemd/system/NetworkManager.service.d/NetworkManager-ovs.conf
+
   # Restore empty dir
   install -d usr/lib/NetworkManager/dispatcher.d/no-wait.d
 }
@@ -158,7 +210,12 @@ END
 package_libnm() {
   pkgdesc="NetworkManager client library"
   license=(LGPL)
-  depends=(glib2 nss util-linux-libs jansson systemd-libs)
+  depends=(
+    glib2
+    nss
+    systemd-libs
+    util-linux-libs
+  )
   provides=(libnm.so)
 
   mv libnm/* "$pkgdir"
@@ -171,4 +228,4 @@ package_nm-cloud-setup() {
   mv cloud/* "$pkgdir"
 }
 
-# vim:set sw=2 et:
+# vim:set sw=2 sts=-1 et:
