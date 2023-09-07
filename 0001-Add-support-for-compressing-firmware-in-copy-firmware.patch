@@ -57,11 +57,11 @@ index 9b46b63..0dd2e5c 100755
  done
  
 +if test "x$compress" = "xyes"; then
-+    cmpxtn=.xz
++    cmpxtn=.zst
 +    grep '^File:' WHENCE | sed -e's/^File: *//g' -e's/"//g' | while read f; do
 +       test -f "$f" || continue
 +       $verbose "compressing $f"
-+       xz -C crc32 "$f"
++       zstd --compress --quiet "$f"
 +    done
 +fi
 +

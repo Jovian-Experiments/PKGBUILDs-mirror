@@ -6,7 +6,7 @@ pkgname=(linux-firmware-neptune-whence linux-firmware-neptune  amd-ucode
 )
 _tag=jupiter-20230420
 pkgver=${_tag//-/.}
-pkgrel=2
+pkgrel=3
 pkgdesc="Firmware files for Linux"
 url="https://gitlab.steamos.cloud/jupiter/linux-firmware-neptune"
 license=('GPL2' 'GPL3' 'custom')
@@ -16,7 +16,7 @@ options=(!strip)
 source=("git+ssh://git@gitlab.steamos.cloud/jupiter/linux-firmware-neptune.git#tag=$_tag"
          0001-Add-support-for-compressing-firmware-in-copy-firmware.patch)
 sha256sums=('SKIP'
-            'aa11b2eed9c0be42571b45eb7153908a43290f02a5fc715aefcaa81030a1832f')
+            'b7feb7db71160e9fe6f3114405e6ab883abfb12a540c8b6a2a7088295dcf5bd2')
 validpgpkeys=('4CDE8575E547BF835FE15807A31B6BD72486CFD6') # Josh Boyer <jwboyer@fedoraproject.org>
 
 _backports=(
@@ -77,7 +77,7 @@ package_linux-firmware-neptune() {
 
   cd ${pkgbase}
 
-  make DESTDIR="${pkgdir}" FIRMWAREDIR=/usr/lib/firmware installcompress
+  ZSTD_CLEVEL=19 make DESTDIR="${pkgdir}" FIRMWAREDIR=/usr/lib/firmware installcompress
 
   # Trigger a microcode reload for configurations not using early updates
   echo 'w /sys/devices/system/cpu/microcode/reload - - - - 1' |
