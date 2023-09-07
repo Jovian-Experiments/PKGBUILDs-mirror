@@ -3,7 +3,7 @@
 pkgname=gamescope
 _srctag=3.12.5
 pkgver=${_srctag//-/.}
-pkgrel=1.2
+pkgrel=1.3
 pkgdesc="gaming shell based on Xwayland, powered by Vulkan and DRM"
 arch=(x86_64)
 url="https://github.com/ValveSoftware/gamescope"
@@ -77,7 +77,7 @@ package() {
 	install -D -m 644 gamescope-session.service "$pkgdir"/usr/lib/systemd/user/gamescope-session.service
 
         # portals
-	install -D -m 644 gamescope-portals.conf "$pkgdir"/etc/xdg-desktop-portal/gamescope-portals.conf
+	install -D -m 644 gamescope-portals.conf "$pkgdir"/usr/share/xdg-desktop-portal/gamescope-portals.conf
 
 	cd "$pkgname/build"
 
