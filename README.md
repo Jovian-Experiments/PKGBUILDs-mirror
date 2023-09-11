@@ -1,5 +1,5 @@
 
-`main @ 20230908.1000`
+`main @ 20230911.1000`
 ======================
 
 Valve packages
@@ -13,11 +13,11 @@ Valve packages
  * [`e2fsprogs` — `holo-main/e2fsprogs-1.47.0-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/e2fsprogs-1.47.0-1.1)
  * [`filesystem` — `holo-main/filesystem-2021.12.07-1.10`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/filesystem-2021.12.07-1.10)
  * [`gssproxy` — `holo-main/gssproxy-0.9.1-2.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/gssproxy-0.9.1-2.1)
- * [`holo-desync` — `holo-main/steamos-customizations-git-r834.b021ef4-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-customizations-git-r834.b021ef4-1)
+ * [`holo-desync` — `holo-main/steamos-customizations-git-r835.be55fcc-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-customizations-git-r835.be55fcc-1)
  * [`holo-keyring` — `holo-main/holo-keyring-20220203-4`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/holo-keyring-20220203-4)
- * [`holo-pipewire` — `holo-main/steamos-customizations-git-r834.b021ef4-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-customizations-git-r834.b021ef4-1)
- * [`holo-sudo` — `holo-main/steamos-customizations-git-r834.b021ef4-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-customizations-git-r834.b021ef4-1)
- * [`holo-wireplumber` — `holo-main/steamos-customizations-git-r834.b021ef4-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-customizations-git-r834.b021ef4-1)
+ * [`holo-pipewire` — `holo-main/steamos-customizations-git-r835.be55fcc-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-customizations-git-r835.be55fcc-1)
+ * [`holo-sudo` — `holo-main/steamos-customizations-git-r835.be55fcc-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-customizations-git-r835.be55fcc-1)
+ * [`holo-wireplumber` — `holo-main/steamos-customizations-git-r835.be55fcc-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-customizations-git-r835.be55fcc-1)
  * [`iwd` — `holo-main/iwd-2.7-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/iwd-2.7-1.1)
  * [`kdumpst` — `holo-main/kdumpst-1.0-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/kdumpst-1.0-1)
  * [`kmod` — `holo-main/kmod-30-1.4`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/kmod-30-1.4)
@@ -81,7 +81,7 @@ Valve packages
  * [`steam-jupiter-stable` — `jupiter-main/steam-jupiter-stable-1.0.0.76-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steam-jupiter-stable-1.0.0.76-1)
  * [`steam_notif_daemon` — `jupiter-main/steam_notif_daemon-v1.0.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steam_notif_daemon-v1.0.1-1)
  * [`steamdeck-kde-presets` — `jupiter-main/steamdeck-kde-presets-0.20-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steamdeck-kde-presets-0.20-1)
- * [`steamos-customizations-jupiter` — `jupiter-main/steamos-customizations-jupiter-20230817.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steamos-customizations-jupiter-20230817.1-1)
+ * [`steamos-customizations-jupiter` — `jupiter-main/steamos-customizations-jupiter-20230911.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steamos-customizations-jupiter-20230911.1-1)
  * [`steamos-devkit-service` — `jupiter-main/steamos-devkit-service-0.20220401.0-7`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steamos-devkit-service-0.20220401.0-7)
  * [`ttf-twemoji-default` — `jupiter-main/ttf-twemoji-default-13.1.0-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/ttf-twemoji-default-13.1.0-2)
  * [`udisks2` — `jupiter-main/udisks2-2.9.4-1.2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/udisks2-2.9.4-1.2)
