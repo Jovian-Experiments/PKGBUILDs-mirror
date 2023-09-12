@@ -1,5 +1,5 @@
 
-`main @ 20230911.1000`
+`main @ 20230912.1000`
 ======================
 
 Valve packages
@@ -31,7 +31,7 @@ Valve packages
  * [`pyzy` — `holo-main/pyzy-1.1-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/pyzy-1.1-1.1)
  * [`rauc` — `holo-main/rauc-1.8-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/rauc-1.8-1.1)
  * [`steamos-atomupd-client-git` — `holo-main/steamos-atomupd-client-git-r301.e0c2c4d-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-atomupd-client-git-r301.e0c2c4d-2)
- * [`steamos-efi` — `holo-main/steamos-efi-20230823.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-efi-20230823.1-1)
+ * [`steamos-efi` — `holo-main/steamos-efi-20230911.2-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-efi-20230911.2-1)
  * [`steamos-kdumpst-layer` — `holo-main/steamos-kdumpst-layer-1.0-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-kdumpst-layer-1.0-1)
  * [`steamos-log-submitter` — `holo-main/steamos-log-submitter-0.2.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-log-submitter-0.2.1-1)
  * [`steamos-systemreport` — `holo-main/steamos-systemreport-0.2-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-systemreport-0.2-1)
