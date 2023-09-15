@@ -1,5 +1,5 @@
 
-`main @ 20230912.1000`
+`main @ 20230915.1000`
 ======================
 
 Valve packages
@@ -13,11 +13,11 @@ Valve packages
  * [`e2fsprogs` — `holo-main/e2fsprogs-1.47.0-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/e2fsprogs-1.47.0-1.1)
  * [`filesystem` — `holo-main/filesystem-2021.12.07-1.10`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/filesystem-2021.12.07-1.10)
  * [`gssproxy` — `holo-main/gssproxy-0.9.1-2.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/gssproxy-0.9.1-2.1)
- * [`holo-desync` — `holo-main/steamos-customizations-git-r835.be55fcc-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-customizations-git-r835.be55fcc-1)
+ * [`holo-desync` — `holo-main/steamos-customizations-git-20230915.2-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-customizations-git-20230915.2-1)
  * [`holo-keyring` — `holo-main/holo-keyring-20220203-4`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/holo-keyring-20220203-4)
- * [`holo-pipewire` — `holo-main/steamos-customizations-git-r835.be55fcc-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-customizations-git-r835.be55fcc-1)
- * [`holo-sudo` — `holo-main/steamos-customizations-git-r835.be55fcc-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-customizations-git-r835.be55fcc-1)
- * [`holo-wireplumber` — `holo-main/steamos-customizations-git-r835.be55fcc-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-customizations-git-r835.be55fcc-1)
+ * [`holo-pipewire` — `holo-main/steamos-customizations-git-20230915.2-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-customizations-git-20230915.2-1)
+ * [`holo-sudo` — `holo-main/steamos-customizations-git-20230915.2-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-customizations-git-20230915.2-1)
+ * [`holo-wireplumber` — `holo-main/steamos-customizations-git-20230915.2-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-customizations-git-20230915.2-1)
  * [`iwd` — `holo-main/iwd-2.7-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/iwd-2.7-1.1)
  * [`kdumpst` — `holo-main/kdumpst-1.0-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/kdumpst-1.0-1)
  * [`kmod` — `holo-main/kmod-30-1.4`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/kmod-30-1.4)
@@ -67,7 +67,7 @@ Valve packages
  * [`libva-mesa-driver` — `jupiter-main/mesa-23.1.3.170235.radeonsi_3.5.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/mesa-23.1.3.170235.radeonsi_3.5.1-1)
  * [`linux-firmware-neptune` — `jupiter-main/linux-firmware-neptune-jupiter.20230420-3`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/linux-firmware-neptune-jupiter.20230420-3)
  * [`linux-firmware-neptune-whence` — `jupiter-main/linux-firmware-neptune-jupiter.20230420-3`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/linux-firmware-neptune-jupiter.20230420-3)
- * [`linux-neptune-61` — `jupiter-main/linux-neptune-61-6.1.43.valve1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/linux-neptune-61-6.1.43.valve1-1)
+ * [`linux-neptune-61` — `jupiter-main/linux-neptune-61-6.1.52.valve2-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/linux-neptune-61-6.1.52.valve2-1)
  * [`mangohud` — `jupiter-main/mangohud-0.6.9.1.r22.g1d8f9f6-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/mangohud-0.6.9.1.r22.g1d8f9f6-1)
  * [`mesa` — `jupiter-main/mesa-23.1.3.170235.radeonsi_3.5.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/mesa-23.1.3.170235.radeonsi_3.5.1-1)
  * [`mesa-vdpau` — `jupiter-main/mesa-23.1.3.170235.radeonsi_3.5.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/mesa-23.1.3.170235.radeonsi_3.5.1-1)
