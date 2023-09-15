@@ -1,12 +1,13 @@
 # Maintainer: Andreas Radke <andyrtr@archlinux.org>
+# Maintainer: Robin Candau <antiz@archlinux.org>
 # Contributor: Tom Gundersen <teg@jklm.no>
 # Contributor: Andrea Scarpino <andrea@archlinux.org>
 # Contributor: Geoffroy Carrier <geoffroy@archlinux.org>
 
 pkgbase=bluez
 pkgname=('bluez' 'bluez-utils' 'bluez-libs' 'bluez-cups' 'bluez-hid2hci' 'bluez-plugins')
-pkgver=5.66
-pkgrel=1.3
+pkgver=5.69
+pkgrel=1.1
 url="http://www.bluez.org/"
 arch=('x86_64')
 license=('GPL2')
@@ -18,12 +19,12 @@ source=(https://www.kernel.org/pub/linux/bluetooth/${pkgname}-${pkgver}.tar.{xz,
         0002-valve-bluetooth-phy.patch     # SteamOS: Enable the phy
 )
 # see https://www.kernel.org/pub/linux/bluetooth/sha256sums.asc
-sha256sums=('39fea64b590c9492984a0c27a89fc203e1cdc74866086efb8f4698677ab2b574'
+sha256sums=('bc5a35ddc7c72d0d3999a0d7b2175c8b7d57ab670774f8b5b4900ff38a2627fc'
             'SKIP'
             '46c021be659c9a1c4e55afd04df0c059af1f3d98a96338236412e449bf7477b4'
             'd863bd52917e4f5819b23ae5e64a34c5b02a0cfdf3969290bfce0d26dfe137b4'
             'ebd6fe4a00f3bc81442885d43c12101a672fccdaf4379a1c4ebdc5e80282b18d'
-            '71a1b85a1d5a530cdb1b876388a8bba855fd36e310603fbd7e88479c19e7f51f')
+            '5d291d833c234a14b6162e3cb14eeff41505f5c3bb7c74528b65cb10597f39cb')
 validpgpkeys=('E932D120BC2AEC444E558F0106CA9F5D1DCF2659') # Marcel Holtmann <marcel@holtmann.org>
 
 build() {
@@ -59,7 +60,7 @@ prepare() {
 
 package_bluez() {
   pkgdesc="Daemons for the bluetooth protocol stack"
-  depends=('libical' 'dbus' 'glib2' 'alsa-lib' 'json-c')
+  depends=('libical' 'dbus' 'glib2' 'alsa-lib' 'json-c' 'glibc')
   backup=('etc/bluetooth/main.conf')
   conflicts=('obexd-client' 'obexd-server')
 
@@ -74,7 +75,7 @@ package_bluez() {
        install-man8
 
   # ship upstream main config file
-  install -dm755 "${pkgdir}"/etc/bluetooth
+  install -dm555 "${pkgdir}"/etc/bluetooth
   install -Dm644 "${srcdir}"/"${pkgbase}"-${pkgver}/src/main.conf "${pkgdir}"/etc/bluetooth/main.conf
 
   # add basic documention
@@ -100,8 +101,9 @@ package_bluez() {
 
 package_bluez-utils() {
   pkgdesc="Development and debugging utilities for the bluetooth protocol stack"
-  depends=('dbus' 'systemd' 'glib2')
-  optdepends=('ell: for btpclient')
+  depends=('dbus' 'systemd' 'systemd-libs' 'glib2' 'glibc' 'readline')
+  optdepends=('ell: for btpclient'
+              'json-c: for mesh-cfgclient')
   backup=('etc/bluetooth/mesh-main.conf')
   conflicts=('bluez-hcidump')
   provides=('bluez-hcidump')
@@ -120,14 +122,14 @@ package_bluez-utils() {
   done
   
   # ship upstream mesh config file
-  install -dm755 "${pkgdir}"/etc/bluetooth
+  install -dm555 "${pkgdir}"/etc/bluetooth
   install -Dm644 "${srcdir}"/"${pkgbase}"-${pkgver}/mesh/mesh-main.conf "${pkgdir}"/etc/bluetooth/mesh-main.conf
-  
+ 
   # libbluetooth.so* are part of libLTLIBRARIES and binPROGRAMS targets
   #make DESTDIR=${pkgdir} uninstall-libLTLIBRARIES
   #rmdir ${pkgdir}/usr/lib
   rm -rf "${pkgdir}"/usr/lib
-  
+
   # move the hid2hci man page out
   mv "${pkgdir}"/usr/share/man/man1/hid2hci.1 "${srcdir}"/
 }
@@ -147,7 +149,7 @@ package_bluez-libs() {
 
 package_bluez-cups() {
   pkgdesc="CUPS printer backend for Bluetooth printers"
-  depends=('cups')
+  depends=('cups' 'glib2' 'glibc' 'dbus')
 
   cd "${pkgbase}"-${pkgver}
   make DESTDIR="${pkgdir}" install-cupsPROGRAMS
@@ -158,7 +160,7 @@ package_bluez-cups() {
 
 package_bluez-hid2hci() {
   pkgdesc="Put HID proxying bluetooth HCI's into HCI mode"
-  depends=('systemd')
+  depends=('systemd' 'systemd-libs' 'glibc')
 
   cd "${pkgbase}"-${pkgver}
   make DESTDIR=${pkgdir} \
@@ -167,14 +169,14 @@ package_bluez-hid2hci() {
   
   install -dm755 "${pkgdir}"/usr/share/man/man1
   mv "${srcdir}"/hid2hci.1 "${pkgdir}"/usr/share/man/man1/hid2hci.1
- 
+
   # cleanup  - these libs go into bluez-libs
   rm "${pkgdir}"/usr/lib/libbluetooth.so*
 }
 
 package_bluez-plugins() {
   pkgdesc="bluez plugins (PS3 Sixaxis controller)"
-  depends=('systemd')
+  depends=('systemd' 'systemd-libs' 'glibc')
 
   cd "${pkgbase}"-${pkgver}
   make DESTDIR="${pkgdir}" \
