@@ -2,7 +2,7 @@
 # Contributor: Emil Velikov <emil.l.velikov@gmail.com>
 
 pkgname=('mangohud' 'lib32-mangohud')
-pkgver=0.6.9.1.r22.g1d8f9f6
+pkgver=0.7.0.rc1.r4.g1a0abc6
 pkgrel=1
 pkgdesc="Vulkan and OpenGL overlay to display performance information"
 url="https://github.com/flightlessmango/MangoHud"
@@ -24,7 +24,7 @@ makedepends=(
 )
 
 source=(
-  "mangohud"::"git+https://github.com/flightlessmango/MangoHud.git#commit=1d8f9f660135f460f4109e98d8725a75c908246a"
+  "mangohud"::"git+https://github.com/flightlessmango/MangoHud.git#commit=1a0abc65dfb44853813e6e437bd71747bac089e5"
   "imgui-v1.81.tar.gz::https://github.com/ocornut/imgui/archive/v1.81.tar.gz"
   "imgui-1.81-1-wrap.zip::https://wrapdb.mesonbuild.com/v1/projects/imgui/1.81/1/get_zip"
   "spdlog-1.8.5.tar.gz::https://github.com/gabime/spdlog/archive/v1.8.5.tar.gz"
