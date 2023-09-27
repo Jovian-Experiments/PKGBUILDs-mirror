@@ -1,15 +1,15 @@
 # Maintainer: Jo Bates <jo@valvesoftware.com>
 
 pkgname=vpower
-pkgver=1.4.0
+pkgver=1.4.1
 pkgrel=1
 pkgdesc="Service that calculates battery metrics and handles critical battery scenarios"
 url=https://gitlab.steamos.cloud/jupiter/vpower
 arch=(x86_64)
 license=(MIT)
 depends=(gcc-libs lm_sensors systemd-sysvcompat)
-makedepends=(rust git)
-source=("git+ssh://git@gitlab.internal.steamos.cloud/jupiter/vpower.git#tag=$pkgver"
+makedepends=(rust git openssh)
+source=("git+ssh://git@gitlab.steamos.cloud/jupiter/vpower.git#tag=$pkgver"
         crate-libc-0.2.117.tar.gz::https://crates.io/api/v1/crates/libc/0.2.117/download
         crate-proc-macro2-1.0.36.tar.gz::https://crates.io/api/v1/crates/proc-macro2/1.0.36/download
         crate-quote-1.0.15.tar.gz::https://crates.io/api/v1/crates/quote/1.0.15/download
