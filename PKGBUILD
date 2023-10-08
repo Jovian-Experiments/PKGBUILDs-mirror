@@ -1,9 +1,9 @@
 # Maintainer: Pierre-Loup A. Griffais <pgriffais@valvesoftware.com>
 
 pkgname=gamescope
-_srctag=3.12.5
+_srctag=3.12.6
 pkgver=${_srctag//-/.}
-pkgrel=1.3
+pkgrel=1
 pkgdesc="gaming shell based on Xwayland, powered by Vulkan and DRM"
 arch=(x86_64)
 url="https://github.com/ValveSoftware/gamescope"
@@ -21,6 +21,7 @@ source=("gamescope-session"
         "git+https://github.com/ValveSoftware/gamescope.git#tag=$_srctag"
         "git+https://gitlab.freedesktop.org/wlroots/wlroots.git"
         "git+https://gitlab.freedesktop.org/emersion/libliftoff.git"
+	"git+https://github.com/Joshua-Ashton/GamescopeShaders.git#tag=v0.1"
         # FIXME Upstream gamescope is just selecting master branch at build time, so we are arbitrarily snapshotting a
         #       revision when bumping the version here such that the build is reproducible.
         "git+https://github.com/nothings/stb.git#commit=af1a5bc352164740c1cc1354942b1c6b72eacb8a")
@@ -35,6 +36,7 @@ sha256sums=('a106cc4f5f31cd799debef0be12dbef65a06e5a25376f616d9672e641a9e39b6'
             'SKIP'
             'SKIP'
             'SKIP'
+	    'SKIP'
             'SKIP')
 
 install=gamescope.install
@@ -78,6 +80,10 @@ package() {
 
         # portals
 	install -D -m 644 gamescope-portals.conf "$pkgdir"/usr/share/xdg-desktop-portal/gamescope-portals.conf
+
+	install -d "$pkgdir"/usr/share/gamescope/reshade
+	cp -r "$srcdir"/GamescopeShaders/* "$pkgdir"/usr/share/gamescope/reshade/
+	chmod -R 655 "$pkgdir"/usr/share/gamescope
 
 	cd "$pkgname/build"
 
