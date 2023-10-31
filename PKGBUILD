@@ -1,7 +1,7 @@
 # Maintainer: Your Name <youremail@domain.com>
 pkgname=foxnetstatsd
 pkgver=1.3
-pkgrel=2
+pkgrel=3
 pkgdesc="Foxnet stats daemon"
 arch=(any)
 depends=(python3 python-psutil python-aiohttp nvme-cli)
@@ -9,7 +9,7 @@ makedepends=(git openssh)
 source=(wheel-foxnetstatsd
         foxnetstatsd.service
         git+ssh://git@gitlab.steamos.cloud/jupiter/foxnetstatsd.git#tag="$pkgver")
-sha256sums=('d3195621e665c490f77694fe23ce2448c190c436b4521593d0aee7c54d7f9299'
+sha256sums=('8faa8a10d832b483886ce0d59e2d513f3288fe96bdd56e1599004b83a4da08dc'
             '34d9355de1ce9744f1b6d8cc31cce24447d895b1b0de901d3845e3c696a2cc55'
             'SKIP')
 
