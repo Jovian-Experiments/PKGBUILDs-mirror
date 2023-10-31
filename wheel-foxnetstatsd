@@ -1,0 +1,1 @@
+%wheel ALL=(root) NOPASSWD: /usr/bin/nvme smart-log /dev/nvme0 -o json
