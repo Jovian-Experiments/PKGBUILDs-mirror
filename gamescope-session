@@ -286,11 +286,15 @@ fi
 
 if [[ -x $HOME/devkit-game/devkit-steam ]]; then
 	steam_notif_daemon &
-	mangoapp &
+	(while true; do
+		mangoapp
+	done) &
 	"$HOME"/devkit-game/devkit-steam "${steamargs[@]}"
 else
 	steam_notif_daemon &
-	mangoapp &
+	(while true; do
+		mangoapp
+	done) &
 	steam "${steamargs[@]}"
 fi
 
