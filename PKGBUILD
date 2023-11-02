@@ -3,7 +3,7 @@
 pkgname=gamescope
 _srctag=3.12.6
 pkgver=${_srctag//-/.}
-pkgrel=1.1
+pkgrel=1.2
 pkgdesc="gaming shell based on Xwayland, powered by Vulkan and DRM"
 arch=(x86_64)
 url="https://github.com/ValveSoftware/gamescope"
@@ -25,7 +25,7 @@ source=("gamescope-session"
         # FIXME Upstream gamescope is just selecting master branch at build time, so we are arbitrarily snapshotting a
         #       revision when bumping the version here such that the build is reproducible.
         "git+https://github.com/nothings/stb.git#commit=af1a5bc352164740c1cc1354942b1c6b72eacb8a")
-sha256sums=('1a3fe268600eb24b2067087d01dd0c17041f068e725a284a04f8d5399133b46e'
+sha256sums=('dceb2dbe502f3da36a48c7c722c0fc58eb9cc44d41c045f3115984bf461ca0b9'
             'fe515fce8f151a6c03a89e043044bfddf8cd6ee89027d2cfbcf6f6706c78ca76'
             'e37ba6107f3a84cf47c2799b537a88583e6cb8951167a9c6a48fa1d85996206b'
             '281d892e32c2c31e9df94c5e712a1fde46c0a2f3214aa2df5b7253c6db47977c'
@@ -36,7 +36,7 @@ sha256sums=('1a3fe268600eb24b2067087d01dd0c17041f068e725a284a04f8d5399133b46e'
             'SKIP'
             'SKIP'
             'SKIP'
-	    'SKIP'
+            'SKIP'
             'SKIP')
 
 install=gamescope.install
