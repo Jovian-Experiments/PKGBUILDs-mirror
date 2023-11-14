@@ -1,38 +1,15 @@
-From d1ef0be0d84b909a88dccf28af52d5a1c0e49992 Mon Sep 17 00:00:00 2001
-From: Vicki Pfau <vi@endrift.com>
-Date: Fri, 8 Sep 2023 16:53:02 -0700
-Subject: [PATCH 2/2] Experimental patch to enable alternate Bluetooth
- connection modes
-
-This should improve Bluetooth connectivity, especially with multiple controllers and while docked.
-
-Testing:
-sudo btmgmt
-[mgmt]# phy
-Verify that LE2MRX, LE2MTX, LECODEDRX, LECODEDTX are in the selected phys list.
-Verify that multiple controllers can connect and work well.
-
-Co-Authored-By: Rachel Blackman <rachel.blackman@synapse.com>
----
- src/adapter.c | 46 ++++++++++++++++++++++++++++
- src/btd.h     |  2 ++
- src/main.c    | 85 +++++++++++++++++++++++++++++++++++++++++++++++++++
- src/main.conf |  5 +++
- 4 files changed, 138 insertions(+)
-
-diff --git a/src/adapter.c b/src/adapter.c
-index 5ebfc4752..bc1e1d418 100644
---- a/src/adapter.c
-+++ b/src/adapter.c
-@@ -86,6 +86,18 @@
- #define DISTANCE_VAL_INVALID	0x7FFF
- #define PATHLOSS_MAX		137
+diff --color -ur bluez-5.66/src/adapter.c bluez-5.66-phy/src/adapter.c
+--- bluez-5.66/src/adapter.c	2022-11-10 12:24:03
++++ bluez-5.66-phy/src/adapter.c	2023-07-31 14:25:29
+@@ -838,6 +838,50 @@
+ 	return false;
+ }
  
 +#define LE_PHY_1M 0x01
 +#define LE_PHY_2M 0x02
 +#define LE_PHY_CODED 0x04
 +
-+#define PHYVAL_REQUIRED 0x07ff
++#define PHYVAL_REQUIRED 0x07ff 
 +#define PHYVAL_1M_TX (1<<9)
 +#define PHYVAL_1M_RX (1<<10)
 +#define PHYVAL_2M_TX (1<<11)
@@ -40,25 +17,20 @@ index 5ebfc4752..bc1e1d418 100644
 +#define PHYVAL_CODED_TX (1<<13)
 +#define PHYVAL_CODED_RX (1<<14)
 +
- /*
-  * These are known security keys that have been compromised.
-  * If this grows or there are needs to be platform specific, it is
-@@ -844,6 +856,36 @@ static bool set_discoverable(struct btd_adapter *adapter, uint8_t mode,
- 	return false;
- }
- 
++
++
 +static void set_phy_support_complete(uint8_t status, uint16_t length,
 +					const void *param, void *user_data)
 +{
 +	if (status != 0) {
 +		struct btd_adapter *adapter = (struct btd_adapter *)user_data;
 +
-+		btd_error(adapter->dev_id, "PHY setting rejected for %u: %s",
++		btd_error(adapter->dev_id, "PHY setting rejected for %u: %s", 
 +								adapter->dev_id, mgmt_errstr(status));
 +	}
 +}
 +
-+static bool set_phy_support(struct btd_adapter *adapter, uint32_t phy_mask)
++static bool set_phy_support(struct btd_adapter *adapter, uint32_t phy_mask) 
 +{
 +	struct mgmt_cp_set_phy_confguration cp;
 +
@@ -68,7 +40,7 @@ index 5ebfc4752..bc1e1d418 100644
 +	if (mgmt_send(adapter->mgmt, MGMT_OP_SET_PHY_CONFIGURATION,
 +				adapter->dev_id, sizeof(cp), &cp,
 +				set_phy_support_complete, (void*)adapter, NULL) > 0)
-+		return true;
++		return true;	
 +
 +	btd_error(adapter->dev_id, "Failed to set PHY for index %u",
 +							adapter->dev_id);
@@ -80,35 +52,33 @@ index 5ebfc4752..bc1e1d418 100644
  static bool pairable_timeout_handler(gpointer user_data)
  {
  	struct btd_adapter *adapter = user_data;
-@@ -10387,6 +10429,10 @@ static void read_info_complete(uint8_t status, uint16_t length,
+@@ -10300,6 +10344,10 @@
+ 
  	if (btd_adapter_get_powered(adapter))
  		adapter_start(adapter);
- 
++
 +	// Some adapters do not want to accept this before being started/powered.
 +	if (btd_opts.phys > 0)
 +		set_phy_support(adapter, btd_opts.phys);
-+
+ 
  	return;
  
- failed:
-diff --git a/src/btd.h b/src/btd.h
-index b7e7ebd61..2b84f7a51 100644
---- a/src/btd.h
-+++ b/src/btd.h
-@@ -151,6 +151,8 @@ struct btd_opts {
- 	struct btd_advmon_opts	advmon;
+diff --color -ur bluez-5.66/src/btd.h bluez-5.66-phy/src/btd.h
+--- bluez-5.66/src/btd.h	2022-11-10 12:24:03
++++ bluez-5.66-phy/src/btd.h	2023-07-31 14:23:23
+@@ -135,6 +135,8 @@
+ 	enum jw_repairing_t jw_repairing;
  
- 	struct btd_csis csis;
+ 	struct btd_advmon_opts	advmon;
 +
 +	uint32_t	phys;
  };
  
  extern struct btd_opts btd_opts;
-diff --git a/src/main.c b/src/main.c
-index 2134fcf75..700c83c78 100644
---- a/src/main.c
-+++ b/src/main.c
-@@ -127,6 +127,7 @@ static const char *le_options[] = {
+diff --color -ur bluez-5.66/src/main.c bluez-5.66-phy/src/main.c
+--- bluez-5.66/src/main.c	2022-07-24 14:02:15
++++ bluez-5.66-phy/src/main.c	2023-07-31 14:28:52
+@@ -125,6 +125,7 @@
  	"AdvMonAllowlistScanDuration",
  	"AdvMonNoFilterScanDuration",
  	"EnableAdvMonInterleaveScan",
@@ -116,7 +86,7 @@ index 2134fcf75..700c83c78 100644
  	NULL
  };
  
-@@ -180,10 +181,32 @@ static const struct group_table {
+@@ -170,7 +171,76 @@
  	{ }
  };
  
@@ -137,22 +107,11 @@ index 2134fcf75..700c83c78 100644
 +	"LECODEDTX",
 +	"LECODEDRX",
 +};
-+
- #ifndef MIN
- #define MIN(x, y) ((x) < (y) ? (x) : (y))
- #endif
  
 +#ifndef NELEM
 +#define NELEM(x) (sizeof(x) / sizeof((x)[0]))
 +#endif
 +
- static int8_t check_sirk_alpha_numeric(char *str)
- {
- 	int8_t val = 0;
-@@ -224,6 +247,54 @@ static size_t hex2bin(const char *hexstr, uint8_t *buf, size_t buflen)
- 	return len;
- }
- 
 +static const char *conf_phys2str(uint32_t phys)
 +{
 +	static char str[256];
@@ -204,13 +163,11 @@ index 2134fcf75..700c83c78 100644
  GKeyFile *btd_get_main_conf(void)
  {
  	return main_conf;
-@@ -674,6 +745,20 @@ static void parse_le_config(GKeyFile *config)
- 		return;
- 
- 	parse_mode_config(config, "LE", params, ARRAY_SIZE(params));
+@@ -880,6 +950,19 @@
+ 		DBG("RemoteNameRequestRetryDelay=%d", val);
+ 		btd_opts.name_request_retry_delay = val;
+ 	}
 +
-+	char **strlist;
-+	GError *err = NULL;
 +	strlist = g_key_file_get_string_list(config, "LE",
 +						"SupportedPHYs",
 +						NULL, &err);
@@ -222,14 +179,14 @@ index 2134fcf75..700c83c78 100644
 +		btd_parse_phy_list(strlist);
 +		g_strfreev(strlist);
 +	}
- }
++
  
- static bool match_experimental(const void *data, const void *match_data)
-diff --git a/src/main.conf b/src/main.conf
-index cb9b241df..c086a17d0 100644
---- a/src/main.conf
-+++ b/src/main.conf
-@@ -231,6 +231,11 @@ MultiProfile = multiple
+ 	str = g_key_file_get_string(config, "GATT", "Cache", &err);
+ 	if (err) {
+diff --color -ur bluez-5.66/src/main.conf bluez-5.66-phy/src/main.conf
+--- bluez-5.66/src/main.conf	2022-07-24 14:02:15
++++ bluez-5.66-phy/src/main.conf	2023-07-31 14:32:09
+@@ -220,6 +220,11 @@
  # Defaults to 1
  #EnableAdvMonInterleaveScan=
  
@@ -241,6 +198,3 @@ index cb9b241df..c086a17d0 100644
  [GATT]
  # GATT attribute cache.
  # Possible values:
--- 
-2.41.0
-
