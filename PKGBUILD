@@ -6,14 +6,15 @@
 
 _basename=steam
 pkgname=steam-jupiter-oobe
-pkgver=1.0.0.74
-# based on upstream steam 1.0.0.74-2, based on steam-jupiter-stable rel 2.19.  Really overloading pkgrel's meaning here.
-pkgrel=2.1903
+pkgver=1.0.0.78
+pkgrel=1.2
 pkgdesc="Valve's digital software delivery system - Jupiter bootstrapped packaging"
 url='https://steampowered.com/'
 arch=('x86_64')
 license=('custom')
+# libxcrypt-compat, lib32-libxcrypt-compat: https://bugs.archlinux.org/task/75443
 depends=('bash' 'desktop-file-utils' 'diffutils' 'hicolor-icon-theme' 'curl' 'dbus'
+         'libxcrypt-compat'
          'freetype2' 'gdk-pixbuf2' 'ttf-font' 'zenity' 'lsb-release' 'nss' 'usbutils'
          'xorg-xrandr' 'vulkan-driver' 'vulkan-icd-loader' 'lsof' 'python')
 # lib32-pipewire: https://bugs.archlinux.org/task/75155
@@ -21,6 +22,7 @@ depends=('bash' 'desktop-file-utils' 'diffutils' 'hicolor-icon-theme' 'curl' 'db
 # lib32-systemd, lib32-libxinerama: https://bugs.archlinux.org/task/75156
 # lib32-libnm, lib32-libva:  https://bugs.archlinux.org/task/75157
 depends_x86_64=('lib32-libgl' 'lib32-gcc-libs' 'lib32-libx11' 'lib32-libxss'
+                'lib32-libxcrypt-compat'
                 'lib32-alsa-plugins' 'lib32-libgpg-error' 'lib32-fontconfig'
                 'lib32-nss' 'lib32-vulkan-driver' 'lib32-vulkan-icd-loader'
                 'lib32-pipewire' 'lib32-systemd' 'lib32-libxinerama' 'lib32-libva')
@@ -32,22 +34,22 @@ conflicts=('steam')
 optdepends=('lib32-libnm: integration with networkmanager')
 
 # Jupiter: Including fully bootstrapped steam image on expected branch
-_fat_bootstrap=steam_jupiter_goldmaster_bootstrapped_20220817.tar.xz
+_fat_bootstrap=steam_jupiter_goldmaster_bootstrapped_20230911.tar.xz
 noextract=("$_fat_bootstrap")
 source=(https://repo.steampowered.com/${_basename}/pool/${_basename}/s/${_basename}/${_basename}_${pkgver}{.tar.gz,.dsc}
-        http://latest-pacman.internal.steamos.cloud/misc/steam-snapshots/"$_fat_bootstrap"
+        http://latest-pacman.internal.steamos.cloud/misc-galileo/steam-snapshots/"$_fat_bootstrap"
         70-steam-jupiter-input.rules
         steam-jupiter.sh
         steam-runtime.sh)
-sha512sums=('2a08d9bb6e17a481c577b6aad7d53b51c7d9f6638aaccffc6b9f750dca4a1f9d12c02fd1446c174e979605ef29bdc10fc8249fd97fe79d62934efe26f4ac7369'
-            '754161985b7a2dc5b10c06ec88f6a4eeef9b4dc0daddeb33c27d01a948223b3b2b17da6d14144f772f7b3156665b10543ad9a860b471c72e2d6bd543f143d964'
-            'f3af76daec81c5f4d876a877e9e03728cafb465e5cf65abc3bc73ac16a81ee558261a942368201ba0ee8f5af10d5e68683b85462029524414bf561faf4f5d0e6'
+sha512sums=('3cebb97bff58d8b6a9aa7e7127873a2290056db107c3a02a2c8e030b9ce3ef9ceb94c2f81eb7fb423b9afce50244646bbc0707d515217d1c5455ba8aa05562ca'
+            'de653b037717dc457aacf8f683bde7ac4542ced90d53349a8140bcda8d0f990a914d56655b73013f465e1fd41ad10a5330ef764087740b6dad55cd7ca5a41cbf'
+            '07e68b36d08732d2782eb77e85ce19e6ab3af83d683e345c2d78100bef5e1ab3814e8bb1254d788801b63985ec9c4625ba73880ff34114a7bbb3f72b158d05cb'
             '85c66db5619fc70553fb4daa4bb9d7784f40586c771853d91147de99c48c58ac5727f2bae4e165a8fa898e9bcf4fb3bcce6c1409cc8edcf85a3965572456990d'
             'da89061db6d4bf61b395339442483570c0c9c5889d609d9d84aed07d8e7995621929e3c82450059304a770f6429744dce68b0d939dc4ebe5b6b1c5d4eed33b62'
             '5e75c019e9fe8c67d686c4e3343dac1180a69a4bdb7d39b333415c63201eef9b98da5619dbf6fd8daa6884e65bc7f8afc9e52778682425e5a75987d527eae6f0')
-b2sums=('dbe02066d08530378ff922daf8733ad373c0eae9be94479aba94077a0f5c093afc39a95c6770494655af1c33895c981219418f8d4024c391a337d16ec32253c1'
-        '3e82229128b10edf8d11a2130490e8f75b2ec91ccaf7e103d7c734b123791285c805bfb303aa374e04087ffdb501510eab9b2a02953e1ec78c656677786eeff9'
-        '4db8d8a97969f40e2b3501839f184607d002d8484a84224bb962313ff20851db7bf65bab0954650e6808a5b48591201881755f8a71f9785753875610411c1c11'
+b2sums=('f84598cc8ff4f38057c21271288d8c9b6106da3e5256d14191079272009b493e9ec51da80483e8767706ad4670b59e9f727285ea3c4c2a340f3230b9938492ea'
+        '6fbc9f8128fb98cf5bc764a28da490241f329d276c47712cf9ac99afab2457e5b851c2e078f50f85e400a350675a38defb1f87a7b858a80efd017629659abf7b'
+        'cce8cf7a32b4b10e6cbab709cc5960b1df1848448699ae83bbc41f79c31e93ef049352b63194c2d903a4ffd3a77226e9399830596a39d5f27a4baa30a7cd4435'
         '8ae0bfdf6bc62460a64d84acb3dbd5d95257749f2560938eefd68a58727f310c8450ce756ed938ebe46a3074860d1abdd744689caf9bde01c89ae02f8c63179e'
         'bc9998406c08107e5a1f3d8cb3f2bd8f568c86af0841408244bc3b28c5a6cb78b6ac9aa6fb6ea05decb7894bb68d0c28f10b438a2a7bc58fd57780c40f4b22f1'
         'c6bac99336b7c30fec7cdbaf9e949555c687dd9dff50bcae136134d6314f4b841f5fc66ddb2caac1b003690b926fd4afbdc11da143b4674db4b75f27709fdd23')
