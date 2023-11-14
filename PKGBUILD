@@ -6,7 +6,7 @@
 pkgbase=bluez
 pkgname=('bluez' 'bluez-utils' 'bluez-libs' 'bluez-cups' 'bluez-hid2hci' 'bluez-plugins')
 pkgver=5.66
-pkgrel=1.3
+pkgrel=3
 url="http://www.bluez.org/"
 arch=('x86_64')
 license=('GPL2')
@@ -22,7 +22,7 @@ sha256sums=('39fea64b590c9492984a0c27a89fc203e1cdc74866086efb8f4698677ab2b574'
             'SKIP'
             '46c021be659c9a1c4e55afd04df0c059af1f3d98a96338236412e449bf7477b4'
             'd863bd52917e4f5819b23ae5e64a34c5b02a0cfdf3969290bfce0d26dfe137b4'
-            'ebd6fe4a00f3bc81442885d43c12101a672fccdaf4379a1c4ebdc5e80282b18d'
+            '54f7fc21fe0b7caf8018e12c8ca368bb308aeb757acf8b6038a6cbecad735ac3'
             '71a1b85a1d5a530cdb1b876388a8bba855fd36e310603fbd7e88479c19e7f51f')
 validpgpkeys=('E932D120BC2AEC444E558F0106CA9F5D1DCF2659') # Marcel Holtmann <marcel@holtmann.org>
 
