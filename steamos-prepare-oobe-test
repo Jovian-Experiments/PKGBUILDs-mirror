@@ -14,9 +14,7 @@ set -euo pipefail
 #   reboot
 
 # The URL to query to determine what OOBE image to grab
-OOBE_IMAGE_VER_URL="https://steamdeck-images.steamos.cloud/steamdeck/latest-oobe-test-image.txt"
-# Where to get it, since we'll ask rauc directly.  Assumes two replacements currently.
-OOBE_IMAGE_URL_PAT="https://steamdeck-images.steamos.cloud/steamdeck/%s/steamdeck-%s-snapshot.raucb"
+OOBE_IMAGE_VER_URL="https://galileo-images.steamos.cloud/galileo/latest-oobe-test-image.txt"
 
 _log() { printf >&2 "[$1] %s\n" "${*:2}"; }
 log() { _log - "$*"; }
@@ -39,23 +37,9 @@ fi
 
 # Query version
 log "Querying available OOBE test image version"
-ver=$(cmd curl -L "$OOBE_IMAGE_VER_URL" | grep -v '^#')
-
-# Make sure it's sane-looking
-if ! [[ $ver =~ ^[0-9]+\.[0-9]+$ ]]; then
-  die "Failed to query a valid OOBE test image version from \"$OOBE_IMAGE_VER_URL\" (got: \"$ver\")"
-fi
-
-# Format url
-url="$(printf "$OOBE_IMAGE_URL_PAT" "$ver" "$ver")"
+url=$(cmd curl --netrc -L "$OOBE_IMAGE_VER_URL" | grep -v '^#')
 
 log "Target OOBE image: $url"
-
-# We cannot install the same version on both slots. If we are somehow in this OOBE image, refuse.
-osver=$(source /etc/os-release && printf "%s" "$BUILD_ID")
-
-[[ -n $osver ]] || die "Couldn't determine OS version"
-[[ $osver != "$ver" ]] || die "Booted OS is already the configured OOBE test image"
 
 ## Do the install
 log "Installing '$url' to other slot"
@@ -67,7 +51,7 @@ if [[ -n $arg_clean ]]; then
   cmd steamos-chroot --partset other -- rm -rf /var/lib/overlays/etc/upper/NetworkManager/ /var/lib/iwd/
 fi
 
-log "Other slot has been updated to version $ver and ready to be used as a OOBE image test"
+log "Other slot has been updated to $url and ready to be used as a OOBE image test"
 log
 log "  Run \`reboot\` to boot into the OOBE, which will perform a day one update."
 log
