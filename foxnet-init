@@ -21,7 +21,6 @@ set -eux
 die() { echo >&2 "!! $*"; exit 1; }
 
 LOCAL_CONF=/esp/foxnet.conf
-FOXNET=foxnet@foxnet-control.steamos.cloud
 
 # Check explicit inhibit file and bail
 BOOTSTRAP_INHIBIT=/home/.steamos/inhibit-foxnet
@@ -40,11 +39,6 @@ fi
 
 # For foxnet-enabled devices, start ssh
 systemctl start sshd || true
-
-# Bake in initial test wifi for these units
-if ! nmcli connection show VC &>/dev/null; then
-  nmcli connection add type wifi con-name VC ssid VC ifname "" -- +wifi-sec.key-mgmt wpa-psk +wifi-sec.psk thecakeisalie
-fi
 
 # Create the foxnet wireguard connection
 if ! nmcli connection show foxnet &>/dev/null; then
@@ -66,7 +60,7 @@ fi
 hostname="$(sed -r 's/^# *Name: (.*)$/\1/;t;d' "$LOCAL_CONF")"
 
 # Set hostname if it is a vanilla image hostname
-if [[ $(cat /etc/hostname) = steamos ]]; then
+if [[ $(cat /etc/hostname) = steamdeck ]]; then
   # If this unit has a bad hostname stop sending bogus stats.
   systemctl disable --now foxnetstatsd || true
   if [[ -n $hostname ]]; then
@@ -78,13 +72,9 @@ if [[ $(cat /etc/hostname) = steamos ]]; then
   fi
 fi
 
-# Temporary work around for steamos-session-select
-# https://gitlab.steamos.cloud/jupiter/tasks/-/issues/83
-[[ -e /usr/bin/steamos-session-select ]] || ln -sv ../local/bin/steamos-session-select /usr/bin/steamos-session-select
-
 # Start the stats daemon only after we have done initial setup once
 # (assuming we found a hostname, don't start as 'steamos')
-[[ $(cat /etc/hostname) = steamos ]] || systemctl enable --now foxnetstatsd
+[[ $(cat /etc/hostname) = steamdeck ]] || systemctl enable --now foxnetstatsd
 
 # Try to accept a foxnet command
 while true; do
@@ -99,4 +89,3 @@ while true; do
   echo "Found no command, retrying in 30 seconds"
   sleep 30
 done
-
