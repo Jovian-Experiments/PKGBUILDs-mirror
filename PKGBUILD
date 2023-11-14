@@ -1,7 +1,7 @@
-# Maintainer: Your Name <youremail@domain.com>
+# Maintainer: John Schoenick <johns@valvesoftware.com>
 pkgname=foxnetstatsd
-pkgver=1.3
-pkgrel=3
+pkgver=1.4
+pkgrel=1
 pkgdesc="Foxnet stats daemon"
 arch=(any)
 depends=(python3 python-psutil python-aiohttp nvme-cli)
