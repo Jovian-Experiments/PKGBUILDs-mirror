@@ -4,8 +4,8 @@
 # Everything still in here should be either removed or re-homed to a proper package.
 
 pkgname=jupiter-legacy-support
-pkgver=1.141
-pkgrel=1
+pkgver=1.144
+pkgrel=2
 pkgdesc="Legacy jupiter-specific support files that haven't been split to their own package or removed."
 arch=(any)
 depends=(python3 python-psutil python-aiohttp nvme-cli)
@@ -24,7 +24,7 @@ sha256sums=('a1a2c6cb5ebdba68b79ab90649f894e1136f72af9e4daacbcb71d134383bd797'
             '582cae3c9f9d4639f027defafe6fa33bda0a3a4d441290d926ad85a2be0f7206'
             '608a3132b952022282ff1219d61acc627c58500e12033cc223c2327d6ee89c3c'
             'a7b8b21e285dac1f255546d1acc46d4423a1fa0e964153a96118b884001d0648'
-            '1875fcfe626ca442249e338eef1d6caa8a80d63b3fded0a8c9fca5bc7d148011'
+            'c905bdd26509ff3b8114c4265c73f6a37301de8f895794c317156adaae3e2adb'
             '3f3491c7ccf72b62094379495c73e6fdecd182d5aa30072b3b2407e331b96806'
             '27739fb50e5c2dd50e3373b22b5ceabb6eb2f6f34b723794cf9a2f911a483f65'
             '942fbb9436835bdb3a87aa8d73b3461f4cee0bc2f58bfa308eeb1be6b52ccb39'
