@@ -79,7 +79,7 @@ Differential Revision: https://reviews.llvm.org/D122768
  create mode 100644 clang/test/SemaCXX/decomposition-openmp.cpp
 
 diff --git a/clang-tools-extra/clang-tidy/modernize/LoopConvertUtils.cpp b/clang-tools-extra/clang-tidy/modernize/LoopConvertUtils.cpp
-index 5d4f3b8249249..fc3dfbdeac785 100644
+index 5d4f3b824924997..fc3dfbdeac785f0 100644
 --- a/clang-tools-extra/clang-tidy/modernize/LoopConvertUtils.cpp
 +++ b/clang-tools-extra/clang-tidy/modernize/LoopConvertUtils.cpp
 @@ -785,8 +785,8 @@ bool ForLoopIndexUseVisitor::TraverseLambdaCapture(LambdaExpr *LE,
@@ -94,7 +94,7 @@ index 5d4f3b8249249..fc3dfbdeac785 100644
        // alias (if any) won't work, because it is only used in case of having
        // exactly one usage.
 diff --git a/clang/docs/ReleaseNotes.rst b/clang/docs/ReleaseNotes.rst
-index 7d90b08814baa..878effe08294c 100644
+index 7d90b08814baa3b..878effe08294cb3 100644
 --- a/clang/docs/ReleaseNotes.rst
 +++ b/clang/docs/ReleaseNotes.rst
 @@ -108,6 +108,16 @@ C++ Language Changes in Clang
@@ -115,7 +115,7 @@ index 7d90b08814baa..878effe08294c 100644
  ^^^^^^^^^^^^^^^^^^^^^
  
 diff --git a/clang/include/clang/AST/Decl.h b/clang/include/clang/AST/Decl.h
-index 6441cd339d917..1b414b5c0c194 100644
+index 6441cd339d917a3..1b414b5c0c194a7 100644
 --- a/clang/include/clang/AST/Decl.h
 +++ b/clang/include/clang/AST/Decl.h
 @@ -689,6 +689,11 @@ class ValueDecl : public NamedDecl {
@@ -131,7 +131,7 @@ index 6441cd339d917..1b414b5c0c194 100644
    static bool classof(const Decl *D) { return classofKind(D->getKind()); }
    static bool classofKind(Kind K) { return K >= firstValue && K <= lastValue; }
 diff --git a/clang/include/clang/AST/DeclCXX.h b/clang/include/clang/AST/DeclCXX.h
-index 9e4fc3fc1254f..c97301957cb60 100644
+index 9e4fc3fc1254fd8..c97301957cb6093 100644
 --- a/clang/include/clang/AST/DeclCXX.h
 +++ b/clang/include/clang/AST/DeclCXX.h
 @@ -1057,8 +1057,9 @@ class CXXRecordDecl : public RecordDecl {
@@ -147,7 +147,7 @@ index 9e4fc3fc1254f..c97301957cb60 100644
    using capture_const_iterator = const LambdaCapture *;
    using capture_const_range = llvm::iterator_range<capture_const_iterator>;
 diff --git a/clang/include/clang/AST/LambdaCapture.h b/clang/include/clang/AST/LambdaCapture.h
-index 7ad1e2361e427..62e7716ed3699 100644
+index 7ad1e2361e42732..62e7716ed3699d2 100644
 --- a/clang/include/clang/AST/LambdaCapture.h
 +++ b/clang/include/clang/AST/LambdaCapture.h
 @@ -71,7 +71,7 @@ class LambdaCapture {
@@ -181,7 +181,7 @@ index 7ad1e2361e427..62e7716ed3699 100644
  
    /// Determine whether this was an implicit capture (not
 diff --git a/clang/include/clang/AST/Stmt.h b/clang/include/clang/AST/Stmt.h
-index 49a66a1ea5b86..52c0ca51ea866 100644
+index 49a66a1ea5b86a6..52c0ca51ea8669d 100644
 --- a/clang/include/clang/AST/Stmt.h
 +++ b/clang/include/clang/AST/Stmt.h
 @@ -59,6 +59,7 @@ class RecordDecl;
@@ -193,7 +193,7 @@ index 49a66a1ea5b86..52c0ca51ea866 100644
  
  //===----------------------------------------------------------------------===//
 diff --git a/clang/include/clang/ASTMatchers/ASTMatchers.h b/clang/include/clang/ASTMatchers/ASTMatchers.h
-index 9f4d807c232dc..5bcf1d3896e89 100644
+index 9f4d807c232dcd3..5bcf1d3896e89b5 100644
 --- a/clang/include/clang/ASTMatchers/ASTMatchers.h
 +++ b/clang/include/clang/ASTMatchers/ASTMatchers.h
 @@ -4722,7 +4722,7 @@ AST_MATCHER_P(LambdaExpr, hasAnyCapture, internal::Matcher<LambdaCapture>,
@@ -206,7 +206,7 @@ index 9f4d807c232dc..5bcf1d3896e89 100644
    auto *capturedVar = Node.getCapturedVar();
    return capturedVar && InnerMatcher.matches(*capturedVar, Finder, Builder);
 diff --git a/clang/include/clang/Basic/DiagnosticSemaKinds.td b/clang/include/clang/Basic/DiagnosticSemaKinds.td
-index 6ff5b8de57fd0..550ad5ab73c64 100644
+index 6ff5b8de57fd027..550ad5ab73c6427 100644
 --- a/clang/include/clang/Basic/DiagnosticSemaKinds.td
 +++ b/clang/include/clang/Basic/DiagnosticSemaKinds.td
 @@ -9013,6 +9013,16 @@ def ext_ms_anonymous_record : ExtWarn<
@@ -227,7 +227,7 @@ index 6ff5b8de57fd0..550ad5ab73c64 100644
  def err_static_data_member_not_allowed_in_local_class : Error<
    "static data member %0 not allowed in local %sub{select_tag_type_kind}2 %1">;
 diff --git a/clang/include/clang/Sema/ScopeInfo.h b/clang/include/clang/Sema/ScopeInfo.h
-index 18848c8d8a456..c0dfcb89e86ff 100644
+index 18848c8d8a45640..c0dfcb89e86ffca 100644
 --- a/clang/include/clang/Sema/ScopeInfo.h
 +++ b/clang/include/clang/Sema/ScopeInfo.h
 @@ -553,7 +553,7 @@ class Capture {
@@ -313,7 +313,7 @@ index 18848c8d8a456..c0dfcb89e86ff 100644
      return Captures[Known->second - 1];
    }
 diff --git a/clang/include/clang/Sema/Sema.h b/clang/include/clang/Sema/Sema.h
-index ed50b9ef42ef4..706383e8943fc 100644
+index ed50b9ef42ef49d..706383e8943fcf4 100644
 --- a/clang/include/clang/Sema/Sema.h
 +++ b/clang/include/clang/Sema/Sema.h
 @@ -5325,23 +5325,23 @@ class Sema final {
@@ -347,7 +347,7 @@ index ed50b9ef42ef4..706383e8943fc 100644
    /// Mark all of the declarations referenced within a particular AST node as
    /// referenced. Used when template instantiation instantiates a non-dependent
 diff --git a/clang/lib/AST/ASTImporter.cpp b/clang/lib/AST/ASTImporter.cpp
-index 159010713f434..2e230921b938f 100644
+index 159010713f4343c..2e230921b938f7e 100644
 --- a/clang/lib/AST/ASTImporter.cpp
 +++ b/clang/lib/AST/ASTImporter.cpp
 @@ -1006,7 +1006,7 @@ ASTNodeImporter::import(const Designator &D) {
@@ -360,7 +360,7 @@ index 159010713f434..2e230921b938f 100644
      if (auto VarOrErr = import(From.getCapturedVar()))
        Var = *VarOrErr;
 diff --git a/clang/lib/AST/Decl.cpp b/clang/lib/AST/Decl.cpp
-index 030792bfc7ca3..61688688b0a73 100644
+index 030792bfc7ca3ba..61688688b0a73bb 100644
 --- a/clang/lib/AST/Decl.cpp
 +++ b/clang/lib/AST/Decl.cpp
 @@ -4983,6 +4983,12 @@ bool ValueDecl::isWeak() const {
@@ -377,7 +377,7 @@ index 030792bfc7ca3..61688688b0a73 100644
  
  ImplicitParamDecl *ImplicitParamDecl::Create(ASTContext &C, DeclContext *DC,
 diff --git a/clang/lib/AST/DeclCXX.cpp b/clang/lib/AST/DeclCXX.cpp
-index a955b4f3aba00..38c46b112b803 100644
+index a955b4f3aba00f1..38c46b112b80301 100644
 --- a/clang/lib/AST/DeclCXX.cpp
 +++ b/clang/lib/AST/DeclCXX.cpp
 @@ -1570,8 +1570,8 @@ CXXMethodDecl *CXXRecordDecl::getLambdaStaticInvoker(CallingConv CC) const {
@@ -392,7 +392,7 @@ index a955b4f3aba00..38c46b112b803 100644
    ThisCapture = nullptr;
  
 diff --git a/clang/lib/AST/ExprCXX.cpp b/clang/lib/AST/ExprCXX.cpp
-index 6328fa4a7dd51..1f860a351866f 100644
+index 6328fa4a7dd5121..1f860a351866f20 100644
 --- a/clang/lib/AST/ExprCXX.cpp
 +++ b/clang/lib/AST/ExprCXX.cpp
 @@ -1087,7 +1087,7 @@ CXXConstructExpr::CXXConstructExpr(StmtClass SC, EmptyShell Empty,
@@ -416,7 +416,7 @@ index 6328fa4a7dd51..1f860a351866f 100644
  
  LambdaExpr::capture_iterator LambdaExpr::capture_begin() const {
 diff --git a/clang/lib/AST/ExprConstant.cpp b/clang/lib/AST/ExprConstant.cpp
-index efaccf52132b3..6f3539a4b2c17 100644
+index efaccf52132b349..6f3539a4b2c177e 100644
 --- a/clang/lib/AST/ExprConstant.cpp
 +++ b/clang/lib/AST/ExprConstant.cpp
 @@ -578,7 +578,7 @@ namespace {
@@ -429,7 +429,7 @@ index efaccf52132b3..6f3539a4b2c17 100644
  
      CallStackFrame(EvalInfo &Info, SourceLocation CallLoc,
 diff --git a/clang/lib/AST/StmtPrinter.cpp b/clang/lib/AST/StmtPrinter.cpp
-index 8d778500d1033..9cb72ee6b1964 100644
+index 8d778500d103366..9cb72ee6b1964cd 100644
 --- a/clang/lib/AST/StmtPrinter.cpp
 +++ b/clang/lib/AST/StmtPrinter.cpp
 @@ -2164,7 +2164,8 @@ void StmtPrinter::VisitLambdaExpr(LambdaExpr *Node) {
@@ -443,7 +443,7 @@ index 8d778500d1033..9cb72ee6b1964 100644
        llvm::StringRef Pre;
        llvm::StringRef Post;
 diff --git a/clang/lib/Analysis/AnalysisDeclContext.cpp b/clang/lib/Analysis/AnalysisDeclContext.cpp
-index f20924604f649..f72c75a12fec9 100644
+index f20924604f64914..f72c75a12fec993 100644
 --- a/clang/lib/Analysis/AnalysisDeclContext.cpp
 +++ b/clang/lib/Analysis/AnalysisDeclContext.cpp
 @@ -142,7 +142,7 @@ bool AnalysisDeclContext::isBodyAutosynthesizedFromModelFile() const {
@@ -467,7 +467,7 @@ index f20924604f649..f72c75a12fec9 100644
    }
  
 diff --git a/clang/lib/CodeGen/CGDebugInfo.cpp b/clang/lib/CodeGen/CGDebugInfo.cpp
-index 522ed7ae8b144..6527d87399bef 100644
+index 522ed7ae8b144fb..6527d87399bef77 100644
 --- a/clang/lib/CodeGen/CGDebugInfo.cpp
 +++ b/clang/lib/CodeGen/CGDebugInfo.cpp
 @@ -1497,7 +1497,7 @@ void CGDebugInfo::CollectRecordLambdaFields(
@@ -480,7 +480,7 @@ index 522ed7ae8b144..6527d87399bef 100644
        llvm::DIFile *VUnit = getOrCreateFile(Loc);
        auto Align = getDeclAlignIfRequired(V, CGM.getContext());
 diff --git a/clang/lib/CodeGen/CGExpr.cpp b/clang/lib/CodeGen/CGExpr.cpp
-index 91a6b4e528472..e26822eaa601e 100644
+index 91a6b4e5284728b..e26822eaa601e68 100644
 --- a/clang/lib/CodeGen/CGExpr.cpp
 +++ b/clang/lib/CodeGen/CGExpr.cpp
 @@ -2942,8 +2942,13 @@ LValue CodeGenFunction::EmitDeclRefLValue(const DeclRefExpr *E) {
@@ -499,7 +499,7 @@ index 91a6b4e528472..e26822eaa601e 100644
    // We can form DeclRefExprs naming GUID declarations when reconstituting
    // non-type template parameters into expressions.
 diff --git a/clang/lib/CodeGen/CGOpenMPRuntime.cpp b/clang/lib/CodeGen/CGOpenMPRuntime.cpp
-index 3a1ed38d491fc..9fc7360e92472 100644
+index 3a1ed38d491fc6f..9fc7360e9247230 100644
 --- a/clang/lib/CodeGen/CGOpenMPRuntime.cpp
 +++ b/clang/lib/CodeGen/CGOpenMPRuntime.cpp
 @@ -409,7 +409,7 @@ class CGOpenMPInnerExprInfo final : public CGOpenMPInlinedRegionInfo {
@@ -530,7 +530,7 @@ index 3a1ed38d491fc..9fc7360e92472 100644
          continue;
        auto It = Captures.find(VD);
 diff --git a/clang/lib/CodeGen/CGOpenMPRuntimeGPU.cpp b/clang/lib/CodeGen/CGOpenMPRuntimeGPU.cpp
-index 058b312c0ce68..e8affaaecc980 100644
+index 058b312c0ce68ff..e8affaaecc980ea 100644
 --- a/clang/lib/CodeGen/CGOpenMPRuntimeGPU.cpp
 +++ b/clang/lib/CodeGen/CGOpenMPRuntimeGPU.cpp
 @@ -444,9 +444,8 @@ class CheckVarsEscapingDeclContext final
@@ -574,7 +574,7 @@ index 058b312c0ce68..e8affaaecc980 100644
          VDAddr = CGF.EmitLoadOfReferenceLValue(VDAddr,
                                                 VD->getType().getCanonicalType())
 diff --git a/clang/lib/CodeGen/CodeGenFunction.h b/clang/lib/CodeGen/CodeGenFunction.h
-index fe0890f433e8c..b61a2a68687d9 100644
+index fe0890f433e8c90..b61a2a68687d9f1 100644
 --- a/clang/lib/CodeGen/CodeGenFunction.h
 +++ b/clang/lib/CodeGen/CodeGenFunction.h
 @@ -609,7 +609,7 @@ class CodeGenFunction : public CodeGenTypeCache {
@@ -587,7 +587,7 @@ index fe0890f433e8c..b61a2a68687d9 100644
  
    /// A mapping from NRVO variables to the flags used to indicate
 diff --git a/clang/lib/Sema/SemaDecl.cpp b/clang/lib/Sema/SemaDecl.cpp
-index eca20002b30da..b110a07f4fcba 100644
+index eca20002b30dab8..b110a07f4fcbad9 100644
 --- a/clang/lib/Sema/SemaDecl.cpp
 +++ b/clang/lib/Sema/SemaDecl.cpp
 @@ -14681,7 +14681,7 @@ static void RebuildLambdaScopeInfo(CXXMethodDecl *CallOperator,
@@ -600,7 +600,7 @@ index eca20002b30da..b110a07f4fcba 100644
          S.CurrentInstantiationScope->InstantiatedLocal(VD, VD);
        const bool ByRef = C.getCaptureKind() == LCK_ByRef;
 diff --git a/clang/lib/Sema/SemaExpr.cpp b/clang/lib/Sema/SemaExpr.cpp
-index 6f758e437a905..9497c4b5d5300 100644
+index 6f758e437a90592..9497c4b5d530043 100644
 --- a/clang/lib/Sema/SemaExpr.cpp
 +++ b/clang/lib/Sema/SemaExpr.cpp
 @@ -2082,9 +2082,8 @@ Sema::BuildDeclRefExpr(ValueDecl *D, QualType Ty, ExprValueKind VK,
@@ -981,7 +981,7 @@ index 6f758e437a905..9497c4b5d5300 100644
  
    // If this is a call to a method via a cast, also mark the method in the
 diff --git a/clang/lib/Sema/SemaInit.cpp b/clang/lib/Sema/SemaInit.cpp
-index d3b454843234b..737952bdfe810 100644
+index d3b454843234b3f..737952bdfe8106f 100644
 --- a/clang/lib/Sema/SemaInit.cpp
 +++ b/clang/lib/Sema/SemaInit.cpp
 @@ -7846,7 +7846,7 @@ void Sema::checkInitializerLifetime(const InitializedEntity &Entity,
@@ -994,7 +994,7 @@ index d3b454843234b..737952bdfe810 100644
              << VD << VD->isInitCapture() << Elem.Capture->isExplicit()
              << (Elem.Capture->getCaptureKind() == LCK_ByRef) << VD
 diff --git a/clang/lib/Sema/SemaLambda.cpp b/clang/lib/Sema/SemaLambda.cpp
-index afc2f3ef4d76e..3f271d6c53f17 100644
+index afc2f3ef4d76e6f..3f271d6c53f17b0 100644
 --- a/clang/lib/Sema/SemaLambda.cpp
 +++ b/clang/lib/Sema/SemaLambda.cpp
 @@ -1088,7 +1088,7 @@ void Sema::ActOnStartOfLambdaDefinition(LambdaIntroducer &Intro,
@@ -1092,7 +1092,7 @@ index afc2f3ef4d76e..3f271d6c53f17 100644
                From.isCopyCapture() ? LCK_ByCopy : LCK_ByRef;
            return LambdaCapture(From.getLocation(), IsImplicit, Kind, Var,
 diff --git a/clang/lib/Sema/SemaOpenMP.cpp b/clang/lib/Sema/SemaOpenMP.cpp
-index a92fec6a02323..4279a152db907 100644
+index a92fec6a02323f6..4279a152db907d9 100644
 --- a/clang/lib/Sema/SemaOpenMP.cpp
 +++ b/clang/lib/Sema/SemaOpenMP.cpp
 @@ -4677,12 +4677,12 @@ void Sema::tryCaptureOpenMPLambdas(ValueDecl *V) {
@@ -1111,7 +1111,7 @@ index a92fec6a02323..4279a152db907 100644
              if (!VDC->Encloses(CurContext))
                continue;
 diff --git a/clang/lib/Sema/SemaStmt.cpp b/clang/lib/Sema/SemaStmt.cpp
-index c6ca10c0342c5..73d243cda974e 100644
+index c6ca10c0342c573..73d243cda974e0a 100644
 --- a/clang/lib/Sema/SemaStmt.cpp
 +++ b/clang/lib/Sema/SemaStmt.cpp
 @@ -4695,11 +4695,11 @@ buildCapturedStmtCaptureList(Sema &S, CapturedRegionScopeInfo *RSI,
@@ -1132,7 +1132,7 @@ index c6ca10c0342c5..73d243cda974e 100644
      CaptureInits.push_back(Init.get());
    }
 diff --git a/clang/lib/Sema/TreeTransform.h b/clang/lib/Sema/TreeTransform.h
-index 86d92158da8df..14f652614730d 100644
+index 86d92158da8df6b..14f652614730db1 100644
 --- a/clang/lib/Sema/TreeTransform.h
 +++ b/clang/lib/Sema/TreeTransform.h
 @@ -12986,7 +12986,7 @@ TreeTransform<Derived>::TransformLambdaExpr(LambdaExpr *E) {
@@ -1173,7 +1173,7 @@ index 86d92158da8df..14f652614730d 100644
            Sema::ArgumentPackSubstitutionIndexRAII SubstIndex(getSema(), I);
            VarDecl *CapturedVar
 diff --git a/clang/lib/Serialization/ASTWriter.cpp b/clang/lib/Serialization/ASTWriter.cpp
-index 34af5d6600126..7e0496fcf34d2 100644
+index 34af5d6600126c0..7e0496fcf34d223 100644
 --- a/clang/lib/Serialization/ASTWriter.cpp
 +++ b/clang/lib/Serialization/ASTWriter.cpp
 @@ -5786,7 +5786,7 @@ void ASTRecordWriter::AddCXXDefinitionData(const CXXRecordDecl *D) {
@@ -1186,7 +1186,7 @@ index 34af5d6600126..7e0496fcf34d2 100644
          AddDeclRef(Var);
          AddSourceLocation(Capture.isPackExpansion() ? Capture.getEllipsisLoc()
 diff --git a/clang/lib/StaticAnalyzer/Checkers/DeadStoresChecker.cpp b/clang/lib/StaticAnalyzer/Checkers/DeadStoresChecker.cpp
-index 2102f9233bc10..8b6304f65dce5 100644
+index 2102f9233bc109d..8b6304f65dce5b0 100644
 --- a/clang/lib/StaticAnalyzer/Checkers/DeadStoresChecker.cpp
 +++ b/clang/lib/StaticAnalyzer/Checkers/DeadStoresChecker.cpp
 @@ -504,7 +504,7 @@ class FindEscaped {
@@ -1217,7 +1217,7 @@ index 2102f9233bc10..8b6304f65dce5 100644
    }
  };
 diff --git a/clang/lib/StaticAnalyzer/Checkers/WebKit/UncountedLambdaCapturesChecker.cpp b/clang/lib/StaticAnalyzer/Checkers/WebKit/UncountedLambdaCapturesChecker.cpp
-index deebbd603b2c1..0c952b5ab9a54 100644
+index deebbd603b2c1c7..0c952b5ab9a5466 100644
 --- a/clang/lib/StaticAnalyzer/Checkers/WebKit/UncountedLambdaCapturesChecker.cpp
 +++ b/clang/lib/StaticAnalyzer/Checkers/WebKit/UncountedLambdaCapturesChecker.cpp
 @@ -57,7 +57,7 @@ class UncountedLambdaCapturesChecker
@@ -1239,7 +1239,7 @@ index deebbd603b2c1..0c952b5ab9a54 100644
      assert(CapturedVar);
  
 diff --git a/clang/lib/StaticAnalyzer/Core/ExprEngine.cpp b/clang/lib/StaticAnalyzer/Core/ExprEngine.cpp
-index cdd566029ae0c..049b7d4724353 100644
+index cdd566029ae0ca6..049b7d4724353c8 100644
 --- a/clang/lib/StaticAnalyzer/Core/ExprEngine.cpp
 +++ b/clang/lib/StaticAnalyzer/Core/ExprEngine.cpp
 @@ -2732,7 +2732,7 @@ void ExprEngine::VisitCommonDeclRefExpr(const Expr *Ex, const NamedDecl *D,
@@ -1252,7 +1252,7 @@ index cdd566029ae0c..049b7d4724353 100644
        CXXRec->getCaptureFields(LambdaCaptureFields, LambdaThisCaptureField);
  
 diff --git a/clang/lib/StaticAnalyzer/Core/LoopUnrolling.cpp b/clang/lib/StaticAnalyzer/Core/LoopUnrolling.cpp
-index 506d61d94d5fe..f6efde8c90d13 100644
+index 506d61d94d5fe6c..f6efde8c90d1366 100644
 --- a/clang/lib/StaticAnalyzer/Core/LoopUnrolling.cpp
 +++ b/clang/lib/StaticAnalyzer/Core/LoopUnrolling.cpp
 @@ -175,7 +175,7 @@ static bool isCapturedByReference(ExplodedNode *N, const DeclRefExpr *DR) {
@@ -1266,7 +1266,7 @@ index 506d61d94d5fe..f6efde8c90d13 100644
  
 diff --git a/clang/test/CodeGenCXX/cxx20-decomposition.cpp b/clang/test/CodeGenCXX/cxx20-decomposition.cpp
 new file mode 100644
-index 0000000000000..165450318a80a
+index 000000000000000..165450318a80abf
 --- /dev/null
 +++ b/clang/test/CodeGenCXX/cxx20-decomposition.cpp
 @@ -0,0 +1,48 @@
@@ -1319,7 +1319,7 @@ index 0000000000000..165450318a80a
 +// CHECK: %[[LAMBDA_GEP_TO_INT:.+]] = getelementptr inbounds %[[LAMBDA_TY]], ptr %[[THIS_PTR]], i32 0, i32 1
 +// CHECK: %[[J_VALUE:.+]] = load i32, ptr %[[LAMBDA_GEP_TO_INT]]
 diff --git a/clang/test/SemaCXX/cxx1z-decomposition.cpp b/clang/test/SemaCXX/cxx1z-decomposition.cpp
-index 4c8c64177ed13..7165f30dc0703 100644
+index 4c8c64177ed133e..7165f30dc070303 100644
 --- a/clang/test/SemaCXX/cxx1z-decomposition.cpp
 +++ b/clang/test/SemaCXX/cxx1z-decomposition.cpp
 @@ -1,4 +1,5 @@
@@ -1407,7 +1407,7 @@ index 4c8c64177ed13..7165f30dc0703 100644
  namespace instantiate_template {
 diff --git a/clang/test/SemaCXX/cxx20-decomposition.cpp b/clang/test/SemaCXX/cxx20-decomposition.cpp
 new file mode 100644
-index 0000000000000..a99766f5775b2
+index 000000000000000..a99766f5775b225
 --- /dev/null
 +++ b/clang/test/SemaCXX/cxx20-decomposition.cpp
 @@ -0,0 +1,141 @@
@@ -1554,7 +1554,7 @@ index 0000000000000..a99766f5775b2
 +}
 diff --git a/clang/test/SemaCXX/decomposition-blocks.cpp b/clang/test/SemaCXX/decomposition-blocks.cpp
 new file mode 100644
-index 0000000000000..21f66f8c7c1b8
+index 000000000000000..21f66f8c7c1b83e
 --- /dev/null
 +++ b/clang/test/SemaCXX/decomposition-blocks.cpp
 @@ -0,0 +1,14 @@
@@ -1574,7 +1574,7 @@ index 0000000000000..21f66f8c7c1b8
 +}
 diff --git a/clang/test/SemaCXX/decomposition-openmp.cpp b/clang/test/SemaCXX/decomposition-openmp.cpp
 new file mode 100644
-index 0000000000000..28afc39800399
+index 000000000000000..28afc3980039957
 --- /dev/null
 +++ b/clang/test/SemaCXX/decomposition-openmp.cpp
 @@ -0,0 +1,13 @@
@@ -1592,7 +1592,7 @@ index 0000000000000..28afc39800399
 +  };
 +}
 diff --git a/clang/tools/libclang/CIndex.cpp b/clang/tools/libclang/CIndex.cpp
-index 9356dd4a23774..b3f91ef794ba2 100644
+index 9356dd4a23774b6..b3f91ef794ba226 100644
 --- a/clang/tools/libclang/CIndex.cpp
 +++ b/clang/tools/libclang/CIndex.cpp
 @@ -3482,9 +3482,11 @@ bool CursorVisitor::RunVisitorWorkList(VisitorWorkList &WL) {
@@ -1611,7 +1611,7 @@ index 9356dd4a23774..b3f91ef794ba2 100644
        }
        // Visit init captures
 diff --git a/clang/www/cxx_status.html b/clang/www/cxx_status.html
-index 41b788e82d73d..5aae4ba822826 100755
+index 41b788e82d73def..5aae4ba82282614 100755
 --- a/clang/www/cxx_status.html
 +++ b/clang/www/cxx_status.html
 @@ -1140,7 +1140,7 @@ <h2 id="cxx20">C++20 implementation status</h2>

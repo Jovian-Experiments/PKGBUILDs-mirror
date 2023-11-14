@@ -13,7 +13,7 @@ Differential Revision: https://reviews.llvm.org/D131202
  3 files changed, 5 insertions(+), 31 deletions(-)
 
 diff --git a/clang/include/clang/Basic/DiagnosticSemaKinds.td b/clang/include/clang/Basic/DiagnosticSemaKinds.td
-index 550ad5ab73c64..13209d3bff24f 100644
+index 550ad5ab73c6427..13209d3bff24ffc 100644
 --- a/clang/include/clang/Basic/DiagnosticSemaKinds.td
 +++ b/clang/include/clang/Basic/DiagnosticSemaKinds.td
 @@ -9013,8 +9013,6 @@ def ext_ms_anonymous_record : ExtWarn<
@@ -26,7 +26,7 @@ index 550ad5ab73c64..13209d3bff24f 100644
    "capturing a structured binding is not yet supported in OpenMP">;
  def ext_capture_binding : ExtWarn<
 diff --git a/clang/lib/Sema/SemaExpr.cpp b/clang/lib/Sema/SemaExpr.cpp
-index 9497c4b5d5300..152f15159fa1f 100644
+index 9497c4b5d530043..152f15159fa1f9f 100644
 --- a/clang/lib/Sema/SemaExpr.cpp
 +++ b/clang/lib/Sema/SemaExpr.cpp
 @@ -18533,32 +18533,8 @@ static bool captureInLambda(LambdaScopeInfo *LSI, ValueDecl *Var,
@@ -65,7 +65,7 @@ index 9497c4b5d5300..152f15159fa1f 100644
    if (!Invalid && BD && S.LangOpts.OpenMP) {
      if (BuildAndDiagnose) {
 diff --git a/clang/test/SemaCXX/cxx1z-decomposition.cpp b/clang/test/SemaCXX/cxx1z-decomposition.cpp
-index 7165f30dc0703..13fe826759a34 100644
+index 7165f30dc070303..13fe826759a3470 100644
 --- a/clang/test/SemaCXX/cxx1z-decomposition.cpp
 +++ b/clang/test/SemaCXX/cxx1z-decomposition.cpp
 @@ -84,9 +84,9 @@ void enclosing() {
