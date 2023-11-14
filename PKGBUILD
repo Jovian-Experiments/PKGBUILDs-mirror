@@ -5,7 +5,7 @@
 
 pkgname=jupiter-legacy-support
 pkgver=1.144
-pkgrel=2
+pkgrel=3
 pkgdesc="Legacy jupiter-specific support files that haven't been split to their own package or removed."
 arch=(any)
 depends=(python3 python-psutil python-aiohttp nvme-cli)
