@@ -1,1 +1,0 @@
-%users ALL=(ALL) /usr/bin/nvme smart-log /dev/nvme0

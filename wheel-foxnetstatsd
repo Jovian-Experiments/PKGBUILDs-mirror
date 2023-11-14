@@ -1,0 +1,7 @@
+%wheel ALL=(ALL) NOPASSWD: /usr/bin/nvme smart-log /dev/nvme0 -o json
+%wheel ALL=(ALL) NOPASSWD: /usr/bin/cat /sys/class/dmi/id/board_serial
+%wheel ALL=(ALL) NOPASSWD: /usr/bin/cat /sys/class/dmi/id/chassis_serial
+%wheel ALL=(ALL) NOPASSWD: /usr/bin/cat /sys/class/dmi/id/power
+%wheel ALL=(ALL) NOPASSWD: /usr/bin/cat /sys/class/dmi/id/product_serial
+%wheel ALL=(ALL) NOPASSWD: /usr/bin/cat /boot/efi/foxnet_dmi.json
+%wheel ALL=(ALL) NOPASSWD: /usr/bin/cat /esp/foxnet_dmi.json
