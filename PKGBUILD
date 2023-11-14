@@ -4,7 +4,7 @@
 
 pkgname=alsa-ucm-conf
 pkgver=1.2.9
-pkgrel=1.1 # Holo: remove Jupiter symlink
+pkgrel=1.2 # Holo: remove Jupiter symlink
 pkgdesc="ALSA Use Case Manager configuration (and topologies)"
 arch=(any)
 url="https://alsa-project.org/"
