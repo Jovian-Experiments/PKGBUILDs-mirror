@@ -75,6 +75,8 @@ if [[ -e "$STEAMOS_STEAM_SHUTDOWN_SENTINEL" ]]; then
 	sudo -n poweroff
 fi
 
+export STEAM_GAMESCOPE_VIRTUAL_WHITE=1
+
 # Enable dynamic backlight, we have the kernel patch to disable events
 export STEAM_ENABLE_DYNAMIC_BACKLIGHT=1
 
@@ -115,7 +117,15 @@ export STEAM_GAMESCOPE_DYNAMIC_REFRESH_IN_STEAM_SUPPORTED=0
 export vk_xwayland_wait_ready=false
 
 # Set refresh rate range and enable refresh rate switching
-export STEAM_DISPLAY_REFRESH_LIMITS=40,60
+# GALILEO: CHANGED from 40,60 to 45,90 - temporarily disabled
+export STEAM_DISPLAY_REFRESH_LIMITS=45,90
+
+# GALILEO: Enable colorimetry override (can be removed when defined in EDID (ev2?)
+export GAMESCOPE_INTERNAL_COLORIMETRY_OVERRIDE="0.680 0.319 0.237 0.723 0.138 0.050 0.3127 0.3290"
+
+# GALILEO: Force HDR on the internal display
+export STEAM_GAMESCOPE_FORCE_HDR_DEFAULT=1
+export STEAM_GAMESCOPE_FORCE_OUTPUT_TO_HDR10PQ_DEFAULT=1
 
 # Let steam know it can unmount drives without superuser privileges
 export STEAM_ALLOW_DRIVE_UNMOUNT=1
@@ -159,7 +169,22 @@ export XCURSOR_THEME=steam
 # Workaround for Steam login issue while Steam client change propagates out of Beta
 touch ~/.steam/root/config/SteamAppData.vdf || true
 
-export STEAM_UPDATEUI_PNG_BACKGROUND=/usr/share/steamos/steamos.png
+board_name=$(cat /sys/class/dmi/id/board_name)
+if [[ $board_name = "Galileo" ]]; then
+	ui_background=/usr/share/plymouth/themes/steamos/steamos-galileo.png
+else
+	ui_background=/usr/share/plymouth/themes/steamos/steamos-jupiter.png
+fi
+export STEAM_UPDATEUI_PNG_BACKGROUND=$ui_background
+
+# We previously shipped custom boot animations alongside the OS as uioverrides
+# These boot animations have now been integrated to the steam client so
+# they no longer need to be part of the OS.
+for file in ~/.local/share/Steam/config/uioverrides/movies/*.installed; do
+	echo "Removing file: ${file%.installed}"
+	rm -- "${file%.installed}" || true
+	rm -- "${file}" || true
+done
 
 ulimit -n 524288
 
@@ -203,6 +228,14 @@ if [[ "$free_disk_space_megs" -lt "$minimum_free_disk_space_needed_megs" ]]; the
 	done
 fi
 
+# Will be empty if not on Galileo or failed
+mura_args=()
+mura_path=$(galileo-mura-setup)
+if [ $? -eq 0 ]; then
+	mura_args=("--mura-map" "$mura_path")
+fi
+
+
 export GAMESCOPE_STATS="$stats"
 mkfifo -- "$stats"
 mkfifo -- "$socket"
@@ -230,6 +263,7 @@ gamescope \
 	--fade-out-duration 200 \
 	-e -R "$socket" -T "$stats" \
 	-O '*',eDP-1 \
+	"${mura_args[@]}" \
 	--cursor-hotspot 5,3 --cursor /usr/share/steamos/steamos-cursor.png \
 	&
 gamescope_pid="$!"
