@@ -1,7 +1,7 @@
 # Maintainer: Pierre-Loup A. Griffais <pgriffais@valvesoftware.com>
 
 pkgname=gamescope
-_srctag=3.13.0
+_srctag=3.13.2
 pkgver=${_srctag//-/.}
 pkgrel=2
 pkgdesc="gaming shell based on Xwayland, powered by Vulkan and DRM"
@@ -25,7 +25,7 @@ source=("gamescope-session"
         # FIXME Upstream gamescope is just selecting master branch at build time, so we are arbitrarily snapshotting a
         #       revision when bumping the version here such that the build is reproducible.
         "git+https://github.com/nothings/stb.git#commit=af1a5bc352164740c1cc1354942b1c6b72eacb8a")
-sha256sums=('9e6335c643883e5bb67312ec9503c4ae84f28bdb76f86e0ba514f038acc8351b'
+sha256sums=('03db944fb8e7de76914624aba5409ed664496e0f00d44a0a60902da5e6db54fe'
             'fe515fce8f151a6c03a89e043044bfddf8cd6ee89027d2cfbcf6f6706c78ca76'
             'e37ba6107f3a84cf47c2799b537a88583e6cb8951167a9c6a48fa1d85996206b'
             '281d892e32c2c31e9df94c5e712a1fde46c0a2f3214aa2df5b7253c6db47977c'

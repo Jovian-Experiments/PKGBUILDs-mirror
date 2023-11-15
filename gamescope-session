@@ -75,8 +75,6 @@ if [[ -e "$STEAMOS_STEAM_SHUTDOWN_SENTINEL" ]]; then
 	sudo -n poweroff
 fi
 
-export STEAM_GAMESCOPE_VIRTUAL_WHITE=1
-
 # Enable dynamic backlight, we have the kernel patch to disable events
 export STEAM_ENABLE_DYNAMIC_BACKLIGHT=1
 
@@ -115,17 +113,6 @@ export STEAM_GAMESCOPE_DYNAMIC_REFRESH_IN_STEAM_SUPPORTED=0
 
 # Don't wait for buffers to idle on the client side before sending them to gamescope
 export vk_xwayland_wait_ready=false
-
-# Set refresh rate range and enable refresh rate switching
-# GALILEO: CHANGED from 40,60 to 45,90 - temporarily disabled
-export STEAM_DISPLAY_REFRESH_LIMITS=45,90
-
-# GALILEO: Enable colorimetry override (can be removed when defined in EDID (ev2?)
-export GAMESCOPE_INTERNAL_COLORIMETRY_OVERRIDE="0.680 0.319 0.237 0.723 0.138 0.050 0.3127 0.3290"
-
-# GALILEO: Force HDR on the internal display
-export STEAM_GAMESCOPE_FORCE_HDR_DEFAULT=1
-export STEAM_GAMESCOPE_FORCE_OUTPUT_TO_HDR10PQ_DEFAULT=1
 
 # Let steam know it can unmount drives without superuser privileges
 export STEAM_ALLOW_DRIVE_UNMOUNT=1
@@ -172,8 +159,16 @@ touch ~/.steam/root/config/SteamAppData.vdf || true
 board_name=$(cat /sys/class/dmi/id/board_name)
 if [[ $board_name = "Galileo" ]]; then
 	ui_background=/usr/share/plymouth/themes/steamos/steamos-galileo.png
+
+	# Set refresh rate range for the legacy refresh swtching UI
+	export STEAM_DISPLAY_REFRESH_LIMITS=45,90
+	export STEAM_GAMESCOPE_FORCE_HDR_DEFAULT=1
+	export STEAM_GAMESCOPE_FORCE_OUTPUT_TO_HDR10PQ_DEFAULT=1
 else
 	ui_background=/usr/share/plymouth/themes/steamos/steamos-jupiter.png
+
+	# Set refresh rate range for the legacy refresh swtching UI
+	export STEAM_DISPLAY_REFRESH_LIMITS=40,60
 fi
 export STEAM_UPDATEUI_PNG_BACKGROUND=$ui_background
 
