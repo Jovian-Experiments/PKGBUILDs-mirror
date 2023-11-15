@@ -1,5 +1,5 @@
 
-`main @ 20231114.1000`
+`main @ 20231114.1001`
 ======================
 
 Valve packages
@@ -54,14 +54,14 @@ Valve packages
  * [`f3` — `jupiter-main/f3-8.0-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/f3-8.0-2)
  * [`flatpak` — `jupiter-main/flatpak-1.14.4-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/flatpak-1.14.4-2)
  * [`galileo-mura` — `jupiter-main/galileo-mura-v0.3-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/galileo-mura-v0.3-1)
- * [`gamescope` — `jupiter-main/gamescope-3.13.0-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/gamescope-3.13.0-1)
+ * [`gamescope` — `jupiter-main/gamescope-3.13.2-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/gamescope-3.13.2-1)
  * [`gpu-trace` — `jupiter-main/gpu-trace-2.12-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/gpu-trace-2.12-1)
  * [`holo-dmi-rules` — `jupiter-main/holo-dmi-rules-1.0-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/holo-dmi-rules-1.0-1)
  * [`holo-nix-offload` — `jupiter-main/holo-nix-offload-0.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/holo-nix-offload-0.1-1)
  * [`ibus-anthy` — `jupiter-main/ibus-anthy-1.5.14-4`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/ibus-anthy-1.5.14-4)
  * [`ibus-table-cangjie-lite` — `jupiter-main/ibus-table-cangjie-lite-1.8.8-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/ibus-table-cangjie-lite-1.8.8-2)
  * [`jupiter-dock-updater-bin` — `jupiter-main/jupiter-dock-updater-bin-20231103.01-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-dock-updater-bin-20231103.01-1)
- * [`jupiter-fan-control` — `jupiter-main/jupiter-fan-control-20231113.2-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-fan-control-20231113.2-1)
+ * [`jupiter-fan-control` — `jupiter-main/jupiter-fan-control-20231114.3-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-fan-control-20231114.3-1)
  * [`jupiter-firewall` — `jupiter-main/jupiter-firewall-0.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-firewall-0.1-1)
  * [`jupiter-hw-support` — `jupiter-main/jupiter-hw-support-20231113.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-hw-support-20231113.1-1)
  * [`jupiter-legacy-support` — `jupiter-main/jupiter-legacy-support-1.144-3`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-legacy-support-1.144-3)
