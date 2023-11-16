@@ -1,5 +1,5 @@
 
-`main @ 20231115.1000`
+`main @ 20231116.1000`
 ======================
 
 Valve packages
@@ -15,6 +15,7 @@ Valve packages
  * [`glibc` — `holo-main/glibc-2.37-3.2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/glibc-2.37-3.2)
  * [`gssproxy` — `holo-main/gssproxy-0.9.1-2.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/gssproxy-0.9.1-2.1)
  * [`holo-desync` — `holo-main/steamos-customizations-git-20231114.2-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-customizations-git-20231114.2-1)
+ * [`holo-flatpak-tmpfiles` — `holo-main/holo-flatpak-tmpfiles-0.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/holo-flatpak-tmpfiles-0.1-1)
  * [`holo-keyring` — `holo-main/holo-keyring-20220203-4`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/holo-keyring-20220203-4)
  * [`holo-sudo` — `holo-main/steamos-customizations-git-20231114.2-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-customizations-git-20231114.2-1)
  * [`iwd` — `holo-main/iwd-2.7-1.2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/iwd-2.7-1.2)
@@ -71,7 +72,7 @@ Valve packages
  * [`libva-mesa-driver` — `jupiter-main/mesa-23.1.3.170235.radeonsi_3.5.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/mesa-23.1.3.170235.radeonsi_3.5.1-1)
  * [`linux-firmware-neptune` — `jupiter-main/linux-firmware-neptune-jupiter.20231113.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/linux-firmware-neptune-jupiter.20231113.1-1)
  * [`linux-firmware-neptune-whence` — `jupiter-main/linux-firmware-neptune-jupiter.20231113.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/linux-firmware-neptune-jupiter.20231113.1-1)
- * [`linux-neptune-61` — `jupiter-main/linux-neptune-61-6.1.52.valve5-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/linux-neptune-61-6.1.52.valve5-1)
+ * [`linux-neptune-61` — `jupiter-main/linux-neptune-61-6.1.52.valve6-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/linux-neptune-61-6.1.52.valve6-1)
  * [`mangohud` — `jupiter-main/mangohud-0.7.0.r68.gea725ed-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/mangohud-0.7.0.r68.gea725ed-1)
  * [`mesa` — `jupiter-main/mesa-23.1.3.170235.radeonsi_3.5.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/mesa-23.1.3.170235.radeonsi_3.5.1-1)
  * [`mesa-vdpau` — `jupiter-main/mesa-23.1.3.170235.radeonsi_3.5.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/mesa-23.1.3.170235.radeonsi_3.5.1-1)
@@ -81,7 +82,7 @@ Valve packages
  * [`renderdoc-minimal` — `jupiter-main/renderdoc-minimal-1.27.r3.g0f851df-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/renderdoc-minimal-1.27.r3.g0f851df-1)
  * [`sddm-wayland` — `jupiter-main/sddm-wayland-v0.19.0.valve4.d19813cb03c7d71b896aead28e5285bc131500a9-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/sddm-wayland-v0.19.0.valve4.d19813cb03c7d71b896aead28e5285bc131500a9-1)
  * [`steam-im-modules` — `jupiter-main/steam-im-modules-jupiter.20220223-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steam-im-modules-jupiter.20220223-1)
- * [`steam-jupiter-stable` — `jupiter-main/steam-jupiter-stable-1.0.0.78-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steam-jupiter-stable-1.0.0.78-1)
+ * [`steam-jupiter-stable` — `jupiter-main/steam-jupiter-stable-1.0.0.78-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steam-jupiter-stable-1.0.0.78-1.1)
  * [`steam_notif_daemon` — `jupiter-main/steam_notif_daemon-v1.0.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steam_notif_daemon-v1.0.1-1)
  * [`steamdeck-dsp` — `jupiter-main/steamdeck-dsp-0.38-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steamdeck-dsp-0.38-1)
  * [`steamdeck-kde-presets` — `jupiter-main/steamdeck-kde-presets-0.21-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steamdeck-kde-presets-0.21-1)
@@ -94,6 +95,8 @@ Valve packages
  * [`vpower` — `jupiter-main/vpower-1.4.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/vpower-1.4.1-1)
  * [`wireplumber` — `jupiter-main/wireplumber-0.4.14.dev23-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/wireplumber-0.4.14.dev23-1)
  * [`xdg-desktop-portal` — `jupiter-main/xdg-desktop-portal-1.17.1-1.0`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/xdg-desktop-portal-1.17.1-1.0)
+ * [`xdg-desktop-portal-gtk` — `jupiter-main/xdg-desktop-portal-gtk-1.15.1-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/xdg-desktop-portal-gtk-1.15.1-1.1)
+ * [`xdg-desktop-portal-kde` — `jupiter-main/xdg-desktop-portal-kde-5.27.8-3.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/xdg-desktop-portal-kde-5.27.8-3.1)
  * [`xorg-xwayland-jupiter` — `jupiter-main/xorg-xwayland-jupiter-jupiter.20220831.d4d883ad5-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/xorg-xwayland-jupiter-jupiter.20220831.d4d883ad5-1)
  * [`zenity-light` — `jupiter-main/zenity-light-3.32.0+55+gd7bedff6-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/zenity-light-3.32.0+55+gd7bedff6-1)
 
@@ -861,7 +864,6 @@ Arch Linux packages
  * [`xcb-util-renderutil/0.3.10-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/xcb-util-renderutil/-/tree/0.3.10-1)
  * [`xcb-util-wm/0.4.2-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/xcb-util-wm/-/tree/0.4.2-1)
  * [`xdg-dbus-proxy/0.1.4-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/xdg-dbus-proxy/-/tree/0.1.4-1)
- * [`xdg-desktop-portal-kde/5.27.5-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/xdg-desktop-portal-kde/-/tree/5.27.5-1)
  * [`xdg-user-dirs/0.18-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/xdg-user-dirs/-/tree/0.18-1)
  * [`xdg-utils/1.1.3+25+g8ae0263-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/xdg-utils/-/tree/1.1.3+25+g8ae0263-1)
  * [`xdotool/3.20211022.1-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/xdotool/-/tree/3.20211022.1-1)
