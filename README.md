@@ -1,5 +1,5 @@
 
-`main @ 20231115.7000`
+`main @ 20231115.7001`
 ======================
 
 Valve packages
@@ -83,7 +83,7 @@ Valve packages
  * [`upower` — `jupiter-main/upower-0.99.15.jupiter-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/upower-0.99.15.jupiter-1.1)
  * [`usbhid-gadget-passthru` — `jupiter-main/usbhid-gadget-passthru-0.1.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/usbhid-gadget-passthru-0.1.1-1)
  * [`vpower` — `jupiter-main/vpower-1.4.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/vpower-1.4.1-1)
- * [`wireplumber` — `jupiter-main/wireplumber-0.4.14.dev22-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/wireplumber-0.4.14.dev22-1)
+ * [`wireplumber` — `jupiter-main/wireplumber-0.4.14.dev23-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/wireplumber-0.4.14.dev23-1)
  * [`xdg-desktop-portal` — `jupiter-main/xdg-desktop-portal-1.17.1-1.0`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/xdg-desktop-portal-1.17.1-1.0)
  * [`xorg-xwayland-jupiter` — `jupiter-main/xorg-xwayland-jupiter-jupiter.20220831.d4d883ad5-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/xorg-xwayland-jupiter-jupiter.20220831.d4d883ad5-1)
  * [`zenity-light` — `jupiter-main/zenity-light-3.32.0+55+gd7bedff6-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/zenity-light-3.32.0+55+gd7bedff6-1)
@@ -225,7 +225,7 @@ Arch Linux packages
  * [`fwupd/1.9.2-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/fwupd/-/tree/1.9.2-2)
  * [`fwupd-efi/1.4-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/fwupd-efi/-/tree/1.4-1)
  * [`gamemode/1.7-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/gamemode/-/tree/1.7-1)
- * [`gamescope/3.13.3-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/gamescope/-/tree/3.13.3-2)
+ * [`gamescope/3.13.5-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/gamescope/-/tree/3.13.5-2)
  * [`gawk/5.2.2-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/gawk/-/tree/5.2.2-1)
  * [`gc/8.2.4-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/gc/-/tree/8.2.4-1)
  * [`gcab/1.5-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/gcab/-/tree/1.5-1)
@@ -297,7 +297,7 @@ Arch Linux packages
  * [`jq/1.6-4`](https://gitlab.archlinux.org/archlinux/packaging/packages/jq/-/tree/1.6-4)
  * [`json-c/0.16-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/json-c/-/tree/0.16-1)
  * [`json-glib/1.6.6-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/json-glib/-/tree/1.6.6-2)
- * [`jupiter-hw-support/3.5.20231114.1-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/jupiter-hw-support/-/tree/3.5.20231114.1-1)
+ * [`jupiter-hw-support/3.5.20231115.1-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/jupiter-hw-support/-/tree/3.5.20231115.1-1)
  * [`kaccounts-integration/23.04.2-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/kaccounts-integration/-/tree/23.04.2-1)
  * [`kactivities/5.107.0-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/kactivities/-/tree/5.107.0-1)
  * [`kactivities-stats/5.107.0-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/kactivities-stats/-/tree/5.107.0-1)
