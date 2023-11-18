@@ -1,5 +1,5 @@
 
-`release @ 20231117.1`
+`release @ 20231117.2`
 ======================
 
 Valve packages
@@ -165,7 +165,7 @@ Arch Linux packages
  * [`fwupd-efi/1.4-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/fwupd-efi/-/tree/1.4-1)
  * [`galileo-mura/v0.3-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/galileo-mura/-/tree/v0.3-1)
  * [`gamemode/1.7-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/gamemode/-/tree/1.7-1)
- * [`gamescope/3.13.5-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/gamescope/-/tree/3.13.5-2)
+ * [`gamescope/3.13.7-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/gamescope/-/tree/3.13.7-2)
  * [`gawk/5.2.2-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/gawk/-/tree/5.2.2-1)
  * [`gc/8.2.4-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/gc/-/tree/8.2.4-1)
  * [`gcab/1.5-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/gcab/-/tree/1.5-1)
