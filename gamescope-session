@@ -151,6 +151,9 @@ export QT_QPA_PLATFORM_THEME=kde
 # To play nice with the short term callback-based limiter for now
 export GAMESCOPE_LIMITER_FILE=$(mktemp /tmp/gamescope-limiter.XXXXXXXX)
 
+# Temporary crutch until dummy plane interactions / etc are figured out
+export GAMESCOPE_DISABLE_ASYNC_FLIPS=1
+
 export XCURSOR_THEME=steam
 
 # Workaround for Steam login issue while Steam client change propagates out of Beta
