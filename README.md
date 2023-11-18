@@ -1,5 +1,5 @@
 
-`release @ 20231116.2`
+`release @ 20231117.1`
 ======================
 
 Valve packages
@@ -780,7 +780,7 @@ Arch Linux packages
  * [`sshfs/3.7.3-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/sshfs/-/tree/3.7.3-1)
  * [`steam-jupiter-stable/1.0.0.78-1.1`](https://gitlab.archlinux.org/archlinux/packaging/packages/steam-jupiter-stable/-/tree/1.0.0.78-1.1)
  * [`steam_notif_daemon/v1.0.1-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/steam_notif_daemon/-/tree/v1.0.1-1)
- * [`steamdeck-dsp/0.38-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/steamdeck-dsp/-/tree/0.38-1)
+ * [`steamdeck-dsp/0.39-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/steamdeck-dsp/-/tree/0.39-1)
  * [`steamdeck-kde-presets/0.20-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/steamdeck-kde-presets/-/tree/0.20-1)
  * [`steamos-atomupd-client-git/r301.e0c2c4d-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/steamos-atomupd-client-git/-/tree/r301.e0c2c4d-2)
  * [`steamos-customizations-jupiter/3.5.20231113.1-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/steamos-customizations-jupiter/-/tree/3.5.20231113.1-1)
