@@ -7,7 +7,7 @@
 _basename=steam
 pkgname=steam-jupiter-stable
 pkgver=1.0.0.78
-pkgrel=1.1
+pkgrel=1.2
 pkgdesc="Valve's digital software delivery system - Jupiter bootstrapped packaging"
 url='https://steampowered.com/'
 arch=('x86_64')
@@ -34,7 +34,7 @@ conflicts=('steam')
 optdepends=('lib32-libnm: integration with networkmanager')
 
 # Jupiter: Including fully bootstrapped steam image on expected branch
-_fat_bootstrap=steam_jupiter_stable_bootstrapped_20231116.1.tar.xz
+_fat_bootstrap=steam_jupiter_stable_bootstrapped_20231122.1.tar.xz
 noextract=("$_fat_bootstrap")
 source=(https://repo.steampowered.com/${_basename}/pool/${_basename}/s/${_basename}/${_basename}_${pkgver}{.tar.gz,.dsc}
         http://latest-pacman.internal.steamos.cloud/misc/steam-snapshots/"$_fat_bootstrap"
@@ -43,13 +43,13 @@ source=(https://repo.steampowered.com/${_basename}/pool/${_basename}/s/${_basena
         steam-runtime.sh)
 sha512sums=('3cebb97bff58d8b6a9aa7e7127873a2290056db107c3a02a2c8e030b9ce3ef9ceb94c2f81eb7fb423b9afce50244646bbc0707d515217d1c5455ba8aa05562ca'
             'de653b037717dc457aacf8f683bde7ac4542ced90d53349a8140bcda8d0f990a914d56655b73013f465e1fd41ad10a5330ef764087740b6dad55cd7ca5a41cbf'
-            'ffa803155196ecdbdb28b596176f3ae74d9ba61e0ee46e3970f9f5175e0f52ddaf3a831faba5307a016e98a58b4b72aa630d87687b1eff0fb89f06676b41d2c0'
+            '17b7011fe7ae13834aa1f722724abfc3829ef8632bbabec2ae6b53ef0a9b6f1fc4db61b32056c62401e5aeb001e0f00d9e20f8ea045347b91cbe84ad4d0a919b'
             '85c66db5619fc70553fb4daa4bb9d7784f40586c771853d91147de99c48c58ac5727f2bae4e165a8fa898e9bcf4fb3bcce6c1409cc8edcf85a3965572456990d'
             '7d568c24f46902715c08797fc1148cfab9ee924d49c9bcd97cd1bd4106dfdd35409912ca1b598f50a50c62394f9618b595ca5bafdc4b9ee3b013398826cc4b01'
             '5e75c019e9fe8c67d686c4e3343dac1180a69a4bdb7d39b333415c63201eef9b98da5619dbf6fd8daa6884e65bc7f8afc9e52778682425e5a75987d527eae6f0')
 b2sums=('f84598cc8ff4f38057c21271288d8c9b6106da3e5256d14191079272009b493e9ec51da80483e8767706ad4670b59e9f727285ea3c4c2a340f3230b9938492ea'
         '6fbc9f8128fb98cf5bc764a28da490241f329d276c47712cf9ac99afab2457e5b851c2e078f50f85e400a350675a38defb1f87a7b858a80efd017629659abf7b'
-        '26463789e2ff3bf2f587b87755688010b5e842a0add5296280d8404ddb53f284bb410a544bc1ce672b66d8f851f320cf7ba3ae462805ad3ef7e6a23238435e22'
+        '53cf2df2786f6bcbb3ca4c608b8d724690cae4f872ca4ac04f178e37904d57fd0dcf610141f5cf5a9c565d9a2b90a0fb240e42b29fdef0ae6edb24523dcb56e5'
         '8ae0bfdf6bc62460a64d84acb3dbd5d95257749f2560938eefd68a58727f310c8450ce756ed938ebe46a3074860d1abdd744689caf9bde01c89ae02f8c63179e'
         '987eeed26caf80e31ce289116f7d2fc7742949a6b5681005c0257a0fa490bb0bbbdde5ab1ec4794732bf58a22cabe9859c4c6a0f19b8be8aa97b5df659304657'
         'c6bac99336b7c30fec7cdbaf9e949555c687dd9dff50bcae136134d6314f4b841f5fc66ddb2caac1b003690b926fd4afbdc11da143b4674db4b75f27709fdd23')
