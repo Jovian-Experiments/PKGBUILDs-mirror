@@ -1,5 +1,5 @@
 
-`release @ 20231117.3`
+`release @ 20231122.1`
 ======================
 
 Valve packages
@@ -215,11 +215,11 @@ Arch Linux packages
  * [`hicolor-icon-theme/0.17-3`](https://gitlab.archlinux.org/archlinux/packaging/packages/hicolor-icon-theme/-/tree/0.17-3)
  * [`hidapi/0.14.0-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/hidapi/-/tree/0.14.0-1)
  * [`highway/1.0.4-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/highway/-/tree/1.0.4-1)
- * [`holo-desync/3.5.20231113.1-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/steamos-customizations-git/-/tree/3.5.20231113.1-1)
+ * [`holo-desync/3.5.20231122.1-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/steamos-customizations-git/-/tree/3.5.20231122.1-1)
  * [`holo-dmi-rules/1.0-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/holo-dmi-rules/-/tree/1.0-1)
  * [`holo-keyring/20220203-4`](https://gitlab.archlinux.org/archlinux/packaging/packages/holo-keyring/-/tree/20220203-4)
  * [`holo-nix-offload/0.1-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/holo-nix-offload/-/tree/0.1-1)
- * [`holo-sudo/3.5.20231113.1-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/steamos-customizations-git/-/tree/3.5.20231113.1-1)
+ * [`holo-sudo/3.5.20231122.1-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/steamos-customizations-git/-/tree/3.5.20231122.1-1)
  * [`htop/3.2.2-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/htop/-/tree/3.2.2-1)
  * [`hunspell/1.7.2-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/hunspell/-/tree/1.7.2-1)
  * [`hwdata/0.371-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/hwdata/-/tree/0.371-1)
@@ -537,7 +537,7 @@ Arch Linux packages
  * [`linux-api-headers/6.3-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/linux-api-headers/-/tree/6.3-1)
  * [`linux-firmware-neptune/jupiter.20231113.1-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/linux-firmware-neptune/-/tree/jupiter.20231113.1-1)
  * [`linux-firmware-neptune-whence/jupiter.20231113.1-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/linux-firmware-neptune/-/tree/jupiter.20231113.1-1)
- * [`linux-neptune-61/6.1.52.valve7-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/linux-neptune-61/-/tree/6.1.52.valve7-1)
+ * [`linux-neptune-61/6.1.52.valve9-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/linux-neptune-61/-/tree/6.1.52.valve9-1)
  * [`llvm-libs/15.0.7-3`](https://gitlab.archlinux.org/archlinux/packaging/packages/llvm-libs/-/tree/15.0.7-3)
  * [`lm_sensors/1:3.6.0.r41.g31d1f125-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/lm_sensors/-/tree/1:3.6.0.r41.g31d1f125-2)
  * [`lmdb/0.9.30-3`](https://gitlab.archlinux.org/archlinux/packaging/packages/lmdb/-/tree/0.9.30-3)
@@ -778,12 +778,12 @@ Arch Linux packages
  * [`sratom/0.6.14-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/sratom/-/tree/0.6.14-1)
  * [`srt/1.5.1-3`](https://gitlab.archlinux.org/archlinux/packaging/packages/srt/-/tree/1.5.1-3)
  * [`sshfs/3.7.3-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/sshfs/-/tree/3.7.3-1)
- * [`steam-jupiter-stable/1.0.0.78-1.1`](https://gitlab.archlinux.org/archlinux/packaging/packages/steam-jupiter-stable/-/tree/1.0.0.78-1.1)
+ * [`steam-jupiter-stable/1.0.0.78-1.2`](https://gitlab.archlinux.org/archlinux/packaging/packages/steam-jupiter-stable/-/tree/1.0.0.78-1.2)
  * [`steam_notif_daemon/v1.0.1-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/steam_notif_daemon/-/tree/v1.0.1-1)
  * [`steamdeck-dsp/0.39-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/steamdeck-dsp/-/tree/0.39-1)
  * [`steamdeck-kde-presets/0.20-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/steamdeck-kde-presets/-/tree/0.20-1)
  * [`steamos-atomupd-client-git/r301.e0c2c4d-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/steamos-atomupd-client-git/-/tree/r301.e0c2c4d-2)
- * [`steamos-customizations-jupiter/3.5.20231113.1-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/steamos-customizations-jupiter/-/tree/3.5.20231113.1-1)
+ * [`steamos-customizations-jupiter/3.5.20231122.1-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/steamos-customizations-jupiter/-/tree/3.5.20231122.1-1)
  * [`steamos-efi/20230925.1-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/steamos-efi/-/tree/20230925.1-1)
  * [`steamos-kdumpst-layer/1.0-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/steamos-kdumpst-layer/-/tree/1.0-1)
  * [`steamos-log-submitter/0.3.1-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/steamos-log-submitter/-/tree/0.3.1-1)
