@@ -1,5 +1,5 @@
 
-`main @ 20231130.1000`
+`main @ 20231201.1000`
 ======================
 
 Valve packages
@@ -56,7 +56,7 @@ Valve packages
  * [`f3` — `jupiter-main/f3-8.0-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/f3-8.0-2)
  * [`flatpak` — `jupiter-main/flatpak-1.14.4-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/flatpak-1.14.4-2)
  * [`galileo-mura` — `jupiter-main/galileo-mura-v0.3-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/galileo-mura-v0.3-1)
- * [`gamescope` — `jupiter-main/gamescope-3.13.11-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/gamescope-3.13.11-1)
+ * [`gamescope` — `jupiter-main/gamescope-3.13.12-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/gamescope-3.13.12-2)
  * [`gpu-trace` — `jupiter-main/gpu-trace-2.12-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/gpu-trace-2.12-1)
  * [`holo-dmi-rules` — `jupiter-main/holo-dmi-rules-1.0-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/holo-dmi-rules-1.0-1)
  * [`holo-nix-offload` — `jupiter-main/holo-nix-offload-0.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/holo-nix-offload-0.1-1)
@@ -74,7 +74,7 @@ Valve packages
  * [`linux-firmware-neptune` — `jupiter-main/linux-firmware-neptune-jupiter.20231113.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/linux-firmware-neptune-jupiter.20231113.1-1)
  * [`linux-firmware-neptune-whence` — `jupiter-main/linux-firmware-neptune-jupiter.20231113.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/linux-firmware-neptune-jupiter.20231113.1-1)
  * [`linux-neptune-61` — `jupiter-main/linux-neptune-61-6.1.52.valve9-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/linux-neptune-61-6.1.52.valve9-1)
- * [`mangohud` — `jupiter-main/mangohud-josh.core.fix-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/mangohud-josh.core.fix-1)
+ * [`mangohud` — `jupiter-main/mangohud-josh.core.fix.r2.ge9d9f68-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/mangohud-josh.core.fix.r2.ge9d9f68-1)
  * [`mesa` — `jupiter-main/mesa-23.1.3.170235.radeonsi_3.5.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/mesa-23.1.3.170235.radeonsi_3.5.1-1)
  * [`mesa-vdpau` — `jupiter-main/mesa-23.1.3.170235.radeonsi_3.5.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/mesa-23.1.3.170235.radeonsi_3.5.1-1)
  * [`networkmanager` — `jupiter-main/networkmanager-1.42.6-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/networkmanager-1.42.6-1.1)
