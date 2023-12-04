@@ -1,5 +1,5 @@
 
-`release @ 20231201.1`
+`release @ 20231204.1`
 ======================
 
 Valve packages
@@ -165,7 +165,7 @@ Arch Linux packages
  * [`fwupd-efi/1.4-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/fwupd-efi/-/tree/1.4-1)
  * [`galileo-mura/v0.3-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/galileo-mura/-/tree/v0.3-1)
  * [`gamemode/1.7-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/gamemode/-/tree/1.7-1)
- * [`gamescope/3.13.13-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/gamescope/-/tree/3.13.13-1)
+ * [`gamescope/3.13.16-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/gamescope/-/tree/3.13.16-1)
  * [`gawk/5.2.2-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/gawk/-/tree/5.2.2-1)
  * [`gc/8.2.4-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/gc/-/tree/8.2.4-1)
  * [`gcab/1.5-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/gcab/-/tree/1.5-1)
@@ -249,7 +249,7 @@ Arch Linux packages
  * [`jupiter-fan-control/20231114.3-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/jupiter-fan-control/-/tree/20231114.3-1)
  * [`jupiter-firewall/0.1-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/jupiter-firewall/-/tree/0.1-1)
  * [`jupiter-hw-support/3.5.20231201.1-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/jupiter-hw-support/-/tree/3.5.20231201.1-1)
- * [`jupiter-legacy-support/1.144-3`](https://gitlab.archlinux.org/archlinux/packaging/packages/jupiter-legacy-support/-/tree/1.144-3)
+ * [`jupiter-legacy-support/1.145-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/jupiter-legacy-support/-/tree/1.145-1)
  * [`jupiter-resolved-nomdns/1.0-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/jupiter-resolved-nomdns/-/tree/1.0-1)
  * [`jupiter-steamos-log-submitter/1-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/jupiter-steamos-log-submitter/-/tree/1-1)
  * [`kaccounts-integration/23.04.2-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/kaccounts-integration/-/tree/23.04.2-1)
@@ -538,7 +538,7 @@ Arch Linux packages
  * [`linux-api-headers/6.3-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/linux-api-headers/-/tree/6.3-1)
  * [`linux-firmware-neptune/jupiter.20231113.1-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/linux-firmware-neptune/-/tree/jupiter.20231113.1-1)
  * [`linux-firmware-neptune-whence/jupiter.20231113.1-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/linux-firmware-neptune/-/tree/jupiter.20231113.1-1)
- * [`linux-neptune-61/6.1.52.valve9-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/linux-neptune-61/-/tree/6.1.52.valve9-1)
+ * [`linux-neptune-61/6.1.52.valve10-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/linux-neptune-61/-/tree/6.1.52.valve10-1)
  * [`llvm-libs/15.0.7-3`](https://gitlab.archlinux.org/archlinux/packaging/packages/llvm-libs/-/tree/15.0.7-3)
  * [`lm_sensors/1:3.6.0.r41.g31d1f125-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/lm_sensors/-/tree/1:3.6.0.r41.g31d1f125-2)
  * [`lmdb/0.9.30-3`](https://gitlab.archlinux.org/archlinux/packaging/packages/lmdb/-/tree/0.9.30-3)
@@ -553,7 +553,7 @@ Arch Linux packages
  * [`maliit-framework/2.3.0-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/maliit-framework/-/tree/2.3.0-1)
  * [`maliit-keyboard/2.3.1-2.1`](https://gitlab.archlinux.org/archlinux/packaging/packages/maliit-keyboard/-/tree/2.3.1-2.1)
  * [`mandoc/1.14.6-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/mandoc/-/tree/1.14.6-2)
- * [`mangohud/0.7.0.r77.gdbb0743-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/mangohud/-/tree/0.7.0.r77.gdbb0743-1)
+ * [`mangohud/0.7.0.r78.gc5c82db-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/mangohud/-/tree/0.7.0.r78.gc5c82db-1)
  * [`md4c/0.4.8-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/md4c/-/tree/0.4.8-1)
  * [`mdadm/4.2-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/mdadm/-/tree/4.2-2)
  * [`media-player-info/24-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/media-player-info/-/tree/24-2)
@@ -835,7 +835,7 @@ Arch Linux packages
  * [`volume_key/0.3.12-8`](https://gitlab.archlinux.org/archlinux/packaging/packages/volume_key/-/tree/0.3.12-8)
  * [`vpower/1.4.1-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/vpower/-/tree/1.4.1-1)
  * [`vulkan-icd-loader/1.3.251-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/vulkan-icd-loader/-/tree/1.3.251-1)
- * [`vulkan-radeon/23.3.0_devel.177475.steamos_23.9.3-3`](https://gitlab.archlinux.org/archlinux/packaging/packages/vulkan-radeon/-/tree/23.3.0_devel.177475.steamos_23.9.3-3)
+ * [`vulkan-radeon/23.3.0_devel.177476.steamos_23.9.4-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/vulkan-radeon/-/tree/23.3.0_devel.177476.steamos_23.9.4-1)
  * [`vulkan-tools/1.3.245-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/vulkan-tools/-/tree/1.3.245-1)
  * [`wayland/1.22.0-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/wayland/-/tree/1.22.0-1)
  * [`wayland-utils/1.2.0-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/wayland-utils/-/tree/1.2.0-1)
