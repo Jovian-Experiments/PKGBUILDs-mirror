@@ -1,5 +1,5 @@
 
-`release @ 20231204.1`
+`release @ 20231206.1`
 ======================
 
 Valve packages
@@ -248,7 +248,7 @@ Arch Linux packages
  * [`jupiter-dock-updater-bin/20231103.01-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/jupiter-dock-updater-bin/-/tree/20231103.01-1)
  * [`jupiter-fan-control/20231114.3-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/jupiter-fan-control/-/tree/20231114.3-1)
  * [`jupiter-firewall/0.1-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/jupiter-firewall/-/tree/0.1-1)
- * [`jupiter-hw-support/3.5.20231201.1-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/jupiter-hw-support/-/tree/3.5.20231201.1-1)
+ * [`jupiter-hw-support/3.5.20231206.1-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/jupiter-hw-support/-/tree/3.5.20231206.1-1)
  * [`jupiter-legacy-support/1.145-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/jupiter-legacy-support/-/tree/1.145-1)
  * [`jupiter-resolved-nomdns/1.0-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/jupiter-resolved-nomdns/-/tree/1.0-1)
  * [`jupiter-steamos-log-submitter/1-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/jupiter-steamos-log-submitter/-/tree/1-1)
