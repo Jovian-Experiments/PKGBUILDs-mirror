@@ -1,0 +1,25 @@
+From bc435841c141ad38768b6cb1a7ad45e8bb13c7d2 Mon Sep 17 00:00:00 2001
+From: Julian Bouzas <julian.bouzas@collabora.com>
+Date: Mon, 7 Nov 2022 09:35:03 -0500
+Subject: [PATCH] echo-cancel: enable monitor mode by default
+
+---
+ src/modules/module-echo-cancel.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/src/modules/module-echo-cancel.c b/src/modules/module-echo-cancel.c
+index 9dba8c51b..6cc6e27a2 100644
+--- a/src/modules/module-echo-cancel.c
++++ b/src/modules/module-echo-cancel.c
+@@ -1102,7 +1102,7 @@ int pipewire__module_init(struct pw_impl_module *module, const char *args)
+ 		goto error;
+ 	}
+ 
+-	impl->monitor_mode = false;
++	impl->monitor_mode = true;
+ 	if ((str = pw_properties_get(props, "monitor.mode")) != NULL)
+ 		impl->monitor_mode = pw_properties_parse_bool(str);
+ 
+-- 
+GitLab
+

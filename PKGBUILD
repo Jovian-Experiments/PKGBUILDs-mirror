@@ -16,9 +16,9 @@ pkgname=(
   pipewire-v4l2
   pipewire-x11-bell
 )
-_commit=acf7c0af0bf31b937c41e916a73c67ae0a253632  # tags/0.3.61-2-dv
-pkgver=0.3.62.2.dv
-pkgrel=2
+_commit=3a443b4e1c9730675c7de0453a6279ab9ee263fd  # tags/0.3.62
+pkgver=0.3.62
+pkgrel=1.2
 epoch=1
 pkgdesc="Low-latency audio/video router and processor"
 url="https://pipewire.org"
@@ -57,8 +57,17 @@ makedepends=(
 )
 checkdepends=(desktop-file-utils)
 options=(debug)
-source=(git+https://gitlab.freedesktop.org/julian/pipewire.git#commit=$_commit)
-sha256sums=('SKIP')
+source=(git+https://gitlab.freedesktop.org/pipewire/pipewire.git#commit=$_commit
+        bc435841c141ad38768b6cb1a7ad45e8bb13c7d2.patch # Holo: TODO: Bug reference
+        acf7c0af0bf31b937c41e916a73c67ae0a253632.patch # Holo: TODO: Bug reference
+
+        0001-Bluez5-backend-native-HSP-AG-release-SCO-link-on-AT-.patch # Holo: upstream MR 1792
+)
+
+sha256sums=('SKIP'
+            'aa7215b60f1ade4f9af33cac09bb68f4fb5e1598365018bd6d48a00d651fe7c2'
+            'a47d9c20793ae81e0bc0fbed005348036904eacaa37a69f2b86a1c49668e97cb'
+            '5bab5b6ac9903635177190280592e256852f11aacb633d319318d340c364e7a6')
 
 pkgver() {
   cd pipewire
@@ -68,11 +77,22 @@ pkgver() {
 prepare() {
   cd pipewire
 
+  # Holo: apply downstream patches
+  local src
+  for src in "${source[@]}"; do
+    src="${src%%::*}"
+    src="${src##*/}"
+    [[ $src = *.patch ]] || continue
+    echo "Applying patch $src..."
+    patch -Np1 < "../$src"
+  done
+
   # remove export of LD_LIBRARY_PATH for pw-jack as it would add /usr/lib
   sed -i '/LD_LIBRARY_PATH/d' pipewire-jack/src/pw-jack.in
 }
 
 build() {
+  # Holo: our build is lacking libcamera support
   local meson_options=(
     -D bluez5-codec-lc3plus=disabled
     -D docs=enabled
@@ -90,7 +110,7 @@ build() {
 }
 
 check() {
-  # Tests disabled as some seem to be failing when running under toolbox
+  # Holo: Tests disabled as some seem to be failing when running under toolbox
   # Re-enable once that is sorted, see:
   # https://gitlab.steamos.cloud/jupiter/tasks/-/issues/758
   #meson test -C build --print-errorlogs
@@ -132,6 +152,8 @@ package_pipewire() {
     'realtime-privileges: realtime privileges with rt module'
     'rtkit: realtime privileges with rtkit module'
   )
+  # Holo: temporary hack, until we move to a split package
+  # providing libpipewire, just like upstream Arch
   provides=("libpipewire=$_ver" "libpipewire-$_ver.so")
   conflicts=(libpipewire)
   install=pipewire.install
@@ -248,6 +270,7 @@ package_pipewire-alsa() {
     pipewire-audio
     pipewire-session-manager
   )
+  conflicts=(pulseaudio-alsa)
   provides=(pulseaudio-alsa)
 
   mkdir -p "$pkgdir/etc/alsa/conf.d"
