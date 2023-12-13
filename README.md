@@ -1,5 +1,5 @@
 
-`release @ 20231212.1`
+`release @ 20231213.1`
 ======================
 
 Valve packages
@@ -165,7 +165,7 @@ Arch Linux packages
  * [`fwupd-efi/1.4-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/fwupd-efi/-/tree/1.4-1)
  * [`galileo-mura/v0.3-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/galileo-mura/-/tree/v0.3-1)
  * [`gamemode/1.7-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/gamemode/-/tree/1.7-1)
- * [`gamescope/3.13.16.1-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/gamescope/-/tree/3.13.16.1-1)
+ * [`gamescope/3.13.16.4-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/gamescope/-/tree/3.13.16.4-1)
  * [`gawk/5.2.2-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/gawk/-/tree/5.2.2-1)
  * [`gc/8.2.4-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/gc/-/tree/8.2.4-1)
  * [`gcab/1.5-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/gcab/-/tree/1.5-1)
@@ -785,7 +785,7 @@ Arch Linux packages
  * [`steamdeck-kde-presets/0.20-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/steamdeck-kde-presets/-/tree/0.20-1)
  * [`steamos-atomupd-client-git/r301.e0c2c4d-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/steamos-atomupd-client-git/-/tree/r301.e0c2c4d-2)
  * [`steamos-customizations-jupiter/3.5.20231122.1-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/steamos-customizations-jupiter/-/tree/3.5.20231122.1-1)
- * [`steamos-efi/20230925.1-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/steamos-efi/-/tree/20230925.1-1)
+ * [`steamos-efi/20231213.1-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/steamos-efi/-/tree/20231213.1-1)
  * [`steamos-kdumpst-layer/1.0-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/steamos-kdumpst-layer/-/tree/1.0-1)
  * [`steamos-log-submitter/0.3.1-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/steamos-log-submitter/-/tree/0.3.1-1)
  * [`steamos-reset/20231006.1-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/steamos-reset/-/tree/20231006.1-1)
