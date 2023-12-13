@@ -18,7 +18,7 @@ pkgname=(
 )
 _commit=3a443b4e1c9730675c7de0453a6279ab9ee263fd  # tags/0.3.62
 pkgver=0.3.62
-pkgrel=1.2
+pkgrel=1.3
 epoch=1
 pkgdesc="Low-latency audio/video router and processor"
 url="https://pipewire.org"
@@ -61,12 +61,14 @@ source=(git+https://gitlab.freedesktop.org/pipewire/pipewire.git#commit=$_commit
         bc435841c141ad38768b6cb1a7ad45e8bb13c7d2.patch # Holo: TODO: Bug reference
         acf7c0af0bf31b937c41e916a73c67ae0a253632.patch # Holo: TODO: Bug reference
 
-        0001-Bluez5-backend-native-HSP-AG-release-SCO-link-on-AT-.patch # Holo: upstream MR 1792
+        e1367c439c07becfb5ee888ca1a657257f9ed341.patch # Holo: upstream MR 1681, shipped in 0.3.78
+        0001-Bluez5-backend-native-HSP-AG-release-SCO-link-on-AT-.patch # Holo: upstream MR 1792, shipping post 1.0.0
 )
 
 sha256sums=('SKIP'
             'aa7215b60f1ade4f9af33cac09bb68f4fb5e1598365018bd6d48a00d651fe7c2'
             'a47d9c20793ae81e0bc0fbed005348036904eacaa37a69f2b86a1c49668e97cb'
+            '28aebf8a628df4233c320f06cc73b05bb32990c8dd61722fcbbab0ac1defb381'
             '5bab5b6ac9903635177190280592e256852f11aacb633d319318d340c364e7a6')
 
 pkgver() {
