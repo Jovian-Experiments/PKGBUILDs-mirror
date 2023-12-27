@@ -1,5 +1,5 @@
 
-`release @ 20231213.2`
+`release @ 20231226.1`
 ======================
 
 Valve packages
@@ -538,7 +538,7 @@ Arch Linux packages
  * [`linux-api-headers/6.3-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/linux-api-headers/-/tree/6.3-1)
  * [`linux-firmware-neptune/jupiter.20231113.1-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/linux-firmware-neptune/-/tree/jupiter.20231113.1-1)
  * [`linux-firmware-neptune-whence/jupiter.20231113.1-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/linux-firmware-neptune/-/tree/jupiter.20231113.1-1)
- * [`linux-neptune-61/6.1.52.valve10-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/linux-neptune-61/-/tree/6.1.52.valve10-1)
+ * [`linux-neptune-61/6.1.52.valve12-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/linux-neptune-61/-/tree/6.1.52.valve12-1)
  * [`llvm-libs/15.0.7-3`](https://gitlab.archlinux.org/archlinux/packaging/packages/llvm-libs/-/tree/15.0.7-3)
  * [`lm_sensors/1:3.6.0.r41.g31d1f125-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/lm_sensors/-/tree/1:3.6.0.r41.g31d1f125-2)
  * [`lmdb/0.9.30-3`](https://gitlab.archlinux.org/archlinux/packaging/packages/lmdb/-/tree/0.9.30-3)
@@ -713,7 +713,6 @@ Arch Linux packages
  * [`python-sysv_ipc/1.1.0-3`](https://gitlab.archlinux.org/archlinux/packaging/packages/python-sysv_ipc/-/tree/1.1.0-3)
  * [`python-typing_extensions/4.6.3-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/python-typing_extensions/-/tree/4.6.3-1)
  * [`python-utils/3.6.0-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/python-utils/-/tree/3.6.0-1)
- * [`python-vdf/3.4-2.1`](https://gitlab.archlinux.org/archlinux/packaging/packages/python-vdf/-/tree/3.4-2.1)
  * [`python-yaml/6.0-3`](https://gitlab.archlinux.org/archlinux/packaging/packages/python-yaml/-/tree/6.0-3)
  * [`python-yarl/1.9.2-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/python-yarl/-/tree/1.9.2-1)
  * [`qca-qt5/2.3.6-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/qca-qt5/-/tree/2.3.6-2)
@@ -787,9 +786,9 @@ Arch Linux packages
  * [`steamos-customizations-jupiter/3.5.20231122.1-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/steamos-customizations-jupiter/-/tree/3.5.20231122.1-1)
  * [`steamos-efi/20231213.1-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/steamos-efi/-/tree/20231213.1-1)
  * [`steamos-kdumpst-layer/1.0-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/steamos-kdumpst-layer/-/tree/1.0-1)
- * [`steamos-log-submitter/0.3.1-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/steamos-log-submitter/-/tree/0.3.1-1)
+ * [`steamos-log-submitter/0.4.1-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/steamos-log-submitter/-/tree/0.4.1-1)
  * [`steamos-reset/20231006.1-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/steamos-reset/-/tree/20231006.1-1)
- * [`steamos-systemreport/0.2-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/steamos-systemreport/-/tree/0.2-1)
+ * [`steamos-systemreport/0.4-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/steamos-systemreport/-/tree/0.4-1)
  * [`steamos-tweak-mtu-probing/1-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/steamos-tweak-mtu-probing/-/tree/1-1)
  * [`strace/6.3-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/strace/-/tree/6.3-1)
  * [`sudo/1.9.13.p3-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/sudo/-/tree/1.9.13.p3-1)
