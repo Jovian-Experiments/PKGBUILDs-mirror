@@ -1,7 +1,7 @@
 # Maintainer Ethan Geller (ethang@valvesoftware.com)
 
 pkgname=steamdeck-dsp
-_srctag=0.41
+_srctag=0.42
 pkgver=${_srctag#galileo-}
 pkgrel=1
 arch=('any')
