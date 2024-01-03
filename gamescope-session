@@ -111,6 +111,9 @@ export STEAM_GAMESCOPE_VRR_SUPPORTED=1
 # When set to 1, a toggle will show up in the steamui to control whether dynamic refresh rate is applied to the steamui
 export STEAM_GAMESCOPE_DYNAMIC_REFRESH_IN_STEAM_SUPPORTED=0
 
+# Allow status LED brightness control
+export STEAM_ENABLE_STATUS_LED_BRIGHTNESS=1
+
 # Don't wait for buffers to idle on the client side before sending them to gamescope
 export vk_xwayland_wait_ready=false
 
@@ -155,6 +158,7 @@ export GAMESCOPE_LIMITER_FILE=$(mktemp /tmp/gamescope-limiter.XXXXXXXX)
 export GAMESCOPE_DISABLE_ASYNC_FLIPS=1
 
 export XCURSOR_THEME=steam
+export XCURSOR_SCALE=256
 
 # Workaround for Steam login issue while Steam client change propagates out of Beta
 touch ~/.steam/root/config/SteamAppData.vdf || true
@@ -259,10 +263,10 @@ gamescope \
 	--hide-cursor-delay 3000 \
 	--max-scale 2 \
 	--fade-out-duration 200 \
+	--cursor-scale-height 720 \
 	-e -R "$socket" -T "$stats" \
 	-O '*',eDP-1 \
 	"${mura_args[@]}" \
-	--cursor-hotspot 5,3 --cursor /usr/share/steamos/steamos-cursor.png \
 	&
 gamescope_pid="$!"
 
@@ -311,10 +315,6 @@ if [[ "$short_session_count" -ge "$short_session_count_before_reset" ]]; then
 	# rearm
 	rm "$short_session_tracker_file"
 fi
-
-# This will re-send automount notifications for steam, and has a builtin timeout to wait for steam to come up.
-# _eventually_ steam should learn to talk to udisks so we don't have to rube goldberg this info to it.
-/usr/bin/steamos-polkit-helpers/steamos-retrigger-automounts
 
 if [[ -x $HOME/devkit-game/devkit-steam ]]; then
 	steam_notif_daemon &
