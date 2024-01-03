@@ -1,7 +1,7 @@
 # Maintainer: ghgh
 
 pkgname=jupiter-validation-tools
-_tag=jupiter-20230628.2
+_tag=jupiter-20240103.2
 _tagstrip=${_tag#jupiter-}
 pkgver=${_tagstrip//-/.}
 pkgrel=2
