@@ -1,5 +1,5 @@
 
-`release @ 20231226.1`
+`release @ 20240104.1`
 ======================
 
 Valve packages
@@ -165,7 +165,7 @@ Arch Linux packages
  * [`fwupd-efi/1.4-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/fwupd-efi/-/tree/1.4-1)
  * [`galileo-mura/v0.3-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/galileo-mura/-/tree/v0.3-1)
  * [`gamemode/1.7-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/gamemode/-/tree/1.7-1)
- * [`gamescope/3.13.16.4-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/gamescope/-/tree/3.13.16.4-1)
+ * [`gamescope/3.13.16.4-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/gamescope/-/tree/3.13.16.4-2)
  * [`gawk/5.2.2-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/gawk/-/tree/5.2.2-1)
  * [`gc/8.2.4-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/gc/-/tree/8.2.4-1)
  * [`gcab/1.5-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/gcab/-/tree/1.5-1)
@@ -248,7 +248,7 @@ Arch Linux packages
  * [`jupiter-dock-updater-bin/20231103.01-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/jupiter-dock-updater-bin/-/tree/20231103.01-1)
  * [`jupiter-fan-control/20231114.3-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/jupiter-fan-control/-/tree/20231114.3-1)
  * [`jupiter-firewall/0.1-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/jupiter-firewall/-/tree/0.1-1)
- * [`jupiter-hw-support/3.5.20231213.1-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/jupiter-hw-support/-/tree/3.5.20231213.1-1)
+ * [`jupiter-hw-support/3.5.20240103.1-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/jupiter-hw-support/-/tree/3.5.20240103.1-1)
  * [`jupiter-legacy-support/1.145-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/jupiter-legacy-support/-/tree/1.145-1)
  * [`jupiter-resolved-nomdns/1.0-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/jupiter-resolved-nomdns/-/tree/1.0-1)
  * [`jupiter-steamos-log-submitter/1-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/jupiter-steamos-log-submitter/-/tree/1-1)
@@ -538,7 +538,7 @@ Arch Linux packages
  * [`linux-api-headers/6.3-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/linux-api-headers/-/tree/6.3-1)
  * [`linux-firmware-neptune/jupiter.20231113.1-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/linux-firmware-neptune/-/tree/jupiter.20231113.1-1)
  * [`linux-firmware-neptune-whence/jupiter.20231113.1-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/linux-firmware-neptune/-/tree/jupiter.20231113.1-1)
- * [`linux-neptune-61/6.1.52.valve12-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/linux-neptune-61/-/tree/6.1.52.valve12-1)
+ * [`linux-neptune-61/6.1.52.valve14-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/linux-neptune-61/-/tree/6.1.52.valve14-1)
  * [`llvm-libs/15.0.7-3`](https://gitlab.archlinux.org/archlinux/packaging/packages/llvm-libs/-/tree/15.0.7-3)
  * [`lm_sensors/1:3.6.0.r41.g31d1f125-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/lm_sensors/-/tree/1:3.6.0.r41.g31d1f125-2)
  * [`lmdb/0.9.30-3`](https://gitlab.archlinux.org/archlinux/packaging/packages/lmdb/-/tree/0.9.30-3)
