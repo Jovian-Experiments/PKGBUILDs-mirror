@@ -18,7 +18,7 @@ pkgname=(
 )
 _commit=3a443b4e1c9730675c7de0453a6279ab9ee263fd  # tags/0.3.62
 pkgver=0.3.62
-pkgrel=1.3
+pkgrel=1.4
 epoch=1
 pkgdesc="Low-latency audio/video router and processor"
 url="https://pipewire.org"
@@ -112,11 +112,7 @@ build() {
 }
 
 check() {
-  # Holo: Tests disabled as some seem to be failing when running under toolbox
-  # Re-enable once that is sorted, see:
-  # https://gitlab.steamos.cloud/jupiter/tasks/-/issues/758
-  #meson test -C build --print-errorlogs
-  true
+  meson test -C build --print-errorlogs
 }
 
 _pick() {
