@@ -7,7 +7,7 @@
 pkgbase=bluez
 pkgname=('bluez' 'bluez-utils' 'bluez-libs' 'bluez-cups' 'bluez-hid2hci' 'bluez-plugins')
 pkgver=5.69
-pkgrel=1.2
+pkgrel=1.3
 url="http://www.bluez.org/"
 arch=('x86_64')
 license=('GPL2')
@@ -17,6 +17,7 @@ source=(https://www.kernel.org/pub/linux/bluetooth/${pkgname}-${pkgver}.tar.{xz,
         AVRCP_TG_MDI_BV-04-C.patch         # SteamOS: For Bluetooth AVRCP certification test AVRCP/TG/MDI/BV-04-C, which requires a valid response from the get_element_attributes command.
         0001-valve-bluetooth-config.patch  # SteamOS: Enable compatibility with devices like AirPods Pro
         0002-valve-bluetooth-phy.patch     # SteamOS: Enable the phy
+        0003-tools-avtest-Add-reject-code-option.patch # SteamOS: For Bluetooth qualification tests A2DP/SNK/AVP/…, merged in 5.71
 )
 # see https://www.kernel.org/pub/linux/bluetooth/sha256sums.asc
 sha256sums=('bc5a35ddc7c72d0d3999a0d7b2175c8b7d57ab670774f8b5b4900ff38a2627fc'
@@ -24,7 +25,8 @@ sha256sums=('bc5a35ddc7c72d0d3999a0d7b2175c8b7d57ab670774f8b5b4900ff38a2627fc'
             '46c021be659c9a1c4e55afd04df0c059af1f3d98a96338236412e449bf7477b4'
             'd863bd52917e4f5819b23ae5e64a34c5b02a0cfdf3969290bfce0d26dfe137b4'
             '54f7fc21fe0b7caf8018e12c8ca368bb308aeb757acf8b6038a6cbecad735ac3'
-            '5d291d833c234a14b6162e3cb14eeff41505f5c3bb7c74528b65cb10597f39cb')
+            '5d291d833c234a14b6162e3cb14eeff41505f5c3bb7c74528b65cb10597f39cb'
+            'd0c9758335d1b5c21257320ee00a110553a135d41f77007ea583610d71705750')
 validpgpkeys=('E932D120BC2AEC444E558F0106CA9F5D1DCF2659') # Marcel Holtmann <marcel@holtmann.org>
 
 build() {
@@ -56,6 +58,7 @@ prepare() {
   patch -d "${pkgname}"-${pkgver} -p1 -i "${srcdir}"/AVRCP_TG_MDI_BV-04-C.patch
   patch -d "${pkgname}"-${pkgver} -p1 -i "${srcdir}"/0001-valve-bluetooth-config.patch
   patch -d "${pkgname}"-${pkgver} -p1 -i "${srcdir}"/0002-valve-bluetooth-phy.patch
+  patch -d "${pkgname}"-${pkgver} -p1 -i "${srcdir}"/0003-tools-avtest-Add-reject-code-option.patch
 }
 
 package_bluez() {
