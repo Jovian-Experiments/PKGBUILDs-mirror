@@ -13,7 +13,7 @@ pkgdesc="An open-source implementation of the OpenGL specification"
 # https://gitlab.steamos.cloud/jupiter/docs/-/wikis/How-to-make-a-new-Mesa-release#updating-the-radv-build-id
 _tag=steamos-23.9.6
 pkgver=23.3.0_devel.177485.steamos_23.9.6
-pkgrel=1
+pkgrel=2
 arch=('x86_64')
 makedepends=('git' 'openssh' 'python-mako' 'libxml2' 'libx11' 'xorgproto' 'libdrm' 'libxshmfence'
              'wayland' 'wayland-protocols' 'zstd' 'elfutils' 'llvm'
