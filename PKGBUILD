@@ -9,7 +9,7 @@ pkgname=('vulkan-mesa-layers' 'opencl-mesa' 'vulkan-intel' 'vulkan-swrast' 'libv
 pkgdesc="An open-source implementation of the OpenGL specification"
 _tag=radeonsi-3.6.1
 pkgver=23.3.0.179670.radeonsi_3.6.1
-pkgrel=1
+pkgrel=2
 arch=('x86_64')
 makedepends=('git' 'openssh' 'python-mako' 'libxml2' 'libx11' 'xorgproto' 'libdrm' 'libxshmfence' 'libxxf86vm'
              'libxdamage' 'libvdpau' 'libva' 'wayland' 'wayland-protocols' 'zstd' 'elfutils' 'llvm'
