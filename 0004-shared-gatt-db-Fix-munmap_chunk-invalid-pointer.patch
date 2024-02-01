@@ -1,0 +1,94 @@
+From dacc693732634365251328159d44d1dc42bd37c5 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Fr=C3=A9d=C3=A9ric=20Danis?= <frederic.danis@collabora.com>
+Date: Thu, 11 Jan 2024 14:39:54 +0100
+Subject: [PATCH] shared/gatt-db: Fix munmap_chunk invalid pointer
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+
+PTS test GATT/CL/GAD/BV-03-C published a service starting at handle 0xfffd
+and ending at 0xffff.
+This resets the next_handle to 0 in gatt_db_insert_service() instead of
+setting it to 0x10000. Other services are added later.
+This could end-up by a crash in db_hash_update() if not enough space has
+been allocated for hash.iov and some entries are overwritten.
+
+Next_handle can be replaced by a last_handle variable which will not loop
+over. This can be replaced by queue_peek_tail() and computing the value,
+but keeping last_handle will avoid this sort of lookup.
+---
+ src/shared/gatt-db.c | 19 ++++++++++---------
+ 1 file changed, 10 insertions(+), 9 deletions(-)
+
+diff --git a/src/shared/gatt-db.c b/src/shared/gatt-db.c
+index 676f963ec..9559583d1 100644
+--- a/src/shared/gatt-db.c
++++ b/src/shared/gatt-db.c
+@@ -58,7 +58,7 @@ struct gatt_db {
+ 	struct bt_crypto *crypto;
+ 	uint8_t hash[16];
+ 	unsigned int hash_id;
+-	uint16_t next_handle;
++	uint16_t last_handle;
+ 	struct queue *services;
+ 
+ 	struct queue *notify_list;
+@@ -255,7 +255,7 @@ struct gatt_db *gatt_db_new(void)
+ 	db->crypto = bt_crypto_new();
+ 	db->services = queue_new();
+ 	db->notify_list = queue_new();
+-	db->next_handle = 0x0001;
++	db->last_handle = 0x0000;
+ 
+ 	return gatt_db_ref(db);
+ }
+@@ -356,14 +356,15 @@ static bool db_hash_update(void *user_data)
+ 
+ 	db->hash_id = 0;
+ 
+-	if (!db->next_handle)
++	if (gatt_db_isempty(db))
+ 		return false;
+ 
+-	hash.iov = new0(struct iovec, db->next_handle);
++	hash.iov = new0(struct iovec, db->last_handle + 1);
+ 	hash.i = 0;
+ 
+ 	gatt_db_foreach_service(db, NULL, service_gen_hash_m, &hash);
+-	bt_crypto_gatt_hash(db->crypto, hash.iov, db->next_handle, db->hash);
++	bt_crypto_gatt_hash(db->crypto, hash.iov, db->last_handle + 1,
++				db->hash);
+ 
+ 	for (i = 0; i < hash.i; i++)
+ 		free(hash.iov[i].iov_base);
+@@ -624,7 +625,7 @@ bool gatt_db_clear_range(struct gatt_db *db, uint16_t start_handle,
+ 
+ done:
+ 	if (gatt_db_isempty(db))
+-		db->next_handle = 0;
++		db->last_handle = 0;
+ 
+ 	return true;
+ }
+@@ -700,7 +701,7 @@ struct gatt_db_attribute *gatt_db_insert_service(struct gatt_db *db,
+ 		return NULL;
+ 
+ 	if (!handle)
+-		handle = db->next_handle;
++		handle = db->last_handle + 1;
+ 
+ 	if (num_handles < 1 || (handle + num_handles - 1) > UINT16_MAX)
+ 		return NULL;
+@@ -747,8 +748,8 @@ struct gatt_db_attribute *gatt_db_insert_service(struct gatt_db *db,
+ 	service->attributes[0]->handle = handle;
+ 	service->num_handles = num_handles;
+ 
+-	/* Fast-forward next_handle if the new service was added to the end */
+-	db->next_handle = MAX(handle + num_handles, db->next_handle);
++	/* Fast-forward last_handle if the new service was added to the end */
++	db->last_handle = MAX(handle + num_handles - 1, db->last_handle);
+ 
+ 	return service->attributes[0];
+ 
+-- 
+2.34.1
+
