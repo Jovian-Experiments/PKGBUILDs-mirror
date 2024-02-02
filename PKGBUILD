@@ -7,9 +7,9 @@ pkgbase=mesa
 # Jupiter: drop radv vulkan driver - separate sources and package
 pkgname=('vulkan-mesa-layers' 'opencl-mesa' 'vulkan-intel' 'vulkan-swrast' 'libva-mesa-driver' 'mesa-vdpau' 'mesa')
 pkgdesc="An open-source implementation of the OpenGL specification"
-_tag=radeonsi-3.6.1
-pkgver=23.3.0.179670.radeonsi_3.6.1
-pkgrel=2
+_tag=radeonsi-3.5.3
+pkgver=23.1.3.170245.radeonsi_3.5.3
+pkgrel=1
 arch=('x86_64')
 makedepends=('git' 'openssh' 'python-mako' 'libxml2' 'libx11' 'xorgproto' 'libdrm' 'libxshmfence' 'libxxf86vm'
              'libxdamage' 'libvdpau' 'libva' 'wayland' 'wayland-protocols' 'zstd' 'elfutils' 'llvm'
