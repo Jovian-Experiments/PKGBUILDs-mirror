@@ -5,51 +5,38 @@
 # Contributor: Geoffroy Carrier <geoffroy@archlinux.org>
 
 pkgbase=bluez
-pkgname=('bluez' 'bluez-utils' 'bluez-libs' 'bluez-cups' 'bluez-hid2hci' 'bluez-plugins')
-pkgver=5.69
-pkgrel=1.4
+#pkgname=('bluez' 'bluez-utils' 'bluez-libs' 'bluez-cups' 'bluez-hid2hci' 'bluez-plugins')
+# Jupiter: ship only a avdtptest package
+pkgname=('bluez-avdtptest')
+pkgver=5.71
+pkgrel=2.1 # See Jupiter sections
 url="http://www.bluez.org/"
 arch=('x86_64')
 license=('GPL2')
 makedepends=('dbus' 'libical' 'systemd' 'alsa-lib' 'json-c' 'ell' 'python-docutils')
-source=(https://www.kernel.org/pub/linux/bluetooth/${pkgname}-${pkgver}.tar.{xz,sign}
+# Jupiter: required for other Android tools
+makedepends+=('sbc' 'speexdsp')
+pkgdesc="The Android avdtptest tool"
+source=(https://www.kernel.org/pub/linux/bluetooth/${pkgbase}-${pkgver}.tar.{xz,sign}
         bluetooth.modprobe
-        AVRCP_TG_MDI_BV-04-C.patch         # SteamOS: For Bluetooth AVRCP certification test AVRCP/TG/MDI/BV-04-C, which requires a valid response from the get_element_attributes command.
-                                           # Send upstream https://lore.kernel.org/linux-bluetooth/CABBYNZJqkjF0WCtdCp7RpWbRVq9motgpSJvc_TyU=+7MYgZpAw@mail.gmail.com/T/
-                                           # Likely ETA bluez 5.73
-        0001-valve-bluetooth-config.patch  # SteamOS: Enable compatibility with devices like AirPods Pro
-        0002-valve-bluetooth-phy.patch     # SteamOS: Enable the phy # No longerneeded with kernel commit 288c90224eec55d13e786844b7954ef060752089, circa linux 6.4
-        0003-tools-avtest-Add-reject-code-option.patch # SteamOS: For Bluetooth qualification tests A2DP/SNK/AVP/…, merged in 5.71
-        0004-shared-gatt-db-Fix-munmap_chunk-invalid-pointer.patch # SteamOS: For Bluetooth qualification test GATT/CL/GAD/BV-03-C, merged in 5.72
-        0005-shared-att-Don-t-keep-retrying-the-same-operation.patch # SteamOS: For Bluetooth qualification tests GATT/CL/GAR/BI-{04,10,11,16}-C and GATT/CL/GAW/BI-{05,12}-C, merged in 5.71
-        0006-shared-gatt-Prevent-security-level-change-for-PTS-GA.patch # SteamOS: For Bluetooth qualification tests GATT/CL/GAR/BI-{04,10,11,16}-C and GATT/CL/GAW/BI-{05,12}-C # ETA 5.73
-        0007-btgatt-client-Add-command-to-prevent-security-level-.patch # SteamOS: For Bluetooth qualification tests GATT/CL/GAR/BI-{04,10,11,16}-C and GATT/CL/GAW/BI-{05,12}-C # ETA 5.73
-        0008-btgatt-client-Add-function-to-search-service-based-o.patch # SteamOS: For Bluetooth qualification test GATT/CL/GAD/BV-02-C # ETA 5.73
-        0009-btgatt-client-Add-function-to-search-characteristics.patch # SteamOS: For Bluetooth qualification tests GATT/CL/GAD/BV-05-C, GATT/CL/GAR/BV-03-C and GATT/CL/GAR/BI-{06,07,09,10,11}-C # ETA 5.73
-        0010-btgatt-client-Add-function-to-search-all-primary-ser.patch # SteamOS: For Bluetooth qualification test GATT/CL/GAD/BV-01-C # ETA 5.73
-        0011-shared-gatt-client-Fix-not-sending-confirmations.patch # SteamOS: For Bluetooth qualification test GAP/SEC/SEM/BV-62-C, merged in 5.70
-)
+        fix-bluez-5.71-autoconnection.diff)
 # see https://www.kernel.org/pub/linux/bluetooth/sha256sums.asc
-sha256sums=('bc5a35ddc7c72d0d3999a0d7b2175c8b7d57ab670774f8b5b4900ff38a2627fc'
+sha256sums=('b828d418c93ced1f55b616fb5482cf01537440bfb34fbda1a564f3ece94735d8'
             'SKIP'
             '46c021be659c9a1c4e55afd04df0c059af1f3d98a96338236412e449bf7477b4'
-            'd863bd52917e4f5819b23ae5e64a34c5b02a0cfdf3969290bfce0d26dfe137b4'
-            '54f7fc21fe0b7caf8018e12c8ca368bb308aeb757acf8b6038a6cbecad735ac3'
-            '5d291d833c234a14b6162e3cb14eeff41505f5c3bb7c74528b65cb10597f39cb'
-            'd0c9758335d1b5c21257320ee00a110553a135d41f77007ea583610d71705750'
-            '40cb627b1ba2c22c54e20e303e1f15674b29d8022ee4b3b11605b078af73b40d'
-            'ab505d2823ee5828c62aea2168271cc9c4f82de94c10ed30e2446bffb797c8f5'
-            'bd158dae9daf35686b3d8e97699feebe64cfe2926c4f03f74204c58fffcc0e37'
-            '54606dd0d2a6e44d923c0afc168115c525d90da6e5eeb29c8b275fa8266437a6'
-            '47de2881275c971e2a99b1cd50207cda8883ddbb44664f89fe387df7b1ee0e8a'
-            '21bba701633e5cc53a18cd6edbbb503c7b6d135464820aa62bf7b827b9c94f3b'
-            'd47837bb85e5b1faa62f4572cbe8e979a04cc6a10d5fb17b7b46b977e4595f33'
-            'e022c0bad40767f0cbfb22c29dfa98bf5ddf70b780c4c1d2d52c5853258711cc'
-            )
+            '7b19092fa09f8b04314cda3e9d14e69ef79bd85bc4f19ca2e15c35ebbb486e48')
 validpgpkeys=('E932D120BC2AEC444E558F0106CA9F5D1DCF2659') # Marcel Holtmann <marcel@holtmann.org>
 
+prepare() {
+  cd "${pkgbase}"-${pkgver}
+  # fix autoconnection - https://github.com/bluez/bluez/issues/686
+  # https://github.com/tedd-an/bluez-upstream-test/pull/484
+  patch -Np1 -i ../fix-bluez-5.71-autoconnection.diff
+}
+
 build() {
-  cd "${pkgname}"-${pkgver}
+  cd "${pkgbase}"-${pkgver}
+  # Jupiter: enable android for avdtptest, disable the rest
   ./configure \
           --prefix=/usr \
           --mandir=/usr/share/man \
@@ -57,35 +44,31 @@ build() {
           --localstatedir=/var \
           --libexecdir=/usr/lib \
           --with-dbusconfdir=/usr/share \
-          --disable-obex \
-          --enable-btpclient \
-          --enable-midi \
-          --enable-sixaxis \
-          --enable-mesh \
-          --enable-hid2hci \
-          --enable-experimental \
-          --enable-library # this is deprecated
+          --enable-android \
+          --disable-btpclient \
+          --disable-midi \
+          --disable-sixaxis \
+          --disable-mesh \
+          --disable-hid2hci \
+          --disable-experimental \
+          --disable-library # this is deprecated
   make
 }
 
 check() {
-  cd "$pkgname"-$pkgver
-  make check
+  # Jupiter: no tests needed
+  return 0
+  cd "$pkgbase"-$pkgver
+  # fails test-vcp - https://github.com/bluez/bluez/issues/683
+  make check || /bin/true
 }
 
-prepare() {
-  patch -d "${pkgname}"-${pkgver} -p1 -i "${srcdir}"/AVRCP_TG_MDI_BV-04-C.patch
-  patch -d "${pkgname}"-${pkgver} -p1 -i "${srcdir}"/0001-valve-bluetooth-config.patch
-  patch -d "${pkgname}"-${pkgver} -p1 -i "${srcdir}"/0002-valve-bluetooth-phy.patch
-  patch -d "${pkgname}"-${pkgver} -p1 -i "${srcdir}"/0003-tools-avtest-Add-reject-code-option.patch
-  patch -d "${pkgname}"-${pkgver} -p1 -i "${srcdir}"/0004-shared-gatt-db-Fix-munmap_chunk-invalid-pointer.patch
-  patch -d "${pkgname}"-${pkgver} -p1 -i "${srcdir}"/0005-shared-att-Don-t-keep-retrying-the-same-operation.patch
-  patch -d "${pkgname}"-${pkgver} -p1 -i "${srcdir}"/0006-shared-gatt-Prevent-security-level-change-for-PTS-GA.patch
-  patch -d "${pkgname}"-${pkgver} -p1 -i "${srcdir}"/0007-btgatt-client-Add-command-to-prevent-security-level-.patch
-  patch -d "${pkgname}"-${pkgver} -p1 -i "${srcdir}"/0008-btgatt-client-Add-function-to-search-service-based-o.patch
-  patch -d "${pkgname}"-${pkgver} -p1 -i "${srcdir}"/0009-btgatt-client-Add-function-to-search-characteristics.patch
-  patch -d "${pkgname}"-${pkgver} -p1 -i "${srcdir}"/0010-btgatt-client-Add-function-to-search-all-primary-ser.patch
-  patch -d "${pkgname}"-${pkgver} -p1 -i "${srcdir}"/0011-shared-gatt-client-Fix-not-sending-confirmations.patch
+# Jupiter: minimal package/target
+package() {
+  depends=('glib2' 'glibc')
+
+  # There's no make install target
+  install -Dm755 "$srcdir/$pkgbase-$pkgver/android/avdtptest" "$pkgdir/usr/bin/avdtptest"
 }
 
 package_bluez() {
@@ -118,7 +101,7 @@ package_bluez() {
   # https://bugzilla.kernel.org/show_bug.cgi?id=196621
   install -dm755 "$pkgdir"/usr/lib/modules-load.d
   echo "crypto_user" > "$pkgdir"/usr/lib/modules-load.d/bluez.conf
-  
+
   # fix obex file transfer - https://bugs.archlinux.org/task/45816
   ln -fs /usr/lib/systemd/user/obex.service "${pkgdir}"/usr/lib/systemd/user/dbus-org.bluez.obex.service
 
@@ -150,11 +133,11 @@ package_bluez-utils() {
     filename=$(basename $files)
     install -Dm755 "${srcdir}"/"${pkgbase}"-${pkgver}/tools/$filename "${pkgdir}"/usr/bin/$filename
   done
-  
+
   # ship upstream mesh config file
   install -dm555 "${pkgdir}"/etc/bluetooth
   install -Dm644 "${srcdir}"/"${pkgbase}"-${pkgver}/mesh/mesh-main.conf "${pkgdir}"/etc/bluetooth/mesh-main.conf
- 
+
   # libbluetooth.so* are part of libLTLIBRARIES and binPROGRAMS targets
   #make DESTDIR=${pkgdir} uninstall-libLTLIBRARIES
   #rmdir ${pkgdir}/usr/lib
@@ -196,7 +179,7 @@ package_bluez-hid2hci() {
   make DESTDIR=${pkgdir} \
        install-udevPROGRAMS \
        install-rulesDATA
-  
+
   install -dm755 "${pkgdir}"/usr/share/man/man1
   mv "${srcdir}"/hid2hci.1 "${pkgdir}"/usr/share/man/man1/hid2hci.1
 
