@@ -15,7 +15,7 @@ Differential Revision: https://reviews.llvm.org/D145862
  1 file changed, 1 insertion(+), 5 deletions(-)
 
 diff --git a/clang/tools/clang-linker-wrapper/CMakeLists.txt b/clang/tools/clang-linker-wrapper/CMakeLists.txt
-index b5f1c0dd0e7d33d..198dbff8cf83c6c 100644
+index b5f1c0dd0e7d33..198dbff8cf83c6 100644
 --- a/clang/tools/clang-linker-wrapper/CMakeLists.txt
 +++ b/clang/tools/clang-linker-wrapper/CMakeLists.txt
 @@ -1,5 +1,3 @@
