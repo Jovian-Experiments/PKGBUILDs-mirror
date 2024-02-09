@@ -2,11 +2,11 @@
 
 pkgname=atomupd-daemon-git
 pkgver=0.20231006.2.r0.g0b004d9
-pkgrel=1
+pkgrel=2
 _tag=v0.20231006.2
 pkgdesc='Atomic updates daemon'
 arch=('x86_64')
-url='https://gitlab.steamos.cloud/steam/atomupd-daemon'
+url='https://gitlab.steamos.cloud/holo/atomupd-daemon'
 license=('MIT')
 makedepends=('git' 'meson' 'python-dbusmock')
 depends=('dbus' 'glib2' 'json-glib' 'steamos-atomupd-client-git>=r157.4d50d6d' 'polkit' 'systemd')
