@@ -4,7 +4,7 @@ pkgname=steamos-customizations-jupiter
 _srctag=jupiter-20231122.1
 _srcver=${_srctag#jupiter-}
 pkgver=${_srcver//-/.}
-pkgrel=1
+pkgrel=2
 pkgdesc='SteamOS customizations (Jupiter fork) - This package installs various SteamOS-specific files'
 arch=('any')
 url='http://repo.steampowered.com'
@@ -13,7 +13,7 @@ depends=('e2fsprogs' 'gptfdisk' 'rsync' 'util-linux' 'mkinitcpio')
 makedepends=('git' 'openssh')
 provides=("${pkgname%-git}")
 conflicts=("${pkgname%-git}")
-source=("${pkgname%-git}::git+ssh://git@gitlab.steamos.cloud/steam/steamos-customizations.git#tag=${_srctag}")
+source=("${pkgname%-git}::git+ssh://git@gitlab.steamos.cloud/holo/steamos-customizations.git#tag=${_srctag}")
 md5sums=('SKIP')
 
 package() {
