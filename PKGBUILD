@@ -3,14 +3,14 @@
 pkgname=steamos-efi
 _srctag=jupiter-20231213.1
 pkgver=${_srctag#jupiter-}
-pkgrel=1
+pkgrel=2
 arch=('x86_64')
-url='https://gitlab.steamos.cloud/steam/steamos-efi'
+url='https://gitlab.steamos.cloud/holo/steamos-efi'
 pkgdesc='Stage 1 bootloader for SteamOS 3+'
 license=('GPL2')
 depends=('efibootmgr' 'util-linux' 'coreutils')
 makedepends=('git' 'openssh' 'gnu-efi-libs' 'grub' 'fontconfig' 'noto-fonts')
-source=("git+ssh://git@gitlab.steamos.cloud/steam/${pkgname}.git#tag=$_srctag")
+source=("git+ssh://git@gitlab.steamos.cloud/holo/${pkgname}.git#tag=$_srctag")
 sha512sums=('SKIP')
 
 build() {
