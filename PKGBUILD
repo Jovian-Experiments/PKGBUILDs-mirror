@@ -2,7 +2,7 @@
 
 pkgname=calamares-settings-steamos-git
 pkgver=r323.d0d0ce2
-pkgrel=2
+pkgrel=3
 pkgdesc='SteamOS theme and settings for the Calamares Installer'
 arch=('any')
 url=""
@@ -14,7 +14,7 @@ makedepends=('git')
 provides=("${pkgname%-git}")
 conflicts=("${pkgname%-git}")
 install="${pkgname%-git}.install"
-source=("${pkgname%-git}::git+https://gitlab.steamos.cloud/steam/${pkgname%-git}.git#commit=d0d0ce2")
+source=("${pkgname%-git}::git+https://gitlab.steamos.cloud/holo/${pkgname%-git}.git#commit=d0d0ce2")
 md5sums=('SKIP')
 
 pkgver() {
