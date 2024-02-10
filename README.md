@@ -1,5 +1,5 @@
 
-`release @ 20240202.2`
+`release @ 20240209.1`
 ======================
 
 Valve packages
@@ -165,7 +165,7 @@ Arch Linux packages
  * [`fwupd-efi/1.4-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/fwupd-efi/-/tree/1.4-1)
  * [`galileo-mura/v0.3-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/galileo-mura/-/tree/v0.3-1)
  * [`gamemode/1.7-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/gamemode/-/tree/1.7-1)
- * [`gamescope/3.13.16.6-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/gamescope/-/tree/3.13.16.6-1)
+ * [`gamescope/3.13.16.7-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/gamescope/-/tree/3.13.16.7-1)
  * [`gawk/5.2.2-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/gawk/-/tree/5.2.2-1)
  * [`gc/8.2.4-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/gc/-/tree/8.2.4-1)
  * [`gcab/1.5-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/gcab/-/tree/1.5-1)
@@ -538,7 +538,7 @@ Arch Linux packages
  * [`linux-api-headers/6.3-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/linux-api-headers/-/tree/6.3-1)
  * [`linux-firmware-neptune/jupiter.20231113.1-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/linux-firmware-neptune/-/tree/jupiter.20231113.1-1)
  * [`linux-firmware-neptune-whence/jupiter.20231113.1-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/linux-firmware-neptune/-/tree/jupiter.20231113.1-1)
- * [`linux-neptune-61/6.1.52.valve14-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/linux-neptune-61/-/tree/6.1.52.valve14-1)
+ * [`linux-neptune-61/6.1.52.valve16-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/linux-neptune-61/-/tree/6.1.52.valve16-1)
  * [`llvm-libs/15.0.7-3`](https://gitlab.archlinux.org/archlinux/packaging/packages/llvm-libs/-/tree/15.0.7-3)
  * [`lm_sensors/1:3.6.0.r41.g31d1f125-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/lm_sensors/-/tree/1:3.6.0.r41.g31d1f125-2)
  * [`lmdb/0.9.30-3`](https://gitlab.archlinux.org/archlinux/packaging/packages/lmdb/-/tree/0.9.30-3)
