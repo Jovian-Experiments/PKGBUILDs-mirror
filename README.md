@@ -1,5 +1,5 @@
 
-`release @ 20240209.1`
+`release @ 20240212.1`
 ======================
 
 Valve packages
@@ -705,6 +705,7 @@ Arch Linux packages
  * [`python-psutil/5.9.5-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/python-psutil/-/tree/5.9.5-1)
  * [`python-pyalsa/1.2.7-4`](https://gitlab.archlinux.org/archlinux/packaging/packages/python-pyalsa/-/tree/1.2.7-4)
  * [`python-pyaml/23.5.9-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/python-pyaml/-/tree/23.5.9-1)
+ * [`python-pyelftools/0.29-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/python-pyelftools/-/tree/0.29-2)
  * [`python-pyenchant/3.2.2-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/python-pyenchant/-/tree/3.2.2-2)
  * [`python-pyinotify/0.9.6-12`](https://gitlab.archlinux.org/archlinux/packaging/packages/python-pyinotify/-/tree/0.9.6-12)
  * [`python-semantic-version/2.10.0-3`](https://gitlab.archlinux.org/archlinux/packaging/packages/python-semantic-version/-/tree/2.10.0-3)
@@ -786,7 +787,7 @@ Arch Linux packages
  * [`steamos-customizations-jupiter/3.5.20231122.1-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/steamos-customizations-jupiter/-/tree/3.5.20231122.1-1)
  * [`steamos-efi/20231213.1-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/steamos-efi/-/tree/20231213.1-1)
  * [`steamos-kdumpst-layer/1.0-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/steamos-kdumpst-layer/-/tree/1.0-1)
- * [`steamos-log-submitter/0.4.3-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/steamos-log-submitter/-/tree/0.4.3-1)
+ * [`steamos-log-submitter/0.4.3-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/steamos-log-submitter/-/tree/0.4.3-2)
  * [`steamos-reset/20231006.1-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/steamos-reset/-/tree/20231006.1-1)
  * [`steamos-systemreport/0.4-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/steamos-systemreport/-/tree/0.4-1)
  * [`steamos-tweak-mtu-probing/1-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/steamos-tweak-mtu-probing/-/tree/1-1)
@@ -834,7 +835,7 @@ Arch Linux packages
  * [`volume_key/0.3.12-8`](https://gitlab.archlinux.org/archlinux/packaging/packages/volume_key/-/tree/0.3.12-8)
  * [`vpower/1.4.1-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/vpower/-/tree/1.4.1-1)
  * [`vulkan-icd-loader/1.3.251-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/vulkan-icd-loader/-/tree/1.3.251-1)
- * [`vulkan-radeon/23.3.0_devel.177505.steamos_23.9.8-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/vulkan-radeon/-/tree/23.3.0_devel.177505.steamos_23.9.8-1)
+ * [`vulkan-radeon/23.3.0_devel.177508.steamos_23.9.9-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/vulkan-radeon/-/tree/23.3.0_devel.177508.steamos_23.9.9-1)
  * [`vulkan-tools/1.3.245-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/vulkan-tools/-/tree/1.3.245-1)
  * [`wayland/1.22.0-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/wayland/-/tree/1.22.0-1)
  * [`wayland-utils/1.2.0-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/wayland-utils/-/tree/1.2.0-1)
