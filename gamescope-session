@@ -230,14 +230,6 @@ if [[ "$free_disk_space_megs" -lt "$minimum_free_disk_space_needed_megs" ]]; the
 	done
 fi
 
-# Will be empty if not on Galileo or failed
-mura_args=()
-mura_path=$(galileo-mura-setup)
-if [ $? -eq 0 ]; then
-	mura_args=("--mura-map" "$mura_path")
-fi
-
-
 export GAMESCOPE_STATS="$stats"
 mkfifo -- "$stats"
 mkfifo -- "$socket"
@@ -265,8 +257,7 @@ gamescope \
 	--fade-out-duration 200 \
 	--cursor-scale-height 720 \
 	-e -R "$socket" -T "$stats" \
-	-O '*',eDP-1 \
-	"${mura_args[@]}" \
+	-O '*',eDP-1
 	&
 gamescope_pid="$!"
 
@@ -318,12 +309,14 @@ fi
 
 if [[ -x $HOME/devkit-game/devkit-steam ]]; then
 	steam_notif_daemon &
+	galileo-mura-setup &
 	(while true; do
 		mangoapp
 	done) &
 	"$HOME"/devkit-game/devkit-steam "${steamargs[@]}"
 else
 	steam_notif_daemon &
+	galileo-mura-setup &
 	(while true; do
 		mangoapp
 	done) &
