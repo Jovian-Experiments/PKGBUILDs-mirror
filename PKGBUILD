@@ -1,7 +1,7 @@
 # Maintainer: Joshua Ashton <joshua@froggi.es>
 
 pkgname=galileo-mura
-_srctag=v0.3
+_srctag=v0.4
 pkgver=${_srctag//-/.}
 pkgrel=1
 pkgdesc="Utilities for setting and reading mura correction on Galileo"
