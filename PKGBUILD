@@ -4,12 +4,14 @@
 # Contributor: Andreas Radke <andyrtr@archlinux.org>
 
 pkgbase=mesa
-# Jupiter: drop radv vulkan driver - separate sources and package
-pkgname=('vulkan-mesa-layers' 'opencl-mesa' 'vulkan-intel' 'vulkan-swrast' 'libva-mesa-driver' 'mesa-vdpau' 'mesa')
+# Jupiter:
+#  - drop radv vulkan driver - separate sources and package
+#  - drop opencl-mesa - unnecessary and requires to install more dependencies
+pkgname=('vulkan-mesa-layers' 'vulkan-intel' 'vulkan-swrast' 'libva-mesa-driver' 'mesa-vdpau' 'mesa')
 pkgdesc="An open-source implementation of the OpenGL specification"
-_tag=radeonsi-3.6.1
-pkgver=23.3.0.179670.radeonsi_3.6.1
-pkgrel=2
+_tag=radeonsi-24.0.0
+pkgver=24.0.0.183256.radeonsi_24.0.0
+pkgrel=1
 arch=('x86_64')
 makedepends=('git' 'openssh' 'python-mako' 'libxml2' 'libx11' 'xorgproto' 'libdrm' 'libxshmfence' 'libxxf86vm'
              'libxdamage' 'libvdpau' 'libva' 'wayland' 'wayland-protocols' 'zstd' 'elfutils' 'llvm'
@@ -58,7 +60,7 @@ build() {
     -D gallium-extra-hud=true \
     -D gallium-nine=true \
     -D gallium-omx=bellagio \
-    -D gallium-opencl=icd \
+    -D gallium-opencl=disabled \
     -D gallium-va=enabled \
     -D gallium-vdpau=enabled \
     -D gallium-xa=disabled \
@@ -108,20 +110,6 @@ package_vulkan-mesa-layers() {
   _install fakeinstall/usr/share/vulkan/implicit_layer.d
   _install fakeinstall/usr/lib/libVkLayer_*.so
   _install fakeinstall/usr/bin/mesa-overlay-control.py
-
-  install -m644 -Dt "${pkgdir}/usr/share/licenses/${pkgname}" LICENSE
-}
-
-package_opencl-mesa() {
-  pkgdesc="OpenCL support for AMD/ATI Radeon mesa drivers"
-  # Jupiter: clang-libs is a local thing, which we should upstream in Arch
-  depends=('libdrm' 'libclc' 'clang-libs' 'expat')
-  optdepends=('opencl-headers: headers necessary for OpenCL development')
-  provides=('opencl-driver')
-
-  _install fakeinstall/etc/OpenCL
-  _install fakeinstall/usr/lib/lib*OpenCL*
-  _install fakeinstall/usr/lib/gallium-pipe
 
   install -m644 -Dt "${pkgdir}/usr/share/licenses/${pkgname}" LICENSE
 }
