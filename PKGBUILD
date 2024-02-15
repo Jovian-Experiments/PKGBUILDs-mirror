@@ -1,9 +1,9 @@
 # Maintainer: Pierre-Loup A. Griffais <pgriffais@valvesoftware.com>
 
 pkgname=gamescope
-_srctag=3.13.19
+_srctag=3.14.1
 pkgver=${_srctag//-/.}
-pkgrel=4
+pkgrel=1
 pkgdesc="gaming shell based on Xwayland, powered by Vulkan and DRM"
 arch=(x86_64)
 url="https://github.com/ValveSoftware/gamescope"
@@ -62,7 +62,7 @@ build() {
 	rm -rf build
 	mkdir build
 	cd build
-	arch-meson --buildtype release --prefix /usr ..
+	arch-meson --buildtype release -Davif_screenshots=disabled --prefix /usr ..
 	ninja
 }
 
