@@ -1,5 +1,5 @@
 
-`main @ 20240214.1000`
+`main @ 20240215.1000`
 ======================
 
 Valve packages
@@ -58,7 +58,7 @@ Valve packages
  * [`f3` — `jupiter-main/f3-8.0-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/f3-8.0-2)
  * [`flatpak` — `jupiter-main/flatpak-1.14.4-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/flatpak-1.14.4-2)
  * [`galileo-mura` — `jupiter-main/galileo-mura-v0.7-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/galileo-mura-v0.7-1)
- * [`gamescope` — `jupiter-main/gamescope-3.13.19-4`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/gamescope-3.13.19-4)
+ * [`gamescope` — `jupiter-main/gamescope-3.14.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/gamescope-3.14.1-1)
  * [`gpu-trace` — `jupiter-main/gpu-trace-2.12-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/gpu-trace-2.12-1)
  * [`holo-dmi-rules` — `jupiter-main/holo-dmi-rules-1.0-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/holo-dmi-rules-1.0-1)
  * [`holo-nix-offload` — `jupiter-main/holo-nix-offload-0.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/holo-nix-offload-0.1-1)
@@ -73,13 +73,13 @@ Valve packages
  * [`jupiter-steamos-log-submitter` — `jupiter-main/jupiter-steamos-log-submitter-1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-steamos-log-submitter-1-1)
  * [`libdrm` — `jupiter-main/libdrm-2.4.120-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/libdrm-2.4.120-1)
  * [`libnm` — `jupiter-main/networkmanager-1.42.6-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/networkmanager-1.42.6-1.1)
- * [`libva-mesa-driver` — `jupiter-main/mesa-23.3.0.179670.radeonsi_3.6.1-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/mesa-23.3.0.179670.radeonsi_3.6.1-2)
+ * [`libva-mesa-driver` — `jupiter-main/mesa-24.0.0.183256.radeonsi_24.0.0-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/mesa-24.0.0.183256.radeonsi_24.0.0-1)
  * [`linux-firmware-neptune` — `jupiter-main/linux-firmware-neptune-jupiter.20231113.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/linux-firmware-neptune-jupiter.20231113.1-1)
  * [`linux-firmware-neptune-whence` — `jupiter-main/linux-firmware-neptune-jupiter.20231113.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/linux-firmware-neptune-jupiter.20231113.1-1)
  * [`linux-neptune-61` — `jupiter-main/linux-neptune-61-6.1.52.valve17-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/linux-neptune-61-6.1.52.valve17-1)
  * [`mangohud` — `jupiter-main/mangohud-0.7.0.r78.gc5c82db-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/mangohud-0.7.0.r78.gc5c82db-1)
- * [`mesa` — `jupiter-main/mesa-23.3.0.179670.radeonsi_3.6.1-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/mesa-23.3.0.179670.radeonsi_3.6.1-2)
- * [`mesa-vdpau` — `jupiter-main/mesa-23.3.0.179670.radeonsi_3.6.1-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/mesa-23.3.0.179670.radeonsi_3.6.1-2)
+ * [`mesa` — `jupiter-main/mesa-24.0.0.183256.radeonsi_24.0.0-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/mesa-24.0.0.183256.radeonsi_24.0.0-1)
+ * [`mesa-vdpau` — `jupiter-main/mesa-24.0.0.183256.radeonsi_24.0.0-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/mesa-24.0.0.183256.radeonsi_24.0.0-1)
  * [`networkmanager` — `jupiter-main/networkmanager-1.42.6-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/networkmanager-1.42.6-1.1)
  * [`plasma-remotecontrollers` — `jupiter-main/plasma-remotecontrollers-5.27.10-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/plasma-remotecontrollers-5.27.10-1.1)
  * [`powerbuttond` — `jupiter-main/powerbuttond-2-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/powerbuttond-2-1)
