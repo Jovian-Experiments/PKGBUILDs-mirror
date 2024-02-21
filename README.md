@@ -1,5 +1,5 @@
 
-`main @ 20240216.1000`
+`main @ 20240221.1000`
 ======================
 
 Valve packages
@@ -14,11 +14,11 @@ Valve packages
  * [`filesystem` — `holo-main/filesystem-2021.12.07-1.10`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/filesystem-2021.12.07-1.10)
  * [`glibc` — `holo-main/glibc-2.37-3.2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/glibc-2.37-3.2)
  * [`gssproxy` — `holo-main/gssproxy-0.9.1-2.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/gssproxy-0.9.1-2.1)
- * [`holo-desync` — `holo-main/steamos-customizations-git-20231122.1-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-customizations-git-20231122.1-2)
+ * [`holo-desync` — `holo-main/steamos-customizations-git-20240219.1-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-customizations-git-20240219.1-2)
  * [`holo-flatpak-tmpfiles` — `holo-main/holo-flatpak-tmpfiles-0.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/holo-flatpak-tmpfiles-0.1-1)
  * [`holo-fstab-repair` — `holo-main/holo-fstab-repair-0.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/holo-fstab-repair-0.1-1)
  * [`holo-keyring` — `holo-main/holo-keyring-20220203-5`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/holo-keyring-20220203-5)
- * [`holo-sudo` — `holo-main/steamos-customizations-git-20231122.1-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-customizations-git-20231122.1-2)
+ * [`holo-sudo` — `holo-main/steamos-customizations-git-20240219.1-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-customizations-git-20240219.1-2)
  * [`holo-zram-swap` — `holo-main/holo-zram-swap-0.2-0`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/holo-zram-swap-0.2-0)
  * [`iwd` — `holo-main/iwd-2.7-1.2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/iwd-2.7-1.2)
  * [`kdumpst` — `holo-main/kdumpst-1.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/kdumpst-1.1-1)
@@ -58,7 +58,7 @@ Valve packages
  * [`f3` — `jupiter-main/f3-8.0-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/f3-8.0-2)
  * [`flatpak` — `jupiter-main/flatpak-1.14.4-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/flatpak-1.14.4-2)
  * [`galileo-mura` — `jupiter-main/galileo-mura-v0.9-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/galileo-mura-v0.9-1)
- * [`gamescope` — `jupiter-main/gamescope-3.14.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/gamescope-3.14.1-1)
+ * [`gamescope` — `jupiter-main/gamescope-3.14.2-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/gamescope-3.14.2-1)
  * [`gpu-trace` — `jupiter-main/gpu-trace-2.12-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/gpu-trace-2.12-1)
  * [`holo-dmi-rules` — `jupiter-main/holo-dmi-rules-1.0-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/holo-dmi-rules-1.0-1)
  * [`holo-nix-offload` — `jupiter-main/holo-nix-offload-0.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/holo-nix-offload-0.1-1)
@@ -86,11 +86,11 @@ Valve packages
  * [`renderdoc-minimal` — `jupiter-main/renderdoc-minimal-1.30-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/renderdoc-minimal-1.30-1)
  * [`sddm-wayland` — `jupiter-main/sddm-wayland-v0.19.0.valve4.d19813cb03c7d71b896aead28e5285bc131500a9-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/sddm-wayland-v0.19.0.valve4.d19813cb03c7d71b896aead28e5285bc131500a9-1)
  * [`steam-im-modules` — `jupiter-main/steam-im-modules-jupiter.20240131-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steam-im-modules-jupiter.20240131-1)
- * [`steam-jupiter-stable` — `jupiter-main/steam-jupiter-stable-1.0.0.78-1.2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steam-jupiter-stable-1.0.0.78-1.2)
+ * [`steam-jupiter-stable` — `jupiter-main/steam-jupiter-stable-1.0.0.79-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steam-jupiter-stable-1.0.0.79-1)
  * [`steam_notif_daemon` — `jupiter-main/steam_notif_daemon-v1.0.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steam_notif_daemon-v1.0.1-1)
  * [`steamdeck-dsp` — `jupiter-main/steamdeck-dsp-0.42-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steamdeck-dsp-0.42-1)
  * [`steamdeck-kde-presets` — `jupiter-main/steamdeck-kde-presets-0.21-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steamdeck-kde-presets-0.21-1)
- * [`steamos-customizations-jupiter` — `jupiter-main/steamos-customizations-jupiter-20231122.1-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steamos-customizations-jupiter-20231122.1-2)
+ * [`steamos-customizations-jupiter` — `jupiter-main/steamos-customizations-jupiter-20240219.1-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steamos-customizations-jupiter-20240219.1-2)
  * [`steamos-devkit-service` — `jupiter-main/steamos-devkit-service-0.20220401.0-7`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steamos-devkit-service-0.20220401.0-7)
  * [`ttf-twemoji-default` — `jupiter-main/ttf-twemoji-default-13.1.0-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/ttf-twemoji-default-13.1.0-2)
  * [`udisks2` — `jupiter-main/udisks2-2.9.4-1.2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/udisks2-2.9.4-1.2)
@@ -839,7 +839,7 @@ Arch Linux packages
  * [`vmaf/2.3.1-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/vmaf/-/tree/2.3.1-1)
  * [`volume_key/0.3.12-8`](https://gitlab.archlinux.org/archlinux/packaging/packages/volume_key/-/tree/0.3.12-8)
  * [`vulkan-icd-loader/1.3.251-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/vulkan-icd-loader/-/tree/1.3.251-1)
- * [`vulkan-radeon/23.3.0_devel.177485.steamos_23.9.6-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/vulkan-radeon/-/tree/23.3.0_devel.177485.steamos_23.9.6-2)
+ * [`vulkan-radeon/24.1.0_devel.184365.steamos_24.1.0-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/vulkan-radeon/-/tree/24.1.0_devel.184365.steamos_24.1.0-1)
  * [`vulkan-tools/1.3.245-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/vulkan-tools/-/tree/1.3.245-1)
  * [`wayland/1.22.0-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/wayland/-/tree/1.22.0-1)
  * [`wayland-utils/1.2.0-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/wayland-utils/-/tree/1.2.0-1)
