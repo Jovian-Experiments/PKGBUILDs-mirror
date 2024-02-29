@@ -1,5 +1,5 @@
 
-`release @ 20240228.1`
+`release @ 20240228.2`
 ======================
 
 Valve packages
@@ -787,7 +787,7 @@ Arch Linux packages
  * [`steamos-customizations-jupiter/3.5.20231122.1-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/steamos-customizations-jupiter/-/tree/3.5.20231122.1-1)
  * [`steamos-efi/20231213.1-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/steamos-efi/-/tree/20231213.1-1)
  * [`steamos-kdumpst-layer/1.0-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/steamos-kdumpst-layer/-/tree/1.0-1)
- * [`steamos-log-submitter/0.4.3-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/steamos-log-submitter/-/tree/0.4.3-2)
+ * [`steamos-log-submitter/0.4.4-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/steamos-log-submitter/-/tree/0.4.4-1)
  * [`steamos-reset/20231006.1-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/steamos-reset/-/tree/20231006.1-1)
  * [`steamos-systemreport/0.4-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/steamos-systemreport/-/tree/0.4-1)
  * [`steamos-tweak-mtu-probing/1-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/steamos-tweak-mtu-probing/-/tree/1-1)
