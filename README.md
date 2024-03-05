@@ -1,5 +1,5 @@
 
-`main @ 20240221.1000`
+`main @ 20240304.1000`
 ======================
 
 Valve packages
@@ -37,7 +37,8 @@ Valve packages
  * [`steamos-atomupd-client-git` — `holo-main/steamos-atomupd-client-git-r301.e0c2c4d-3`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-atomupd-client-git-r301.e0c2c4d-3)
  * [`steamos-efi` — `holo-main/steamos-efi-20231213.1-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-efi-20231213.1-2)
  * [`steamos-kdumpst-layer` — `holo-main/steamos-kdumpst-layer-1.0-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-kdumpst-layer-1.0-1)
- * [`steamos-log-submitter` — `holo-main/steamos-log-submitter-0.4.3-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-log-submitter-0.4.3-2)
+ * [`steamos-log-submitter` — `holo-main/steamos-log-submitter-0.4.4-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-log-submitter-0.4.4-1)
+ * [`steamos-manager` — `holo-main/steamos-manager-v0.20240208.0-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-manager-v0.20240208.0-1)
  * [`steamos-reset` — `holo-main/steamos-reset-20240125.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-reset-20240125.1-1)
  * [`steamos-systemreport` — `holo-main/steamos-systemreport-0.5-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-systemreport-0.5-1)
  * [`steamos-tweak-mtu-probing` — `holo-main/steamos-tweak-mtu-probing-1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-tweak-mtu-probing-1-1)
@@ -76,7 +77,7 @@ Valve packages
  * [`libva-mesa-driver` — `jupiter-main/mesa-24.0.0.183256.radeonsi_24.0.0-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/mesa-24.0.0.183256.radeonsi_24.0.0-1)
  * [`linux-firmware-neptune` — `jupiter-main/linux-firmware-neptune-jupiter.20231113.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/linux-firmware-neptune-jupiter.20231113.1-1)
  * [`linux-firmware-neptune-whence` — `jupiter-main/linux-firmware-neptune-jupiter.20231113.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/linux-firmware-neptune-jupiter.20231113.1-1)
- * [`linux-neptune-61` — `jupiter-main/linux-neptune-61-6.1.52.valve17-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/linux-neptune-61-6.1.52.valve17-1)
+ * [`linux-neptune-61` — `jupiter-main/linux-neptune-61-6.1.52.valve19-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/linux-neptune-61-6.1.52.valve19-1)
  * [`mangohud` — `jupiter-main/mangohud-0.7.0.r78.gc5c82db-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/mangohud-0.7.0.r78.gc5c82db-1)
  * [`mesa` — `jupiter-main/mesa-24.0.0.183256.radeonsi_24.0.0-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/mesa-24.0.0.183256.radeonsi_24.0.0-1)
  * [`mesa-vdpau` — `jupiter-main/mesa-24.0.0.183256.radeonsi_24.0.0-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/mesa-24.0.0.183256.radeonsi_24.0.0-1)
