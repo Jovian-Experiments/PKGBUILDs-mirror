@@ -1,5 +1,5 @@
 
-`main @ 20240304.1000`
+`main @ 20240318.1000`
 ======================
 
 Valve packages
@@ -40,7 +40,7 @@ Valve packages
  * [`steamos-log-submitter` — `holo-main/steamos-log-submitter-0.4.4-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-log-submitter-0.4.4-1)
  * [`steamos-manager` — `holo-main/steamos-manager-v0.20240208.0-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-manager-v0.20240208.0-1)
  * [`steamos-reset` — `holo-main/steamos-reset-20240125.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-reset-20240125.1-1)
- * [`steamos-systemreport` — `holo-main/steamos-systemreport-0.5-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-systemreport-0.5-1)
+ * [`steamos-systemreport` — `holo-main/steamos-systemreport-0.6-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-systemreport-0.6-1)
  * [`steamos-tweak-mtu-probing` — `holo-main/steamos-tweak-mtu-probing-1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-tweak-mtu-probing-1-1)
  * [`systemd` — `holo-main/systemd-253.5-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/systemd-253.5-2)
  * [`systemd-libs` — `holo-main/systemd-253.5-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/systemd-253.5-2)
@@ -68,7 +68,7 @@ Valve packages
  * [`jupiter-dock-updater-bin` — `jupiter-main/jupiter-dock-updater-bin-20231121.01-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-dock-updater-bin-20231121.01-1)
  * [`jupiter-fan-control` — `jupiter-main/jupiter-fan-control-20240118.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-fan-control-20240118.1-1)
  * [`jupiter-firewall` — `jupiter-main/jupiter-firewall-0.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-firewall-0.1-1)
- * [`jupiter-hw-support` — `jupiter-main/jupiter-hw-support-20240209.1-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-hw-support-20240209.1-2)
+ * [`jupiter-hw-support` — `jupiter-main/jupiter-hw-support-20240313.1-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-hw-support-20240313.1-2)
  * [`jupiter-legacy-support` — `jupiter-main/jupiter-legacy-support-1.145-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-legacy-support-1.145-1)
  * [`jupiter-resolved-nomdns` — `jupiter-main/jupiter-resolved-nomdns-1.0-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-resolved-nomdns-1.0-1)
  * [`jupiter-steamos-log-submitter` — `jupiter-main/jupiter-steamos-log-submitter-1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-steamos-log-submitter-1-1)
@@ -840,7 +840,7 @@ Arch Linux packages
  * [`vmaf/2.3.1-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/vmaf/-/tree/2.3.1-1)
  * [`volume_key/0.3.12-8`](https://gitlab.archlinux.org/archlinux/packaging/packages/volume_key/-/tree/0.3.12-8)
  * [`vulkan-icd-loader/1.3.251-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/vulkan-icd-loader/-/tree/1.3.251-1)
- * [`vulkan-radeon/24.1.0_devel.184365.steamos_24.1.0-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/vulkan-radeon/-/tree/24.1.0_devel.184365.steamos_24.1.0-1)
+ * [`vulkan-radeon/24.1.0_devel.184368.steamos_24.1.2-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/vulkan-radeon/-/tree/24.1.0_devel.184368.steamos_24.1.2-1)
  * [`vulkan-tools/1.3.245-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/vulkan-tools/-/tree/1.3.245-1)
  * [`wayland/1.22.0-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/wayland/-/tree/1.22.0-1)
  * [`wayland-utils/1.2.0-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/wayland-utils/-/tree/1.2.0-1)
