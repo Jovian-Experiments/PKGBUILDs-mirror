@@ -1,8 +1,8 @@
 # Maintainer: Collabora Ltd <gael.portay@collabora.com>
 
 pkgname=steamos-customizations-jupiter
-_srctag=jupiter-20240219.1
-_srcver=${_srctag#jupiter-}
+_srctag=jupiter-staging-20240212.1
+_srcver=${_srctag#jupiter-staging-}
 pkgver=${_srcver//-/.}
 pkgrel=2
 pkgdesc='SteamOS customizations (Jupiter fork) - This package installs various SteamOS-specific files'
@@ -19,10 +19,10 @@ md5sums=('SKIP')
 package() {
 	cd "${pkgname%-git}"
 	make DESTDIR="$pkgdir" prefix="/usr" sbindir="/usr/bin" libexecdir="/usr/lib" \
-		 ATOMUPD_QUERY_URL=https://steamdeck-atomupd.steamos.cloud/updates \
 		 ATOMUPD_META_URL=https://steamdeck-atomupd.steamos.cloud/meta \
 		 ATOMUPD_IMAGES_URL=https://steamdeck-images.steamos.cloud/ \
-		 ATOMUPD_VARIANTS_LIST='rel;rc;beta;bc;main' \
+		 ATOMUPD_VARIANTS_LIST='steamdeck' \
+		 ATOMUPD_BRANCHES_LIST='stable;rc;beta;bc;main' \
 		 install
 	make DESTDIR="$pkgdir" prefix="/usr" sbindir="/usr/bin" libexecdir="/usr/lib" -C mkinitcpio install
 
