@@ -1,5 +1,5 @@
 
-`main @ 20240325.1001`
+`main @ 20240327.1000`
 ======================
 
 Valve packages
@@ -29,7 +29,7 @@ Valve packages
  * [`steamos-atomupd-client-git` — `holo-main/steamos-atomupd-client-git-r415.dc043be-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-atomupd-client-git-r415.dc043be-1)
  * [`steamos-efi` — `holo-main/steamos-efi-20231213.1-3`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-efi-20231213.1-3)
  * [`steamos-kdumpst-layer` — `holo-main/steamos-kdumpst-layer-1.0-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-kdumpst-layer-1.0-2)
- * [`steamos-log-submitter` — `holo-main/steamos-log-submitter-0.4.4-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-log-submitter-0.4.4-2)
+ * [`steamos-log-submitter` — `holo-main/steamos-log-submitter-0.4.5-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-log-submitter-0.4.5-1)
  * [`steamos-manager` — `holo-main/steamos-manager-v0.20240208.0-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-manager-v0.20240208.0-2)
  * [`steamos-reset` — `holo-main/steamos-reset-20240125.1-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-reset-20240125.1-2)
  * [`steamos-systemreport` — `holo-main/steamos-systemreport-0.6-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-systemreport-0.6-2)
@@ -62,13 +62,13 @@ Valve packages
  * [`jupiter-steamos-log-submitter` — `jupiter-main/jupiter-steamos-log-submitter-1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-steamos-log-submitter-1-1)
  * [`libdrm` — `jupiter-main/libdrm-2.4.120-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/libdrm-2.4.120-1)
  * [`libnm` — `jupiter-main/networkmanager-1.44.2-3.2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/networkmanager-1.44.2-3.2)
- * [`libva-mesa-driver` — `jupiter-main/mesa-24.0.0.183256.radeonsi_24.0.0-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/mesa-24.0.0.183256.radeonsi_24.0.0-1)
+ * [`libva-mesa-driver` — `jupiter-main/mesa-24.0.0.183256.radeonsi_24.0.0-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/mesa-24.0.0.183256.radeonsi_24.0.0-2)
  * [`linux-firmware-neptune` — `jupiter-main/linux-firmware-neptune-jupiter.20231113.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/linux-firmware-neptune-jupiter.20231113.1-1)
  * [`linux-firmware-neptune-whence` — `jupiter-main/linux-firmware-neptune-jupiter.20231113.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/linux-firmware-neptune-jupiter.20231113.1-1)
  * [`linux-neptune-61` — `jupiter-main/linux-neptune-61-6.1.52.valve19-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/linux-neptune-61-6.1.52.valve19-1)
  * [`mangohud` — `jupiter-main/mangohud-0.7.0.r78.gc5c82db-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/mangohud-0.7.0.r78.gc5c82db-1)
- * [`mesa` — `jupiter-main/mesa-24.0.0.183256.radeonsi_24.0.0-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/mesa-24.0.0.183256.radeonsi_24.0.0-1)
- * [`mesa-vdpau` — `jupiter-main/mesa-24.0.0.183256.radeonsi_24.0.0-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/mesa-24.0.0.183256.radeonsi_24.0.0-1)
+ * [`mesa` — `jupiter-main/mesa-24.0.0.183256.radeonsi_24.0.0-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/mesa-24.0.0.183256.radeonsi_24.0.0-2)
+ * [`mesa-vdpau` — `jupiter-main/mesa-24.0.0.183256.radeonsi_24.0.0-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/mesa-24.0.0.183256.radeonsi_24.0.0-2)
  * [`networkmanager` — `jupiter-main/networkmanager-1.44.2-3.2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/networkmanager-1.44.2-3.2)
  * [`plasma-remotecontrollers` — `jupiter-main/plasma-remotecontrollers-5.27.10-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/plasma-remotecontrollers-5.27.10-1.1)
  * [`powerbuttond` — `jupiter-main/powerbuttond-2-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/powerbuttond-2-1)
@@ -850,7 +850,7 @@ Arch Linux packages
  * [`vmaf/3.0.0-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/vmaf/-/tree/3.0.0-1)
  * [`volume_key/0.3.12-8`](https://gitlab.archlinux.org/archlinux/packaging/packages/volume_key/-/tree/0.3.12-8)
  * [`vulkan-icd-loader/1.3.276-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/vulkan-icd-loader/-/tree/1.3.276-1)
- * [`vulkan-radeon/24.1.0_devel.184368.steamos_24.1.2-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/vulkan-radeon/-/tree/24.1.0_devel.184368.steamos_24.1.2-1)
+ * [`vulkan-radeon/24.1.0_devel.184368.steamos_24.1.2-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/vulkan-radeon/-/tree/24.1.0_devel.184368.steamos_24.1.2-2)
  * [`vulkan-tools/1.3.269-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/vulkan-tools/-/tree/1.3.269-1)
  * [`wayland/1.22.0-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/wayland/-/tree/1.22.0-1)
  * [`wayland-utils/1.2.0-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/wayland-utils/-/tree/1.2.0-1)
