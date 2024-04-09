@@ -1,7 +1,7 @@
 # Maintainer: Joshua Ashton <joshua@froggi.es>
 
 pkgname=wayland-protocols
-pkgver=1.32
+pkgver=1.34
 pkgrel=1
 pkgdesc='Specifications of extended Wayland protocols'
 arch=('any')
@@ -9,7 +9,7 @@ url='https://wayland.freedesktop.org/'
 license=('MIT')
 makedepends=('wayland' 'meson' 'ninja')
 source=("https://gitlab.freedesktop.org/wayland/$pkgname/-/releases/$pkgver/downloads/$pkgname-$pkgver.tar.xz")
-sha256sums=('7459799d340c8296b695ef857c07ddef24c5a09b09ab6a74f7b92640d2b1ba11')
+sha256sums=('c59b27cacd85f60baf4ee5f80df5c0d15760ead6a2432b00ab7e2e0574dcafeb')
 
 prepare() {
   cd $pkgname-$pkgver
