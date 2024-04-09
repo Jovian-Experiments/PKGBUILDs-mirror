@@ -1,5 +1,5 @@
 
-`main @ 20240327.1000`
+`main @ 20240409.1000`
 ======================
 
 Valve packages
@@ -31,6 +31,7 @@ Valve packages
  * [`steamos-kdumpst-layer` — `holo-main/steamos-kdumpst-layer-1.0-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-kdumpst-layer-1.0-2)
  * [`steamos-log-submitter` — `holo-main/steamos-log-submitter-0.4.5-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-log-submitter-0.4.5-1)
  * [`steamos-manager` — `holo-main/steamos-manager-v0.20240208.0-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-manager-v0.20240208.0-2)
+ * [`steamos-networking-tools` — `holo-main/steamos-networking-tools-1.0-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-networking-tools-1.0-1)
  * [`steamos-reset` — `holo-main/steamos-reset-20240125.1-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-reset-20240125.1-2)
  * [`steamos-systemreport` — `holo-main/steamos-systemreport-0.6-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-systemreport-0.6-2)
  * [`steamos-tweak-mtu-probing` — `holo-main/steamos-tweak-mtu-probing-1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-tweak-mtu-probing-1-1)
@@ -57,7 +58,7 @@ Valve packages
  * [`jupiter-fan-control` — `jupiter-main/jupiter-fan-control-20240118.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-fan-control-20240118.1-1)
  * [`jupiter-firewall` — `jupiter-main/jupiter-firewall-0.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-firewall-0.1-1)
  * [`jupiter-hw-support` — `jupiter-main/jupiter-hw-support-20240313.1-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-hw-support-20240313.1-2)
- * [`jupiter-legacy-support` — `jupiter-main/jupiter-legacy-support-1.146-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-legacy-support-1.146-1)
+ * [`jupiter-legacy-support` — `jupiter-main/jupiter-legacy-support-1.147-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-legacy-support-1.147-1)
  * [`jupiter-resolved-nomdns` — `jupiter-main/jupiter-resolved-nomdns-1.0-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-resolved-nomdns-1.0-1)
  * [`jupiter-steamos-log-submitter` — `jupiter-main/jupiter-steamos-log-submitter-1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-steamos-log-submitter-1-1)
  * [`libdrm` — `jupiter-main/libdrm-2.4.120-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/libdrm-2.4.120-1)
@@ -392,6 +393,7 @@ Arch Linux packages
  * [`layer-shell-qt/5.27.10-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/layer-shell-qt/-/tree/5.27.10-1)
  * [`lcms2/2.16-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/lcms2/-/tree/2.16-1)
  * [`ldb/2:2.8.0-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/ldb/-/tree/2:2.8.0-1)
+ * [`less/1:643-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/less/-/tree/1:643-1)
  * [`libaccounts-glib/1.26-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/libaccounts-glib/-/tree/1.26-2)
  * [`libaccounts-qt/1.16-3`](https://gitlab.archlinux.org/archlinux/packaging/packages/libaccounts-qt/-/tree/1.16-3)
  * [`libadwaita/1:1.4.3-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/libadwaita/-/tree/1:1.4.3-1)
