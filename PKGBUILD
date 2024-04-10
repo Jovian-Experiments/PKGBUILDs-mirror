@@ -1,14 +1,14 @@
 # Maintainer: Pierre-Loup A. Griffais <pgriffais@valvesoftware.com>
 
 pkgname=gamescope
-_srctag=3.14.2
+_srctag=3.14.3
 pkgver=${_srctag//-/.}
 pkgrel=2
 pkgdesc="gaming shell based on Xwayland, powered by Vulkan and DRM"
 arch=(x86_64)
 url="https://github.com/ValveSoftware/gamescope"
 license=('MIT')
-depends=('xorg-xwayland-jupiter' 'libxres' 'xcb-util-errors' 'freerdp' 'xcb-util-wm' 'libxcomposite' 'pixman' 'libinput' 'seatd' 'pipewire' 'libxmu' 'libxcursor' 'powerbuttond')
+depends=('xorg-xwayland-jupiter' 'libxres' 'xcb-util-errors' 'freerdp' 'xcb-util-wm' 'libxcomposite' 'pixman' 'libinput' 'seatd' 'pipewire' 'libxmu' 'libxcursor' 'powerbuttond' 'libdecor')
 makedepends=(openssh git meson cmake wayland-protocols ninja glslang glm vulkan-headers benchmark)
 source=("gamescope-session"
         "gamescope-wayland.desktop"
@@ -19,7 +19,7 @@ source=("gamescope-session"
         "steam_http_loader.desktop"
         "steam-http-loader"
         "git+https://github.com/ValveSoftware/gamescope.git#tag=$_srctag"
-        "git+https://gitlab.freedesktop.org/wlroots/wlroots.git"
+        "git+https://github.com/Joshua-Ashton/wlroots.git"
         "git+https://gitlab.freedesktop.org/emersion/libliftoff.git"
         "git+https://github.com/Joshua-Ashton/GamescopeShaders.git#tag=v0.1"
         # FIXME Upstream gamescope is just selecting master branch at build time, so we are arbitrarily snapshotting a
