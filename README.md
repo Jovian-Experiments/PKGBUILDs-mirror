@@ -1,5 +1,5 @@
 
-`main @ 20240409.1000`
+`main @ 20240412.1000`
 ======================
 
 Valve packages
@@ -29,7 +29,7 @@ Valve packages
  * [`steamos-atomupd-client-git` — `holo-main/steamos-atomupd-client-git-r415.dc043be-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-atomupd-client-git-r415.dc043be-1)
  * [`steamos-efi` — `holo-main/steamos-efi-20231213.1-3`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-efi-20231213.1-3)
  * [`steamos-kdumpst-layer` — `holo-main/steamos-kdumpst-layer-1.0-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-kdumpst-layer-1.0-2)
- * [`steamos-log-submitter` — `holo-main/steamos-log-submitter-0.4.5-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-log-submitter-0.4.5-1)
+ * [`steamos-log-submitter` — `holo-main/steamos-log-submitter-0.5.0-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-log-submitter-0.5.0-1)
  * [`steamos-manager` — `holo-main/steamos-manager-v0.20240208.0-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-manager-v0.20240208.0-2)
  * [`steamos-networking-tools` — `holo-main/steamos-networking-tools-1.0-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-networking-tools-1.0-1)
  * [`steamos-reset` — `holo-main/steamos-reset-20240125.1-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-reset-20240125.1-2)
@@ -48,7 +48,7 @@ Valve packages
  * [`ds-inhibit` — `jupiter-main/ds-inhibit-0.1.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/ds-inhibit-0.1.1-1)
  * [`f3` — `jupiter-main/f3-8.0-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/f3-8.0-2)
  * [`galileo-mura` — `jupiter-main/galileo-mura-v0.9-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/galileo-mura-v0.9-1)
- * [`gamescope` — `jupiter-main/gamescope-3.14.2-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/gamescope-3.14.2-2)
+ * [`gamescope` — `jupiter-main/gamescope-3.14.3-3`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/gamescope-3.14.3-3)
  * [`gpu-trace` — `jupiter-main/gpu-trace-2.12-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/gpu-trace-2.12-1)
  * [`holo-dmi-rules` — `jupiter-main/holo-dmi-rules-1.0-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/holo-dmi-rules-1.0-1)
  * [`holo-nix-offload` — `jupiter-main/holo-nix-offload-0.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/holo-nix-offload-0.1-1)
@@ -86,6 +86,7 @@ Valve packages
  * [`upower` — `jupiter-main/upower-0.99.15.jupiter-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/upower-0.99.15.jupiter-1.1)
  * [`usbhid-gadget-passthru` — `jupiter-main/usbhid-gadget-passthru-0.1.3-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/usbhid-gadget-passthru-0.1.3-2)
  * [`vpower` — `jupiter-main/vpower-1.4.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/vpower-1.4.1-1)
+ * [`wakehook` — `jupiter-main/wakehook-1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/wakehook-1-1)
  * [`wireplumber` — `jupiter-main/wireplumber-0.4.14.dev23-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/wireplumber-0.4.14.dev23-1)
  * [`xdg-desktop-portal-gtk` — `jupiter-main/xdg-desktop-portal-gtk-1.15.1-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/xdg-desktop-portal-gtk-1.15.1-1.1)
  * [`xorg-xwayland-jupiter` — `jupiter-main/xorg-xwayland-jupiter-jupiter.20221104.94fde3eb2-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/xorg-xwayland-jupiter-jupiter.20221104.94fde3eb2-1)
@@ -244,6 +245,7 @@ Arch Linux packages
  * [`glslang/13.1.1-3`](https://gitlab.archlinux.org/archlinux/packaging/packages/glslang/-/tree/13.1.1-3)
  * [`glu/9.0.3-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/glu/-/tree/9.0.3-1)
  * [`gmp/6.3.0-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/gmp/-/tree/6.3.0-1)
+ * [`gnu-free-fonts/20120503-8`](https://gitlab.archlinux.org/archlinux/packaging/packages/gnu-free-fonts/-/tree/20120503-8)
  * [`gnupg/2.4.4-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/gnupg/-/tree/2.4.4-1)
  * [`gnutls/3.8.3-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/gnutls/-/tree/3.8.3-1)
  * [`gobject-introspection-runtime/1.78.1-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/gobject-introspection-runtime/-/tree/1.78.1-1)
