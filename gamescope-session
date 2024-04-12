@@ -285,6 +285,9 @@ steamargs=("-steamos3" "-steampal" "-steamdeck" "-gamepadui")
     /usr/lib/hwsupport/powerbuttond
 done) &
 
+(while true; do
+	/usr/lib/hwsupport/wakehook
+done) &
 
 short_session_tracker_file="/tmp/steamos-short-session-tracker"
 short_session_duration=60
