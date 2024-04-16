@@ -12,7 +12,7 @@ pkgname=(
   nm-cloud-setup
 )
 pkgver=1.44.2
-pkgrel=3.2
+pkgrel=3.3
 pkgdesc="Network connection manager and user applications"
 url="https://networkmanager.dev/"
 arch=(x86_64)
