@@ -1,5 +1,5 @@
 
-`main @ 20240417.1000`
+`main @ 20240418.1000`
 ======================
 
 Valve packages
@@ -14,6 +14,7 @@ Valve packages
  * [`filesystem` — `holo-main/filesystem-2021.12.07-1.10`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/filesystem-2021.12.07-1.10)
  * [`holo-desync` — `holo-main/steamos-customizations-git-20240328.1-3`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-customizations-git-20240328.1-3)
  * [`holo-fstab-repair` — `holo-main/holo-fstab-repair-0.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/holo-fstab-repair-0.1-1)
+ * [`holo-glibc-locales` — `holo-main/holo-glibc-locales-2.39-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/holo-glibc-locales-2.39-1)
  * [`holo-keyring` — `holo-main/holo-keyring-20240322.sq033-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/holo-keyring-20240322.sq033-1)
  * [`holo-nfs-utils-tmpfiles` — `holo-main/holo-nfs-utils-tmpfiles-0.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/holo-nfs-utils-tmpfiles-0.1-1)
  * [`holo-sudo` — `holo-main/steamos-customizations-git-20240328.1-3`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-customizations-git-20240328.1-3)
@@ -33,7 +34,7 @@ Valve packages
  * [`steamos-log-submitter` — `holo-main/steamos-log-submitter-0.5.0-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-log-submitter-0.5.0-2)
  * [`steamos-manager` — `holo-main/steamos-manager-v0.20240208.0-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-manager-v0.20240208.0-2)
  * [`steamos-networking-tools` — `holo-main/steamos-networking-tools-1.0-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-networking-tools-1.0-1)
- * [`steamos-reset` — `holo-main/steamos-reset-20240125.1-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-reset-20240125.1-2)
+ * [`steamos-reset` — `holo-main/steamos-reset-20240417.1-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-reset-20240417.1-2)
  * [`steamos-systemreport` — `holo-main/steamos-systemreport-0.6-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-systemreport-0.6-2)
  * [`steamos-tweak-mtu-probing` — `holo-main/steamos-tweak-mtu-probing-1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-tweak-mtu-probing-1-1)
  * [`vkmark-git` — `holo-main/vkmark-git-r133.30d2cd3-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/vkmark-git-r133.30d2cd3-2)
@@ -41,10 +42,10 @@ Valve packages
 ### `jupiter-main`
  * [`alsa-ucm-conf` — `jupiter-main/alsa-ucm-conf-1.2.9-1.2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/alsa-ucm-conf-1.2.9-1.2)
  * [`amd-ucode` — `jupiter-main/linux-firmware-neptune-jupiter.20231113.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/linux-firmware-neptune-jupiter.20231113.1-1)
- * [`bluez` — `jupiter-main/bluez-5.69-1.5`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/bluez-5.69-1.5)
- * [`bluez-libs` — `jupiter-main/bluez-5.69-1.5`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/bluez-5.69-1.5)
- * [`bluez-plugins` — `jupiter-main/bluez-5.69-1.5`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/bluez-5.69-1.5)
- * [`bluez-utils` — `jupiter-main/bluez-5.69-1.5`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/bluez-5.69-1.5)
+ * [`bluez` — `jupiter-main/bluez-5.73-5`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/bluez-5.73-5)
+ * [`bluez-libs` — `jupiter-main/bluez-5.73-5`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/bluez-5.73-5)
+ * [`bluez-plugins` — `jupiter-main/bluez-5.73-5`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/bluez-5.73-5)
+ * [`bluez-utils` — `jupiter-main/bluez-5.73-5`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/bluez-5.73-5)
  * [`breakpad` — `jupiter-main/breakpad-v2023.01.27-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/breakpad-v2023.01.27-1)
  * [`ds-inhibit` — `jupiter-main/ds-inhibit-0.1.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/ds-inhibit-0.1.1-1)
  * [`f3` — `jupiter-main/f3-8.0-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/f3-8.0-2)
@@ -169,6 +170,9 @@ Arch Linux packages
  * [`criu/3.18-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/criu/-/tree/3.18-2)
  * [`crun/1.14.3-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/crun/-/tree/1.14.3-1)
  * [`cryptsetup/2.7.0-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/cryptsetup/-/tree/2.7.0-1)
+ * [`cups/1:2.4.7-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/cups/-/tree/1:2.4.7-2)
+ * [`cups-filters/2.0.0-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/cups-filters/-/tree/2.0.0-1)
+ * [`cups-pdf/3.0.1-7`](https://gitlab.archlinux.org/archlinux/packaging/packages/cups-pdf/-/tree/3.0.1-7)
  * [`curl/8.6.0-3`](https://gitlab.archlinux.org/archlinux/packaging/packages/curl/-/tree/8.6.0-3)
  * [`dav1d/1.4.0-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/dav1d/-/tree/1.4.0-1)
  * [`db5.3/5.3.28-4`](https://gitlab.archlinux.org/archlinux/packaging/packages/db5.3/-/tree/5.3.28-4)
@@ -422,6 +426,7 @@ Arch Linux packages
  * [`libcloudproviders/0.3.5-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/libcloudproviders/-/tree/0.3.5-1)
  * [`libcolord/1.4.7-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/libcolord/-/tree/1.4.7-2)
  * [`libcups/1:2.4.7-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/libcups/-/tree/1:2.4.7-2)
+ * [`libcupsfilters/2.0.0-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/libcupsfilters/-/tree/2.0.0-1)
  * [`libdaemon/0.14-5`](https://gitlab.archlinux.org/archlinux/packaging/packages/libdaemon/-/tree/0.14-5)
  * [`libdatrie/0.2.13-4`](https://gitlab.archlinux.org/archlinux/packaging/packages/libdatrie/-/tree/0.2.13-4)
  * [`libdbusmenu-glib/16.04.0.r498-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/libdbusmenu-glib/-/tree/16.04.0.r498-2)
@@ -436,6 +441,7 @@ Arch Linux packages
  * [`libepoxy/1.5.10-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/libepoxy/-/tree/1.5.10-2)
  * [`libevdev/1.13.1-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/libevdev/-/tree/1.13.1-1)
  * [`libevent/2.1.12-4`](https://gitlab.archlinux.org/archlinux/packaging/packages/libevent/-/tree/2.1.12-4)
+ * [`libexif/0.6.24-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/libexif/-/tree/0.6.24-2)
  * [`libfakekey/0.3-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/libfakekey/-/tree/0.3-2)
  * [`libfdk-aac/2.0.3-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/libfdk-aac/-/tree/2.0.3-1)
  * [`libffi/3.4.6-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/libffi/-/tree/3.4.6-1)
@@ -499,6 +505,7 @@ Arch Linux packages
  * [`libplacebo/6.338.2-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/libplacebo/-/tree/6.338.2-1)
  * [`libplist/2.3.0-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/libplist/-/tree/2.3.0-2)
  * [`libpng/1.6.42-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/libpng/-/tree/1.6.42-1)
+ * [`libppd/2.0.0-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/libppd/-/tree/2.0.0-1)
  * [`libproxy/0.5.4-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/libproxy/-/tree/0.5.4-1)
  * [`libpsl/0.21.2-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/libpsl/-/tree/0.21.2-1)
  * [`libpulse/17.0-3`](https://gitlab.archlinux.org/archlinux/packaging/packages/libpulse/-/tree/17.0-3)
@@ -759,6 +766,7 @@ Arch Linux packages
  * [`python-yarl/1.9.4-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/python-yarl/-/tree/1.9.4-1)
  * [`pyzy/1.1-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/pyzy/-/tree/1.1-2)
  * [`qca-qt5/2.3.8-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/qca-qt5/-/tree/2.3.8-2)
+ * [`qpdf/11.8.0-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/qpdf/-/tree/11.8.0-1)
  * [`qqc2-desktop-style5/5.115.0-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/qqc2-desktop-style5/-/tree/5.115.0-1)
  * [`qrencode/4.1.1-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/qrencode/-/tree/4.1.1-2)
  * [`qt5-base/5.15.12+kde+r151-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/qt5-base/-/tree/5.15.12+kde+r151-1)
