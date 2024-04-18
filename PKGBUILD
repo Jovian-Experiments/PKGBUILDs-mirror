@@ -1,9 +1,9 @@
 # Maintainer: Pierre-Loup A. Griffais <pgriffais@valvesoftware.com>
 
 pkgname=gamescope
-_srctag=3.14.3
+_srctag=3.14.4
 pkgver=${_srctag//-/.}
-pkgrel=3
+pkgrel=1
 pkgdesc="gaming shell based on Xwayland, powered by Vulkan and DRM"
 arch=(x86_64)
 url="https://github.com/ValveSoftware/gamescope"
