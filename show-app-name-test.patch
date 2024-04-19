@@ -1,4 +1,4 @@
-From bcf0480e9423b07e4a043b1398559f9446c68abb Mon Sep 17 00:00:00 2001
+From 886462b8118c1ea4f16957553acfb6625df9e002 Mon Sep 17 00:00:00 2001
 From: Chris Williams <chrisawign@gmail.com>
 Date: Wed, 21 Feb 2024 17:12:52 -0500
 Subject: [PATCH] tests: Check appdata name parsing via flatpak info

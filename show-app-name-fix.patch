@@ -1,4 +1,4 @@
-From 2cba9e3db316d7ea4deac2f55704978d5dcdcdc8 Mon Sep 17 00:00:00 2001
+From 73d4a3b062429f331c6062d39c57d6b7dbd1f19a Mon Sep 17 00:00:00 2001
 From: Chris Williams <chrisawign@gmail.com>
 Date: Wed, 21 Feb 2024 13:24:26 -0500
 Subject: [PATCH] appdata: exclude <name> element inside <developer>
