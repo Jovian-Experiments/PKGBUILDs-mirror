@@ -1,10 +1,11 @@
+# Maintainer (Holo): Alberto Garcia <berto@igalia.com>
 # Maintainer: Jan Alexander Steffens (heftig) <heftig@archlinux.org>
 # Contributor: Bartłomiej Piotrowski <bpiotrowski@archlinux.org>
 # Contributor: Jan Alexander Steffens (heftig) <jan.steffens@gmail.com>
 
 pkgname=flatpak
 pkgver=1.14.4
-pkgrel=2
+pkgrel=2.1
 pkgdesc="Linux application sandboxing and distribution framework (formerly xdg-app)"
 url="https://flatpak.org"
 arch=(x86_64)
@@ -44,6 +45,12 @@ source=("git+https://github.com/flatpak/flatpak#commit=$_commit"
         git+https://gitlab.gnome.org/alexl/variant-schema-compiler.git
         https://dl.flathub.org/repo/flathub.flatpakrepo
         allow-modify_ldt-in-multiarch.patch
+        # Holo: Fix and test case for CVE-2024-32462 -- https://github.com/flatpak/flatpak/security/advisories/GHSA-phv6-cpc2-2fgj
+        CVE-2024-32462-fix.patch
+        CVE-2024-32462-test.patch
+        # Holo: Show app name instead of developer name in 'flatpak list' -- https://github.com/flatpak/flatpak/issues/5700
+        show-app-name-fix.patch
+        show-app-name-test.patch
         fusermount3.diff
         flatpak-bindir.sh)
 sha256sums=('SKIP'
@@ -53,6 +60,10 @@ sha256sums=('SKIP'
             'SKIP'
             '3371dd250e61d9e1633630073fefda153cd4426f72f4afa0c3373ae2e8fea03a'
             'f0f6322318b51f9a92f35bdcf125a11cfe345518a3b9d48f9faf84189723762b'
+            '410e144c08da8e9dd77a12b2d144ec8c9ceb5259554d39fee2a72228515cf82b'
+            '765accd41516d0cde1df4c2447a73f553f143df99769da80ce380055e1980e6c'
+            'a4d8a71b920ea81c89548f798379ae51fc48c7371d9f9a10a9e1e3c1ff82de94'
+            '90cadfd4b2507bf319dd13777feefb47434fe6b70f4ead4ca5c3f4d21899ec73'
             '23e01650d60222082ffb67a16d3ea033192cc9e6932027cf0ea0c55ea17863af'
             '1824cb4eb1cc88702cb2b9f1c55b6dfdf20fca5eab83f6e8e532099281328745')
 
@@ -71,6 +82,14 @@ prepare() {
   # Support fuse3
   # https://bugs.archlinux.org/task/75623
   git apply -3 "$srcdir/fusermount3.diff"
+
+  # Holo: Fix for CVE-2024-32462
+  git apply -3 "$srcdir/CVE-2024-32462-fix.patch"
+  git apply -3 "$srcdir/CVE-2024-32462-test.patch"
+
+  # Holo: Fix for flatpak#5700
+  git apply -3 "$srcdir/show-app-name-fix.patch"
+  git apply -3 "$srcdir/show-app-name-test.patch"
 
   git submodule init
   git submodule set-url bubblewrap "$srcdir/bubblewrap"
