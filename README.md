@@ -1,5 +1,5 @@
 
-`release @ 20240228.2`
+`release @ 20240419.1`
 ======================
 
 Valve packages
@@ -149,7 +149,7 @@ Arch Linux packages
  * [`fish/3.6.1-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/fish/-/tree/3.6.1-1)
  * [`flac/1.4.2-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/flac/-/tree/1.4.2-1)
  * [`flashrom/1.2-4`](https://gitlab.archlinux.org/archlinux/packaging/packages/flashrom/-/tree/1.2-4)
- * [`flatpak/1.14.4-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/flatpak/-/tree/1.14.4-2)
+ * [`flatpak/1.14.4-2.1`](https://gitlab.archlinux.org/archlinux/packaging/packages/flatpak/-/tree/1.14.4-2.1)
  * [`flatpak-kcm/5.27.5-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/flatpak-kcm/-/tree/5.27.5-1)
  * [`fontconfig/2:2.14.2-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/fontconfig/-/tree/2:2.14.2-1)
  * [`frameworkintegration/5.107.0-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/frameworkintegration/-/tree/5.107.0-1)
@@ -165,7 +165,7 @@ Arch Linux packages
  * [`fwupd-efi/1.4-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/fwupd-efi/-/tree/1.4-1)
  * [`galileo-mura/v0.3-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/galileo-mura/-/tree/v0.3-1)
  * [`gamemode/1.7-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/gamemode/-/tree/1.7-1)
- * [`gamescope/3.13.16.8-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/gamescope/-/tree/3.13.16.8-1)
+ * [`gamescope/3.13.16.9-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/gamescope/-/tree/3.13.16.9-1)
  * [`gawk/5.2.2-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/gawk/-/tree/5.2.2-1)
  * [`gc/8.2.4-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/gc/-/tree/8.2.4-1)
  * [`gcab/1.5-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/gcab/-/tree/1.5-1)
@@ -248,7 +248,7 @@ Arch Linux packages
  * [`jupiter-dock-updater-bin/20231103.01-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/jupiter-dock-updater-bin/-/tree/20231103.01-1)
  * [`jupiter-fan-control/20231114.3-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/jupiter-fan-control/-/tree/20231114.3-1)
  * [`jupiter-firewall/0.1-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/jupiter-firewall/-/tree/0.1-1)
- * [`jupiter-hw-support/3.5.20240116.1-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/jupiter-hw-support/-/tree/3.5.20240116.1-2)
+ * [`jupiter-hw-support/3.5.20240418.1-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/jupiter-hw-support/-/tree/3.5.20240418.1-2)
  * [`jupiter-legacy-support/1.145-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/jupiter-legacy-support/-/tree/1.145-1)
  * [`jupiter-resolved-nomdns/1.0-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/jupiter-resolved-nomdns/-/tree/1.0-1)
  * [`jupiter-steamos-log-submitter/1-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/jupiter-steamos-log-submitter/-/tree/1-1)
@@ -845,7 +845,7 @@ Arch Linux packages
  * [`wireguard-tools/1.0.20210914-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/wireguard-tools/-/tree/1.0.20210914-1)
  * [`wireless-regdb/2023.05.03-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/wireless-regdb/-/tree/2023.05.03-1)
  * [`wireless_tools/30.pre9-3`](https://gitlab.archlinux.org/archlinux/packaging/packages/wireless_tools/-/tree/30.pre9-3)
- * [`wireplumber/0.4.14.dev23-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/wireplumber/-/tree/0.4.14.dev23-1)
+ * [`wireplumber/0.4.14.dev24-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/wireplumber/-/tree/0.4.14.dev24-1)
  * [`wpa_supplicant/2:2.10-8`](https://gitlab.archlinux.org/archlinux/packaging/packages/wpa_supplicant/-/tree/2:2.10-8)
  * [`x264/3:0.164.r3095.baee400-4`](https://gitlab.archlinux.org/archlinux/packaging/packages/x264/-/tree/3:0.164.r3095.baee400-4)
  * [`x265/3.5-3`](https://gitlab.archlinux.org/archlinux/packaging/packages/x265/-/tree/3.5-3)
