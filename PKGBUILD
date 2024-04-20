@@ -1,7 +1,7 @@
 # Maintainer: Vicki Pfau (vi@endrift.com)
 
 pkgname=wakehook
-_srctag=v1
+_srctag=v2
 pkgver=${_srctag##v}
 pkgrel=1
 arch=('x86_64')
