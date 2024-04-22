@@ -1,5 +1,5 @@
 
-`release @ 20240419.1`
+`release @ 20240422.1`
 ======================
 
 Valve packages
@@ -183,7 +183,7 @@ Arch Linux packages
  * [`glfw-x11/3.3.8-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/glfw-x11/-/tree/3.3.8-1)
  * [`glib-networking/1:2.76.0-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/glib-networking/-/tree/1:2.76.0-1)
  * [`glib2/2.76.3-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/glib2/-/tree/2.76.3-1)
- * [`glibc/2.37-3.2`](https://gitlab.archlinux.org/archlinux/packaging/packages/glibc/-/tree/2.37-3.2)
+ * [`glibc/2.37-3.3`](https://gitlab.archlinux.org/archlinux/packaging/packages/glibc/-/tree/2.37-3.3)
  * [`glibmm/2.66.6-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/glibmm/-/tree/2.66.6-1)
  * [`glu/9.0.2-3`](https://gitlab.archlinux.org/archlinux/packaging/packages/glu/-/tree/9.0.2-3)
  * [`gmp/6.2.1-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/gmp/-/tree/6.2.1-2)
