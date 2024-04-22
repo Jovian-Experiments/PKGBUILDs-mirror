@@ -1,5 +1,5 @@
 
-`main @ 20240418.1000`
+`main @ 20240422.1000`
 ======================
 
 Valve packages
@@ -89,7 +89,7 @@ Valve packages
  * [`upower` — `jupiter-main/upower-0.99.15.jupiter-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/upower-0.99.15.jupiter-1.1)
  * [`usbhid-gadget-passthru` — `jupiter-main/usbhid-gadget-passthru-0.1.3-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/usbhid-gadget-passthru-0.1.3-2)
  * [`vpower` — `jupiter-main/vpower-1.4.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/vpower-1.4.1-1)
- * [`wakehook` — `jupiter-main/wakehook-1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/wakehook-1-1)
+ * [`wakehook` — `jupiter-main/wakehook-2-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/wakehook-2-1)
  * [`webrtc-audio-processing-1` — `jupiter-main/webrtc-audio-processing-1-1.3-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/webrtc-audio-processing-1-1.3-2)
  * [`wireplumber` — `jupiter-main/wireplumber-0.5.0-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/wireplumber-0.5.0-1)
  * [`xdg-desktop-portal-gtk` — `jupiter-main/xdg-desktop-portal-gtk-1.15.1-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/xdg-desktop-portal-gtk-1.15.1-1.1)
@@ -218,7 +218,7 @@ Arch Linux packages
  * [`firewalld/2.1.1-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/firewalld/-/tree/2.1.1-1)
  * [`fish/3.7.0-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/fish/-/tree/3.7.0-1)
  * [`flac/1.4.3-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/flac/-/tree/1.4.3-1)
- * [`flatpak/1:1.15.6-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/flatpak/-/tree/1:1.15.6-2)
+ * [`flatpak/1:1.15.6-2.1`](https://gitlab.archlinux.org/archlinux/packaging/packages/flatpak/-/tree/1:1.15.6-2.1)
  * [`flatpak-kcm/5.27.10-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/flatpak-kcm/-/tree/5.27.10-1)
  * [`fontconfig/2:2.15.0-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/fontconfig/-/tree/2:2.15.0-2)
  * [`frameworkintegration5/5.115.0-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/frameworkintegration5/-/tree/5.115.0-1)
