@@ -7,11 +7,11 @@
 pkgbase=bluez
 pkgname=('bluez' 'bluez-utils' 'bluez-libs' 'bluez-cups' 'bluez-hid2hci' 'bluez-plugins')
 pkgver=5.73
-pkgrel=5
+pkgrel=6
 url="http://www.bluez.org/"
 arch=('x86_64')
 license=('GPL2')
-makedepends=('dbus' 'libical' 'systemd' 'alsa-lib' 'json-c' 'ell' 'python-docutils' 'python-pygments' 'cups')
+makedepends=('dbus' 'libical' 'systemd' 'alsa-lib' 'json-c' 'python-docutils' 'python-pygments' 'cups')
 source=(https://www.kernel.org/pub/linux/bluetooth/${pkgname}-${pkgver}.tar.{xz,sign}
         bluetooth.modprobe
         0001-valve-bluetooth-config.patch  # SteamOS: Enable compatibility with devices like AirPods Pro
@@ -19,7 +19,6 @@ source=(https://www.kernel.org/pub/linux/bluetooth/${pkgname}-${pkgver}.tar.{xz,
         0014-shared-gatt-Add-env-variable-to-prefer-indication-ov.patch # SteamOS: For Bluetooth qualification tests GAP/SEC/SEM/BV-56-C, GAP/SEC/SEM/BV-57-C and GAP/SEC/SEM/BV-58-C # not upstreamable
         0017-device-Fix-airpods-pairing.patch
         0018-disable-unreliable-vcp-tests.patch
-        0019-airpods-plugin.patch
 )
 # see https://www.kernel.org/pub/linux/bluetooth/sha256sums.asc
 sha256sums=('257e9075ce05c70d48c5defd254e78c418416f7584b45f9dddc884ff88e3fc53'
@@ -30,16 +29,11 @@ sha256sums=('257e9075ce05c70d48c5defd254e78c418416f7584b45f9dddc884ff88e3fc53'
             'a7928e6c78ce81abe9aa0022900a33577c1c76fd5bdf6e24f0c753013b8ead4c'
             '7010fff3fadfabd298b0231576f4d820f5a1d39218540f4109a98eef6f2b29f2'
             'c0acf96d27bf2aec97cc1c1b66cc4be079712959d1ea266052f3e886d534c1e9'
-            'ab7c0f8e651ba8a92d590839e181ee6da6b134f8cf86996c0f5f4300812f0c2e'
             )
 validpgpkeys=('E932D120BC2AEC444E558F0106CA9F5D1DCF2659') # Marcel Holtmann <marcel@holtmann.org>
 
 build() {
   cd "${pkgname}"-${pkgver}
-
-  # we patched a new plugin into Makefile.plugins so we need to re-run this:
-  autoreconf -ivf
-
   ./configure \
           --prefix=/usr \
           --mandir=/usr/share/man \
