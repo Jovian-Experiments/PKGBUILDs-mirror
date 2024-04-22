@@ -3,7 +3,7 @@
 pkgname=plasma-remotecontrollers
 pkgver=5.27.10
 _dirver=$(echo $pkgver | cut -d. -f1-3)
-pkgrel=1.2
+pkgrel=1.3
 pkgdesc='Translate various input device events into keyboard and pointer events'
 arch=(x86_64)
 url='https://plasma-bigscreen.org/'
@@ -24,7 +24,7 @@ sha256sums=('510426dfb47cb86e0491cdeaead3af6f5d8700408973188ca981c24572f1f473'
             '208b7640475a0f7647e0952061a9176fed7a3fd4ce9bfd8a087d03ed97bf1f70'
             '17a81c30760b6fd297935ca5b633abbd2b13e2f24e5c26b660c8ee9ca37ed29f'
             'b844b24d1364632c874ec27b69fe1294d6dbdf778e9af4de90da93245edb0b42'
-            '20024a59b05fe381c6aa5ac960b10cbc4e1f8196e663e397d692dc71638c95f2'
+            '0e05ea16cd8541bde1a33c23574d111a27965058a01c0730595eb0cd31cd655d'
             'd4dc16146515250a5a6f6d4a3b02ff05d5890474f27b1ee59cee5fa7b230d0e0')
 validpgpkeys=('E0A3EB202F8E57528E13E72FD7574483BB57B18D'  # Jonathan Esk-Riddell <jr@jriddell.org>
               '0AAC775BB6437A8D9AF7A3ACFE0784117FBCE11D'  # Bhushan Shah <bshah@kde.org>

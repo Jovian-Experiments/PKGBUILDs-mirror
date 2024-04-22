@@ -2,6 +2,7 @@
 BindsTo=dev-cec0.device
 After=dev-cec0.device gamescope-session.service
 Requisite=gamescope-session.service
+JobTimeoutSec=1
 
 [Service]
 ExecStart=/usr/bin/plasma-remotecontrollers --platform offscreen
