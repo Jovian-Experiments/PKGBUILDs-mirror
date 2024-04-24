@@ -3,12 +3,12 @@
 pkgname=gamescope
 _srctag=3.14.5
 pkgver=${_srctag//-/.}
-pkgrel=1
+pkgrel=2
 pkgdesc="gaming shell based on Xwayland, powered by Vulkan and DRM"
 arch=(x86_64)
 url="https://github.com/ValveSoftware/gamescope"
 license=('MIT')
-depends=('xorg-xwayland-jupiter' 'libxres' 'xcb-util-errors' 'freerdp' 'xcb-util-wm' 'libxcomposite' 'pixman' 'libinput' 'seatd' 'pipewire' 'libxmu' 'libxcursor' 'powerbuttond' 'libdecor' 'wakehook' 'libei')
+depends=('xorg-xwayland' 'libxres' 'xcb-util-errors' 'freerdp' 'xcb-util-wm' 'libxcomposite' 'pixman' 'libinput' 'seatd' 'pipewire' 'libxmu' 'libxcursor' 'powerbuttond' 'libdecor' 'wakehook' 'libei')
 makedepends=(openssh git meson cmake wayland-protocols ninja glslang glm vulkan-headers benchmark)
 source=("gamescope-session"
         "gamescope-wayland.desktop"
