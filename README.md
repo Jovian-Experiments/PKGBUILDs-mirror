@@ -1,5 +1,5 @@
 
-`main @ 20240422.1000`
+`main @ 20240423.1000`
 ======================
 
 Valve packages
@@ -12,6 +12,7 @@ Valve packages
  * [`drm_info` — `holo-main/drm_info-2.4.0-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/drm_info-2.4.0-1)
  * [`e2fsprogs` — `holo-main/e2fsprogs-1.47.0-1.2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/e2fsprogs-1.47.0-1.2)
  * [`filesystem` — `holo-main/filesystem-2021.12.07-1.10`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/filesystem-2021.12.07-1.10)
+ * [`glibc` — `holo-main/glibc-2.39-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/glibc-2.39-1.1)
  * [`holo-desync` — `holo-main/steamos-customizations-git-20240328.1-3`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-customizations-git-20240328.1-3)
  * [`holo-fstab-repair` — `holo-main/holo-fstab-repair-0.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/holo-fstab-repair-0.1-1)
  * [`holo-glibc-locales` — `holo-main/holo-glibc-locales-2.39-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/holo-glibc-locales-2.39-1)
@@ -32,7 +33,7 @@ Valve packages
  * [`steamos-efi` — `holo-main/steamos-efi-20231213.1-3`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-efi-20231213.1-3)
  * [`steamos-kdumpst-layer` — `holo-main/steamos-kdumpst-layer-1.0-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-kdumpst-layer-1.0-2)
  * [`steamos-log-submitter` — `holo-main/steamos-log-submitter-0.5.0-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-log-submitter-0.5.0-2)
- * [`steamos-manager` — `holo-main/steamos-manager-v0.20240208.0-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-manager-v0.20240208.0-2)
+ * [`steamos-manager` — `holo-main/steamos-manager-24.4.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-manager-24.4.1-1)
  * [`steamos-networking-tools` — `holo-main/steamos-networking-tools-1.0-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-networking-tools-1.0-1)
  * [`steamos-reset` — `holo-main/steamos-reset-20240417.1-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-reset-20240417.1-2)
  * [`steamos-systemreport` — `holo-main/steamos-systemreport-0.6-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-systemreport-0.6-2)
@@ -42,12 +43,11 @@ Valve packages
 ### `jupiter-main`
  * [`alsa-ucm-conf` — `jupiter-main/alsa-ucm-conf-1.2.9-1.2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/alsa-ucm-conf-1.2.9-1.2)
  * [`amd-ucode` — `jupiter-main/linux-firmware-neptune-jupiter.20231113.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/linux-firmware-neptune-jupiter.20231113.1-1)
- * [`bluez` — `jupiter-main/bluez-5.73-5`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/bluez-5.73-5)
- * [`bluez-libs` — `jupiter-main/bluez-5.73-5`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/bluez-5.73-5)
- * [`bluez-plugins` — `jupiter-main/bluez-5.73-5`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/bluez-5.73-5)
- * [`bluez-utils` — `jupiter-main/bluez-5.73-5`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/bluez-5.73-5)
+ * [`bluez` — `jupiter-main/bluez-5.73-6`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/bluez-5.73-6)
+ * [`bluez-libs` — `jupiter-main/bluez-5.73-6`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/bluez-5.73-6)
+ * [`bluez-plugins` — `jupiter-main/bluez-5.73-6`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/bluez-5.73-6)
+ * [`bluez-utils` — `jupiter-main/bluez-5.73-6`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/bluez-5.73-6)
  * [`breakpad` — `jupiter-main/breakpad-v2023.01.27-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/breakpad-v2023.01.27-1)
- * [`ds-inhibit` — `jupiter-main/ds-inhibit-0.1.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/ds-inhibit-0.1.1-1)
  * [`f3` — `jupiter-main/f3-8.0-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/f3-8.0-2)
  * [`galileo-mura` — `jupiter-main/galileo-mura-v0.9-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/galileo-mura-v0.9-1)
  * [`gamescope` — `jupiter-main/gamescope-3.14.4-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/gamescope-3.14.4-1)
@@ -56,10 +56,10 @@ Valve packages
  * [`holo-nix-offload` — `jupiter-main/holo-nix-offload-0.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/holo-nix-offload-0.1-1)
  * [`ibus-anthy` — `jupiter-main/ibus-anthy-1.5.14-4`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/ibus-anthy-1.5.14-4)
  * [`ibus-table-cangjie-lite` — `jupiter-main/ibus-table-cangjie-lite-1.8.8-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/ibus-table-cangjie-lite-1.8.8-2)
- * [`jupiter-dock-updater-bin` — `jupiter-main/jupiter-dock-updater-bin-20231121.01-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-dock-updater-bin-20231121.01-1)
+ * [`jupiter-dock-updater-bin` — `jupiter-main/jupiter-dock-updater-bin-20240422.01-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-dock-updater-bin-20240422.01-1)
  * [`jupiter-fan-control` — `jupiter-main/jupiter-fan-control-20240118.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-fan-control-20240118.1-1)
  * [`jupiter-firewall` — `jupiter-main/jupiter-firewall-0.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-firewall-0.1-1)
- * [`jupiter-hw-support` — `jupiter-main/jupiter-hw-support-20240416.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-hw-support-20240416.1-1)
+ * [`jupiter-hw-support` — `jupiter-main/jupiter-hw-support-20240423.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-hw-support-20240423.1-1)
  * [`jupiter-legacy-support` — `jupiter-main/jupiter-legacy-support-1.147-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-legacy-support-1.147-1)
  * [`jupiter-resolved-nomdns` — `jupiter-main/jupiter-resolved-nomdns-1.0-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-resolved-nomdns-1.0-1)
  * [`jupiter-steamos-log-submitter` — `jupiter-main/jupiter-steamos-log-submitter-1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-steamos-log-submitter-1-1)
@@ -74,7 +74,7 @@ Valve packages
  * [`mesa` — `jupiter-main/mesa-24.0.0.183256.radeonsi_24.0.0-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/mesa-24.0.0.183256.radeonsi_24.0.0-2)
  * [`mesa-vdpau` — `jupiter-main/mesa-24.0.0.183256.radeonsi_24.0.0-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/mesa-24.0.0.183256.radeonsi_24.0.0-2)
  * [`networkmanager` — `jupiter-main/networkmanager-1.44.2-3.3`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/networkmanager-1.44.2-3.3)
- * [`plasma-remotecontrollers` — `jupiter-main/plasma-remotecontrollers-5.27.10-1.2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/plasma-remotecontrollers-5.27.10-1.2)
+ * [`plasma-remotecontrollers` — `jupiter-main/plasma-remotecontrollers-5.27.10-1.3`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/plasma-remotecontrollers-5.27.10-1.3)
  * [`powerbuttond` — `jupiter-main/powerbuttond-2-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/powerbuttond-2-1)
  * [`renderdoc-minimal` — `jupiter-main/renderdoc-minimal-1.30-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/renderdoc-minimal-1.30-1)
  * [`sddm-wayland` — `jupiter-main/sddm-wayland-v0.19.0.valve4.d19813cb03c7d71b896aead28e5285bc131500a9-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/sddm-wayland-v0.19.0.valve4.d19813cb03c7d71b896aead28e5285bc131500a9-1)
@@ -247,7 +247,6 @@ Arch Linux packages
  * [`glfw-x11/3.3.9-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/glfw-x11/-/tree/3.3.9-1)
  * [`glib-networking/1:2.78.0-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/glib-networking/-/tree/1:2.78.0-1)
  * [`glib2/2.78.4-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/glib2/-/tree/2.78.4-1)
- * [`glibc/2.39-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/glibc/-/tree/2.39-1)
  * [`glibmm/2.66.6-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/glibmm/-/tree/2.66.6-1)
  * [`glslang/13.1.1-3`](https://gitlab.archlinux.org/archlinux/packaging/packages/glslang/-/tree/13.1.1-3)
  * [`glu/9.0.3-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/glu/-/tree/9.0.3-1)
@@ -757,7 +756,6 @@ Arch Linux packages
  * [`python-pyaml/23.9.0-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/python-pyaml/-/tree/23.9.0-1)
  * [`python-pyelftools/0.30-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/python-pyelftools/-/tree/0.30-1)
  * [`python-pyenchant/3.2.2-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/python-pyenchant/-/tree/3.2.2-2)
- * [`python-pyinotify/0.9.6-12`](https://gitlab.archlinux.org/archlinux/packaging/packages/python-pyinotify/-/tree/0.9.6-12)
  * [`python-semantic-version/2.10.0-3`](https://gitlab.archlinux.org/archlinux/packaging/packages/python-semantic-version/-/tree/2.10.0-3)
  * [`python-sniffio/1.3.0-4`](https://gitlab.archlinux.org/archlinux/packaging/packages/python-sniffio/-/tree/1.3.0-4)
  * [`python-typing_extensions/4.9.0-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/python-typing_extensions/-/tree/4.9.0-1)
