@@ -1,5 +1,5 @@
 
-`main @ 20240424.1000`
+`main @ 20240424.1001`
 ======================
 
 Valve packages
@@ -50,7 +50,7 @@ Valve packages
  * [`breakpad` — `jupiter-main/breakpad-v2023.01.27-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/breakpad-v2023.01.27-1)
  * [`f3` — `jupiter-main/f3-8.0-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/f3-8.0-2)
  * [`galileo-mura` — `jupiter-main/galileo-mura-v0.9-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/galileo-mura-v0.9-1)
- * [`gamescope` — `jupiter-main/gamescope-3.14.5-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/gamescope-3.14.5-2)
+ * [`gamescope` — `jupiter-main/gamescope-3.14.6-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/gamescope-3.14.6-1)
  * [`gpu-trace` — `jupiter-main/gpu-trace-2.12-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/gpu-trace-2.12-1)
  * [`holo-dmi-rules` — `jupiter-main/holo-dmi-rules-1.0-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/holo-dmi-rules-1.0-1)
  * [`holo-nix-offload` — `jupiter-main/holo-nix-offload-0.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/holo-nix-offload-0.1-1)
@@ -89,7 +89,7 @@ Valve packages
  * [`upower` — `jupiter-main/upower-0.99.15.jupiter-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/upower-0.99.15.jupiter-1.1)
  * [`usbhid-gadget-passthru` — `jupiter-main/usbhid-gadget-passthru-0.1.3-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/usbhid-gadget-passthru-0.1.3-2)
  * [`vpower` — `jupiter-main/vpower-1.4.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/vpower-1.4.1-1)
- * [`wakehook` — `jupiter-main/wakehook-2-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/wakehook-2-1)
+ * [`wakehook` — `jupiter-main/wakehook-2-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/wakehook-2-2)
  * [`webrtc-audio-processing-1` — `jupiter-main/webrtc-audio-processing-1-1.3-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/webrtc-audio-processing-1-1.3-2)
  * [`wireplumber` — `jupiter-main/wireplumber-0.5.0-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/wireplumber-0.5.0-1)
  * [`xdg-desktop-portal-gtk` — `jupiter-main/xdg-desktop-portal-gtk-1.15.1-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/xdg-desktop-portal-gtk-1.15.1-1.1)
@@ -252,7 +252,6 @@ Arch Linux packages
  * [`glslang/13.1.1-3`](https://gitlab.archlinux.org/archlinux/packaging/packages/glslang/-/tree/13.1.1-3)
  * [`glu/9.0.3-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/glu/-/tree/9.0.3-1)
  * [`gmp/6.3.0-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/gmp/-/tree/6.3.0-1)
- * [`gnu-free-fonts/20120503-8`](https://gitlab.archlinux.org/archlinux/packaging/packages/gnu-free-fonts/-/tree/20120503-8)
  * [`gnupg/2.4.4-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/gnupg/-/tree/2.4.4-1)
  * [`gnutls/3.8.3-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/gnutls/-/tree/3.8.3-1)
  * [`gobject-introspection-runtime/1.78.1-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/gobject-introspection-runtime/-/tree/1.78.1-1)
