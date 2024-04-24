@@ -1,5 +1,5 @@
 
-`main @ 20240423.1000`
+`main @ 20240424.1000`
 ======================
 
 Valve packages
@@ -50,7 +50,7 @@ Valve packages
  * [`breakpad` — `jupiter-main/breakpad-v2023.01.27-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/breakpad-v2023.01.27-1)
  * [`f3` — `jupiter-main/f3-8.0-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/f3-8.0-2)
  * [`galileo-mura` — `jupiter-main/galileo-mura-v0.9-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/galileo-mura-v0.9-1)
- * [`gamescope` — `jupiter-main/gamescope-3.14.4-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/gamescope-3.14.4-1)
+ * [`gamescope` — `jupiter-main/gamescope-3.14.5-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/gamescope-3.14.5-2)
  * [`gpu-trace` — `jupiter-main/gpu-trace-2.12-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/gpu-trace-2.12-1)
  * [`holo-dmi-rules` — `jupiter-main/holo-dmi-rules-1.0-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/holo-dmi-rules-1.0-1)
  * [`holo-nix-offload` — `jupiter-main/holo-nix-offload-0.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/holo-nix-offload-0.1-1)
@@ -93,7 +93,8 @@ Valve packages
  * [`webrtc-audio-processing-1` — `jupiter-main/webrtc-audio-processing-1-1.3-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/webrtc-audio-processing-1-1.3-2)
  * [`wireplumber` — `jupiter-main/wireplumber-0.5.0-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/wireplumber-0.5.0-1)
  * [`xdg-desktop-portal-gtk` — `jupiter-main/xdg-desktop-portal-gtk-1.15.1-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/xdg-desktop-portal-gtk-1.15.1-1.1)
- * [`xorg-xwayland-jupiter` — `jupiter-main/xorg-xwayland-jupiter-jupiter.20221104.94fde3eb2-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/xorg-xwayland-jupiter-jupiter.20221104.94fde3eb2-1)
+ * [`xorg-xwayland` — `jupiter-main/xorg-xwayland-23.2.6-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/xorg-xwayland-23.2.6-2)
+ * [`xorgproto` — `jupiter-main/xorgproto-2024.1-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/xorgproto-2024.1-2)
 
 Arch Linux packages
 -------------------
@@ -436,6 +437,7 @@ Arch Linux packages
  * [`libdmtx/0.7.7-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/libdmtx/-/tree/0.7.7-1)
  * [`libdovi/3.2.0-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/libdovi/-/tree/3.2.0-2)
  * [`libedit/20230828_3.1-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/libedit/-/tree/20230828_3.1-1)
+ * [`libei/1.2.1-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/libei/-/tree/1.2.1-1)
  * [`libelf/0.190-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/libelf/-/tree/0.190-2)
  * [`libepoxy/1.5.10-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/libepoxy/-/tree/1.5.10-2)
  * [`libevdev/1.13.1-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/libevdev/-/tree/1.13.1-1)
@@ -913,7 +915,6 @@ Arch Linux packages
  * [`xorg-xset/1.2.5-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/xorg-xset/-/tree/1.2.5-1)
  * [`xorg-xsetroot/1.1.3-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/xorg-xsetroot/-/tree/1.1.3-1)
  * [`xorg-xwininfo/1.1.6-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/xorg-xwininfo/-/tree/1.1.6-1)
- * [`xorgproto/2023.2-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/xorgproto/-/tree/2023.2-1)
  * [`xterm/390-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/xterm/-/tree/390-1)
  * [`xvidcore/1.3.7-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/xvidcore/-/tree/1.3.7-2)
  * [`xxhash/0.8.2-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/xxhash/-/tree/0.8.2-1)
