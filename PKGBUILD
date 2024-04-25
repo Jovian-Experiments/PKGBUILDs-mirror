@@ -5,63 +5,59 @@
 
 pkgbase=plasma-workspace
 pkgname=(plasma-workspace plasma-wayland-session)
-pkgver=5.23.5
-pkgrel=5
+pkgver=5.27.10
+_dirver=$(echo $pkgver | cut -d. -f1-3)
+pkgrel=2.1
 pkgdesc='KDE Plasma Workspace'
 arch=(x86_64)
 url='https://kde.org/plasma-desktop/'
 license=(LGPL)
-depends=(knotifyconfig ksystemstats ktexteditor libqalculate kde-cli-tools appstream-qt
-         xorg-xrdb xorg-xsetroot kactivitymanagerd kholidays xorg-xmessage milou prison kwin
-         plasma-integration kpeople kactivities-stats libkscreen kquickcharts kuserfeedback kio-extras kio-fuse)
-makedepends=(extra-cmake-modules kdoctools gpsd baloo networkmanager-qt plasma-wayland-protocols kunitconversion kinit)
+depends=(knotifyconfig5 ksystemstats ktexteditor5 libqalculate kde-cli-tools appstream-qt5
+         xorg-xrdb xorg-xsetroot kactivitymanagerd kholidays5 xorg-xmessage milou prison5 kwin
+         plasma-integration kpeople5 kactivities-stats5 kquickcharts5 kuserfeedback5 kpipewire
+         accountsservice kio-extras kio-fuse qt5-tools oxygen-sounds)
+makedepends=(extra-cmake-modules kdoctools5 gpsd baloo5 networkmanager-qt5 plasma-wayland-protocols wayland-protocols kunitconversion5)
 groups=(plasma)
-source=(https://download.kde.org/stable/plasma/$pkgver/$pkgbase-$pkgver.tar.xz{,.sig} kde.pam
-        https://invent.kde.org/plasma/plasma-workspace/-/commit/70d23b89.patch
-        https://invent.kde.org/plasma/plasma-workspace/-/commit/926f8647.patch
-        0001-Load-additional-actions-for-app-entries-in-applicati.patch
-        0003-Backport-fixing-the-writing-of-lnf-defaults.patch
-        steam.desktop)
-sha256sums=('2ebee6ab2f10cabc350e0f75a0d8462ae0b7616a795d078f6bb5765396052575'
+source=(https://download.kde.org/stable/plasma/$_dirver/$pkgbase-$pkgver.tar.xz{,.sig} kde.pam
+        appstream-1.0.patch)
+sha256sums=('525dc164c61a6730f33d54ff5013d57184b9d671786fe898ca7e054426359778'
             'SKIP'
             '00090291204baabe9d6857d3b1419832376dd2e279087d718b64792691e86739'
-            '810660c3d7948c21c61f8d4c7d604ca7cb51c85e1a41c6225d1f39c72feae808'
-            'fe5ae91bc2c5e1b9021523efec60dc7740285e2c74684639e8238e9df9f58572'
-            '20617818d22a655236a30b7ec75ddf3c9917e2efa696884b84d9a27fa3159dab'
-            '4965f42f2294c1143457c0ec2b6f1ab406a33e12a3fe2edea59b23db06ffa0e6'
-            '72af031bed09455bd8c8625a6549b6bd130797be7ab4f0ba2283c34b9fdbedaf')
+            'e3068a5709711dc54809b0280a59ec3ab6bc3b7ad0f0d93246e40d1daa1dc45e')
 validpgpkeys=('E0A3EB202F8E57528E13E72FD7574483BB57B18D'  # Jonathan Esk-Riddell <jr@jriddell.org>
               '0AAC775BB6437A8D9AF7A3ACFE0784117FBCE11D'  # Bhushan Shah <bshah@kde.org>
               'D07BD8662C56CB291B316EB2F5675605C74E02CF'  # David Edmundson <davidedmundson@kde.org>
               '1FA881591C26B276D7A5518EEAAF29B42A678C20') # Marco Martin <notmart@gmail.com>
 
 prepare() {
-  patch -d $pkgbase-$pkgver -p1 < 70d23b89.patch # Remove implicit kinit dependency on shell runner
-  patch -d $pkgbase-$pkgver -p1 < 926f8647.patch # Fix missing taskbar thumbnails on Wayland
-  patch -d $pkgbase-$pkgver -p1 --input="${srcdir}/0001-Load-additional-actions-for-app-entries-in-applicati.patch"
-  patch -d $pkgbase-$pkgver -p1 --input="${srcdir}/0003-Backport-fixing-the-writing-of-lnf-defaults.patch"
+  patch -d $pkgbase-$pkgver -p1 < appstream-1.0.patch # Support appstream 1.0
 }
 
 build() {
+
+  # GLIBC_LOCALE_* settings are overriden due to Steam differences
+  # with the read only disk.
+  # See documentation with CMakeLists.txt of plasma-workspace for details
+
   cmake -B build -S $pkgbase-$pkgver \
     -DCMAKE_INSTALL_LIBEXECDIR=lib \
-    -DBUILD_TESTING=OFF \
-    -DCMAKE_INSTALL_PREFIX=/usr
+    -DGLIBC_LOCALE_PREGENERATED=ON \
+    -DGLIBC_LOCALE_GEN=OFF \
+    -DBUILD_TESTING=OFF
   cmake --build build
 }
 
 package_plasma-workspace() {
   optdepends=('plasma-workspace-wallpapers: additional wallpapers'
-              'gpsd: GPS based geolocation' 'networkmanager-qt: IP based geolocation'
+              'gpsd: GPS based geolocation' 'networkmanager-qt5: IP based geolocation'
               'kdepim-addons: displaying PIM events in the calendar'
               'appmenu-gtk-module: global menu support for GTK2 and some GTK3 applications'
-              'baloo: Baloo search runner' 'discover: manage applications installation from the launcher')
+              'baloo5: Baloo search runner' 'discover: manage applications installation from the launcher')
   backup=('etc/pam.d/kde')
 
   DESTDIR="$pkgdir" cmake --install build
 
   install -Dm644 "$srcdir"/kde.pam "$pkgdir"/etc/pam.d/kde
-  install -D -m644 "$srcdir"/steam.desktop "$pkgdir"/usr/share/plasma/kickeractions/steam.desktop
 
   # Split plasma-wayland scripts
   rm -r "$pkgdir"/usr/share/wayland-sessions
