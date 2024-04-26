@@ -1,12 +1,12 @@
 
-`main @ 20240424.1001`
+`main @ 20240426.1000`
 ======================
 
 Valve packages
 --------------
 
 ### `holo-main`
- * [`atomupd-daemon-git` — `holo-main/atomupd-daemon-git-0.20240212.1.r0.g486524b-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/atomupd-daemon-git-0.20240212.1.r0.g486524b-1)
+ * [`atomupd-daemon-git` — `holo-main/atomupd-daemon-git-0.20240425.1.r0.g5a37302-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/atomupd-daemon-git-0.20240425.1.r0.g5a37302-1)
  * [`casync` — `holo-main/casync-2.r227.g99559cd-4.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/casync-2.r227.g99559cd-4.1)
  * [`discover` — `holo-main/discover-5.27.10.1-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/discover-5.27.10.1-1.1)
  * [`drm_info` — `holo-main/drm_info-2.4.0-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/drm_info-2.4.0-1)
@@ -43,10 +43,10 @@ Valve packages
 ### `jupiter-main`
  * [`alsa-ucm-conf` — `jupiter-main/alsa-ucm-conf-1.2.9-1.2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/alsa-ucm-conf-1.2.9-1.2)
  * [`amd-ucode` — `jupiter-main/linux-firmware-neptune-jupiter.20231113.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/linux-firmware-neptune-jupiter.20231113.1-1)
- * [`bluez` — `jupiter-main/bluez-5.73-6`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/bluez-5.73-6)
- * [`bluez-libs` — `jupiter-main/bluez-5.73-6`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/bluez-5.73-6)
- * [`bluez-plugins` — `jupiter-main/bluez-5.73-6`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/bluez-5.73-6)
- * [`bluez-utils` — `jupiter-main/bluez-5.73-6`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/bluez-5.73-6)
+ * [`bluez` — `jupiter-main/bluez-5.73-7`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/bluez-5.73-7)
+ * [`bluez-libs` — `jupiter-main/bluez-5.73-7`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/bluez-5.73-7)
+ * [`bluez-plugins` — `jupiter-main/bluez-5.73-7`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/bluez-5.73-7)
+ * [`bluez-utils` — `jupiter-main/bluez-5.73-7`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/bluez-5.73-7)
  * [`breakpad` — `jupiter-main/breakpad-v2023.01.27-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/breakpad-v2023.01.27-1)
  * [`f3` — `jupiter-main/f3-8.0-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/f3-8.0-2)
  * [`galileo-mura` — `jupiter-main/galileo-mura-v0.9-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/galileo-mura-v0.9-1)
@@ -65,16 +65,18 @@ Valve packages
  * [`jupiter-steamos-log-submitter` — `jupiter-main/jupiter-steamos-log-submitter-1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-steamos-log-submitter-1-1)
  * [`libdrm` — `jupiter-main/libdrm-2.4.120-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/libdrm-2.4.120-1)
  * [`libnm` — `jupiter-main/networkmanager-1.44.2-3.3`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/networkmanager-1.44.2-3.3)
- * [`libva-mesa-driver` — `jupiter-main/mesa-24.0.0.183256.radeonsi_24.0.0-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/mesa-24.0.0.183256.radeonsi_24.0.0-2)
+ * [`libva-mesa-driver` — `jupiter-main/mesa-24.0.5.183656.radeonsi_24.0.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/mesa-24.0.5.183656.radeonsi_24.0.1-1)
  * [`libwireplumber` — `jupiter-main/wireplumber-0.5.0-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/wireplumber-0.5.0-1)
  * [`linux-firmware-neptune` — `jupiter-main/linux-firmware-neptune-jupiter.20231113.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/linux-firmware-neptune-jupiter.20231113.1-1)
  * [`linux-firmware-neptune-whence` — `jupiter-main/linux-firmware-neptune-jupiter.20231113.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/linux-firmware-neptune-jupiter.20231113.1-1)
  * [`linux-neptune-61` — `jupiter-main/linux-neptune-61-6.1.52.valve19-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/linux-neptune-61-6.1.52.valve19-1)
  * [`mangohud` — `jupiter-main/mangohud-0.7.0.r78.gc5c82db-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/mangohud-0.7.0.r78.gc5c82db-1)
- * [`mesa` — `jupiter-main/mesa-24.0.0.183256.radeonsi_24.0.0-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/mesa-24.0.0.183256.radeonsi_24.0.0-2)
- * [`mesa-vdpau` — `jupiter-main/mesa-24.0.0.183256.radeonsi_24.0.0-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/mesa-24.0.0.183256.radeonsi_24.0.0-2)
+ * [`mesa` — `jupiter-main/mesa-24.0.5.183656.radeonsi_24.0.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/mesa-24.0.5.183656.radeonsi_24.0.1-1)
+ * [`mesa-vdpau` — `jupiter-main/mesa-24.0.5.183656.radeonsi_24.0.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/mesa-24.0.5.183656.radeonsi_24.0.1-1)
  * [`networkmanager` — `jupiter-main/networkmanager-1.44.2-3.3`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/networkmanager-1.44.2-3.3)
  * [`plasma-remotecontrollers` — `jupiter-main/plasma-remotecontrollers-5.27.10-1.3`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/plasma-remotecontrollers-5.27.10-1.3)
+ * [`plasma-wayland-session` — `jupiter-main/plasma-workspace-5.27.10-2.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/plasma-workspace-5.27.10-2.1)
+ * [`plasma-workspace` — `jupiter-main/plasma-workspace-5.27.10-2.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/plasma-workspace-5.27.10-2.1)
  * [`powerbuttond` — `jupiter-main/powerbuttond-2-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/powerbuttond-2-1)
  * [`renderdoc-minimal` — `jupiter-main/renderdoc-minimal-1.30-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/renderdoc-minimal-1.30-1)
  * [`sddm-wayland` — `jupiter-main/sddm-wayland-v0.19.0.valve4.d19813cb03c7d71b896aead28e5285bc131500a9-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/sddm-wayland-v0.19.0.valve4.d19813cb03c7d71b896aead28e5285bc131500a9-1)
@@ -213,6 +215,7 @@ Arch Linux packages
  * [`fatresize/1.1.0-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/fatresize/-/tree/1.1.0-1)
  * [`fd/9.0.0-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/fd/-/tree/9.0.0-1)
  * [`ffmpeg/2:6.1.1-5`](https://gitlab.archlinux.org/archlinux/packaging/packages/ffmpeg/-/tree/2:6.1.1-5)
+ * [`ffmpegthumbs/23.08.5-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/ffmpegthumbs/-/tree/23.08.5-1)
  * [`fftw/3.3.10-6`](https://gitlab.archlinux.org/archlinux/packaging/packages/fftw/-/tree/3.3.10-6)
  * [`file/5.45-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/file/-/tree/5.45-1)
  * [`findutils/4.9.0-3`](https://gitlab.archlinux.org/archlinux/packaging/packages/findutils/-/tree/4.9.0-3)
@@ -708,9 +711,7 @@ Arch Linux packages
  * [`plasma-thunderbolt/5.27.10-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/plasma-thunderbolt/-/tree/5.27.10-1)
  * [`plasma-vault/5.27.10-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/plasma-vault/-/tree/5.27.10-1)
  * [`plasma-wayland-protocols/1.12.0-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/plasma-wayland-protocols/-/tree/1.12.0-1)
- * [`plasma-wayland-session/5.27.10-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/plasma-workspace/-/tree/5.27.10-2)
  * [`plasma-welcome/5.27.10-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/plasma-welcome/-/tree/5.27.10-1)
- * [`plasma-workspace/5.27.10-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/plasma-workspace/-/tree/5.27.10-2)
  * [`plasma-workspace-wallpapers/5.27.10-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/plasma-workspace-wallpapers/-/tree/5.27.10-1)
  * [`polkit/124-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/polkit/-/tree/124-2)
  * [`polkit-kde-agent/5.27.10-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/polkit-kde-agent/-/tree/5.27.10-1)
@@ -868,7 +869,7 @@ Arch Linux packages
  * [`vmaf/3.0.0-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/vmaf/-/tree/3.0.0-1)
  * [`volume_key/0.3.12-8`](https://gitlab.archlinux.org/archlinux/packaging/packages/volume_key/-/tree/0.3.12-8)
  * [`vulkan-icd-loader/1.3.276-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/vulkan-icd-loader/-/tree/1.3.276-1)
- * [`vulkan-radeon/24.1.0_devel.184368.steamos_24.1.2-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/vulkan-radeon/-/tree/24.1.0_devel.184368.steamos_24.1.2-2)
+ * [`vulkan-radeon/24.1.0_devel.188125.steamos_24.4.0-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/vulkan-radeon/-/tree/24.1.0_devel.188125.steamos_24.4.0-1)
  * [`vulkan-tools/1.3.269-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/vulkan-tools/-/tree/1.3.269-1)
  * [`wayland/1.22.0-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/wayland/-/tree/1.22.0-1)
  * [`wayland-utils/1.2.0-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/wayland-utils/-/tree/1.2.0-1)
