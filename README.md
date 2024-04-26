@@ -1,5 +1,5 @@
 
-`main @ 20240426.1000`
+`main @ 20240426.1001`
 ======================
 
 Valve packages
@@ -69,7 +69,7 @@ Valve packages
  * [`libwireplumber` — `jupiter-main/wireplumber-0.5.0-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/wireplumber-0.5.0-1)
  * [`linux-firmware-neptune` — `jupiter-main/linux-firmware-neptune-jupiter.20231113.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/linux-firmware-neptune-jupiter.20231113.1-1)
  * [`linux-firmware-neptune-whence` — `jupiter-main/linux-firmware-neptune-jupiter.20231113.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/linux-firmware-neptune-jupiter.20231113.1-1)
- * [`linux-neptune-61` — `jupiter-main/linux-neptune-61-6.1.52.valve19-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/linux-neptune-61-6.1.52.valve19-1)
+ * [`linux-neptune-65` — `jupiter-main/linux-neptune-65-6.5.0.valve3-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/linux-neptune-65-6.5.0.valve3-1)
  * [`mangohud` — `jupiter-main/mangohud-0.7.0.r78.gc5c82db-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/mangohud-0.7.0.r78.gc5c82db-1)
  * [`mesa` — `jupiter-main/mesa-24.0.5.183656.radeonsi_24.0.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/mesa-24.0.5.183656.radeonsi_24.0.1-1)
  * [`mesa-vdpau` — `jupiter-main/mesa-24.0.5.183656.radeonsi_24.0.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/mesa-24.0.5.183656.radeonsi_24.0.1-1)
