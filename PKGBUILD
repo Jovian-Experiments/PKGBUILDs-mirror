@@ -7,7 +7,7 @@
 pkgbase=bluez
 pkgname=('bluez' 'bluez-utils' 'bluez-libs' 'bluez-cups' 'bluez-hid2hci' 'bluez-plugins')
 pkgver=5.73
-pkgrel=6
+pkgrel=7
 url="http://www.bluez.org/"
 arch=('x86_64')
 license=('GPL2')
@@ -19,6 +19,8 @@ source=(https://www.kernel.org/pub/linux/bluetooth/${pkgname}-${pkgver}.tar.{xz,
         0014-shared-gatt-Add-env-variable-to-prefer-indication-ov.patch # SteamOS: For Bluetooth qualification tests GAP/SEC/SEM/BV-56-C, GAP/SEC/SEM/BV-57-C and GAP/SEC/SEM/BV-58-C # not upstreamable
         0017-device-Fix-airpods-pairing.patch
         0018-disable-unreliable-vcp-tests.patch
+        0019-plugins-Add-new-plugin-to-manage-wake-policy.patch
+        0020-plugins-wake-policy-Only-allow-Peripherals-to-wake-u.patch
 )
 # see https://www.kernel.org/pub/linux/bluetooth/sha256sums.asc
 sha256sums=('257e9075ce05c70d48c5defd254e78c418416f7584b45f9dddc884ff88e3fc53'
@@ -29,11 +31,17 @@ sha256sums=('257e9075ce05c70d48c5defd254e78c418416f7584b45f9dddc884ff88e3fc53'
             'a7928e6c78ce81abe9aa0022900a33577c1c76fd5bdf6e24f0c753013b8ead4c'
             '7010fff3fadfabd298b0231576f4d820f5a1d39218540f4109a98eef6f2b29f2'
             'c0acf96d27bf2aec97cc1c1b66cc4be079712959d1ea266052f3e886d534c1e9'
+            '120c7e435c854e4442e6de8dd257e19e142e2c36ebd491d18d7fa796f585f1ac'
+            '0919781b35efb1e53b60dbad947ec282ad82f413879fd3e58af38a7b49a91941'
             )
 validpgpkeys=('E932D120BC2AEC444E558F0106CA9F5D1DCF2659') # Marcel Holtmann <marcel@holtmann.org>
 
 build() {
   cd "${pkgname}"-${pkgver}
+
+  # we patched a new plugin into Makefile.plugins so we need to re-run this:
+  autoreconf -ivf
+
   ./configure \
           --prefix=/usr \
           --mandir=/usr/share/man \
@@ -105,6 +113,9 @@ package_bluez() {
 
   # cleanup  - these libs go into bluez-libs
   rm "${pkgdir}"/usr/lib/libbluetooth.so*
+
+  # ship wake-policy config file
+  install -Dm644 "${srcdir}"/"${pkgbase}"-${pkgver}/plugins/wake-policy.conf "${pkgdir}"/etc/bluetooth/wake-policy.conf
 }
 
 package_bluez-utils() {
