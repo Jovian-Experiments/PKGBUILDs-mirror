@@ -1,5 +1,5 @@
 
-`main @ 20240429.1000`
+`main @ 20240429.1001`
 ======================
 
 Valve packages
@@ -50,7 +50,7 @@ Valve packages
  * [`breakpad` — `jupiter-main/breakpad-v2023.01.27-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/breakpad-v2023.01.27-1)
  * [`f3` — `jupiter-main/f3-8.0-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/f3-8.0-2)
  * [`galileo-mura` — `jupiter-main/galileo-mura-v0.9-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/galileo-mura-v0.9-1)
- * [`gamescope` — `jupiter-main/gamescope-3.14.8-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/gamescope-3.14.8-1)
+ * [`gamescope` — `jupiter-main/gamescope-3.14.11-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/gamescope-3.14.11-1)
  * [`gpu-trace` — `jupiter-main/gpu-trace-2.12-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/gpu-trace-2.12-1)
  * [`holo-dmi-rules` — `jupiter-main/holo-dmi-rules-1.0-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/holo-dmi-rules-1.0-1)
  * [`holo-nix-offload` — `jupiter-main/holo-nix-offload-0.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/holo-nix-offload-0.1-1)
@@ -415,6 +415,7 @@ Arch Linux packages
  * [`libasyncns/1:0.8+r3+g68cd5af-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/libasyncns/-/tree/1:0.8+r3+g68cd5af-2)
  * [`libatasmart/0.19-6`](https://gitlab.archlinux.org/archlinux/packaging/packages/libatasmart/-/tree/0.19-6)
  * [`libavc1394/0.5.4-6`](https://gitlab.archlinux.org/archlinux/packaging/packages/libavc1394/-/tree/0.5.4-6)
+ * [`libavif/1.0.4-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/libavif/-/tree/1.0.4-1)
  * [`libblockdev/3.0.4-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/libblockdev/-/tree/3.0.4-2)
  * [`libbluray/1.3.4-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/libbluray/-/tree/1.3.4-1)
  * [`libbpf/1.3.0-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/libbpf/-/tree/1.3.0-1)
@@ -597,6 +598,7 @@ Arch Linux packages
  * [`libxv/1.0.12-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/libxv/-/tree/1.0.12-1)
  * [`libxxf86vm/1.1.5-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/libxxf86vm/-/tree/1.1.5-1)
  * [`libyaml/0.2.5-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/libyaml/-/tree/0.2.5-2)
+ * [`libyuv/r2426+464c51a0-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/libyuv/-/tree/r2426+464c51a0-1)
  * [`libzip/1.10.1-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/libzip/-/tree/1.10.1-1)
  * [`licenses/20240206-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/licenses/-/tree/20240206-1)
  * [`lilv/0.24.24-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/lilv/-/tree/0.24.24-1)
