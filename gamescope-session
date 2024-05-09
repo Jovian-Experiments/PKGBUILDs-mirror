@@ -304,6 +304,8 @@ if [[ "$short_session_count" -ge "$short_session_count_before_reset" ]]; then
 	# instead of resetting the wrong thing
 	# also could print full list of files and sizes in the Steam dir and save as a diagnostic report
 	echo >&2 "gamescope-session: detected broken Steam, bootstrapping from OS copy..."
+	# at this point, might as well make sure we won't relaunch on a sideloaded build
+	rm -f $HOME/devkit-game/devkit-steam
 	mkdir -p ~/.local/share/Steam
 	# remove some caches and stateful things known to cause Steam to fail to start if corrupt
 	rm -rf --one-file-system ~/.local/share/Steam/config/widevine
