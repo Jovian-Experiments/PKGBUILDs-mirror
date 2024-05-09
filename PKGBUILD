@@ -2,8 +2,8 @@
 # Contributor: Emil Velikov <emil.l.velikov@gmail.com>
 
 pkgname=('mangohud' 'lib32-mangohud')
-pkgver=0.7.0.r78.gc5c82db
-pkgrel=1
+pkgver=0.7.2.rc3.r11.g31f2ca5
+pkgrel=2
 pkgdesc="Vulkan and OpenGL overlay to display performance information"
 url="https://github.com/flightlessmango/MangoHud"
 arch=(x86_64)
@@ -21,14 +21,16 @@ makedepends=(
   libxnvctrl
   meson
   python-mako
+  libxkbcommon
+  lib32-libxkbcommon
 )
 
 source=(
-  "mangohud"::"git+https://github.com/flightlessmango/MangoHud.git#commit=c5c82dbbae846b5ea2bf920810fa2ede4a6979f8"
+  "mangohud"::"git+https://github.com/flightlessmango/MangoHud.git#commit=31f2ca5e306d7bad502ae70d346f0309e1f4764b"
   "imgui-v1.89.9.tar.gz::https://github.com/ocornut/imgui/archive/refs/tags/v1.89.9.tar.gz"
   "imgui-1.89-9-wrap.zip::https://wrapdb.mesonbuild.com/v2/imgui_1.89.9-1/get_patch"
-  "spdlog-1.12.0.tar.gz::https://github.com/gabime/spdlog/archive/refs/tags/v1.12.0.tar.gz"
-  "spdlog-1.12.0-1-wrap.zip::https://wrapdb.mesonbuild.com/v2/spdlog_1.12.0-1/get_patch"
+  "spdlog-v1.14.1.tar.gz::https://github.com/gabime/spdlog/archive/refs/tags/v1.14.1.tar.gz"
+  "spdlog-1.14.1-1-wrap.zip::https://wrapdb.mesonbuild.com/v2/spdlog_1.14.1-1/get_patch"
   "nlohmann_json-3.10.5.zip::https://github.com/nlohmann/json/releases/download/v3.10.5/include.zip"
   "vulkan-headers-1.2.158.tar.gz::https://github.com/KhronosGroup/Vulkan-Headers/archive/v1.2.158.tar.gz"
   "vulkan-headers-1.2.158-2-wrap.zip::https://wrapdb.mesonbuild.com/v2/vulkan-headers_1.2.158-2/get_patch"
@@ -39,8 +41,8 @@ source=(
 sha256sums=('SKIP'
             '1acc27a778b71d859878121a3f7b287cd81c29d720893d2b2bf74455bf9d52d6'
             '9b21290c597d76bf8d4eeb3f9ffa024b11d9ea6c61e91d648ccc90b42843d584'
-            '4dccf2d10f410c1e2feaff89966bfc49a1abb29ef6f08246335b110e001e09a9'
-            '0515906db7324df0e439bdd018bf019a60304430f6af8f1725910652e30ebe69'
+            '1586508029a7d0670dfcb2d97575dcdc242d3868a259742b69f100801ab4e16b'
+            'ae878e732330ea1048f90d7e117c40c0cd2a6fb8ae5492c7955818ce3aaade6c'
             'b94997df68856753b72f0d7a3703b7d484d4745c567f3584ef97c96c25a5798e'
             '53361271cfe274df8782e1e47bdc9e61b7af432ba30acbfe31723f9df2c257f3'
             '860358cf5e73f458cd1e88f8c38116d123ab421d5ce2e4129ec38eaedd820e17'
@@ -57,7 +59,7 @@ prepare() {
 
   # meson subprojects
   ln -sv "$srcdir/imgui-1.89.9" subprojects
-  ln -sv "$srcdir/spdlog-1.12.0" subprojects
+  ln -sv "$srcdir/spdlog-1.14.1" subprojects
   ln -sv "$srcdir/implot-0.16" subprojects
   mkdir  subprojects/nlohmann_json-3.10.5
   ln -sv "$srcdir/include" subprojects/nlohmann_json-3.10.5/
@@ -88,9 +90,9 @@ build() {
   export CXX="g++ -m32"
   export PKG_CONFIG_PATH="/usr/lib32/pkgconfig"
 
-  arch-meson mangohud build32 "${meson_options[@]}" --libdir=lib32
-  meson compile -C build32
-}
+  arch-meson mangohud build32 "${meson_options[@]}" --libdir=lib32 
+  meson compile -C build32 
+} 
 
 package_mangohud() {
   conflicts=('mangohud-common')
