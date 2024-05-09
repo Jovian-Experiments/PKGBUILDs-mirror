@@ -2,9 +2,9 @@
 # Maintainer: Jan Alexander Steffens (heftig) <heftig@archlinux.org>
 
 pkgbase=linux-neptune-65
-_tag=6.5.0-valve3
+_tag=6.5.0-valve4
 pkgver=${_tag//-/.}
-pkgrel=3
+pkgrel=4
 pkgdesc='Linux'
 url="https://gitlab.steamos.cloud/jupiter/linux-integration/-/tree/$_tag"
 arch=(x86_64)
