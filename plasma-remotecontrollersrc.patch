@@ -2,10 +2,11 @@ diff --git a/plasma-remotecontrollersrc b/plasma-remotecontrollersrc
 index a52611f..e6c7565 100644
 --- a/plasma-remotecontrollersrc
 +++ b/plasma-remotecontrollersrc
-@@ -16,3 +16,6 @@ ButtonBlue=113
+@@ -16,3 +16,7 @@ ButtonBlue=113
  ButtonRed=114
  ButtonYellow=115
  ButtonGreen=116
 +KeyBack=1
 +KeyExit=1
 +OSDName=Steam Deck
++EnableEvdev=false
