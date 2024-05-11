@@ -2,7 +2,7 @@
 
 pkgname=xorg-xwayland
 pkgver=23.2.6
-pkgrel=2
+pkgrel=3
 arch=('x86_64')
 license=(
     LicenseRef-Adobe-Display-PostScript
@@ -31,9 +31,11 @@ depends=('nettle' 'libepoxy' 'systemd-libs' 'libxfont2'
 makedepends=('meson' 'xorgproto' 'xtrans' 'libxkbfile' 'dbus'
              'xorg-font-util' 'wayland-protocols' 'mesa-libgl'
              'systemd' 'egl-wayland')
-source=(https://xorg.freedesktop.org/archive/individual/xserver/xwayland-$pkgver.tar.xz{,.sig})
+source=(https://xorg.freedesktop.org/archive/individual/xserver/xwayland-$pkgver.tar.xz{,.sig}
+        0001-xwayland-Send-ei_device_frame-on-device_scroll_discr.patch)
 sha512sums=('9e3c2253af335a559d0f890fa8f9bc381beca6531e0842d739ac15cbca008b3d07c0eefafd03611b04917c626861a7871a83657afa2a298994f4b162f714fc49'
-            'SKIP')
+            'SKIP'
+            'b9f8816ec0dd896585ab4a71046ee57c8b08fb92b34310f4bd337a65e6e91400ba1dec827ad458cd65951c176960b05ed2a2742efba1d547587d187093184149')
 provides=('xorg-server-xwayland')
 conflicts=('xorg-server-xwayland')
 replaces=('xorg-server-xwayland')
@@ -41,6 +43,11 @@ replaces=('xorg-server-xwayland')
 validpgpkeys=('67DC86F2623FC5FD4BB5225D14706DBE1E4B4540') # "Olivier Fourdan <fourdan@xfce.org>"
 validpgpkeys+=('3C2C43D9447D5938EF4551EBE23B7E70B467F0BF') # Peter Hutterer (Who-T) <office@who-t.net>
 
+prepare() {
+  cd xwayland-$pkgver
+
+  patch -Np1 < ../0001-xwayland-Send-ei_device_frame-on-device_scroll_discr.patch
+}
 
 build() {
   arch-meson xwayland-$pkgver build \
