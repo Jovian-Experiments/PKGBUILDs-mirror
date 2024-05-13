@@ -1,5 +1,5 @@
 
-`main @ 20240509.1001`
+`main @ 20240513.1000`
 ======================
 
 Valve packages
@@ -50,7 +50,7 @@ Valve packages
  * [`breakpad` — `jupiter-main/breakpad-v2023.01.27-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/breakpad-v2023.01.27-1)
  * [`f3` — `jupiter-main/f3-8.0-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/f3-8.0-2)
  * [`galileo-mura` — `jupiter-main/galileo-mura-v0.9-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/galileo-mura-v0.9-1)
- * [`gamescope` — `jupiter-main/gamescope-3.14.13-4`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/gamescope-3.14.13-4)
+ * [`gamescope` — `jupiter-main/gamescope-3.14.14-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/gamescope-3.14.14-1)
  * [`gpu-trace` — `jupiter-main/gpu-trace-2.13-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/gpu-trace-2.13-1)
  * [`holo-dmi-rules` — `jupiter-main/holo-dmi-rules-1.0-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/holo-dmi-rules-1.0-1)
  * [`holo-nix-offload` — `jupiter-main/holo-nix-offload-0.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/holo-nix-offload-0.1-1)
@@ -74,7 +74,7 @@ Valve packages
  * [`mesa` — `jupiter-main/mesa-24.0.5.183658.radeonsi_24.0.2-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/mesa-24.0.5.183658.radeonsi_24.0.2-1)
  * [`mesa-vdpau` — `jupiter-main/mesa-24.0.5.183658.radeonsi_24.0.2-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/mesa-24.0.5.183658.radeonsi_24.0.2-1)
  * [`networkmanager` — `jupiter-main/networkmanager-1.44.2-3.3`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/networkmanager-1.44.2-3.3)
- * [`plasma-remotecontrollers` — `jupiter-main/plasma-remotecontrollers-5.27.11-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/plasma-remotecontrollers-5.27.11-1.1)
+ * [`plasma-remotecontrollers` — `jupiter-main/plasma-remotecontrollers-5.27.11-1.2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/plasma-remotecontrollers-5.27.11-1.2)
  * [`plasma-wayland-session` — `jupiter-main/plasma-workspace-5.27.10-2.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/plasma-workspace-5.27.10-2.1)
  * [`plasma-workspace` — `jupiter-main/plasma-workspace-5.27.10-2.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/plasma-workspace-5.27.10-2.1)
  * [`powerbuttond` — `jupiter-main/powerbuttond-2-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/powerbuttond-2-1)
@@ -95,7 +95,7 @@ Valve packages
  * [`webrtc-audio-processing-1` — `jupiter-main/webrtc-audio-processing-1-1.3-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/webrtc-audio-processing-1-1.3-2)
  * [`wireplumber` — `jupiter-main/wireplumber-0.5.0-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/wireplumber-0.5.0-1)
  * [`xdg-desktop-portal-gtk` — `jupiter-main/xdg-desktop-portal-gtk-1.15.1-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/xdg-desktop-portal-gtk-1.15.1-1.1)
- * [`xorg-xwayland` — `jupiter-main/xorg-xwayland-23.2.6-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/xorg-xwayland-23.2.6-2)
+ * [`xorg-xwayland` — `jupiter-main/xorg-xwayland-23.2.6-3`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/xorg-xwayland-23.2.6-3)
  * [`xorgproto` — `jupiter-main/xorgproto-2024.1-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/xorgproto-2024.1-2)
 
 Arch Linux packages
@@ -404,7 +404,7 @@ Arch Linux packages
  * [`layer-shell-qt/5.27.10-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/layer-shell-qt/-/tree/5.27.10-1)
  * [`lcms2/2.16-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/lcms2/-/tree/2.16-1)
  * [`ldb/2:2.8.0-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/ldb/-/tree/2:2.8.0-1)
- * [`less/1:643-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/less/-/tree/1:643-1)
+ * [`less/1:643-1.1`](https://gitlab.archlinux.org/archlinux/packaging/packages/less/-/tree/1:643-1.1)
  * [`libaccounts-glib/1.26-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/libaccounts-glib/-/tree/1.26-2)
  * [`libaccounts-qt/1.16-3`](https://gitlab.archlinux.org/archlinux/packaging/packages/libaccounts-qt/-/tree/1.16-3)
  * [`libadwaita/1:1.4.3-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/libadwaita/-/tree/1:1.4.3-1)
