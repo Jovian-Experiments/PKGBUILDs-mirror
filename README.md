@@ -1,12 +1,12 @@
 
-`main @ 20240517.1000`
+`main @ 20240521.1000`
 ======================
 
 Valve packages
 --------------
 
 ### `holo-main`
- * [`atomupd-daemon-git` — `holo-main/atomupd-daemon-git-0.20240425.1.r0.g5a37302-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/atomupd-daemon-git-0.20240425.1.r0.g5a37302-1)
+ * [`atomupd-daemon-git` — `holo-main/atomupd-daemon-git-0.20240517.1.r0.ge7f34ba-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/atomupd-daemon-git-0.20240517.1.r0.ge7f34ba-1)
  * [`casync` — `holo-main/casync-2.r227.g99559cd-4.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/casync-2.r227.g99559cd-4.1)
  * [`discover` — `holo-main/discover-5.27.10.1-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/discover-5.27.10.1-1.1)
  * [`drm_info` — `holo-main/drm_info-2.4.0-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/drm_info-2.4.0-1)
@@ -69,7 +69,7 @@ Valve packages
  * [`libwireplumber` — `jupiter-main/wireplumber-0.5.0-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/wireplumber-0.5.0-1)
  * [`linux-firmware-neptune` — `jupiter-main/linux-firmware-neptune-jupiter.20231113.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/linux-firmware-neptune-jupiter.20231113.1-1)
  * [`linux-firmware-neptune-whence` — `jupiter-main/linux-firmware-neptune-jupiter.20231113.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/linux-firmware-neptune-jupiter.20231113.1-1)
- * [`linux-neptune-65` — `jupiter-main/linux-neptune-65-6.5.0.valve5-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/linux-neptune-65-6.5.0.valve5-1)
+ * [`linux-neptune-65` — `jupiter-main/linux-neptune-65-6.5.0.valve6-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/linux-neptune-65-6.5.0.valve6-1)
  * [`mangohud` — `jupiter-main/mangohud-0.7.2.rc3.r11.g31f2ca5-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/mangohud-0.7.2.rc3.r11.g31f2ca5-2)
  * [`mesa` — `jupiter-main/mesa-24.0.5.183658.radeonsi_24.0.2-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/mesa-24.0.5.183658.radeonsi_24.0.2-1)
  * [`mesa-vdpau` — `jupiter-main/mesa-24.0.5.183658.radeonsi_24.0.2-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/mesa-24.0.5.183658.radeonsi_24.0.2-1)
