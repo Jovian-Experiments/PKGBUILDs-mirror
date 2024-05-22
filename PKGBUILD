@@ -11,7 +11,7 @@ pkgname=('vulkan-mesa-layers' 'vulkan-intel' 'vulkan-swrast' 'libva-mesa-driver'
 pkgdesc="An open-source implementation of the OpenGL specification"
 _tag=radeonsi-24.0.2
 pkgver=24.0.5.183658.radeonsi_24.0.2
-pkgrel=1
+pkgrel=1.1
 arch=('x86_64')
 makedepends=('git' 'openssh' 'python-mako' 'libxml2' 'libx11' 'xorgproto' 'libdrm' 'libxshmfence' 'libxxf86vm'
              'libxdamage' 'libvdpau' 'libva' 'wayland' 'wayland-protocols' 'zstd' 'elfutils' 'llvm'
@@ -102,7 +102,7 @@ _install() {
 
 package_vulkan-mesa-layers() {
   pkgdesc="Mesa's Vulkan layers"
-  depends=('libdrm' 'libxcb' 'wayland' 'python')
+  depends=('libdrm' 'libxcb' 'wayland' 'python>=3.11' 'python<3.12')
   conflicts=('vulkan-mesa-layer')
   replaces=('vulkan-mesa-layer')
 
