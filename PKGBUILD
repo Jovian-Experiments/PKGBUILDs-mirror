@@ -22,7 +22,7 @@ pkgname=(
 _commit=6ab86209f23a841de7eac6bc0c1009aceb9ffd87  # tags/1.0.3
 pkgver=1.0.3
 _so_ver=0.3
-pkgrel=2
+pkgrel=3
 epoch=1
 pkgdesc="Low-latency audio/video router and processor"
 url="https://pipewire.org"
@@ -93,6 +93,10 @@ prepare() {
     echo "Applying patch $src..."
     patch -Np1 < "../$src"
   done
+
+  # HOLO: Pull in this cherry pick for Gamescope
+  # "spa: fix integer overflows etc. in spa_pod_compare_value"
+  git cherry-pick -n a63aa6329bf3b9a7c6a13a511617472980e9e238
 
   # remove export of LD_LIBRARY_PATH for pw-jack as it would add /usr/lib
   sed -i '/LD_LIBRARY_PATH/d' pipewire-jack/src/pw-jack.in
