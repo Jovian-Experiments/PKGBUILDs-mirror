@@ -4,7 +4,7 @@ pkgbase=linux-firmware-neptune
 pkgname=(linux-firmware-neptune-whence linux-firmware-neptune  amd-ucode
          linux-firmware-{nfp,mellanox,marvell,qcom,liquidio,qlogic,bnx2x}
 )
-_tag=jupiter-20231113.1
+_tag=jupiter-20240503.1
 pkgver=${_tag//-/.}
 pkgrel=1
 pkgdesc="Firmware files for Linux"
