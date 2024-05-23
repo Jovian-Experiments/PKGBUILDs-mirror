@@ -7,7 +7,7 @@
 pkgbase=bluez
 pkgname=('bluez' 'bluez-utils' 'bluez-libs' 'bluez-cups' 'bluez-hid2hci' 'bluez-plugins')
 pkgver=5.73
-pkgrel=8
+pkgrel=9
 url="http://www.bluez.org/"
 arch=('x86_64')
 license=('GPL2')
@@ -22,6 +22,7 @@ source=(https://www.kernel.org/pub/linux/bluetooth/${pkgname}-${pkgver}.tar.{xz,
         0019-plugins-Add-new-plugin-to-manage-wake-policy.patch
         0020-plugins-wake-policy-Only-allow-Peripherals-to-wake-u.patch
         0021-valve-bluetooth-ll-privacy.patch
+        0022-enable-experimental-offload-codecs.patch
 )
 # see https://www.kernel.org/pub/linux/bluetooth/sha256sums.asc
 sha256sums=('257e9075ce05c70d48c5defd254e78c418416f7584b45f9dddc884ff88e3fc53'
@@ -35,6 +36,7 @@ sha256sums=('257e9075ce05c70d48c5defd254e78c418416f7584b45f9dddc884ff88e3fc53'
             '120c7e435c854e4442e6de8dd257e19e142e2c36ebd491d18d7fa796f585f1ac'
             '0919781b35efb1e53b60dbad947ec282ad82f413879fd3e58af38a7b49a91941'
             '5800e6f6ff74a2a1b2c4482a393c65a83b10b0be52a53d51588e7a192d16fa0f'
+            '2c3c40833f2975d951456a8ea948e90bce5c0ad9ba82cc44dbfaa0858d3f6c9d'
             )
 validpgpkeys=('E932D120BC2AEC444E558F0106CA9F5D1DCF2659') # Marcel Holtmann <marcel@holtmann.org>
 
