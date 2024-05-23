@@ -22,7 +22,7 @@ pkgname=(
 _commit=6ab86209f23a841de7eac6bc0c1009aceb9ffd87  # tags/1.0.3
 pkgver=1.0.3
 _so_ver=0.3
-pkgrel=1
+pkgrel=2
 epoch=1
 pkgdesc="Low-latency audio/video router and processor"
 url="https://pipewire.org"
@@ -69,10 +69,12 @@ checkdepends=(
 options=(debug)
 source=(
     "git+https://gitlab.freedesktop.org/pipewire/pipewire.git#commit=$_commit"
+    "0001-pipeware-bluez5-backend-native-Enable-SCO-offload.patch"
 )
 
 sha256sums=(
     'SKIP'
+    '8ab3367f2ff07ff9a1541fce8cf16ced13e676fd554e884feedf841fb49540eb'
 )
 
 pkgver() {
