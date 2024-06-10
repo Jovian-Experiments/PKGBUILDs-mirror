@@ -106,3 +106,6 @@ CONFIG_ATH11K_TRACING=y
 
 # Disable simple-framebuffer to fix logo regression
 CONFIG_SYSFB_SIMPLEFB=n
+
+# Enable Extensible Scheduling Class
+CONFIG_SCHED_CLASS_EXT=y
