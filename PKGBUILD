@@ -2,7 +2,7 @@
 # Maintainer: Jan Alexander Steffens (heftig) <heftig@archlinux.org>
 
 pkgbase=linux-neptune-65-kasan
-_tag=6.5.0-valve3
+_tag=6.5.0-valve11
 pkgver=${_tag//-/.}
 pkgrel=3
 pkgdesc='Linux'
