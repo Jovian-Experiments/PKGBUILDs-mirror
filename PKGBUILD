@@ -2,16 +2,16 @@
 # Maintainer: Emil Velikov <emil.l.velikov@gmail.com>
 
 pkgname=umr
-epoch=1
-pkgver=jupiter_extras_1.0.8
+_srctag=1.0.10
+pkgver=${_srctag##v}
 pkgrel=1
 pkgdesc='userspace debugging and diagnostic tool for AMD GPUs using the AMDGPU kernel driver'
 arch=('i686' 'x86_64')
-url='https://lists.freedesktop.org/archives/amd-gfx/2017-February/005122.html'
+url='https://gitlab.freedesktop.org/tomstdenis/umr'
 license=('MIT')
 depends=('libpciaccess' 'ncurses' 'llvm-libs')
 makedepends=('git' 'cmake' 'llvm' 'libdrm')
-source=('git+https://gitlab.freedesktop.org/tomstdenis/umr.git#commit=22a2a8c02af49badc19ba1e9fdb2834988933c5f')
+source=("git+https://gitlab.freedesktop.org/tomstdenis/umr.git#tag=${_srctag}")
 sha256sums=('SKIP')
 
 build() {
