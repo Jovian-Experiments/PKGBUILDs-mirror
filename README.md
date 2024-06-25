@@ -1,5 +1,5 @@
 
-`main @ 20240624.1000`
+`main @ 20240625.1000`
 ======================
 
 Valve packages
@@ -63,20 +63,20 @@ Valve packages
  * [`jupiter-dock-updater-bin` — `jupiter-main/jupiter-dock-updater-bin-20240422.01-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-dock-updater-bin-20240422.01-1)
  * [`jupiter-fan-control` — `jupiter-main/jupiter-fan-control-20240523.3-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-fan-control-20240523.3-1)
  * [`jupiter-firewall` — `jupiter-main/jupiter-firewall-0.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-firewall-0.1-1)
- * [`jupiter-hw-support` — `jupiter-main/jupiter-hw-support-20240617.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-hw-support-20240617.1-1)
+ * [`jupiter-hw-support` — `jupiter-main/jupiter-hw-support-20240624.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-hw-support-20240624.1-1)
  * [`jupiter-legacy-support` — `jupiter-main/jupiter-legacy-support-1.148-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-legacy-support-1.148-1)
  * [`jupiter-resolved-nomdns` — `jupiter-main/jupiter-resolved-nomdns-1.0-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-resolved-nomdns-1.0-1)
  * [`jupiter-steamos-log-submitter` — `jupiter-main/jupiter-steamos-log-submitter-1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-steamos-log-submitter-1-1)
  * [`libdrm` — `jupiter-main/libdrm-2.4.120-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/libdrm-2.4.120-1)
  * [`libnm` — `jupiter-main/networkmanager-1.44.2-3.3`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/networkmanager-1.44.2-3.3)
- * [`libva-mesa-driver` — `jupiter-main/mesa-24.0.5.183658.radeonsi_24.0.2-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/mesa-24.0.5.183658.radeonsi_24.0.2-1.1)
+ * [`libva-mesa-driver` — `jupiter-main/mesa-24.0.5.183659.radeonsi_24.0.3-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/mesa-24.0.5.183659.radeonsi_24.0.3-1)
  * [`libwireplumber` — `jupiter-main/wireplumber-0.5.2.jupiter1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/wireplumber-0.5.2.jupiter1-1)
  * [`linux-firmware-neptune` — `jupiter-main/linux-firmware-neptune-jupiter.20240605.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/linux-firmware-neptune-jupiter.20240605.1-1)
  * [`linux-firmware-neptune-whence` — `jupiter-main/linux-firmware-neptune-jupiter.20240605.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/linux-firmware-neptune-jupiter.20240605.1-1)
- * [`linux-neptune-65` — `jupiter-main/linux-neptune-65-6.5.0.valve11-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/linux-neptune-65-6.5.0.valve11-1)
+ * [`linux-neptune-65` — `jupiter-main/linux-neptune-65-6.5.0.valve12-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/linux-neptune-65-6.5.0.valve12-1)
  * [`mangohud` — `jupiter-main/mangohud-0.7.2.rc3.r11.g31f2ca5-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/mangohud-0.7.2.rc3.r11.g31f2ca5-2)
- * [`mesa` — `jupiter-main/mesa-24.0.5.183658.radeonsi_24.0.2-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/mesa-24.0.5.183658.radeonsi_24.0.2-1.1)
- * [`mesa-vdpau` — `jupiter-main/mesa-24.0.5.183658.radeonsi_24.0.2-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/mesa-24.0.5.183658.radeonsi_24.0.2-1.1)
+ * [`mesa` — `jupiter-main/mesa-24.0.5.183659.radeonsi_24.0.3-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/mesa-24.0.5.183659.radeonsi_24.0.3-1)
+ * [`mesa-vdpau` — `jupiter-main/mesa-24.0.5.183659.radeonsi_24.0.3-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/mesa-24.0.5.183659.radeonsi_24.0.3-1)
  * [`networkmanager` — `jupiter-main/networkmanager-1.44.2-3.3`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/networkmanager-1.44.2-3.3)
  * [`plasma-remotecontrollers` — `jupiter-main/plasma-remotecontrollers-5.27.11-1.2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/plasma-remotecontrollers-5.27.11-1.2)
  * [`plasma-wayland-session` — `jupiter-main/plasma-workspace-5.27.10-2.2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/plasma-workspace-5.27.10-2.2)
