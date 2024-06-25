@@ -4,7 +4,7 @@ pkgname=steamos-customizations-jupiter
 _srctag=jupiter-20240530.1
 _srcver=${_srctag#jupiter-}
 pkgver=${_srcver//-/.}
-pkgrel=2
+pkgrel=3
 pkgdesc='SteamOS customizations (Jupiter fork) - This package installs various SteamOS-specific files'
 arch=('any')
 url='http://repo.steampowered.com'
@@ -22,7 +22,7 @@ package() {
 		 ATOMUPD_META_URL=https://steamdeck-atomupd.steamos.cloud/meta \
 		 ATOMUPD_IMAGES_URL=https://steamdeck-images.steamos.cloud/ \
 		 ATOMUPD_VARIANTS_LIST='steamdeck' \
-		 ATOMUPD_BRANCHES_LIST='stable;rc;beta;bc;main' \
+		 ATOMUPD_BRANCHES_LIST='stable;rc;beta;bc;preview;pc;main' \
 		 install
 	make DESTDIR="$pkgdir" prefix="/usr" sbindir="/usr/bin" libexecdir="/usr/lib" -C mkinitcpio install
 
