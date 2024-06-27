@@ -1,0 +1,31 @@
+From 5ebaeab4164f80539904b9a520d9b7a8307e06e2 Mon Sep 17 00:00:00 2001
+From: Luiz Augusto von Dentz <luiz.von.dentz@intel.com>
+Date: Mon, 24 Jun 2024 16:10:15 -0400
+Subject: [PATCH] hog-lib: Fix passing wrong parameters to
+ bt_uhid_get_report_reply
+
+The parameters of bt_uhid_get_report_reply are number followed by
+status, not status followed by number, so the order needs to be
+swapped.
+
+Fixes: https://github.com/bluez/bluez/issues/880
+---
+ profiles/input/hog-lib.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/profiles/input/hog-lib.c b/profiles/input/hog-lib.c
+index 67a0e832d..1b4aca074 100644
+--- a/profiles/input/hog-lib.c
++++ b/profiles/input/hog-lib.c
+@@ -904,7 +904,7 @@ static void report_reply(struct bt_hog *hog, uint8_t status, uint8_t id,
+ 
+ 	hog->getrep_att = 0;
+ 
+-	err = bt_uhid_get_report_reply(hog->uhid, hog->getrep_id, status, id,
++	err = bt_uhid_get_report_reply(hog->uhid, hog->getrep_id, id, status,
+ 					data, len);
+ 	if (err < 0)
+ 		error("bt_uhid_get_report_reply: %s", strerror(-err));
+-- 
+2.39.2
+
