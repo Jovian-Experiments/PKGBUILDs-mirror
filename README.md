@@ -1,12 +1,12 @@
 
-`main @ 20240625.1000`
+`main @ 20240626.1000`
 ======================
 
 Valve packages
 --------------
 
 ### `holo-main`
- * [`atomupd-daemon-git` — `holo-main/atomupd-daemon-git-0.20240528.1.r0.gb8752ed-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/atomupd-daemon-git-0.20240528.1.r0.gb8752ed-1)
+ * [`atomupd-daemon-git` — `holo-main/atomupd-daemon-git-0.20240626.1.r0.gf8ad510-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/atomupd-daemon-git-0.20240626.1.r0.gf8ad510-1)
  * [`casync` — `holo-main/casync-2.r227.g99559cd-4.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/casync-2.r227.g99559cd-4.1)
  * [`discover` — `holo-main/discover-5.27.10.1-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/discover-5.27.10.1-1.1)
  * [`drm_info` — `holo-main/drm_info-2.4.0-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/drm_info-2.4.0-1)
