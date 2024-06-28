@@ -1,5 +1,5 @@
 
-`main @ 20240626.1000`
+`main @ 20240628.1000`
 ======================
 
 Valve packages
@@ -48,9 +48,9 @@ Valve packages
 ### `jupiter-main`
  * [`alsa-ucm-conf` — `jupiter-main/alsa-ucm-conf-1.2.9-1.2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/alsa-ucm-conf-1.2.9-1.2)
  * [`amd-ucode` — `jupiter-main/linux-firmware-neptune-jupiter.20240605.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/linux-firmware-neptune-jupiter.20240605.1-1)
- * [`bluez` — `jupiter-main/bluez-5.76-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/bluez-5.76-1.1)
- * [`bluez-libs` — `jupiter-main/bluez-5.76-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/bluez-5.76-1.1)
- * [`bluez-utils` — `jupiter-main/bluez-5.76-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/bluez-5.76-1.1)
+ * [`bluez` — `jupiter-main/bluez-5.76-2.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/bluez-5.76-2.1)
+ * [`bluez-libs` — `jupiter-main/bluez-5.76-2.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/bluez-5.76-2.1)
+ * [`bluez-utils` — `jupiter-main/bluez-5.76-2.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/bluez-5.76-2.1)
  * [`breakpad` — `jupiter-main/breakpad-v2023.01.27-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/breakpad-v2023.01.27-1)
  * [`f3` — `jupiter-main/f3-8.0-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/f3-8.0-2)
  * [`galileo-mura` — `jupiter-main/galileo-mura-v0.9-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/galileo-mura-v0.9-1)
@@ -58,6 +58,7 @@ Valve packages
  * [`gpu-trace` — `jupiter-main/gpu-trace-2.13-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/gpu-trace-2.13-1)
  * [`holo-dmi-rules` — `jupiter-main/holo-dmi-rules-1.0-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/holo-dmi-rules-1.0-1)
  * [`holo-nix-offload` — `jupiter-main/holo-nix-offload-0.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/holo-nix-offload-0.1-1)
+ * [`ibus` — `jupiter-main/ibus-1.5.30-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/ibus-1.5.30-1.1)
  * [`ibus-anthy` — `jupiter-main/ibus-anthy-1.5.14-4.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/ibus-anthy-1.5.14-4.1)
  * [`ibus-table-cangjie-lite` — `jupiter-main/ibus-table-cangjie-lite-1.8.8-2.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/ibus-table-cangjie-lite-1.8.8-2.1)
  * [`jupiter-dock-updater-bin` — `jupiter-main/jupiter-dock-updater-bin-20240422.01-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-dock-updater-bin-20240422.01-1)
@@ -68,12 +69,13 @@ Valve packages
  * [`jupiter-resolved-nomdns` — `jupiter-main/jupiter-resolved-nomdns-1.0-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-resolved-nomdns-1.0-1)
  * [`jupiter-steamos-log-submitter` — `jupiter-main/jupiter-steamos-log-submitter-1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-steamos-log-submitter-1-1)
  * [`libdrm` — `jupiter-main/libdrm-2.4.120-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/libdrm-2.4.120-1)
+ * [`libibus` — `jupiter-main/ibus-1.5.30-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/ibus-1.5.30-1.1)
  * [`libnm` — `jupiter-main/networkmanager-1.44.2-3.3`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/networkmanager-1.44.2-3.3)
  * [`libva-mesa-driver` — `jupiter-main/mesa-24.0.5.183659.radeonsi_24.0.3-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/mesa-24.0.5.183659.radeonsi_24.0.3-1)
  * [`libwireplumber` — `jupiter-main/wireplumber-0.5.2.jupiter1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/wireplumber-0.5.2.jupiter1-1)
  * [`linux-firmware-neptune` — `jupiter-main/linux-firmware-neptune-jupiter.20240605.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/linux-firmware-neptune-jupiter.20240605.1-1)
  * [`linux-firmware-neptune-whence` — `jupiter-main/linux-firmware-neptune-jupiter.20240605.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/linux-firmware-neptune-jupiter.20240605.1-1)
- * [`linux-neptune-65` — `jupiter-main/linux-neptune-65-6.5.0.valve12-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/linux-neptune-65-6.5.0.valve12-1)
+ * [`linux-neptune-65` — `jupiter-main/linux-neptune-65-6.5.0.valve13-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/linux-neptune-65-6.5.0.valve13-1)
  * [`mangohud` — `jupiter-main/mangohud-0.7.2.rc3.r11.g31f2ca5-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/mangohud-0.7.2.rc3.r11.g31f2ca5-2)
  * [`mesa` — `jupiter-main/mesa-24.0.5.183659.radeonsi_24.0.3-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/mesa-24.0.5.183659.radeonsi_24.0.3-1)
  * [`mesa-vdpau` — `jupiter-main/mesa-24.0.5.183659.radeonsi_24.0.3-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/mesa-24.0.5.183659.radeonsi_24.0.3-1)
@@ -296,7 +298,6 @@ Arch Linux packages
  * [`hwdata/0.379-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/hwdata/-/tree/0.379-1)
  * [`i2c-tools/4.3-4`](https://gitlab.archlinux.org/archlinux/packaging/packages/i2c-tools/-/tree/4.3-4)
  * [`iana-etc/20231228-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/iana-etc/-/tree/20231228-1)
- * [`ibus/1.5.29-3`](https://gitlab.archlinux.org/archlinux/packaging/packages/ibus/-/tree/1.5.29-3)
  * [`ibus-hangul/1.5.5-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/ibus-hangul/-/tree/1.5.5-1)
  * [`ibus-pinyin/1.5.0-8`](https://gitlab.archlinux.org/archlinux/packaging/packages/ibus-pinyin/-/tree/1.5.0-8)
  * [`ibus-table/1.17.4-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/ibus-table/-/tree/1.17.4-1)
@@ -459,7 +460,6 @@ Arch Linux packages
  * [`libgpg-error/1.47-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/libgpg-error/-/tree/1.47-1)
  * [`libgudev/238-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/libgudev/-/tree/238-1)
  * [`libhangul/0.1.0-4`](https://gitlab.archlinux.org/archlinux/packaging/packages/libhangul/-/tree/0.1.0-4)
- * [`libibus/1.5.29-3`](https://gitlab.archlinux.org/archlinux/packaging/packages/libibus/-/tree/1.5.29-3)
  * [`libice/1.1.1-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/libice/-/tree/1.1.1-2)
  * [`libidn/1.42-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/libidn/-/tree/1.42-1)
  * [`libidn2/2.3.7-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/libidn2/-/tree/2.3.7-1)
