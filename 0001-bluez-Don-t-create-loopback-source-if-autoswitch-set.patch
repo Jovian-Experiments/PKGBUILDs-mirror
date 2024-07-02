@@ -1,0 +1,29 @@
+From d18a07310656e111caf21df326b9d2a23dff5561 Mon Sep 17 00:00:00 2001
+From: Julian Bouzas <julian.bouzas@collabora.com>
+Date: Thu, 6 Jun 2024 17:00:46 -0400
+Subject: [PATCH 1/2] bluez: Don't create loopback source if autoswitch setting
+ is disabled
+
+---
+ src/scripts/monitors/bluez.lua | 5 +++++
+ 1 file changed, 5 insertions(+)
+
+diff --git a/src/scripts/monitors/bluez.lua b/src/scripts/monitors/bluez.lua
+index c3c00c60..e8da0952 100644
+--- a/src/scripts/monitors/bluez.lua
++++ b/src/scripts/monitors/bluez.lua
+@@ -432,6 +432,11 @@ function checkProfiles (dev)
+   local device_id = dev["bound-id"]
+   local props = dev.properties
+ 
++  -- Don't create loopback source device if autoswitch is disabled
++  if not Settings.get_boolean ("bluetooth.autoswitch-to-headset-profile") then
++    return
++  end
++
+   -- Get the associated BT SpaDevice
+   local internal_id = tostring (props["api.bluez5.id"])
+   local spa_device = monitor:get_managed_object (internal_id)
+-- 
+2.45.1
+
