@@ -1,0 +1,22 @@
+From 0949bb294c29a2790554884093d82ff40ed40759 Mon Sep 17 00:00:00 2001
+From: hillwoodroc <hillwoodroc@gmail.com>
+Date: Fri, 10 Apr 2020 22:07:05 +0800
+Subject: [PATCH] Fix m_preedit_text.selected_text
+
+---
+ src/PinyinContext.cc | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/src/PinyinContext.cc b/src/PinyinContext.cc
+index ad409dc..73c997e 100644
+--- a/src/PinyinContext.cc
++++ b/src/PinyinContext.cc
+@@ -149,7 +149,7 @@ PinyinContext::updatePreeditText ()
+         }
+     }
+ 
+-    m_preedit_text.selected_text = m_buffer.substr (0, edit_begin_byte);
++    m_preedit_text.selected_text = m_buffer.substr (edit_begin_byte);
+     m_preedit_text.candidate_text = m_buffer.substr (edit_begin_byte, edit_end_byte - edit_begin_byte);
+     m_preedit_text.rest_text = m_buffer.substr (edit_end_byte);
+ 
