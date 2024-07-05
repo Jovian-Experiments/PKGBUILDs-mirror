@@ -308,9 +308,6 @@ SECONDS=0
 short_session_count=$(< "$short_session_tracker_file" wc -l)
 
 if [[ "$short_session_count" -ge "$short_session_count_before_reset" ]]; then
-	# TODO could detect if we're in the devkit case below and undo that instead
-	# instead of resetting the wrong thing
-	# also could print full list of files and sizes in the Steam dir and save as a diagnostic report
 	echo >&2 "gamescope-session: detected broken Steam, bootstrapping from OS copy..."
 	# at this point, might as well make sure we won't relaunch on a sideloaded build
 	rm -f -- "$HOME/devkit-game/devkit-steam"
