@@ -1,7 +1,7 @@
 # Maintainer: Pierre-Loup A. Griffais <pgriffais@valvesoftware.com>
 
 pkgname=gamescope
-_srctag=3.14.22
+_srctag=3.14.25
 pkgver=${_srctag//-/.}
 pkgrel=3
 pkgdesc="gaming shell based on Xwayland, powered by Vulkan and DRM"
