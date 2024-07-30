@@ -1,15 +1,19 @@
 # Maintainer: Joshua Ashton <joshua@froggi.es>
+# Contributor Sébastien Luttringer <seblu@seblu.net>
 
 pkgname=wayland-protocols
-pkgver=1.34
+pkgver=1.36
 pkgrel=1
 pkgdesc='Specifications of extended Wayland protocols'
 arch=('any')
 url='https://wayland.freedesktop.org/'
 license=('MIT')
-makedepends=('wayland' 'meson' 'ninja')
-source=("https://gitlab.freedesktop.org/wayland/$pkgname/-/releases/$pkgver/downloads/$pkgname-$pkgver.tar.xz")
-sha256sums=('c59b27cacd85f60baf4ee5f80df5c0d15760ead6a2432b00ab7e2e0574dcafeb')
+makedepends=('wayland' 'meson')
+validpgpkeys=('8307C0A224BABDA1BABD0EB9A6EEEC9E0136164A'  # Jonas Ådahl
+              'A66D805F7C9329B4C5D82767CCC4F07FAC641EFF') # Daniel Stone
+source=("https://gitlab.freedesktop.org/wayland/$pkgname/-/releases/$pkgver/downloads/$pkgname-$pkgver.tar.xz"{,.sig})
+sha256sums=('71fd4de05e79f9a1ca559fac30c1f8365fa10346422f9fe795f74d77b9ef7e92'
+            'SKIP')
 
 prepare() {
   cd $pkgname-$pkgver
@@ -25,17 +29,16 @@ prepare() {
 }
 
 build() {
-  meson build $pkgname-$pkgver --buildtype=release --prefix=/usr
-  ninja -C build
+  arch-meson $pkgname-$pkgver build
+  meson compile -C build
 }
 
 check() {
-  ninja -C build test
+  meson test -C build --print-errorlogs
 }
 
 package() {
-  DESTDIR="$pkgdir" ninja -C build install
-  set -x
+  meson install -C build --destdir "$pkgdir"
   install -Dt "$pkgdir/usr/share/licenses/$pkgname" -m 644 "$pkgname-$pkgver/COPYING"
 }
 
