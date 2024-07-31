@@ -2,7 +2,7 @@
 # Maintainer: Jan Alexander Steffens (heftig) <heftig@archlinux.org>
 
 pkgbase=linux-neptune-68
-_tag=6.8.0-valve1-preview4
+_tag=6.8.0-valve1-preview5
 pkgver=${_tag//-/.}
 pkgrel=1
 pkgdesc='Linux'
@@ -44,7 +44,7 @@ source=(
 )
 sha256sums=('SKIP'
             '4f1967a107ebdec0d5bbbb7d18ac1d61d40c0c9394d823b8fc52c8908a33b879'
-            '8c7997a629368ba4a54a84af5578705a3113d376f48f60b292bb9feea1a75c2b')
+            '07aa5c95fed0bc3d85e348dbb2bb354e42324edd6653f409110688c46050bd5c')
 
 export KBUILD_BUILD_HOST=archlinux
 export KBUILD_BUILD_USER=$pkgbase
