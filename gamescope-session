@@ -314,6 +314,14 @@ if [[ "$short_session_count" -ge "$short_session_count_before_reset" ]]; then
 	mkdir -p ~/.local/share/Steam
 	# remove some caches and stateful things known to cause Steam to fail to start if corrupt
 	rm -rf --one-file-system ~/.local/share/Steam/config/widevine
+	# cleanup the steam config dir, i.e. ~/.steam. We should try to preserve registry.vdf if possible
+	steam_config_dir="$HOME/.steam"
+	steam_config_backup_dir="$HOME/dot-steam.bak.$(date +%s)"
+	registry_vdf="$steam_config_dir/registry.vdf"
+	registry_backup_vdf="$steam_config_backup_dir/.steam/registry.vdf"
+	mv "$steam_config_dir" "$steam_config_backup_dir"
+	mkdir -p "$steam_config_dir"
+	cp -f "$registry_backup_vdf" "$registry_vdf" || true
 	# restore clean copy of binaries from RO partition
 	tar xf /usr/lib/steam/bootstraplinux_ubuntu12_32.tar.xz -C ~/.local/share/Steam
 	# rearm
