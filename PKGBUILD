@@ -4,7 +4,7 @@
 pkgbase=linux-neptune-68
 _tag=6.8.0-valve1-preview5
 pkgver=${_tag//-/.}
-pkgrel=1
+pkgrel=2
 pkgdesc='Linux'
 url="https://gitlab.steamos.cloud/jupiter/linux-integration/-/tree/$_tag"
 arch=(x86_64)
@@ -44,7 +44,7 @@ source=(
 )
 sha256sums=('SKIP'
             '4f1967a107ebdec0d5bbbb7d18ac1d61d40c0c9394d823b8fc52c8908a33b879'
-            '07aa5c95fed0bc3d85e348dbb2bb354e42324edd6653f409110688c46050bd5c')
+            '51240e658ed013ecefd907748fa592ea6303f3d998aef07816e337ac1b3cc53f')
 
 export KBUILD_BUILD_HOST=archlinux
 export KBUILD_BUILD_USER=$pkgbase
