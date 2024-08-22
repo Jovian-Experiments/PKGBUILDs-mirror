@@ -1,0 +1,26 @@
+From 9607410b94a58535198e108c249e65525ac4c20a Mon Sep 17 00:00:00 2001
+From: baldurk <baldurk@baldurk.org>
+Date: Mon, 12 Aug 2024 12:17:02 +0100
+Subject: [PATCH] Strip VK_EXT_hdr_metadata extension on replay
+
+* This is a pure WSI extension
+---
+ renderdoc/driver/vulkan/wrappers/vk_device_funcs.cpp | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/renderdoc/driver/vulkan/wrappers/vk_device_funcs.cpp b/renderdoc/driver/vulkan/wrappers/vk_device_funcs.cpp
+index 8c2c1fb68..fe2f6b2ac 100644
+--- a/renderdoc/driver/vulkan/wrappers/vk_device_funcs.cpp
++++ b/renderdoc/driver/vulkan/wrappers/vk_device_funcs.cpp
+@@ -191,7 +191,7 @@ static void StripUnwantedExtensions(rdcarray<rdcstr> &Extensions)
+     if(ext == "VK_GOOGLE_display_timing" || ext == "VK_KHR_display_swapchain" ||
+        ext == "VK_EXT_display_control" || ext == "VK_KHR_present_id" ||
+        ext == "VK_KHR_present_wait" || ext == "VK_EXT_surface_maintenance1" ||
+-       ext == "VK_EXT_swapchain_maintenance1")
++       ext == "VK_EXT_swapchain_maintenance1" || ext == "VK_EXT_hdr_metadata")
+       return true;
+ 
+     // remove fullscreen exclusive extension
+-- 
+2.46.0
+
