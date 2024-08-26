@@ -7,9 +7,9 @@ pkgname=(
   wireplumber
   libwireplumber
 )
-_tag=0.5.3
+_tag=0.5.5
 pkgver=${_tag//-/.}
-pkgrel=1.2
+pkgrel=1.1
 pkgdesc="Session / policy manager implementation for PipeWire"
 url="https://pipewire.pages.freedesktop.org/wireplumber/"
 arch=(x86_64)
@@ -38,17 +38,14 @@ options=(debug)
 source=(
   "git+https://gitlab.freedesktop.org/pipewire/$pkgbase.git#tag=$_tag"
 
-  # Holo: backport of https://gitlab.freedesktop.org/pipewire/wireplumber/-/merge_requests/650
-  # This patch set has already been merged in master and is expected to be included in
-  # wireplumber 0.5.4
-  # Partially addresses https://gitlab.steamos.cloud/holo-team/tasks/-/work_items/1228
-  "0001-bluez-Don-t-create-loopback-source-if-autoswitch-set.patch"
-  "0002-scripts-Fix-autoswitch-BT-profile-when-using-filters.patch"
+  # from https://gitlab.freedesktop.org/pipewire/wireplumber/-/merge_requests/655
+  "0003-rescan-Merge-filters-metadata-changed-hook-with-resc.patch" # holo-team/tasks/-/issues/881 ETA 0.5.6
+  "0004-rescan-Stop-rescan-for-2s-if-BT-node-is-removed.patch"      # holo-team/tasks/-/issues/881 ETA 0.5.6
 )
 b2sums=(
   'SKIP'
-  '8758a5981f7ef009fa3d746f11ad4f4b3cfe94f8da637393d87f133a12dd8203a7c3c64ac6e44fc0af3ce991c60f7103554370f8b487681adb06920b198ba325'
-  '0d36b671dafa4bc07824e780d503b64254bbdae457050fe7fbb1dbcc992a4de11b16064b80d260721bb615abb125c6cd96331a74cb6a3711d640ee87de720b34'
+  '5034eb85057dc4c6c1c139d7ffdcb794db5d560f92457905ea8f4a0bada2c141130cd864889588652b0247032f2ed06c522e4d89baf93f55d557c1d884d4006b'
+  '799d20f383047e441a8946cce8e07c053b2d5e136a8bbf8518b328ce6b1063f0455d083e3917d9f41e3edbd28210840b26c21b5e7ca92236984428437a228267'
 )
 
 prepare() {
