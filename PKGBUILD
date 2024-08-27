@@ -4,12 +4,12 @@ pkgname=jupiter-validation-tools
 _tag=jupiter-20240103.2
 _tagstrip=${_tag#jupiter-}
 pkgver=${_tagstrip//-/.}
-pkgrel=2
+pkgrel=3
 arch=('any')
 url="https://gitlab.steamos.cloud/Plagman/jupiter-validation-tools"
 pkgdesc="Jupiter validation tools"
 license=('MIT')
-depends=('python-hid')
+depends=('python-hid' 'python>=3.11' 'python<3.12')
 makedepends=('git' 'openssh')
 source=("git+ssh://git@gitlab.steamos.cloud/jupiter/jupiter-validation-tools.git#tag=$_tag")
 sha512sums=(SKIP)
