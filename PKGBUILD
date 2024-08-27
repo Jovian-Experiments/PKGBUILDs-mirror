@@ -12,7 +12,7 @@ pkgname=(
   nm-cloud-setup
 )
 pkgver=1.44.2
-pkgrel=3.3
+pkgrel=3.4
 pkgdesc="Network connection manager and user applications"
 url="https://networkmanager.dev/"
 arch=(x86_64)
@@ -46,6 +46,8 @@ makedepends=(
   perl-yaml
   polkit
   ppp
+  'python>=3.11'
+  'python<3.12'
   python-gobject
   systemd
   vala
