@@ -9,9 +9,10 @@ pkgname=('vulkan-mesa-layers-unstable' 'opencl-mesa-unstable' 'vulkan-intel-unst
 pkgdesc="An open-source implementation of the OpenGL specification"
 _tag=radeonsi-3.5.0
 pkgver=23.1.2.170169.radeonsi_3.5.0
-pkgrel=1.1
+pkgrel=1.2
 arch=('x86_64')
 makedepends=('git' 'openssh' 'python-mako' 'libxml2' 'libx11' 'xorgproto' 'libdrm' 'libxshmfence' 'libxxf86vm'
+             'python>=3.11' 'python<3.12'
              'libxdamage' 'libvdpau' 'libva' 'wayland' 'wayland-protocols' 'zstd' 'elfutils' 'llvm'
              'libomxil-bellagio' 'libclc' 'clang' 'libglvnd' 'libunwind' 'lm_sensors' 'libxrandr'
              'systemd' 'valgrind' 'glslang' 'vulkan-icd-loader' 'directx-headers' 'cmake' 'meson')
