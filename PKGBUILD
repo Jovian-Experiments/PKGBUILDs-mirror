@@ -6,13 +6,13 @@ _pkgbase="sddm"
 _srccommit="d19813cb03c7d71b896aead28e5285bc131500a9"
 pkgname="$_pkgbase-wayland"
 pkgver="v0.19.0.valve4.${_srccommit#v}"
-pkgrel=1
+pkgrel=1.1
 pkgdesc="The Simple Desktop Display Manager - development branch"
 arch=("x86_64")
 url="https://github.com/sddm/sddm/"
 license=("GPL")
 depends=('qt5-declarative' 'xorg-xauth' 'xorg-server')
-makedepends=('extra-cmake-modules' 'python-docutils' 'qt5-tools' 'git')
+makedepends=('extra-cmake-modules' 'python-docutils' 'qt5-tools' 'git' 'python>=3.11' 'python<3.12')
 provides=("$_pkgbase" "$_pkgbase-git" 'display-manager')
 conflicts=("$_pkgbase" "$_pkgbase-git")
 backup=('usr/share/sddm/scripts/Xsetup'
@@ -45,7 +45,7 @@ package() {
   install -d "$pkgdir"/usr/lib/sddm/sddm.conf.d
   "$pkgdir"/usr/bin/sddm --example-config > "$pkgdir"/usr/lib/sddm/sddm.conf.d/default.conf
   # Don't set PATH in sddm.conf
-  sed -r 's|DefaultPath=.*|DefaultPath=/usr/local/sbin:/usr/local/bin:/usr/bin|g' -i "$pkgdir"/usr/lib/sddm/sddm.conf.d/default.conf 
+  sed -r 's|DefaultPath=.*|DefaultPath=/usr/local/sbin:/usr/local/bin:/usr/bin|g' -i "$pkgdir"/usr/lib/sddm/sddm.conf.d/default.conf
   # Unset InputMethod https://github.com/sddm/sddm/issues/952
   sed -e "/^InputMethod/s/qtvirtualkeyboard//" -i "$pkgdir"/usr/lib/sddm/sddm.conf.d/default.conf
 }
