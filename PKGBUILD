@@ -3,7 +3,7 @@
 
 pkgname=('mangohud' 'lib32-mangohud')
 pkgver=0.7.2.rc3.r11.g31f2ca5
-pkgrel=2
+pkgrel=2.1
 pkgdesc="Vulkan and OpenGL overlay to display performance information"
 url="https://github.com/flightlessmango/MangoHud"
 arch=(x86_64)
@@ -20,6 +20,8 @@ makedepends=(
   libx11
   libxnvctrl
   meson
+  'python>=3.11'
+  'python<3.12'
   python-mako
   libxkbcommon
   lib32-libxkbcommon
@@ -90,9 +92,9 @@ build() {
   export CXX="g++ -m32"
   export PKG_CONFIG_PATH="/usr/lib32/pkgconfig"
 
-  arch-meson mangohud build32 "${meson_options[@]}" --libdir=lib32 
-  meson compile -C build32 
-} 
+  arch-meson mangohud build32 "${meson_options[@]}" --libdir=lib32
+  meson compile -C build32
+}
 
 package_mangohud() {
   conflicts=('mangohud-common')
