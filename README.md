@@ -1,5 +1,5 @@
 
-`main @ 20240827.1000`
+`main @ 20240827.1001`
 ======================
 
 Valve packages
@@ -17,12 +17,12 @@ Valve packages
  * [`fwupd-minimal` — `holo-main/fwupd-minimal-1.9.19-3`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/fwupd-minimal-1.9.19-3)
  * [`glib2` — `holo-main/glib2-2.78.6-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/glib2-2.78.6-1.1)
  * [`glibc` — `holo-main/glibc-2.39-1.2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/glibc-2.39-1.2)
- * [`holo-desync` — `holo-main/steamos-customizations-git-20240827.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-customizations-git-20240827.1-1)
+ * [`holo-desync` — `holo-main/steamos-customizations-git-20240827.3-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-customizations-git-20240827.3-1)
  * [`holo-fstab-repair` — `holo-main/holo-fstab-repair-0.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/holo-fstab-repair-0.1-1)
  * [`holo-glibc-locales` — `holo-main/holo-glibc-locales-2.39-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/holo-glibc-locales-2.39-1)
  * [`holo-keyring` — `holo-main/holo-keyring-20240322.sq033-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/holo-keyring-20240322.sq033-1.1)
  * [`holo-nfs-utils-tmpfiles` — `holo-main/holo-nfs-utils-tmpfiles-0.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/holo-nfs-utils-tmpfiles-0.1-1)
- * [`holo-sudo` — `holo-main/steamos-customizations-git-20240827.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-customizations-git-20240827.1-1)
+ * [`holo-sudo` — `holo-main/steamos-customizations-git-20240827.3-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-customizations-git-20240827.3-1)
  * [`holo-zram-swap` — `holo-main/holo-zram-swap-0.2-0`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/holo-zram-swap-0.2-0)
  * [`iwd` — `holo-main/iwd-2.14-1.2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/iwd-2.14-1.2)
  * [`kdumpst` — `holo-main/kdumpst-1.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/kdumpst-1.1-1)
@@ -98,7 +98,7 @@ Valve packages
  * [`steam_notif_daemon` — `jupiter-main/steam_notif_daemon-v1.0.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steam_notif_daemon-v1.0.1-1)
  * [`steamdeck-dsp` — `jupiter-main/steamdeck-dsp-0.49.5-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steamdeck-dsp-0.49.5-1)
  * [`steamdeck-kde-presets` — `jupiter-main/steamdeck-kde-presets-0.23-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steamdeck-kde-presets-0.23-1)
- * [`steamos-customizations-jupiter` — `jupiter-main/steamos-customizations-jupiter-20240827.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steamos-customizations-jupiter-20240827.1-1)
+ * [`steamos-customizations-jupiter` — `jupiter-main/steamos-customizations-jupiter-20240827.3-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steamos-customizations-jupiter-20240827.3-1)
  * [`steamos-devkit-service` — `jupiter-main/steamos-devkit-service-0.20220401.0-7`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steamos-devkit-service-0.20220401.0-7)
  * [`ttf-twemoji-default` — `jupiter-main/ttf-twemoji-default-13.1.0-2.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/ttf-twemoji-default-13.1.0-2.1)
  * [`upower` — `jupiter-main/upower-0.99.15.jupiter-1.2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/upower-0.99.15.jupiter-1.2)
