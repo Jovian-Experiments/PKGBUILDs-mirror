@@ -4,7 +4,7 @@
 pkgbase=ibus
 pkgname=(ibus libibus)
 pkgver=1.5.30
-pkgrel=1.1
+pkgrel=1.2
 pkgdesc="Intelligent input bus for Linux/Unix"
 arch=('x86_64')
 url="https://github.com/ibus/ibus/wiki"
@@ -27,7 +27,8 @@ depends=(
     'libxfixes'
     'libxi'
     'pango'
-    'python'
+    'python>=3.11'
+    'python<3.12'
     'python-dbus'
     'python-gobject'
     'wayland'
