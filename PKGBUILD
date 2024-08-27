@@ -22,7 +22,7 @@ pkgname=(
 _commit=6ab86209f23a841de7eac6bc0c1009aceb9ffd87  # tags/1.0.3
 pkgver=1.0.3
 _so_ver=0.3
-pkgrel=3
+pkgrel=3.1
 epoch=1
 pkgdesc="Low-latency audio/video router and processor"
 url="https://pipewire.org"
@@ -53,6 +53,8 @@ makedepends=(
   meson
   ncurses
   opus
+  'python>=3.11'
+  'python<3.12'
   python-docutils
   readline
   rtkit
