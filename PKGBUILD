@@ -12,7 +12,7 @@ pkgname=(
   flatpak-docs
 )
 pkgver=1.15.6
-pkgrel=2.1
+pkgrel=2.2
 epoch=1
 pkgdesc="Linux application sandboxing and distribution framework (formerly xdg-app)"
 url="https://flatpak.org"
@@ -32,7 +32,8 @@ depends=(
   libxau
   ostree
   polkit
-  python
+  'python>=3.11'
+  'python<3.12'
   systemd
   wayland
   xdg-dbus-proxy
