@@ -3,12 +3,12 @@
 pkgname=neptune-ctl
 _srctag=20230928.1
 pkgver=${_srctag#galileo-}
-pkgrel=2
+pkgrel=3
 arch=('any')
 url=""
 pkgdesc="Neptune CTL"
 license=('Proprietary')
-depends=('python-pyserial' 'python-click' 'python-pylink-square' 'python-hexdump')
+depends=('python-pyserial' 'python-click' 'python-pylink-square' 'python-hexdump' 'python>=3.11' 'python<3.12')
 source=(neptunectl.py
         neptune-ctl
 )
@@ -17,5 +17,5 @@ sha512sums=('2faaff2f08438f5ea1af815d2a5fa22db031ff865b29f08d592e70ff15c3aa3a73f
 
 package() {
   install -D -m755 -t "$pkgdir"/usr/lib/neptunectl "$srcdir"/neptunectl.py
-  install -D -m755 -t "$pkgdir"/usr/bin "$srcdir"/neptune-ctl  
+  install -D -m755 -t "$pkgdir"/usr/bin "$srcdir"/neptune-ctl
 }
