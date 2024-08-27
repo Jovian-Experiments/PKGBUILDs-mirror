@@ -2,10 +2,10 @@
 
 pkgname=foxnet
 pkgver=1.5
-pkgrel=1
+pkgrel=2
 pkgdesc="Foxnet and various paraphernalia"
 arch=(any)
-depends=(python3 python-psutil python-aiohttp nvme-cli foxnetstatsd)
+depends=(python-psutil python-aiohttp nvme-cli foxnetstatsd 'python>=3.11' 'python<3.12')
 source=(foxnet.service
         foxnet-init)
 sha256sums=('0200d280e1c7acf67f7856014dd2fb2b3e2425f2d486752a583c24defa275680'
