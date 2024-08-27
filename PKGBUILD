@@ -2,13 +2,13 @@
 
 pkgname=upower
 pkgver=0.99.15.jupiter
-pkgrel=1.1
+pkgrel=1.2
 pkgdesc="Abstraction for enumerating power devices, listening to device events and querying history and statistics"
 url="https://upower.freedesktop.org"
 arch=(x86_64)
 license=(GPL)
 depends=(systemd libimobiledevice libgudev)
-makedepends=(docbook-xsl gobject-introspection python git openssh gtk-doc meson)
+makedepends=(docbook-xsl gobject-introspection 'python>=3.11' 'python<3.12' git openssh gtk-doc meson)
 checkdepends=(python-{dbus,dbusmock,gobject,packaging} umockdev)
 backup=(etc/UPower/UPower.conf)
 source=("git+ssh://git@gitlab.steamos.cloud/jupiter/upower.git#commit=v$pkgver")
