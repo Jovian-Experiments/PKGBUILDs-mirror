@@ -9,7 +9,7 @@ pkgname=(
 )
 _tag=0.5.5
 pkgver=${_tag//-/.}
-pkgrel=1.1
+pkgrel=1.2
 pkgdesc="Session / policy manager implementation for PipeWire"
 url="https://pipewire.pages.freedesktop.org/wireplumber/"
 arch=(x86_64)
@@ -26,6 +26,8 @@ makedepends=(
   lua
   meson
   'pipewire>=1:1.0.3'
+  'python>=3.11'
+  'python<3.12'
   python-breathe
   python-lxml
   python-sphinx
