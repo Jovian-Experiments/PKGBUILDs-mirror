@@ -4,7 +4,7 @@
 
 pkgname=xorgproto
 pkgver=2024.1
-pkgrel=2
+pkgrel=2.1
 pkgdesc="combined X.Org X11 Protocol headers"
 arch=('any')
 url="https://xorg.freedesktop.org/"
@@ -18,7 +18,7 @@ license=(BSD-2-Clause
          SMLNJ
          X11
          X11-distribute-modifications-variant)
-makedepends=('xorg-util-macros' 'meson')
+makedepends=('xorg-util-macros' 'meson' 'python>=3.11' 'python<3.12')
 checkdepends=('python-libevdev')
 source=(https://xorg.freedesktop.org/archive/individual/proto/$pkgname-$pkgver.tar.xz)
 sha512sums=('63955cb604ff831575af2193548857c1b99e52d00206ea9421ce99e145094bcd907388c4574bc32174a01cbe2c940b0377bf75ae7d2c0f953157dc9c32e5a07f')
