@@ -1,15 +1,15 @@
 
-`main @ 20240827.1001`
+`main @ 20240829.1000`
 ======================
 
 Valve packages
 --------------
 
 ### `holo-main`
- * [`atomupd-daemon-git` — `holo-main/atomupd-daemon-git-0.20240626.1.r0.gf8ad510-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/atomupd-daemon-git-0.20240626.1.r0.gf8ad510-2)
+ * [`atomupd-daemon` — `holo-main/atomupd-daemon-0.20240827.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/atomupd-daemon-0.20240827.1-1)
  * [`casync` — `holo-main/casync-2.r227.g99559cd-4.2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/casync-2.r227.g99559cd-4.2)
  * [`ddcutil` — `holo-main/ddcutil-2.1.4-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/ddcutil-2.1.4-1.1)
- * [`discover` — `holo-main/discover-5.27.10.1-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/discover-5.27.10.1-1.1)
+ * [`discover` — `holo-main/discover-5.27.10.1-1.2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/discover-5.27.10.1-1.2)
  * [`drm_info` — `holo-main/drm_info-2.4.0-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/drm_info-2.4.0-1)
  * [`drm_janitor` — `holo-main/drm_janitor-0.0.4-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/drm_janitor-0.0.4-2)
  * [`e2fsprogs` — `holo-main/e2fsprogs-1.47.0-1.2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/e2fsprogs-1.47.0-1.2)
@@ -36,13 +36,13 @@ Valve packages
  * [`paru` — `holo-main/paru-2.0.1-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/paru-2.0.1-1.1)
  * [`podman` — `holo-main/podman-4.9.3-1.2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/podman-4.9.3-1.2)
  * [`rauc` — `holo-main/rauc-1.11.1-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/rauc-1.11.1-1.1)
- * [`steamos-atomupd-client-git` — `holo-main/steamos-atomupd-client-git-r419.20bcefb-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-atomupd-client-git-r419.20bcefb-1.1)
+ * [`steamos-atomupd-client` — `holo-main/steamos-atomupd-client-0.20240827.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-atomupd-client-0.20240827.1-1)
  * [`steamos-efi` — `holo-main/steamos-efi-20231213.1-3`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-efi-20231213.1-3)
  * [`steamos-kdumpst-layer` — `holo-main/steamos-kdumpst-layer-1.0-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-kdumpst-layer-1.0-2)
  * [`steamos-log-submitter` — `holo-main/steamos-log-submitter-0.6.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-log-submitter-0.6.1-1)
  * [`steamos-manager` — `holo-main/steamos-manager-24.5.1-3`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-manager-24.5.1-3)
  * [`steamos-networking-tools` — `holo-main/steamos-networking-tools-1.0-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-networking-tools-1.0-1)
- * [`steamos-reset` — `holo-main/steamos-reset-20240417.1-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-reset-20240417.1-2)
+ * [`steamos-reset` — `holo-main/steamos-reset-20240417.1-3`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-reset-20240417.1-3)
  * [`steamos-systemreport` — `holo-main/steamos-systemreport-0.11-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-systemreport-0.11-1)
  * [`steamos-tweak-mtu-probing` — `holo-main/steamos-tweak-mtu-probing-1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-tweak-mtu-probing-1-1)
  * [`systemd` — `holo-main/systemd-255.3-1.2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/systemd-255.3-1.2)
@@ -59,7 +59,7 @@ Valve packages
  * [`breakpad` — `jupiter-main/breakpad-v2023.01.27-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/breakpad-v2023.01.27-1)
  * [`f3` — `jupiter-main/f3-8.0-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/f3-8.0-2)
  * [`galileo-mura` — `jupiter-main/galileo-mura-v0.9-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/galileo-mura-v0.9-1)
- * [`gamescope` — `jupiter-main/gamescope-3.15.1-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/gamescope-3.15.1-2)
+ * [`gamescope` — `jupiter-main/gamescope-3.15.3-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/gamescope-3.15.3-1)
  * [`gpu-trace` — `jupiter-main/gpu-trace-2.14-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/gpu-trace-2.14-1)
  * [`holo-dmi-rules` — `jupiter-main/holo-dmi-rules-1.0-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/holo-dmi-rules-1.0-1)
  * [`holo-nix-offload` — `jupiter-main/holo-nix-offload-0.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/holo-nix-offload-0.1-1)
