@@ -1,5 +1,5 @@
 
-`main @ 20240911.1000`
+`main @ 20240917.1000`
 ======================
 
 Valve packages
@@ -7,6 +7,7 @@ Valve packages
 
 ### `holo-main`
  * [`atomupd-daemon` — `holo-main/atomupd-daemon-0.20240827.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/atomupd-daemon-0.20240827.1-1)
+ * [`bubblewrap` — `holo-main/bubblewrap-0.10.0-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/bubblewrap-0.10.0-1.1)
  * [`casync` — `holo-main/casync-2.r227.g99559cd-4.2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/casync-2.r227.g99559cd-4.2)
  * [`ddcutil` — `holo-main/ddcutil-2.1.4-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/ddcutil-2.1.4-1.1)
  * [`discover` — `holo-main/discover-5.27.10.1-1.2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/discover-5.27.10.1-1.2)
@@ -36,7 +37,7 @@ Valve packages
  * [`paru` — `holo-main/paru-2.0.1-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/paru-2.0.1-1.1)
  * [`podman` — `holo-main/podman-4.9.3-1.2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/podman-4.9.3-1.2)
  * [`rauc` — `holo-main/rauc-1.11.1-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/rauc-1.11.1-1.1)
- * [`steamos-atomupd-client` — `holo-main/steamos-atomupd-client-0.20240827.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-atomupd-client-0.20240827.1-1)
+ * [`steamos-atomupd-client` — `holo-main/steamos-atomupd-client-0.20240906.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-atomupd-client-0.20240906.1-1)
  * [`steamos-efi` — `holo-main/steamos-efi-20231213.1-3`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-efi-20231213.1-3)
  * [`steamos-kdumpst-layer` — `holo-main/steamos-kdumpst-layer-1.0-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-kdumpst-layer-1.0-2)
  * [`steamos-log-submitter` — `holo-main/steamos-log-submitter-0.6.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-log-submitter-0.6.1-1)
@@ -52,7 +53,6 @@ Valve packages
 
 ### `jupiter-main`
  * [`alsa-ucm-conf` — `jupiter-main/alsa-ucm-conf-1.2.9-1.2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/alsa-ucm-conf-1.2.9-1.2)
- * [`amd-ucode` — `jupiter-main/linux-firmware-neptune-jupiter.20240813.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/linux-firmware-neptune-jupiter.20240813.1-1)
  * [`bluez` — `jupiter-main/bluez-5.76-2.3`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/bluez-5.76-2.3)
  * [`bluez-libs` — `jupiter-main/bluez-5.76-2.3`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/bluez-5.76-2.3)
  * [`bluez-utils` — `jupiter-main/bluez-5.76-2.3`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/bluez-5.76-2.3)
@@ -79,8 +79,8 @@ Valve packages
  * [`libnm` — `jupiter-main/networkmanager-1.44.2-3.4`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/networkmanager-1.44.2-3.4)
  * [`libva-mesa-driver` — `jupiter-main/mesa-24.0.5.183659.radeonsi_24.0.3-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/mesa-24.0.5.183659.radeonsi_24.0.3-1.1)
  * [`libwireplumber` — `jupiter-main/wireplumber-0.5.5-1.2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/wireplumber-0.5.5-1.2)
- * [`linux-firmware-neptune` — `jupiter-main/linux-firmware-neptune-jupiter.20240813.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/linux-firmware-neptune-jupiter.20240813.1-1)
- * [`linux-firmware-neptune-whence` — `jupiter-main/linux-firmware-neptune-jupiter.20240813.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/linux-firmware-neptune-jupiter.20240813.1-1)
+ * [`linux-firmware-neptune` — `jupiter-main/linux-firmware-neptune-jupiter.20240917.1-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/linux-firmware-neptune-jupiter.20240917.1-2)
+ * [`linux-firmware-neptune-whence` — `jupiter-main/linux-firmware-neptune-jupiter.20240917.1-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/linux-firmware-neptune-jupiter.20240917.1-2)
  * [`linux-neptune-68` — `jupiter-main/linux-neptune-68-6.8.12.valve2-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/linux-neptune-68-6.8.12.valve2-1)
  * [`mangohud` — `jupiter-main/mangohud-0.7.2.rc3.r11.g31f2ca5-2.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/mangohud-0.7.2.rc3.r11.g31f2ca5-2.1)
  * [`mesa` — `jupiter-main/mesa-24.0.5.183659.radeonsi_24.0.3-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/mesa-24.0.5.183659.radeonsi_24.0.3-1.1)
@@ -130,6 +130,7 @@ Arch Linux packages
  * [`alsa-plugins/1:1.2.7.1-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/alsa-plugins/-/tree/1:1.2.7.1-2)
  * [`alsa-topology-conf/1.2.5.1-3`](https://gitlab.archlinux.org/archlinux/packaging/packages/alsa-topology-conf/-/tree/1.2.5.1-3)
  * [`alsa-utils/1.2.11-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/alsa-utils/-/tree/1.2.11-1)
+ * [`amd-ucode-neptune/jupiter.20240917.1-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/amd-ucode-neptune/-/tree/jupiter.20240917.1-2)
  * [`anthy/9100h-6`](https://gitlab.archlinux.org/archlinux/packaging/packages/anthy/-/tree/9100h-6)
  * [`aom/3.8.1-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/aom/-/tree/3.8.1-1)
  * [`appstream/1.0.1-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/appstream/-/tree/1.0.1-2)
@@ -166,7 +167,6 @@ Arch Linux packages
  * [`brotli/1.1.0-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/brotli/-/tree/1.1.0-1)
  * [`btop/1.3.2-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/btop/-/tree/1.3.2-1)
  * [`btrfs-progs/6.7.1-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/btrfs-progs/-/tree/6.7.1-1)
- * [`bubblewrap/0.8.0-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/bubblewrap/-/tree/0.8.0-1)
  * [`bzip2/1.0.8-5`](https://gitlab.archlinux.org/archlinux/packaging/packages/bzip2/-/tree/1.0.8-5)
  * [`ca-certificates/20220905-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/ca-certificates/-/tree/20220905-1)
  * [`ca-certificates-mozilla/3.98-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/ca-certificates-mozilla/-/tree/3.98-1)
