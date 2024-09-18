@@ -1,22 +1,33 @@
-# Maintainer: Thomas Bächler <thomas@archlinux.org>
+# Maintainer: Tobias Powalowski <tpowa@archlinux.org>
+# Contributor: Thomas Bächler <thomas@archlinux.org>
 
 pkgbase=linux-firmware-neptune
-pkgname=(linux-firmware-neptune-whence linux-firmware-neptune  amd-ucode
-         linux-firmware-{nfp,mellanox,marvell,qcom,liquidio,qlogic,bnx2x}
+pkgname=(linux-firmware-neptune-whence linux-firmware-neptune  amd-ucode-neptune
+         linux-firmware-neptune-{nfp,mellanox,marvell,qcom,liquidio,qlogic,bnx2x}
 )
-_tag=jupiter-20240813.1
+_tag=jupiter-20240917.1
 pkgver=${_tag//-/.}
-pkgrel=1
+pkgrel=2
 pkgdesc="Firmware files for Linux"
 url="https://gitlab.steamos.cloud/jupiter/linux-firmware-neptune"
-license=('GPL2' 'GPL3' 'custom')
+license=(
+  GPL-2.0-only
+  GPL-2.0-or-later
+  GPL-3.0-only
+  custom
+)
 arch=('any')
-makedepends=('git' 'openssh')
-options=(!strip)
-source=("git+ssh://git@gitlab.steamos.cloud/jupiter/linux-firmware-neptune.git#tag=$_tag"
-         0001-Add-support-for-compressing-firmware-in-copy-firmware.patch)
-sha256sums=('SKIP'
-            'b7feb7db71160e9fe6f3114405e6ab883abfb12a540c8b6a2a7088295dcf5bd2')
+makedepends=(
+  git
+  rdfind
+  openssh
+)
+options=(
+  !strip
+  !debug
+)
+source=("git+ssh://git@gitlab.steamos.cloud/jupiter/linux-firmware-neptune.git#tag=$_tag")
+sha256sums=('SKIP')
 validpgpkeys=('4CDE8575E547BF835FE15807A31B6BD72486CFD6') # Josh Boyer <jwboyer@fedoraproject.org>
 
 _backports=(
@@ -30,10 +41,15 @@ prepare() {
     git log --oneline -1 "${_c}"
     git cherry-pick -n "${_c}"
   done
-
-  # add firmware compression support - patch taken from Fedora
-  patch -Np1 -i ../0001-Add-support-for-compressing-firmware-in-copy-firmware.patch
 }
+
+# holo: using tag as pkgver
+# pkgver() {
+#   cd ${pkgbase}
+#
+#   # Commit date + short rev
+#   echo $(TZ=UTC git show -s --pretty=%cd --date=format-local:%Y%m%d HEAD).$(git rev-parse --short HEAD)
+# }
 
 build() {
   mkdir -p kernel/x86/microcode
@@ -62,31 +78,32 @@ _pick() {
 
 package_linux-firmware-neptune-whence() {
   pkgdesc+=" - contains the WHENCE license file which documents the vendor license details"
-  provides=('linux-firmware-whence')
-  conflicts=('linux-firmware-whence')
-  replaces=('linux-firmware-whence')
+  provides=("${pkgname//-neptune/}")
+  conflicts=("${pkgname//-neptune/}")
+  replaces=("${pkgname//-neptune/}")
 
   install -Dt "${pkgdir}/usr/share/licenses/${pkgname}" -m644 ${pkgbase}/WHENCE
 }
 
 package_linux-firmware-neptune() {
   depends=('linux-firmware-whence')
-  provides=('linux-firmware')
-  conflicts=('linux-firmware')
-  replaces=('linux-firmware')
+  provides=("${pkgname//-neptune/}")
+  conflicts=("${pkgname//-neptune/}")
+  replaces=("${pkgname//-neptune/}")
 
   cd ${pkgbase}
 
-  ZSTD_CLEVEL=19 make DESTDIR="${pkgdir}" FIRMWAREDIR=/usr/lib/firmware installcompress
-
-  # Trigger a microcode reload for configurations not using early updates
-  echo 'w /sys/devices/system/cpu/microcode/reload - - - - 1' |
-    install -Dm644 /dev/stdin "${pkgdir}/usr/lib/tmpfiles.d/${pkgname}.conf"
+  ZSTD_CLEVEL=19 make DESTDIR="${pkgdir}" FIRMWAREDIR=/usr/lib/firmware install-zst
 
   install -Dt "${pkgdir}/usr/share/licenses/${pkgname}" -m644 LICEN*
 
-  # split
   cd "${pkgdir}"
+
+  # remove arm64 firmware https://bugs.archlinux.org/task/76583
+  rm usr/lib/firmware/mrvl/prestera/mvsw_prestera_fw_arm64-v4.1.img.zst
+
+  # split
+  _pick amd-ucode usr/lib/firmware/amd-ucode
 
   _pick linux-firmware-nfp usr/lib/firmware/netronome
   _pick linux-firmware-nfp usr/share/licenses/${pkgname}/LICENCE.Netronome
@@ -108,62 +125,87 @@ package_linux-firmware-neptune() {
   _pick linux-firmware-bnx2x usr/lib/firmware/bnx2x*
 }
 
-package_amd-ucode() {
+package_amd-ucode-neptune() {
   pkgdesc="Microcode update image for AMD CPUs"
   license=(custom)
+  provides=("${pkgname//-neptune/}")
+  conflicts=("${pkgname//-neptune/}")
+  replaces=("${pkgname//-neptune/}")
+
+  # holo - don't use $pkgname here to match _pick call above (also in aur linux-firmware-git)
+  mv -v amd-ucode/* "$pkgdir"
 
   install -Dt "${pkgdir}/boot" -m644 amd-ucode.img
 
   install -Dt "${pkgdir}/usr/share/licenses/${pkgname}" -m644 ${pkgbase}/LICENSE.amd-ucode
 }
 
-package_linux-firmware-nfp() {
+package_linux-firmware-neptune-nfp() {
   pkgdesc+=" - nfp / Firmware for Netronome Flow Processors"
   depends=('linux-firmware-whence')
+  provides=("${pkgname//-neptune/}")
+  conflicts=("${pkgname//-neptune/}")
+  replaces=("${pkgname//-neptune/}")
 
   mv -v linux-firmware-nfp/* "${pkgdir}"
 }
 
-package_linux-firmware-mellanox() {
+package_linux-firmware-neptune-mellanox() {
   pkgdesc+=" - mellanox / Firmware for Mellanox Spectrum switches"
   depends=('linux-firmware-whence')
+  provides=("${pkgname//-neptune/}")
+  conflicts=("${pkgname//-neptune/}")
+  replaces=("${pkgname//-neptune/}")
 
   mv -v linux-firmware-mellanox/* "${pkgdir}"
 }
 
-package_linux-firmware-marvell() {
+package_linux-firmware-neptune-marvell() {
   pkgdesc+=" - marvell / Firmware for Marvell devices"
   depends=('linux-firmware-whence')
+  provides=("${pkgname//-neptune/}")
+  conflicts=("${pkgname//-neptune/}")
+  replaces=("${pkgname//-neptune/}")
 
   mv -v linux-firmware-marvell/* "${pkgdir}"
-  # remove arm64 firmware #76583
-  rm -rf "${pkgdir}"/usr/lib/firmware/mrvl/prestera/mvsw_prestera_fw_arm64-v4.1.img.xz
 }
 
-package_linux-firmware-qcom() {
+package_linux-firmware-neptune-qcom() {
   pkgdesc+=" - qcom / Firmware for Qualcomm SoCs"
   depends=('linux-firmware-whence')
+  provides=("${pkgname//-neptune/}")
+  conflicts=("${pkgname//-neptune/}")
+  replaces=("${pkgname//-neptune/}")
 
   mv -v linux-firmware-qcom/* "${pkgdir}"
 }
 
-package_linux-firmware-liquidio() {
+package_linux-firmware-neptune-liquidio() {
   pkgdesc+=" - liquidio / Firmware for Cavium LiquidIO server adapters"
   depends=('linux-firmware-whence')
+  provides=("${pkgname//-neptune/}")
+  conflicts=("${pkgname//-neptune/}")
+  replaces=("${pkgname//-neptune/}")
 
   mv -v linux-firmware-liquidio/* "${pkgdir}"
 }
 
-package_linux-firmware-qlogic() {
+package_linux-firmware-neptune-qlogic() {
   pkgdesc+=" - qlogic / Firmware for QLogic devices"
   depends=('linux-firmware-whence')
+  provides=("${pkgname//-neptune/}")
+  conflicts=("${pkgname//-neptune/}")
+  replaces=("${pkgname//-neptune/}")
 
   mv -v linux-firmware-qlogic/* "${pkgdir}"
 }
 
-package_linux-firmware-bnx2x() {
+package_linux-firmware-neptune-bnx2x() {
   pkgdesc+=" - bnx2x / Firmware for Broadcom NetXtreme II 10Gb ethernet adapters"
   depends=('linux-firmware-whence')
+  provides=("${pkgname//-neptune/}")
+  conflicts=("${pkgname//-neptune/}")
+  replaces=("${pkgname//-neptune/}")
 
   mv -v linux-firmware-bnx2x/* "${pkgdir}"
 }
