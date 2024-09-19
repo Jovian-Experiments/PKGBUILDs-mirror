@@ -1,5 +1,5 @@
 
-`main @ 20240917.1000`
+`main @ 20240919.1000`
 ======================
 
 Valve packages
@@ -29,7 +29,7 @@ Valve packages
  * [`kdumpst` — `holo-main/kdumpst-1.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/kdumpst-1.1-1)
  * [`kmod` — `holo-main/kmod-30-1.6`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/kmod-30-1.6)
  * [`kpmcore` — `holo-main/kpmcore-23.04.2-2.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/kpmcore-23.04.2-2.1)
- * [`kwin` — `holo-main/kwin-5.27.10-3`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/kwin-5.27.10-3)
+ * [`kwin` — `holo-main/kwin-5.27.10-4`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/kwin-5.27.10-4)
  * [`libarchive` — `holo-main/libarchive-3.7.2-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/libarchive-3.7.2-1.1)
  * [`lsb-release` — `holo-main/lsb-release-2.0.r48.3cf5103-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/lsb-release-2.0.r48.3cf5103-1.1)
  * [`maliit-keyboard` — `holo-main/maliit-keyboard-2.3.1-2.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/maliit-keyboard-2.3.1-2.1)
@@ -50,9 +50,11 @@ Valve packages
  * [`systemd-libs` — `holo-main/systemd-255.3-1.2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/systemd-255.3-1.2)
  * [`systemd-sysvcompat` — `holo-main/systemd-255.3-1.2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/systemd-255.3-1.2)
  * [`vkmark-git` — `holo-main/vkmark-git-r133.30d2cd3-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/vkmark-git-r133.30d2cd3-2)
+ * [`wayland` — `holo-main/wayland-1.23.0-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/wayland-1.23.0-2)
 
 ### `jupiter-main`
  * [`alsa-ucm-conf` — `jupiter-main/alsa-ucm-conf-1.2.9-1.2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/alsa-ucm-conf-1.2.9-1.2)
+ * [`amd-ucode-neptune` — `jupiter-main/linux-firmware-neptune-jupiter.20240917.1-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/linux-firmware-neptune-jupiter.20240917.1-2)
  * [`bluez` — `jupiter-main/bluez-5.76-2.3`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/bluez-5.76-2.3)
  * [`bluez-libs` — `jupiter-main/bluez-5.76-2.3`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/bluez-5.76-2.3)
  * [`bluez-utils` — `jupiter-main/bluez-5.76-2.3`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/bluez-5.76-2.3)
@@ -94,7 +96,7 @@ Valve packages
  * [`renderdoc-minimal` — `jupiter-main/renderdoc-minimal-1.34-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/renderdoc-minimal-1.34-1.1)
  * [`sddm-wayland` — `jupiter-main/sddm-wayland-v0.19.0.valve4.d19813cb03c7d71b896aead28e5285bc131500a9-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/sddm-wayland-v0.19.0.valve4.d19813cb03c7d71b896aead28e5285bc131500a9-1.1)
  * [`steam-im-modules` — `jupiter-main/steam-im-modules-jupiter.20240131-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steam-im-modules-jupiter.20240131-1)
- * [`steam-jupiter-stable` — `jupiter-main/steam-jupiter-stable-1.0.0.79-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steam-jupiter-stable-1.0.0.79-1.1)
+ * [`steam-jupiter-stable` — `jupiter-main/steam-jupiter-stable-1.0.0.79-1.2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steam-jupiter-stable-1.0.0.79-1.2)
  * [`steam_notif_daemon` — `jupiter-main/steam_notif_daemon-v1.0.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steam_notif_daemon-v1.0.1-1)
  * [`steamdeck-dsp` — `jupiter-main/steamdeck-dsp-0.49.5-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steamdeck-dsp-0.49.5-1)
  * [`steamdeck-kde-presets` — `jupiter-main/steamdeck-kde-presets-0.23-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steamdeck-kde-presets-0.23-1)
@@ -105,7 +107,6 @@ Valve packages
  * [`usbhid-gadget-passthru` — `jupiter-main/usbhid-gadget-passthru-0.1.3-3`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/usbhid-gadget-passthru-0.1.3-3)
  * [`vpower` — `jupiter-main/vpower-1.4.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/vpower-1.4.1-1)
  * [`wakehook` — `jupiter-main/wakehook-2-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/wakehook-2-2)
- * [`wayland` — `jupiter-main/wayland-1.23.0-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/wayland-1.23.0-1)
  * [`webrtc-audio-processing-1` — `jupiter-main/webrtc-audio-processing-1-1.3-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/webrtc-audio-processing-1-1.3-2)
  * [`wireplumber` — `jupiter-main/wireplumber-0.5.5-1.2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/wireplumber-0.5.5-1.2)
  * [`xdg-desktop-portal-gtk` — `jupiter-main/xdg-desktop-portal-gtk-1.15.1-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/xdg-desktop-portal-gtk-1.15.1-1.1)
@@ -130,7 +131,6 @@ Arch Linux packages
  * [`alsa-plugins/1:1.2.7.1-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/alsa-plugins/-/tree/1:1.2.7.1-2)
  * [`alsa-topology-conf/1.2.5.1-3`](https://gitlab.archlinux.org/archlinux/packaging/packages/alsa-topology-conf/-/tree/1.2.5.1-3)
  * [`alsa-utils/1.2.11-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/alsa-utils/-/tree/1.2.11-1)
- * [`amd-ucode-neptune/jupiter.20240917.1-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/amd-ucode-neptune/-/tree/jupiter.20240917.1-2)
  * [`anthy/9100h-6`](https://gitlab.archlinux.org/archlinux/packaging/packages/anthy/-/tree/9100h-6)
  * [`aom/3.8.1-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/aom/-/tree/3.8.1-1)
  * [`appstream/1.0.1-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/appstream/-/tree/1.0.1-2)
@@ -237,7 +237,7 @@ Arch Linux packages
  * [`firewalld/2.1.1-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/firewalld/-/tree/2.1.1-1)
  * [`fish/3.7.0-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/fish/-/tree/3.7.0-1)
  * [`flac/1.4.3-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/flac/-/tree/1.4.3-1)
- * [`flatpak/1:1.15.6-2.2`](https://gitlab.archlinux.org/archlinux/packaging/packages/flatpak/-/tree/1:1.15.6-2.2)
+ * [`flatpak/1:1.15.10-1.1`](https://gitlab.archlinux.org/archlinux/packaging/packages/flatpak/-/tree/1:1.15.10-1.1)
  * [`flatpak-kcm/5.27.10-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/flatpak-kcm/-/tree/5.27.10-1)
  * [`fontconfig/2:2.15.0-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/fontconfig/-/tree/2:2.15.0-2)
  * [`frameworkintegration5/5.115.0-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/frameworkintegration5/-/tree/5.115.0-1)
