@@ -1,5 +1,5 @@
 
-`main @ 20240919.1001`
+`main @ 20240919.1002`
 ======================
 
 Valve packages
@@ -72,7 +72,7 @@ Valve packages
  * [`jupiter-dock-updater-bin` — `jupiter-main/jupiter-dock-updater-bin-20240422.01-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-dock-updater-bin-20240422.01-1)
  * [`jupiter-fan-control` — `jupiter-main/jupiter-fan-control-20240523.3-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-fan-control-20240523.3-2)
  * [`jupiter-firewall` — `jupiter-main/jupiter-firewall-0.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-firewall-0.1-1)
- * [`jupiter-hw-support` — `jupiter-main/jupiter-hw-support-20240919.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-hw-support-20240919.1-1)
+ * [`jupiter-hw-support` — `jupiter-main/jupiter-hw-support-20240919.2-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-hw-support-20240919.2-1)
  * [`jupiter-legacy-support` — `jupiter-main/jupiter-legacy-support-1.148-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-legacy-support-1.148-1)
  * [`jupiter-resolved-nomdns` — `jupiter-main/jupiter-resolved-nomdns-1.0-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-resolved-nomdns-1.0-1)
  * [`jupiter-steamos-log-submitter` — `jupiter-main/jupiter-steamos-log-submitter-1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-steamos-log-submitter-1-1)
