@@ -1,5 +1,5 @@
 
-`main @ 20240919.1000`
+`main @ 20240919.1001`
 ======================
 
 Valve packages
@@ -72,7 +72,7 @@ Valve packages
  * [`jupiter-dock-updater-bin` — `jupiter-main/jupiter-dock-updater-bin-20240422.01-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-dock-updater-bin-20240422.01-1)
  * [`jupiter-fan-control` — `jupiter-main/jupiter-fan-control-20240523.3-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-fan-control-20240523.3-2)
  * [`jupiter-firewall` — `jupiter-main/jupiter-firewall-0.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-firewall-0.1-1)
- * [`jupiter-hw-support` — `jupiter-main/jupiter-hw-support-20240904.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-hw-support-20240904.1-1)
+ * [`jupiter-hw-support` — `jupiter-main/jupiter-hw-support-20240919.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-hw-support-20240919.1-1)
  * [`jupiter-legacy-support` — `jupiter-main/jupiter-legacy-support-1.148-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-legacy-support-1.148-1)
  * [`jupiter-resolved-nomdns` — `jupiter-main/jupiter-resolved-nomdns-1.0-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-resolved-nomdns-1.0-1)
  * [`jupiter-steamos-log-submitter` — `jupiter-main/jupiter-steamos-log-submitter-1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-steamos-log-submitter-1-1)
@@ -96,7 +96,7 @@ Valve packages
  * [`renderdoc-minimal` — `jupiter-main/renderdoc-minimal-1.34-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/renderdoc-minimal-1.34-1.1)
  * [`sddm-wayland` — `jupiter-main/sddm-wayland-v0.19.0.valve4.d19813cb03c7d71b896aead28e5285bc131500a9-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/sddm-wayland-v0.19.0.valve4.d19813cb03c7d71b896aead28e5285bc131500a9-1.1)
  * [`steam-im-modules` — `jupiter-main/steam-im-modules-jupiter.20240131-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steam-im-modules-jupiter.20240131-1)
- * [`steam-jupiter-stable` — `jupiter-main/steam-jupiter-stable-1.0.0.79-1.2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steam-jupiter-stable-1.0.0.79-1.2)
+ * [`steam-jupiter-stable` — `jupiter-main/steam-jupiter-stable-1.0.0.79-1.3`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steam-jupiter-stable-1.0.0.79-1.3)
  * [`steam_notif_daemon` — `jupiter-main/steam_notif_daemon-v1.0.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steam_notif_daemon-v1.0.1-1)
  * [`steamdeck-dsp` — `jupiter-main/steamdeck-dsp-0.49.5-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steamdeck-dsp-0.49.5-1)
  * [`steamdeck-kde-presets` — `jupiter-main/steamdeck-kde-presets-0.23-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steamdeck-kde-presets-0.23-1)
