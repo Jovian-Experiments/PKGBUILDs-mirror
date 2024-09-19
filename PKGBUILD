@@ -7,7 +7,7 @@
 _basename=steam
 pkgname=steam-jupiter-stable
 pkgver=1.0.0.79
-pkgrel=1.2
+pkgrel=1.3
 pkgdesc="Valve's digital software delivery system - Jupiter bootstrapped packaging"
 url='https://steampowered.com/'
 arch=('x86_64')
@@ -66,7 +66,7 @@ optdepends=('lib32-libnm: integration with networkmanager')
 _fat_bootstrap=steam_jupiter_stable_bootstrapped_20240509.1.tar.xz
 noextract=("$_fat_bootstrap")
 source=(https://repo.steampowered.com/${_basename}/archive/beta/${_basename}_${pkgver}{.tar.gz,.dsc}
-        http://latest-pacman.internal.steamos.cloud/misc/steam-snapshots/"$_fat_bootstrap"
+        https://steamdeck-packages.steamos.cloud/misc/steam-snapshots/"$_fat_bootstrap"
         70-steam-jupiter-input.rules
         steam-jupiter.sh
         steam-runtime.sh
