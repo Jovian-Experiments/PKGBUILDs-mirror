@@ -4,12 +4,13 @@
 # Everything still in here should be either removed or re-homed to a proper package.
 
 pkgname=jupiter-legacy-support
-pkgver=1.148
+pkgver=1.149
 pkgrel=1
 pkgdesc="Legacy jupiter-specific support files that haven't been split to their own package or removed."
 arch=(any)
 depends=(python3 python-psutil python-aiohttp nvme-cli)
 source=(steam-web-debug-portforward.service
+        steam-web-debug-portforward.socket
         killuserprocesses.conf
         flathub-beta.flatpakrepo
         flatpak-workaround.service
@@ -19,7 +20,8 @@ source=(steam-web-debug-portforward.service
         org.valve.steamos.jupiter-legacy-support.policy
         black_800x1280.png
         white_800x1280.png)
-sha256sums=('a1a2c6cb5ebdba68b79ab90649f894e1136f72af9e4daacbcb71d134383bd797'
+sha256sums=('7fbb99b93049f19260da6a3add0222302c0c568a6d3e3a2d592e3674a614b3d0'
+            'e444ddd5a0a1c43039df3ded65aad8cdff1cdc6792b2e47cf7e83997f78c9f16'
             'e34a9dc905771bd99cd04cdf88262481cab7a7808d99dfaa968366fcb1b99a0b'
             '582cae3c9f9d4639f027defafe6fa33bda0a3a4d441290d926ad85a2be0f7206'
             '608a3132b952022282ff1219d61acc627c58500e12033cc223c2327d6ee89c3c'
@@ -54,7 +56,8 @@ package() {
 
   install -D -m644 "$srcdir"/killuserprocesses.conf "$pkgdir"/etc/systemd/logind.conf.d/killuserprocesses.conf
 
-  install -D -m644 "$srcdir"/steam-web-debug-portforward.service "$pkgdir"/etc/systemd/system/steam-web-debug-portforward.service
+  install -D -m644 "$srcdir"/steam-web-debug-portforward.service "$pkgdir"/usr/lib/systemd/system/steam-web-debug-portforward.service
+  install -D -m644 "$srcdir"/steam-web-debug-portforward.socket "$pkgdir"/usr/lib/systemd/system/steam-web-debug-portforward.socket
 
   install -D -m644 xbindkeysrc "$pkgdir"/etc/xbindkeysrc
 
