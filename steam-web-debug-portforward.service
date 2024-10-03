@@ -2,9 +2,6 @@
 Description="Portforward CEF remote debug port"
 
 [Service]
-ExecStart=socat TCP4-LISTEN:8081,fork TCP4:127.0.0.1:8080
-User=deck
-Restart=always
-
-[Install]
-WantedBy=multi-user.target
+ExecStart=/lib/systemd/systemd-socket-proxyd --exit-idle-time=5m 127.0.0.1:8080
+User=cef-port-fwd
+DynamicUser=yes
