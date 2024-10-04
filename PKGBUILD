@@ -6,8 +6,8 @@
 
 pkgbase=bluez
 pkgname=('bluez' 'bluez-utils' 'bluez-libs' 'bluez-cups' 'bluez-deprecated-tools' 'bluez-hid2hci' 'bluez-mesh')
-pkgver=5.76
-pkgrel=2.3
+pkgver=5.77
+pkgrel=1.3
 url="http://www.bluez.org/"
 arch=('x86_64')
 license=('GPL-2.0-only')
@@ -15,26 +15,31 @@ makedepends=('dbus' 'libical' 'systemd' 'alsa-lib' 'json-c' 'ell' 'python-docuti
 source=(https://www.kernel.org/pub/linux/bluetooth/${pkgname}-${pkgver}.tar.{xz,sign}
         bluetooth.modprobe
         0001-valve-bluetooth-config.patch  # SteamOS: Enable compatibility with devices like AirPods Pro
-        0002-valve-bluetooth-phy.patch     # SteamOS: Enable the phy # No longerneeded with kernel commit 288c90224eec55d13e786844b7954ef060752089, circa linux 6.4
         0014-shared-gatt-Add-env-variable-to-prefer-indication-ov.patch # SteamOS: For Bluetooth qualification tests GAP/SEC/SEM/BV-56-C, GAP/SEC/SEM/BV-57-C and GAP/SEC/SEM/BV-58-C # not upstreamable
         0018-disable-unreliable-vcp-tests.patch
         0019-plugins-Add-new-plugin-to-manage-wake-policy.patch
         0020-plugins-wake-policy-Only-allow-Peripherals-to-wake-u.patch
         0021-valve-bluetooth-ll-privacy.patch
-        0023-hog-lib-Fix-passing-wrong-parameters-to-bt_uhid_get_.patch # 5.77: Session crashes every few minutes after connecting Steam Controller over Bluetooth
+
+        # Holo: Fix for the Steam Controller that could block a suspend request
+        # Part of https://gitlab.steamos.cloud/holo-team/tasks/-/issues/1267
+        # At the moment of writing, the upstream patch has still not being merged
+        # https://lore.kernel.org/all/CABBYNZKFEBuW2OeU4uOSfku=-jCnn3oXJENDMBGmkqP-4rybDA@mail.gmail.com/t/#u
+        0001-BlueZ-adapter-Fix-execute-LE-Add-Device-To-Resolving.patch
+        0002-Use-the-device-privacy-mode.patch
 )
 # see https://www.kernel.org/pub/linux/bluetooth/sha256sums.asc
-sha256sums=('55e2c645909ad82d833c42ce85ec20434e0ef0070941b1eab73facdd240bbd63'
+sha256sums=('5d032fdc1d4a085813554f57591e2e1fb0ceb2b3616ee56f689bc00e1d150812'
             'SKIP'
             '46c021be659c9a1c4e55afd04df0c059af1f3d98a96338236412e449bf7477b4'
             '42ca8090a4b04854210c7b3a4618e5bb09457247993151549b4db2c9109dacc6'
-            '5d291d833c234a14b6162e3cb14eeff41505f5c3bb7c74528b65cb10597f39cb'
             'a7928e6c78ce81abe9aa0022900a33577c1c76fd5bdf6e24f0c753013b8ead4c'
             'c0acf96d27bf2aec97cc1c1b66cc4be079712959d1ea266052f3e886d534c1e9'
             '120c7e435c854e4442e6de8dd257e19e142e2c36ebd491d18d7fa796f585f1ac'
             '0919781b35efb1e53b60dbad947ec282ad82f413879fd3e58af38a7b49a91941'
             '5800e6f6ff74a2a1b2c4482a393c65a83b10b0be52a53d51588e7a192d16fa0f'
-            'bba07cc01d41777a851a416238dbe77035c99c1fc1686fb5736d328af1f1fe75')
+            '24e49ec04e5c985d7f42acceb7c2dd9bad6ad6f8be80ff12368e18293448c42a'
+            '170eef0d9b26a7e31ef2ce2039f662bf9558ee71a1f832538dc9ba5628659f69')
 validpgpkeys=('E932D120BC2AEC444E558F0106CA9F5D1DCF2659') # Marcel Holtmann <marcel@holtmann.org>
 
 build() {
@@ -146,6 +151,7 @@ package_bluez-utils() {
   _install fakeinstall/usr/share/man/man1/bluetoothctl*.1
   _install fakeinstall/usr/share/man/man1/{btattach,btmgmt,btmon,isotest,l2ping,rctest}.1
   _install fakeinstall/usr/share/man/man5/org.bluez.{A,B,D,G,I,L,M,N,P}*.5
+  _install fakeinstall/usr/share/man/man7/l2cap.7
   _install fakeinstall/usr/share/zsh/site-functions/_bluetoothctl
 }
 
@@ -155,6 +161,7 @@ package_bluez-deprecated-tools() {
 
   _install fakeinstall/usr/bin/{ciptool,hciattach,hciconfig,hcidump,hcitool,meshctl,rfcomm,sdptool}
   _install fakeinstall/usr/share/man/man1/{ciptool,hciattach,hciconfig,hcidump,hcitool,rfcomm,sdptool}.1
+  _install fakeinstall/usr/share/man/man7/rfcomm.7
 }
 
 package_bluez-libs() {
