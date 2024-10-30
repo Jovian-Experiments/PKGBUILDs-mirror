@@ -11,11 +11,12 @@ pkgdesc="An open-source implementation of the OpenGL specification"
 # When updating the tag, consider if you are adding any shader compiler changes. If so,
 # or if you are not sure, regenerate the radv-build-id below. To update, see
 # https://gitlab.steamos.cloud/jupiter/docs/-/wikis/How-to-make-a-new-Mesa-release#updating-the-radv-build-id
-_tag=steamos-23.9.10
-pkgver=23.3.0_devel.177509.steamos_23.9.10
+_tag=steamos-24.4.3
+pkgver=24.1.0_devel.188129.steamos_24.4.3
 pkgrel=1
 arch=('x86_64')
 makedepends=('git' 'openssh' 'python-mako' 'libxml2' 'libx11' 'xorgproto' 'libdrm' 'libxshmfence'
+             'python>=3.11' 'python<3.12'
              'wayland' 'wayland-protocols' 'zstd' 'elfutils' 'llvm'
              'libunwind' 'libxrandr'
              'valgrind' 'meson' 'glslang')
@@ -79,7 +80,8 @@ build() {
     -D osmesa=false \
     -D microsoft-clc=disabled \
     -D valgrind=enabled \
-    -D radv-build-id="0fc57c2cf625a235fe81e41877a40609c43e451a"
+    -D intel-rt=disabled \
+    -D radv-build-id="64474a6475eb8af2b44ef334793fd58ad89875f6"
 
   # Print config
   meson configure build
@@ -104,7 +106,7 @@ _install() {
 
 package_vulkan-mesa-layers() {
   pkgdesc="Mesa's Vulkan layers"
-  depends=('libdrm' 'libxcb' 'wayland' 'python')
+  depends=('libdrm' 'libxcb' 'wayland' 'python>=3.11' 'python<3.12')
   conflicts=('vulkan-mesa-layer')
   replaces=('vulkan-mesa-layer')
 
