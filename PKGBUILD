@@ -11,8 +11,8 @@ pkgdesc="An open-source implementation of the OpenGL specification"
 # When updating the tag, consider if you are adding any shader compiler changes. If so,
 # or if you are not sure, regenerate the radv-build-id below. To update, see
 # https://gitlab.steamos.cloud/jupiter/docs/-/wikis/How-to-make-a-new-Mesa-release#updating-the-radv-build-id
-_tag=steamos-24.4.1
-pkgver=24.1.0_devel.188126.steamos_24.4.1
+_tag=steamos-24.4.3
+pkgver=24.1.0_devel.188129.steamos_24.4.3
 pkgrel=1
 arch=('x86_64')
 makedepends=('git' 'openssh' 'python-mako' 'libxml2' 'libx11' 'xorgproto' 'libdrm' 'libxshmfence'
