@@ -9,7 +9,6 @@
 
 [Unit]
 Description=SteamOS Offload - /nix
-After=steamos-offload-pre.target
 ConditionPathExists=/nix
 
 [Mount]

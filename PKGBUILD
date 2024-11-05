@@ -1,14 +1,14 @@
 # Maintainer: Alberto Garcia <berto@igalia.com>
 
 pkgname='holo-nix-offload'
-pkgver=0.1
+pkgver=0.2
 pkgrel=1
 pkgdesc="SteamOS Nix Offload"
 arch=('any')
 license=('LGPL2.1')
 depends=('steamos-customizations-jupiter')
 source=("nix.mount")
-sha256sums=('8aee780339355957845cfb9bac775ca7c15afb23e4f5fdce95c7d1b12162060e')
+sha256sums=('a5ba0949e279f0472ce26f2c0044f2cba6ba53e48331e2414c1bfa84d80e3e0a')
 
 package() {
     mkdir -m 0755 -p "$pkgdir"/nix
