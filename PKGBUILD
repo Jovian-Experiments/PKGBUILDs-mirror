@@ -2,7 +2,7 @@
 # Maintainer: Jan Alexander Steffens (heftig) <heftig@archlinux.org>
 
 pkgbase=linux-neptune-68
-_tag=6.8.12-valve4
+_tag=6.8.12-valve5
 pkgver=${_tag//-/.}
 pkgrel=1
 pkgdesc='Linux'
