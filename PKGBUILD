@@ -3,7 +3,7 @@
 
 pkgname=('mangohud' 'lib32-mangohud')
 pkgver=0.7.2.rc3.r11.g31f2ca5
-pkgrel=2.1
+pkgrel=2.2
 pkgdesc="Vulkan and OpenGL overlay to display performance information"
 url="https://github.com/flightlessmango/MangoHud"
 arch=(x86_64)
@@ -20,12 +20,11 @@ makedepends=(
   libx11
   libxnvctrl
   meson
-  'python>=3.11'
-  'python<3.12'
+  python
   python-mako
-  libxkbcommon
-  lib32-libxkbcommon
 )
+
+depends=(libxkbcommon lib32-libxkbcommon)
 
 source=(
   "mangohud"::"git+https://github.com/flightlessmango/MangoHud.git#commit=31f2ca5e306d7bad502ae70d346f0309e1f4764b"
