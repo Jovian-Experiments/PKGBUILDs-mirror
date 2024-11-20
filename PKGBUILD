@@ -6,8 +6,8 @@
 
 pkgbase=bluez
 pkgname=('bluez' 'bluez-utils' 'bluez-libs' 'bluez-cups' 'bluez-deprecated-tools' 'bluez-hid2hci' 'bluez-mesh')
-pkgver=5.77
-pkgrel=1.3
+pkgver=5.79
+pkgrel=1.1
 url="http://www.bluez.org/"
 arch=('x86_64')
 license=('GPL-2.0-only')
@@ -29,7 +29,7 @@ source=(https://www.kernel.org/pub/linux/bluetooth/${pkgname}-${pkgver}.tar.{xz,
         0002-Use-the-device-privacy-mode.patch
 )
 # see https://www.kernel.org/pub/linux/bluetooth/sha256sums.asc
-sha256sums=('5d032fdc1d4a085813554f57591e2e1fb0ceb2b3616ee56f689bc00e1d150812'
+sha256sums=('4164a5303a9f71c70f48c03ff60be34231b568d93a9ad5e79928d34e6aa0ea8a'
             'SKIP'
             '46c021be659c9a1c4e55afd04df0c059af1f3d98a96338236412e449bf7477b4'
             '42ca8090a4b04854210c7b3a4618e5bb09457247993151549b4db2c9109dacc6'
@@ -148,10 +148,11 @@ package_bluez-utils() {
   replaces=('bluez-plugins')
 
   _install fakeinstall/usr/bin/{advtest,amptest,avinfo,avtest,bcmfw,bdaddr,bluemoon,bluetoothctl,bluetooth-player,bneptest,btattach,btconfig,btgatt-client,btgatt-server,btinfo,btiotest,btmgmt,btmon,btpclient,btpclientctl,btproxy,btsnoop,check-selftest,cltest,create-image,eddystone,gatt-service,hcieventmask,hcisecfilter,hex2hcd,hid2hci,hwdb,ibeacon,isotest,l2ping,l2test,mcaptest,mpris-proxy,nokfw,oobtest,rctest,rtlfw,scotest,seq2bseq,test-runner}
+  _install fakeinstall/usr/lib/systemd/user/mpris-proxy.service
   _install fakeinstall/usr/share/man/man1/bluetoothctl*.1
   _install fakeinstall/usr/share/man/man1/{btattach,btmgmt,btmon,isotest,l2ping,rctest}.1
   _install fakeinstall/usr/share/man/man5/org.bluez.{A,B,D,G,I,L,M,N,P}*.5
-  _install fakeinstall/usr/share/man/man7/l2cap.7
+  _install fakeinstall/usr/share/man/man7/{hci,l2cap}.7
   _install fakeinstall/usr/share/zsh/site-functions/_bluetoothctl
 }
 
