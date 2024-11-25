@@ -7,7 +7,7 @@
 _basename=steam
 pkgname=steam-jupiter-stable
 pkgver=1.0.0.79
-pkgrel=1.3
+pkgrel=1.4
 pkgdesc="Valve's digital software delivery system - Jupiter bootstrapped packaging"
 url='https://steampowered.com/'
 arch=('x86_64')
@@ -31,7 +31,8 @@ depends=(
   vulkan-driver
   vulkan-icd-loader
   lsof
-  python
+  'python>=3.12'
+  'python<3.13'
   libxcrypt-compat
 )
 # lib32-pipewire: https://gitlab.archlinux.org/archlinux/packaging/packages/steam/-/issues/9
