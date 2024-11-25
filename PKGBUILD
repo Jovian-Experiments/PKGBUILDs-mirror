@@ -7,7 +7,7 @@
 _basename=steam
 pkgname=steam-jupiter-oobe
 pkgver=1.0.0.79
-pkgrel=1.3
+pkgrel=1.5
 pkgdesc="Valve's digital software delivery system - Jupiter bootstrapped packaging"
 url='https://steampowered.com/'
 arch=('x86_64')
@@ -16,7 +16,7 @@ license=('custom')
 depends=('bash' 'desktop-file-utils' 'diffutils' 'hicolor-icon-theme' 'curl' 'dbus'
          'libxcrypt-compat'
          'freetype2' 'gdk-pixbuf2' 'ttf-font' 'zenity' 'lsb-release' 'nss' 'usbutils'
-         'xorg-xrandr' 'vulkan-driver' 'vulkan-icd-loader' 'lsof' 'python>=3.11' 'python<3.12')
+         'xorg-xrandr' 'vulkan-driver' 'vulkan-icd-loader' 'lsof' 'python>=3.12' 'python<3.13')
 # lib32-pipewire: https://bugs.archlinux.org/task/75155
 # lib32-fontconfig: https://bugs.archlinux.org/task/74827
 # lib32-systemd, lib32-libxinerama: https://bugs.archlinux.org/task/75156
@@ -36,7 +36,7 @@ optdepends=('lib32-libnm: integration with networkmanager')
 # Jupiter: Including fully bootstrapped steam image on expected branch
 _fat_bootstrap=steam_jupiter_goldmaster_bootstrapped_20230911.tar.xz
 noextract=("$_fat_bootstrap")
-source=(https://repo.steampowered.com/${_basename}/pool/${_basename}/s/${_basename}/${_basename}_${pkgver}{.tar.gz,.dsc}
+source=(https://repo.steampowered.com/${_basename}/archive/beta/${_basename}_${pkgver}{.tar.gz,.dsc}
         http://latest-pacman.internal.steamos.cloud/misc-galileo/steam-snapshots/"$_fat_bootstrap"
         70-steam-jupiter-input.rules
         steam-jupiter.sh
