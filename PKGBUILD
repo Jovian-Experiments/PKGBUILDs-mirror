@@ -1,10 +1,10 @@
 # Maintainer: John Schoenick <johns@valvesoftware.com>
 pkgname=foxnetstatsd
 pkgver=1.4
-pkgrel=2
+pkgrel=3
 pkgdesc="Foxnet stats daemon"
 arch=(any)
-depends=(python-psutil python-aiohttp nvme-cli 'python>=3.11' 'python<3.12')
+depends=(python-psutil python-aiohttp nvme-cli 'python>=3.12' 'python<3.13')
 makedepends=(git openssh)
 source=(wheel-foxnetstatsd
         foxnetstatsd.service
