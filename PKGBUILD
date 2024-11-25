@@ -12,7 +12,7 @@
 
 pkgname=renderdoc
 pkgver=1.34
-pkgrel=1.1
+pkgrel=1.2
 pkgdesc="OpenGL and Vulkan debugging tool"
 arch=(x86_64)
 url="https://github.com/baldurk/renderdoc"
@@ -21,9 +21,11 @@ makedepends=("pcre" "cmake" "python" "clang")
 depends=("libx11" "libxcb" "mesa" "libgl" "qt5-base" "qt5-svg" "qt5-x11extras" "xcb-util-keysyms")
 source=("https://github.com/baldurk/renderdoc/archive/v${pkgver}.tar.gz"
         "https://github.com/baldurk/renderdoc/releases/download/v${pkgver}/v${pkgver}.tar.gz.asc"
-        "0001-Strip-VK_EXT_hdr_metadata-extension-on-replay.patch")
+        "0001-Strip-VK_EXT_hdr_metadata-extension-on-replay.patch"
+        "0001-Move-stdio.h-include-outside-of-namespace-avoids-som.patch")
 validpgpkeys=('1B039DB9A4718A2D699DE031AC612C3120C34695')
 sha384sums=('49502afa687d17cb8268fc25f90141837c406b7a2f001c2a9c5fb8c7c9e5d36e9e0bf2844bea4efa5a56adecc97b4303'
+            'SKIP'
             'SKIP'
             'SKIP')
 
@@ -35,6 +37,8 @@ prepare() {
   # Backport from v1.x to deal with Gamescope WSI layer enabling HDR metadata while
   # plain replayer does not get WSI layer.
   patch -p1 < "../../0001-Strip-VK_EXT_hdr_metadata-extension-on-replay.patch"
+  # Backport buggy include of stdio.h inside namespace
+  patch -p1 < "../../0001-Move-stdio.h-include-outside-of-namespace-avoids-som.patch"
 }
 
 build() {
