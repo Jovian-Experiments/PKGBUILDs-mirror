@@ -3,7 +3,7 @@
 pkgname=powerbuttond
 _srctag=v2
 pkgver=${_srctag##v}
-pkgrel=1
+pkgrel=2
 arch=('x86_64')
 url="https://gitlab.steamos.cloud/jupiter/powerbuttond"
 pkgdesc="Power button daemon"
