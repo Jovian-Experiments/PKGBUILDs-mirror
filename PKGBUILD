@@ -3,12 +3,12 @@
 
 pkgname=pyzy
 pkgver=1.1
-pkgrel=2.2
+pkgrel=2.3
 pkgdesc='The Chinese PinYin and Bopomofo conversion library'
 arch=('x86_64')
 license=('LGPL')
 depends=('glib2' 'sqlite' 'util-linux')
-makedepends=('doxygen' 'gnome-common' 'python')
+makedepends=('doxygen' 'gnome-common' 'python>=3.12' 'python<3.13')
 _commit=ec719d053bd491ec64fe68fe0d1699ca6039ad80
 source=(
   "git+https://github.com/openSUSE/pyzy#commit=${_commit}"
