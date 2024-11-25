@@ -1,7 +1,7 @@
 # Maintainer: Joshua Ashton <joshua@froggi.es>
 pkgname=steam_notif_daemon
 pkgver=v1.0.1
-pkgrel=1
+pkgrel=2
 license=('MIT')
 pkgdesc='Simple XDG D-Bus Notification wrapper'
 makedepends=("meson" "systemd" "git")
