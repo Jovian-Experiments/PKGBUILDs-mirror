@@ -1,7 +1,7 @@
 # Maintainer: Pierre-Loup A. Griffais (pgriffais@valvesoftware.com)
 
 pkgname=jupiter-hw-support
-_srctag=jupiter-20240919.2
+_srctag=jupiter-20241119.1
 _srcver=${_srctag#jupiter-}
 pkgver=${_srcver//-/.}
 pkgrel=1
@@ -10,9 +10,10 @@ url="https://gitlab.steamos.cloud/jupiter/jupiter-hw-support"
 pkgdesc="Jupiter HW support package"
 license=('MIT')
 depends=('python-evdev'
-         'python>=3.11' 'python<3.12'
+         'python>=3.12' 'python<3.13'
          'dmidecode' # for jupiter-biosupdate
-         'python-crcmod' 'python-click' 'python-progressbar' 'python-hid'
+         'python-crcmod' 'python-click' 'python-progressbar'
+         'python-hid>=1.0.6-2' # for jupiter-controller-update
          'jq' # for jupiter-controller-update, jupiter-biosupdate
          'alsa-utils' # for the sound workarounds
          'parted' 'e2fsprogs' # for sdcard formatting
