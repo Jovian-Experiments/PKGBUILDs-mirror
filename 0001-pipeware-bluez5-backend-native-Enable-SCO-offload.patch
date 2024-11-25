@@ -20,10 +20,10 @@ index 8144b09fa12c..4b1e0b2b5603 100644
  
 +#define ENABLE_SCO_OFFLOAD   1
 +
- static struct spa_log_topic log_topic = SPA_LOG_TOPIC(0, "spa.bluez5.native");
+ SPA_LOG_TOPIC_DEFINE_STATIC(log_topic, "spa.bluez5.native");
  #undef SPA_LOG_TOPIC_DEFAULT
  #define SPA_LOG_TOPIC_DEFAULT &log_topic
-@@ -1378,6 +1380,32 @@ static void rfcomm_event(struct spa_source *source)
+@@ -1441,6 +1443,32 @@ static void rfcomm_event(struct spa_source *source)
  	}
  }
  
@@ -53,7 +53,7 @@ index 8144b09fa12c..4b1e0b2b5603 100644
 +	return err;
 +}
 +
- static int sco_create_socket(struct impl *backend, struct spa_bt_adapter *adapter, bool msbc)
+ static int sco_create_socket(struct impl *backend, struct spa_bt_adapter *adapter, bool transparent)
  {
  	struct sockaddr_sco addr;
 @@ -1413,6 +1441,9 @@ static int sco_create_socket(struct impl *backend, struct spa_bt_adapter *adapte
@@ -61,17 +61,24 @@ index 8144b09fa12c..4b1e0b2b5603 100644
  		}
  	}
 +#if ENABLE_SCO_OFFLOAD
-+	sco_offload_btcodec(backend, sock, msbc);
++	sco_offload_btcodec(backend, sock, transparent);
 +#endif
  
  	return spa_steal_fd(sock);
  }
-@@ -1777,6 +1808,9 @@ static void sco_listen_event(struct spa_source *source)
+@@ -1777,6 +1808,16 @@ static void sco_listen_event(struct spa_source *source)
  				return;
  			}
  		}
 +#if ENABLE_SCO_OFFLOAD
-+		sco_offload_btcodec(backend, sock, t->codec == HFP_AUDIO_CODEC_MSBC);
++		switch (t->codec) {
++			case HFP_AUDIO_CODEC_MSBC:
++			case HFP_AUDIO_CODEC_LC3_SWB:
++				sco_offload_btcodec(backend, sock, 1);
++				break;
++			default:
++				sco_offload_btcodec(backend, sock, 0);
++		}
 +#endif
  
  		/* First read from the accepted socket is non-blocking and returns a zero length buffer. */
