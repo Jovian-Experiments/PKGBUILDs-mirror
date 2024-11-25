@@ -1,0 +1,25 @@
+From a206de98b8104a2e8d7e64bcba71a00cb5bc791e Mon Sep 17 00:00:00 2001
+From: Vicki Pfau <vi@endrift.com>
+Date: Wed, 6 Nov 2024 16:08:09 -0800
+Subject: [PATCH] Remove -D_FORTIFY_SOURCE
+
+---
+ Makefile | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/Makefile b/Makefile
+index a495d4d..4746e62 100644
+--- a/Makefile
++++ b/Makefile
+@@ -3,7 +3,7 @@ all: usbhid-gadget-passthru
+ CFLAGS += -Wall -Wextra -Werror -Wno-format-truncation -Wno-stringop-overflow -Iinclude
+ 
+ ifeq ($(DEBUG),)
+-  CFLAGS += -O2 -D_FORTIFY_SOURCE=2
++  CFLAGS += -O2
+ else
+   CFLAGS += -g
+ endif
+-- 
+2.47.0
+
