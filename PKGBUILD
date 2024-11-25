@@ -3,16 +3,18 @@
 # Contributor: Jan Alexander Steffens (heftig) <jan.steffens@gmail.com>
 
 pkgname=alsa-ucm-conf
-pkgver=1.2.9
-pkgrel=1.2 # Holo: remove Jupiter symlink
+pkgver=1.2.12
+pkgrel=1.1 # Holo: remove Jupiter symlink
 pkgdesc="ALSA Use Case Manager configuration (and topologies)"
 arch=(any)
 url="https://alsa-project.org/"
-license=(BSD)
-source=(https://www.alsa-project.org/files/pub/lib/$pkgname-$pkgver.tar.bz2{,.sig})
-sha512sums=('3aced4d4df76044a5525f1217851e05f7ad177389d2008e3e3dd0fb4d2cf72cd0897b140659a7729cc37d5b737c2d0cf5b607df4f576647044accd560d8cb87b'
+license=(BSD-3-Clause)
+source=(
+  $url/files/pub/lib/$pkgname-$pkgver.tar.bz2{,.sig}
+)
+sha512sums=('391dde123271172d899c04865d1d6e21b4ad0060ee9b2256dfbc6fc89ad48edcaa43c861893ab0e5c70d972e20d15c528defc19c00308e7465f13f954cce25d7'
             'SKIP')
-b2sums=('fe71790aa8658ab12378baa55f95a03aaebd3eb0aef2535b65b89884de6cb404a75b44fd238d2089e0a005ca81720f3c44d1912452908e97aa75fcda513908cf'
+b2sums=('65f429afa6a9134f1896acac3827f6065ce9315f1920d27d5ea97244fe376f1f7780c9537cf33b8a91eeaebfde7489842bd603a7d60c0d20b6017f2e7e1eda4e'
         'SKIP')
 validpgpkeys=('F04DF50737AC1A884C4B3D718380596DA6E59C91') # ALSA Release Team (Package Signing Key v1) <release@alsa-project.org>
 
