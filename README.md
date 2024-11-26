@@ -1,5 +1,5 @@
 
-`main @ 20241125.1000`
+`main @ 20241126.1000`
 ======================
 
 Valve packages
@@ -34,6 +34,7 @@ Valve packages
  * [`libnm` — `holo-main/networkmanager-1.50.0-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/networkmanager-1.50.0-1.1)
  * [`lsb-release` — `holo-main/lsb-release-2.0.r53.a86f885-2.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/lsb-release-2.0.r53.a86f885-2.1)
  * [`maliit-keyboard` — `holo-main/maliit-keyboard-2.3.1-3.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/maliit-keyboard-2.3.1-3.1)
+ * [`mpg123` — `holo-main/mpg123-1.32.9-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/mpg123-1.32.9-1)
  * [`networkmanager` — `holo-main/networkmanager-1.50.0-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/networkmanager-1.50.0-1.1)
  * [`paru` — `holo-main/paru-2.0.4-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/paru-2.0.4-1.1)
  * [`podman` — `holo-main/podman-5.2.5-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/podman-5.2.5-1.1)
@@ -68,11 +69,12 @@ Valve packages
  * [`jupiter-fan-control` — `jupiter-main/jupiter-fan-control-20240523.3-3`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-fan-control-20240523.3-3)
  * [`jupiter-firewall` — `jupiter-main/jupiter-firewall-0.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-firewall-0.1-1)
  * [`jupiter-hw-support` — `jupiter-main/jupiter-hw-support-20241119.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-hw-support-20241119.1-1)
- * [`jupiter-legacy-support` — `jupiter-main/jupiter-legacy-support-1.150-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-legacy-support-1.150-1)
+ * [`jupiter-legacy-support` — `jupiter-main/jupiter-legacy-support-1.151-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-legacy-support-1.151-1)
  * [`jupiter-resolved-nomdns` — `jupiter-main/jupiter-resolved-nomdns-1.0-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-resolved-nomdns-1.0-1)
  * [`jupiter-steamos-log-submitter` — `jupiter-main/jupiter-steamos-log-submitter-1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-steamos-log-submitter-1-1)
  * [`kwin` — `jupiter-main/kwin-6.2.2-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/kwin-6.2.2-1.1)
  * [`libva-mesa-driver` — `jupiter-main/mesa-24.0.5.183660.radeonsi_24.0.4-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/mesa-24.0.5.183660.radeonsi_24.0.4-1.1)
+ * [`libwireplumber` — `jupiter-main/wireplumber-0.5.6-1.2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/wireplumber-0.5.6-1.2)
  * [`linux-firmware-neptune` — `jupiter-main/linux-firmware-neptune-jupiter.20240917.1-3`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/linux-firmware-neptune-jupiter.20240917.1-3)
  * [`linux-firmware-neptune-whence` — `jupiter-main/linux-firmware-neptune-jupiter.20240917.1-3`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/linux-firmware-neptune-jupiter.20240917.1-3)
  * [`linux-neptune-68` — `jupiter-main/linux-neptune-68-6.8.12.valve7-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/linux-neptune-68-6.8.12.valve7-1)
@@ -87,14 +89,15 @@ Valve packages
  * [`steam-im-modules` — `jupiter-main/steam-im-modules-jupiter.20240131-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steam-im-modules-jupiter.20240131-2)
  * [`steam-jupiter-stable` — `jupiter-main/steam-jupiter-stable-1.0.0.79-1.4`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steam-jupiter-stable-1.0.0.79-1.4)
  * [`steam_notif_daemon` — `jupiter-main/steam_notif_daemon-v1.0.1-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steam_notif_daemon-v1.0.1-2)
- * [`steamdeck-dsp` — `jupiter-main/steamdeck-dsp-0.49.5-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steamdeck-dsp-0.49.5-1.1)
+ * [`steamdeck-dsp` — `jupiter-main/steamdeck-dsp-0.57-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steamdeck-dsp-0.57-1)
  * [`steamdeck-kde-presets` — `jupiter-main/steamdeck-kde-presets-0.24-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steamdeck-kde-presets-0.24-2)
- * [`steamos-customizations-jupiter` — `jupiter-main/steamos-customizations-jupiter-20241030.1-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steamos-customizations-jupiter-20241030.1-2)
+ * [`steamos-customizations-jupiter` — `jupiter-main/steamos-customizations-jupiter-20241107.1-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steamos-customizations-jupiter-20241107.1-2)
  * [`steamos-devkit-service` — `jupiter-main/steamos-devkit-service-0.20220401.0-7`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steamos-devkit-service-0.20220401.0-7)
  * [`upower` — `jupiter-main/upower-0.99.15.jupiter-1.3`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/upower-0.99.15.jupiter-1.3)
  * [`usbhid-gadget-passthru` — `jupiter-main/usbhid-gadget-passthru-0.1.3-4`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/usbhid-gadget-passthru-0.1.3-4)
  * [`vpower` — `jupiter-main/vpower-1.4.1-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/vpower-1.4.1-2)
  * [`wakehook` — `jupiter-main/wakehook-2.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/wakehook-2.1-1)
+ * [`wireplumber` — `jupiter-main/wireplumber-0.5.6-1.2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/wireplumber-0.5.6-1.2)
  * [`xorgproto` — `jupiter-main/xorgproto-2024.1-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/xorgproto-2024.1-2)
 
 Arch Linux packages
@@ -600,7 +603,6 @@ Arch Linux packages
  * [`libwacom/2.13.0-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/libwacom/-/tree/2.13.0-1)
  * [`libwbclient/2:4.21.1-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/libwbclient/-/tree/2:4.21.1-1)
  * [`libwebp/1.4.0-3`](https://gitlab.archlinux.org/archlinux/packaging/packages/libwebp/-/tree/1.4.0-3)
- * [`libwireplumber/0.5.6-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/wireplumber/-/tree/0.5.6-1)
  * [`libx11/1.8.10-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/libx11/-/tree/1.8.10-1)
  * [`libxau/1.0.11-3`](https://gitlab.archlinux.org/archlinux/packaging/packages/libxau/-/tree/1.0.11-3)
  * [`libxaw/1.0.16-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/libxaw/-/tree/1.0.16-1)
@@ -666,7 +668,6 @@ Arch Linux packages
  * [`modemmanager-qt/6.7.0-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/modemmanager-qt/-/tree/6.7.0-1)
  * [`mpdecimal/4.0.0-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/mpdecimal/-/tree/4.0.0-2)
  * [`mpfr/4.2.1-4`](https://gitlab.archlinux.org/archlinux/packaging/packages/mpfr/-/tree/4.2.1-4)
- * [`mpg123/1.32.7-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/mpg123/-/tree/1.32.7-1)
  * [`mtdev/1.1.7-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/mtdev/-/tree/1.1.7-1)
  * [`nano/8.2-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/nano/-/tree/8.2-1)
  * [`ncdu/2.6-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/ncdu/-/tree/2.6-1)
@@ -946,7 +947,6 @@ Arch Linux packages
  * [`wireguard-tools/1.0.20210914-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/wireguard-tools/-/tree/1.0.20210914-2)
  * [`wireless-regdb/2024.10.07-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/wireless-regdb/-/tree/2024.10.07-1)
  * [`wireless_tools/30.pre9-4`](https://gitlab.archlinux.org/archlinux/packaging/packages/wireless_tools/-/tree/30.pre9-4)
- * [`wireplumber/0.5.6-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/wireplumber/-/tree/0.5.6-1)
  * [`wpa_supplicant/2:2.11-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/wpa_supplicant/-/tree/2:2.11-2)
  * [`x264/3:0.164.r3108.31e19f9-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/x264/-/tree/3:0.164.r3108.31e19f9-2)
  * [`x265/3.6-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/x265/-/tree/3.6-1)
