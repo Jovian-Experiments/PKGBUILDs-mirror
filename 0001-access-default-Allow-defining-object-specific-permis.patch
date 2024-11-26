@@ -1,0 +1,145 @@
+From bf7d875b6100e9bd15709bea8f0eca1f84169a1e Mon Sep 17 00:00:00 2001
+From: Julian Bouzas <julian.bouzas@collabora.com>
+Date: Fri, 17 May 2024 13:44:02 -0400
+Subject: [PATCH 1/2] access-default: Allow defining object specific
+ permissions for any client
+
+This improves the 'access.rules' Json configuration to grant object specific
+permissions to any client. This is done by adding a 'update-perms' action in
+the matched rule. See example in 'wireplumber.conf.d.examples/access.conf' for
+its usage.
+---
+ .../wireplumber.conf.d.examples/access.conf   | 32 ++++++++++-
+ src/scripts/client/access-default.lua         | 55 ++++++++++++++++---
+ 2 files changed, 78 insertions(+), 9 deletions(-)
+
+diff --git a/src/config/wireplumber.conf.d.examples/access.conf b/src/config/wireplumber.conf.d.examples/access.conf
+index 5f0b8565..d165c341 100644
+--- a/src/config/wireplumber.conf.d.examples/access.conf
++++ b/src/config/wireplumber.conf.d.examples/access.conf
+@@ -1,9 +1,9 @@
+ ## The WirePlumber access configuration
+ 
+ access.rules = [
+-  # The list of access rules
++  ## The list of access rules
+ 
+-  # The following are the default rules applied if none overrides them.
++  ## The following are the default rules applied if none overrides them.
+   # {
+   #   matches = [
+   #     {
+@@ -57,4 +57,32 @@ access.rules = [
+   #     }
+   #   }
+   # }
++
++  ## Object specific permissions can also be applied. For example, this rule
++  ## grants read only permissions for Audio/Source nodes to all pipewire-pulse
++  ## clients, and all permissions to the rest of objects
++  # {
++  #   matches = [
++  #     {
++  #       client.api = "pipewire-pulse"
++  #     }
++  #   ]
++  #   actions = {
++  #     update-props = {
++  #       default_permissions = "all"
++  #     }
++  #     update-perms = [
++  #       {
++  #         matches = [
++  #           {
++  #              media.class = "Audio/Source"
++  #           }
++  #         ]
++  #         actions = {
++  #           permissions = "r"
++  #         }
++  #       }
++  #     ]
++  #   }
++  # }
+ ]
+diff --git a/src/scripts/client/access-default.lua b/src/scripts/client/access-default.lua
+index 70b3a2be..68565430 100644
+--- a/src/scripts/client/access-default.lua
++++ b/src/scripts/client/access-default.lua
+@@ -57,11 +57,38 @@ function getPermissions (properties)
+   return nil, nil
+ end
+ 
+-clients_om = ObjectManager {
+-  Interest { type = "client" }
+-}
++function updateObjectDefinedPermissions (client, properties, perms_table)
++  if config.rules then
++    local client_id = client["bound-id"]
++
++    -- update perms_table with the permissions of each pipewire object
++    JsonUtils.match_rules (config.rules, properties, function (action, value)
++      if action == "update-perms" then
++        for po in po_om:iterate () do
++          local po_id = po["bound-id"]
++
++	  -- make sure the pipewire object is not the client itself
++	  if client_id ~= po_id then
++            local po_properties = po["properties"]
++            JsonUtils.match_rules (value, po_properties, function (po_action, po_value)
++              if po_action == "permissions" then
++                log:info (client, "Granting permissions to client " .. client_id ..
++                    " on object " .. po_id .. " to '" .. po_value:parse() .. "'")
++                perms_table[po_id] = po_value:parse()
++              end
++
++              return true
++            end)
++          end
++        end
++      end
++
++      return true
++    end)
++  end
++end
+ 
+-clients_om:connect("object-added", function (om, client)
++function handleClient (client)
+   local id = client["bound-id"]
+   local properties = client["properties"]
+   local access = getAccess (properties)
+@@ -77,13 +104,27 @@ clients_om:connect("object-added", function (om, client)
+   end
+ 
+   if perms ~= nil then
+-    log:info(client, "Granting permissions to client " .. id .. " (access " ..
++    log:info(client, "Granting default permissions to client " .. id .. " (access " ..
+       effective_access .. "): " .. perms)
+-    client:update_permissions { ["any"] = perms }
++
++    local perms_table = { ["any"] = perms }
++    updateObjectDefinedPermissions (client, properties, perms_table)
++
++    client:update_permissions (perms_table)
+     client:update_properties { ["pipewire.access.effective"] = effective_access }
+   else
+     log:debug(client, "No rule for client " .. id .. " (access " .. access .. ")")
+   end
++end
++
++po_om = ObjectManager {
++  Interest { type = "PipewireObject" }
++}
++
++po_om:connect("objects-changed", function (om)
++  for client in om:iterate { type = "client" } do
++    handleClient (client)
++  end
+ end)
+ 
+-clients_om:activate()
++po_om:activate()
+-- 
+2.46.0
+
