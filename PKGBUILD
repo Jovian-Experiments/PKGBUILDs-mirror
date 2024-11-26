@@ -1,9 +1,9 @@
 # Maintainer Ethan Geller (ethang@valvesoftware.com)
 
 pkgname=steamdeck-dsp
-_srctag=0.49.5
+_srctag=0.57
 pkgver=${_srctag#galileo-}
-pkgrel=1.1
+pkgrel=1
 arch=('any')
 url=""
 pkgdesc="Steamdeck Audio Processing"
