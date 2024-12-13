@@ -8,7 +8,7 @@ pkgname=(
   libwireplumber
 )
 pkgver=0.5.6
-pkgrel=1.2
+pkgrel=1.3
 pkgdesc="Session / policy manager implementation for PipeWire"
 url="https://pipewire.pages.freedesktop.org/wireplumber/"
 arch=(x86_64)
@@ -44,6 +44,7 @@ source=(
   # Part of https://gitlab.steamos.cloud/holo-team/tasks/-/issues/1208
   "0001-access-default-Allow-defining-object-specific-permis.patch"
   "0002-monitor-alsa-Add-node.create-loopback-property.patch"
+  "0003-monitor-alsa-Don-t-make-the-loopback-device-node-vir.patch"
 
   # Holo: backport of https://gitlab.freedesktop.org/pipewire/wireplumber/-/merge_requests/678
   # Part of https://gitlab.steamos.cloud/holo-team/tasks/-/issues/1208
@@ -51,8 +52,9 @@ source=(
 )
 b2sums=(
   'a367d750ec8b4e629c6685c77df460099b267bf9ffb7e99f323b750d9c5313bb643525434fe7417a4fa426a4395f27409c010cf4d3a464553f8a681b2d010834'
-  '8213aa6b77d9d9731fc481dcb8f2ad6c4e8e60f82d4a6a8d21fbd9307c45cbe52a70c137439dbe9cb105c9bbabe4e94dfa0f9b0f3012b784c3dcd9b08d6f90fa'
-  '29005318e9f2aec26a2f36d8bc9cf9e59f53e62b95ddf65cbf88ebe01a2b8c3ca735459777cb5101f1b0c1c8b1ac26f42d0817746574fe8640764022e7930e25'
+  '86f80f07bb5f446ae90f88f39870139d4d902f99048a62eb825ac12b654ca248568b17f8a1ca15777b41e0a11054345d023fc36a348372f15cb75b92a0180cfe'
+  'ea55591190916920756ee0cdab3d4d315500346370dc03a9b739bdcf9806aaec23cfafe31e35c89a6d53e3dd2d5001986012d29fcc77f3be1bf5eaa4ca486cb1'
+  '145fd614765ebe212de7e27e78b243bb294bd2fdc1efb1c6852280e8db2c2cbca40d6ce838013a06ced34bc030a16a11f1c4875562cd5d041c0785e7be712636'
   '1498cd88ec907e93975e73af62e01fe0ab40d228603a433e502025b44322092bef0adb0dd508eb96a304c8bc94b00cabafd193ab2eb97d9aaaf699e441a133f3'
 )
 
