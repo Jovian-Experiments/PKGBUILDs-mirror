@@ -1,5 +1,5 @@
 
-`release @ 20241030.1`
+`release @ 20241212.1`
 ======================
 
 Valve packages
@@ -163,7 +163,7 @@ Arch Linux packages
  * [`fuse3/3.16.2-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/fuse3/-/tree/3.16.2-1)
  * [`galileo-mura/v0.9-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/galileo-mura/-/tree/v0.9-1)
  * [`gamemode/1.8.1-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/gamemode/-/tree/1.8.1-2)
- * [`gamescope/3.15.14-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/gamescope/-/tree/3.15.14-1)
+ * [`gamescope/3.15.15-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/gamescope/-/tree/3.15.15-1)
  * [`gawk/5.3.0-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/gawk/-/tree/5.3.0-1)
  * [`gc/8.2.6-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/gc/-/tree/8.2.6-1)
  * [`gcc-libs/13.2.1-7`](https://gitlab.archlinux.org/archlinux/packaging/packages/gcc-libs/-/tree/13.2.1-7)
@@ -359,7 +359,7 @@ Arch Linux packages
  * [`libaccounts-glib/1.26-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/libaccounts-glib/-/tree/1.26-2)
  * [`libaccounts-qt/1.16-3`](https://gitlab.archlinux.org/archlinux/packaging/packages/libaccounts-qt/-/tree/1.16-3)
  * [`libaio/0.3.113-3`](https://gitlab.archlinux.org/archlinux/packaging/packages/libaio/-/tree/0.3.113-3)
- * [`libarchive/3.7.2-1.1`](https://gitlab.archlinux.org/archlinux/packaging/packages/libarchive/-/tree/3.7.2-1.1)
+ * [`libarchive/3.7.2-1.2`](https://gitlab.archlinux.org/archlinux/packaging/packages/libarchive/-/tree/3.7.2-1.2)
  * [`libass/0.17.1-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/libass/-/tree/0.17.1-2)
  * [`libassuan/2.5.6-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/libassuan/-/tree/2.5.6-1)
  * [`libasyncns/1:0.8+r3+g68cd5af-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/libasyncns/-/tree/1:0.8+r3+g68cd5af-2)
@@ -559,7 +559,7 @@ Arch Linux packages
  * [`linux-api-headers/6.7-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/linux-api-headers/-/tree/6.7-1)
  * [`linux-firmware-neptune/jupiter.20231113.1-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/linux-firmware-neptune/-/tree/jupiter.20231113.1-1)
  * [`linux-firmware-neptune-whence/jupiter.20231113.1-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/linux-firmware-neptune/-/tree/jupiter.20231113.1-1)
- * [`linux-neptune-65/6.5.0.valve22-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/linux-neptune-65/-/tree/6.5.0.valve22-1)
+ * [`linux-neptune-65/6.5.0.valve24-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/linux-neptune-65/-/tree/6.5.0.valve24-1)
  * [`llvm-libs/16.0.6-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/llvm-libs/-/tree/16.0.6-1)
  * [`lm_sensors/1:3.6.0.r41.g31d1f125-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/lm_sensors/-/tree/1:3.6.0.r41.g31d1f125-2)
  * [`lmdb/0.9.32-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/lmdb/-/tree/0.9.32-1)
@@ -590,7 +590,7 @@ Arch Linux packages
  * [`modemmanager/1.22.0-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/modemmanager/-/tree/1.22.0-1)
  * [`modemmanager-qt5/5.115.0-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/modemmanager-qt5/-/tree/5.115.0-1)
  * [`mpfr/4.2.1-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/mpfr/-/tree/4.2.1-2)
- * [`mpg123/1.32.5-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/mpg123/-/tree/1.32.5-1)
+ * [`mpg123/1.32.9-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/mpg123/-/tree/1.32.9-1)
  * [`mtdev/1.1.6-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/mtdev/-/tree/1.1.6-2)
  * [`nano/7.2-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/nano/-/tree/7.2-1)
  * [`ncdu/2.3-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/ncdu/-/tree/2.3-1)
@@ -812,7 +812,7 @@ Arch Linux packages
  * [`steamos-efi/20231213.1-3`](https://gitlab.archlinux.org/archlinux/packaging/packages/steamos-efi/-/tree/20231213.1-3)
  * [`steamos-kdumpst-layer/1.0-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/steamos-kdumpst-layer/-/tree/1.0-2)
  * [`steamos-log-submitter/0.6.1-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/steamos-log-submitter/-/tree/0.6.1-1)
- * [`steamos-manager/24.4.1-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/steamos-manager/-/tree/24.4.1-2)
+ * [`steamos-manager/24.11.1-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/steamos-manager/-/tree/24.11.1-1)
  * [`steamos-networking-tools/1.0-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/steamos-networking-tools/-/tree/1.0-1)
  * [`steamos-reset/20240417.1-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/steamos-reset/-/tree/20240417.1-2)
  * [`steamos-systemreport/0.8-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/steamos-systemreport/-/tree/0.8-1)
@@ -862,7 +862,7 @@ Arch Linux packages
  * [`volume_key/0.3.12-8`](https://gitlab.archlinux.org/archlinux/packaging/packages/volume_key/-/tree/0.3.12-8)
  * [`vpower/1.4.1-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/vpower/-/tree/1.4.1-1)
  * [`vulkan-icd-loader/1.3.276-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/vulkan-icd-loader/-/tree/1.3.276-1)
- * [`vulkan-radeon/24.1.0_devel.188129.steamos_24.4.3-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/vulkan-radeon/-/tree/24.1.0_devel.188129.steamos_24.4.3-1)
+ * [`vulkan-radeon/24.1.0_devel.188137.steamos_24.4.4-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/vulkan-radeon/-/tree/24.1.0_devel.188137.steamos_24.4.4-1)
  * [`vulkan-tools/1.3.269-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/vulkan-tools/-/tree/1.3.269-1)
  * [`wakehook/2-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/wakehook/-/tree/2-2)
  * [`wayland/1.23.0-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/wayland/-/tree/1.23.0-2)
