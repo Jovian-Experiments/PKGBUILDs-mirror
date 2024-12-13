@@ -1,7 +1,7 @@
-From 9bda22806b8cc3a31f77ee2fbb0c0fceca967936 Mon Sep 17 00:00:00 2001
+From 9fe08ee90a4e6e487de23116a2bb05b7f5ca1ed8 Mon Sep 17 00:00:00 2001
 From: Julian Bouzas <julian.bouzas@collabora.com>
 Date: Thu, 15 Aug 2024 14:03:14 -0400
-Subject: [PATCH 2/2] monitor: alsa: Add 'node.create-loopback' property
+Subject: [PATCH 2/3] monitor: alsa: Add 'node.create-loopback' property
 
 If enabled, the monitor will create a loopback filter for each ALSA node.
 ---
@@ -139,5 +139,5 @@ index 15d20f42..bc2b2ecb 100644
        if not node then
          return
 -- 
-2.46.0
+2.47.1
 
