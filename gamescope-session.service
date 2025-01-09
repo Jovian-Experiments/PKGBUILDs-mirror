@@ -6,6 +6,7 @@ Wants=graphical-session-pre.target
 After=graphical-session-pre.target
 
 [Service]
+TimeoutStopSec=10
 ExecStart=/usr/bin/gamescope-session
 KillMode=mixed
 # Make Steam's srt-logger write to the journal with it's own prefixes
