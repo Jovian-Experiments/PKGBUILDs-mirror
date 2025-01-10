@@ -5,14 +5,14 @@
 pkgname=python-pylink-square
 _name=pylink
 pkgver=1.2.1
-pkgrel=1
+pkgrel=2
 pkgdesc="Python interface for the SEGGER J-Link"
 arch=(any)
 url="https://github.com/Square/pylink"
 license=(Apache-2.0)
 depends=(
-  'python>=3.12'
-  'python<3.13'
+  'python>=3.13'
+  'python<3.14'
   python-psutil
   python-six
 )
