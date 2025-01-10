@@ -7,7 +7,7 @@
 _basename=steam
 pkgname=steam-jupiter-oobe
 pkgver=1.0.0.79
-pkgrel=1.5
+pkgrel=1.6
 pkgdesc="Valve's digital software delivery system - Jupiter bootstrapped packaging"
 url='https://steampowered.com/'
 arch=('x86_64')
@@ -16,7 +16,7 @@ license=('custom')
 depends=('bash' 'desktop-file-utils' 'diffutils' 'hicolor-icon-theme' 'curl' 'dbus'
          'libxcrypt-compat'
          'freetype2' 'gdk-pixbuf2' 'ttf-font' 'zenity' 'lsb-release' 'nss' 'usbutils'
-         'xorg-xrandr' 'vulkan-driver' 'vulkan-icd-loader' 'lsof' 'python>=3.12' 'python<3.13')
+         'xorg-xrandr' 'vulkan-driver' 'vulkan-icd-loader' 'lsof' 'python>=3.13' 'python<3.14')
 # lib32-pipewire: https://bugs.archlinux.org/task/75155
 # lib32-fontconfig: https://bugs.archlinux.org/task/74827
 # lib32-systemd, lib32-libxinerama: https://bugs.archlinux.org/task/75156
