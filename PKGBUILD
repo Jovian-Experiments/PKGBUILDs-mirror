@@ -3,12 +3,12 @@
 pkgname=neptune-ctl
 _srctag=20230928.1
 pkgver=${_srctag#galileo-}
-pkgrel=4
+pkgrel=5
 arch=('any')
 url=""
 pkgdesc="Neptune CTL"
 license=('Proprietary')
-depends=('python-pyserial' 'python-click' 'python-pylink-square' 'python-hexdump' 'python>=3.12' 'python<3.13')
+depends=('python-pyserial' 'python-click' 'python-pylink-square' 'python-hexdump' 'python>=3.13' 'python<3.14')
 source=(neptunectl.py
         neptune-ctl
 )
