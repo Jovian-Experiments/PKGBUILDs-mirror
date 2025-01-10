@@ -11,10 +11,10 @@ pkgname=('vulkan-mesa-layers' 'vulkan-intel' 'vulkan-swrast' 'libva-mesa-driver'
 pkgdesc="An open-source implementation of the OpenGL specification"
 _tag=radeonsi-24.0.4
 pkgver=24.0.5.183660.radeonsi_24.0.4
-pkgrel=1.1
+pkgrel=1.2
 arch=('x86_64')
 makedepends=('git' 'openssh' 'python-mako' 'python-packaging' 'libxml2' 'libx11' 'xorgproto' 'libdrm' 'libxshmfence' 'libxxf86vm'
-             'python>=3.12' 'python<3.13'
+             'python>=3.13' 'python<3.14'
              'libxdamage' 'libvdpau' 'libva' 'wayland' 'wayland-protocols' 'zstd' 'elfutils' 'llvm'
              'libomxil-bellagio' 'libclc' 'clang' 'libglvnd' 'libunwind' 'lm_sensors' 'libxrandr'
              'systemd' 'valgrind' 'glslang' 'vulkan-icd-loader' 'directx-headers' 'cmake' 'meson' 'bison' 'flex')
