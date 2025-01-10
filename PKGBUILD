@@ -4,13 +4,13 @@ pkgname=jupiter-hw-support
 _srctag=jupiter-20250107.1
 _srcver=${_srctag#jupiter-}
 pkgver=${_srcver//-/.}
-pkgrel=1
+pkgrel=2
 arch=('any')
 url="https://gitlab.steamos.cloud/jupiter/jupiter-hw-support"
 pkgdesc="Jupiter HW support package"
 license=('MIT')
 depends=('python-evdev'
-         'python>=3.12' 'python<3.13'
+         'python>=3.13' 'python<3.14'
          'dmidecode' # for jupiter-biosupdate
          'python-crcmod' 'python-click' 'python-progressbar'
          'python-hid>=1.0.6-2' # for jupiter-controller-update
