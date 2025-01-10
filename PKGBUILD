@@ -13,7 +13,7 @@ pkgdesc="An open-source implementation of the OpenGL specification"
 # https://gitlab.steamos.cloud/jupiter/docs/-/wikis/How-to-make-a-new-Mesa-release#updating-the-radv-build-id
 _tag=steamos-24.11.4
 pkgver=24.3.0_devel.197238.steamos_24.11.4
-pkgrel=1
+pkgrel=2
 arch=('x86_64')
 makedepends=('git' 'openssh' 'python-mako' 'libxml2' 'libx11' 'xorgproto' 'libdrm' 'libxshmfence'
              'python>=3.12' 'python<3.13' 'python-packaging' 'python-yaml'
@@ -56,6 +56,7 @@ build() {
   #  - drop all gallium-foo toggles
   #  - disable gbm, disable gles2, glvnd, glx, lmsensors, osmesa
   #  - drop shared-glapi
+  #  - Enable gpuvis tracing
   arch-meson jupiter-mesa build \
     -D b_ndebug=true \
     -D b_lto=false \
@@ -81,7 +82,8 @@ build() {
     -D video-codecs=vc1dec,h264dec,h264enc,h265dec,h265enc \
     -D valgrind=enabled \
     -D intel-rt=disabled \
-    -D radv-build-id="da39a3ee5e6b4b0d3255bfef95601890afd80709"
+    -D radv-build-id="da39a3ee5e6b4b0d3255bfef95601890afd80709" \
+    -D gpuvis=true
 
   # Print config
   meson configure build
