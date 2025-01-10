@@ -3,12 +3,12 @@
 
 pkgname=gpu-trace
 pkgver=2.14
-pkgrel=1.1
+pkgrel=1.2
 pkgdesc="GPU Trace capture tool"
 arch=('any')
 url="https://github.com/lostgoat/gpu-trace"
 license=('MIT')
-depends=('python>=3.12' 'python<3.13' 'trace-cmd' 'perf')
+depends=('python>=3.13' 'python<3.14' 'trace-cmd' 'perf')
 provides=('amdgpu-trace')
 conflicts=('amdgpu-trace')
 source=("$pkgname-$pkgver.tar.gz::$url/archive/v$pkgver.tar.gz")
