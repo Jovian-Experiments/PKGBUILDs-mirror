@@ -8,7 +8,7 @@ pkgname=(
   libwireplumber
 )
 pkgver=0.5.6
-pkgrel=1.3
+pkgrel=1.4
 pkgdesc="Session / policy manager implementation for PipeWire"
 url="https://pipewire.pages.freedesktop.org/wireplumber/"
 arch=(x86_64)
@@ -26,8 +26,8 @@ makedepends=(
   lua
   meson
   pipewire
-  'python>=3.12'
-  'python<3.13'
+  'python>=3.13'
+  'python<3.14'
   python-breathe
   python-lxml
   python-sphinx
