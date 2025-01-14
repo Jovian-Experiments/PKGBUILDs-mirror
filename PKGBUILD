@@ -1,9 +1,9 @@
 # Maintainer David Edmundson (bluesystems@davidedmundson.co.uk)
 
 pkgname=steamdeck-kde-presets
-_srctag=0.24
+_srctag=0.25
 pkgver=${_srctag#jupiter-}
-pkgrel=2
+pkgrel=1
 arch=('any')
 url=""
 pkgdesc="Steamdeck KDE Presets"
