@@ -2,9 +2,9 @@
 # Maintainer: Jan Alexander Steffens (heftig) <heftig@archlinux.org>
 
 pkgbase=linux-neptune-68
-_tag=6.8.12-valve9
+_tag=6.8.12-valve10
 pkgver=${_tag//-/.}
-pkgrel=2
+pkgrel=1
 pkgdesc='Linux'
 url="https://gitlab.steamos.cloud/jupiter/linux-integration/-/tree/$_tag"
 arch=(x86_64)
