@@ -5,9 +5,9 @@ pkgbase=linux-firmware-neptune
 pkgname=(linux-firmware-neptune-whence linux-firmware-neptune  amd-ucode-neptune
          linux-firmware-neptune-{nfp,mellanox,marvell,qcom,liquidio,qlogic,bnx2x}
 )
-_tag=jupiter-20241205.1
+_tag=jupiter-20240917.1
 pkgver=${_tag//-/.}
-pkgrel=1
+pkgrel=4
 pkgdesc="Firmware files for Linux"
 url="https://gitlab.steamos.cloud/jupiter/linux-firmware-neptune"
 license=(
