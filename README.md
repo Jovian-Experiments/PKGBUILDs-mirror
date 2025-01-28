@@ -1,5 +1,5 @@
 
-`main @ 20250127.1000`
+`main @ 20250128.1000`
 ======================
 
 Valve packages
@@ -52,7 +52,7 @@ Valve packages
  * [`systemd-libs` — `holo-main/systemd-256.7-1.2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/systemd-256.7-1.2)
  * [`systemd-sysvcompat` — `holo-main/systemd-256.7-1.2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/systemd-256.7-1.2)
  * [`ttf-twemoji-default` — `holo-main/ttf-twemoji-default-13.1.0-2.3`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/ttf-twemoji-default-13.1.0-2.3)
- * [`umr` — `holo-main/umr-1.0.10-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/umr-1.0.10-1.1)
+ * [`umr` — `holo-main/umr-1.0.10-1.2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/umr-1.0.10-1.2)
  * [`xdg-desktop-portal-gtk` — `holo-main/xdg-desktop-portal-gtk-1.15.1-2.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/xdg-desktop-portal-gtk-1.15.1-2.1)
  * [`zenity-gtk3` — `holo-main/zenity-gtk3-3.44.2-3`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/zenity-gtk3-3.44.2-3)
 
