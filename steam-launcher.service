@@ -1,0 +1,11 @@
+[Unit]
+Description=Steam Launcher
+After=graphical-session.target
+PartOf=graphical-session.target
+
+[Service]
+ExecStart=/usr/lib/steamos/steam-launcher
+ExecStartPre=/usr/lib/steamos/steam-short-session-tracker --started
+ExecStopPost=/usr/lib/steamos/steam-short-session-tracker --stopped
+Type=exec
+EnvironmentFile=%t/gamescope-environment

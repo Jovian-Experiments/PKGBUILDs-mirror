@@ -1,0 +1,10 @@
+[Unit]
+Description=powerbuttond
+After=graphical-session.target
+PartOf=graphical-session.target
+
+[Service]
+ExecStart=/usr/lib/hwsupport/powerbuttond
+Restart=always
+EnvironmentFile=%t/gamescope-environment
+Slice=session.slice

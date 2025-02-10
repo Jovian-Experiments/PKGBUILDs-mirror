@@ -3,19 +3,29 @@
 pkgname=gamescope
 _srctag=3.16.1
 pkgver=${_srctag//-/.}
-pkgrel=2
+pkgrel=3
 pkgdesc="gaming shell based on Xwayland, powered by Vulkan and DRM"
 arch=(x86_64)
 url="https://github.com/ValveSoftware/gamescope"
 license=('MIT')
 depends=('xorg-xwayland' 'libavif' 'aom' 'rav1e' 'libxres' 'xcb-util-errors' 'freerdp' 'xcb-util-wm' 'libxcomposite' 'pixman' 'libinput' 'seatd' 'pipewire' 'libxmu' 'libxcursor' 'powerbuttond' 'libdecor' 'libei' 'luajit')
 makedepends=(openssh git meson cmake wayland-protocols ninja glslang glm vulkan-headers benchmark)
-source=("gamescope-session"
+source=("galileo-mura-setup.service"
+        "gamescope-session"
         "gamescope-wayland.desktop"
         "gamescope-mimeapps.list"
         "gamescope-session.service"
+        "gamescope-session.target"
         "gamescope-portals.conf"
+        "gamescope-xbindkeys.service"
+        "gamescope-mangoapp.service"
+        "ibus-gamescope.service"
+        "powerbuttond.service"
         "start-gamescope-session"
+        "steam-launcher"
+        "steam-launcher.service"
+        "steam-notif-daemon.service"
+        "steam-short-session-tracker"
         "steam_http_loader.desktop"
         "steam-http-loader"
         "git+https://github.com/ValveSoftware/gamescope.git#tag=$_srctag"
@@ -25,12 +35,22 @@ source=("gamescope-session"
         # FIXME Upstream gamescope is just selecting master branch at build time, so we are arbitrarily snapshotting a
         #       revision when bumping the version here such that the build is reproducible.
         "git+https://github.com/nothings/stb.git#commit=af1a5bc352164740c1cc1354942b1c6b72eacb8a")
-sha256sums=('1ef33e8a125b831544184218da2a5c5e39512f14189942d4d238803e00d1fe02'
+sha256sums=('941f5a16a495c9c4de0302819c0069749db6915345ac1e207a12544863391e4b'
+            '74f1d6f246fce6f13c1d2497199c320d2c04eb3916dc9218b3630e9b7b8a0ff8'
             'fe515fce8f151a6c03a89e043044bfddf8cd6ee89027d2cfbcf6f6706c78ca76'
             'e37ba6107f3a84cf47c2799b537a88583e6cb8951167a9c6a48fa1d85996206b'
-            '747d001a525f194b423192cca6fa50679789a61104e33e297e29b35660a2d704'
+            'e4add84152c3c0dfa53cf6bd2a1f15c2ce74d2312f7fa945b9476e91c8752544'
+            'c01b2b1a99a742d50df34f83217347dd39f35ebc29496446d5f0295a93370304'
             'b74f4515a3ed793973b3be6eca145d7ba862dbf50218c694fb478ba725bfd025'
-            'beabd15da2a15ef22c20de2be3b023029254d93c55784e628928ec0324ffe1b7'
+            '2cba6cd1a89767ef1b8a5044faa43394b9d1b24d0a64e24df1c42ec88e54cd60'
+            '7a651035b786da325b2fbce7dec314d1a6a5d602ed053cb768c37bb5e3e1fd9d'
+            '60e3701b96d1f7083d4a3c48b6c9ce372da55f65bab92ee2fff694158541a445'
+            '0a589373302dd6371d0c0c88bc65b758ef0a103a5b384a9e2073f046533a915d'
+            '2cadeb1ffc90e8a19fc87d187a2ed069c944f2a7af56b9e54520add65977bb8b'
+            'bc2e16bbff2357091f04b7049b9fa40d3fc8d75e909c09310ebe39acc5c09621'
+            '48bf922cc0387196ae73b7100b88f297305f2ef69c7beeef67fd401d6cc0da00'
+            '41115eb48d3bb5b821f0a7eec186e45020a1cbeedb2604499b65140dcd8249e3'
+            'ec7aea652cae955089c58d4ad2b53d0b2caedcf63239a73587f4311f89150a30'
             '525060896abef2da9db8d8294253b7444d60e48cf6cc0496ca48fc7084cc8590'
             'dea09abb47c3d907c00ff7f36967b599f3caca554ac6eb7b7dc6d2d78651dd44'
             '35c39c5b65cf5f974d4f5af0a4710ec302659ac2f3ad260c92ae404bd9c5834c'
@@ -67,7 +87,10 @@ build() {
 }
 
 package() {
-	install -D -m 755 gamescope-session "$pkgdir"/usr/bin/gamescope-session
+	install -D -m 755 gamescope-session "$pkgdir"/usr/lib/steamos/gamescope-session
+	install -D -m 755 steam-launcher "$pkgdir"/usr/lib/steamos/steam-launcher
+  install -D -m 755 steam-short-session-tracker "$pkgdir"/usr/lib/steamos/steam-short-session-tracker
+
 	install -D -m 755 start-gamescope-session "$pkgdir"/usr/bin/start-gamescope-session
 	install -D -m 644 gamescope-wayland.desktop "$pkgdir"/usr/share/wayland-sessions/gamescope-wayland.desktop
 
@@ -76,7 +99,16 @@ package() {
 	install -D -m 644 gamescope-mimeapps.list "$pkgdir"/usr/share/applications/gamescope-mimeapps.list
 	install -D -m 755 steam-http-loader "$pkgdir"/usr/bin/steam-http-loader
 
+	# systemd
+	install -D -m 644 galileo-mura-setup.service "$pkgdir"/usr/lib/systemd/user/galileo-mura-setup.service
 	install -D -m 644 gamescope-session.service "$pkgdir"/usr/lib/systemd/user/gamescope-session.service
+	install -D -m 644 gamescope-session.target "$pkgdir"/usr/lib/systemd/user/gamescope-session.target
+	install -D -m 644 gamescope-mangoapp.service "$pkgdir"/usr/lib/systemd/user/gamescope-mangoapp.service
+	install -D -m 644 ibus-gamescope.service  "$pkgdir"/usr/lib/systemd/user/ibus-gamescope.service 
+	install -D -m 644 powerbuttond.service "$pkgdir"/usr/lib/systemd/user/powerbuttond.service
+	install -D -m 644 steam-launcher.service "$pkgdir"/usr/lib/systemd/user/steam-launcher.service
+	install -D -m 644 steam-notif-daemon.service "$pkgdir"/usr/lib/systemd/user/steam-notif-daemon.service
+	install -D -m 644 gamescope-xbindkeys.service "$pkgdir"/usr/lib/systemd/user/gamescope-xbindkeys.service
 
 	# portals
 	install -D -m 644 gamescope-portals.conf "$pkgdir"/usr/share/xdg-desktop-portal/gamescope-portals.conf
