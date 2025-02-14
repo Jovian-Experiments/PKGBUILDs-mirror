@@ -4,7 +4,7 @@
 pkgbase=linux-neptune-611
 _tag=6.11.11-valve4
 pkgver=${_tag//-/.}
-pkgrel=1
+pkgrel=2
 pkgdesc='Linux'
 url="https://gitlab.steamos.cloud/jupiter/linux-integration/-/tree/$_tag"
 arch=(x86_64)
@@ -42,9 +42,9 @@ source=(
   config          # Upstream Arch Linux kernel configuration file, DO NOT EDIT!!!
   config-neptune  # Jupiter: the neptune kernel fragment file (overrides 'config' above)
 )
-sha256sums=('SKIP'
+sha256sums=('4d00a440a62594adf9cfff03d34df379db3eee053a36543e67b6b62a0fc7c0c2'
             '8d105c501a1648e2752fe74c99a7c61e2a441156b3643dfa66f1d550d01957f3'
-            '89e68fe898d0fe08f3205a0a518fadf02111ce46c06918f315bc2decc8f051bd')
+            '98916f4b93dd8fa7f6f4ad47c9b5fa7bc90ef041a4bff0e0bf11e5167a7e35ef')
 
 export KBUILD_BUILD_HOST=archlinux
 export KBUILD_BUILD_USER=$pkgbase
