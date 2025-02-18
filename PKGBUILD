@@ -1,7 +1,7 @@
 # Maintainer: Collabora Ltd <gael.portay@collabora.com>
 
 pkgname=steamos-customizations-jupiter
-_srctag=jupiter-20250211.1
+_srctag=jupiter-20250217.1
 _srcver=${_srctag#jupiter-}
 pkgver=${_srcver//-/.}
 pkgrel=1
