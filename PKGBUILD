@@ -1,38 +1,172 @@
 # Maintainer: Laurent Carlier <lordheavym@gmail.com>
 # Maintainer: Felix Yan <felixonmars@archlinux.org>
+# Maintainer: Jan Alexander Steffens (heftig) <heftig@archlinux.org>
 # Contributor: Jan de Groot <jgc@archlinux.org>
 # Contributor: Andreas Radke <andyrtr@archlinux.org>
 
 pkgbase=mesa-radv
 # Jupiter: only build RADV, the rest comes from upstream/Arch Mesa
-pkgname=('vulkan-radeon')
-pkgdesc="An open-source implementation of the OpenGL specification"
+pkgname=(
+  mesa
+#  opencl-clover-mesa
+#  opencl-rusticl-mesa
+#  vulkan-intel
+#  vulkan-mesa-layers
+#  vulkan-nouveau
+  vulkan-radeon
+#  vulkan-swrast
+#  vulkan-virtio
+#  mesa-docs
+)
 
 # When updating the tag, consider if you are adding any shader compiler changes. If so,
 # or if you are not sure, regenerate the radv-build-id below. To update, see
 # https://gitlab.steamos.cloud/jupiter/docs/-/wikis/How-to-make-a-new-Mesa-release#updating-the-radv-build-id
 _tag=steamos-24.11.5
 pkgver=24.3.0_devel.197250.steamos_24.11.5
-pkgrel=1
-arch=('x86_64')
-makedepends=('git' 'openssh' 'python-mako' 'libxml2' 'libx11' 'xorgproto' 'libdrm' 'libxshmfence'
-             'python>=3.13' 'python<3.14' 'python-packaging' 'python-yaml'
-             'wayland' 'wayland-protocols' 'zstd' 'elfutils' 'llvm'
-             'libunwind' 'libxrandr'
-             'valgrind' 'meson' 'glslang')
+
+pkgrel=2
+epoch=0
+pkgdesc="Open-source OpenGL drivers"
 url="https://www.mesa3d.org/"
-license=('custom')
-options=('debug' '!lto')
-source=("jupiter-mesa::git+ssh://git@gitlab.steamos.cloud/jupiter/mesa.git#tag=$_tag"
-        LICENSE)
-sha512sums=('SKIP'
-            'f9f0d0ccf166fe6cb684478b6f1e1ab1f2850431c06aa041738563eb1808a004e52cdec823c103c9e180f03ffc083e95974d291353f0220fe52ae6d4897fecc7')
-validpgpkeys=('8703B6700E7EE06D7A39B8D6EDAE37B02CEB490D'  # Emil Velikov <emil.l.velikov@gmail.com>
-              '946D09B5E4C9845E63075FF1D961C596A7203456'  # Andres Gomez <tanty@igalia.com>
-              'E3E8F480C52ADD73B278EE78E1ECBE07D7D70895'  # Juan Antonio Suárez Romero (Igalia, S.L.) <jasuarez@igalia.com>
-              'A5CC9FEC93F2F837CB044912336909B6B25FADFA'  # Juan A. Suarez Romero <jasuarez@igalia.com>
-              '71C4B75620BC75708B4BDB254C95FAAB3EB073EC'  # Dylan Baker <dylan@pnwbakers.com>
-              '57551DE15B968F6341C248F68D8E31AFC32428A6') # Eric Engestrom <eric@engestrom.ch>
+arch=(x86_64)
+license=("MIT AND BSD-3-Clause AND SGI-B-2.0")
+makedepends=(
+  clang
+  expat
+  gcc-libs
+  glibc
+  libdrm
+  libelf
+  libglvnd
+  libpng
+  libva
+  libvdpau
+  libx11
+  libxcb
+  libxext
+  libxml2
+  libxrandr
+  libxshmfence
+  libxxf86vm
+  llvm
+  llvm-libs
+  lm_sensors
+  rust
+  spirv-llvm-translator
+  spirv-tools
+  systemd-libs
+  vulkan-icd-loader
+  wayland
+  xcb-util-keysyms
+  zlib
+  zstd
+
+  # shared between mesa and lib32-mesa
+  cbindgen
+  clang
+  cmake
+  elfutils
+  glslang
+  libclc
+  meson
+  python-mako
+  python-packaging
+  python-ply
+  python-yaml
+  rust-bindgen
+  wayland-protocols
+  xorgproto
+
+  # valgrind deps
+  valgrind
+
+  # d3d12 deps
+  directx-headers
+
+  # html-docs
+  python-sphinx
+  python-sphinx-hawkmoth
+)
+options=(
+  # GCC 14 LTO causes segfault in LLVM under si_llvm_optimize_module
+  # https://gitlab.freedesktop.org/mesa/mesa/-/issues/11140
+  #
+  # In general, upstream considers LTO to be broken until explicit notice.
+  !lto
+)
+source=(
+  "jupiter-mesa::git+ssh://git@gitlab.steamos.cloud/jupiter/mesa.git#tag=$_tag"
+)
+validpgpkeys=(
+  946D09B5E4C9845E63075FF1D961C596A7203456 # Andres Gomez <tanty@igalia.com>
+  71C4B75620BC75708B4BDB254C95FAAB3EB073EC # Dylan Baker <dylan@pnwbakers.com>
+  8703B6700E7EE06D7A39B8D6EDAE37B02CEB490D # Emil Velikov <emil.l.velikov@gmail.com>
+  57551DE15B968F6341C248F68D8E31AFC32428A6 # Eric Engestrom <eric@engestrom.ch>
+  A5CC9FEC93F2F837CB044912336909B6B25FADFA # Juan A. Suarez Romero <jasuarez@igalia.com>
+  E3E8F480C52ADD73B278EE78E1ECBE07D7D70895 # Juan Antonio Suárez Romero (Igalia, S.L.) <jasuarez@igalia.com>
+)
+
+# Rust crates for NVK, used as Meson subprojects
+declare -A _crates=(
+   equivalent      1.0.1
+   hashbrown       0.14.1
+   indexmap        2.2.6
+   once_cell       1.8.0
+   paste           1.0.14
+   pest            2.7.11
+   pest_derive     2.7.11
+   pest_generator  2.7.11
+   pest_meta       2.7.11
+   proc-macro2     1.0.86
+   quote           1.0.33
+   roxmltree       0.20.0
+   syn             2.0.68
+   ucd-trie        0.1.6
+   unicode-ident   1.0.12
+)
+
+for _crate in "${!_crates[@]}"; do
+  _ver="${_crates[$_crate]}"
+  source+=(
+    "$_crate-$_ver.tar.gz::https://crates.io/api/v1/crates/$_crate/$_ver/download"
+  )
+done
+
+b2sums=('SKIP'
+        'a6d47c903be6094423d89b8ec3ca899d0a84df6dbd6e76632bb6c9b9f40ad9c216f8fa400310753d392f85072756b43ac3892e0a2c4d55f87ab6463002554823'
+        '9c34f1ab14ad5ae124882513e0f14b1d731d06a43203bdc37fa3b202dd3ce93dbe8ebb554d01bab475689fe6ffd3ec0cbc0d5365c9b984cb83fb34ea3e9e732e'
+        'fac5cf6339dc3c0a40b100035a5c874cc7b2efeafeb31c51488d25156e392dc9db86a497e76eead351d2126f69d060422faa9c55d73407a0de9f5be18d234123'
+        'afa9268513caa93fb141e69d27e7d65e72b9232b57d91e499f36ea4ec89d65bc6c8cbb37753ed59d149be5a2d349028b1fb0414c6223914366d6f3f31619855f'
+        '4b89e07f23af8328dbb34fe2b3f1b202f1e6a3885a6269740a23359b41bb4099ac2484565d3b2b0936261689ca525785ac620c766997234fd8d0f409e80e5ea3'
+        'e81ed8b60492da9612d2208c6cfa712ebf8c6ed7993642bfc4fadeaba10a0bc16700bce012d34d955104041ed8bbf659d16d9b86eab52342875d4c6148e7f60d'
+        '4cede03c08758ccd6bf53a0d0057d7542dfdd0c93d342e89f3b90460be85518a9fd24958d8b1da2b5a09b5ddbee8a4263982194158e171c2bba3e394d88d6dac'
+        '77c4b166f1200e1ee2ab94a5014acd334c1fe4b7d72851d73768d491c56c6779a0882a304c1f30c88732a6168351f0f786b10516ae537cff993892a749175848'
+        '9605ca407af248c71e0d2bc24d213aa6ff08a14eb548b85de16de7e172a617cdf12c2e4c686f6dd1c80455448a313f6e7d760885f189ae726934efbe06fb5603'
+        '35e8548611c51ee75f4d04926149e5e54870d7073d9b635d550a6fa0f85891f57f326bdbcff3dd8618cf40f8e08cf903ef87d9c034d5921d8b91e1db842cdd7c'
+        '23bb1f3453d5d839dba7b3292806eb2d327ccafb1b1472fd970262a44c0abbabfbf3316ca16dd5526177bcb67a701cf79fa86b68fd1e57a3d875cb4b7ff89ad9'
+        '302d78069d9df05e78b53f0488a9e4eb98fa2bc1e21893dc8a0acf2234347ba7c4df4b9d6b380ae77d8ffb1074b9c790460fe2dae47318aa1c4fe4208244540a'
+        'dd65c69d8d0ff343d36e31e6a4f4e11aeb01b1fd23d0db06d90f506ec2f2bb2c50422f6a73b48780e16e07c8d0addb374dd09cfabaf6230d5b2ba409dd3fa6cd'
+        '7681b1a7497b5711e663773c1a7e076f333c06c10d3f289079a781c36f050c1620cc279742ea8e5b15ec48f3d6038a6079bbda7fee3ae8e1128bd916d53ed43a'
+        '8bc6f68ed286bea617a2cfaf3949bb699d3a0466faeca735314a51596ce950e4ee57eda88154bd562c1728cfaff4cdb5bc1ba701b9d47a9c50d4c4f011bee975')
+
+# https://docs.mesa3d.org/relnotes.html
+sha256sums=('SKIP'
+            'ed646292ffc8188ef8ea4d1e0e0150fb15a5c2e12ad9b8fc191ae7a8a7f3c4b9'
+            'a941429fea7e08bedec25e4f6785b6ffaacc6b755da98df5ef3e7dcf4a124c4f'
+            '168fb715dda47215e360912c096649d23d58bf392ac62f73919e831745e40f26'
+            '7dfda62a12f55daeae5015f81b0baea145391cb4520f86c248fc615d72640d12'
+            '5e719e8df665df0d1c8fbfd238015744736151d4445ec0836b8e628aae103b77'
+            '2a548d2beca6773b1c244554d36fcf8548a8a58e74156968211567250e48e49a'
+            '3354b9ac3fae1ff6755cb6db53683adb661634f67557942dea4facebec0fee4b'
+            '5267fca4496028628a95160fc423a33e8b2e6af8a5302579e322e4b520293cae'
+            '6c20b6793b5c2fa6553b250154b78d6d0db37e72700ae35fad9387a46f487c97'
+            'de3145af08024dea9fa9914f381a17b8fc6034dfb00f3a84013f7ff43f29ed4c'
+            'cd53dff83f26735fdc1ca837098ccf133605d794cdae66acfc2bfac3ec809d95'
+            '5443807d6dff69373d433ab9ef5378ad8df50ca6298caf15de6e52e24aaf54d5'
+            '3c93a82e8d145725dcbaf44e5ea887c8a869efdcc28706df2d08c69e17077183'
+            '692fcb63b64b1758029e0a96ee63e049ce8c5948587f2f7208df04625e5f6b56'
+            '901fa70d88b9d6c98022e23b4136f9f3e54e4662c3bc1bd1d84a42a9a0f0c1e9')
 
 pkgver() {
   cd jupiter-mesa
@@ -42,11 +176,16 @@ pkgver() {
   echo "${_ver/-/_}.$(git rev-list --count HEAD).${_tag//-/_}"
 }
 
-build() {
-  # Build only minimal debug info to reduce size
-  CFLAGS+=' -g1'
-  CXXFLAGS+=' -g1'
+#prepare() {
+#  cd mesa-$pkgver
+#
+#  # Include package release in version string so Chromium invalidates
+#  # its GPU cache; otherwise it can cause pages to render incorrectly.
+#  # https://bugs.launchpad.net/ubuntu/+source/chromium-browser/+bug/2020604
+#  echo "$pkgver-arch$epoch.$pkgrel" >VERSION
+#}
 
+build() {
   # Jupiter: only build RADV, the rest comes from upstream/Arch Mesa
   # In particular:
   #  - drop all dri, gallium drivers
@@ -55,179 +194,353 @@ build() {
   #  - disable egl
   #  - drop all gallium-foo toggles
   #  - disable gbm, disable gles2, glvnd, glx, lmsensors, osmesa
-  #  - drop shared-glapi
-  #  - Enable gpuvis tracing
-  arch-meson jupiter-mesa build \
-    -D b_ndebug=true \
-    -D b_lto=false \
-    -D platforms=x11,wayland \
-    -D gallium-drivers= \
-    -D gallium-vdpau=disabled \
-    -D gallium-va=disabled \
-    -D gallium-xa=disabled \
-    -D android-libbacktrace=disabled \
-    -D vulkan-drivers=amd \
-    -D vulkan-layers= \
-    -D egl=disabled \
-    -D gbm=disabled \
-    -D gles1=disabled \
-    -D gles2=disabled \
-    -D glvnd=disabled \
-    -D glx=disabled \
-    -D libunwind=enabled \
-    -D llvm=enabled \
-    -D lmsensors=disabled \
-    -D osmesa=false \
-    -D microsoft-clc=disabled \
-    -D video-codecs=vc1dec,h264dec,h264enc,h265dec,h265enc \
-    -D valgrind=enabled \
-    -D intel-rt=disabled \
-    -D radv-build-id="e205930701a1219fec3f130e26fdf689e1538462" \
+  #  - enable gpuvis tracing
+  local meson_options=(
+    -D android-libbacktrace=disabled
+    -D b_ndebug=true
+    -D gallium-drivers=
+    -D gles1=disabled
+    -D glx=disabled
+    -D html-docs=disabled
+    -D intel-rt=disabled
+    -D libunwind=enabled
+    -D microsoft-clc=disabled
+    -D osmesa=false
+    -D platforms=x11,wayland
+    -D video-codecs=vc1dec,h264dec,h264enc,h265dec,h265enc
+    -D vulkan-drivers=amd
+    -D vulkan-layers=
+    -D b_lto=false
+    -D gallium-vdpau=disabled
+    -D gallium-va=disabled
+    -D gallium-xa=disabled
+    -D egl=disabled
+    -D gbm=disabled
+    -D gles2=disabled
+    -D glvnd=disabled
+    -D llvm=enabled
+    -D lmsensors=disabled
+    -D valgrind=enabled
     -D gpuvis=true
+    -D radv-build-id="e205930701a1219fec3f130e26fdf689e1538462"
+  )
 
-  # Print config
-  meson configure build
+  # Build only minimal debug info to reduce size
+  CFLAGS+=" -g1"
+  CXXFLAGS+=" -g1"
 
-  ninja -C build
+  # Inject subproject packages
+  export MESON_PACKAGE_CACHE_DIR="$srcdir"
+
+  arch-meson jupiter-mesa build "${meson_options[@]}"
   meson compile -C build
-
-  # fake installation to be seperated into packages
-  # outside of fakeroot but mesa doesn't need to chown/mod
-  DESTDIR="${srcdir}/fakeinstall" meson install -C build
 }
 
-_install() {
-  local src f dir
-  for src; do
-    f="${src#fakeinstall/}"
-    dir="${pkgdir}/${f%/*}"
-    install -m755 -d "${dir}"
-    mv -v "${src}" "${dir}/"
+_pick() {
+  local p="$1" f d; shift
+  for f; do
+    d="$srcdir/$p/${f#$pkgdir/}"
+    mkdir -p "$(dirname "$d")"
+    mv -v "$f" "$d"
+    rmdir -p --ignore-fail-on-non-empty "$(dirname "$f")"
   done
+}
+
+package_mesa() {
+  depends=(
+    expat
+    gcc-libs
+    glibc
+    libdrm
+    libelf
+    libglvnd
+    libx11
+    libxcb
+    libxext
+    libxshmfence
+    libxxf86vm
+    llvm-libs
+    lm_sensors
+    spirv-tools
+    wayland
+    zlib
+    zstd
+  )
+  optdepends=("opengl-man-pages: for the OpenGL API man pages")
+  provides=(
+    "libva-mesa-driver=$epoch:$pkgver-$pkgrel"
+    "mesa-libgl=$epoch:$pkgver-$pkgrel"
+    "mesa-vdpau=$epoch:$pkgver-$pkgrel"
+    libva-driver
+    opengl-driver
+    vdpau-driver
+  )
+  conflicts=(
+    'libva-mesa-driver<1:24.2.7-1'
+    'mesa-libgl<17.0.1-2'
+    'mesa-vdpau<1:24.2.7-1'
+  )
+  replaces=(
+    'libva-mesa-driver<1:24.2.7-1'
+    'mesa-libgl<17.0.1-2'
+    'mesa-vdpau<1:24.2.7-1'
+  )
+
+  meson install -C build --destdir "$pkgdir"
+
+  (
+    local libdir=usr/lib icddir=usr/share/vulkan/icd.d
+
+    cd "$pkgdir"
+
+#    _pick clover $libdir/gallium-pipe
+#    _pick clover $libdir/libMesaOpenCL*
+#    _pick clover etc/OpenCL/vendors/mesa.icd
+
+#    _pick clrust $libdir/libRusticlOpenCL*
+#    _pick clrust etc/OpenCL/vendors/rusticl.icd
+
+#    _pick vkintel $icddir/intel_*.json
+#    _pick vkintel $libdir/libvulkan_intel*.so
+
+#    _pick vklayer $libdir/libVkLayer_*.so
+#    _pick vklayer usr/bin/mesa-*-control.py
+#    _pick vklayer usr/share/vulkan/{ex,im}plicit_layer.d
+
+#    _pick vknvidia $icddir/nouveau_*.json
+#    _pick vknvidia $libdir/libvulkan_nouveau*.so
+
+    _pick vkradeon $icddir/radeon_icd*.json
+    _pick vkradeon $libdir/libvulkan_radeon.so
+    _pick vkradeon usr/share/drirc.d/00-radv-defaults.conf
+
+#    _pick vkswrast $icddir/lvp_icd*.json
+#    _pick vkswrast $libdir/libvulkan_lvp.so
+
+#    _pick vkvirtio $icddir/virtio_icd*.json
+#    _pick vkvirtio $libdir/libvulkan_virtio.so
+
+#    _pick docs usr/share/doc
+
+    # indirect rendering
+#    ln -sr $libdir/libGLX_{mesa,indirect}.so.0
+  )
+
+  install -Dm644 jupiter-mesa/docs/license.rst -t "$pkgdir/usr/share/licenses/$pkgname"
+}
+
+package_opencl-clover-mesa() {
+  pkgdesc="Open-source OpenCL drivers - Clover variant"
+  depends=(
+    clang
+    expat
+    gcc-libs
+    glibc
+    libdrm
+    libelf
+    llvm-libs
+    zlib
+    zstd
+
+    libclc # For /usr/share/clc/
+  )
+  optdepends=("opencl-headers: headers necessary for OpenCL development")
+  provides=(opencl-driver)
+  replaces=("opencl-mesa<=23.1.4-1")
+  conflicts=(opencl-mesa)
+
+  mv clover/* "$pkgdir"
+
+  install -Dm644 mesa-$pkgver/docs/license.rst -t "$pkgdir/usr/share/licenses/$pkgname"
+}
+
+package_opencl-rusticl-mesa() {
+  pkgdesc="Open-source OpenCL drivers - RustICL variant"
+  depends=(
+    clang
+    expat
+    gcc-libs
+    glibc
+    libdrm
+    libelf
+    llvm-libs
+    spirv-llvm-translator
+    spirv-tools
+    zlib
+    zstd
+
+    libclc # For /usr/share/clc/
+  )
+  optdepends=("opencl-headers: headers necessary for OpenCL development")
+  provides=(opencl-driver)
+  replaces=("opencl-mesa<=23.1.4-1")
+  conflicts=(opencl-mesa)
+
+  mv clrust/* "$pkgdir"
+
+  install -Dm644 mesa-$pkgver/docs/license.rst -t "$pkgdir/usr/share/licenses/$pkgname"
+}
+
+package_vulkan-intel() {
+  pkgdesc="Open-source Vulkan driver for Intel GPUs"
+  depends=(
+    expat
+    gcc-libs
+    glibc
+    libdrm
+    libx11
+    libxcb
+    libxshmfence
+    spirv-tools
+    systemd-libs
+    vulkan-icd-loader
+    wayland
+    xcb-util-keysyms
+    zlib
+    zstd
+  )
+  optdepends=("vulkan-mesa-layers: additional vulkan layers")
+  provides=(vulkan-driver)
+
+  mv vkintel/* "$pkgdir"
+
+  install -Dm644 mesa-$pkgver/docs/license.rst -t "$pkgdir/usr/share/licenses/$pkgname"
 }
 
 package_vulkan-mesa-layers() {
   pkgdesc="Mesa's Vulkan layers"
-  depends=('libdrm' 'libxcb' 'wayland' 'python>=3.11' 'python<3.12')
-  conflicts=('vulkan-mesa-layer')
-  replaces=('vulkan-mesa-layer')
+  depends=(
+    gcc-libs
+    glibc
+    libdrm
+    libpng
+    libxcb
+    wayland
 
-  _install fakeinstall/usr/share/vulkan/explicit_layer.d
-  _install fakeinstall/usr/share/vulkan/implicit_layer.d
-  _install fakeinstall/usr/lib/libVkLayer_*.so
-  _install fakeinstall/usr/bin/mesa-overlay-control.py
+    python
+  )
+  conflicts=(vulkan-mesa-layer)
+  replaces=(vulkan-mesa-layer)
 
-  install -m644 -Dt "${pkgdir}/usr/share/licenses/${pkgname}" LICENSE
+  mv vklayer/* "$pkgdir"
+
+  install -Dm644 mesa-$pkgver/docs/license.rst -t "$pkgdir/usr/share/licenses/$pkgname"
 }
 
-package_opencl-mesa() {
-  pkgdesc="OpenCL support for AMD/ATI Radeon mesa drivers"
-  depends=('libdrm' 'libclc' 'clang' 'expat')
-  optdepends=('opencl-headers: headers necessary for OpenCL development')
-  provides=('opencl-driver')
+package_vulkan-nouveau() {
+  pkgdesc="Open-source Vulkan driver for Nvidia GPUs"
+  depends=(
+    expat
+    gcc-libs
+    glibc
+    libdrm
+    libx11
+    libxcb
+    libxshmfence
+    spirv-tools
+    systemd-libs
+    vulkan-icd-loader
+    wayland
+    xcb-util-keysyms
+    zlib
+    zstd
+  )
+  optdepends=("vulkan-mesa-layers: additional vulkan layers")
+  provides=(vulkan-driver)
 
-  _install fakeinstall/etc/OpenCL
-  _install fakeinstall/usr/lib/lib*OpenCL*
-  _install fakeinstall/usr/lib/gallium-pipe
+  mv vknvidia/* "$pkgdir"
 
-  install -m644 -Dt "${pkgdir}/usr/share/licenses/${pkgname}" LICENSE
-}
-
-package_vulkan-intel() {
-  pkgdesc="Intel's Vulkan mesa driver"
-  depends=('wayland' 'libx11' 'libxshmfence' 'libdrm' 'zstd' 'systemd-libs')
-  optdepends=('vulkan-mesa-layers: additional vulkan layers')
-  provides=('vulkan-driver')
-
-  _install fakeinstall/usr/share/vulkan/icd.d/intel_icd*.json
-  _install fakeinstall/usr/lib/libvulkan_intel.so
-
-  install -m644 -Dt "${pkgdir}/usr/share/licenses/${pkgname}" LICENSE
+  install -Dm644 mesa-$pkgver/docs/license.rst -t "$pkgdir/usr/share/licenses/$pkgname"
 }
 
 package_vulkan-radeon() {
-  pkgdesc="Radeon's Vulkan mesa driver"
-  depends=('wayland' 'libx11' 'libxshmfence' 'libelf' 'libdrm' 'llvm-libs' 'systemd-libs')
-  optdepends=('vulkan-mesa-layers: additional vulkan layers')
-  provides=('vulkan-driver')
+  pkgdesc="Open-source Vulkan driver for AMD GPUs"
+  depends=(
+    expat
+    gcc-libs
+    glibc
+    libdrm
+    libelf
+    libx11
+    libxcb
+    libxshmfence
+    llvm-libs
+    spirv-tools
+    systemd-libs
+    vulkan-icd-loader
+    wayland
+    xcb-util-keysyms
+    zlib
+    zstd
+  )
+  optdepends=("vulkan-mesa-layers: additional vulkan layers")
+  provides=(vulkan-driver)
 
-  _install fakeinstall/usr/share/drirc.d/00-radv-defaults.conf
-  _install fakeinstall/usr/share/vulkan/icd.d/radeon_icd*.json
-  _install fakeinstall/usr/lib/libvulkan_radeon.so
+  mv vkradeon/* "$pkgdir"
 
-  install -m644 -Dt "${pkgdir}/usr/share/licenses/${pkgname}" LICENSE
+  install -Dm644 jupiter-mesa/docs/license.rst -t "$pkgdir/usr/share/licenses/$pkgname"
 }
 
 package_vulkan-swrast() {
-  pkgdesc="Vulkan software rasteriser driver"
-  depends=('wayland' 'libx11' 'libxshmfence' 'libdrm' 'zstd' 'llvm-libs' 'systemd-libs' 'libunwind')
-  optdepends=('vulkan-mesa-layers: additional vulkan layers')
-  conflicts=('vulkan-mesa')
-  replaces=('vulkan-mesa')
-  provides=('vulkan-driver')
+  pkgdesc="Open-source Vulkan driver for CPUs (Software Rasterizer)"
+  depends=(
+    expat
+    gcc-libs
+    glibc
+    libdrm
+    libx11
+    libxcb
+    libxshmfence
+    llvm-libs
+    spirv-tools
+    systemd-libs
+    vulkan-icd-loader
+    wayland
+    xcb-util-keysyms
+    zlib
+    zstd
+  )
+  optdepends=("vulkan-mesa-layers: additional vulkan layers")
+  conflicts=(vulkan-mesa)
+  replaces=(vulkan-mesa)
+  provides=(vulkan-driver)
 
-  _install fakeinstall/usr/share/vulkan/icd.d/lvp_icd*.json
-  _install fakeinstall/usr/lib/libvulkan_lvp.so
+  mv vkswrast/* "$pkgdir"
 
-  install -m644 -Dt "${pkgdir}/usr/share/licenses/${pkgname}" LICENSE
+  install -Dm644 mesa-$pkgver/docs/license.rst -t "$pkgdir/usr/share/licenses/$pkgname"
 }
 
-package_libva-mesa-driver() {
-  pkgdesc="VA-API implementation for gallium"
-  depends=('libdrm' 'libx11' 'llvm-libs' 'expat' 'libelf' 'libxshmfence')
-  depends+=('libexpat.so')
+package_vulkan-virtio() {
+  pkgdesc="Open-source Vulkan driver for Virtio-GPU (Venus)"
+  depends=(
+    expat
+    gcc-libs
+    glibc
+    libdrm
+    libx11
+    libxcb
+    libxshmfence
+    systemd-libs
+    vulkan-icd-loader
+    wayland
+    xcb-util-keysyms
+    zlib
+    zstd
+  )
+  optdepends=("vulkan-mesa-layers: additional vulkan layers")
+  provides=(vulkan-driver)
 
-  _install fakeinstall/usr/lib/dri/*_drv_video.so
+  mv vkvirtio/* "$pkgdir"
 
-  install -m644 -Dt "${pkgdir}/usr/share/licenses/${pkgname}" LICENSE
+  install -Dm644 mesa-$pkgver/docs/license.rst -t "$pkgdir/usr/share/licenses/$pkgname"
 }
 
-package_mesa-vdpau() {
-  pkgdesc="Mesa VDPAU drivers"
-  depends=('libdrm' 'libx11' 'llvm-libs' 'expat' 'libelf' 'libxshmfence')
-  depends+=('libexpat.so')
+package_mesa-docs() {
+  pkgdesc="Mesa's documentation"
 
-  _install fakeinstall/usr/lib/vdpau
+  mv docs/* "$pkgdir"
 
-  install -m644 -Dt "${pkgdir}/usr/share/licenses/${pkgname}" LICENSE
+  install -Dm644 mesa-$pkgver/docs/license.rst -t "$pkgdir/usr/share/licenses/$pkgname"
 }
 
-package_mesa() {
-  depends=('libdrm' 'wayland' 'libxxf86vm' 'libxdamage' 'libxshmfence' 'libelf'
-           'libomxil-bellagio' 'libunwind' 'llvm-libs' 'lm_sensors' 'libglvnd'
-           'zstd' 'vulkan-icd-loader')
-  depends+=('libsensors.so' 'libexpat.so' 'libvulkan.so')
-  optdepends=('opengl-man-pages: for the OpenGL API man pages'
-              'mesa-vdpau: for accelerated video playback'
-              'libva-mesa-driver: for accelerated video playback')
-  provides=('mesa-libgl' 'opengl-driver')
-  conflicts=('mesa-libgl')
-  replaces=('mesa-libgl')
-
-  _install fakeinstall/usr/share/drirc.d/00-mesa-defaults.conf
-  _install fakeinstall/usr/share/glvnd/egl_vendor.d/50_mesa.json
-
-  # ati-dri, nouveau-dri, intel-dri, svga-dri, swrast, swr
-  _install fakeinstall/usr/lib/dri/*_dri.so
-
-  _install fakeinstall/usr/lib/bellagio
-  _install fakeinstall/usr/lib/d3d
-  _install fakeinstall/usr/lib/lib{gbm,glapi}.so*
-  _install fakeinstall/usr/lib/libOSMesa.so*
-  _install fakeinstall/usr/lib/libxatracker.so*
-
-  _install fakeinstall/usr/include
-  _install fakeinstall/usr/lib/pkgconfig
-
-  # libglvnd support
-  _install fakeinstall/usr/lib/libGLX_mesa.so*
-  _install fakeinstall/usr/lib/libEGL_mesa.so*
-
-  # indirect rendering
-  ln -s /usr/lib/libGLX_mesa.so.0 "${pkgdir}/usr/lib/libGLX_indirect.so.0"
-
-  # make sure there are no files left to install
-  find fakeinstall -depth -print0 | xargs -0 rmdir
-
-  install -m644 -Dt "${pkgdir}/usr/share/licenses/${pkgname}" LICENSE
-}
+# vim:set sw=2 sts=-1 et:
