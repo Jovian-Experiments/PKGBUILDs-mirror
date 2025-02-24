@@ -1,5 +1,5 @@
 
-`release @ 20241212.1`
+`release @ 20250224.1`
 ======================
 
 Valve packages
@@ -579,7 +579,7 @@ Arch Linux packages
  * [`md4c/0.5.2-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/md4c/-/tree/0.5.2-1)
  * [`mdadm/4.2-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/mdadm/-/tree/4.2-2)
  * [`media-player-info/24-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/media-player-info/-/tree/24-2)
- * [`mesa/24.0.5.183659.radeonsi_24.0.3-3`](https://gitlab.archlinux.org/archlinux/packaging/packages/mesa/-/tree/24.0.5.183659.radeonsi_24.0.3-3)
+ * [`mesa/24.0.5.183659.radeonsi_24.0.3-3`](https://gitlab.archlinux.org/archlinux/packaging/packages/mesa-radv/-/tree/24.0.5.183659.radeonsi_24.0.3-3)
  * [`mesa-utils/9.0.0-3`](https://gitlab.archlinux.org/archlinux/packaging/packages/mesa-utils/-/tree/9.0.0-3)
  * [`mesa-vdpau/24.0.5.183659.radeonsi_24.0.3-3`](https://gitlab.archlinux.org/archlinux/packaging/packages/mesa/-/tree/24.0.5.183659.radeonsi_24.0.3-3)
  * [`milou/5.27.10-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/milou/-/tree/5.27.10-1)
@@ -811,7 +811,7 @@ Arch Linux packages
  * [`steamos-customizations-jupiter/3.6.20241030.1-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/steamos-customizations-jupiter/-/tree/3.6.20241030.1-1)
  * [`steamos-efi/20231213.1-3`](https://gitlab.archlinux.org/archlinux/packaging/packages/steamos-efi/-/tree/20231213.1-3)
  * [`steamos-kdumpst-layer/1.0-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/steamos-kdumpst-layer/-/tree/1.0-2)
- * [`steamos-log-submitter/0.6.1-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/steamos-log-submitter/-/tree/0.6.1-1)
+ * [`steamos-log-submitter/0.6.3-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/steamos-log-submitter/-/tree/0.6.3-1)
  * [`steamos-manager/24.11.1-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/steamos-manager/-/tree/24.11.1-1)
  * [`steamos-networking-tools/1.0-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/steamos-networking-tools/-/tree/1.0-1)
  * [`steamos-reset/20240417.1-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/steamos-reset/-/tree/20240417.1-2)
@@ -862,7 +862,7 @@ Arch Linux packages
  * [`volume_key/0.3.12-8`](https://gitlab.archlinux.org/archlinux/packaging/packages/volume_key/-/tree/0.3.12-8)
  * [`vpower/1.4.1-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/vpower/-/tree/1.4.1-1)
  * [`vulkan-icd-loader/1.3.276-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/vulkan-icd-loader/-/tree/1.3.276-1)
- * [`vulkan-radeon/24.1.0_devel.188137.steamos_24.4.4-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/vulkan-radeon/-/tree/24.1.0_devel.188137.steamos_24.4.4-1)
+ * [`vulkan-radeon/24.1.0_devel.188138.steamos_24.4.5-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/mesa-radv/-/tree/24.1.0_devel.188138.steamos_24.4.5-1)
  * [`vulkan-tools/1.3.269-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/vulkan-tools/-/tree/1.3.269-1)
  * [`wakehook/2-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/wakehook/-/tree/2-2)
  * [`wayland/1.23.0-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/wayland/-/tree/1.23.0-2)
