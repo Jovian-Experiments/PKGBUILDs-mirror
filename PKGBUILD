@@ -3,12 +3,12 @@
 pkgname=gamescope
 _srctag=3.16.1
 pkgver=${_srctag//-/.}
-pkgrel=4
+pkgrel=5
 pkgdesc="gaming shell based on Xwayland, powered by Vulkan and DRM"
 arch=(x86_64)
 url="https://github.com/ValveSoftware/gamescope"
 license=('MIT')
-depends=('xorg-xwayland' 'libavif' 'aom' 'rav1e' 'libxres' 'xcb-util-errors' 'freerdp' 'xcb-util-wm' 'libxcomposite' 'pixman' 'libinput' 'seatd' 'pipewire' 'libxmu' 'libxcursor' 'powerbuttond' 'libdecor' 'libei' 'luajit')
+depends=('xorg-xwayland' 'libavif' 'aom' 'rav1e' 'libxres' 'xcb-util-errors' 'freerdp' 'xcb-util-wm' 'libxcomposite' 'pixman' 'libinput' 'seatd' 'pipewire' 'libxmu' 'libxcursor' 'libdecor' 'libei' 'luajit')
 makedepends=(openssh git meson cmake wayland-protocols ninja glslang glm vulkan-headers benchmark)
 source=("galileo-mura-setup.service"
         "gamescope-session"
@@ -20,7 +20,6 @@ source=("galileo-mura-setup.service"
         "gamescope-xbindkeys.service"
         "gamescope-mangoapp.service"
         "ibus-gamescope.service"
-        "powerbuttond.service"
         "start-gamescope-session"
         "steam-launcher"
         "steam-launcher.service"
@@ -40,12 +39,11 @@ sha256sums=('941f5a16a495c9c4de0302819c0069749db6915345ac1e207a12544863391e4b'
             'fe515fce8f151a6c03a89e043044bfddf8cd6ee89027d2cfbcf6f6706c78ca76'
             'e37ba6107f3a84cf47c2799b537a88583e6cb8951167a9c6a48fa1d85996206b'
             'e4add84152c3c0dfa53cf6bd2a1f15c2ce74d2312f7fa945b9476e91c8752544'
-            'c01b2b1a99a742d50df34f83217347dd39f35ebc29496446d5f0295a93370304'
+            'ce7e26d4145b44a1161d8ec050fb97f3c8786b7c5b719f36aa1dfb984b5863c1'
             'b74f4515a3ed793973b3be6eca145d7ba862dbf50218c694fb478ba725bfd025'
             '2cba6cd1a89767ef1b8a5044faa43394b9d1b24d0a64e24df1c42ec88e54cd60'
             '7a651035b786da325b2fbce7dec314d1a6a5d602ed053cb768c37bb5e3e1fd9d'
             '60e3701b96d1f7083d4a3c48b6c9ce372da55f65bab92ee2fff694158541a445'
-            '0a589373302dd6371d0c0c88bc65b758ef0a103a5b384a9e2073f046533a915d'
             '2cadeb1ffc90e8a19fc87d187a2ed069c944f2a7af56b9e54520add65977bb8b'
             'bc2e16bbff2357091f04b7049b9fa40d3fc8d75e909c09310ebe39acc5c09621'
             '6002fcf6585d047964daf29a4688604c33bc80042a706a884c0d48ca91ce488b'
@@ -105,7 +103,6 @@ package() {
 	install -D -m 644 gamescope-session.target "$pkgdir"/usr/lib/systemd/user/gamescope-session.target
 	install -D -m 644 gamescope-mangoapp.service "$pkgdir"/usr/lib/systemd/user/gamescope-mangoapp.service
 	install -D -m 644 ibus-gamescope.service  "$pkgdir"/usr/lib/systemd/user/ibus-gamescope.service 
-	install -D -m 644 powerbuttond.service "$pkgdir"/usr/lib/systemd/user/powerbuttond.service
 	install -D -m 644 steam-launcher.service "$pkgdir"/usr/lib/systemd/user/steam-launcher.service
 	install -D -m 644 steam-notif-daemon.service "$pkgdir"/usr/lib/systemd/user/steam-notif-daemon.service
 	install -D -m 644 gamescope-xbindkeys.service "$pkgdir"/usr/lib/systemd/user/gamescope-xbindkeys.service

@@ -11,7 +11,6 @@ BindsTo=gamescope-session.service
 Upholds=steam-launcher.service
 
 Wants=ibus-gamescope.service
-Wants=powerbuttond.service
 Wants=steam-notif-daemon.service
 Wants=gamescope-xbindkeys.service
 Wants=galileo-mura-setup.service
