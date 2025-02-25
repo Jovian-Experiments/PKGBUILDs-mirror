@@ -7,7 +7,7 @@
 pkgbase=mesa-radv
 # Jupiter: only build RADV, the rest comes from upstream/Arch Mesa
 pkgname=(
-  mesa
+#  mesa
 #  opencl-clover-mesa
 #  opencl-rusticl-mesa
 #  vulkan-intel
@@ -25,7 +25,7 @@ pkgname=(
 _tag=steamos-24.11.5
 pkgver=24.3.0_devel.197250.steamos_24.11.5
 
-pkgrel=2
+pkgrel=5
 epoch=0
 pkgdesc="Open-source OpenGL drivers"
 url="https://www.mesa3d.org/"
@@ -199,17 +199,24 @@ build() {
     -D android-libbacktrace=disabled
     -D b_ndebug=true
     -D gallium-drivers=
+    -D gallium-extra-hud=false
+    -D gallium-nine=false
+    -D gallium-opencl=disabled
+    -D gallium-rusticl=false
     -D gles1=disabled
     -D glx=disabled
     -D html-docs=disabled
+    -D intel-clc=auto
     -D intel-rt=disabled
-    -D libunwind=enabled
+    -D libunwind=disabled
     -D microsoft-clc=disabled
     -D osmesa=false
     -D platforms=x11,wayland
+    -D valgrind=enabled
     -D video-codecs=vc1dec,h264dec,h264enc,h265dec,h265enc
     -D vulkan-drivers=amd
     -D vulkan-layers=
+    # Jupiter specific options below:
     -D b_lto=false
     -D gallium-vdpau=disabled
     -D gallium-va=disabled
@@ -220,7 +227,6 @@ build() {
     -D glvnd=disabled
     -D llvm=enabled
     -D lmsensors=disabled
-    -D valgrind=enabled
     -D gpuvis=true
     -D radv-build-id="e205930701a1219fec3f130e26fdf689e1538462"
   )
@@ -293,40 +299,40 @@ package_mesa() {
 
     cd "$pkgdir"
 
-#    _pick clover $libdir/gallium-pipe
-#    _pick clover $libdir/libMesaOpenCL*
-#    _pick clover etc/OpenCL/vendors/mesa.icd
+    _pick clover $libdir/gallium-pipe
+    _pick clover $libdir/libMesaOpenCL*
+    _pick clover etc/OpenCL/vendors/mesa.icd
 
-#    _pick clrust $libdir/libRusticlOpenCL*
-#    _pick clrust etc/OpenCL/vendors/rusticl.icd
+    _pick clrust $libdir/libRusticlOpenCL*
+    _pick clrust etc/OpenCL/vendors/rusticl.icd
 
-#    _pick vkintel $icddir/intel_*.json
-#    _pick vkintel $libdir/libvulkan_intel*.so
+    _pick vkintel $icddir/intel_*.json
+    _pick vkintel $libdir/libvulkan_intel*.so
 
-#    _pick vklayer $libdir/libVkLayer_*.so
-#    _pick vklayer usr/bin/mesa-*-control.py
-#    _pick vklayer usr/share/vulkan/{ex,im}plicit_layer.d
+    _pick vklayer $libdir/libVkLayer_*.so
+    _pick vklayer usr/bin/mesa-*-control.py
+    _pick vklayer usr/share/vulkan/{ex,im}plicit_layer.d
 
-#    _pick vknvidia $icddir/nouveau_*.json
-#    _pick vknvidia $libdir/libvulkan_nouveau*.so
+    _pick vknvidia $icddir/nouveau_*.json
+    _pick vknvidia $libdir/libvulkan_nouveau*.so
 
     _pick vkradeon $icddir/radeon_icd*.json
     _pick vkradeon $libdir/libvulkan_radeon.so
     _pick vkradeon usr/share/drirc.d/00-radv-defaults.conf
 
-#    _pick vkswrast $icddir/lvp_icd*.json
-#    _pick vkswrast $libdir/libvulkan_lvp.so
+    _pick vkswrast $icddir/lvp_icd*.json
+    _pick vkswrast $libdir/libvulkan_lvp.so
 
-#    _pick vkvirtio $icddir/virtio_icd*.json
-#    _pick vkvirtio $libdir/libvulkan_virtio.so
+    _pick vkvirtio $icddir/virtio_icd*.json
+    _pick vkvirtio $libdir/libvulkan_virtio.so
 
-#    _pick docs usr/share/doc
+    _pick docs usr/share/doc
 
     # indirect rendering
-#    ln -sr $libdir/libGLX_{mesa,indirect}.so.0
+    ln -sr $libdir/libGLX_{mesa,indirect}.so.0
   )
 
-  install -Dm644 jupiter-mesa/docs/license.rst -t "$pkgdir/usr/share/licenses/$pkgname"
+  install -Dm644 mesa-$pkgver/docs/license.rst -t "$pkgdir/usr/share/licenses/$pkgname"
 }
 
 package_opencl-clover-mesa() {
@@ -476,7 +482,14 @@ package_vulkan-radeon() {
   optdepends=("vulkan-mesa-layers: additional vulkan layers")
   provides=(vulkan-driver)
 
-  mv vkradeon/* "$pkgdir"
+#  mv vkradeon/* "$pkgdir"
+
+  # Jupiter specific: install libvulkan_radeon.so, radeon_icd.x86_64.json and
+  # 00-radv-defaults.conf but remove the drirc file which is already installed
+  # by mesa.
+  meson install -C build --destdir "$pkgdir"
+
+  rm -rv "$pkgdir"/usr/share/drirc.d/00-mesa-defaults.conf
 
   install -Dm644 jupiter-mesa/docs/license.rst -t "$pkgdir/usr/share/licenses/$pkgname"
 }
