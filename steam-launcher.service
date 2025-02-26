@@ -2,6 +2,7 @@
 Description=Steam Launcher
 After=graphical-session.target
 PartOf=graphical-session.target
+Wants=steam-short-session-tracker.service
 
 [Service]
 ExecStart=/usr/lib/steamos/steam-launcher
@@ -13,7 +14,5 @@ ExecStop=/bin/bash -c 'kill -TERM $(pgrep -P $MAINPID || echo $MAINPID)'
 KillSignal=SIGCONT
 KillMode=mixed
 
-ExecStartPre=/usr/lib/steamos/steam-short-session-tracker --started
-ExecStopPost=/usr/lib/steamos/steam-short-session-tracker --stopped
 Type=exec
 EnvironmentFile=%t/gamescope-environment

@@ -3,7 +3,7 @@
 pkgname=gamescope
 _srctag=3.16.1
 pkgver=${_srctag//-/.}
-pkgrel=5
+pkgrel=6
 pkgdesc="gaming shell based on Xwayland, powered by Vulkan and DRM"
 arch=(x86_64)
 url="https://github.com/ValveSoftware/gamescope"
@@ -25,6 +25,7 @@ source=("galileo-mura-setup.service"
         "steam-launcher.service"
         "steam-notif-daemon.service"
         "steam-short-session-tracker"
+        "steam-short-session-tracker.service"
         "steam_http_loader.desktop"
         "steam-http-loader"
         "git+https://github.com/ValveSoftware/gamescope.git#tag=$_srctag"
@@ -46,9 +47,10 @@ sha256sums=('941f5a16a495c9c4de0302819c0069749db6915345ac1e207a12544863391e4b'
             '60e3701b96d1f7083d4a3c48b6c9ce372da55f65bab92ee2fff694158541a445'
             '2cadeb1ffc90e8a19fc87d187a2ed069c944f2a7af56b9e54520add65977bb8b'
             'bc2e16bbff2357091f04b7049b9fa40d3fc8d75e909c09310ebe39acc5c09621'
-            '6002fcf6585d047964daf29a4688604c33bc80042a706a884c0d48ca91ce488b'
+            'c9bf7bcb0c3fd7ad9787621c471e4dadb6d0c1cfe54d39991917495d4287f415'
             '41115eb48d3bb5b821f0a7eec186e45020a1cbeedb2604499b65140dcd8249e3'
             'ec7aea652cae955089c58d4ad2b53d0b2caedcf63239a73587f4311f89150a30'
+            'b028629e3d41ccbad4af46d491b72340e221abbcb4af608627f6d0bd7d1c0d12'
             '525060896abef2da9db8d8294253b7444d60e48cf6cc0496ca48fc7084cc8590'
             'dea09abb47c3d907c00ff7f36967b599f3caca554ac6eb7b7dc6d2d78651dd44'
             '35c39c5b65cf5f974d4f5af0a4710ec302659ac2f3ad260c92ae404bd9c5834c'
@@ -104,6 +106,7 @@ package() {
 	install -D -m 644 gamescope-mangoapp.service "$pkgdir"/usr/lib/systemd/user/gamescope-mangoapp.service
 	install -D -m 644 ibus-gamescope.service  "$pkgdir"/usr/lib/systemd/user/ibus-gamescope.service 
 	install -D -m 644 steam-launcher.service "$pkgdir"/usr/lib/systemd/user/steam-launcher.service
+	install -D -m 644 steam-short-session-tracker.service "$pkgdir"/usr/lib/systemd/user/steam-short-session-tracker.service
 	install -D -m 644 steam-notif-daemon.service "$pkgdir"/usr/lib/systemd/user/steam-notif-daemon.service
 	install -D -m 644 gamescope-xbindkeys.service "$pkgdir"/usr/lib/systemd/user/gamescope-xbindkeys.service
 
