@@ -7,6 +7,8 @@
 # Related to https://gitlab.steamos.cloud/holo-team/tasks/-/issues/1241
 # Holo: The second patch we include is a backport from upstream to fix the Airpods.
 # Once we update to a newer pipewire that includes it, we can remove this backport
+# Holo: Symlink the `.conf.d` directories of pipewire to `/run/pipewire`. This is required
+# by steamdeck-dsp
 
 pkgbase=pipewire
 pkgname=(
@@ -30,7 +32,7 @@ pkgname=(
   pulse-native-provider
 )
 pkgver=1.2.6
-pkgrel=1.3
+pkgrel=1.4
 epoch=1
 pkgdesc="Low-latency audio/video router and processor"
 url="https://pipewire.org"
@@ -157,6 +159,8 @@ package_pipewire() {
     libreadline.so
     libsystemd.so
     libudev.so
+    # Holo: required to handle the /run/pipewire symlinks
+    'steamdeck-dsp>=0.43'
   )
   optdepends=(
     'gst-plugin-pipewire: GStreamer plugin'
@@ -282,8 +286,14 @@ package_pipewire() {
     _pick x11-bell usr/lib/$_pwname/libpipewire-module-x11-bell.so
     _pick x11-bell usr/share/man/man7/libpipewire-module-x11-bell.7
 
-    # directories for overrides
-    mkdir -p etc/pipewire/{client-rt,client,minimal,pipewire}.conf.d
+    # Holo: we symlink the .conf.d directories from /etc/pipewire to /run because at
+    # runtime the script pipewire-hwconfig picks up the correct config files based
+    # on the hw.
+    mkdir -p etc/pipewire
+    for _l in {client-rt,client,minimal,pipewire}.conf.d
+    do
+      ln -s /run/pipewire/${_l} etc/pipewire/${_l}
+    done
   )
 
   install -Dt "$pkgdir/usr/share/licenses/$pkgname" -m644 pipewire/COPYING
@@ -432,6 +442,8 @@ package_pipewire-jack() {
     pipewire-audio
     pipewire-session-manager
     sh
+    # Holo: required to handle the /run/pipewire symlinks
+    'steamdeck-dsp>=0.43'
   )
   optdepends=(
     'jack-example-tools: for official JACK example-clients and tools'
@@ -453,8 +465,11 @@ package_pipewire-jack() {
   install -Dm644 /dev/null \
     "$pkgdir/usr/share/pipewire/media-session.d/with-jack"
 
-  # directories for overrides
-  mkdir -p "$pkgdir/etc/pipewire/jack.conf.d"
+  # Holo: we symlink the jack.conf.d directory from /etc/pipewire to /run because at
+  # runtime the script pipewire-hwconfig picks up the correct config files based
+  # on the hw.
+  mkdir -p "$pkgdir/etc/pipewire"
+  ln -s /run/pipewire/jack.conf.d "$pkgdir"/etc/pipewire/jack.conf.d
 
   install -Dt "$pkgdir/usr/share/licenses/$pkgname" -m644 pipewire/COPYING
 }
@@ -474,6 +489,8 @@ package_pipewire-pulse() {
     pipewire-audio
     pipewire-session-manager
     systemd-libs
+    # Holo: required to handle the /run/pipewire symlinks
+    'steamdeck-dsp>=0.43'
   )
   provides=(pulse-native-provider)
   conflicts=(pulseaudio)
@@ -481,8 +498,12 @@ package_pipewire-pulse() {
 
   mv pulse/* "$pkgdir"
 
-  # directory for overrides
-  mkdir -p "$pkgdir/etc/pipewire/pipewire-pulse.conf.d"
+  # Holo: we symlink the pipewire-pulse.conf.d directory from /etc/pipewire to /run
+  # because at runtime the script pipewire-hwconfig picks up the correct config files
+  # based on the hw.
+  mkdir -p "$pkgdir/etc/pipewire"
+  ln -s /run/pipewire/pipewire-pulse.conf.d \
+     "$pkgdir/etc/pipewire/pipewire-pulse.conf.d"
 
   install -Dm644 /dev/null \
     "$pkgdir/usr/share/pipewire/media-session.d/with-pulseaudio"
