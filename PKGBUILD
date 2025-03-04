@@ -31,8 +31,8 @@ pkgname=(
   pipewire-session-manager
   pulse-native-provider
 )
-pkgver=1.2.6
-pkgrel=1.4
+pkgver=1.2.7
+pkgrel=1.1
 epoch=1
 pkgdesc="Low-latency audio/video router and processor"
 url="https://pipewire.org"
@@ -91,7 +91,7 @@ source=(
     # Part of https://gitlab.steamos.cloud/holo-team/tasks/-/issues/1544
     "0002-bluez-aac-airpods-fix-when-reconnecting.patch.patch"
 )
-b2sums=('fb72384b2f62b26d65d935118388f204542eeb1fe173e1c0b70e17ac1786c7533cf15ce2f05c9447ff0ea1a9d8dcf19a9bdbfea6d31fc6558d7762df92865cec'
+b2sums=('c2941d8400e5299da86239967179f15ed69cc0142d5cf5adc510585ce85ff2e49b975c7adc39146a16a9bd130b3f4a9db51c6c470c9cc6a05913a5c38f214635'
         '68ad58cb1a8c532a194b7982167e6b461ff3a2d046f346305c38d3af21a696a2cd18619b73b99cc1b41c55f8786cf26ab5c077f58652e8197a9f5f42416c764f'
         'e735106336aec1ff8e7b1011c79f1ab8787bc9d07cd775b22433df064225cb0975c55cef6e8ffd98d4b0c5cb2cf9091534e4cf2af957c9088aba3d9a650c232e')
 
