@@ -7,8 +7,8 @@ pkgname=(
   wireplumber
   libwireplumber
 )
-pkgver=0.5.6
-pkgrel=1.4
+pkgver=0.5.7
+pkgrel=1.1
 pkgdesc="Session / policy manager implementation for PipeWire"
 url="https://pipewire.pages.freedesktop.org/wireplumber/"
 arch=(x86_64)
@@ -51,7 +51,7 @@ source=(
   "0001-state-routes-only-save-route-properties-if-it-is-ava.patch"
 )
 b2sums=(
-  'a367d750ec8b4e629c6685c77df460099b267bf9ffb7e99f323b750d9c5313bb643525434fe7417a4fa426a4395f27409c010cf4d3a464553f8a681b2d010834'
+  '4d57500277d7ba82a96996ead553b40bb7b0d5803cba1e8a1ac0ada25077dc10645e03a7aca32eba4e780311c67f2cdf2ddbc8dc147fd232823416867b682812'
   '86f80f07bb5f446ae90f88f39870139d4d902f99048a62eb825ac12b654ca248568b17f8a1ca15777b41e0a11054345d023fc36a348372f15cb75b92a0180cfe'
   'ea55591190916920756ee0cdab3d4d315500346370dc03a9b739bdcf9806aaec23cfafe31e35c89a6d53e3dd2d5001986012d29fcc77f3be1bf5eaa4ca486cb1'
   '145fd614765ebe212de7e27e78b243bb294bd2fdc1efb1c6852280e8db2c2cbca40d6ce838013a06ced34bc030a16a11f1c4875562cd5d041c0785e7be712636'
