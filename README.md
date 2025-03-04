@@ -1,5 +1,5 @@
 
-`release @ 20250224.1`
+`release @ 20250304.1`
 ======================
 
 Valve packages
@@ -60,6 +60,7 @@ Arch Linux packages
  * [`bluedevil/1:5.27.10-3`](https://gitlab.archlinux.org/archlinux/packaging/packages/bluedevil/-/tree/1:5.27.10-3)
  * [`bluez/5.76_really5.66-1.2`](https://gitlab.archlinux.org/archlinux/packaging/packages/bluez/-/tree/5.76_really5.66-1.2)
  * [`bluez-libs/5.76_really5.66-1.2`](https://gitlab.archlinux.org/archlinux/packaging/packages/bluez/-/tree/5.76_really5.66-1.2)
+ * [`bluez-plugins/5.76_really5.66-1.2`](https://gitlab.archlinux.org/archlinux/packaging/packages/bluez/-/tree/5.76_really5.66-1.2)
  * [`bluez-qt5/5.115.0-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/bluez-qt5/-/tree/5.115.0-1)
  * [`bluez-utils/5.76_really5.66-1.2`](https://gitlab.archlinux.org/archlinux/packaging/packages/bluez/-/tree/5.76_really5.66-1.2)
  * [`bolt/0.9.6-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/bolt/-/tree/0.9.6-2)
@@ -163,7 +164,7 @@ Arch Linux packages
  * [`fuse3/3.16.2-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/fuse3/-/tree/3.16.2-1)
  * [`galileo-mura/v0.9-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/galileo-mura/-/tree/v0.9-1)
  * [`gamemode/1.8.1-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/gamemode/-/tree/1.8.1-2)
- * [`gamescope/3.15.15-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/gamescope/-/tree/3.15.15-1)
+ * [`gamescope/3.15.16-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/gamescope/-/tree/3.15.16-1)
  * [`gawk/5.3.0-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/gawk/-/tree/5.3.0-1)
  * [`gc/8.2.6-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/gc/-/tree/8.2.6-1)
  * [`gcc-libs/13.2.1-7`](https://gitlab.archlinux.org/archlinux/packaging/packages/gcc-libs/-/tree/13.2.1-7)
@@ -579,7 +580,7 @@ Arch Linux packages
  * [`md4c/0.5.2-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/md4c/-/tree/0.5.2-1)
  * [`mdadm/4.2-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/mdadm/-/tree/4.2-2)
  * [`media-player-info/24-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/media-player-info/-/tree/24-2)
- * [`mesa/24.0.5.183659.radeonsi_24.0.3-3`](https://gitlab.archlinux.org/archlinux/packaging/packages/mesa-radv/-/tree/24.0.5.183659.radeonsi_24.0.3-3)
+ * [`mesa/24.0.5.183659.radeonsi_24.0.3-3`](https://gitlab.archlinux.org/archlinux/packaging/packages/mesa/-/tree/24.0.5.183659.radeonsi_24.0.3-3)
  * [`mesa-utils/9.0.0-3`](https://gitlab.archlinux.org/archlinux/packaging/packages/mesa-utils/-/tree/9.0.0-3)
  * [`mesa-vdpau/24.0.5.183659.radeonsi_24.0.3-3`](https://gitlab.archlinux.org/archlinux/packaging/packages/mesa/-/tree/24.0.5.183659.radeonsi_24.0.3-3)
  * [`milou/5.27.10-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/milou/-/tree/5.27.10-1)
@@ -862,7 +863,7 @@ Arch Linux packages
  * [`volume_key/0.3.12-8`](https://gitlab.archlinux.org/archlinux/packaging/packages/volume_key/-/tree/0.3.12-8)
  * [`vpower/1.4.1-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/vpower/-/tree/1.4.1-1)
  * [`vulkan-icd-loader/1.3.276-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/vulkan-icd-loader/-/tree/1.3.276-1)
- * [`vulkan-radeon/24.1.0_devel.188138.steamos_24.4.5-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/mesa-radv/-/tree/24.1.0_devel.188138.steamos_24.4.5-1)
+ * [`vulkan-radeon/24.1.0_devel.188139.steamos_24.4.6-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/vulkan-radeon/-/tree/24.1.0_devel.188139.steamos_24.4.6-1)
  * [`vulkan-tools/1.3.269-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/vulkan-tools/-/tree/1.3.269-1)
  * [`wakehook/2-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/wakehook/-/tree/2-2)
  * [`wayland/1.23.0-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/wayland/-/tree/1.23.0-2)
@@ -899,7 +900,7 @@ Arch Linux packages
  * [`xkeyboard-config/2.41-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/xkeyboard-config/-/tree/2.41-1)
  * [`xorg-fonts-encodings/1.0.7-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/xorg-fonts-encodings/-/tree/1.0.7-1)
  * [`xorg-server/21.1.11-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/xorg-server/-/tree/21.1.11-1)
- * [`xorg-server-common/21.1.11-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/xorg-server-common/-/tree/21.1.11-1)
+ * [`xorg-server-common/21.1.11-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/xorg-server/-/tree/21.1.11-1)
  * [`xorg-setxkbmap/1.3.4-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/xorg-setxkbmap/-/tree/1.3.4-1)
  * [`xorg-xauth/1.1.2-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/xorg-xauth/-/tree/1.1.2-1)
  * [`xorg-xdpyinfo/1.3.4-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/xorg-xdpyinfo/-/tree/1.3.4-1)
