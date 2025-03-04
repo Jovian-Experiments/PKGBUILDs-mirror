@@ -22,10 +22,10 @@ pkgname=(
 # When updating the tag, consider if you are adding any shader compiler changes. If so,
 # or if you are not sure, regenerate the radv-build-id below. To update, see
 # https://gitlab.steamos.cloud/jupiter/docs/-/wikis/How-to-make-a-new-Mesa-release#updating-the-radv-build-id
-_tag=steamos-24.11.5
-pkgver=24.3.0_devel.197250.steamos_24.11.5
+_tag=steamos-24.11.8
+pkgver=24.3.0_devel.197253.steamos_24.11.8
 
-pkgrel=5
+pkgrel=1
 epoch=0
 pkgdesc="Open-source OpenGL drivers"
 url="https://www.mesa3d.org/"
@@ -228,7 +228,7 @@ build() {
     -D llvm=enabled
     -D lmsensors=disabled
     -D gpuvis=true
-    -D radv-build-id="e205930701a1219fec3f130e26fdf689e1538462"
+    -D radv-build-id="9945cd2ca30523adc39089f95892da7b49f138a0"
   )
 
   # Build only minimal debug info to reduce size
