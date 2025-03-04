@@ -8,7 +8,7 @@
 pkgname=plasma-workspace
 pkgver=6.2.2
 _dirver=$(echo $pkgver | cut -d. -f1-3)
-pkgrel=1.1
+pkgrel=1.2
 pkgdesc='KDE Plasma Workspace'
 arch=(x86_64)
 url='https://kde.org/plasma-desktop/'
@@ -135,13 +135,21 @@ optdepends=('appmenu-gtk-module: global menu support for GTK2 and some GTK3 appl
 conflicts=(plasma-wayland-session)
 replaces=(plasma-wayland-session)
 groups=(plasma)
-source=(https://download.kde.org/stable/plasma/$_dirver/$pkgname-$pkgver.tar.xz{,.sig})
+source=(https://download.kde.org/stable/plasma/$_dirver/$pkgname-$pkgver.tar.xz{,.sig}
+        0001-Avoid-assert-on-shortcut-handling-when-used-with-kio.patch # Fix for crashing lockscreen, drop after = 6.3
+)
 sha256sums=('becc89473d57dcc574a8d9d626cc83b446df2567a478a663f81d58fd6ea3f853'
-            'SKIP')
+            'SKIP'
+            'ad4f7e762f9babe601e537acdafd22f0a38b63f4c43ca78e754cc63494830bd3')
 validpgpkeys=('E0A3EB202F8E57528E13E72FD7574483BB57B18D'  # Jonathan Esk-Riddell <jr@jriddell.org>
               '0AAC775BB6437A8D9AF7A3ACFE0784117FBCE11D'  # Bhushan Shah <bshah@kde.org>
               'D07BD8662C56CB291B316EB2F5675605C74E02CF'  # David Edmundson <davidedmundson@kde.org>
               '1FA881591C26B276D7A5518EEAAF29B42A678C20') # Marco Martin <notmart@gmail.com>
+
+prepare() {
+  patch -p1 -d "$srcdir/$pkgname-$pkgver" -i "$srcdir/0001-Avoid-assert-on-shortcut-handling-when-used-with-kio.patch"
+}
+
 
 build() {
 
