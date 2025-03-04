@@ -6,9 +6,9 @@
 # Holo: Build with the GLIBC_LOCALE_PREGENERATED=ON option
 
 pkgname=plasma-workspace
-pkgver=6.2.2
+pkgver=6.2.5
 _dirver=$(echo $pkgver | cut -d. -f1-3)
-pkgrel=1.2
+pkgrel=1.1
 pkgdesc='KDE Plasma Workspace'
 arch=(x86_64)
 url='https://kde.org/plasma-desktop/'
@@ -138,7 +138,7 @@ groups=(plasma)
 source=(https://download.kde.org/stable/plasma/$_dirver/$pkgname-$pkgver.tar.xz{,.sig}
         0001-Avoid-assert-on-shortcut-handling-when-used-with-kio.patch # Fix for crashing lockscreen, drop after = 6.3
 )
-sha256sums=('becc89473d57dcc574a8d9d626cc83b446df2567a478a663f81d58fd6ea3f853'
+sha256sums=('b82511e46f62e1b8f60b969c828c8d8d32fc7928401a70cc28c29f85f46c412f'
             'SKIP'
             'ad4f7e762f9babe601e537acdafd22f0a38b63f4c43ca78e754cc63494830bd3')
 validpgpkeys=('E0A3EB202F8E57528E13E72FD7574483BB57B18D'  # Jonathan Esk-Riddell <jr@jriddell.org>
