@@ -3,7 +3,7 @@
 # Contributor: Andrea Scarpino <andrea@archlinux.org>
 
 pkgname=kwin
-pkgver=6.2.2
+pkgver=6.2.5
 _dirver=$(echo $pkgver | cut -d. -f1-3)
 pkgrel=1.1 # Holo: Allow xwayland to use libei without portal
 pkgdesc='An easy to use, but flexible, composited Window Manager'
@@ -87,16 +87,14 @@ source=(https://download.kde.org/stable/plasma/$_dirver/$pkgname-$pkgver.tar.xz{
         0002-Allow-specifying-file-descriptors-that-are-passed-to.patch # Deck specific for X input
         0003-Enable-Xwayland-xtest-input-emulation-without-going-.patch # Deck specific for X input
         0004-Outputconfigurationstore-default-to-internal-display.patch # Deck specific for default scale
-        0005-Fix-DPMS-Filter.patch # This can be dropped in 6.2.3 onwards
         )
 install=$pkgname.install
-sha256sums=('fb5c2ff3e8007722f3fa528872e6494dc21d48c8a6b632b748486389486bc061'
+sha256sums=('5cc450a6e41105c8c49929b72550b331237f96aafb294690f4707bdc5f776848'
             'SKIP'
-            '4c0f6dc62851371f63af725d09f2eeaf1a56f08ef6e8c16650d40212e84a8534'
-            '5e5040d57cc6ec317ad7b2d4f4bcafb3b9632622f5ac6d0726699f55898ed788'
-            'f7d91c5d14ef53585230db4621691b001a5a16be3a90f8ecd0f39db7dc403b9b'
-            'SKIP'
-            'SKIP')
+            'efe97260d2d157c867d26eb589faae6b47c41554e78ff83ff19b94d03d8e38ea'
+            '4ebbde0ee2e1f013a2b64673d25faf44173b2c40799cbbdb5dfb90740b606006'
+            'ba0ef9198be28a180804b905026419efd88ea9582c93c6f6c851732254ba2890'
+            '9417723b2a2c2ff81b914707edf6dd759ec1fa729eb80fea0719e1722b004a55')
 validpgpkeys=('E0A3EB202F8E57528E13E72FD7574483BB57B18D'  # Jonathan Esk-Riddell <jr@jriddell.org>
               '0AAC775BB6437A8D9AF7A3ACFE0784117FBCE11D'  # Bhushan Shah <bshah@kde.org>
               'D07BD8662C56CB291B316EB2F5675605C74E02CF'  # David Edmundson <davidedmundson@kde.org>
@@ -107,7 +105,6 @@ prepare() {
   patch -p1 -d "$srcdir/$pkgname-$pkgver" -i "$srcdir/0002-Allow-specifying-file-descriptors-that-are-passed-to.patch"
   patch -p1 -d "$srcdir/$pkgname-$pkgver" -i "$srcdir/0003-Enable-Xwayland-xtest-input-emulation-without-going-.patch"
   patch -p1 -d "$srcdir/$pkgname-$pkgver" -i "$srcdir/0004-Outputconfigurationstore-default-to-internal-display.patch"
-  patch -p1 -d "$srcdir/$pkgname-$pkgver" -i "$srcdir/0005-Fix-DPMS-Filter.patch"
 }
 
 

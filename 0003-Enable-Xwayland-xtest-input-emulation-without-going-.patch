@@ -169,7 +169,7 @@ index 577fe8b050..5a1239718a 100644
 -
  static std::chrono::microseconds currentTime()
  {
-     return std::chrono::duration_cast<std::chrono::microseconds>(std::chrono::system_clock::now().time_since_epoch());
+     return std::chrono::duration_cast<std::chrono::microseconds>(std::chrono::steady_clock::now().time_since_epoch());
 diff --git a/src/plugins/eis/eiscontext.h b/src/plugins/eis/eiscontext.h
 index fd8f676a4f..50de947a85 100644
 --- a/src/plugins/eis/eiscontext.h
@@ -224,7 +224,7 @@ diff --git a/src/xwayland/xwaylandlauncher.cpp b/src/xwayland/xwaylandlauncher.c
 index 7ec501dd7c..afc1bce91c 100644
 --- a/src/xwayland/xwaylandlauncher.cpp
 +++ b/src/xwayland/xwaylandlauncher.cpp
-@@ -201,9 +201,6 @@ bool XwaylandLauncher::start()
+@@ -207,9 +207,6 @@ bool XwaylandLauncher::start()
      arguments << QStringLiteral("-displayfd") << QString::number(pipeFds[1]);
      arguments << QStringLiteral("-rootless");
      arguments << QStringLiteral("-wm") << QString::number(fd);
