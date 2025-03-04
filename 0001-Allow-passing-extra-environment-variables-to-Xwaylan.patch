@@ -61,7 +61,7 @@ index e24cd5fe4e..1fdbe8f8e9 100644
  void XwaylandLauncher::enable()
  {
      if (m_enabled) {
-@@ -198,6 +203,9 @@ bool XwaylandLauncher::start()
+@@ -204,6 +209,9 @@ bool XwaylandLauncher::start()
      if (qEnvironmentVariableIntValue("KWIN_XWAYLAND_DEBUG") == 1) {
          env.insert("WAYLAND_DEBUG", QByteArrayLiteral("1"));
      }

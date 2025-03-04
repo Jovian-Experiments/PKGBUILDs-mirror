@@ -85,7 +85,7 @@ index 1fdbe8f8e9..7ec501dd7c 100644
  void XwaylandLauncher::enable()
  {
      if (m_enabled) {
-@@ -208,6 +218,13 @@ bool XwaylandLauncher::start()
+@@ -214,6 +224,13 @@ bool XwaylandLauncher::start()
      }
      m_xwaylandProcess->setProcessEnvironment(env);
      m_xwaylandProcess->setArguments(arguments);
