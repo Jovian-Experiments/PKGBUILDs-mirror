@@ -8,7 +8,7 @@
 pkgname=plasma-workspace
 pkgver=6.2.5
 _dirver=$(echo $pkgver | cut -d. -f1-3)
-pkgrel=1.1
+pkgrel=1.2
 pkgdesc='KDE Plasma Workspace'
 arch=(x86_64)
 url='https://kde.org/plasma-desktop/'
@@ -137,10 +137,12 @@ replaces=(plasma-wayland-session)
 groups=(plasma)
 source=(https://download.kde.org/stable/plasma/$_dirver/$pkgname-$pkgver.tar.xz{,.sig}
         0001-Avoid-assert-on-shortcut-handling-when-used-with-kio.patch # Fix for crashing lockscreen, drop after = 6.3
+        0002-shellcorona-delete-containments-in-a-for-loop.patch # Fix for crash on Global Theme change on 6.3
 )
 sha256sums=('b82511e46f62e1b8f60b969c828c8d8d32fc7928401a70cc28c29f85f46c412f'
             'SKIP'
-            'ad4f7e762f9babe601e537acdafd22f0a38b63f4c43ca78e754cc63494830bd3')
+            'ad4f7e762f9babe601e537acdafd22f0a38b63f4c43ca78e754cc63494830bd3'
+            '6f1174189224b6840bd84b85ca09c85a175d7058151ce7bfeb59b44b8ffaecaf')
 validpgpkeys=('E0A3EB202F8E57528E13E72FD7574483BB57B18D'  # Jonathan Esk-Riddell <jr@jriddell.org>
               '0AAC775BB6437A8D9AF7A3ACFE0784117FBCE11D'  # Bhushan Shah <bshah@kde.org>
               'D07BD8662C56CB291B316EB2F5675605C74E02CF'  # David Edmundson <davidedmundson@kde.org>
@@ -148,6 +150,7 @@ validpgpkeys=('E0A3EB202F8E57528E13E72FD7574483BB57B18D'  # Jonathan Esk-Riddell
 
 prepare() {
   patch -p1 -d "$srcdir/$pkgname-$pkgver" -i "$srcdir/0001-Avoid-assert-on-shortcut-handling-when-used-with-kio.patch"
+  patch -p1 -d "$srcdir/$pkgname-$pkgver" -i "$srcdir/0002-shellcorona-delete-containments-in-a-for-loop.patch"
 }
 
 
