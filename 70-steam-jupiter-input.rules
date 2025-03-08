@@ -1,5 +1,5 @@
-# USB devices
-SUBSYSTEM=="usb", TAG+="uaccess"
+# USB devices and topological children
+SUBSYSTEMS=="usb", TAG+="uaccess"
 
 # HID devices over hidraw
 KERNEL=="hidraw*", TAG+="uaccess"
