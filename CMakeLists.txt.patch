@@ -1,9 +1,13 @@
 diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 3160e72..e134ddc 100644
 index fdfa428..0f10c1f 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
-@@ -62,7 +62,6 @@ add_subdirectory(src)
- add_subdirectory(kcm)
+@@ -59,10 +59,8 @@ set(CMAKE_CXX_STANDARD 17)
+ find_package(PlasmaWaylandProtocols REQUIRED)
+ 
+ add_subdirectory(src)
+-add_subdirectory(kcm)
  
  configure_file(org.kde.plasma-remotecontrollers.desktop.cmake ${CMAKE_CURRENT_BINARY_DIR}/org.kde.plasma-remotecontrollers.desktop @ONLY)
 -install(FILES ${CMAKE_CURRENT_BINARY_DIR}/org.kde.plasma-remotecontrollers.desktop DESTINATION ${KDE_INSTALL_SYSCONFDIR}/xdg/autostart)
