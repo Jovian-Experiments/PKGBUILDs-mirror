@@ -1,5 +1,5 @@
 
-`main @ 20250306.1001`
+`main @ 20250310.1000`
 ======================
 
 Valve packages
@@ -7,9 +7,9 @@ Valve packages
 
 ### `holo-main`
  * [`atomupd-daemon` — `holo-main/atomupd-daemon-0.20250122.0-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/atomupd-daemon-0.20250122.0-1)
- * [`bluez` — `holo-main/bluez-5.79-1.8`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/bluez-5.79-1.8)
- * [`bluez-libs` — `holo-main/bluez-5.79-1.8`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/bluez-5.79-1.8)
- * [`bluez-utils` — `holo-main/bluez-5.79-1.8`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/bluez-5.79-1.8)
+ * [`bluez` — `holo-main/bluez-5.79-1.9`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/bluez-5.79-1.9)
+ * [`bluez-libs` — `holo-main/bluez-5.79-1.9`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/bluez-5.79-1.9)
+ * [`bluez-utils` — `holo-main/bluez-5.79-1.9`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/bluez-5.79-1.9)
  * [`breakpad` — `holo-main/breakpad-v2023.06.01-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/breakpad-v2023.06.01-1)
  * [`casync` — `holo-main/casync-2.r227.g99559cd-4.4`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/casync-2.r227.g99559cd-4.4)
  * [`desync` — `holo-main/desync-0.9.6-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/desync-0.9.6-1.1)
@@ -81,7 +81,7 @@ Valve packages
  * [`jupiter-legacy-support` — `jupiter-main/jupiter-legacy-support-1.153-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-legacy-support-1.153-1)
  * [`jupiter-resolved-nomdns` — `jupiter-main/jupiter-resolved-nomdns-1.0-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-resolved-nomdns-1.0-1)
  * [`jupiter-steamos-log-submitter` — `jupiter-main/jupiter-steamos-log-submitter-1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-steamos-log-submitter-1-1)
- * [`kwin` — `jupiter-main/kwin-6.2.5-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/kwin-6.2.5-1.1)
+ * [`kwin` — `jupiter-main/kwin-6.2.5-1.2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/kwin-6.2.5-1.2)
  * [`libva-mesa-driver` — `jupiter-main/mesa-24.3.4.197725.radeonsi_24.3.4-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/mesa-24.3.4.197725.radeonsi_24.3.4-2)
  * [`libwireplumber` — `jupiter-main/wireplumber-0.5.7-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/wireplumber-0.5.7-1.1)
  * [`linux-firmware-neptune` — `jupiter-main/linux-firmware-neptune-jupiter.20240917.1-4`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/linux-firmware-neptune-jupiter.20240917.1-4)
@@ -90,16 +90,16 @@ Valve packages
  * [`mangohud` — `jupiter-main/mangohud-0.7.2.rc3.r11.g31f2ca5-2.3`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/mangohud-0.7.2.rc3.r11.g31f2ca5-2.3)
  * [`mesa` — `jupiter-main/mesa-24.3.4.197725.radeonsi_24.3.4-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/mesa-24.3.4.197725.radeonsi_24.3.4-2)
  * [`mesa-vdpau` — `jupiter-main/mesa-24.3.4.197725.radeonsi_24.3.4-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/mesa-24.3.4.197725.radeonsi_24.3.4-2)
- * [`plasma-remotecontrollers` — `jupiter-main/plasma-remotecontrollers-5.26.90.r256.g8daeecc-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/plasma-remotecontrollers-5.26.90.r256.g8daeecc-1)
+ * [`plasma-remotecontrollers` — `jupiter-main/plasma-remotecontrollers-5.26.90.r258.g9ace9a9-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/plasma-remotecontrollers-5.26.90.r258.g9ace9a9-1)
  * [`plasma-workspace` — `jupiter-main/plasma-workspace-6.2.5-1.2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/plasma-workspace-6.2.5-1.2)
  * [`pyzy` — `jupiter-main/pyzy-1.1-2.4`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/pyzy-1.1-2.4)
  * [`renderdoc-minimal` — `jupiter-main/renderdoc-minimal-1.36-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/renderdoc-minimal-1.36-1.1)
  * [`steam-im-modules` — `jupiter-main/steam-im-modules-jupiter.20240131-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steam-im-modules-jupiter.20240131-2)
- * [`steam-jupiter-stable` — `jupiter-main/steam-jupiter-stable-1.0.0.79-1.5`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steam-jupiter-stable-1.0.0.79-1.5)
+ * [`steam-jupiter-stable` — `jupiter-main/steam-jupiter-stable-1.0.0.79-1.6`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steam-jupiter-stable-1.0.0.79-1.6)
  * [`steam_notif_daemon` — `jupiter-main/steam_notif_daemon-v1.0.1-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steam_notif_daemon-v1.0.1-2)
  * [`steamdeck-dsp` — `jupiter-main/steamdeck-dsp-0.57-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steamdeck-dsp-0.57-1)
  * [`steamdeck-kde-presets` — `jupiter-main/steamdeck-kde-presets-0.27-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steamdeck-kde-presets-0.27-1)
- * [`steamos-customizations-jupiter` — `jupiter-main/steamos-customizations-jupiter-20250219.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steamos-customizations-jupiter-20250219.1-1)
+ * [`steamos-customizations-jupiter` — `jupiter-main/steamos-customizations-jupiter-20250310.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steamos-customizations-jupiter-20250310.1-1)
  * [`steamos-devkit-service` — `jupiter-main/steamos-devkit-service-0.20220401.0-7`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steamos-devkit-service-0.20220401.0-7)
  * [`steamos-powerbuttond` — `jupiter-main/steamos-powerbuttond-3.0-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steamos-powerbuttond-3.0-1)
  * [`upower` — `jupiter-main/upower-0.99.15.jupiter-1.4`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/upower-0.99.15.jupiter-1.4)
@@ -226,7 +226,6 @@ Arch Linux packages
  * [`efivar/39-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/efivar/-/tree/39-1)
  * [`elfutils/0.192-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/elfutils/-/tree/0.192-2)
  * [`ell/0.71-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/ell/-/tree/0.71-1)
- * [`encfs/1.9.5-7`](https://gitlab.archlinux.org/archlinux/packaging/packages/encfs/-/tree/1.9.5-7)
  * [`enchant/2.8.2-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/enchant/-/tree/2.8.2-1)
  * [`evtest/1.35-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/evtest/-/tree/1.35-2)
  * [`exfat-utils/1.4.0-3`](https://gitlab.archlinux.org/archlinux/packaging/packages/exfat-utils/-/tree/1.4.0-3)
@@ -284,6 +283,7 @@ Arch Linux packages
  * [`gnupg/2.4.7-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/gnupg/-/tree/2.4.7-1)
  * [`gnutls/3.8.8-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/gnutls/-/tree/3.8.8-1)
  * [`gobject-introspection-runtime/1.82.0-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/gobject-introspection-runtime/-/tree/1.82.0-2)
+ * [`gocryptfs/2.4.0-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/gocryptfs/-/tree/2.4.0-2)
  * [`gperftools/2.16-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/gperftools/-/tree/2.16-1)
  * [`gpgme/1.24.1-3`](https://gitlab.archlinux.org/archlinux/packaging/packages/gpgme/-/tree/1.24.1-3)
  * [`gpm/1.20.7.r38.ge82d1a6-6`](https://gitlab.archlinux.org/archlinux/packaging/packages/gpm/-/tree/1.20.7.r38.ge82d1a6-6)
@@ -928,7 +928,6 @@ Arch Linux packages
  * [`tevent/1:0.16.1-4`](https://gitlab.archlinux.org/archlinux/packaging/packages/tevent/-/tree/1:0.16.1-4)
  * [`threadweaver/6.9.0-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/threadweaver/-/tree/6.9.0-1)
  * [`tinysparql/3.8.2-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/tinysparql/-/tree/3.8.2-2)
- * [`tinyxml2/10.0.0-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/tinyxml2/-/tree/10.0.0-1)
  * [`tk/8.6.16-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/tk/-/tree/8.6.16-1)
  * [`tmux/3.5_a-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/tmux/-/tree/3.5_a-1)
  * [`tpm2-tss/4.1.3-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/tpm2-tss/-/tree/4.1.3-1)
