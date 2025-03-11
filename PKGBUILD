@@ -5,9 +5,9 @@ pkgbase=linux-firmware-neptune
 pkgname=(linux-firmware-neptune-whence linux-firmware-neptune  amd-ucode-neptune
          linux-firmware-neptune-{nfp,mellanox,marvell,qcom,liquidio,qlogic,bnx2x}
 )
-_tag=jupiter-20240917.1
+_tag=jupiter-20250311.1
 pkgver=${_tag//-/.}
-pkgrel=4
+pkgrel=1
 pkgdesc="Firmware files for Linux"
 url="https://gitlab.steamos.cloud/jupiter/linux-firmware-neptune"
 license=(
@@ -19,6 +19,8 @@ license=(
 arch=('any')
 makedepends=(
   git
+  parallel
+  python
   rdfind
   openssh
 )
@@ -94,6 +96,9 @@ package_linux-firmware-neptune() {
   cd ${pkgbase}
 
   ZSTD_CLEVEL=19 make DESTDIR="${pkgdir}" FIRMWAREDIR=/usr/lib/firmware install-zst
+
+  # holo: compat with older jupiter kernels
+  ln -s /usr/lib/firmware/ath11k/QCA2066 ${pkgdir}/usr/lib/firmware/ath11k/QCA206X
 
   install -Dt "${pkgdir}/usr/share/licenses/${pkgname}" -m644 LICEN*
 
