@@ -1,5 +1,5 @@
 
-`main @ 20250310.1000`
+`main @ 20250312.1000`
 ======================
 
 Valve packages
@@ -65,9 +65,9 @@ Valve packages
 
 ### `jupiter-main`
  * [`alsa-ucm-conf` — `jupiter-main/alsa-ucm-conf-1.2.12-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/alsa-ucm-conf-1.2.12-1.1)
- * [`amd-ucode-neptune` — `jupiter-main/linux-firmware-neptune-jupiter.20240917.1-4`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/linux-firmware-neptune-jupiter.20240917.1-4)
+ * [`amd-ucode-neptune` — `jupiter-main/linux-firmware-neptune-jupiter.20250311.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/linux-firmware-neptune-jupiter.20250311.1-1)
  * [`galileo-mura` — `jupiter-main/galileo-mura-v0.9-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/galileo-mura-v0.9-2)
- * [`gamescope` — `jupiter-main/gamescope-3.16.2-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/gamescope-3.16.2-2)
+ * [`gamescope` — `jupiter-main/gamescope-3.16.2-3`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/gamescope-3.16.2-3)
  * [`gpu-trace` — `jupiter-main/gpu-trace-2.14-1.2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/gpu-trace-2.14-1.2)
  * [`holo-nix-offload` — `jupiter-main/holo-nix-offload-0.2-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/holo-nix-offload-0.2-1)
  * [`ibus-anthy` — `jupiter-main/ibus-anthy-1.5.14-4.3`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/ibus-anthy-1.5.14-4.3)
@@ -84,9 +84,9 @@ Valve packages
  * [`kwin` — `jupiter-main/kwin-6.2.5-1.2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/kwin-6.2.5-1.2)
  * [`libva-mesa-driver` — `jupiter-main/mesa-24.3.4.197725.radeonsi_24.3.4-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/mesa-24.3.4.197725.radeonsi_24.3.4-2)
  * [`libwireplumber` — `jupiter-main/wireplumber-0.5.7-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/wireplumber-0.5.7-1.1)
- * [`linux-firmware-neptune` — `jupiter-main/linux-firmware-neptune-jupiter.20240917.1-4`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/linux-firmware-neptune-jupiter.20240917.1-4)
- * [`linux-firmware-neptune-whence` — `jupiter-main/linux-firmware-neptune-jupiter.20240917.1-4`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/linux-firmware-neptune-jupiter.20240917.1-4)
- * [`linux-neptune-611` — `jupiter-main/linux-neptune-611-6.11.11.valve7-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/linux-neptune-611-6.11.11.valve7-1)
+ * [`linux-firmware-neptune` — `jupiter-main/linux-firmware-neptune-jupiter.20250311.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/linux-firmware-neptune-jupiter.20250311.1-1)
+ * [`linux-firmware-neptune-whence` — `jupiter-main/linux-firmware-neptune-jupiter.20250311.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/linux-firmware-neptune-jupiter.20250311.1-1)
+ * [`linux-neptune-611` — `jupiter-main/linux-neptune-611-6.11.11.valve8-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/linux-neptune-611-6.11.11.valve8-1)
  * [`mangohud` — `jupiter-main/mangohud-0.7.2.rc3.r11.g31f2ca5-2.3`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/mangohud-0.7.2.rc3.r11.g31f2ca5-2.3)
  * [`mesa` — `jupiter-main/mesa-24.3.4.197725.radeonsi_24.3.4-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/mesa-24.3.4.197725.radeonsi_24.3.4-2)
  * [`mesa-vdpau` — `jupiter-main/mesa-24.3.4.197725.radeonsi_24.3.4-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/mesa-24.3.4.197725.radeonsi_24.3.4-2)
@@ -95,7 +95,7 @@ Valve packages
  * [`pyzy` — `jupiter-main/pyzy-1.1-2.4`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/pyzy-1.1-2.4)
  * [`renderdoc-minimal` — `jupiter-main/renderdoc-minimal-1.36-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/renderdoc-minimal-1.36-1.1)
  * [`steam-im-modules` — `jupiter-main/steam-im-modules-jupiter.20240131-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steam-im-modules-jupiter.20240131-2)
- * [`steam-jupiter-stable` — `jupiter-main/steam-jupiter-stable-1.0.0.79-1.6`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steam-jupiter-stable-1.0.0.79-1.6)
+ * [`steam-jupiter-stable` — `jupiter-main/steam-jupiter-stable-1.0.0.81-2.2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steam-jupiter-stable-1.0.0.81-2.2)
  * [`steam_notif_daemon` — `jupiter-main/steam_notif_daemon-v1.0.1-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steam_notif_daemon-v1.0.1-2)
  * [`steamdeck-dsp` — `jupiter-main/steamdeck-dsp-0.57-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steamdeck-dsp-0.57-1)
  * [`steamdeck-kde-presets` — `jupiter-main/steamdeck-kde-presets-0.27-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steamdeck-kde-presets-0.27-1)
