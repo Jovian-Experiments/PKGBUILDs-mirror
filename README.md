@@ -1,5 +1,5 @@
 
-`release @ 20250304.1`
+`release @ 20250313.1`
 ======================
 
 Valve packages
@@ -863,7 +863,7 @@ Arch Linux packages
  * [`volume_key/0.3.12-8`](https://gitlab.archlinux.org/archlinux/packaging/packages/volume_key/-/tree/0.3.12-8)
  * [`vpower/1.4.1-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/vpower/-/tree/1.4.1-1)
  * [`vulkan-icd-loader/1.3.276-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/vulkan-icd-loader/-/tree/1.3.276-1)
- * [`vulkan-radeon/24.1.0_devel.188139.steamos_24.4.6-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/vulkan-radeon/-/tree/24.1.0_devel.188139.steamos_24.4.6-1)
+ * [`vulkan-radeon/24.1.0_devel.188140.steamos_24.4.7-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/vulkan-radeon/-/tree/24.1.0_devel.188140.steamos_24.4.7-1)
  * [`vulkan-tools/1.3.269-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/vulkan-tools/-/tree/1.3.269-1)
  * [`wakehook/2-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/wakehook/-/tree/2-2)
  * [`wayland/1.23.0-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/wayland/-/tree/1.23.0-2)
