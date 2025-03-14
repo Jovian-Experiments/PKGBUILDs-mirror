@@ -1,5 +1,5 @@
 
-`main @ 20250313.1000`
+`main @ 20250313.1001`
 ======================
 
 Valve packages
@@ -67,7 +67,7 @@ Valve packages
  * [`alsa-ucm-conf` — `jupiter-main/alsa-ucm-conf-1.2.12-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/alsa-ucm-conf-1.2.12-1.1)
  * [`amd-ucode-neptune` — `jupiter-main/linux-firmware-neptune-jupiter.20250311.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/linux-firmware-neptune-jupiter.20250311.1-1)
  * [`galileo-mura` — `jupiter-main/galileo-mura-v0.9-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/galileo-mura-v0.9-2)
- * [`gamescope` — `jupiter-main/gamescope-3.16.2-3`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/gamescope-3.16.2-3)
+ * [`gamescope` — `jupiter-main/gamescope-3.16.2-4`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/gamescope-3.16.2-4)
  * [`gpu-trace` — `jupiter-main/gpu-trace-2.14-1.2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/gpu-trace-2.14-1.2)
  * [`holo-nix-offload` — `jupiter-main/holo-nix-offload-0.2-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/holo-nix-offload-0.2-1)
  * [`ibus-anthy` — `jupiter-main/ibus-anthy-1.5.14-4.3`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/ibus-anthy-1.5.14-4.3)
@@ -77,7 +77,7 @@ Valve packages
  * [`jupiter-dock-updater-bin` — `jupiter-main/jupiter-dock-updater-bin-20250220.02-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-dock-updater-bin-20250220.02-1)
  * [`jupiter-fan-control` — `jupiter-main/jupiter-fan-control-20240523.3-4`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-fan-control-20240523.3-4)
  * [`jupiter-firewall` — `jupiter-main/jupiter-firewall-0.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-firewall-0.1-1)
- * [`jupiter-hw-support` — `jupiter-main/jupiter-hw-support-20250306.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-hw-support-20250306.1-1)
+ * [`jupiter-hw-support` — `jupiter-main/jupiter-hw-support-20250313.1-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-hw-support-20250313.1-2)
  * [`jupiter-legacy-support` — `jupiter-main/jupiter-legacy-support-1.153-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-legacy-support-1.153-1)
  * [`jupiter-resolved-nomdns` — `jupiter-main/jupiter-resolved-nomdns-1.0-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-resolved-nomdns-1.0-1)
  * [`jupiter-steamos-log-submitter` — `jupiter-main/jupiter-steamos-log-submitter-1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-steamos-log-submitter-1-1)
