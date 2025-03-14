@@ -1,5 +1,5 @@
 
-`main @ 20250312.1000`
+`main @ 20250313.1000`
 ======================
 
 Valve packages
@@ -73,7 +73,7 @@ Valve packages
  * [`ibus-anthy` — `jupiter-main/ibus-anthy-1.5.14-4.3`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/ibus-anthy-1.5.14-4.3)
  * [`ibus-pinyin` — `jupiter-main/ibus-pinyin-1.5.1-2.2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/ibus-pinyin-1.5.1-2.2)
  * [`ibus-table-cangjie-lite` — `jupiter-main/ibus-table-cangjie-lite-1.8.8-2.3`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/ibus-table-cangjie-lite-1.8.8-2.3)
- * [`inputplumber` — `jupiter-main/inputplumber-0.47.2-4`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/inputplumber-0.47.2-4)
+ * [`inputplumber` — `jupiter-main/inputplumber-0.49.4-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/inputplumber-0.49.4-1)
  * [`jupiter-dock-updater-bin` — `jupiter-main/jupiter-dock-updater-bin-20250220.02-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-dock-updater-bin-20250220.02-1)
  * [`jupiter-fan-control` — `jupiter-main/jupiter-fan-control-20240523.3-4`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-fan-control-20240523.3-4)
  * [`jupiter-firewall` — `jupiter-main/jupiter-firewall-0.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-firewall-0.1-1)
