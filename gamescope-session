@@ -167,11 +167,13 @@ if [[ $board_name = "Galileo" ]]; then
 	export STEAM_DISPLAY_REFRESH_LIMITS=45,90
 	export STEAM_GAMESCOPE_FORCE_HDR_DEFAULT=1
 	export STEAM_GAMESCOPE_FORCE_OUTPUT_TO_HDR10PQ_DEFAULT=1
-else
+elif [[ $board_name = "Jupiter" ]]; then
 	ui_background=/usr/share/plymouth/themes/steamos/steamos-jupiter.png
 
 	# Set refresh rate range for the legacy refresh swtching UI
 	export STEAM_DISPLAY_REFRESH_LIMITS=40,60
+else
+	ui_background=/usr/share/plymouth/themes/steamos/steamos.png
 fi
 export STEAM_UPDATEUI_PNG_BACKGROUND=$ui_background
 
