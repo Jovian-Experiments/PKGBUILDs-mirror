@@ -4,7 +4,7 @@
 # Everything still in here should be either removed or re-homed to a proper package.
 
 pkgname=jupiter-legacy-support
-pkgver=1.153
+pkgver=1.154
 pkgrel=1
 pkgdesc="Legacy jupiter-specific support files that haven't been split to their own package or removed."
 arch=(any)
@@ -24,7 +24,7 @@ sha256sums=('7fbb99b93049f19260da6a3add0222302c0c568a6d3e3a2d592e3674a614b3d0'
             'e34a9dc905771bd99cd04cdf88262481cab7a7808d99dfaa968366fcb1b99a0b'
             '582cae3c9f9d4639f027defafe6fa33bda0a3a4d441290d926ad85a2be0f7206'
             'a7b8b21e285dac1f255546d1acc46d4423a1fa0e964153a96118b884001d0648'
-            'c905bdd26509ff3b8114c4265c73f6a37301de8f895794c317156adaae3e2adb'
+            'ed5f393af68b2a8f39eefd1866087b8536d6474d823aff738ea8a9165a1e032b'
             '3f3491c7ccf72b62094379495c73e6fdecd182d5aa30072b3b2407e331b96806'
             '27739fb50e5c2dd50e3373b22b5ceabb6eb2f6f34b723794cf9a2f911a483f65'
             '942fbb9436835bdb3a87aa8d73b3461f4cee0bc2f58bfa308eeb1be6b52ccb39'
