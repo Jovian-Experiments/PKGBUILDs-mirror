@@ -14,7 +14,7 @@ set -euo pipefail
 #   reboot
 
 # The URL to query to determine what OOBE image to grab
-OOBE_IMAGE_VER_URL="https://galileo-images.steamos.cloud/galileo/latest-oobe-test-image.txt"
+OOBE_IMAGE_VER_URL="https://steamdeck-images.steamos.cloud/steamdeck/latest-oobe-test-image.txt"
 
 _log() { printf >&2 "[$1] %s\n" "${*:2}"; }
 log() { _log - "$*"; }
