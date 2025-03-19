@@ -1,7 +1,8 @@
-# Maintainer: Collabora Ltd <gael.portay@collabora.com>
+# Maintainer: Ludovico de Nittis <ludovico.denittis@collabora.com>
+# Maintainer: Vivek Das Mohapatra <vivek.dasmohapatra@collabora.com>
 
 pkgname=steamos-customizations-jupiter
-_srctag=jupiter-20250310.1
+_srctag=jupiter-20250318.1
 _srcver=${_srctag#jupiter-}
 pkgver=${_srcver//-/.}
 pkgrel=1
