@@ -1,7 +1,7 @@
 # Maintainer David Edmundson (bluesystems@davidedmundson.co.uk)
 
 pkgname=steamdeck-kde-presets
-_srctag=0.27
+_srctag=0.28
 pkgver=${_srctag#jupiter-}
 pkgrel=1
 arch=('any')
@@ -15,4 +15,6 @@ sha512sums=(SKIP)
 
 package() {
   cp -R "$srcdir"/steamdeck-kde-presets/* "$pkgdir"
+  install -d -m0755 "$pkgdir/usr/lib/systemd/system/multi-user.target.wants/"
+  ln -s ../steamos-set-plasma-theme.service "$pkgdir/usr/lib/systemd/system/multi-user.target.wants/"
 }
