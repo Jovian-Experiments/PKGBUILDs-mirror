@@ -3,7 +3,7 @@
 pkgname=gamescope
 _srctag=3.16.2
 pkgver=${_srctag//-/.}
-pkgrel=5
+pkgrel=6
 pkgdesc="gaming shell based on Xwayland, powered by Vulkan and DRM"
 arch=(x86_64)
 url="https://github.com/ValveSoftware/gamescope"
@@ -42,15 +42,15 @@ sha256sums=('941f5a16a495c9c4de0302819c0069749db6915345ac1e207a12544863391e4b'
             'e4add84152c3c0dfa53cf6bd2a1f15c2ce74d2312f7fa945b9476e91c8752544'
             'ce7e26d4145b44a1161d8ec050fb97f3c8786b7c5b719f36aa1dfb984b5863c1'
             'b74f4515a3ed793973b3be6eca145d7ba862dbf50218c694fb478ba725bfd025'
-            '2cba6cd1a89767ef1b8a5044faa43394b9d1b24d0a64e24df1c42ec88e54cd60'
-            '7a651035b786da325b2fbce7dec314d1a6a5d602ed053cb768c37bb5e3e1fd9d'
-            '60e3701b96d1f7083d4a3c48b6c9ce372da55f65bab92ee2fff694158541a445'
+            'd9a8e593bea8ea0afc96cec3849c48e87b686d263a5d7a09a272237cc35acb52'
+            '81da49a733a757a4848a5c95011c3f9d3e584373244722ed9b26687ae0126793'
+            'd010a36f52f2122b51f8a0bdc983560a553759f85c2eb5a9ccb2b1a6de367059'
             'a40cd2618b51f4aed7f44bffb5e9eda17bd5a0d8cd4629104b323cc969e333cc'
             'bc2e16bbff2357091f04b7049b9fa40d3fc8d75e909c09310ebe39acc5c09621'
-            'c9bf7bcb0c3fd7ad9787621c471e4dadb6d0c1cfe54d39991917495d4287f415'
-            '41115eb48d3bb5b821f0a7eec186e45020a1cbeedb2604499b65140dcd8249e3'
+            'eed4e14ff49e5812c48311c9f177710dac29bde2ece60174b96e546c54a0d016'
+            '609da4097f9addc83f07647cc6e5c75493ddc8372853868c033d1c71c5c0cce9'
             'ec7aea652cae955089c58d4ad2b53d0b2caedcf63239a73587f4311f89150a30'
-            'b028629e3d41ccbad4af46d491b72340e221abbcb4af608627f6d0bd7d1c0d12'
+            '7ad42dfd12a8d429b9d29dbf58131cf2c7e1740ff4e6830df1d9524c95fa2582'
             '525060896abef2da9db8d8294253b7444d60e48cf6cc0496ca48fc7084cc8590'
             'dea09abb47c3d907c00ff7f36967b599f3caca554ac6eb7b7dc6d2d78651dd44'
             '928b91e4ee11d9b7f7cdc092632f6337da2ae1bb394089663df5a45699ab1b9b'
