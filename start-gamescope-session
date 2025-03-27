@@ -1,5 +1,9 @@
 #!/bin/sh
 
+# It is possible to get things remaining from the previous session if SDDM is sigkilled by root systemd
+# and our units are still running in the user systemd
+systemctl --user stop gamescope-session.target
+systemctl --user stop graphical-session-pre.target
 systemctl --user reset-failed
 
 # SDDM sets this to wayland but apps using Gamescope must use x11
