@@ -7,7 +7,7 @@ pkgname=(linux-firmware-neptune-whence linux-firmware-neptune  amd-ucode-neptune
 )
 _tag=jupiter-20250311.1
 pkgver=${_tag//-/.}
-pkgrel=1
+pkgrel=2
 pkgdesc="Firmware files for Linux"
 url="https://gitlab.steamos.cloud/jupiter/linux-firmware-neptune"
 license=(
@@ -98,7 +98,9 @@ package_linux-firmware-neptune() {
   ZSTD_CLEVEL=19 make DESTDIR="${pkgdir}" FIRMWAREDIR=/usr/lib/firmware install-zst
 
   # holo: compat with older jupiter kernels
-  ln -s /usr/lib/firmware/ath11k/QCA2066 ${pkgdir}/usr/lib/firmware/ath11k/QCA206X
+  ln -s QCA2066 ${pkgdir}/usr/lib/firmware/ath11k/QCA206X
+  ln -s cirrus/cs35l41-dsp1-spk-prot-vlv1776.wmfw.zst ${pkgdir}/usr/lib/firmware/cs35l41-dsp1-spk-prot.wmfw.zst
+  ln -s cirrus/cs35l41-dsp1-spk-prot-vlv1776.bin.zst ${pkgdir}/usr/lib/firmware/cs35l41-dsp1-spk-prot.bin.zst
 
   install -Dt "${pkgdir}/usr/share/licenses/${pkgname}" -m644 LICEN*
 
