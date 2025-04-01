@@ -1,10 +1,11 @@
 pkgname=steamos-devkit-service
-pkgver=0.20220401.0
+pkgdesc="SteamOS Devkit Service"
+pkgver=0.20250401.0
 pkgrel=7
 arch=('any')
 url="https://gitlab.steamos.cloud/devkit/steamos-devkit-service"
 license=('LGPL-2.1+')
-_commit=3b924e16bea6009d464d497fae378c637407c4cf # tags/v0.20220401.0
+_commit=3bfc0d0b14be95e717a53859abd5bd8df626376d
 source=(
     git+https://gitlab.steamos.cloud/devkit/steamos-devkit-service.git#commit=$_commit
     steamos-devkit-service.service
