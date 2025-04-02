@@ -7,7 +7,7 @@
 # and then manually merge the resulting PKGBUILD with this file.
 
 pkgname=inputplumber
-pkgver=0.49.4
+pkgver=0.51.0
 pkgrel=1
 pkgdesc="Open source input router and remapper daemon for Linux"
 arch=('x86_64')
@@ -31,7 +31,7 @@ makedepends=(
   cargo
   holo-rust-packaging-tools
 )
-source=('inputplumber-0.49.4.tar.gz::https://github.com/ShadowBlip/InputPlumber/archive/v0.49.4.tar.gz'
+source=('inputplumber-0.51.0.tar.gz::https://github.com/ShadowBlip/InputPlumber/archive/v0.51.0.tar.gz'
         'addr2line-0.21.0.tar.gz::https://crates.io/api/v1/crates/addr2line/0.21.0/download'
         'adler-1.0.2.tar.gz::https://crates.io/api/v1/crates/adler/1.0.2/download'
         'aho-corasick-1.1.3.tar.gz::https://crates.io/api/v1/crates/aho-corasick/1.1.3/download'
@@ -88,6 +88,7 @@ source=('inputplumber-0.49.4.tar.gz::https://github.com/ShadowBlip/InputPlumber/
         'darling_macro-0.20.10.tar.gz::https://crates.io/api/v1/crates/darling_macro/0.20.10/download'
         'deranged-0.3.11.tar.gz::https://crates.io/api/v1/crates/deranged/0.3.11/download'
         'diff-0.1.13.tar.gz::https://crates.io/api/v1/crates/diff/0.1.13/download'
+        'dyn-clone-1.0.19.tar.gz::https://crates.io/api/v1/crates/dyn-clone/1.0.19/download'
         'either-1.12.0.tar.gz::https://crates.io/api/v1/crates/either/1.12.0/download'
         'endi-1.1.0.tar.gz::https://crates.io/api/v1/crates/endi/1.1.0/download'
         'enumflags2-0.7.9.tar.gz::https://crates.io/api/v1/crates/enumflags2/0.7.9/download'
@@ -203,9 +204,13 @@ source=('inputplumber-0.49.4.tar.gz::https://github.com/ShadowBlip/InputPlumber/
         'rustix-0.38.34.tar.gz::https://crates.io/api/v1/crates/rustix/0.38.34/download'
         'rustversion-1.0.19.tar.gz::https://crates.io/api/v1/crates/rustversion/1.0.19/download'
         'ryu-1.0.18.tar.gz::https://crates.io/api/v1/crates/ryu/1.0.18/download'
+        'schemars-0.8.22.tar.gz::https://crates.io/api/v1/crates/schemars/0.8.22/download'
+        'schemars_derive-0.8.22.tar.gz::https://crates.io/api/v1/crates/schemars_derive/0.8.22/download'
         'scopeguard-1.2.0.tar.gz::https://crates.io/api/v1/crates/scopeguard/1.2.0/download'
         'serde-1.0.217.tar.gz::https://crates.io/api/v1/crates/serde/1.0.217/download'
         'serde_derive-1.0.217.tar.gz::https://crates.io/api/v1/crates/serde_derive/1.0.217/download'
+        'serde_derive_internals-0.29.1.tar.gz::https://crates.io/api/v1/crates/serde_derive_internals/0.29.1/download'
+        'serde_json-1.0.140.tar.gz::https://crates.io/api/v1/crates/serde_json/1.0.140/download'
         'serde_repr-0.1.19.tar.gz::https://crates.io/api/v1/crates/serde_repr/0.1.19/download'
         'serde_yaml-0.9.34+deprecated.tar.gz::https://crates.io/api/v1/crates/serde_yaml/0.9.34+deprecated/download'
         'shlex-1.3.0.tar.gz::https://crates.io/api/v1/crates/shlex/1.3.0/download'
@@ -303,7 +308,7 @@ source=('inputplumber-0.49.4.tar.gz::https://github.com/ShadowBlip/InputPlumber/
         'zvariant_derive-5.4.0.tar.gz::https://crates.io/api/v1/crates/zvariant_derive/5.4.0/download'
         'zvariant_utils-3.2.0.tar.gz::https://crates.io/api/v1/crates/zvariant_utils/3.2.0/download')
 
-sha256sums=('f7ac75659fd242921f7f211959a4ef4fb40a0dc635096424e3d1328f44056907'
+sha256sums=('b110e03c23a1e15dc1917373c839a2fbdcf9f944228538fc67ee4414fac08dee'
             '8a30b2e23b9e17a9f90641c7ab1549cd9b44f296d3ccbf309d2863cfe398a0cb'
             'f26201604c87b1e01bd3d98f8d5d9a8fcbb815e8cedb41ffccbeb4bf593a35fe'
             '8e60d3430d3a69478ad0993f19238d2df97c507009a52b3c10addcd7f6bcb916'
@@ -360,6 +365,7 @@ sha256sums=('f7ac75659fd242921f7f211959a4ef4fb40a0dc635096424e3d1328f44056907'
             'd336a2a514f6ccccaa3e09b02d41d35330c07ddf03a62165fcec10bb561c7806'
             'b42b6fa04a440b495c8b04d0e71b707c585f83cb9cb28cf8cd0d976c315e31b4'
             '56254986775e3233ffa9c4d7d3faaf6d36a2c09d30b20687e9f88bc8bafc16c8'
+            '1c7a8fb8a9fbf66c1f703fe16184d10ca0ee9d23be5b4436400408ba54a95005'
             '3dca9240753cf90908d7e4aac30f630662b02aebaa1b58a3cadabdb23385b58b'
             'a3d8a32ae18130a3c84dd492d4215c3d913c3b07c6b63c2eb3eb7ff1101ab7bf'
             '3278c9d5fb675e0a51dabcf4c0d355f692b064171535ba72361be1528a9d8e8d'
@@ -475,9 +481,13 @@ sha256sums=('f7ac75659fd242921f7f211959a4ef4fb40a0dc635096424e3d1328f44056907'
             '70dc5ec042f7a43c4a73241207cecc9873a06d45debb38b329f8541d85c2730f'
             'f7c45b9784283f1b2e7fb61b42047c2fd678ef0960d4f6f1eba131594cc369d4'
             'f3cb5ba0dc43242ce17de99c180e96db90b235b8a9fdc9543c96d2209116bd9f'
+            '3fbf2ae1b8bc8e02df939598064d22402220cd5bbcca1c76f7d6a310974d5615'
+            '32e265784ad618884abaea0600a9adf15393368d840e0222d101a072f3f7534d'
             '94143f37725109f92c262ed2cf5e59bce7498c01bcc1502d7b9afe439a4e9f49'
             '02fc4265df13d6fa1d00ecff087228cc0a2b5f3c0e87e258d8b94a156e984c70'
             '5a9bf7cf98d04a2b28aead066b7496853d4779c9cc183c440dbac457641e19a0'
+            '18d26a20a969b9e3fdf2fc2d9f21eda6c40e2de84c9408bb5d3b05d499aae711'
+            '20068b6e96dc6c9bd23e01df8827e6c7e1f2fddd43c21810382803c136b99373'
             '6c64451ba24fc7a6a2d60fc75dd9c83c90903b19028d4eff35e88fc1e86564e9'
             '6a8b1a1a2ebf674015cc02edccce75287f1a0130d394307b36743c2f5d504b47'
             '0fda2ff0d084019ba4d7c6f371c95d8fd75ce3524c3cb8fb653a3023f6323e64'
