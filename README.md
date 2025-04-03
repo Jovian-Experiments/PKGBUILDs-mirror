@@ -1,5 +1,5 @@
 
-`main @ 20250402.1000`
+`main @ 20250402.1001`
 ======================
 
 Valve packages
@@ -99,7 +99,7 @@ Valve packages
  * [`steam_notif_daemon` — `jupiter-main/steam_notif_daemon-v1.0.1-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steam_notif_daemon-v1.0.1-2)
  * [`steamdeck-dsp` — `jupiter-main/steamdeck-dsp-0.61-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steamdeck-dsp-0.61-1)
  * [`steamdeck-kde-presets` — `jupiter-main/steamdeck-kde-presets-0.28-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steamdeck-kde-presets-0.28-1)
- * [`steamos-customizations-jupiter` — `jupiter-main/steamos-customizations-jupiter-20250318.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steamos-customizations-jupiter-20250318.1-1)
+ * [`steamos-customizations-jupiter` — `jupiter-main/steamos-customizations-jupiter-20250402.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steamos-customizations-jupiter-20250402.1-1)
  * [`steamos-devkit-service` — `jupiter-main/steamos-devkit-service-0.20250401.0-7`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steamos-devkit-service-0.20250401.0-7)
  * [`steamos-powerbuttond` — `jupiter-main/steamos-powerbuttond-3.0-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steamos-powerbuttond-3.0-1)
  * [`upower` — `jupiter-main/upower-0.99.15.jupiter-1.4`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/upower-0.99.15.jupiter-1.4)
