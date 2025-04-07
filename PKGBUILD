@@ -2,8 +2,8 @@
 # Contributor: Emil Velikov <emil.l.velikov@gmail.com>
 
 pkgname=('mangohud' 'lib32-mangohud')
-pkgver=0.7.2.rc3.r11.g31f2ca5
-pkgrel=2.3
+pkgver=0.8.1.r30.g07a04a2
+pkgrel=1
 pkgdesc="Vulkan and OpenGL overlay to display performance information"
 url="https://github.com/flightlessmango/MangoHud"
 arch=(x86_64)
@@ -28,12 +28,11 @@ makedepends=(
 depends=(libxkbcommon lib32-libxkbcommon)
 
 source=(
-  "mangohud"::"git+https://github.com/flightlessmango/MangoHud.git#commit=31f2ca5e306d7bad502ae70d346f0309e1f4764b"
+  "mangohud"::"git+https://github.com/flightlessmango/MangoHud.git#commit=07a04a27cc6ecd66c3d132a22b3c313ef4860532"
   "imgui-v1.89.9.tar.gz::https://github.com/ocornut/imgui/archive/refs/tags/v1.89.9.tar.gz"
   "imgui-1.89-9-wrap.zip::https://wrapdb.mesonbuild.com/v2/imgui_1.89.9-1/get_patch"
   "spdlog-v1.14.1.tar.gz::https://github.com/gabime/spdlog/archive/refs/tags/v1.14.1.tar.gz"
   "spdlog-1.14.1-1-wrap.zip::https://wrapdb.mesonbuild.com/v2/spdlog_1.14.1-1/get_patch"
-  "nlohmann_json-3.10.5.zip::https://github.com/nlohmann/json/releases/download/v3.10.5/include.zip"
   "vulkan-headers-1.2.158.tar.gz::https://github.com/KhronosGroup/Vulkan-Headers/archive/v1.2.158.tar.gz"
   "vulkan-headers-1.2.158-2-wrap.zip::https://wrapdb.mesonbuild.com/v2/vulkan-headers_1.2.158-2/get_patch"
   "implot-v0.16.zip::https://github.com/epezent/implot/archive/refs/tags/v0.16.zip"
@@ -45,7 +44,6 @@ sha256sums=('SKIP'
             '9b21290c597d76bf8d4eeb3f9ffa024b11d9ea6c61e91d648ccc90b42843d584'
             '1586508029a7d0670dfcb2d97575dcdc242d3868a259742b69f100801ab4e16b'
             'ae878e732330ea1048f90d7e117c40c0cd2a6fb8ae5492c7955818ce3aaade6c'
-            'b94997df68856753b72f0d7a3703b7d484d4745c567f3584ef97c96c25a5798e'
             '53361271cfe274df8782e1e47bdc9e61b7af432ba30acbfe31723f9df2c257f3'
             '860358cf5e73f458cd1e88f8c38116d123ab421d5ce2e4129ec38eaedd820e17'
             '24f772c688f6b8a6e19d7efc10e4923a04a915f13d487b08b83553aa62ae1708'
@@ -63,11 +61,6 @@ prepare() {
   ln -sv "$srcdir/imgui-1.89.9" subprojects
   ln -sv "$srcdir/spdlog-1.14.1" subprojects
   ln -sv "$srcdir/implot-0.16" subprojects
-  mkdir  subprojects/nlohmann_json-3.10.5
-  ln -sv "$srcdir/include" subprojects/nlohmann_json-3.10.5/
-  ln -sv "$srcdir/single_include" subprojects/nlohmann_json-3.10.5/
-  ln -sv "$srcdir/LICENSE.MIT" subprojects/nlohmann_json-3.10.5/
-  ln -sv "$srcdir/meson.build" subprojects/nlohmann_json-3.10.5/
   ln -sv "$srcdir/Vulkan-Headers-1.2.158" subprojects
 }
 
@@ -77,7 +70,6 @@ build() {
   # Arch has only 64bit version
     -D use_system_spdlog=disabled
     -D mangoapp=false
-    -D mangoapp_layer=true
     -D mangohudctl=false
     -D with_xnvctrl=disabled
   # Enable once mangohud can use system cmocka
