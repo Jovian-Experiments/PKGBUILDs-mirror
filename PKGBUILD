@@ -1,7 +1,7 @@
 # Maintainer: Vicki Pfau (vi@endrift.com)
 
 pkgname=steamos-powerbuttond
-_srctag=v3.0
+_srctag=v3.1
 pkgver=${_srctag##v}
 pkgrel=1
 arch=('x86_64')
