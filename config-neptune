@@ -80,6 +80,9 @@ CONFIG_DRM_AMD_COLOR_STEAMDECK=y
 CONFIG_LENOVO_WMI_GAMEZONE=m
 CONFIG_LENOVO_WMI_TUNING=m
 
+CONFIG_ZOTAC_ZONE_HID=m
+CONFIG_ZOTAC_ZONE_PLATFORM=m
+
 # PARAVIRT options have overhead, even on bare metal boots. They can cause
 # spinlocks to not be inlined as well. Either way, we don't intend to run this
 # kernel as a guest, so this also clears out a whole bunch of
