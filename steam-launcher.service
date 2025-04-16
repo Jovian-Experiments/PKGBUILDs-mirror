@@ -7,6 +7,10 @@ Wants=steam-short-session-tracker.service
 [Service]
 ExecStart=/usr/lib/steamos/steam-launcher
 
+# Track short sessions to trigger a repair after enough failures
+ExecStartPre=/usr/lib/steamos/steam-short-session-tracker --track-started
+ExecStopPost=/usr/lib/steamos/steam-short-session-tracker --track-stopped
+
 # To close properly we need to kill the child of the steam wrapper, as the wrapper itself does not forward signals
 ExecStop=/bin/bash -c 'kill -TERM $(pgrep -P $MAINPID || echo $MAINPID)'
 # Disable the term signal sent from systemd, as we we handle it manually above
