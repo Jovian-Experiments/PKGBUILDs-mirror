@@ -8,7 +8,7 @@ pkgname=(
   libwireplumber
 )
 pkgver=0.5.7
-pkgrel=1.1
+pkgrel=1.2
 pkgdesc="Session / policy manager implementation for PipeWire"
 url="https://pipewire.pages.freedesktop.org/wireplumber/"
 arch=(x86_64)
@@ -49,14 +49,19 @@ source=(
   # Holo: backport of https://gitlab.freedesktop.org/pipewire/wireplumber/-/merge_requests/678
   # Part of https://gitlab.steamos.cloud/holo-team/tasks/-/issues/1208
   "0001-state-routes-only-save-route-properties-if-it-is-ava.patch"
+
+  # Holo: backport of https://gitlab.freedesktop.org/pipewire/wireplumber/-/merge_requests/646
+  # Part of https://gitlab.steamos.cloud/holo-team/tasks/-/issues/1173
+  "0001-lib-Add-new-proc-utils-API-for-process-utilities.patch"
+  "0002-scripts-Add-audio-group-utils.lua-to-group-audio-str.patch"
 )
-b2sums=(
-  '4d57500277d7ba82a96996ead553b40bb7b0d5803cba1e8a1ac0ada25077dc10645e03a7aca32eba4e780311c67f2cdf2ddbc8dc147fd232823416867b682812'
-  '86f80f07bb5f446ae90f88f39870139d4d902f99048a62eb825ac12b654ca248568b17f8a1ca15777b41e0a11054345d023fc36a348372f15cb75b92a0180cfe'
-  'ea55591190916920756ee0cdab3d4d315500346370dc03a9b739bdcf9806aaec23cfafe31e35c89a6d53e3dd2d5001986012d29fcc77f3be1bf5eaa4ca486cb1'
-  '145fd614765ebe212de7e27e78b243bb294bd2fdc1efb1c6852280e8db2c2cbca40d6ce838013a06ced34bc030a16a11f1c4875562cd5d041c0785e7be712636'
-  '1498cd88ec907e93975e73af62e01fe0ab40d228603a433e502025b44322092bef0adb0dd508eb96a304c8bc94b00cabafd193ab2eb97d9aaaf699e441a133f3'
-)
+b2sums=('4d57500277d7ba82a96996ead553b40bb7b0d5803cba1e8a1ac0ada25077dc10645e03a7aca32eba4e780311c67f2cdf2ddbc8dc147fd232823416867b682812'
+        '86f80f07bb5f446ae90f88f39870139d4d902f99048a62eb825ac12b654ca248568b17f8a1ca15777b41e0a11054345d023fc36a348372f15cb75b92a0180cfe'
+        'ea55591190916920756ee0cdab3d4d315500346370dc03a9b739bdcf9806aaec23cfafe31e35c89a6d53e3dd2d5001986012d29fcc77f3be1bf5eaa4ca486cb1'
+        '145fd614765ebe212de7e27e78b243bb294bd2fdc1efb1c6852280e8db2c2cbca40d6ce838013a06ced34bc030a16a11f1c4875562cd5d041c0785e7be712636'
+        '1498cd88ec907e93975e73af62e01fe0ab40d228603a433e502025b44322092bef0adb0dd508eb96a304c8bc94b00cabafd193ab2eb97d9aaaf699e441a133f3'
+        'a93d7a763286ae7c243d3273bda656ddb3f978a285e26b395fa5ff53ec00fcd5cd138a97069af614d93105770bc45dc827c157676c931e5cdd43457548067150'
+        'cda56c0e8f442fac5a7bb13cb915ebd28c21e62fd7ede3e3c84357ab20b5ff180c31e25c7064467d3d1237011ebd9d79745922b428681dbfefbae12580744937')
 
 prepare() {
   cd $pkgbase
