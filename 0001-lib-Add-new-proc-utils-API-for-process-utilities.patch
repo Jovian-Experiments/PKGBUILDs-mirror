@@ -1,0 +1,434 @@
+From 86cdfaccc4003e07077772068911085b9e64ac5f Mon Sep 17 00:00:00 2001
+From: Julian Bouzas <julian.bouzas@collabora.com>
+Date: Fri, 5 Jul 2024 13:29:01 -0400
+Subject: [PATCH] lib: Add new proc-utils API for process utilities
+
+---
+ lib/wp/meson.build                       |   2 +
+ lib/wp/proc-utils.c                      | 204 +++++++++++++++++++++++
+ lib/wp/proc-utils.h                      |  54 ++++++
+ lib/wp/wp.h                              |   1 +
+ modules/module-lua-scripting/api/api.c   |  76 +++++++++
+ modules/module-lua-scripting/api/api.lua |   1 +
+ 6 files changed, 338 insertions(+)
+ create mode 100644 lib/wp/proc-utils.c
+ create mode 100644 lib/wp/proc-utils.h
+
+diff --git a/lib/wp/meson.build b/lib/wp/meson.build
+index 623474658..9aacc6240 100644
+--- a/lib/wp/meson.build
++++ b/lib/wp/meson.build
+@@ -24,6 +24,7 @@ wp_lib_sources = files(
+   'object-manager.c',
+   'plugin.c',
+   'port.c',
++  'proc-utils.c',
+   'properties.c',
+   'proxy.c',
+   'proxy-interfaces.c',
+@@ -70,6 +71,7 @@ wp_lib_headers = files(
+   'object-manager.h',
+   'plugin.h',
+   'port.h',
++  'proc-utils.h',
+   'properties.h',
+   'proxy.h',
+   'proxy-interfaces.h',
+diff --git a/lib/wp/proc-utils.c b/lib/wp/proc-utils.c
+new file mode 100644
+index 000000000..fbd39c04d
+--- /dev/null
++++ b/lib/wp/proc-utils.c
+@@ -0,0 +1,204 @@
++/* WirePlumber
++ *
++ * Copyright © 2024 Collabora Ltd.
++ *    @author Julian Bouzas <julian.bouzas@collabora.com>
++ *
++ * SPDX-License-Identifier: MIT
++ */
++
++#include <stdio.h>
++
++#include "log.h"
++#include "proc-utils.h"
++
++#define MAX_ARGS 1024
++
++WP_DEFINE_LOCAL_LOG_TOPIC ("wp-proc-utils")
++
++/*! \defgroup wpprocutils Process Utilities */
++
++/*!
++ * \struct WpProcInfo
++ *
++ * WpProcInfo holds information of a process.
++ */
++struct _WpProcInfo {
++  grefcount ref;
++  pid_t pid;
++  pid_t parent;
++  gchar *cgroup;
++  gchar *args[MAX_ARGS];
++  guint n_args;
++};
++
++G_DEFINE_BOXED_TYPE (WpProcInfo, wp_proc_info, wp_proc_info_ref,
++    wp_proc_info_unref)
++
++/*!
++ * \brief Increases the reference count of a process information object
++ * \ingroup wpprocutils
++ * \param self a process information object
++ * \returns (transfer full): \a self with an additional reference count on it
++ */
++WpProcInfo *
++wp_proc_info_ref (WpProcInfo * self)
++{
++  g_ref_count_inc (&self->ref);
++  return self;
++}
++
++static void
++wp_proc_info_free (WpProcInfo * self)
++{
++  g_clear_pointer (&self->cgroup, g_free);
++  for (guint i = 0; i < MAX_ARGS; i++)
++    g_clear_pointer (&self->args[i], free);
++  g_slice_free (WpProcInfo, self);
++}
++
++/*!
++ * \brief Decreases the reference count on \a self and frees it when the ref
++ * count reaches zero.
++ * \ingroup wpprocutils
++ * \param self (transfer full): a process information object
++ */
++void
++wp_proc_info_unref (WpProcInfo * self)
++{
++  if (g_ref_count_dec (&self->ref))
++    wp_proc_info_free (self);
++}
++
++static WpProcInfo *
++wp_proc_info_new (pid_t pid)
++{
++  WpProcInfo *self = g_slice_new0 (WpProcInfo);
++  g_ref_count_init (&self->ref);
++  self->pid = pid;
++  self->parent = 0;
++  self->cgroup = NULL;
++  for (guint i = 0; i < MAX_ARGS; i++)
++    self->args[i] = NULL;
++  return self;
++}
++
++/*!
++ * \brief Gets the PID of a process information object
++ * \ingroup wpprocutils
++ * \param self the process information object
++ * \returns the PID of the process information object
++ */
++pid_t
++wp_proc_info_get_pid (WpProcInfo * self)
++{
++  return self->pid;
++}
++
++/*!
++ * \brief Gets the parent PID of a process information object
++ * \ingroup wpprocutils
++ * \param self the process information object
++ * \returns the parent PID of the process information object
++ */
++pid_t
++wp_proc_info_get_parent_pid (WpProcInfo * self)
++{
++  return self->parent;
++}
++
++/*!
++ * \brief Gets the number of args of a process information object
++ * \ingroup wpprocutils
++ * \param self the process information object
++ * \returns the number of args of the process information object
++ */
++guint
++wp_proc_info_get_n_args (WpProcInfo * self)
++{
++  return self->n_args;
++}
++
++/*!
++ * \brief Gets the indexed arg of a process information object
++ * \ingroup wpprocutils
++ * \param self the process information object
++ * \param index the index of the arg
++ * \returns the indexed arg of the process information object
++ */
++const gchar *
++wp_proc_info_get_arg (WpProcInfo * self, guint index)
++{
++  if (index >= self->n_args)
++    return NULL;
++  return self->args[index];
++}
++
++/*!
++ * \brief Gets the systemd cgroup of a process information object
++ * \ingroup wpprocutils
++ * \param self the process information object
++ * \returns the systemd cgroup of the process information object
++ */
++const gchar *
++wp_proc_info_get_cgroup (WpProcInfo * self)
++{
++  return self->cgroup;
++}
++
++/*!
++ * \brief Gets the process information of a given PID
++ * \ingroup wpprocutils
++ * \param pid the PID to get the process information from
++ * \returns: (transfer full): the process information of the given PID
++ */
++WpProcInfo *
++wp_proc_utils_get_proc_info (pid_t pid)
++{
++  WpProcInfo *ret = wp_proc_info_new (pid);
++  g_autofree gchar *status = NULL;
++  g_autoptr (GError) error = NULL;
++  gsize length = 0;
++
++  /* Get parent PID */
++  {
++    g_autofree gchar *path = g_strdup_printf ("/proc/%d/status", pid);
++    if (g_file_get_contents (path, &status, &length, &error)) {
++      const gchar *loc = strstr (status, "\nPPid:");
++      if (loc) {
++        const gint res = sscanf (loc, "\nPPid:%d\n", &ret->parent);
++        if (!res || res == EOF)
++          wp_warning ("failed to parse status PPID for PID %d", pid);
++      } else {
++        wp_warning ("failed to find status parent PID for PID %d", pid);
++      }
++    } else {
++      wp_warning ("failed to get status for PID %d: %s", pid, error->message);
++    }
++  }
++
++  /* Get cgroup */
++  {
++    g_autofree gchar *path = g_strdup_printf ("/proc/%d/cgroup", pid);
++    if (g_file_get_contents (path, &ret->cgroup, &length, &error))
++      ret->cgroup [length - 1] = '\0';  /* Remove EOF character */
++    else
++      wp_warning ("failed to get cgroup for PID %d: %s", pid, error->message);
++  }
++
++  /* Get args */
++  {
++    g_autofree gchar *path = g_strdup_printf ("/proc/%d/cmdline", pid);
++    FILE *file = fopen (path, "rb");
++    if (file) {
++      g_autofree gchar *lineptr = NULL;
++      size_t size = 0;
++      while (getdelim (&lineptr, &size, 0, file) > 1 && ret->n_args < MAX_ARGS)
++        ret->args[ret->n_args++] = g_strdup (lineptr);
++      fclose (file);
++    } else {
++      wp_warning ("failed to get cmdline for PID %d: %m", pid);
++    }
++  }
++
++  return ret;
++}
+diff --git a/lib/wp/proc-utils.h b/lib/wp/proc-utils.h
+new file mode 100644
+index 000000000..94f5c1ab3
+--- /dev/null
++++ b/lib/wp/proc-utils.h
+@@ -0,0 +1,54 @@
++/* WirePlumber
++ *
++ * Copyright © 2024 Collabora Ltd.
++ *    @author Julian Bouzas <julian.bouzas@collabora.com>
++ *
++ * SPDX-License-Identifier: MIT
++ */
++
++#ifndef __WIREPLUMBER_PROC_UTILS_H__
++#define __WIREPLUMBER_PROC_UTILS_H__
++
++#include <gio/gio.h>
++
++G_BEGIN_DECLS
++
++/*!
++ * \brief The WpProcInfo GType
++ * \ingroup wpprocutils
++ */
++#define WP_TYPE_PROC_INFO (wp_proc_info_get_type ())
++WP_API
++GType wp_proc_info_get_type (void);
++
++typedef struct _WpProcInfo WpProcInfo;
++
++WP_API
++WpProcInfo *wp_proc_info_ref (WpProcInfo * self);
++
++WP_API
++void wp_proc_info_unref (WpProcInfo * self);
++
++WP_API
++pid_t wp_proc_info_get_pid (WpProcInfo * self);
++
++WP_API
++pid_t wp_proc_info_get_parent_pid (WpProcInfo * self);
++
++WP_API
++guint wp_proc_info_get_n_args (WpProcInfo * self);
++
++WP_API
++const gchar *wp_proc_info_get_arg (WpProcInfo * self, guint index);
++
++WP_API
++const gchar *wp_proc_info_get_cgroup (WpProcInfo * self);
++
++G_DEFINE_AUTOPTR_CLEANUP_FUNC (WpProcInfo, wp_proc_info_unref)
++
++WP_API
++WpProcInfo *wp_proc_utils_get_proc_info (pid_t pid);
++
++G_END_DECLS
++
++#endif
+diff --git a/lib/wp/wp.h b/lib/wp/wp.h
+index cd13993da..3e010f966 100644
+--- a/lib/wp/wp.h
++++ b/lib/wp/wp.h
+@@ -31,6 +31,7 @@
+ #include "object.h"
+ #include "plugin.h"
+ #include "port.h"
++#include "proc-utils.h"
+ #include "properties.h"
+ #include "proxy.h"
+ #include "proxy-interfaces.h"
+diff --git a/modules/module-lua-scripting/api/api.c b/modules/module-lua-scripting/api/api.c
+index f4db06a12..bf51051f2 100644
+--- a/modules/module-lua-scripting/api/api.c
++++ b/modules/module-lua-scripting/api/api.c
+@@ -1906,6 +1906,77 @@ static const luaL_Reg json_utils_funcs[] = {
+   { NULL, NULL }
+ };
+ 
++/* ProcInfo */
++
++static int
++proc_info_get_pid (lua_State *L)
++{
++  WpProcInfo *pi = wplua_checkboxed (L, 1, WP_TYPE_PROC_INFO);
++  lua_pushinteger (L, wp_proc_info_get_pid (pi));
++  return 1;
++}
++
++static int
++proc_info_get_parent_pid (lua_State *L)
++{
++  WpProcInfo *pi = wplua_checkboxed (L, 1, WP_TYPE_PROC_INFO);
++  lua_pushinteger (L, wp_proc_info_get_parent_pid (pi));
++  return 1;
++}
++
++static int
++proc_info_get_n_args (lua_State *L)
++{
++  WpProcInfo *pi = wplua_checkboxed (L, 1, WP_TYPE_PROC_INFO);
++  lua_pushinteger (L, wp_proc_info_get_n_args (pi));
++  return 1;
++}
++
++static int
++proc_info_get_arg (lua_State *L)
++{
++  WpProcInfo *pi = wplua_checkboxed (L, 1, WP_TYPE_PROC_INFO);
++  guint index = luaL_checkinteger (L, 2);
++  lua_pushstring (L, wp_proc_info_get_arg (pi, index));
++  return 1;
++}
++
++static int
++proc_info_get_cgroup (lua_State *L)
++{
++  WpProcInfo *pi = wplua_checkboxed (L, 1, WP_TYPE_PROC_INFO);
++  lua_pushstring (L, wp_proc_info_get_cgroup (pi));
++  return 1;
++}
++
++static const luaL_Reg proc_info_funcs[] = {
++  { "get_pid", proc_info_get_pid },
++  { "get_parent_pid", proc_info_get_parent_pid },
++  { "get_cgroup", proc_info_get_cgroup },
++  { "get_n_args", proc_info_get_n_args },
++  { "get_arg", proc_info_get_arg },
++  { NULL, NULL }
++};
++
++/* ProcUtils */
++
++static int
++proc_utils_get_proc_info (lua_State *L)
++{
++  guint pid = luaL_checkinteger (L, 1);
++  WpProcInfo *pi = wp_proc_utils_get_proc_info (pid);
++  if (pi)
++    wplua_pushboxed (L, WP_TYPE_PROC_INFO, pi);
++  else
++    lua_pushnil (L);
++  return 1;
++}
++
++static const luaL_Reg proc_utils_funcs[] = {
++  { "get_proc_info", proc_utils_get_proc_info },
++  { NULL, NULL }
++};
++
+ /* WpSettings */
+ 
+ static int
+@@ -2812,6 +2883,9 @@ wp_lua_scripting_api_init (lua_State *L)
+   luaL_newlib (L, json_utils_funcs);
+   lua_setglobal (L, "JsonUtils");
+ 
++  luaL_newlib (L, proc_utils_funcs);
++  lua_setglobal (L, "ProcUtils");
++
+   luaL_newlib (L, settings_methods);
+   lua_setglobal (L, "WpSettings");
+ 
+@@ -2873,6 +2947,8 @@ wp_lua_scripting_api_init (lua_State *L)
+       NULL, transition_methods);
+   wplua_register_type_methods (L, WP_TYPE_CONF,
+       conf_new, conf_methods);
++  wplua_register_type_methods (L, WP_TYPE_PROC_INFO,
++      NULL, proc_info_funcs);
+ 
+   if (!wplua_load_uri (L, URI_API, &error) ||
+       !wplua_pcall (L, 0, 0, &error)) {
+diff --git a/modules/module-lua-scripting/api/api.lua b/modules/module-lua-scripting/api/api.lua
+index b53686c20..e4e41bcf9 100644
+--- a/modules/module-lua-scripting/api/api.lua
++++ b/modules/module-lua-scripting/api/api.lua
+@@ -216,6 +216,7 @@ SANDBOX_EXPORT = {
+   Settings = WpSettings,
+   Conf = WpConf,
+   JsonUtils = JsonUtils,
++  ProcUtils = ProcUtils,
+   SimpleEventHook = WpSimpleEventHook_new,
+   AsyncEventHook = WpAsyncEventHook_new,
+ }
+-- 
+GitLab
+
