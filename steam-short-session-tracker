@@ -36,6 +36,11 @@ handle_started() {
   if [[ "$short_session_count" -ge "$short_session_count_before_reset" ]]; then
     echo >&2 "steam-short-session-tracker: Steam failed to start $short_session_count_before_reset times within $short_session_duration seconds"
 
+    if [ -f "$HOME/.config/inhibit-short-session-tracker" ]; then
+      echo >&2 "steam-short-session-tracker: Auto-repair disabled by config. Remove ~/.config/inhibit-short-session-tracker to re-enable"
+      return
+    fi
+
     do_repair
   fi
 }

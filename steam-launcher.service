@@ -2,7 +2,6 @@
 Description=Steam Launcher
 After=graphical-session.target
 PartOf=graphical-session.target
-Wants=steam-short-session-tracker.service
 
 [Service]
 ExecStart=/usr/lib/steamos/steam-launcher
