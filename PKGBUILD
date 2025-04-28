@@ -1,6 +1,6 @@
 pkgname=steamos-devkit-service
 pkgdesc="SteamOS Devkit Service"
-pkgver=0.20250425.0
+pkgver=0.20250428.0
 pkgrel=1
 arch=('any')
 url="https://gitlab.steamos.cloud/devkit/steamos-devkit-service"
