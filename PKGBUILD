@@ -1,26 +1,34 @@
 pkgname=steamos-devkit-service
 pkgdesc="SteamOS Devkit Service"
-pkgver=0.20250428.0
-pkgrel=3
+pkgver=0.20250429.0
+pkgrel=2
 arch=('any')
 url="https://gitlab.steamos.cloud/devkit/steamos-devkit-service"
 license=('LGPL-2.1+')
+_commit=83bfd488883a7fc6de6fb6054fc98269e6c10853
 source=(
     git+https://gitlab.steamos.cloud/devkit/steamos-devkit-service.git#tag=v"$pkgver"
     steamos-devkit-service.service
+    10-steamos-devkit-service-dns-sd.rules
 )
-sha512sums=('2bb1279b97b4df20f2f8e320b8038eaa248b97f5aa35180420ec5b0d9639e19c4705b1d821e67ff4ea576000d65dbc8694c5d798bda02c90f7fac7b8bd5096d9'
-            'a563dbb7452859d2632c6291eebf12547f484fcb1db4fe14044d3aea06c1c0e53c92dd9c5082ef91833af8158b9cde97e6f2fa271df45ed63b70bf95987385cd')
-makedepends=('git' 'avahi' 'dbus-python' 'systemd')
+sha512sums=(
+    SKIP
+    b028654e3a1e4a59d6ff62bf3d82bca7a6c3009507bb7b60d2abad7a37d442f0988d832b1d64bacfebc1363581bf2c78c806f9fae3f7a5c90dae9fa9d7c797e4
+    406ae6abe9858f6a42569d1631da9c264de7a9b001ee4ff5757c80bc0ec41ffecf0ffef9987aa6bf1978827ab030f75d2c13205cefeb8e881fd470208f0215e0
+)
+makedepends=('git' 'dbus-python' 'systemd')
 
 package() {
-    depends=('avahi' 'dbus-python' 'systemd')
+    depends=('dbus-python' 'systemd')
     pkgdesc="SteamOS Devkit Service"
 
     cd "${pkgname}"
 
     mkdir -p "${pkgdir}"/usr/lib/systemd/system
     cp "${srcdir}"/steamos-devkit-service.service "${pkgdir}"/usr/lib/systemd/system/
+
+    mkdir -p "${pkgdir}"/etc/polkit-1/rules.d
+    cp "${srcdir}"/10-steamos-devkit-service-dns-sd.rules "${pkgdir}"/etc/polkit-1/rules.d/
 
     mkdir -p "${pkgdir}"/usr/share/steamos-devkit
     cp -r "${srcdir}"/${pkgname}/hooks "${pkgdir}"/usr/share/steamos-devkit
