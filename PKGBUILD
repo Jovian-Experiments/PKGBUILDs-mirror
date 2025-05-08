@@ -7,7 +7,7 @@
 # and then manually merge the resulting PKGBUILD with this file.
 
 pkgname=inputplumber
-pkgver=0.54.0
+pkgver=0.57.0
 pkgrel=1
 pkgdesc="Open source input router and remapper daemon for Linux"
 arch=('x86_64')
@@ -31,7 +31,7 @@ makedepends=(
   cargo
   holo-rust-packaging-tools
 )
-source=('inputplumber-0.54.0.tar.gz::https://github.com/ShadowBlip/InputPlumber/archive/v0.54.0.tar.gz'
+source=('inputplumber-0.57.0.tar.gz::https://github.com/ShadowBlip/InputPlumber/archive/v0.57.0.tar.gz'
         'addr2line-0.21.0.tar.gz::https://crates.io/api/v1/crates/addr2line/0.21.0/download'
         'adler-1.0.2.tar.gz::https://crates.io/api/v1/crates/adler/1.0.2/download'
         'aho-corasick-1.1.3.tar.gz::https://crates.io/api/v1/crates/aho-corasick/1.1.3/download'
@@ -259,6 +259,7 @@ source=('inputplumber-0.54.0.tar.gz::https://github.com/ShadowBlip/InputPlumber/
         'unsafe-libyaml-0.2.11.tar.gz::https://crates.io/api/v1/crates/unsafe-libyaml/0.2.11/download'
         'utf8parse-0.2.1.tar.gz::https://crates.io/api/v1/crates/utf8parse/0.2.1/download'
         'uuid-1.10.0.tar.gz::https://crates.io/api/v1/crates/uuid/1.10.0/download'
+        'version-compare-0.2.0.tar.gz::https://crates.io/api/v1/crates/version-compare/0.2.0/download'
         'virtual-usb-0.1.0.tar.gz::https://github.com/ShadowBlip/virtual-usb-rs/archive/5c4c551a23b56f627a36d6775a5876c174be9eb3.tar.gz'
         'vte-0.14.1.tar.gz::https://crates.io/api/v1/crates/vte/0.14.1/download'
         'wasi-0.11.0+wasi-snapshot-preview1.tar.gz::https://crates.io/api/v1/crates/wasi/0.11.0+wasi-snapshot-preview1/download'
@@ -308,7 +309,7 @@ source=('inputplumber-0.54.0.tar.gz::https://github.com/ShadowBlip/InputPlumber/
         'zvariant_derive-5.4.0.tar.gz::https://crates.io/api/v1/crates/zvariant_derive/5.4.0/download'
         'zvariant_utils-3.2.0.tar.gz::https://crates.io/api/v1/crates/zvariant_utils/3.2.0/download')
 
-sha256sums=('09f5ff2c26dc62042f5b76b67500c71bc49472cc32801c788228922b208ee332'
+sha256sums=('dc39a42cbbb002aa98bbfebdb476bc3102d4a7bd9b170a6b0ef5e0e28226738e'
             '8a30b2e23b9e17a9f90641c7ab1549cd9b44f296d3ccbf309d2863cfe398a0cb'
             'f26201604c87b1e01bd3d98f8d5d9a8fcbb815e8cedb41ffccbeb4bf593a35fe'
             '8e60d3430d3a69478ad0993f19238d2df97c507009a52b3c10addcd7f6bcb916'
@@ -536,6 +537,7 @@ sha256sums=('09f5ff2c26dc62042f5b76b67500c71bc49472cc32801c788228922b208ee332'
             '673aac59facbab8a9007c7f6108d11f63b603f7cabff99fabf650fea5c32b861'
             '711b9620af191e0cdc7468a8d14e709c3dcdb115b36f838e601583af800a370a'
             '81dfa00651efa65069b0b6b651f4aaa31ba9e3c3ce0137aaad053604ee7e0314'
+            '852e951cb7832cb45cb1169900d19760cfa39b82bc0ea9c0e5a14ae88411c98b'
             '2594550bdc59b65041dba388fa2bd9690aa4675c9c332043185638a4495c685a'
             '231fdcd7ef3037e8330d8e17e61011a2c244126acc0a982f4040ac3f9f0bc077'
             '9c8d87e72b64a3b4db28d11ce29237c246188f4f51057d65a7eab63b7987e423'
