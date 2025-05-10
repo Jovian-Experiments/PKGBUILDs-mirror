@@ -22,8 +22,8 @@ pkgname=(
 # When updating the tag, consider if you are adding any shader compiler changes. If so,
 # or if you are not sure, regenerate the radv-build-id below. To update, see
 # https://gitlab.steamos.cloud/jupiter/docs/-/wikis/How-to-make-a-new-Mesa-release#updating-the-radv-build-id
-_tag=steamos-24.11.9
-pkgver=24.3.0_devel.197254.steamos_24.11.9
+_tag=steamos-24.11.10
+pkgver=24.3.0_devel.197257.steamos_24.11.10
 
 pkgrel=1
 epoch=0
@@ -133,7 +133,23 @@ for _crate in "${!_crates[@]}"; do
   )
 done
 
-b2sums=('SKIP'
+sha256sums=('d476d117583c86d7cda8bdee71854cc62d99f79c1d2c4aba41774277c2a3ff49'
+            'ed646292ffc8188ef8ea4d1e0e0150fb15a5c2e12ad9b8fc191ae7a8a7f3c4b9'
+            'a941429fea7e08bedec25e4f6785b6ffaacc6b755da98df5ef3e7dcf4a124c4f'
+            '168fb715dda47215e360912c096649d23d58bf392ac62f73919e831745e40f26'
+            '7dfda62a12f55daeae5015f81b0baea145391cb4520f86c248fc615d72640d12'
+            '5e719e8df665df0d1c8fbfd238015744736151d4445ec0836b8e628aae103b77'
+            '2a548d2beca6773b1c244554d36fcf8548a8a58e74156968211567250e48e49a'
+            '3354b9ac3fae1ff6755cb6db53683adb661634f67557942dea4facebec0fee4b'
+            '5267fca4496028628a95160fc423a33e8b2e6af8a5302579e322e4b520293cae'
+            '6c20b6793b5c2fa6553b250154b78d6d0db37e72700ae35fad9387a46f487c97'
+            'de3145af08024dea9fa9914f381a17b8fc6034dfb00f3a84013f7ff43f29ed4c'
+            'cd53dff83f26735fdc1ca837098ccf133605d794cdae66acfc2bfac3ec809d95'
+            '5443807d6dff69373d433ab9ef5378ad8df50ca6298caf15de6e52e24aaf54d5'
+            '3c93a82e8d145725dcbaf44e5ea887c8a869efdcc28706df2d08c69e17077183'
+            '692fcb63b64b1758029e0a96ee63e049ce8c5948587f2f7208df04625e5f6b56'
+            '901fa70d88b9d6c98022e23b4136f9f3e54e4662c3bc1bd1d84a42a9a0f0c1e9')
+b2sums=('8393957553b54f4f28ee9602205e813a4c4f9136e6f6d5fc6e8b361c8293a2a15d6c530ecad14f5e045c2844efe7315ee7e29267a3c84e13d0faa53821f4e281'
         'a6d47c903be6094423d89b8ec3ca899d0a84df6dbd6e76632bb6c9b9f40ad9c216f8fa400310753d392f85072756b43ac3892e0a2c4d55f87ab6463002554823'
         '9c34f1ab14ad5ae124882513e0f14b1d731d06a43203bdc37fa3b202dd3ce93dbe8ebb554d01bab475689fe6ffd3ec0cbc0d5365c9b984cb83fb34ea3e9e732e'
         'fac5cf6339dc3c0a40b100035a5c874cc7b2efeafeb31c51488d25156e392dc9db86a497e76eead351d2126f69d060422faa9c55d73407a0de9f5be18d234123'
@@ -151,22 +167,6 @@ b2sums=('SKIP'
         '8bc6f68ed286bea617a2cfaf3949bb699d3a0466faeca735314a51596ce950e4ee57eda88154bd562c1728cfaff4cdb5bc1ba701b9d47a9c50d4c4f011bee975')
 
 # https://docs.mesa3d.org/relnotes.html
-sha256sums=('SKIP'
-            'ed646292ffc8188ef8ea4d1e0e0150fb15a5c2e12ad9b8fc191ae7a8a7f3c4b9'
-            'a941429fea7e08bedec25e4f6785b6ffaacc6b755da98df5ef3e7dcf4a124c4f'
-            '168fb715dda47215e360912c096649d23d58bf392ac62f73919e831745e40f26'
-            '7dfda62a12f55daeae5015f81b0baea145391cb4520f86c248fc615d72640d12'
-            '5e719e8df665df0d1c8fbfd238015744736151d4445ec0836b8e628aae103b77'
-            '2a548d2beca6773b1c244554d36fcf8548a8a58e74156968211567250e48e49a'
-            '3354b9ac3fae1ff6755cb6db53683adb661634f67557942dea4facebec0fee4b'
-            '5267fca4496028628a95160fc423a33e8b2e6af8a5302579e322e4b520293cae'
-            '6c20b6793b5c2fa6553b250154b78d6d0db37e72700ae35fad9387a46f487c97'
-            'de3145af08024dea9fa9914f381a17b8fc6034dfb00f3a84013f7ff43f29ed4c'
-            'cd53dff83f26735fdc1ca837098ccf133605d794cdae66acfc2bfac3ec809d95'
-            '5443807d6dff69373d433ab9ef5378ad8df50ca6298caf15de6e52e24aaf54d5'
-            '3c93a82e8d145725dcbaf44e5ea887c8a869efdcc28706df2d08c69e17077183'
-            '692fcb63b64b1758029e0a96ee63e049ce8c5948587f2f7208df04625e5f6b56'
-            '901fa70d88b9d6c98022e23b4136f9f3e54e4662c3bc1bd1d84a42a9a0f0c1e9')
 
 pkgver() {
   cd jupiter-mesa
