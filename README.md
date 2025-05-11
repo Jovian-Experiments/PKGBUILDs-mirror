@@ -1,5 +1,5 @@
 
-`main @ 20250509.1000`
+`main @ 20250510.1000`
 ======================
 
 Valve packages
@@ -955,7 +955,7 @@ Arch Linux packages
  * [`volume_key/0.3.12-10`](https://gitlab.archlinux.org/archlinux/packaging/packages/volume_key/-/tree/0.3.12-10)
  * [`vulkan-headers/1:1.4.303-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/vulkan-headers/-/tree/1:1.4.303-1)
  * [`vulkan-icd-loader/1.4.303-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/vulkan-icd-loader/-/tree/1.4.303-1)
- * [`vulkan-radeon/24.3.0_devel.197254.steamos_24.11.9-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/vulkan-radeon/-/tree/24.3.0_devel.197254.steamos_24.11.9-1)
+ * [`vulkan-radeon/24.3.0_devel.197257.steamos_24.11.10-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/vulkan-radeon/-/tree/24.3.0_devel.197257.steamos_24.11.10-1)
  * [`vulkan-tools/1.4.303-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/vulkan-tools/-/tree/1.4.303-2)
  * [`wayland/1.23.1-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/wayland/-/tree/1.23.1-1)
  * [`wayland-utils/1.2.0-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/wayland-utils/-/tree/1.2.0-2)
