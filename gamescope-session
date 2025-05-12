@@ -1,5 +1,17 @@
 #!/bin/bash
 
+# Create run directory file for startup and stats sockets
+#   shellcheck disable=SC2030 # (broken warning)
+tmpdir="$([[ -n ${XDG_RUNTIME_DIR+x} ]] && mktemp -p "$XDG_RUNTIME_DIR" -d -t gamescope.XXXXXXX)"
+socket="${tmpdir:+$tmpdir/startup.socket}"
+stats="${tmpdir:+$tmpdir/stats.pipe}"
+# Fail early if we don't have a proper runtime directory setup
+#   shellcheck disable=SC2031 # (broken warning)
+if [[ -z $tmpdir || -z ${XDG_RUNTIME_DIR+x} ]]; then
+	echo >&2 "!! Failed to find run directory in which to create stats session sockets (is \$XDG_RUNTIME_DIR set?)"
+	exit 0
+fi
+
 ##
 ## Session globals
 ##
@@ -10,10 +22,10 @@ export HOMETEST_DESKTOP_SESSION=plasma
 
 export STEAM_MANGOAPP_PRESETS_SUPPORTED=1
 export STEAM_USE_MANGOAPP=1
-export MANGOHUD_CONFIGFILE=$(mktemp /tmp/mangohud.XXXXXXXX)
+export MANGOHUD_CONFIGFILE="${tmpdir:+$tmpdir/mangohud.config}"
 
 export STEAM_USE_DYNAMIC_VRS=1
-export RADV_FORCE_VRS_CONFIG_FILE=$(mktemp /tmp/radv_vrs.XXXXXXXX)
+export RADV_FORCE_VRS_CONFIG_FILE="${tmpdir:+$tmpdir/radv_vrs.config}"
 
 # Plop GAMESCOPE_MODE_SAVE_FILE into $XDG_CONFIG_HOME (defaults to ~/.config).
 export GAMESCOPE_MODE_SAVE_FILE="${XDG_CONFIG_HOME:-$HOME/.config}/gamescope/modes.cfg"
@@ -145,7 +157,7 @@ export QT_QPA_PLATFORM_THEME=kde
 export ENABLE_GAMESCOPE_WSI=1
 
 # To play nice with the short term callback-based limiter for now
-export GAMESCOPE_LIMITER_FILE=$(mktemp /tmp/gamescope-limiter.XXXXXXXX)
+export GAMESCOPE_LIMITER_FILE="${tmpdir:+$tmpdir/gamescope-limiter.config}"
 
 # Temporary crutch until dummy plane interactions / etc are figured out
 export GAMESCOPE_DISABLE_ASYNC_FLIPS=1
@@ -187,18 +199,6 @@ for file in ~/.local/share/Steam/config/uioverrides/movies/*.installed; do
 done
 
 ulimit -n 524288
-
-# Create run directory file for startup and stats sockets
-#   shellcheck disable=SC2030 # (broken warning)
-tmpdir="$([[ -n ${XDG_RUNTIME_DIR+x} ]] && mktemp -p "$XDG_RUNTIME_DIR" -d -t gamescope.XXXXXXX)"
-socket="${tmpdir:+$tmpdir/startup.socket}"
-stats="${tmpdir:+$tmpdir/stats.pipe}"
-# Fail early if we don't have a proper runtime directory setup
-#   shellcheck disable=SC2031 # (broken warning)
-if [[ -z $tmpdir || -z ${XDG_RUNTIME_DIR+x} ]]; then
-	echo >&2 "!! Failed to find run directory in which to create stats session sockets (is \$XDG_RUNTIME_DIR set?)"
-	exit 0
-fi
 
 # 1048576 = 1M - passing it like that omits the 'M' suffix - xargs removes whitespace
 free_disk_space_megs=$(df ~/ --output=avail -B1048576 | sed -n '2 p' | xargs)
