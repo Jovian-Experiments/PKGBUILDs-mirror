@@ -1,8 +1,8 @@
 # Maintainer: Jo Bates <jo@valvesoftware.com>
 
 pkgname=vpower
-pkgver=1.4.1
-pkgrel=2
+pkgver=1.5.1
+pkgrel=1
 pkgdesc="Service that calculates battery metrics and handles critical battery scenarios"
 url=https://gitlab.steamos.cloud/jupiter/vpower
 arch=(x86_64)
@@ -17,7 +17,9 @@ source=("git+ssh://git@gitlab.steamos.cloud/jupiter/vpower.git#tag=$pkgver"
         crate-serde_derive-1.0.136.tar.gz::https://crates.io/api/v1/crates/serde_derive/1.0.136/download
         crate-syn-1.0.86.tar.gz::https://crates.io/api/v1/crates/syn/1.0.86/download
         crate-toml-0.5.8.tar.gz::https://crates.io/api/v1/crates/toml/0.5.8/download
-        crate-unicode-xid-0.2.2.tar.gz::https://crates.io/api/v1/crates/unicode-xid/0.2.2/download)
+        crate-unicode-xid-0.2.2.tar.gz::https://crates.io/api/v1/crates/unicode-xid/0.2.2/download
+        crate-lazy_static-1.5.0.tar.gz::https://crates.io/api/v1/crates/lazy_static/1.5.0/download
+       )
 sha256sums=('SKIP'
             'e74d72e0f9b65b5b4ca49a346af3976df0f9c61d550727f349ecd559f251a26c'
             'c7342d5883fbccae1cc37a2353b09c87c9b0f3afd73f5fb9bba687a1f733b029'
@@ -26,7 +28,9 @@ sha256sums=('SKIP'
             '08597e7152fcd306f41838ed3e37be9eaeed2b61c42e2117266a554fab4662f9'
             '8a65b3f4ffa0092e9887669db0eae07941f023991ab58ea44da8fe8e2d511c6b'
             'a31142970826733df8241ef35dc040ef98c679ab14d7c3e54d827099b3acecaa'
-            '8ccb82d61f80a663efe1f787a51b16b5a51e3314d6ac365b08639f52387b33f3')
+            '8ccb82d61f80a663efe1f787a51b16b5a51e3314d6ac365b08639f52387b33f3'
+            'bbd2bcb4c963f2ddae06a2efc7e9f3591312473c50c6685e1f298068316e66fe'
+           )
 
 prepare() {
   # Mark crates as already checksummed
@@ -37,15 +41,17 @@ prepare() {
 
   # Tell rust to use the pre-vendored crates
   cd vpower
-  mkdir .cargo
-  cat << EOF >> .cargo/config.toml
+  mkdir -p .cargo
+  if ! grep -E '^\s*\[source\.crates-io\]\s*' .cargo/config.toml
+  then
+      cat << EOF >> .cargo/config.toml
     [source.crates-io]
     replace-with = "vendored-sources"
 
     [source.vendored-sources]
     directory = "${srcdir}"
 EOF
-
+  fi
 }
 
 build() {
