@@ -1,9 +1,9 @@
 # Maintainer: Pierre-Loup A. Griffais <pgriffais@valvesoftware.com>
 
 pkgname=gamescope
-_srctag=3.16.4
+_srctag=3.16.7
 pkgver=${_srctag//-/.}
-pkgrel=4
+pkgrel=1
 pkgdesc="gaming shell based on Xwayland, powered by Vulkan and DRM"
 arch=(x86_64)
 url="https://github.com/ValveSoftware/gamescope"
@@ -33,7 +33,8 @@ source=("galileo-mura-setup.service"
         "git+https://github.com/Joshua-Ashton/GamescopeShaders.git#tag=v0.1"
         # FIXME Upstream gamescope is just selecting master branch at build time, so we are arbitrarily snapshotting a
         #       revision when bumping the version here such that the build is reproducible.
-        "git+https://github.com/nothings/stb.git#commit=af1a5bc352164740c1cc1354942b1c6b72eacb8a")
+        "git+https://github.com/nothings/stb.git#commit=af1a5bc352164740c1cc1354942b1c6b72eacb8a"
+        "git+https://github.com/g-truc/glm.git#commit=0af55ccecd98d4e5a8d1fad7de25ba429d60e863")
 sha256sums=('941f5a16a495c9c4de0302819c0069749db6915345ac1e207a12544863391e4b'
             'b3436c12b35329f407b6dbb5ba41c45b84d4af65405c4dc59c9707a57e588f11'
             'fe515fce8f151a6c03a89e043044bfddf8cd6ee89027d2cfbcf6f6706c78ca76'
@@ -51,11 +52,12 @@ sha256sums=('941f5a16a495c9c4de0302819c0069749db6915345ac1e207a12544863391e4b'
             '674367927b9d0665a1e1c57ebcd7373683659b1dc1020d2bffd4ab50e4af73fa'
             '525060896abef2da9db8d8294253b7444d60e48cf6cc0496ca48fc7084cc8590'
             'dea09abb47c3d907c00ff7f36967b599f3caca554ac6eb7b7dc6d2d78651dd44'
-            'd25661a4a0485343a89e0a84e412ce7e22050011b50f79101466c5d96bae6c87'
+            'b96f7bd67613742a0848c0c2caa77c8b973c9a7a9cddfbab13f6ccaddb27e2fe'
             'SKIP'
             'SKIP'
             '03726f2fb44ae79e6a398e8f9aaaf8054800dda9b8298726157522fe5f7296b1'
-            'e39e0c91b297bfd707afcda84ecdc15a08c22e2ad4c347fc3533b1ed98fb3f85')
+            'e39e0c91b297bfd707afcda84ecdc15a08c22e2ad4c347fc3533b1ed98fb3f85'
+            '85f3e55fb527e9853bd4fc31300253587198831660a743eaa55f6b40fe1b9c90')
 
 install=gamescope.install
 
@@ -72,6 +74,10 @@ prepare() {
 	rm -rf subprojects/stb
 	git clone "$srcdir/stb" subprojects/stb
 	cp -av subprojects/packagefiles/stb/* subprojects/stb/ # patch from the .wrap we elided
+
+	rm -rf subprojects/glm
+	git clone "$srcdir/glm" subprojects/glm
+	cp -av subprojects/packagefiles/glm/* subprojects/glm/ # patch from the .wrap we elided
 }
 
 build() {
