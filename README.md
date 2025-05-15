@@ -1,5 +1,5 @@
 
-`main @ 20250514.1000`
+`main @ 20250515.1000`
 ======================
 
 Valve packages
@@ -13,7 +13,7 @@ Valve packages
  * [`breakpad` — `holo-main/breakpad-v2023.06.01-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/breakpad-v2023.06.01-1)
  * [`casync` — `holo-main/casync-2.r227.g99559cd-4.4`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/casync-2.r227.g99559cd-4.4)
  * [`desync` — `holo-main/desync-0.9.6-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/desync-0.9.6-1.1)
- * [`dirlock` — `holo-main/dirlock-0.0.1.141.99e94bc-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/dirlock-0.0.1.141.99e94bc-1)
+ * [`dirlock` — `holo-main/dirlock-0.0.1.141.99e94bc-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/dirlock-0.0.1.141.99e94bc-2)
  * [`discover` — `holo-main/discover-6.2.5-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/discover-6.2.5-1.1)
  * [`drm_info` — `holo-main/drm_info-2.7.0-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/drm_info-2.7.0-1)
  * [`drm_janitor` — `holo-main/drm_janitor-0.0.4-4`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/drm_janitor-0.0.4-4)
@@ -94,6 +94,7 @@ Valve packages
  * [`mesa-vdpau` — `jupiter-main/mesa-24.3.4.197725.radeonsi_24.3.4-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/mesa-24.3.4.197725.radeonsi_24.3.4-2)
  * [`plasma-remotecontrollers` — `jupiter-main/plasma-remotecontrollers-5.26.90.r258.g9ace9a9-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/plasma-remotecontrollers-5.26.90.r258.g9ace9a9-1)
  * [`plasma-workspace` — `jupiter-main/plasma-workspace-6.2.5-1.2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/plasma-workspace-6.2.5-1.2)
+ * [`powerdevil` — `jupiter-main/powerdevil-6.2.5-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/powerdevil-6.2.5-2)
  * [`pyzy` — `jupiter-main/pyzy-1.1-2.4`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/pyzy-1.1-2.4)
  * [`renderdoc-minimal` — `jupiter-main/renderdoc-minimal-1.36-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/renderdoc-minimal-1.36-1.1)
  * [`steam-im-modules` — `jupiter-main/steam-im-modules-jupiter.20240131-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steam-im-modules-jupiter.20240131-2)
@@ -103,7 +104,7 @@ Valve packages
  * [`steamdeck-kde-presets` — `jupiter-main/steamdeck-kde-presets-0.28-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steamdeck-kde-presets-0.28-1)
  * [`steamos-customizations-jupiter` — `jupiter-main/steamos-customizations-jupiter-20250414.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steamos-customizations-jupiter-20250414.1-1)
  * [`steamos-devkit-service` — `jupiter-main/steamos-devkit-service-0.20250429.0-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steamos-devkit-service-0.20250429.0-2)
- * [`steamos-powerbuttond` — `jupiter-main/steamos-powerbuttond-3.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steamos-powerbuttond-3.1-1)
+ * [`steamos-powerbuttond` — `jupiter-main/steamos-powerbuttond-3.1-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steamos-powerbuttond-3.1-2)
  * [`upower` — `jupiter-main/upower-0.99.15.jupiter-1.4`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/upower-0.99.15.jupiter-1.4)
  * [`usbhid-gadget-passthru` — `jupiter-main/usbhid-gadget-passthru-0.1.3-4`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/usbhid-gadget-passthru-0.1.3-4)
  * [`vpower` — `jupiter-main/vpower-1.5.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/vpower-1.5.1-1)
@@ -780,7 +781,6 @@ Arch Linux packages
  * [`poppler-qt6/25.01.0-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/poppler-qt6/-/tree/25.01.0-1)
  * [`popt/1.19-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/popt/-/tree/1.19-2)
  * [`portaudio/1:19.7.0-3`](https://gitlab.archlinux.org/archlinux/packaging/packages/portaudio/-/tree/1:19.7.0-3)
- * [`powerdevil/6.2.5-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/powerdevil/-/tree/6.2.5-1)
  * [`powertop/2.15-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/powertop/-/tree/2.15-2)
  * [`ppp/2.5.1-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/ppp/-/tree/2.5.1-1)
  * [`print-manager/1:6.2.5-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/print-manager/-/tree/1:6.2.5-1)
@@ -930,6 +930,7 @@ Arch Linux packages
  * [`tinysparql/3.8.2-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/tinysparql/-/tree/3.8.2-2)
  * [`tk/8.6.16-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/tk/-/tree/8.6.16-1)
  * [`tmux/3.5_a-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/tmux/-/tree/3.5_a-1)
+ * [`tpm2-tools/5.7-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/tpm2-tools/-/tree/5.7-1)
  * [`tpm2-tss/4.1.3-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/tpm2-tss/-/tree/4.1.3-1)
  * [`trace-cmd/3.3.1-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/trace-cmd/-/tree/3.3.1-2)
  * [`tree/2.1.3-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/tree/-/tree/2.1.3-1)
