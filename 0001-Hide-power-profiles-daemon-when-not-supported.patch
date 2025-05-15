@@ -1,0 +1,25 @@
+From 1728dfd7391d24a8ff79ad7beac59d41d0467384 Mon Sep 17 00:00:00 2001
+From: David Edmundson <kde@davidedmundson.co.uk>
+Date: Mon, 12 May 2025 08:35:25 +0100
+Subject: [PATCH] Hide power profiles daemon when not supported
+
+---
+ applets/batterymonitor/package/contents/ui/PopupDialog.qml | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/applets/batterymonitor/package/contents/ui/PopupDialog.qml b/applets/batterymonitor/package/contents/ui/PopupDialog.qml
+index b1277089..f9a0c352 100644
+--- a/applets/batterymonitor/package/contents/ui/PopupDialog.qml
++++ b/applets/batterymonitor/package/contents/ui/PopupDialog.qml
+@@ -106,6 +106,8 @@ PlasmaExtras.Representation {
+                     }
+ 
+                     onActiveFocusChanged: if (activeFocus) scrollView.positionViewAtItem(this)
++
++                    visible: false // PPD is not installed, but the user can't do anything
+                 }
+             }
+ 
+-- 
+2.49.0
+
