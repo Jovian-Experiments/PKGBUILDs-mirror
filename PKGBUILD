@@ -3,13 +3,13 @@
 pkgname=steamos-powerbuttond
 _srctag=v3.1
 pkgver=${_srctag##v}
-pkgrel=1
+pkgrel=2
 arch=('x86_64')
-url="https://gitlab.steamos.cloud/jupiter/powerbuttond"
+url="https://gitlab.steamos.cloud/holo/powerbuttond"
 pkgdesc="Power button daemon for SteamOS"
 license=('BSD')
 depends=('libevdev' 'udev' 'gamescope')
-source=("steamos-powerbuttond::git+ssh://git@gitlab.steamos.cloud/jupiter/powerbuttond.git#tag=$_srctag")
+source=("steamos-powerbuttond::git+ssh://git@gitlab.steamos.cloud/holo/powerbuttond.git#tag=$_srctag")
 replaces=('powerbuttond')
 conflicts=('powerbuttond')
 provides=('powerbuttond')
