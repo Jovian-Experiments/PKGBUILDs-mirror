@@ -84,6 +84,8 @@ CONFIG_LENOVO_LEGOS_HID=m
 CONFIG_ZOTAC_ZONE_HID=m
 CONFIG_ZOTAC_ZONE_PLATFORM=m
 
+CONFIG_ASUS_ALLY_HID=m
+
 # PARAVIRT options have overhead, even on bare metal boots. They can cause
 # spinlocks to not be inlined as well. Either way, we don't intend to run this
 # kernel as a guest, so this also clears out a whole bunch of
