@@ -1,5 +1,5 @@
 
-`main @ 20250515.1002`
+`main @ 20250516.1000`
 ======================
 
 Valve packages
@@ -19,7 +19,7 @@ Valve packages
  * [`drm_janitor` — `holo-main/drm_janitor-0.0.4-4`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/drm_janitor-0.0.4-4)
  * [`f3` — `holo-main/f3-8.0-2.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/f3-8.0-2.1)
  * [`filesystem` — `holo-main/filesystem-2021.12.07-1.15`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/filesystem-2021.12.07-1.15)
- * [`fwupd-minimal` — `holo-main/fwupd-minimal-2.0.9-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/fwupd-minimal-2.0.9-1)
+ * [`fwupd-minimal` — `holo-main/fwupd-minimal-2.0.9-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/fwupd-minimal-2.0.9-2)
  * [`glibc` — `holo-main/glibc-2.41+r47+g046b33800c3e-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/glibc-2.41+r47+g046b33800c3e-1)
  * [`holo-desync` — `holo-main/steamos-customizations-git-20250219.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-customizations-git-20250219.1-1)
  * [`holo-dmi-rules` — `holo-main/holo-dmi-rules-1.0-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/holo-dmi-rules-1.0-2)
@@ -50,7 +50,7 @@ Valve packages
  * [`steamos-efi` — `holo-main/steamos-efi-20250204.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-efi-20250204.1-1)
  * [`steamos-kdumpst-layer` — `holo-main/steamos-kdumpst-layer-1.0-3`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-kdumpst-layer-1.0-3)
  * [`steamos-log-submitter` — `holo-main/steamos-log-submitter-0.7.5-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-log-submitter-0.7.5-1)
- * [`steamos-manager` — `holo-main/steamos-manager-25.4.1-0`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-manager-25.4.1-0)
+ * [`steamos-manager` — `holo-main/steamos-manager-25.5.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-manager-25.5.1-1)
  * [`steamos-networking-tools` — `holo-main/steamos-networking-tools-1.2-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-networking-tools-1.2-1)
  * [`steamos-reset` — `holo-main/steamos-reset-20241008.1-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-reset-20241008.1-2)
  * [`steamos-systemreport` — `holo-main/steamos-systemreport-0.14-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-systemreport-0.14-1)
@@ -101,7 +101,7 @@ Valve packages
  * [`steam-jupiter-stable` — `jupiter-main/steam-jupiter-stable-1.0.0.81-2.2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steam-jupiter-stable-1.0.0.81-2.2)
  * [`steam_notif_daemon` — `jupiter-main/steam_notif_daemon-v1.0.1-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steam_notif_daemon-v1.0.1-2)
  * [`steamdeck-dsp` — `jupiter-main/steamdeck-dsp-0.61-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steamdeck-dsp-0.61-1)
- * [`steamdeck-kde-presets` — `jupiter-main/steamdeck-kde-presets-0.28-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steamdeck-kde-presets-0.28-1)
+ * [`steamdeck-kde-presets` — `jupiter-main/steamdeck-kde-presets-0.29-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steamdeck-kde-presets-0.29-1)
  * [`steamos-customizations-jupiter` — `jupiter-main/steamos-customizations-jupiter-20250414.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steamos-customizations-jupiter-20250414.1-1)
  * [`steamos-devkit-service` — `jupiter-main/steamos-devkit-service-0.20250429.0-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steamos-devkit-service-0.20250429.0-2)
  * [`steamos-powerbuttond` — `jupiter-main/steamos-powerbuttond-3.1-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steamos-powerbuttond-3.1-2)
