@@ -1,5 +1,5 @@
 
-`main @ 20250515.1000`
+`main @ 20250515.1001`
 ======================
 
 Valve packages
@@ -19,7 +19,7 @@ Valve packages
  * [`drm_janitor` — `holo-main/drm_janitor-0.0.4-4`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/drm_janitor-0.0.4-4)
  * [`f3` — `holo-main/f3-8.0-2.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/f3-8.0-2.1)
  * [`filesystem` — `holo-main/filesystem-2021.12.07-1.15`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/filesystem-2021.12.07-1.15)
- * [`fwupd-minimal` — `holo-main/fwupd-minimal-2.0.6-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/fwupd-minimal-2.0.6-1)
+ * [`fwupd-minimal` — `holo-main/fwupd-minimal-2.0.9-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/fwupd-minimal-2.0.9-1)
  * [`glibc` — `holo-main/glibc-2.41+r47+g046b33800c3e-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/glibc-2.41+r47+g046b33800c3e-1)
  * [`holo-desync` — `holo-main/steamos-customizations-git-20250219.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-customizations-git-20250219.1-1)
  * [`holo-dmi-rules` — `holo-main/holo-dmi-rules-1.0-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/holo-dmi-rules-1.0-2)
@@ -70,7 +70,7 @@ Valve packages
  * [`alsa-ucm-conf` — `jupiter-main/alsa-ucm-conf-1.2.12-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/alsa-ucm-conf-1.2.12-1.1)
  * [`amd-ucode-neptune` — `jupiter-main/linux-firmware-neptune-jupiter.20250311.1-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/linux-firmware-neptune-jupiter.20250311.1-2)
  * [`galileo-mura` — `jupiter-main/galileo-mura-v0.9-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/galileo-mura-v0.9-2)
- * [`gamescope` — `jupiter-main/gamescope-3.16.7-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/gamescope-3.16.7-1)
+ * [`gamescope` — `jupiter-main/gamescope-3.16.8-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/gamescope-3.16.8-1)
  * [`gpu-trace` — `jupiter-main/gpu-trace-2.14-1.2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/gpu-trace-2.14-1.2)
  * [`holo-nix-offload` — `jupiter-main/holo-nix-offload-0.2-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/holo-nix-offload-0.2-1)
  * [`ibus-anthy` — `jupiter-main/ibus-anthy-1.5.14-4.3`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/ibus-anthy-1.5.14-4.3)
@@ -88,7 +88,7 @@ Valve packages
  * [`libwireplumber` — `jupiter-main/wireplumber-0.5.7-1.2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/wireplumber-0.5.7-1.2)
  * [`linux-firmware-neptune` — `jupiter-main/linux-firmware-neptune-jupiter.20250311.1-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/linux-firmware-neptune-jupiter.20250311.1-2)
  * [`linux-firmware-neptune-whence` — `jupiter-main/linux-firmware-neptune-jupiter.20250311.1-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/linux-firmware-neptune-jupiter.20250311.1-2)
- * [`linux-neptune-611` — `jupiter-main/linux-neptune-611-6.11.11.valve13-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/linux-neptune-611-6.11.11.valve13-2)
+ * [`linux-neptune-611` — `jupiter-main/linux-neptune-611-6.11.11.valve13-3`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/linux-neptune-611-6.11.11.valve13-3)
  * [`mangohud` — `jupiter-main/mangohud-0.8.1.r49.ga113f7c-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/mangohud-0.8.1.r49.ga113f7c-1)
  * [`mesa` — `jupiter-main/mesa-24.3.4.197725.radeonsi_24.3.4-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/mesa-24.3.4.197725.radeonsi_24.3.4-2)
  * [`mesa-vdpau` — `jupiter-main/mesa-24.3.4.197725.radeonsi_24.3.4-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/mesa-24.3.4.197725.radeonsi_24.3.4-2)
