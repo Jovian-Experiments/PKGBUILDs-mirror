@@ -1,5 +1,5 @@
 
-`main @ 20250520.1000`
+`main @ 20250521.1000`
 ======================
 
 Valve packages
@@ -13,7 +13,7 @@ Valve packages
  * [`breakpad` — `holo-main/breakpad-v2023.06.01-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/breakpad-v2023.06.01-1)
  * [`casync` — `holo-main/casync-2.r227.g99559cd-4.4`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/casync-2.r227.g99559cd-4.4)
  * [`desync` — `holo-main/desync-0.9.6-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/desync-0.9.6-1.1)
- * [`dirlock` — `holo-main/dirlock-0.0.1.141.99e94bc-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/dirlock-0.0.1.141.99e94bc-2)
+ * [`dirlock` — `holo-main/dirlock-0.0.1.152.70aa248-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/dirlock-0.0.1.152.70aa248-1)
  * [`discover` — `holo-main/discover-6.2.5-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/discover-6.2.5-1.1)
  * [`drm_info` — `holo-main/drm_info-2.7.0-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/drm_info-2.7.0-1)
  * [`drm_janitor` — `holo-main/drm_janitor-0.0.4-4`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/drm_janitor-0.0.4-4)
@@ -21,14 +21,14 @@ Valve packages
  * [`filesystem` — `holo-main/filesystem-2021.12.07-1.15`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/filesystem-2021.12.07-1.15)
  * [`fwupd-minimal` — `holo-main/fwupd-minimal-2.0.9-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/fwupd-minimal-2.0.9-2)
  * [`glibc` — `holo-main/glibc-2.41+r47+g046b33800c3e-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/glibc-2.41+r47+g046b33800c3e-1)
- * [`holo-desync` — `holo-main/steamos-customizations-git-20250520.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-customizations-git-20250520.1-1)
+ * [`holo-desync` — `holo-main/steamos-customizations-git-20250521.3-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-customizations-git-20250521.3-1)
  * [`holo-dmi-rules` — `holo-main/holo-dmi-rules-1.0-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/holo-dmi-rules-1.0-2)
  * [`holo-earlyoom` — `holo-main/holo-earlyoom-1.0-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/holo-earlyoom-1.0-1)
  * [`holo-fstab-repair` — `holo-main/holo-fstab-repair-0.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/holo-fstab-repair-0.1-1)
  * [`holo-glibc-locales` — `holo-main/holo-glibc-locales-2.41+r47+g046b33800c3e-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/holo-glibc-locales-2.41+r47+g046b33800c3e-2)
  * [`holo-keyring` — `holo-main/holo-keyring-20250110-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/holo-keyring-20250110-1.1)
  * [`holo-nfs-utils-tmpfiles` — `holo-main/holo-nfs-utils-tmpfiles-0.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/holo-nfs-utils-tmpfiles-0.1-1)
- * [`holo-sudo` — `holo-main/steamos-customizations-git-20250520.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-customizations-git-20250520.1-1)
+ * [`holo-sudo` — `holo-main/steamos-customizations-git-20250521.3-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-customizations-git-20250521.3-1)
  * [`holo-zram-swap` — `holo-main/holo-zram-swap-0.3-0`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/holo-zram-swap-0.3-0)
  * [`ibus` — `holo-main/ibus-1.5.31-2.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/ibus-1.5.31-2.1)
  * [`iwd` — `holo-main/iwd-3.0-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/iwd-3.0-1)
@@ -98,11 +98,11 @@ Valve packages
  * [`pyzy` — `jupiter-main/pyzy-1.1-2.4`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/pyzy-1.1-2.4)
  * [`renderdoc-minimal` — `jupiter-main/renderdoc-minimal-1.36-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/renderdoc-minimal-1.36-1.1)
  * [`steam-im-modules` — `jupiter-main/steam-im-modules-jupiter.20240131-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steam-im-modules-jupiter.20240131-2)
- * [`steam-jupiter-stable` — `jupiter-main/steam-jupiter-stable-1.0.0.81-2.2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steam-jupiter-stable-1.0.0.81-2.2)
+ * [`steam-jupiter-stable` — `jupiter-main/steam-jupiter-stable-1.0.0.81-2.3`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steam-jupiter-stable-1.0.0.81-2.3)
  * [`steam_notif_daemon` — `jupiter-main/steam_notif_daemon-v1.0.1-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steam_notif_daemon-v1.0.1-2)
  * [`steamdeck-dsp` — `jupiter-main/steamdeck-dsp-0.61-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steamdeck-dsp-0.61-1)
  * [`steamdeck-kde-presets` — `jupiter-main/steamdeck-kde-presets-0.29-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steamdeck-kde-presets-0.29-1)
- * [`steamos-customizations-jupiter` — `jupiter-main/steamos-customizations-jupiter-20250520.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steamos-customizations-jupiter-20250520.1-1)
+ * [`steamos-customizations-jupiter` — `jupiter-main/steamos-customizations-jupiter-20250521.3-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steamos-customizations-jupiter-20250521.3-1)
  * [`steamos-devkit-service` — `jupiter-main/steamos-devkit-service-0.20250429.0-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steamos-devkit-service-0.20250429.0-2)
  * [`steamos-powerbuttond` — `jupiter-main/steamos-powerbuttond-3.1-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steamos-powerbuttond-3.1-2)
  * [`upower` — `jupiter-main/upower-0.99.15.jupiter-1.4`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/upower-0.99.15.jupiter-1.4)
@@ -930,7 +930,6 @@ Arch Linux packages
  * [`tinysparql/3.8.2-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/tinysparql/-/tree/3.8.2-2)
  * [`tk/8.6.16-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/tk/-/tree/8.6.16-1)
  * [`tmux/3.5_a-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/tmux/-/tree/3.5_a-1)
- * [`tpm2-tools/5.7-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/tpm2-tools/-/tree/5.7-1)
  * [`tpm2-tss/4.1.3-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/tpm2-tss/-/tree/4.1.3-1)
  * [`trace-cmd/3.3.1-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/trace-cmd/-/tree/3.3.1-2)
  * [`tree/2.1.3-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/tree/-/tree/2.1.3-1)
