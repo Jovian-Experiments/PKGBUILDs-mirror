@@ -7,7 +7,7 @@
 _basename=steam
 pkgname=steam-jupiter-oobe
 pkgver=1.0.0.79
-pkgrel=1.6
+pkgrel=1.10
 pkgdesc="Valve's digital software delivery system - Jupiter bootstrapped packaging"
 url='https://steampowered.com/'
 arch=('x86_64')
@@ -34,22 +34,22 @@ conflicts=('steam')
 optdepends=('lib32-libnm: integration with networkmanager')
 
 # Jupiter: Including fully bootstrapped steam image on expected branch
-_fat_bootstrap=steam_jupiter_goldmaster_bootstrapped_20230911.tar.xz
+_fat_bootstrap=steam_jupiter_goldmaster_bootstrapped_20250403.highwayvids_scaling_kbfixed.tar.xz
 noextract=("$_fat_bootstrap")
 source=(https://repo.steampowered.com/${_basename}/archive/beta/${_basename}_${pkgver}{.tar.gz,.dsc}
-        http://latest-pacman.internal.steamos.cloud/misc-galileo/steam-snapshots/"$_fat_bootstrap"
+        http://latest-pacman.internal.steamos.cloud/misc/steam-snapshots/"$_fat_bootstrap"
         70-steam-jupiter-input.rules
         steam-jupiter.sh
         steam-runtime.sh)
 sha512sums=('52d1a23f43012af641ebc9a03a444b6944ea966e0814619c890e792442e760a96bf570a84e4f8b38552904dafb6572a92de31154ddefe1eb8d702106605c8497'
             '68b59c7b4e9d55b60f92b466e01c10b5d84309e5822adb6bfdee8790a77357eb513166d958f25fc8f17f4f786b2dae19f281c330ff7bc34d4dbb17a4b263c99a'
-            '07e68b36d08732d2782eb77e85ce19e6ab3af83d683e345c2d78100bef5e1ab3814e8bb1254d788801b63985ec9c4625ba73880ff34114a7bbb3f72b158d05cb'
+            'aec08a393cbe19d3edbd2341ee7760423a50fb78a0960d6dcaf3885bd2ac2becca52b46d1ec56e8e53f293af9d01339ff4573aaaa700518f6e4978568aca598b'
             '85c66db5619fc70553fb4daa4bb9d7784f40586c771853d91147de99c48c58ac5727f2bae4e165a8fa898e9bcf4fb3bcce6c1409cc8edcf85a3965572456990d'
             'da89061db6d4bf61b395339442483570c0c9c5889d609d9d84aed07d8e7995621929e3c82450059304a770f6429744dce68b0d939dc4ebe5b6b1c5d4eed33b62'
             '5e75c019e9fe8c67d686c4e3343dac1180a69a4bdb7d39b333415c63201eef9b98da5619dbf6fd8daa6884e65bc7f8afc9e52778682425e5a75987d527eae6f0')
 b2sums=('73538d120182b37cca15e99512af6c689ff29e47cd37ea5bdd0d754f42aacd69aa71125e3c07140d8b8eaf55ee980babdfa6f7a1de8daf8c6ce8af4b03608cbc'
         '27f2df8198d0fcf5173f3b4e3cef38d9cfc122aa4e5383ee5924597892137918cbcf5fce813f6379412b5a61c676b13f85ef70798ab94a91d67eaaf8583b7250'
-        'cce8cf7a32b4b10e6cbab709cc5960b1df1848448699ae83bbc41f79c31e93ef049352b63194c2d903a4ffd3a77226e9399830596a39d5f27a4baa30a7cd4435'
+        'c75634766d50d5bf66ebe94bed3417c41ba8b375bf102cac2cfc9b39407cb7dd2c16b78a93abc28a4024185b1c45b8f014bb85b6de5b6dd0f1b640ff9c5064ab'
         '8ae0bfdf6bc62460a64d84acb3dbd5d95257749f2560938eefd68a58727f310c8450ce756ed938ebe46a3074860d1abdd744689caf9bde01c89ae02f8c63179e'
         'bc9998406c08107e5a1f3d8cb3f2bd8f568c86af0841408244bc3b28c5a6cb78b6ac9aa6fb6ea05decb7894bb68d0c28f10b438a2a7bc58fd57780c40f4b22f1'
         'c6bac99336b7c30fec7cdbaf9e949555c687dd9dff50bcae136134d6314f4b841f5fc66ddb2caac1b003690b926fd4afbdc11da143b4674db4b75f27709fdd23')
