@@ -25,7 +25,7 @@ export STEAM_USE_MANGOAPP=1
 export MANGOHUD_CONFIGFILE="${tmpdir:+$tmpdir/mangohud.config}"
 
 export STEAM_USE_DYNAMIC_VRS=1
-export RADV_FORCE_VRS_CONFIG_FILE="${tmpdir:+$tmpdir/radv_vrs.config}"
+export RADV_FORCE_VRS_CONFIG_FILE="$(mktemp /tmp/radv_vrs.XXXXXXXX)"
 
 # Plop GAMESCOPE_MODE_SAVE_FILE into $XDG_CONFIG_HOME (defaults to ~/.config).
 export GAMESCOPE_MODE_SAVE_FILE="${XDG_CONFIG_HOME:-$HOME/.config}/gamescope/modes.cfg"
@@ -157,7 +157,7 @@ export QT_QPA_PLATFORM_THEME=kde
 export ENABLE_GAMESCOPE_WSI=1
 
 # To play nice with the short term callback-based limiter for now
-export GAMESCOPE_LIMITER_FILE="${tmpdir:+$tmpdir/gamescope-limiter.config}"
+export GAMESCOPE_LIMITER_FILE="$(mktemp /tmp/gamescope-limiter.XXXXXXXX)'
 
 # Temporary crutch until dummy plane interactions / etc are figured out
 export GAMESCOPE_DISABLE_ASYNC_FLIPS=1
