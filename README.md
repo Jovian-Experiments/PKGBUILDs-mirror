@@ -1,5 +1,5 @@
 
-`main @ 20250521.1001`
+`main @ 20250522.1000`
 ======================
 
 Valve packages
@@ -70,7 +70,7 @@ Valve packages
  * [`alsa-ucm-conf` — `jupiter-main/alsa-ucm-conf-1.2.12-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/alsa-ucm-conf-1.2.12-1.1)
  * [`amd-ucode-neptune` — `jupiter-main/linux-firmware-neptune-jupiter.20250311.1-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/linux-firmware-neptune-jupiter.20250311.1-2)
  * [`galileo-mura` — `jupiter-main/galileo-mura-v0.9-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/galileo-mura-v0.9-2)
- * [`gamescope` — `jupiter-main/gamescope-3.16.10-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/gamescope-3.16.10-2)
+ * [`gamescope` — `jupiter-main/gamescope-3.16.10-4`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/gamescope-3.16.10-4)
  * [`gpu-trace` — `jupiter-main/gpu-trace-2.14-1.2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/gpu-trace-2.14-1.2)
  * [`holo-nix-offload` — `jupiter-main/holo-nix-offload-0.2-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/holo-nix-offload-0.2-1)
  * [`ibus-anthy` — `jupiter-main/ibus-anthy-1.5.14-4.3`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/ibus-anthy-1.5.14-4.3)
@@ -88,7 +88,7 @@ Valve packages
  * [`libwireplumber` — `jupiter-main/wireplumber-0.5.7-1.2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/wireplumber-0.5.7-1.2)
  * [`linux-firmware-neptune` — `jupiter-main/linux-firmware-neptune-jupiter.20250311.1-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/linux-firmware-neptune-jupiter.20250311.1-2)
  * [`linux-firmware-neptune-whence` — `jupiter-main/linux-firmware-neptune-jupiter.20250311.1-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/linux-firmware-neptune-jupiter.20250311.1-2)
- * [`linux-neptune-611` — `jupiter-main/linux-neptune-611-6.11.11.valve14-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/linux-neptune-611-6.11.11.valve14-1)
+ * [`linux-neptune-611` — `jupiter-main/linux-neptune-611-6.11.11.valve15-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/linux-neptune-611-6.11.11.valve15-1)
  * [`mangohud` — `jupiter-main/mangohud-0.8.1.r49.ga113f7c-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/mangohud-0.8.1.r49.ga113f7c-1)
  * [`mesa` — `jupiter-main/mesa-24.3.4.197725.radeonsi_24.3.4-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/mesa-24.3.4.197725.radeonsi_24.3.4-2)
  * [`mesa-vdpau` — `jupiter-main/mesa-24.3.4.197725.radeonsi_24.3.4-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/mesa-24.3.4.197725.radeonsi_24.3.4-2)
