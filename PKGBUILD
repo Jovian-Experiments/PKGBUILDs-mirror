@@ -3,7 +3,7 @@
 pkgname=gamescope
 _srctag=3.16.11
 pkgver=${_srctag//-/.}
-pkgrel=1
+pkgrel=2
 pkgdesc="gaming shell based on Xwayland, powered by Vulkan and DRM"
 arch=(x86_64)
 url="https://github.com/ValveSoftware/gamescope"
@@ -41,11 +41,11 @@ sha256sums=('941f5a16a495c9c4de0302819c0069749db6915345ac1e207a12544863391e4b'
             'e37ba6107f3a84cf47c2799b537a88583e6cb8951167a9c6a48fa1d85996206b'
             'e4add84152c3c0dfa53cf6bd2a1f15c2ce74d2312f7fa945b9476e91c8752544'
             'ce7e26d4145b44a1161d8ec050fb97f3c8786b7c5b719f36aa1dfb984b5863c1'
-            'b74f4515a3ed793973b3be6eca145d7ba862dbf50218c694fb478ba725bfd025'
+            'eae6b5cbd0735d6732c8b7de99ed3362f24f6aa76bbba0950a14b99040f4e6d0'
             'd9a8e593bea8ea0afc96cec3849c48e87b686d263a5d7a09a272237cc35acb52'
             '81da49a733a757a4848a5c95011c3f9d3e584373244722ed9b26687ae0126793'
             'd010a36f52f2122b51f8a0bdc983560a553759f85c2eb5a9ccb2b1a6de367059'
-            'a40cd2618b51f4aed7f44bffb5e9eda17bd5a0d8cd4629104b323cc969e333cc'
+            '10462d319e9d2a97a8fc9265628c03819bd6fd86dc13cee6e38151fc9b270407'
             'bc2e16bbff2357091f04b7049b9fa40d3fc8d75e909c09310ebe39acc5c09621'
             'f92f193a541d9bdb94e312be7922257e72cf4bb08a0f0bec8d4222e561118aec'
             '609da4097f9addc83f07647cc6e5c75493ddc8372853868c033d1c71c5c0cce9'
@@ -114,7 +114,7 @@ package() {
 	install -D -m 644 gamescope-xbindkeys.service "$pkgdir"/usr/lib/systemd/user/gamescope-xbindkeys.service
 
 	# portals
-	install -D -m 644 gamescope-portals.conf "$pkgdir"/usr/share/xdg-desktop-portal/gamescope-portals.conf
+	install -D -m 644 gamescope-portals.conf "$pkgdir"/usr/share/xdg-desktop-portal/gamescope-portals/gamescope-portals.conf
 
 	install -d "$pkgdir"/usr/share/gamescope/reshade
 	cp -r "$srcdir"/GamescopeShaders/* "$pkgdir"/usr/share/gamescope/reshade/
