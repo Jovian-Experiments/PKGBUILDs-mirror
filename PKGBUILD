@@ -1,0 +1,41 @@
+# Maintainer: Olivier Tilloy <otilloy@igalia.com>
+
+pkgname=xdg-desktop-portal-holo
+_commit=c1b8cf151122636dc16b723e4d9b19aa30b851a6
+pkgver=0.1.11.c1b8cf1
+pkgrel=1
+pkgdesc='A backend implementation for xdg-desktop-portal of holo-specific interfaces'
+url="https://gitlab.steamos.cloud/holo/$pkgname"
+arch=('x86_64')
+source=("git+ssh://git@gitlab.steamos.cloud/holo/$pkgname.git#commit=$_commit")
+depends=('glib2')
+makedepends=('fontconfig'
+             'git'
+             'glib2-devel'
+             'meson'
+             'pkgconf'
+             'systemd'
+             'xdg-desktop-portal')
+license=('LGPL-2.1-or-later')
+sha256sums=('SKIP')
+provides=('xdg-desktop-portal-impl')
+
+pkgver() {
+  cd "$srcdir/$pkgname"
+
+  echo 0.1.$(git rev-list --count HEAD).$(git rev-parse --short HEAD)
+}
+
+prepare() {
+  cd "$pkgname"
+}
+
+build() {
+  arch-meson "$pkgname" _build
+  meson compile -C _build
+}
+
+package() {
+  meson install -C _build --destdir "$pkgdir"
+}
+
