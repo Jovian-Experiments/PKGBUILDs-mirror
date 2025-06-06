@@ -1,0 +1,51 @@
+From 2fe9195988612e05d2f1373cb9cf0a2930fe7797 Mon Sep 17 00:00:00 2001
+From: David Redondo <kde@david-redondo.de>
+Date: Thu, 5 Jun 2025 11:43:38 +0200
+Subject: [PATCH 1/5] Take rotation into account when applying osd actions
+
+Otherwise we end up with configurations with gaps or overlapping
+screens.
+---
+ common/osdaction.cpp | 6 ++----
+ 1 file changed, 2 insertions(+), 4 deletions(-)
+
+diff --git a/common/osdaction.cpp b/common/osdaction.cpp
+index 7fcb3881..8e9fbed7 100644
+--- a/common/osdaction.cpp
++++ b/common/osdaction.cpp
+@@ -108,7 +108,6 @@ KScreen::SetConfigOperation *OsdAction::applyAction(const QSharedPointer<KScreen
+         internal->setEnabled(true);
+         external->setEnabled(true);
+         internal->setPos(QPoint());
+-        const double internalScale = internal->scale();
+         ModePtr currentMode = internal->currentMode();
+         if (!currentMode) { // When the internal display is not enabled
+             const auto internalModesMap = internal->modes();
+@@ -122,14 +121,13 @@ KScreen::SetConfigOperation *OsdAction::applyAction(const QSharedPointer<KScreen
+             currentMode = bestModeIt.value();
+             internal->setCurrentModeId(currentMode->id());
+         }
+-        external->setPos(QPoint(std::ceil(currentMode->size().width() / internalScale), 0));
++        external->setPos({copy->logicalSizeForOutputInt(*internal).width(), 0});
+         break;
+     }
+     case KScreen::OsdAction::Action::ExtendLeft: {
+         internal->setEnabled(true);
+         external->setEnabled(true);
+         external->setPos(QPoint());
+-        const double externalScale = external->scale();
+         ModePtr currentMode = external->currentMode();
+         if (!currentMode) { // When the external display is not enabled
+             const auto externalModesMap = external->modes();
+@@ -143,7 +141,7 @@ KScreen::SetConfigOperation *OsdAction::applyAction(const QSharedPointer<KScreen
+             currentMode = bestModeIt.value();
+             external->setCurrentModeId(currentMode->id());
+         }
+-        internal->setPos(QPoint(std::ceil(currentMode->size().width() / externalScale), 0));
++        internal->setPos({copy->logicalSizeForOutputInt(*external).width(), 0});
+         break;
+     }
+     }
+-- 
+2.43.0
+

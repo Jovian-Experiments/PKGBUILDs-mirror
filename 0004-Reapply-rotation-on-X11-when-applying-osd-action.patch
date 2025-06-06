@@ -1,0 +1,44 @@
+From dd2523ea0f1a7a66221aae9995493e1656fdbc5f Mon Sep 17 00:00:00 2001
+From: David Redondo <kde@david-redondo.de>
+Date: Thu, 5 Jun 2025 11:46:10 +0200
+Subject: [PATCH 4/5] Reapply rotation on X11 when applying osd action
+
+On X11 the config reports disabled screens as not rotated however
+our saved last output config includes the last set rotation. Read
+it and apply it.
+---
+ common/osdaction.cpp | 11 +++++++++++
+ 1 file changed, 11 insertions(+)
+
+diff --git a/common/osdaction.cpp b/common/osdaction.cpp
+index 8e9fbed7..0c38a3e9 100644
+--- a/common/osdaction.cpp
++++ b/common/osdaction.cpp
+@@ -11,6 +11,7 @@
+ */
+ 
+ #include "osdaction.h"
++#include "output.h"
+ 
+ #include <KLocalizedString>
+ #include <KScreen/Config>
+@@ -51,6 +52,16 @@ KScreen::SetConfigOperation *OsdAction::applyAction(const QSharedPointer<KScreen
+     const OutputPtr &external = *std::find_if(outputs.cbegin(), outputs.cend(), [&internal](const auto &output) {
+         return output != internal;
+     });
++
++    if (!(config->supportedFeatures() & Config::Feature::PerOutputScaling)) {
++        if (!internal->isEnabled()) {
++            internal->setRotation(::Output::readGlobal(internal).rotation.value_or(Output::Rotation::None));
++        }
++        if (!external->isEnabled()) {
++            external->setRotation(::Output::readGlobal(external).rotation.value_or(Output::Rotation::None));
++        }
++    }
++
+     switch (action) {
+     case KScreen::OsdAction::Action::NoAction:
+         return nullptr;
+-- 
+2.43.0
+

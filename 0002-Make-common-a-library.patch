@@ -1,0 +1,299 @@
+From 4caa2b1eb4719fc4ad94232da113e73a41f7a22c Mon Sep 17 00:00:00 2001
+From: David Redondo <kde@david-redondo.de>
+Date: Thu, 5 Jun 2025 12:09:37 +0200
+Subject: [PATCH 2/5] Make common a library
+
+---
+ CMakeLists.txt            | 2 +-
+ common/CMakeLists.txt     | 4 ++++
+ kcm/CMakeLists.txt        | 5 +----
+ kcm/config_handler.h      | 2 +-
+ kcm/kcm.cpp               | 5 +++--
+ kcm/output_model.cpp      | 2 +-
+ kded/CMakeLists.txt       | 6 +-----
+ kded/config.cpp           | 2 +-
+ kded/daemon.h             | 4 ++--
+ kded/output.h             | 4 ++--
+ osd/CMakeLists.txt        | 3 ++-
+ osd/osd.h                 | 2 +-
+ osd/osdmanager.h          | 2 +-
+ plasmoid/CMakeLists.txt   | 5 +++--
+ plasmoid/kscreenapplet.h  | 2 +-
+ tests/kded/CMakeLists.txt | 5 +----
+ tests/kded/configtest.cpp | 2 +-
+ 17 files changed, 27 insertions(+), 30 deletions(-)
+ create mode 100644 common/CMakeLists.txt
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 0ffc800c..4c9a7658 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -74,7 +74,7 @@ ecm_set_disabled_deprecation_versions(QT 5.15.2
+     KF 5.101
+ )
+ 
+-
++add_subdirectory(common)
+ add_subdirectory(kcm)
+ add_subdirectory(kded)
+ add_subdirectory(osd)
+diff --git a/common/CMakeLists.txt b/common/CMakeLists.txt
+new file mode 100644
+index 00000000..9e9b49d6
+--- /dev/null
++++ b/common/CMakeLists.txt
+@@ -0,0 +1,4 @@
++add_library(kscreen_common OBJECT control.cpp globals.cpp orientation_sensor.cpp osdaction.cpp utils.cpp)
++set_property(TARGET kscreen_common PROPERTY POSITION_INDEPENDENT_CODE ON)
++target_link_libraries(kscreen_common PRIVATE Qt::Core Qt::Sensors KF6::Screen KF6::CoreAddons KF6::I18n)
++target_include_directories(kscreen_common PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/..>")
+diff --git a/kcm/CMakeLists.txt b/kcm/CMakeLists.txt
+index 1a0ac618..60614e70 100644
+--- a/kcm/CMakeLists.txt
++++ b/kcm/CMakeLists.txt
+@@ -7,10 +7,6 @@ target_sources(kcm_kscreen PRIVATE
+     kcm.cpp
+     output_model.cpp
+     ${kwincompositing_SRC}
+-    ${CMAKE_SOURCE_DIR}/common/utils.cpp
+-    ${CMAKE_SOURCE_DIR}/common/control.cpp
+-    ${CMAKE_SOURCE_DIR}/common/globals.cpp
+-    ${CMAKE_SOURCE_DIR}/common/orientation_sensor.cpp
+ )
+ 
+ ecm_qt_declare_logging_category(kcm_kscreen
+@@ -26,6 +22,7 @@ ecm_qt_declare_logging_category(kcm_kscreen
+ kconfig_add_kcfg_files(kcm_kscreen GENERATE_MOC globalscalesettings.kcfgc)
+ kconfig_add_kcfg_files(kcm_kscreen GENERATE_MOC kwincompositing_setting.kcfgc)
+ target_link_libraries(kcm_kscreen PRIVATE
++    kscreen_common
+     Qt::DBus
+     Qt::Sensors
+     KF6::ConfigGui
+diff --git a/kcm/config_handler.h b/kcm/config_handler.h
+index af4301c4..b2b665c5 100644
+--- a/kcm/config_handler.h
++++ b/kcm/config_handler.h
+@@ -5,7 +5,7 @@
+ */
+ #pragma once
+ 
+-#include "../common/control.h"
++#include "common/control.h"
+ 
+ #include <kscreen/config.h>
+ 
+diff --git a/kcm/kcm.cpp b/kcm/kcm.cpp
+index dbe1f3d9..74af85ba 100644
+--- a/kcm/kcm.cpp
++++ b/kcm/kcm.cpp
+@@ -5,8 +5,9 @@
+ */
+ #include "kcm.h"
+ 
+-#include "../common/control.h"
+-#include "../common/orientation_sensor.h"
++#include "common/control.h"
++#include "common/orientation_sensor.h"
++
+ #include "config_handler.h"
+ #include "globalscalesettings.h"
+ #include "kcm_screen_debug.h"
+diff --git a/kcm/output_model.cpp b/kcm/output_model.cpp
+index 3eafeabd..2ed6585e 100644
+--- a/kcm/output_model.cpp
++++ b/kcm/output_model.cpp
+@@ -10,7 +10,7 @@
+ #include <kscreen/edid.h>
+ #include <kscreen/mode.h>
+ 
+-#include "../common/utils.h"
++#include "common/utils.h"
+ #include "config_handler.h"
+ 
+ #include <KLocalizedString>
+diff --git a/kded/CMakeLists.txt b/kded/CMakeLists.txt
+index 513feaf7..ebf8b4b7 100644
+--- a/kded/CMakeLists.txt
++++ b/kded/CMakeLists.txt
+@@ -8,11 +8,6 @@ target_sources(kscreen PRIVATE
+     output.cpp
+     generator.cpp
+     device.cpp
+-    ${CMAKE_SOURCE_DIR}/common/osdaction.cpp
+-    ${CMAKE_SOURCE_DIR}/common/globals.cpp
+-    ${CMAKE_SOURCE_DIR}/common/control.cpp
+-    ${CMAKE_SOURCE_DIR}/common/orientation_sensor.cpp
+-    ${CMAKE_SOURCE_DIR}/common/utils.cpp
+ )
+ 
+ ecm_qt_declare_logging_category(kscreen HEADER kscreen_daemon_debug.h IDENTIFIER KSCREEN_KDED CATEGORY_NAME kscreen.kded DESCRIPTION "kscreen kded (kscreen)" EXPORT KSCREEN)
+@@ -27,6 +22,7 @@ qt_add_dbus_interface(dbus_SRCS
+ target_sources(kscreen PRIVATE ${dbus_SRCS})
+ 
+ target_link_libraries(kscreen PRIVATE
++                              kscreen_common
+                               Qt::Widgets
+                               Qt::DBus
+                               Qt::Quick
+diff --git a/kded/config.cpp b/kded/config.cpp
+index b3a5bc35..fd858575 100644
+--- a/kded/config.cpp
++++ b/kded/config.cpp
+@@ -5,7 +5,7 @@
+     SPDX-License-Identifier: GPL-2.0-or-later
+ */
+ #include "config.h"
+-#include "../common/control.h"
++#include "common/control.h"
+ #include "device.h"
+ #include "kscreen_daemon_debug.h"
+ #include "output.h"
+diff --git a/kded/daemon.h b/kded/daemon.h
+index 597df26f..b8148a62 100644
+--- a/kded/daemon.h
++++ b/kded/daemon.h
+@@ -6,8 +6,8 @@
+ */
+ #pragma once
+ 
+-#include "../common/globals.h"
+-#include "../common/osdaction.h"
++#include "common/globals.h"
++#include "common/osdaction.h"
+ #include "config-X11.h"
+ 
+ #include <kscreen/config.h>
+diff --git a/kded/output.h b/kded/output.h
+index 082c8b34..72650679 100644
+--- a/kded/output.h
++++ b/kded/output.h
+@@ -6,8 +6,8 @@
+ */
+ #pragma once
+ 
+-#include "../common/control.h"
+-#include "../common/globals.h"
++#include "common/control.h"
++#include "common/globals.h"
+ 
+ #include <kscreen/output.h>
+ #include <kscreen/types.h>
+diff --git a/osd/CMakeLists.txt b/osd/CMakeLists.txt
+index 544d87d3..9feba793 100644
+--- a/osd/CMakeLists.txt
++++ b/osd/CMakeLists.txt
+@@ -1,9 +1,10 @@
+-add_executable(kscreen_osd_service main.cpp osdmanager.cpp osd.cpp ../common/osdaction.cpp qml.qrc)
++add_executable(kscreen_osd_service main.cpp osdmanager.cpp osd.cpp qml.qrc)
+ 
+ qt_add_dbus_adaptor(DBUS_SRC org.kde.kscreen.osdService.xml osdmanager.h KScreen::OsdManager)
+ target_sources(kscreen_osd_service PRIVATE ${DBUS_SRC})
+ 
+ target_link_libraries(kscreen_osd_service PRIVATE
++    kscreen_common
+     Qt::DBus
+     Qt::Quick
+     KF6::I18n
+diff --git a/osd/osd.h b/osd/osd.h
+index 9ad2206a..bb5ebde8 100644
+--- a/osd/osd.h
++++ b/osd/osd.h
+@@ -16,7 +16,7 @@
+ 
+ #include <memory>
+ 
+-#include "../common/osdaction.h"
++#include "common/osdaction.h"
+ 
+ class QQuickView;
+ 
+diff --git a/osd/osdmanager.h b/osd/osdmanager.h
+index b15f8696..bda89a43 100644
+--- a/osd/osdmanager.h
++++ b/osd/osdmanager.h
+@@ -11,7 +11,7 @@
+ #include <QString>
+ #include <QTimer>
+ 
+-#include "../common/osdaction.h"
++#include "common/osdaction.h"
+ 
+ namespace KScreen
+ {
+diff --git a/plasmoid/CMakeLists.txt b/plasmoid/CMakeLists.txt
+index 43c183b3..dbaad475 100644
+--- a/plasmoid/CMakeLists.txt
++++ b/plasmoid/CMakeLists.txt
+@@ -2,7 +2,6 @@ add_definitions(-DTRANSLATION_DOMAIN=\"plasma_applet_org.kde.kscreen\")
+ 
+ set(kscreenapplet_SRCS
+     kscreenapplet.cpp
+-    ../common/osdaction.cpp
+ )
+ 
+ add_library(org.kde.kscreen MODULE ${kscreenapplet_SRCS})
+@@ -11,8 +10,10 @@ target_link_libraries(org.kde.kscreen
+                       Qt::Qml
+                       KF6::I18n
+                       Plasma::Plasma
+-                      KF6::Screen)
++                      KF6::Screen
++                      kscreen_common)
+ 
+ install(TARGETS org.kde.kscreen DESTINATION ${KDE_INSTALL_PLUGINDIR}/plasma/applets)
+ 
+ plasma_install_package(package org.kde.kscreen)
++
+diff --git a/plasmoid/kscreenapplet.h b/plasmoid/kscreenapplet.h
+index 8fe5ff0f..990ad0d3 100644
+--- a/plasmoid/kscreenapplet.h
++++ b/plasmoid/kscreenapplet.h
+@@ -11,7 +11,7 @@
+ 
+ #include <KScreen/Types>
+ 
+-#include "../common/osdaction.h"
++#include "common/osdaction.h"
+ 
+ class KScreenApplet : public Plasma::Applet
+ {
+diff --git a/tests/kded/CMakeLists.txt b/tests/kded/CMakeLists.txt
+index fa0946fe..dca74b82 100644
+--- a/tests/kded/CMakeLists.txt
++++ b/tests/kded/CMakeLists.txt
+@@ -9,9 +9,6 @@ macro(ADD_KDED_TEST testname)
+         ${CMAKE_SOURCE_DIR}/kded/device.cpp
+         ${CMAKE_SOURCE_DIR}/kded/config.cpp
+         ${CMAKE_SOURCE_DIR}/kded/output.cpp
+-        ${CMAKE_SOURCE_DIR}/common/globals.cpp
+-        ${CMAKE_SOURCE_DIR}/common/control.cpp
+-        #${CMAKE_SOURCE_DIR}/kded/daemon.cpp
+     )
+     ecm_qt_declare_logging_category(test_SRCS HEADER kscreen_daemon_debug.h IDENTIFIER KSCREEN_KDED CATEGORY_NAME kscreen.kded)
+ 
+@@ -23,7 +20,7 @@ macro(ADD_KDED_TEST testname)
+     add_executable(${testname} ${test_SRCS})
+     add_dependencies(${testname} kscreen) # make sure the dbus interfaces are generated
+     target_compile_definitions(${testname} PRIVATE "-DTEST_DATA=\"${CMAKE_CURRENT_SOURCE_DIR}/\"")
+-    target_link_libraries(${testname} Qt::Test Qt::DBus Qt::Gui Qt::Sensors KF6::Screen KF6::CoreAddons)
++    target_link_libraries(${testname} Qt::Test Qt::DBus Qt::Gui Qt::Sensors KF6::Screen KF6::CoreAddons kscreen_common)
+     add_test(NAME kscreen-kded-${testname} COMMAND ${testname})
+     ecm_mark_as_test(${testname})
+ endmacro()
+diff --git a/tests/kded/configtest.cpp b/tests/kded/configtest.cpp
+index 56eb7726..9c249f9b 100644
+--- a/tests/kded/configtest.cpp
++++ b/tests/kded/configtest.cpp
+@@ -5,7 +5,7 @@
+     SPDX-License-Identifier: GPL-2.0-or-later
+ */
+ #include "../../kded/config.h"
+-#include "../../common/globals.h"
++#include "common/globals.h"
+ 
+ #include <QObject>
+ #include <QtTest>
+-- 
+2.43.0
+

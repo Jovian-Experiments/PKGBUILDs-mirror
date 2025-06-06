@@ -1,0 +1,28 @@
+From 49afaf50c44bb0b70499028f81042ee83e5bf47b Mon Sep 17 00:00:00 2001
+From: David Redondo <kde@david-redondo.de>
+Date: Fri, 6 Jun 2025 08:46:29 +0200
+Subject: [PATCH 5/5] Disable clone action
+
+It doesn't do anything right now because we dont find matching
+modes. Revisit when updating to Plasma 6.4 as wayland has a different
+method then.
+---
+ common/osdaction.cpp | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/common/osdaction.cpp b/common/osdaction.cpp
+index 0c38a3e9..8b4b899a 100644
+--- a/common/osdaction.cpp
++++ b/common/osdaction.cpp
+@@ -27,7 +27,7 @@ QList<OsdAction> OsdAction::availableActions()
+     return {
+         {SwitchToExternal, i18nd("kscreen_common", "Switch to external screen"), QStringLiteral("osd-shutd-laptop")},
+         {SwitchToInternal, i18nd("kscreen_common", "Switch to laptop screen"), QStringLiteral("osd-shutd-screen")},
+-        {Clone, i18nd("kscreen_common", "Unify outputs"), QStringLiteral("osd-duplicate")},
++        // {Clone, i18nd("kscreen_common", "Unify outputs"), QStringLiteral("osd-duplicate")},
+         {ExtendLeft, i18nd("kscreen_common", "Extend to left"), QStringLiteral("osd-sbs-left")},
+         {ExtendRight, i18nd("kscreen_common", "Extend to right"), QStringLiteral("osd-sbs-sright")},
+         {NoAction, i18nd("kscreen_common", "Leave unchanged"), QStringLiteral("dialog-cancel")},
+-- 
+2.43.0
+
