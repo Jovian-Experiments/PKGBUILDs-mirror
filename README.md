@@ -1,5 +1,5 @@
 
-`main @ 20250604.1000`
+`main @ 20250610.1000`
 ======================
 
 Valve packages
@@ -42,6 +42,7 @@ Valve packages
  * [`maliit-keyboard` — `holo-main/maliit-keyboard-2.3.1-4.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/maliit-keyboard-2.3.1-4.1)
  * [`mpg123` — `holo-main/mpg123-1.32.9-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/mpg123-1.32.9-1)
  * [`networkmanager` — `holo-main/networkmanager-1.50.1-1.2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/networkmanager-1.50.1-1.2)
+ * [`orca` — `holo-main/orca-47.5-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/orca-47.5-1)
  * [`paru` — `holo-main/paru-2.0.4-1.2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/paru-2.0.4-1.2)
  * [`perl` — `holo-main/perl-5.40.0-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/perl-5.40.0-1.1)
  * [`podman` — `holo-main/podman-5.3.2-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/podman-5.3.2-1.1)
@@ -61,7 +62,7 @@ Valve packages
  * [`systemd-sysvcompat` — `holo-main/systemd-257.2-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/systemd-257.2-1.1)
  * [`ttf-twemoji-default` — `holo-main/ttf-twemoji-default-13.1.0-2.3`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/ttf-twemoji-default-13.1.0-2.3)
  * [`umr` — `holo-main/umr-1.0.10-1.2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/umr-1.0.10-1.2)
- * [`xdg-desktop-portal-gamescope` — `holo-main/xdg-desktop-portal-gamescope-0.1.20.c54d973-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/xdg-desktop-portal-gamescope-0.1.20.c54d973-1)
+ * [`xdg-desktop-portal-gamescope` — `holo-main/xdg-desktop-portal-gamescope-0.1.21.20ac820-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/xdg-desktop-portal-gamescope-0.1.21.20ac820-1)
  * [`xdg-desktop-portal-gtk` — `holo-main/xdg-desktop-portal-gtk-1.15.1-2.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/xdg-desktop-portal-gtk-1.15.1-2.1)
  * [`xdg-desktop-portal-holo` — `holo-main/xdg-desktop-portal-holo-0.1.11.c1b8cf1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/xdg-desktop-portal-holo-0.1.11.c1b8cf1-1)
  * [`xorg-server` — `holo-main/xorg-server-21.1.16-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/xorg-server-21.1.16-1.1)
@@ -86,6 +87,8 @@ Valve packages
  * [`jupiter-hw-support` — `jupiter-main/jupiter-hw-support-20250521.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-hw-support-20250521.1-1)
  * [`jupiter-legacy-support` — `jupiter-main/jupiter-legacy-support-1.154-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-legacy-support-1.154-1)
  * [`jupiter-steamos-log-submitter` — `jupiter-main/jupiter-steamos-log-submitter-1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-steamos-log-submitter-1-1)
+ * [`konsole` — `jupiter-main/konsole-24.12.0-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/konsole-24.12.0-1)
+ * [`kscreen` — `jupiter-main/kscreen-6.2.5-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/kscreen-6.2.5-2)
  * [`kwin` — `jupiter-main/kwin-6.2.5-1.2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/kwin-6.2.5-1.2)
  * [`libva-mesa-driver` — `jupiter-main/mesa-24.3.4.197725.radeonsi_24.3.4-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/mesa-24.3.4.197725.radeonsi_24.3.4-2)
  * [`libwireplumber` — `jupiter-main/wireplumber-0.5.7-1.2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/wireplumber-0.5.7-1.2)
@@ -101,9 +104,9 @@ Valve packages
  * [`pyzy` — `jupiter-main/pyzy-1.1-2.4`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/pyzy-1.1-2.4)
  * [`renderdoc-minimal` — `jupiter-main/renderdoc-minimal-1.36-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/renderdoc-minimal-1.36-1.1)
  * [`steam-im-modules` — `jupiter-main/steam-im-modules-jupiter.20240131-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steam-im-modules-jupiter.20240131-2)
- * [`steam-jupiter-stable` — `jupiter-main/steam-jupiter-stable-1.0.0.81-2.4`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steam-jupiter-stable-1.0.0.81-2.4)
+ * [`steam-jupiter-stable` — `jupiter-main/steam-jupiter-stable-1.0.0.81-2.5`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steam-jupiter-stable-1.0.0.81-2.5)
  * [`steam_notif_daemon` — `jupiter-main/steam_notif_daemon-v1.0.1-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steam_notif_daemon-v1.0.1-2)
- * [`steamdeck-dsp` — `jupiter-main/steamdeck-dsp-0.61-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steamdeck-dsp-0.61-1)
+ * [`steamdeck-dsp` — `jupiter-main/steamdeck-dsp-0.62-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steamdeck-dsp-0.62-1)
  * [`steamdeck-kde-presets` — `jupiter-main/steamdeck-kde-presets-0.30-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steamdeck-kde-presets-0.30-1)
  * [`steamos-customizations-jupiter` — `jupiter-main/steamos-customizations-jupiter-20250527.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steamos-customizations-jupiter-20250527.1-1)
  * [`steamos-devkit-service` — `jupiter-main/steamos-devkit-service-0.20250429.0-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steamos-devkit-service-0.20250429.0-2)
@@ -408,7 +411,6 @@ Arch Linux packages
  * [`knewstuff/6.9.0-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/knewstuff/-/tree/6.9.0-2)
  * [`knotifications/6.9.0-3`](https://gitlab.archlinux.org/archlinux/packaging/packages/knotifications/-/tree/6.9.0-3)
  * [`knotifyconfig/6.9.0-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/knotifyconfig/-/tree/6.9.0-1)
- * [`konsole/24.12.0-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/konsole/-/tree/24.12.0-1)
  * [`kpackage/6.9.0-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/kpackage/-/tree/6.9.0-1)
  * [`kparts/6.9.0-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/kparts/-/tree/6.9.0-1)
  * [`kpeople/6.9.0-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/kpeople/-/tree/6.9.0-1)
@@ -419,7 +421,6 @@ Arch Linux packages
  * [`krb5/1.21.3-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/krb5/-/tree/1.21.3-1)
  * [`krdp/6.2.5-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/krdp/-/tree/6.2.5-1)
  * [`krunner/6.9.0-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/krunner/-/tree/6.9.0-1)
- * [`kscreen/6.2.5-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/kscreen/-/tree/6.2.5-1)
  * [`kscreenlocker/6.2.5-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/kscreenlocker/-/tree/6.2.5-1)
  * [`kservice/6.9.0-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/kservice/-/tree/6.9.0-1)
  * [`ksshaskpass/6.2.5-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/ksshaskpass/-/tree/6.2.5-1)
@@ -740,7 +741,6 @@ Arch Linux packages
  * [`openxr/1.1.43-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/openxr/-/tree/1.1.43-1)
  * [`opus/1.5.2-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/opus/-/tree/1.5.2-1)
  * [`orc/0.4.40-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/orc/-/tree/0.4.40-1)
- * [`orca/47.3-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/orca/-/tree/47.3-1)
  * [`ostree/2024.10-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/ostree/-/tree/2024.10-1)
  * [`oxygen/6.2.5-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/oxygen/-/tree/6.2.5-1)
  * [`oxygen-sounds/6.2.5-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/oxygen-sounds/-/tree/6.2.5-1)
