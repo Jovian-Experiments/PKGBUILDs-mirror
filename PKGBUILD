@@ -11,7 +11,7 @@ pkgname=('vulkan-mesa-layers' 'vulkan-intel' 'vulkan-swrast' 'libva-mesa-driver'
 pkgdesc="An open-source implementation of the OpenGL specification"
 _tag=radeonsi-24.3.4
 pkgver=24.3.4.197725.radeonsi_24.3.4
-pkgrel=2
+pkgrel=3
 arch=('x86_64')
 makedepends=('git' 'openssh' 'python-mako' 'python-packaging' 'libxml2' 'libx11' 'xorgproto' 'libdrm' 'libxshmfence' 'libxxf86vm'
              'python>=3.13' 'python<3.14' 'python-ply' 'python-yaml'
@@ -47,14 +47,14 @@ build() {
   CXXFLAGS+=' -g1'
 
   # Jupiter:
-  #  - drop most gallium drivers but radeonsi, swrast and zink
+  #  - drop most gallium drivers but radeonsi, intel, swrast and zink
   #  - drop radv vulkan driver - separate sources and package
   #  - disable xa - unused by our gallium drivers
   arch-meson jupiter-mesa build \
     -D b_ndebug=true \
     -D b_lto=false \
     -D platforms=x11,wayland \
-    -D gallium-drivers=radeonsi,swrast,zink \
+    -D gallium-drivers=radeonsi,swrast,zink,iris,i915 \
     -D vulkan-drivers=intel,swrast \
     -D vulkan-layers=device-select,intel-nullhw,overlay \
     -D egl=enabled \
