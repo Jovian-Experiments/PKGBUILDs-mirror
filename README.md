@@ -1,5 +1,5 @@
 
-`main @ 20250617.1000`
+`main @ 20250617.1001`
 ======================
 
 Valve packages
@@ -971,6 +971,7 @@ Arch Linux packages
  * [`udisks2-lvm2/2.10.1-5`](https://gitlab.archlinux.org/archlinux/packaging/packages/udisks2-lvm2/-/tree/2.10.1-5)
  * [`unrar/1:7.1.2-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/unrar/-/tree/1:7.1.2-1)
  * [`unzip/6.0-21`](https://gitlab.archlinux.org/archlinux/packaging/packages/unzip/-/tree/6.0-21)
+ * [`usb_modeswitch/2.6.1-4`](https://gitlab.archlinux.org/archlinux/packaging/packages/usb_modeswitch/-/tree/2.6.1-4)
  * [`usbutils/018-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/usbutils/-/tree/018-1)
  * [`util-linux/2.40.2-3`](https://gitlab.archlinux.org/archlinux/packaging/packages/util-linux/-/tree/2.40.2-3)
  * [`util-linux-libs/2.40.2-3`](https://gitlab.archlinux.org/archlinux/packaging/packages/util-linux-libs/-/tree/2.40.2-3)
