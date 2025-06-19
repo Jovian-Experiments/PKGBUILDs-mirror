@@ -1,5 +1,5 @@
 
-`main @ 20250618.1000`
+`main @ 20250619.1000`
 ======================
 
 Valve packages
@@ -34,6 +34,16 @@ Valve packages
  * [`iwd` — `holo-main/iwd-3.0-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/iwd-3.0-1)
  * [`kdumpst` — `holo-main/kdumpst-1.1-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/kdumpst-1.1-2)
  * [`kmod` — `holo-main/kmod-33-3.2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/kmod-33-3.2)
+ * [`libblockdev` — `holo-main/libblockdev-3.2.1-3.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/libblockdev-3.2.1-3.1)
+ * [`libblockdev-btrfs` — `holo-main/libblockdev-3.2.1-3.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/libblockdev-3.2.1-3.1)
+ * [`libblockdev-crypto` — `holo-main/libblockdev-3.2.1-3.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/libblockdev-3.2.1-3.1)
+ * [`libblockdev-fs` — `holo-main/libblockdev-3.2.1-3.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/libblockdev-3.2.1-3.1)
+ * [`libblockdev-loop` — `holo-main/libblockdev-3.2.1-3.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/libblockdev-3.2.1-3.1)
+ * [`libblockdev-lvm` — `holo-main/libblockdev-3.2.1-3.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/libblockdev-3.2.1-3.1)
+ * [`libblockdev-mdraid` — `holo-main/libblockdev-3.2.1-3.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/libblockdev-3.2.1-3.1)
+ * [`libblockdev-nvme` — `holo-main/libblockdev-3.2.1-3.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/libblockdev-3.2.1-3.1)
+ * [`libblockdev-part` — `holo-main/libblockdev-3.2.1-3.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/libblockdev-3.2.1-3.1)
+ * [`libblockdev-swap` — `holo-main/libblockdev-3.2.1-3.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/libblockdev-3.2.1-3.1)
  * [`libdrm` — `holo-main/libdrm-2.4.123-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/libdrm-2.4.123-1)
  * [`libibus` — `holo-main/ibus-1.5.31-2.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/ibus-1.5.31-2.1)
  * [`libnm` — `holo-main/networkmanager-1.50.1-1.2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/networkmanager-1.50.1-1.2)
@@ -42,7 +52,7 @@ Valve packages
  * [`maliit-keyboard` — `holo-main/maliit-keyboard-2.3.1-4.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/maliit-keyboard-2.3.1-4.1)
  * [`mpg123` — `holo-main/mpg123-1.32.9-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/mpg123-1.32.9-1)
  * [`networkmanager` — `holo-main/networkmanager-1.50.1-1.2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/networkmanager-1.50.1-1.2)
- * [`orca` — `holo-main/orca-47.5-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/orca-47.5-1)
+ * [`orca` — `holo-main/orca-48.2-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/orca-48.2-1.1)
  * [`paru` — `holo-main/paru-2.0.4-1.2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/paru-2.0.4-1.2)
  * [`perl` — `holo-main/perl-5.40.0-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/perl-5.40.0-1.1)
  * [`podman` — `holo-main/podman-5.3.2-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/podman-5.3.2-1.1)
@@ -65,9 +75,9 @@ Valve packages
  * [`xdg-desktop-portal-gamescope` — `holo-main/xdg-desktop-portal-gamescope-0.1.21.20ac820-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/xdg-desktop-portal-gamescope-0.1.21.20ac820-1)
  * [`xdg-desktop-portal-gtk` — `holo-main/xdg-desktop-portal-gtk-1.15.1-2.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/xdg-desktop-portal-gtk-1.15.1-2.1)
  * [`xdg-desktop-portal-holo` — `holo-main/xdg-desktop-portal-holo-0.1.11.c1b8cf1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/xdg-desktop-portal-holo-0.1.11.c1b8cf1-1)
- * [`xorg-server` — `holo-main/xorg-server-21.1.17-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/xorg-server-21.1.17-1.1)
- * [`xorg-server-common` — `holo-main/xorg-server-21.1.17-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/xorg-server-21.1.17-1.1)
- * [`xorg-xwayland` — `holo-main/xorg-xwayland-24.1.7-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/xorg-xwayland-24.1.7-1.1)
+ * [`xorg-server` — `holo-main/xorg-server-21.1.18-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/xorg-server-21.1.18-1.1)
+ * [`xorg-server-common` — `holo-main/xorg-server-21.1.18-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/xorg-server-21.1.18-1.1)
+ * [`xorg-xwayland` — `holo-main/xorg-xwayland-24.1.8-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/xorg-xwayland-24.1.8-1.1)
  * [`zenity-gtk3` — `holo-main/zenity-gtk3-3.44.2-3`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/zenity-gtk3-3.44.2-3)
 
 ### `jupiter-main`
@@ -91,7 +101,7 @@ Valve packages
  * [`kscreen` — `jupiter-main/kscreen-6.2.5-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/kscreen-6.2.5-2)
  * [`kwin` — `jupiter-main/kwin-6.2.5-1.2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/kwin-6.2.5-1.2)
  * [`libva-mesa-driver` — `jupiter-main/mesa-24.3.4.197725.radeonsi_24.3.4-3`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/mesa-24.3.4.197725.radeonsi_24.3.4-3)
- * [`libwireplumber` — `jupiter-main/wireplumber-0.5.7-1.2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/wireplumber-0.5.7-1.2)
+ * [`libwireplumber` — `jupiter-main/wireplumber-0.5.7-1.3`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/wireplumber-0.5.7-1.3)
  * [`linux-firmware-neptune` — `jupiter-main/linux-firmware-neptune-jupiter.20250311.1-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/linux-firmware-neptune-jupiter.20250311.1-2)
  * [`linux-firmware-neptune-whence` — `jupiter-main/linux-firmware-neptune-jupiter.20250311.1-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/linux-firmware-neptune-jupiter.20250311.1-2)
  * [`linux-neptune-611` — `jupiter-main/linux-neptune-611-6.11.11.valve19-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/linux-neptune-611-6.11.11.valve19-1)
@@ -106,7 +116,7 @@ Valve packages
  * [`steam-im-modules` — `jupiter-main/steam-im-modules-jupiter.20240131-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steam-im-modules-jupiter.20240131-2)
  * [`steam-jupiter-stable` — `jupiter-main/steam-jupiter-stable-1.0.0.81-2.5`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steam-jupiter-stable-1.0.0.81-2.5)
  * [`steam_notif_daemon` — `jupiter-main/steam_notif_daemon-v1.0.1-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steam_notif_daemon-v1.0.1-2)
- * [`steamdeck-dsp` — `jupiter-main/steamdeck-dsp-0.62-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steamdeck-dsp-0.62-1)
+ * [`steamdeck-dsp` — `jupiter-main/steamdeck-dsp-0.64-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steamdeck-dsp-0.64-1)
  * [`steamdeck-kde-presets` — `jupiter-main/steamdeck-kde-presets-0.30-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steamdeck-kde-presets-0.30-1)
  * [`steamos-customizations-jupiter` — `jupiter-main/steamos-customizations-jupiter-20250527.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steamos-customizations-jupiter-20250527.1-1)
  * [`steamos-devkit-service` — `jupiter-main/steamos-devkit-service-0.20250429.0-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steamos-devkit-service-0.20250429.0-2)
@@ -115,7 +125,7 @@ Valve packages
  * [`vpower` — `jupiter-main/vpower-1.5.3-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/vpower-1.5.3-1)
  * [`vulkan-intel` — `jupiter-main/mesa-24.3.4.197725.radeonsi_24.3.4-3`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/mesa-24.3.4.197725.radeonsi_24.3.4-3)
  * [`wakehook` — `jupiter-main/wakehook-2.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/wakehook-2.1-1)
- * [`wireplumber` — `jupiter-main/wireplumber-0.5.7-1.2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/wireplumber-0.5.7-1.2)
+ * [`wireplumber` — `jupiter-main/wireplumber-0.5.7-1.3`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/wireplumber-0.5.7-1.3)
  * [`xorgproto` — `jupiter-main/xorgproto-2024.1-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/xorgproto-2024.1-2)
 
 Arch Linux packages
@@ -457,16 +467,6 @@ Arch Linux packages
  * [`libavc1394/0.5.4-6`](https://gitlab.archlinux.org/archlinux/packaging/packages/libavc1394/-/tree/0.5.4-6)
  * [`libavif/1.1.1-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/libavif/-/tree/1.1.1-2)
  * [`libb2/0.98.1-3`](https://gitlab.archlinux.org/archlinux/packaging/packages/libb2/-/tree/0.98.1-3)
- * [`libblockdev/3.2.1-3`](https://gitlab.archlinux.org/archlinux/packaging/packages/libblockdev/-/tree/3.2.1-3)
- * [`libblockdev-btrfs/3.2.1-3`](https://gitlab.archlinux.org/archlinux/packaging/packages/libblockdev-btrfs/-/tree/3.2.1-3)
- * [`libblockdev-crypto/3.2.1-3`](https://gitlab.archlinux.org/archlinux/packaging/packages/libblockdev-crypto/-/tree/3.2.1-3)
- * [`libblockdev-fs/3.2.1-3`](https://gitlab.archlinux.org/archlinux/packaging/packages/libblockdev-fs/-/tree/3.2.1-3)
- * [`libblockdev-loop/3.2.1-3`](https://gitlab.archlinux.org/archlinux/packaging/packages/libblockdev-loop/-/tree/3.2.1-3)
- * [`libblockdev-lvm/3.2.1-3`](https://gitlab.archlinux.org/archlinux/packaging/packages/libblockdev-lvm/-/tree/3.2.1-3)
- * [`libblockdev-mdraid/3.2.1-3`](https://gitlab.archlinux.org/archlinux/packaging/packages/libblockdev-mdraid/-/tree/3.2.1-3)
- * [`libblockdev-nvme/3.2.1-3`](https://gitlab.archlinux.org/archlinux/packaging/packages/libblockdev-nvme/-/tree/3.2.1-3)
- * [`libblockdev-part/3.2.1-3`](https://gitlab.archlinux.org/archlinux/packaging/packages/libblockdev-part/-/tree/3.2.1-3)
- * [`libblockdev-swap/3.2.1-3`](https://gitlab.archlinux.org/archlinux/packaging/packages/libblockdev-swap/-/tree/3.2.1-3)
  * [`libbluray/1.3.4-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/libbluray/-/tree/1.3.4-2)
  * [`libbpf/1.5.0-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/libbpf/-/tree/1.5.0-1)
  * [`libbs2b/3.1.0-9`](https://gitlab.archlinux.org/archlinux/packaging/packages/libbs2b/-/tree/3.1.0-9)
