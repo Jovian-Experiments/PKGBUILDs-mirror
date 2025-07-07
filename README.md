@@ -1,5 +1,5 @@
 
-`main @ 20250701.1000`
+`main @ 20250707.1000`
 ======================
 
 Valve packages
@@ -13,7 +13,7 @@ Valve packages
  * [`breakpad` — `holo-main/breakpad-v2023.06.01-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/breakpad-v2023.06.01-1)
  * [`casync` — `holo-main/casync-2.r227.g99559cd-4.4`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/casync-2.r227.g99559cd-4.4)
  * [`desync` — `holo-main/desync-0.9.6-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/desync-0.9.6-1.1)
- * [`dirlock` — `holo-main/dirlock-0.0.1.160.9e3b956-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/dirlock-0.0.1.160.9e3b956-1)
+ * [`dirlock` — `holo-main/dirlock-0.0.1.173.dba841d-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/dirlock-0.0.1.173.dba841d-1)
  * [`discover` — `holo-main/discover-6.2.5-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/discover-6.2.5-1.1)
  * [`drm_info` — `holo-main/drm_info-2.7.0-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/drm_info-2.7.0-1)
  * [`drm_janitor` — `holo-main/drm_janitor-0.0.4-4`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/drm_janitor-0.0.4-4)
