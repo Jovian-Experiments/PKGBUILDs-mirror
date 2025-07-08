@@ -1,0 +1,176 @@
+From c3b147fbee99c8330aa69d04e04b583b9cf71b4c Mon Sep 17 00:00:00 2001
+From: Julian Bouzas <julian.bouzas@collabora.com>
+Date: Mon, 30 Jun 2025 10:28:21 -0400
+Subject: [PATCH] default-nodes: Use session and route priorities when finding
+ the default node
+
+Some PCM devices can expose multiple nodes with same session priorities but
+different route priorities. This improves the default nodes logic to also check
+the route priorities when the session priorities are the same.
+---
+ .../default-nodes/find-best-default-node.lua  |  9 +++++-
+ .../find-selected-default-node.lua            | 11 +++++--
+ .../default-nodes/state-default-nodes.lua     |  9 +++++-
+ src/scripts/lib/node-utils.lua                | 32 +++++++++++++++++++
+ 4 files changed, 57 insertions(+), 4 deletions(-)
+
+diff --git a/src/scripts/default-nodes/find-best-default-node.lua b/src/scripts/default-nodes/find-best-default-node.lua
+index fe97a2b20..cd1a9bd10 100644
+--- a/src/scripts/default-nodes/find-best-default-node.lua
++++ b/src/scripts/default-nodes/find-best-default-node.lua
+@@ -18,6 +18,7 @@ SimpleEventHook {
+   execute = function (event)
+     local available_nodes = event:get_data ("available-nodes")
+     local selected_prio = event:get_data ("selected-node-priority") or 0
++    local selected_route_prio = event:get_data ("selected-route-priority") or 0
+     local selected_node = event:get_data ("selected-node")
+ 
+     available_nodes = available_nodes and available_nodes:parse ()
+@@ -28,14 +29,20 @@ SimpleEventHook {
+     for _, node_props in ipairs (available_nodes) do
+       -- Highest priority node wins
+       local priority = nutils.get_session_priority (node_props)
++      local route_priority = nutils.get_route_priority (node_props)
+ 
+-      if priority > selected_prio or selected_node == nil then
++      if selected_node == nil or
++          priority > selected_prio or
++          (priority == selected_prio and route_priority > selected_route_prio)
++          then
+         selected_prio = priority
++        selected_route_prio = route_priority
+         selected_node = node_props ["node.name"]
+       end
+     end
+ 
+     event:set_data ("selected-node-priority", selected_prio)
++    event:set_data ("selected-route-priority", selected_route_prio)
+     event:set_data ("selected-node", selected_node)
+   end
+ }:register ()
+diff --git a/src/scripts/default-nodes/find-selected-default-node.lua b/src/scripts/default-nodes/find-selected-default-node.lua
+index 8ece52cd1..905a4aac5 100644
+--- a/src/scripts/default-nodes/find-selected-default-node.lua
++++ b/src/scripts/default-nodes/find-selected-default-node.lua
+@@ -31,6 +31,7 @@ SimpleEventHook {
+     end
+ 
+     local selected_prio = event:get_data ("selected-node-priority") or 0
++    local selected_route_prio = event:get_data ("selected-route-priority") or 0
+     local selected_node = event:get_data ("selected-node")
+ 
+     local source = event:get_source ()
+@@ -49,17 +50,23 @@ SimpleEventHook {
+ 
+     for _, node_props in ipairs (available_nodes) do
+       local name = node_props ["node.name"]
+-      local priority = nutils.get_session_priority (node_props)
+ 
+       if current_configured_node == name then
++        local priority = nutils.get_session_priority (node_props)
++        local route_priority = nutils.get_route_priority (node_props)
++
+         priority = 30000 + priority
+ 
+-        if priority > selected_prio then
++        if priority > selected_prio or
++            (priority == selected_prio and route_priority > selected_route_prio)
++            then
+ 
+           selected_prio = priority
++          selected_route_prio = route_priority
+           selected_node = name
+ 
+           event:set_data ("selected-node-priority", selected_prio)
++          event:set_data ("selected-route-priority", selected_route_prio)
+           event:set_data ("selected-node", selected_node)
+         end
+ 
+diff --git a/src/scripts/default-nodes/state-default-nodes.lua b/src/scripts/default-nodes/state-default-nodes.lua
+index 1f379dafe..4661b2490 100644
+--- a/src/scripts/default-nodes/state-default-nodes.lua
++++ b/src/scripts/default-nodes/state-default-nodes.lua
+@@ -29,6 +29,7 @@ find_stored_default_node_hook = SimpleEventHook {
+     local props = event:get_properties ()
+     local available_nodes = event:get_data ("available-nodes")
+     local selected_prio = event:get_data ("selected-node-priority") or 0
++    local selected_route_prio = event:get_data ("selected-route-priority") or 0
+     local selected_node = event:get_data ("selected-node")
+ 
+     available_nodes = available_nodes and available_nodes:parse ()
+@@ -45,10 +46,15 @@ find_stored_default_node_hook = SimpleEventHook {
+       for i, v in ipairs (stored) do
+         if name == v then
+           local priority = nutils.get_session_priority (node_props)
++          local route_priority = nutils.get_route_priority (node_props)
++
+           priority = priority + 20001 - i
+ 
+-          if priority > selected_prio then
++          if priority > selected_prio or
++              (priority == selected_prio and route_priority > selected_route_prio)
++              then
+             selected_prio = priority
++            selected_route_prio = route_priority
+             selected_node = name
+           end
+ 
+@@ -59,6 +65,7 @@ find_stored_default_node_hook = SimpleEventHook {
+ 
+     if selected_node then
+       event:set_data ("selected-node-priority", selected_prio)
++      event:set_data ("selected-route-priority", selected_route_prio)
+       event:set_data ("selected-node", selected_node)
+     end
+   end
+diff --git a/src/scripts/lib/node-utils.lua b/src/scripts/lib/node-utils.lua
+index 38b6e6b3b..46eaefe35 100644
+--- a/src/scripts/lib/node-utils.lua
++++ b/src/scripts/lib/node-utils.lua
+@@ -4,6 +4,8 @@
+ --
+ -- SPDX-License-Identifier: MIT
+ 
++local cutils = require ("common-utils")
++
+ local module = {}
+ 
+ function module.get_session_priority (node_props)
+@@ -15,4 +17,34 @@ function module.get_session_priority (node_props)
+   return math.tointeger (priority) or 0
+ end
+ 
++function module.get_route_priority (node_props)
++  local card_profile_device = node_props ["card.profile.device"]
++  local device_id = node_props ["device.id"]
++
++  -- if the node does not have an associated device, just return 0
++  if not card_profile_device or not device_id then
++    return 0
++  end
++
++  -- Get the device
++  devices_om = cutils.get_object_manager ("device")
++  local device = devices_om:lookup {
++    Constraint { "bound-id", "=", device_id, type = "gobject" },
++  }
++
++  if not device then
++    return 0
++  end
++
++  -- Get the priority of the associated route
++  for p in device:iterate_params ("Route") do
++    local route = cutils.parseParam (p, "Route")
++    if route and (route.device == tonumber (card_profile_device)) then
++      return route.priority
++    end
++  end
++
++  return 0
++end
++
+ return module
+-- 
+GitLab
+
