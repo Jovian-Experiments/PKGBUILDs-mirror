@@ -8,7 +8,7 @@ pkgname=(
   libwireplumber
 )
 pkgver=0.5.7
-pkgrel=1.3
+pkgrel=1.4
 pkgdesc="Session / policy manager implementation for PipeWire"
 url="https://pipewire.pages.freedesktop.org/wireplumber/"
 arch=(x86_64)
@@ -58,6 +58,12 @@ source=(
   # Holo: backport final patch of https://gitlab.freedesktop.org/pipewire/wireplumber/-/merge_requests/667/commits
   # Addresses https://gitlab.steamos.cloud/holo-team/tasks/-/issues/1340
   "0004-monitor-alsa-Forward-the-session.suspend-timeout-sec.patch"
+
+  # Holo: backport of https://gitlab.freedesktop.org/pipewire/wireplumber/-/merge_requests/719 and
+  # https://gitlab.freedesktop.org/pipewire/wireplumber/-/merge_requests/720
+  # Fixes https://gitlab.steamos.cloud/holo-team/tasks/-/issues/1729
+  "0001-monitor-alsa-increase-priority-for-usb-devices.patch"
+  "0001-use-session-and-route-priorities.patch"
 )
 b2sums=('4d57500277d7ba82a96996ead553b40bb7b0d5803cba1e8a1ac0ada25077dc10645e03a7aca32eba4e780311c67f2cdf2ddbc8dc147fd232823416867b682812'
         '86f80f07bb5f446ae90f88f39870139d4d902f99048a62eb825ac12b654ca248568b17f8a1ca15777b41e0a11054345d023fc36a348372f15cb75b92a0180cfe'
@@ -67,6 +73,8 @@ b2sums=('4d57500277d7ba82a96996ead553b40bb7b0d5803cba1e8a1ac0ada25077dc10645e03a
         'a93d7a763286ae7c243d3273bda656ddb3f978a285e26b395fa5ff53ec00fcd5cd138a97069af614d93105770bc45dc827c157676c931e5cdd43457548067150'
         'cda56c0e8f442fac5a7bb13cb915ebd28c21e62fd7ede3e3c84357ab20b5ff180c31e25c7064467d3d1237011ebd9d79745922b428681dbfefbae12580744937'
         '3b05b23dd3ff1da4f59df814780cf5251769c10ef3b1c07707ef717160631e27113e5e7286cd8b37ad4f37b21f9f14649d8fa5148b6aa90d26fef48a219e7e5e'
+        'd8e0ff4f2c0927e1da127442c2c3d9aecaa05cca2753fdcb1786fe2ac6d959b0a995988e02f155de396fbe4fcb5eac3cbd55caa75be6d4a86eaa3e723415d062'
+        'aba4d3fd93a4dafac5c1bb425621b176a80b3396f2896102c0c26399e86d9101165dabd0dee2c9d8964415e5098a8b78e87b564d2855de6c81f3eca489b183da'
 )
 
 prepare() {
