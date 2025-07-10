@@ -1,7 +1,7 @@
 # Maintainer Ethan Geller (ethang@valvesoftware.com)
 
 pkgname=steamdeck-dsp
-_srctag=0.64
+_srctag=0.66
 pkgver=${_srctag#galileo-}
 pkgrel=1
 arch=('any')
@@ -11,7 +11,7 @@ license=('Proprietary')
 depends=('pipewire')
 makedepends=('git' 'openssh' 'base-devel' 'glibc' 'faust' 'ladspa' 'lv2' 'boost' 'linux-api-headers' 'qt5-base')
 source=("git+ssh://git@gitlab.steamos.cloud/jupiter/valve-hardware-audio-processing.git#tag=$_srctag")
-sha512sums=('c74d03be4c7c75a3ea40bbe5e0521a4a413f68a3fb5686719dbf2292e8767b89cfe98511bde25f5eacc129cb394748f3174ed879b7c9ed9cfc514c211553c7c8')
+sha512sums=('49a84a3468555c42b0b13ab3f4aa3e60f6a868f06c5ac49d8454f9b60dd8faa60ff7e8106de18e4805c1e0aa4cb61744bb11cfe31ca5ef92c8da10a8608cd43f')
 
 build() {
   cd valve-hardware-audio-processing
