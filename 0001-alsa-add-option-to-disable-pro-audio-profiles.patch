@@ -1,0 +1,50 @@
+From 411500215c7be0dbdb2b5e4d74280aedab342c96 Mon Sep 17 00:00:00 2001
+From: Julian Bouzas <julian.bouzas@collabora.com>
+Date: Wed, 2 Jul 2025 08:09:54 -0400
+Subject: [PATCH] alsa: add option to disable pro-audio profiles
+
+Some devices might have nonfunctional 'Pro Audio' sound. This patch adds a
+new 'api.acp.disable-pro-audio' option to disable pro-audio profile entirely.
+---
+ spa/plugins/alsa/acp/acp.c  | 5 ++++-
+ spa/plugins/alsa/acp/card.h | 1 +
+ 2 files changed, 5 insertions(+), 1 deletion(-)
+
+diff --git a/spa/plugins/alsa/acp/acp.c b/spa/plugins/alsa/acp/acp.c
+index 505681d5c..0657f93bf 100644
+--- a/spa/plugins/alsa/acp/acp.c
++++ b/spa/plugins/alsa/acp/acp.c
+@@ -490,7 +490,8 @@ static void add_profiles(pa_card *impl)
+ 	ap->profile.flags = ACP_PROFILE_OFF;
+ 	pa_hashmap_put(impl->profiles, ap->name, ap);
+ 
+-	add_pro_profile(impl, impl->card.index);
++	if (!impl->disable_pro_audio)
++		add_pro_profile(impl, impl->card.index);
+ 
+ 	PA_HASHMAP_FOREACH(ap, impl->profile_set->profiles, state) {
+ 		pa_alsa_mapping *m;
+@@ -1683,6 +1684,8 @@ struct acp_card *acp_card_new(uint32_t index, const struct acp_dict *props)
+ 			impl->rate = atoi(s);
+ 		if ((s = acp_dict_lookup(props, "api.acp.pro-channels")) != NULL)
+ 			impl->pro_channels = atoi(s);
++		if ((s = acp_dict_lookup(props, "api.acp.disable-pro-audio")) != NULL)
++			impl->disable_pro_audio = spa_atob(s);
+ 	}
+ 
+ 	impl->ucm.default_sample_spec.format = PA_SAMPLE_S16NE;
+diff --git a/spa/plugins/alsa/acp/card.h b/spa/plugins/alsa/acp/card.h
+index c58f89abe..b49183710 100644
+--- a/spa/plugins/alsa/acp/card.h
++++ b/spa/plugins/alsa/acp/card.h
+@@ -47,6 +47,7 @@ struct pa_card {
+ 	bool auto_profile;
+ 	bool auto_port;
+ 	bool ignore_dB;
++	bool disable_pro_audio;
+ 	uint32_t rate;
+ 	uint32_t pro_channels;
+ 
+-- 
+2.50.0
+
