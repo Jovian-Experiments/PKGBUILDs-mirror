@@ -1,5 +1,5 @@
 
-`main @ 20250715.1000`
+`main @ 20250721.1000`
 ======================
 
 Valve packages
@@ -62,10 +62,10 @@ Valve packages
  * [`rauc` — `holo-main/rauc-1.12-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/rauc-1.12-1.1)
  * [`speech-dispatcher` — `holo-main/speech-dispatcher-0.12.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/speech-dispatcher-0.12.1-1)
  * [`steamos-atomupd-client` — `holo-main/steamos-atomupd-client-0.20250122.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-atomupd-client-0.20250122.1-1)
- * [`steamos-efi` — `holo-main/steamos-efi-20250204.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-efi-20250204.1-1)
+ * [`steamos-efi` — `holo-main/steamos-efi-20250718.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-efi-20250718.1-1)
  * [`steamos-kdumpst-layer` — `holo-main/steamos-kdumpst-layer-1.0-3`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-kdumpst-layer-1.0-3)
  * [`steamos-log-submitter` — `holo-main/steamos-log-submitter-0.7.5-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-log-submitter-0.7.5-1)
- * [`steamos-manager` — `holo-main/steamos-manager-25.6.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-manager-25.6.1-1)
+ * [`steamos-manager` — `holo-main/steamos-manager-25.7.0-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-manager-25.7.0-1)
  * [`steamos-networking-tools` — `holo-main/steamos-networking-tools-1.2-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-networking-tools-1.2-1)
  * [`steamos-powerbuttond` — `holo-main/steamos-powerbuttond-3.2-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-powerbuttond-3.2-1)
  * [`steamos-reset` — `holo-main/steamos-reset-20241008.1-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-reset-20241008.1-2)
@@ -99,7 +99,7 @@ Valve packages
  * [`jupiter-dock-updater-bin` — `jupiter-main/jupiter-dock-updater-bin-20250220.02-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-dock-updater-bin-20250220.02-1)
  * [`jupiter-fan-control` — `jupiter-main/jupiter-fan-control-20240523.3-4`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-fan-control-20240523.3-4)
  * [`jupiter-firewall` — `jupiter-main/jupiter-firewall-0.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-firewall-0.1-1)
- * [`jupiter-hw-support` — `jupiter-main/jupiter-hw-support-20250708.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-hw-support-20250708.1-1)
+ * [`jupiter-hw-support` — `jupiter-main/jupiter-hw-support-20250715.1-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-hw-support-20250715.1-2)
  * [`jupiter-legacy-support` — `jupiter-main/jupiter-legacy-support-1.154-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-legacy-support-1.154-1)
  * [`jupiter-steamos-log-submitter` — `jupiter-main/jupiter-steamos-log-submitter-1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-steamos-log-submitter-1-1)
  * [`konsole` — `jupiter-main/konsole-24.12.0-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/konsole-24.12.0-1)
@@ -119,13 +119,13 @@ Valve packages
  * [`steam-im-modules` — `jupiter-main/steam-im-modules-jupiter.20240131-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steam-im-modules-jupiter.20240131-2)
  * [`steam-jupiter-stable` — `jupiter-main/steam-jupiter-stable-1.0.0.81-2.5`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steam-jupiter-stable-1.0.0.81-2.5)
  * [`steam_notif_daemon` — `jupiter-main/steam_notif_daemon-v1.0.1-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steam_notif_daemon-v1.0.1-2)
- * [`steamdeck-dsp` — `jupiter-main/steamdeck-dsp-0.66-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steamdeck-dsp-0.66-1)
+ * [`steamdeck-dsp` — `jupiter-main/steamdeck-dsp-0.68-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steamdeck-dsp-0.68-1)
  * [`steamdeck-kde-presets` — `jupiter-main/steamdeck-kde-presets-0.30-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steamdeck-kde-presets-0.30-1)
  * [`steamos-customizations-jupiter` — `jupiter-main/steamos-customizations-jupiter-20250715.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steamos-customizations-jupiter-20250715.1-1)
  * [`steamos-devkit-service` — `jupiter-main/steamos-devkit-service-0.20250620.0-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steamos-devkit-service-0.20250620.0-1)
  * [`upower` — `jupiter-main/upower-0.99.15.jupiter-1.4`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/upower-0.99.15.jupiter-1.4)
  * [`usbhid-gadget-passthru` — `jupiter-main/usbhid-gadget-passthru-0.1.3-4`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/usbhid-gadget-passthru-0.1.3-4)
- * [`vpower` — `jupiter-main/vpower-1.5.3-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/vpower-1.5.3-1)
+ * [`vpower` — `jupiter-main/vpower-1.5.4-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/vpower-1.5.4-1)
  * [`vulkan-intel` — `jupiter-main/mesa-25.1.4.204699.radeonsi_25.1.5-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/mesa-25.1.4.204699.radeonsi_25.1.5-1)
  * [`wakehook` — `jupiter-main/wakehook-2.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/wakehook-2.1-1)
  * [`wireplumber` — `jupiter-main/wireplumber-0.5.7-1.4`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/wireplumber-0.5.7-1.4)
