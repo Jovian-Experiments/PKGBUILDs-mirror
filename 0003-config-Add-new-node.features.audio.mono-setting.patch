@@ -1,0 +1,51 @@
+From bab761abe7519759836b109cc1a78d36a3b6d86e Mon Sep 17 00:00:00 2001
+From: Julian Bouzas <julian.bouzas@collabora.com>
+Date: Thu, 3 Jul 2025 10:46:28 -0400
+Subject: [PATCH 3/3] config: Add new 'node.features.audio.mono' setting
+
+This setting allows users to toggle between MONO audio or not at runtime.
+---
+ src/config/wireplumber.conf      | 5 +++++
+ src/scripts/node/create-item.lua | 6 ++++++
+ 2 files changed, 11 insertions(+)
+
+diff --git a/src/config/wireplumber.conf b/src/config/wireplumber.conf
+index dcbb67a7..f0a7cfb0 100644
+--- a/src/config/wireplumber.conf
++++ b/src/config/wireplumber.conf
+@@ -851,6 +851,11 @@ wireplumber.settings.schema = {
+     type = "bool"
+     default = false
+   }
++  node.features.audio.mono = {
++    description = "Whether to configure all audio adapters in MONO or not"
++    type = "bool"
++    default = false
++  }
+   node.stream.restore-props = {
+     description = "Whether to restore properties on stream nodes or not"
+     type = "bool"
+diff --git a/src/scripts/node/create-item.lua b/src/scripts/node/create-item.lua
+index 30547f62..b78b6752 100644
+--- a/src/scripts/node/create-item.lua
++++ b/src/scripts/node/create-item.lua
+@@ -39,6 +39,8 @@ function configProperties (node)
+       Settings.get_boolean ("node.features.audio.monitor-ports")
+   properties ["item.features.control-port"] =
+       Settings.get_boolean ("node.features.audio.control-port")
++  properties ["item.features.mono"] =
++      Settings.get_boolean ("node.features.audio.mono")
+   properties ["node.id"] = node ["bound-id"]
+ 
+   -- set the default media.role, if configured
+@@ -200,3 +202,7 @@ end)
+ Settings.subscribe ("node.features.audio.control-port", function ()
+   reconfigureAudioAdapters ()
+ end)
++
++Settings.subscribe ("node.features.audio.mono", function ()
++  reconfigureAudioAdapters ()
++end)
+-- 
+2.50.1
+
