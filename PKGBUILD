@@ -23,7 +23,7 @@ pkgname=(
 )
 _tag=radeonsi-25.1.5
 pkgver=25.1.4.204699.radeonsi_25.1.5
-pkgrel=1
+pkgrel=1.1
 epoch=0
 pkgdesc="Open-source OpenGL drivers"
 url="https://www.mesa3d.org/"
