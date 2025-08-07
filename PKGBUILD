@@ -3,7 +3,7 @@
 pkgname=plasma-remotecontrollers
 pkgver=5.26.90.r258.g9ace9a9
 # _dirver=$(echo $pkgver | cut -d. -f1-3)
-pkgrel=1
+pkgrel=2
 pkgdesc='Translate various input device events into keyboard and pointer events'
 arch=(x86_64)
 url='https://plasma-bigscreen.org/'
@@ -12,7 +12,7 @@ depends=(plasma-workspace)
 makedepends=(extra-cmake-modules plasma-wayland-protocols libcec)
 optdepends=('libcec: TV remotes support')
 
-# There is no Qt6 release of plasma-remotecontrollers at present, take master at the time of 6.2
+# There is no Qt6 release of plasma-remotecontrollers at present, take master at the time of 6.4
 _commit=9ace9a9bae6decee00c0e4d5fefb584b6ca3aa0f
 
 source=(${pkgname}::git+https://invent.kde.org/plasma-bigscreen/plasma-remotecontrollers.git#commit=${_commit}
