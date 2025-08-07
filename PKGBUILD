@@ -1,7 +1,7 @@
 pkgname=steam-im-modules
 _srctag=jupiter-20240131
 pkgver=${_srctag//-/.}
-pkgrel=2
+pkgrel=3
 pkgdesc="Steam Qt Keyboard Plug-in"
 arch=(x86_64 i686 arm armv6h armv7h aarch64)
 url="https://github.com/valve-project/steam-qt-keyboard-plugin"
@@ -14,7 +14,7 @@ source=("$pkgname::git+${url}.git#tag=${_srctag}")
 sha256sums=('SKIP')
 
 build() {
-  cmake -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=RelWithDebInfo -B build -S "${pkgname%-git}"
+  cmake -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCMAKE_POLICY_VERSION_MINIMUM=3.5 -B build -S "${pkgname%-git}"
   cmake --build build --config RelWithDebInfo
 }
 
