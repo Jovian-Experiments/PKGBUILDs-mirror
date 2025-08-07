@@ -6,7 +6,7 @@
 pkgname=ibus-anthy
 pkgver=1.5.14
 _commit=0962741856498bc9d197be0713b2fae1879c29ba  # Valve specific changes not yet upstream
-pkgrel=4.3
+pkgrel=4.4
 pkgdesc='Japanese input method Anthy IMEngine for IBus Framework'
 arch=('x86_64')
 license=('LGPL')
