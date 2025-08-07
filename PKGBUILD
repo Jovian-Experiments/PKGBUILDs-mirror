@@ -7,15 +7,15 @@ pkgbase=kdump-steamos
 pkgname=kdump-steamos
 pkgver=0.92
 _srctag=v0.92
-pkgrel=3
+pkgrel=4
 pkgdesc="Kdump scripts to collect vmcore/dmesg in a small dracut-based initramfs"
 makedepends=('git')
 arch=('x86_64')
 license=('GPL2')
 install=kdump-steamos.install
 
-source=("$pkgbase::git+https://gitlab.steamos.cloud/jupiter/kdump_steamos.git#tag=${_srctag}")
-sha256sums=('SKIP')
+source=("$pkgbase::git+ssh://git@gitlab.steamos.cloud/jupiter/kdump_steamos.git#tag=${_srctag}")
+sha256sums=('50089cf9fd6763f7336185369bca803a46108240ba1b1547af020db33abcc33b')
 
 package() {
 	depends=('curl' 'dmidecode' 'dracut' 'jq' 'kexec-tools' 'makedumpfile' 'systemd' 'zip' 'zstd')
