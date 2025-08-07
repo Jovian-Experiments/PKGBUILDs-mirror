@@ -3,7 +3,7 @@
 pkgname=steamdeck-dsp
 _srctag=0.69
 pkgver=${_srctag#galileo-}
-pkgrel=1
+pkgrel=2
 arch=('any')
 url=""
 pkgdesc="Steamdeck Audio Processing"
