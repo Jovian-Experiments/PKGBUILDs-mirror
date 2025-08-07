@@ -3,7 +3,7 @@
 
 pkgname=('mangohud' 'lib32-mangohud')
 pkgver=0.8.1.r49.ga113f7c
-pkgrel=1
+pkgrel=2
 pkgdesc="Vulkan and OpenGL overlay to display performance information"
 url="https://github.com/flightlessmango/MangoHud"
 arch=(x86_64)
