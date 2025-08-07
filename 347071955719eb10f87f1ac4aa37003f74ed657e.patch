@@ -1,0 +1,21 @@
+From 347071955719eb10f87f1ac4aa37003f74ed657e Mon Sep 17 00:00:00 2001
+From: Mike FABIAN <mfabian@redhat.com>
+Date: Thu, 17 Jul 2025 15:54:20 +0200
+Subject: [PATCH] cmake_minimum_required(VERSION 3.0.0) ->
+ cmake_minimum_required(VERSION 3.12...4.0)
+
+Resolves: https://bugzilla.redhat.com/show_bug.cgi?id=2380646
+---
+ CMakeLists.txt | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 47c2d28..e6f0cb1 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -1,4 +1,4 @@
+-cmake_minimum_required(VERSION 3.0.0)
++cmake_minimum_required(VERSION 3.12...4.0)
+ 
+ # Default CMAKE_INSTALL_PREFIX should be set before PROJECT()
+ SET(CMAKE_INSTALL_PREFIX "/usr" CACHE PATH "Install dir prefix")
