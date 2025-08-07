@@ -1,22 +1,31 @@
-# Holo Maintainer: Emil Velikov <emil.l.velikov@gmail.com>
-# Maintainer: David Runge <dvzrv@archlinux.org>
+# Maintainer: Holo Team
+# Contributor: David Runge <dvzrv@archlinux.org>
 # Contributor: Jan Alexander Steffens (heftig) <jan.steffens@gmail.com>
 
 pkgname=alsa-ucm-conf
-pkgver=1.2.12
-pkgrel=1.1 # Holo: remove Jupiter symlink
+pkgver=1.2.14
+pkgrel=2.1 # Holo: remove Jupiter symlink
 pkgdesc="ALSA Use Case Manager configuration (and topologies)"
 arch=(any)
 url="https://alsa-project.org/"
 license=(BSD-3-Clause)
 source=(
   $url/files/pub/lib/$pkgname-$pkgver.tar.bz2{,.sig}
+  '010-alsa-ucm-conf-fix-acp3x-alc5682-max98357.patch'::'https://github.com/alsa-project/alsa-ucm-conf/commit/25f519f66c3e496b21ca1ad83ebc6114dfaa9fc3.patch'
 )
-sha512sums=('391dde123271172d899c04865d1d6e21b4ad0060ee9b2256dfbc6fc89ad48edcaa43c861893ab0e5c70d972e20d15c528defc19c00308e7465f13f954cce25d7'
-            'SKIP')
-b2sums=('65f429afa6a9134f1896acac3827f6065ce9315f1920d27d5ea97244fe376f1f7780c9537cf33b8a91eeaebfde7489842bd603a7d60c0d20b6017f2e7e1eda4e'
-        'SKIP')
+sha512sums=('a224e890919306bdcd606dfb873b089950c9fa89f24c02947692ee8ab1a05c419f2a8dc174440d17c8a9575cab293806630f2cb43d74677f7ef0d956b7883dc5'
+            'SKIP'
+            'd5eb3c3b96f6616e39f6d551e1a5fb888f15e1d940785a9d546134298ff46b5dbbb3354a39c885126c8db3dcfcd350ed4195b6930e9ca5846923abf4c8bf0cc6')
+b2sums=('cbb4b81db7670207cac5b85ba9cd4d9df93e4aca573da4caffe0f1e0386a9685b837e58b7ed85ddcfecf3c0f2469e706833dad6f0ef020440c943aa41520f8f0'
+        'SKIP'
+        'cc6e37135301187d42c6f54950c7ba9d86217dd04d2726a4123b0a357981172fa43605c6ed6034f2df5fa648b2802e4c3ef62e877040ee870a03fda7f13f1b8d')
 validpgpkeys=('F04DF50737AC1A884C4B3D718380596DA6E59C91') # ALSA Release Team (Package Signing Key v1) <release@alsa-project.org>
+
+prepare() {
+  # https://github.com/alsa-project/alsa-ucm-conf/issues/550
+  # https://gitlab.archlinux.org/archlinux/packaging/packages/alsa-ucm-conf/-/issues/2
+  patch -d $pkgname-$pkgver -Np1 -i "${srcdir}/010-alsa-ucm-conf-fix-acp3x-alc5682-max98357.patch"
+}
 
 package() {
   cd $pkgname-$pkgver
