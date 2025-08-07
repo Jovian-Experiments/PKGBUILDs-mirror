@@ -2,7 +2,7 @@
 
 pkgname=upower
 pkgver=0.99.15.jupiter
-pkgrel=1.4
+pkgrel=1.5
 pkgdesc="Abstraction for enumerating power devices, listening to device events and querying history and statistics"
 url="https://upower.freedesktop.org"
 arch=(x86_64)
@@ -28,7 +28,7 @@ build() {
   meson compile -C build
 }
 
-# Holo: self-tests fail on python 3.11.  Can come back after next rebase.
+# Holo: self-tests fail on python 3.13.  Can come back after we bump upower.
 #
 # check() {
 #   meson test -C build --print-errorlogs
