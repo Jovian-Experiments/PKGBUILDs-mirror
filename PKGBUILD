@@ -26,7 +26,7 @@ pkgname=(
 _tag=steamos-25.6.0
 pkgver=25.2.0_devel.206774.steamos_25.6.0
 
-pkgrel=1
+pkgrel=2
 epoch=0
 pkgdesc="Open-source OpenGL drivers"
 url="https://www.mesa3d.org/"
