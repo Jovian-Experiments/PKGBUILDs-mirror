@@ -1,17 +1,33 @@
-# Maintainer: Thomas Bächler <thomas@archlinux.org>
+# Maintainer: Tobias Powalowski <tpowa@archlinux.org>
+# Contributor: Thomas Bächler <thomas@archlinux.org>
 
 pkgbase=linux-firmware-neptune
-pkgname=(linux-firmware-neptune-rtw-debug) # amd-ucode)
-_tag=jupiter-20230217-rtw-debug
-_srctag=${_tag#jupiter-}
-pkgver=${_srctag%-rtw-debug}
-pkgrel=3
+pkgname=(linux-firmware-neptune-whence linux-firmware-neptune  amd-ucode-neptune
+         linux-firmware-neptune-{nfp,mellanox,marvell,qcom,liquidio,qlogic,bnx2x}
+)
+_tag=jupiter-20250731.1
+pkgver=${_tag//-/.}
+pkgrel=2
 pkgdesc="Firmware files for Linux"
 url="https://gitlab.steamos.cloud/jupiter/linux-firmware-neptune"
-license=('GPL2' 'GPL3' 'custom')
+license=(
+  GPL-2.0-only
+  GPL-2.0-or-later
+  GPL-3.0-only
+  custom
+)
 arch=('any')
-makedepends=('git' 'openssh')
-options=(!strip !debug)
+makedepends=(
+  git
+  parallel
+  python
+  rdfind
+  openssh
+)
+options=(
+  !strip
+  !debug
+)
 source=("git+ssh://git@gitlab.steamos.cloud/jupiter/linux-firmware-neptune.git#tag=$_tag")
 sha256sums=('SKIP')
 validpgpkeys=('4CDE8575E547BF835FE15807A31B6BD72486CFD6') # Josh Boyer <jwboyer@fedoraproject.org>
@@ -29,12 +45,20 @@ prepare() {
   done
 }
 
+# holo: using tag as pkgver
+# pkgver() {
+#   cd ${pkgbase}
+#
+#   # Commit date + short rev
+#   echo $(TZ=UTC git show -s --pretty=%cd --date=format-local:%Y%m%d HEAD).$(git rev-parse --short HEAD)
+# }
+
 build() {
   mkdir -p kernel/x86/microcode
   cat ${pkgbase}/amd-ucode/microcode_amd*.bin > kernel/x86/microcode/AuthenticAMD.bin
 
   # Reproducibility: set the timestamp on the bin file
-  if [[ -n ${SOURCE_DATE_EPOCH} ]]; then 
+  if [[ -n ${SOURCE_DATE_EPOCH} ]]; then
     touch -d @${SOURCE_DATE_EPOCH} kernel/x86/microcode/AuthenticAMD.bin
   fi
 
@@ -44,43 +68,155 @@ build() {
     bsdtar --null -cf - --format=newc @- > amd-ucode.img
 }
 
-package_linux-firmware-neptune-rtw-debug() {
-  provides=('linux-firmware')
-  conflicts=('linux-firmware')
-  replaces=('linux-firmware')
-
-  cd ${pkgbase}
-
-  make DESTDIR="${pkgdir}" FIRMWAREDIR=/usr/lib/firmware install
-
-  # Trigger a microcode reload for configurations not using early updates
-  echo 'w /sys/devices/system/cpu/microcode/reload - - - - 1' |
-    install -Dm644 /dev/stdin "${pkgdir}/usr/lib/tmpfiles.d/${pkgname}.conf"
-
-  install -Dt "${pkgdir}/usr/share/licenses/${pkgname}" -m644 LICEN* WHENCE
-
-  # Jupiter: remove unused/unneeded firmware files, bloating the package.
-  # Listed in decreasing size, mainly server NIC and non-AMD gpu
-  local -r _unused_firmware="netronome qcom mellanox liquidio qed i915 dpaa2 radeon nvidia"
-  for folder in ${_unused_firmware}; do
-    rm -rf "${pkgdir}/usr/lib/firmware/$folder"
-  done
-
-  # In addition, nuke all amdgpu firmware but VanGogh which we need
-  for amdgpu in "${pkgdir}/usr/lib/firmware/amdgpu/"*; do
-    _file=$(basename $amdgpu)
-    [[ "$_file" = vangogh* ]] && continue
-    rm -rf "$amdgpu"
+_pick() {
+  local p="$1" f d; shift
+  for f; do
+    d="$srcdir/$p/${f#$pkgdir/}"
+    mkdir -p "$(dirname "$d")"
+    mv "$f" "$d"
+    rmdir -p --ignore-fail-on-non-empty "$(dirname "$f")"
   done
 }
 
-package_amd-ucode() {
+package_linux-firmware-neptune-whence() {
+  pkgdesc+=" - contains the WHENCE license file which documents the vendor license details"
+  provides=("${pkgname//-neptune/}")
+  conflicts=("${pkgname//-neptune/}")
+  replaces=("${pkgname//-neptune/}")
+
+  install -Dt "${pkgdir}/usr/share/licenses/${pkgname}" -m644 ${pkgbase}/WHENCE
+}
+
+package_linux-firmware-neptune() {
+  depends=('linux-firmware-whence')
+  provides=("${pkgname//-neptune/}")
+  conflicts=("${pkgname//-neptune/}")
+  replaces=("${pkgname//-neptune/}")
+
+  cd ${pkgbase}
+
+  ZSTD_CLEVEL=19 make DESTDIR="${pkgdir}" FIRMWAREDIR=/usr/lib/firmware install-zst
+
+  # holo: compat with older jupiter kernels
+  # XXX: Upstream firmware renamed these, but the upstream *driver* didn't use the new name yet.  As of when this
+  #      workaround was added upstreaming was still in progress, so ensure that happened before removing this.
+  ln -s QCA2066 ${pkgdir}/usr/lib/firmware/ath11k/QCA206X
+  ln -s cirrus/cs35l41-dsp1-spk-prot-vlv1776.wmfw.zst ${pkgdir}/usr/lib/firmware/cs35l41-dsp1-spk-prot.wmfw.zst
+  ln -s cirrus/cs35l41-dsp1-spk-prot-vlv1776.bin.zst ${pkgdir}/usr/lib/firmware/cs35l41-dsp1-spk-prot.bin.zst
+
+  install -Dt "${pkgdir}/usr/share/licenses/${pkgname}" -m644 LICEN*
+
+  cd "${pkgdir}"
+
+  # remove arm64 firmware https://bugs.archlinux.org/task/76583
+  rm usr/lib/firmware/mrvl/prestera/mvsw_prestera_fw_arm64-v4.1.img.zst
+
+  # split
+  _pick amd-ucode usr/lib/firmware/amd-ucode
+
+  _pick linux-firmware-nfp usr/lib/firmware/netronome
+  _pick linux-firmware-nfp usr/share/licenses/${pkgname}/LICENCE.Netronome
+
+  _pick linux-firmware-mellanox usr/lib/firmware/mellanox
+
+  _pick linux-firmware-marvell usr/lib/firmware/{libertas,mwl8k,mwlwifi,mrvl}
+  _pick linux-firmware-marvell usr/share/licenses/${pkgname}/LICENCE.{Marvell,NXP}
+
+  _pick linux-firmware-qcom usr/lib/firmware/{qcom,a300_*}
+  _pick linux-firmware-qcom usr/share/licenses/${pkgname}/LICENSE.qcom*
+
+  _pick linux-firmware-liquidio usr/lib/firmware/liquidio
+  _pick linux-firmware-liquidio usr/share/licenses/${pkgname}/LICENCE.cavium_liquidio
+
+  _pick linux-firmware-qlogic usr/lib/firmware/{qlogic,qed,ql2???_*,c{b,t,t2}fw-*}
+  _pick linux-firmware-qlogic usr/share/licenses/${pkgname}/LICENCE.{qla1280,qla2xxx}
+
+  _pick linux-firmware-bnx2x usr/lib/firmware/bnx2x*
+}
+
+package_amd-ucode-neptune() {
   pkgdesc="Microcode update image for AMD CPUs"
   license=(custom)
+  provides=("${pkgname//-neptune/}")
+  conflicts=("${pkgname//-neptune/}")
+  replaces=("${pkgname//-neptune/}")
+
+  # holo - don't use $pkgname here to match _pick call above (also in aur linux-firmware-git)
+  mv -v amd-ucode/* "$pkgdir"
 
   install -Dt "${pkgdir}/boot" -m644 amd-ucode.img
 
   install -Dt "${pkgdir}/usr/share/licenses/${pkgname}" -m644 ${pkgbase}/LICENSE.amd-ucode
+}
+
+package_linux-firmware-neptune-nfp() {
+  pkgdesc+=" - nfp / Firmware for Netronome Flow Processors"
+  depends=('linux-firmware-whence')
+  provides=("${pkgname//-neptune/}")
+  conflicts=("${pkgname//-neptune/}")
+  replaces=("${pkgname//-neptune/}")
+
+  mv -v linux-firmware-nfp/* "${pkgdir}"
+}
+
+package_linux-firmware-neptune-mellanox() {
+  pkgdesc+=" - mellanox / Firmware for Mellanox Spectrum switches"
+  depends=('linux-firmware-whence')
+  provides=("${pkgname//-neptune/}")
+  conflicts=("${pkgname//-neptune/}")
+  replaces=("${pkgname//-neptune/}")
+
+  mv -v linux-firmware-mellanox/* "${pkgdir}"
+}
+
+package_linux-firmware-neptune-marvell() {
+  pkgdesc+=" - marvell / Firmware for Marvell devices"
+  depends=('linux-firmware-whence')
+  provides=("${pkgname//-neptune/}")
+  conflicts=("${pkgname//-neptune/}")
+  replaces=("${pkgname//-neptune/}")
+
+  mv -v linux-firmware-marvell/* "${pkgdir}"
+}
+
+package_linux-firmware-neptune-qcom() {
+  pkgdesc+=" - qcom / Firmware for Qualcomm SoCs"
+  depends=('linux-firmware-whence')
+  provides=("${pkgname//-neptune/}")
+  conflicts=("${pkgname//-neptune/}")
+  replaces=("${pkgname//-neptune/}")
+
+  mv -v linux-firmware-qcom/* "${pkgdir}"
+}
+
+package_linux-firmware-neptune-liquidio() {
+  pkgdesc+=" - liquidio / Firmware for Cavium LiquidIO server adapters"
+  depends=('linux-firmware-whence')
+  provides=("${pkgname//-neptune/}")
+  conflicts=("${pkgname//-neptune/}")
+  replaces=("${pkgname//-neptune/}")
+
+  mv -v linux-firmware-liquidio/* "${pkgdir}"
+}
+
+package_linux-firmware-neptune-qlogic() {
+  pkgdesc+=" - qlogic / Firmware for QLogic devices"
+  depends=('linux-firmware-whence')
+  provides=("${pkgname//-neptune/}")
+  conflicts=("${pkgname//-neptune/}")
+  replaces=("${pkgname//-neptune/}")
+
+  mv -v linux-firmware-qlogic/* "${pkgdir}"
+}
+
+package_linux-firmware-neptune-bnx2x() {
+  pkgdesc+=" - bnx2x / Firmware for Broadcom NetXtreme II 10Gb ethernet adapters"
+  depends=('linux-firmware-whence')
+  provides=("${pkgname//-neptune/}")
+  conflicts=("${pkgname//-neptune/}")
+  replaces=("${pkgname//-neptune/}")
+
+  mv -v linux-firmware-bnx2x/* "${pkgdir}"
 }
 
 # vim:set sw=2 et:
