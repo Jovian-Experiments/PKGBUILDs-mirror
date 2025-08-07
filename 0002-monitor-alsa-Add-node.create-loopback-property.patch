@@ -1,19 +1,20 @@
-From 9fe08ee90a4e6e487de23116a2bb05b7f5ca1ed8 Mon Sep 17 00:00:00 2001
+From cc037da20324d0c6766cd4c1bd20622bbc2b4b41 Mon Sep 17 00:00:00 2001
 From: Julian Bouzas <julian.bouzas@collabora.com>
 Date: Thu, 15 Aug 2024 14:03:14 -0400
-Subject: [PATCH 2/3] monitor: alsa: Add 'node.create-loopback' property
+Subject: [PATCH 2/4] monitor: alsa: Add 'node.create-loopback' property
 
-If enabled, the monitor will create a loopback filter for each ALSA node.
+If enabled, the monitor will create a loopback filter for each ALSA
+node.
 ---
  src/config/wireplumber.conf   |  2 +-
- src/scripts/monitors/alsa.lua | 84 +++++++++++++++++++++++++++++++++++
- 2 files changed, 85 insertions(+), 1 deletion(-)
+ src/scripts/monitors/alsa.lua | 83 +++++++++++++++++++++++++++++++++++
+ 2 files changed, 84 insertions(+), 1 deletion(-)
 
 diff --git a/src/config/wireplumber.conf b/src/config/wireplumber.conf
-index 65aa0824..9f1b58a9 100644
+index dcbb67a7..03dd7fe4 100644
 --- a/src/config/wireplumber.conf
 +++ b/src/config/wireplumber.conf
-@@ -357,7 +357,7 @@ wireplumber.components = [
+@@ -364,7 +364,7 @@ wireplumber.components = [
    {
      name = monitors/alsa.lua, type = script/lua
      provides = monitor.alsa
@@ -23,21 +24,20 @@ index 65aa0824..9f1b58a9 100644
    }
    {
 diff --git a/src/scripts/monitors/alsa.lua b/src/scripts/monitors/alsa.lua
-index 15d20f42..bc2b2ecb 100644
+index 06b40f20..65b1b298 100644
 --- a/src/scripts/monitors/alsa.lua
 +++ b/src/scripts/monitors/alsa.lua
-@@ -5,6 +5,8 @@
+@@ -5,6 +5,7 @@
  --
  -- SPDX-License-Identifier: MIT
  
 +LOOPBACK_ID_OFFSET = 128
-+
- cutils = require ("common-utils")
- log = Log.open_topic ("s-monitors")
+ SPLIT_PCM_PARENT_OFFSET = 256
+ SPLIT_PCM_OFFSET = 512
  
-@@ -27,6 +29,79 @@ function applyDefaultDeviceProperties (properties)
-   properties["api.dbus.ReserveDevice1.Priority"] = -20
- end
+@@ -178,6 +179,79 @@ split_nodes_om:connect ("object-added", function(_, node)
+     end
+ end)
  
 +function CreateLoopback (properties)
 +  local name = properties ["node.name"]
@@ -114,10 +114,10 @@ index 15d20f42..bc2b2ecb 100644
 +
  function createNode(parent, id, obj_type, factory, properties)
    local dev_props = parent.properties
- 
-@@ -166,6 +241,12 @@ function createNode(parent, id, obj_type, factory, properties)
-   local node = Node("adapter", properties)
-   node:activate(Feature.Proxy.BOUND)
+   local parent_id = tonumber(dev_props["spa.object.id"])
+@@ -360,12 +434,21 @@ function createNode(parent, id, obj_type, factory, properties)
+       end
+   end)
    parent:store_managed_object(id, node)
 +
 +  -- create the loopback node if requested
@@ -127,17 +127,16 @@ index 15d20f42..bc2b2ecb 100644
 +  end
  end
  
- function createDevice(parent, id, factory, properties)
-@@ -173,6 +254,9 @@ function createDevice(parent, id, factory, properties)
-   if device then
-     device:connect("create-object", createNode)
-     device:connect("object-removed", function (parent, id)
-+      -- remove loopback if any
-+      parent:store_managed_object(LOOPBACK_ID_OFFSET + id, nil)
+ function removeNode(parent, id)
+   local parent_id = tonumber(parent.properties["spa.object.id"])
+   local ids = {id, SPLIT_PCM_PARENT_OFFSET + id, SPLIT_PCM_OFFSET + id}
+ 
++  -- remove loopback if any
++  parent:store_managed_object(LOOPBACK_ID_OFFSET + id, nil)
 +
-       local node = parent:get_managed_object(id)
-       if not node then
-         return
+   for _, j in pairs(ids) do
+     local node_name = id_name_table[parent_id][j]
+ 
 -- 
-2.47.1
+2.50.1
 
