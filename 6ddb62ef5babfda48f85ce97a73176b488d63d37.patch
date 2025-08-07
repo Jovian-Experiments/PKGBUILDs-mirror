@@ -1,0 +1,50 @@
+From 6ddb62ef5babfda48f85ce97a73176b488d63d37 Mon Sep 17 00:00:00 2001
+From: Ludovico de Nittis <ludovico.denittis@collabora.com>
+Date: Tue, 5 Aug 2025 13:35:33 +0200
+Subject: [PATCH] Fix parameter for the signal handler function
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Signal handlers are expected to accept an int parameter for the signal
+number.
+
+Fixes the following build error:
+```
+src/main.c: In function ‘main’:
+src/main.c:418:23: error: assignment to ‘__sighandler_t’ {aka ‘void
+(*)(int)’} from incompatible pointer type ‘void (*)(void)’
+[-Wincompatible-pointer-types]
+  418 |         sa.sa_handler = hup;
+      |                       ^
+src/main.c:37:6: note: ‘hup’ declared here
+   37 | void hup() {
+      |      ^~~
+In file included from src/main.c:14:
+/usr/include/signal.h:72:16: note: ‘__sighandler_t’ declared here
+   72 | typedef void (*__sighandler_t) (int);
+      |                ^~~~~~~~~~~~~~
+make: *** [<builtin>: src/main.o] Error 1
+```
+
+Signed-off-by: Ludovico de Nittis <ludovico.denittis@collabora.com>
+---
+ src/main.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/src/main.c b/src/main.c
+index c77f94f..7d7cba9 100644
+--- a/src/main.c
++++ b/src/main.c
+@@ -34,7 +34,7 @@ struct usb_hidg_report {
+ 
+ bool did_hup = false;
+ 
+-void hup() {
++void hup(int sig __attribute__((unused))) {
+ 	did_hup = true;
+ }
+ 
+-- 
+GitLab
+
