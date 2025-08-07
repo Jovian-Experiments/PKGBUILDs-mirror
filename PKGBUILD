@@ -6,7 +6,7 @@
 pkgname=scx-scheds
 gitname=scx
 pkgver=1.0.14.linux.neptune.611
-pkgrel=1
+pkgrel=2
 pkgdesc="sched_ext schedulers"
 arch=('x86_64')
 url="https://gitlab.steamos.cloud/holo/scx/-/tree/v$pkgver"
