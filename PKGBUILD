@@ -3,7 +3,7 @@
 
 pkgname=gpu-trace
 pkgver=2.14
-pkgrel=1.2
+pkgrel=1.3
 pkgdesc="GPU Trace capture tool"
 arch=('any')
 url="https://github.com/lostgoat/gpu-trace"
