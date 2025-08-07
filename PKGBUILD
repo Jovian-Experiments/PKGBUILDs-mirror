@@ -7,8 +7,8 @@ pkgname=(
   wireplumber
   libwireplumber
 )
-pkgver=0.5.7
-pkgrel=1.6
+pkgver=0.5.10
+pkgrel=1.1
 pkgdesc="Session / policy manager implementation for PipeWire"
 url="https://pipewire.pages.freedesktop.org/wireplumber/"
 arch=(x86_64)
@@ -52,11 +52,6 @@ source=(
   # Part of https://gitlab.steamos.cloud/holo-team/tasks/-/issues/1208
   "0001-state-routes-only-save-route-properties-if-it-is-ava.patch"
 
-  # Holo: backport of https://gitlab.freedesktop.org/pipewire/wireplumber/-/merge_requests/646
-  # Part of https://gitlab.steamos.cloud/holo-team/tasks/-/issues/1173
-  "0001-lib-Add-new-proc-utils-API-for-process-utilities.patch"
-  "0002-scripts-Add-audio-group-utils.lua-to-group-audio-str.patch"
-
   # Holo: backport final patch of https://gitlab.freedesktop.org/pipewire/wireplumber/-/merge_requests/667/commits
   # Addresses https://gitlab.steamos.cloud/holo-team/tasks/-/issues/1340
   "0004-monitor-alsa-Forward-the-session.suspend-timeout-sec.patch"
@@ -73,21 +68,18 @@ source=(
   "0002-m-si-audio-adapter-Add-new-item.features.mono-config.patch"
   "0003-config-Add-new-node.features.audio.mono-setting.patch"
 )
-b2sums=('4d57500277d7ba82a96996ead553b40bb7b0d5803cba1e8a1ac0ada25077dc10645e03a7aca32eba4e780311c67f2cdf2ddbc8dc147fd232823416867b682812'
+b2sums=('5c9d06c4084187ce172e98fb05bef3826e4b7bf1fba505e5543fec0e194d8a957172c81e6fa32c7f53832e204dd794189d48deaae5eca10577b04106f2625ff3'
         '86f80f07bb5f446ae90f88f39870139d4d902f99048a62eb825ac12b654ca248568b17f8a1ca15777b41e0a11054345d023fc36a348372f15cb75b92a0180cfe'
-        'ea55591190916920756ee0cdab3d4d315500346370dc03a9b739bdcf9806aaec23cfafe31e35c89a6d53e3dd2d5001986012d29fcc77f3be1bf5eaa4ca486cb1'
+        '09ab29570886efb01148edec25a0bb1bcc2ef20e7b02ed6f1fbaa0a29caa4b1f859717735b33fa93ca3494a36336c6730ed940f580ee78705d3c7b6fdc9d5735'
         '145fd614765ebe212de7e27e78b243bb294bd2fdc1efb1c6852280e8db2c2cbca40d6ce838013a06ced34bc030a16a11f1c4875562cd5d041c0785e7be712636'
         '46f72253266c5b9230678946d7b349a5726801d2dd038fa00748e0b5cf194b1d21812862399a95a11f2ae9942a2319304ba2cdd607f6fcacdf382ac5ca57aa01'
         '1498cd88ec907e93975e73af62e01fe0ab40d228603a433e502025b44322092bef0adb0dd508eb96a304c8bc94b00cabafd193ab2eb97d9aaaf699e441a133f3'
-        'a93d7a763286ae7c243d3273bda656ddb3f978a285e26b395fa5ff53ec00fcd5cd138a97069af614d93105770bc45dc827c157676c931e5cdd43457548067150'
-        'cda56c0e8f442fac5a7bb13cb915ebd28c21e62fd7ede3e3c84357ab20b5ff180c31e25c7064467d3d1237011ebd9d79745922b428681dbfefbae12580744937'
         '3b05b23dd3ff1da4f59df814780cf5251769c10ef3b1c07707ef717160631e27113e5e7286cd8b37ad4f37b21f9f14649d8fa5148b6aa90d26fef48a219e7e5e'
         'd8e0ff4f2c0927e1da127442c2c3d9aecaa05cca2753fdcb1786fe2ac6d959b0a995988e02f155de396fbe4fcb5eac3cbd55caa75be6d4a86eaa3e723415d062'
         'aba4d3fd93a4dafac5c1bb425621b176a80b3396f2896102c0c26399e86d9101165dabd0dee2c9d8964415e5098a8b78e87b564d2855de6c81f3eca489b183da'
         '0a6c56d194377a330a277463e614656e1c68618ed417834e8413c4897bb90d35404d1e4b85016b32ddecf20ccf42b0dd9eff4492e649a1d633b558ee9abe5b73'
         '42cc47d7f3119898f6560e85af44c812316c3babd8d439129054ef3c48782296c63f5f3f543a4b44700b197f0657c9d9bc863e8b03b02be01e24472e7c29f5a5'
-        'c7381703ce9b75c0fd2a64676df6c3875b2baa319b1714fdced4578952010f37834322e6d836dacfc643659f8df1008e480f54bee881321736fe812a1bf70b97'
-)
+        'c7381703ce9b75c0fd2a64676df6c3875b2baa319b1714fdced4578952010f37834322e6d836dacfc643659f8df1008e480f54bee881321736fe812a1bf70b97')
 
 prepare() {
   cd $pkgbase
