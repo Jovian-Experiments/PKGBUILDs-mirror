@@ -118,3 +118,9 @@ CONFIG_SCHED_CLASS_EXT=y
 
 # Disable call depth tracking speculative execution vulnerability mitigation
 CONFIG_CALL_DEPTH_TRACKING=n
+
+# Xbox GIP driver
+CONFIG_JOYSTICK_XBOX_GIP=m
+CONFIG_JOYSTICK_XBOX_GIP_FF=y
+CONFIG_JOYSTICK_XBOX_GIP_LEDS=y
+
