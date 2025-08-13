@@ -8,7 +8,7 @@ pkgname=(
   libwireplumber
 )
 pkgver=0.5.10
-pkgrel=1.1
+pkgrel=1.2
 pkgdesc="Session / policy manager implementation for PipeWire"
 url="https://pipewire.pages.freedesktop.org/wireplumber/"
 arch=(x86_64)
@@ -48,10 +48,6 @@ source=(
   "0003-monitor-alsa-Don-t-make-the-loopback-device-node-vir.patch"
   "0004-monitor-alsa-Dont-set-node-dont-remix-property.patch"
 
-  # Holo: backport of https://gitlab.freedesktop.org/pipewire/wireplumber/-/merge_requests/678
-  # Part of https://gitlab.steamos.cloud/holo-team/tasks/-/issues/1208
-  "0001-state-routes-only-save-route-properties-if-it-is-ava.patch"
-
   # Holo: backport final patch of https://gitlab.freedesktop.org/pipewire/wireplumber/-/merge_requests/667/commits
   # Addresses https://gitlab.steamos.cloud/holo-team/tasks/-/issues/1340
   "0004-monitor-alsa-Forward-the-session.suspend-timeout-sec.patch"
@@ -73,7 +69,6 @@ b2sums=('5c9d06c4084187ce172e98fb05bef3826e4b7bf1fba505e5543fec0e194d8a957172c81
         '09ab29570886efb01148edec25a0bb1bcc2ef20e7b02ed6f1fbaa0a29caa4b1f859717735b33fa93ca3494a36336c6730ed940f580ee78705d3c7b6fdc9d5735'
         '145fd614765ebe212de7e27e78b243bb294bd2fdc1efb1c6852280e8db2c2cbca40d6ce838013a06ced34bc030a16a11f1c4875562cd5d041c0785e7be712636'
         '46f72253266c5b9230678946d7b349a5726801d2dd038fa00748e0b5cf194b1d21812862399a95a11f2ae9942a2319304ba2cdd607f6fcacdf382ac5ca57aa01'
-        '1498cd88ec907e93975e73af62e01fe0ab40d228603a433e502025b44322092bef0adb0dd508eb96a304c8bc94b00cabafd193ab2eb97d9aaaf699e441a133f3'
         '3b05b23dd3ff1da4f59df814780cf5251769c10ef3b1c07707ef717160631e27113e5e7286cd8b37ad4f37b21f9f14649d8fa5148b6aa90d26fef48a219e7e5e'
         'd8e0ff4f2c0927e1da127442c2c3d9aecaa05cca2753fdcb1786fe2ac6d959b0a995988e02f155de396fbe4fcb5eac3cbd55caa75be6d4a86eaa3e723415d062'
         'aba4d3fd93a4dafac5c1bb425621b176a80b3396f2896102c0c26399e86d9101165dabd0dee2c9d8964415e5098a8b78e87b564d2855de6c81f3eca489b183da'
