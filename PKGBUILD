@@ -6,7 +6,7 @@
 pkgname=kwin
 pkgver=6.4.3
 _dirver=$(echo $pkgver | cut -d. -f1-3)
-pkgrel=1.1 # Holo: Default scale fix
+pkgrel=1.2 # Holo: Default scale fix
 pkgdesc='An easy to use, but flexible, Wayland compositor'
 arch=(x86_64)
 url='https://kde.org/plasma-desktop/'
@@ -79,11 +79,13 @@ makedepends=(extra-cmake-modules
 optdepends=('maliit-keyboard: virtual keyboard')
 groups=(plasma)
 source=(https://download.kde.org/stable/plasma/$_dirver/$pkgname-$pkgver.tar.xz{,.sig}
+        0001-Load-current-brightness-from-device.patch # Keep screen brightness from gamescope, track at https://bugs.kde.org/show_bug.cgi?id=508163
         0004-Outputconfigurationstore-default-to-internal-display.patch # Deck specific for default scale
         )
 install=$pkgname.install
 sha256sums=('a13568c918eca7803eb44a3a2778b860edc3f03b36797851c4f3aeeed4b502a8'
             'SKIP'
+            '887985706783d2658637548c8a63220397b9ebbd8fc425839d99c6138e8f19b8'
             '9417723b2a2c2ff81b914707edf6dd759ec1fa729eb80fea0719e1722b004a55')
 validpgpkeys=('E0A3EB202F8E57528E13E72FD7574483BB57B18D'  # Jonathan Esk-Riddell <jr@jriddell.org>
               '0AAC775BB6437A8D9AF7A3ACFE0784117FBCE11D'  # Bhushan Shah <bshah@kde.org>
@@ -92,6 +94,7 @@ validpgpkeys=('E0A3EB202F8E57528E13E72FD7574483BB57B18D'  # Jonathan Esk-Riddell
               '1FA881591C26B276D7A5518EEAAF29B42A678C20') # Marco Martin <notmart@gmail.com>
 
 prepare() {
+  patch -p1 -d "$srcdir/$pkgname-$pkgver" -i "$srcdir/0001-Load-current-brightness-from-device.patch"
   patch -p1 -d "$srcdir/$pkgname-$pkgver" -i "$srcdir/0004-Outputconfigurationstore-default-to-internal-display.patch"
 }
 

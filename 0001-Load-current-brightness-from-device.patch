@@ -1,0 +1,31 @@
+From 3db5c7ba90b59d7661bc3d0b671e636a8aa5b889 Mon Sep 17 00:00:00 2001
+From: David Edmundson <kde@davidedmundson.co.uk>
+Date: Tue, 12 Aug 2025 11:09:58 +0100
+Subject: [PATCH] Load current brightness from device
+
+The system brightness may have already been changed by the user in
+another session or at the login screen.
+
+Kwin should load that value, instead of restoring from a config.
+---
+ src/workspace.cpp | 4 ++++
+ 1 file changed, 4 insertions(+)
+
+diff --git a/src/workspace.cpp b/src/workspace.cpp
+index 866abb8080..ec04c96d30 100644
+--- a/src/workspace.cpp
++++ b/src/workspace.cpp
+@@ -1322,6 +1322,10 @@ void Workspace::assignBrightnessDevices(OutputConfiguration &outputConfig)
+             if (device->usesDdcCi()) {
+                 changeset->detectedDdcCi = true;
+             }
++            if (changeset->brightnessDevice && *changeset->brightnessDevice != output->brightnessDevice()) {
++                changeset->brightness = device->observedBrightness();
++                changeset->currentBrightness = device->observedBrightness();
++            }
+             if (changeset->allowSdrSoftwareBrightness.value_or(output->allowSdrSoftwareBrightness())) {
+                 changeset->allowSdrSoftwareBrightness = false;
+                 changeset->brightness = device->observedBrightness();
+-- 
+2.50.1
+
