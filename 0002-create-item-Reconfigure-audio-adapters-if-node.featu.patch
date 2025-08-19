@@ -1,0 +1,69 @@
+From 91ea3d3c6f7ad5a916dc382b6917f32afb74eb0f Mon Sep 17 00:00:00 2001
+From: Julian Bouzas <julian.bouzas@collabora.com>
+Date: Thu, 3 Jul 2025 10:39:02 -0400
+Subject: [PATCH 2/4] create-item: Reconfigure audio adapters if
+ 'node.features.audio.*' settings changed
+
+Up until now, all the 'node.features.audio.*' settings did not have any effect
+if changed at runtime. This patch fixes this by reconfiguring the audio adapters
+every time those settings have changed.
+---
+ src/scripts/node/create-item.lua | 45 ++++++++++++++++++++++++++++++++
+ 1 file changed, 45 insertions(+)
+
+diff --git a/src/scripts/node/create-item.lua b/src/scripts/node/create-item.lua
+index 813f238b..582c7da8 100644
+--- a/src/scripts/node/create-item.lua
++++ b/src/scripts/node/create-item.lua
+@@ -152,3 +152,48 @@ SimpleEventHook {
+ 
+   end
+ }:register ()
++
++function reconfigureAudioAdapters ()
++  local ids = {}
++
++  -- Get the Id of all session items that are audio adapters
++  for id, item in pairs(items) do
++    local si_props = item.properties
++    if si_props ["item.factory.name"] == "si-audio-adapter" then
++      table.insert (ids, id)
++    end
++  end
++
++  -- Re-configure all audio adapters
++  for _, id in pairs (ids) do
++    local item = items[id]
++    local node = item:get_associated_proxy ("node")
++
++    log:info (item, "Started re-configuring audio adapter")
++
++    -- Remove the session item so that it is unlinked
++    items[id] = nil
++    item:remove()
++
++    -- Configure the session item
++    if not item:configure (configProperties (node)) then
++      log:warning (item, "Could not re-configure audio adapter")
++      return
++    end
++
++    -- Activate the session item so that it is linked again
++    items[id] = item
++    item:activate (Features.ALL, function (si, e)
++      if e then
++        log:warning (si, "Could not re-activate audio adapter")
++      else
++        log:info (si, "Successfully re-activated audio adapter")
++        si:register ()
++      end
++    end)
++  end
++end
++
++Settings.subscribe ("node.features.audio.*", function ()
++  reconfigureAudioAdapters ()
++end)
+-- 
+2.50.1
+

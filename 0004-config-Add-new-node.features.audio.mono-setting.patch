@@ -1,32 +1,34 @@
-From bab761abe7519759836b109cc1a78d36a3b6d86e Mon Sep 17 00:00:00 2001
+From 0fa4e869f3bce25be9b345b4cf40674d22b688c4 Mon Sep 17 00:00:00 2001
 From: Julian Bouzas <julian.bouzas@collabora.com>
 Date: Thu, 3 Jul 2025 10:46:28 -0400
-Subject: [PATCH 3/3] config: Add new 'node.features.audio.mono' setting
+Subject: [PATCH 4/4] config: Add new 'node.features.audio.mono' setting
 
-This setting allows users to toggle between MONO audio or not at runtime.
+This setting allows users to toggle between MONO audio or not at
+runtime.
 ---
- src/config/wireplumber.conf      | 5 +++++
- src/scripts/node/create-item.lua | 6 ++++++
- 2 files changed, 11 insertions(+)
+ src/config/wireplumber.conf      | 6 ++++++
+ src/scripts/node/create-item.lua | 2 ++
+ 2 files changed, 8 insertions(+)
 
 diff --git a/src/config/wireplumber.conf b/src/config/wireplumber.conf
-index dcbb67a7..f0a7cfb0 100644
+index 337e1950..34e239dd 100644
 --- a/src/config/wireplumber.conf
 +++ b/src/config/wireplumber.conf
-@@ -851,6 +851,11 @@ wireplumber.settings.schema = {
+@@ -883,6 +883,12 @@ wireplumber.settings.schema = {
      type = "bool"
      default = false
    }
 +  node.features.audio.mono = {
++    name = "Mono"
 +    description = "Whether to configure all audio adapters in MONO or not"
 +    type = "bool"
 +    default = false
 +  }
    node.stream.restore-props = {
-     description = "Whether to restore properties on stream nodes or not"
-     type = "bool"
+     name = "Restore properties"
+     description = "Remember and restore properties of streams"
 diff --git a/src/scripts/node/create-item.lua b/src/scripts/node/create-item.lua
-index 30547f62..b78b6752 100644
+index 582c7da8..d7ece302 100644
 --- a/src/scripts/node/create-item.lua
 +++ b/src/scripts/node/create-item.lua
 @@ -39,6 +39,8 @@ function configProperties (node)
@@ -38,14 +40,6 @@ index 30547f62..b78b6752 100644
    properties ["node.id"] = node ["bound-id"]
  
    -- set the default media.role, if configured
-@@ -200,3 +202,7 @@ end)
- Settings.subscribe ("node.features.audio.control-port", function ()
-   reconfigureAudioAdapters ()
- end)
-+
-+Settings.subscribe ("node.features.audio.mono", function ()
-+  reconfigureAudioAdapters ()
-+end)
 -- 
 2.50.1
 
