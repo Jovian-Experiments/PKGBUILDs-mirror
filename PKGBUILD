@@ -8,7 +8,7 @@ pkgname=(
   libwireplumber
 )
 pkgver=0.5.10
-pkgrel=1.2
+pkgrel=1.3
 pkgdesc="Session / policy manager implementation for PipeWire"
 url="https://pipewire.pages.freedesktop.org/wireplumber/"
 arch=(x86_64)
@@ -60,9 +60,10 @@ source=(
 
   # Holo: backport of https://gitlab.freedesktop.org/pipewire/wireplumber/-/merge_requests/721
   # Addresses https://gitlab.steamos.cloud/holo-team/tasks/-/issues/564
-  "0001-create-item-Reconfigure-audio-adapters-if-node.featu.patch"
-  "0002-m-si-audio-adapter-Add-new-item.features.mono-config.patch"
-  "0003-config-Add-new-node.features.audio.mono-setting.patch"
+  "0001-m-si-audio-adapter-Configure-the-node-ports-if-the-i.patch"
+  "0002-create-item-Reconfigure-audio-adapters-if-node.featu.patch"
+  "0003-m-si-audio-adapter-Add-new-item.features.mono-config.patch"
+  "0004-config-Add-new-node.features.audio.mono-setting.patch"
 )
 b2sums=('5c9d06c4084187ce172e98fb05bef3826e4b7bf1fba505e5543fec0e194d8a957172c81e6fa32c7f53832e204dd794189d48deaae5eca10577b04106f2625ff3'
         '86f80f07bb5f446ae90f88f39870139d4d902f99048a62eb825ac12b654ca248568b17f8a1ca15777b41e0a11054345d023fc36a348372f15cb75b92a0180cfe'
@@ -72,9 +73,10 @@ b2sums=('5c9d06c4084187ce172e98fb05bef3826e4b7bf1fba505e5543fec0e194d8a957172c81
         '3b05b23dd3ff1da4f59df814780cf5251769c10ef3b1c07707ef717160631e27113e5e7286cd8b37ad4f37b21f9f14649d8fa5148b6aa90d26fef48a219e7e5e'
         'd8e0ff4f2c0927e1da127442c2c3d9aecaa05cca2753fdcb1786fe2ac6d959b0a995988e02f155de396fbe4fcb5eac3cbd55caa75be6d4a86eaa3e723415d062'
         'aba4d3fd93a4dafac5c1bb425621b176a80b3396f2896102c0c26399e86d9101165dabd0dee2c9d8964415e5098a8b78e87b564d2855de6c81f3eca489b183da'
-        '0a6c56d194377a330a277463e614656e1c68618ed417834e8413c4897bb90d35404d1e4b85016b32ddecf20ccf42b0dd9eff4492e649a1d633b558ee9abe5b73'
-        '42cc47d7f3119898f6560e85af44c812316c3babd8d439129054ef3c48782296c63f5f3f543a4b44700b197f0657c9d9bc863e8b03b02be01e24472e7c29f5a5'
-        'c7381703ce9b75c0fd2a64676df6c3875b2baa319b1714fdced4578952010f37834322e6d836dacfc643659f8df1008e480f54bee881321736fe812a1bf70b97')
+        '40a604ee6b0b2e1f36fbbeacfcc6ef937d660d48aaab7ec307efbfbd3ad14ad6c869f46c08b81de383ec31f6cc870bd432cd2a1a3c41437d2281427a66c14541'
+        'be0fd13aadbad2f2135a7a84197ae1d73a3eaf1da89dc856e032a1ddc1ff666548f69adf5e89f15e80ad29b57888d76b90a99a7a7897ff387f9e6ef65369d8ba'
+        'b0ee137c10d676ac6ee33bf1431467b0e5b278bf798581a51449572db2eec5668cde787e7ec81ac1f9a2fc6e7cc2d60158daf8fcafceb3a3cff999f858f63b1a'
+        'a16666f32605b1e52d586b613033a0428d8b018a8c15941a9e5404866307a4ed69fc3748a5fd7490f83f2782d40c7b920f16c7286070c9da3e6c28ff945a0101')
 
 prepare() {
   cd $pkgbase

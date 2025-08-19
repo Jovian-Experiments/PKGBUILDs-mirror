@@ -1,7 +1,7 @@
-From fa24f3cabfecddbf2549f03696d57d08cc4b408f Mon Sep 17 00:00:00 2001
+From 57f577b21b549264666cc414d488ea0b47559c94 Mon Sep 17 00:00:00 2001
 From: Julian Bouzas <julian.bouzas@collabora.com>
 Date: Thu, 3 Jul 2025 10:44:41 -0400
-Subject: [PATCH 2/3] m-si-audio-adapter: Add new 'item.features.mono'
+Subject: [PATCH 3/4] m-si-audio-adapter: Add new 'item.features.mono'
  configuration property
 
 This allows configuring the audio adapter in MONO. The property is set to FALSE
@@ -11,10 +11,10 @@ by default.
  1 file changed, 15 insertions(+), 2 deletions(-)
 
 diff --git a/modules/module-si-audio-adapter.c b/modules/module-si-audio-adapter.c
-index 995345a6..e16d93ae 100644
+index 048a93e2..5170fdab 100644
 --- a/modules/module-si-audio-adapter.c
 +++ b/modules/module-si-audio-adapter.c
-@@ -27,6 +27,7 @@ struct _WpSiAudioAdapter
+@@ -28,6 +28,7 @@ struct _WpSiAudioAdapter
    WpNode *node;
    WpPort *port;  /* only used for passthrough or convert mode */
    gboolean no_format;
@@ -22,7 +22,7 @@ index 995345a6..e16d93ae 100644
    gboolean control_port;
    gboolean monitor;
    gboolean disable_dsp;
-@@ -104,6 +105,7 @@ si_audio_adapter_reset (WpSessionItem * item)
+@@ -106,6 +107,7 @@ si_audio_adapter_reset (WpSessionItem * item)
    g_clear_object (&self->node);
    g_clear_object (&self->port);
    self->no_format = FALSE;
@@ -30,7 +30,7 @@ index 995345a6..e16d93ae 100644
    self->control_port = FALSE;
    self->monitor = FALSE;
    self->disable_dsp = FALSE;
-@@ -145,7 +147,8 @@ is_unpositioned (struct spa_audio_info_raw *info)
+@@ -147,7 +149,8 @@ is_unpositioned (struct spa_audio_info_raw *info)
  }
  
  static gboolean
@@ -40,7 +40,7 @@ index 995345a6..e16d93ae 100644
  {
    g_autoptr (WpIterator) formats = NULL;
    g_auto (GValue) value = G_VALUE_INIT;
-@@ -196,6 +199,11 @@ si_audio_adapter_find_format (WpSiAudioAdapter * self, WpNode * node)
+@@ -198,6 +201,11 @@ si_audio_adapter_find_format (WpSiAudioAdapter * self, WpNode * node)
            !spa_pod_copy_array(position, SPA_TYPE_Id, raw_format.position, SPA_AUDIO_MAX_CHANNELS))
          SPA_FLAG_SET(raw_format.flags, SPA_AUDIO_FLAG_UNPOSITIONED);
  
@@ -52,7 +52,7 @@ index 995345a6..e16d93ae 100644
        if (self->raw_format.channels < raw_format.channels) {
          self->raw_format = raw_format;
          if (is_unpositioned(&raw_format))
-@@ -264,7 +272,12 @@ si_audio_adapter_configure (WpSessionItem * item, WpProperties *p)
+@@ -266,7 +274,12 @@ si_audio_adapter_configure (WpSessionItem * item, WpProperties *p)
  
    str = wp_properties_get (si_props, "item.features.no-format");
    self->no_format = str && pw_properties_parse_bool (str);
