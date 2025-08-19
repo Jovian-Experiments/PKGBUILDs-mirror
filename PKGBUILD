@@ -4,7 +4,7 @@
 pkgbase=linux-neptune-615
 _tag=6.15.9-valve1
 pkgver=${_tag//-/.}
-pkgrel=1
+pkgrel=2
 pkgdesc='Linux'
 url="https://gitlab.steamos.cloud/jupiter/linux-integration/-/tree/$_tag"
 arch=(x86_64)
@@ -44,7 +44,7 @@ source=(
 )
 sha256sums=('cae0da97e232a6a6b18cf339e4eeb05d3a0f6fe668365baedde9ad852a19e043'
             '95a2848c23e99e7987ef73afc9fcd038f2460168fd1c56b1cb59faebe4fb599d'
-            '5abea12bb30e854eefa0b6d6228f86c6e046bf78d217448ac300467cc046f8bf')
+            '84bacdfa9d48735effec09ac47056438fa6404e2a6bc1ba1db11223f8a2832ea')
 
 export KBUILD_BUILD_HOST=archlinux
 export KBUILD_BUILD_USER=$pkgbase
