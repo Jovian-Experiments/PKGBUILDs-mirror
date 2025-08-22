@@ -21,9 +21,9 @@ pkgname=(
   vulkan-mesa-layers
 #  mesa-docs
 )
-_tag=radeonsi-25.1.5
-pkgver=25.1.4.204699.radeonsi_25.1.5
-pkgrel=1.1
+_tag=radeonsi-25.2.0
+pkgver=25.2.0.208938.radeonsi_25.2.0
+pkgrel=1
 epoch=0
 pkgdesc="Open-source OpenGL drivers"
 url="https://www.mesa3d.org/"
@@ -202,7 +202,6 @@ build() {
     -D gallium-drivers=radeonsi,llvmpipe,zink,iris,i915
     -D gallium-extra-hud=true
     -D gallium-rusticl=false
-    -D gallium-xa=disabled
     -D gles1=disabled
     -D html-docs=disabled
     -D libunwind=disabled
@@ -211,8 +210,8 @@ build() {
     -D video-codecs=all
     -D vulkan-drivers=intel,swrast
     -D vulkan-layers=device-select,intel-nullhw,overlay,screenshot,vram-report-limit
-    -D gallium-opencl=disabled
-    -D radeonsi-build-id=53d063d06f3d5b95f1ffc56a00972475e31e57ac
+    -D gallium-mediafoundation=disabled
+    -D radeonsi-build-id=057e67ad037d628991eb985a05023c20caeed78d
   )
 
   # Build only minimal debug info to reduce size
