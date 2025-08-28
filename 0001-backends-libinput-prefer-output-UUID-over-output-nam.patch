@@ -1,0 +1,220 @@
+From 19a00948b1a6768eaa508ee93d8773f9584f169f Mon Sep 17 00:00:00 2001
+From: Xaver Hugl <xaver.hugl@kde.org>
+Date: Fri, 22 Aug 2025 21:48:51 +0200
+Subject: [PATCH] backends/libinput: prefer output UUID over output names for
+ identifying outputs
+
+The name is not actually stable, so the configuration often got lost before.
+
+(cherry picked from commit f860be3ab9d8e8598fbe7077e34c356ef58cb90a)
+---
+ src/backends/libinput/connection.cpp | 23 ++++++------
+ src/backends/libinput/device.cpp     | 55 +++++++++++++++++++++-------
+ src/backends/libinput/device.h       | 20 +++++++++-
+ 3 files changed, 71 insertions(+), 27 deletions(-)
+
+diff --git a/src/backends/libinput/connection.cpp b/src/backends/libinput/connection.cpp
+index 1ef924d5dd..682bd5cedb 100644
+--- a/src/backends/libinput/connection.cpp
++++ b/src/backends/libinput/connection.cpp
+@@ -607,10 +607,17 @@ void Connection::applyScreenToDevice(Device *device)
+     }
+ 
+     Output *deviceOutput = nullptr;
+-    const QList<Output *> outputs = kwinApp()->outputBackend()->outputs();
++    const QList<Output *> outputs = workspace()->outputs();
+ 
+     // let's try to find a screen for it
+-    if (!device->outputName().isEmpty()) {
++    if (!device->outputUuid().isEmpty()) {
++        // use the UUID if possible, which is more stable than the output name
++        const auto it = std::ranges::find_if(outputs, [device](Output *output) {
++            return output->uuid() == device->outputUuid();
++        });
++        deviceOutput = it == outputs.end() ? nullptr : *it;
++    }
++    if (!deviceOutput && !device->outputName().isEmpty()) {
+         // we have an output name, try to find a screen with matching name
+         for (Output *output : outputs) {
+             if (!output->isEnabled()) {
+@@ -626,9 +633,6 @@ void Connection::applyScreenToDevice(Device *device)
+         // do we have an internal screen?
+         Output *internalOutput = nullptr;
+         for (Output *output : outputs) {
+-            if (!output->isEnabled()) {
+-                continue;
+-            }
+             if (output->isInternal()) {
+                 internalOutput = output;
+                 break;
+@@ -645,9 +649,6 @@ void Connection::applyScreenToDevice(Device *device)
+         }
+         // let's compare all screens for size
+         for (Output *output : outputs) {
+-            if (!output->isEnabled()) {
+-                continue;
+-            }
+             if (testScreenMatches(output)) {
+                 deviceOutput = output;
+                 break;
+@@ -661,10 +662,8 @@ void Connection::applyScreenToDevice(Device *device)
+             } else {
+                 for (Output *output : outputs) {
+                     // just take first screen, we have no clue
+-                    if (output->isEnabled()) {
+-                        deviceOutput = output;
+-                        break;
+-                    }
++                    deviceOutput = output;
++                    break;
+                 }
+             }
+         }
+diff --git a/src/backends/libinput/device.cpp b/src/backends/libinput/device.cpp
+index f11e37769c..574bef018f 100644
+--- a/src/backends/libinput/device.cpp
++++ b/src/backends/libinput/device.cpp
+@@ -24,6 +24,10 @@
+ 
+ #include <linux/input.h>
+ 
++#ifndef KWIN_BUILD_TESTING
++#include "workspace.h"
++#endif
++
+ namespace KWin
+ {
+ namespace LibInput
+@@ -156,6 +160,7 @@ enum class ConfigKey {
+     InputArea,
+     TabletToolRelativeMode,
+     Rotation,
++    OutputUuid,
+ };
+ 
+ struct ConfigDataBase
+@@ -255,7 +260,8 @@ static const QMap<ConfigKey, std::shared_ptr<ConfigDataBase>> s_configData{
+     {ConfigKey::Orientation, std::make_shared<ConfigData<DeviceOrientation>>()},
+     {ConfigKey::Calibration, std::make_shared<ConfigData<CalibrationMatrix>>()},
+     {ConfigKey::TabletToolPressureCurve, std::make_shared<ConfigData<QString>>(QByteArrayLiteral("TabletToolPressureCurve"), &Device::setPressureCurve, &Device::defaultPressureCurve)},
+-    {ConfigKey::OutputName, std::make_shared<ConfigData<QString>>(QByteArrayLiteral("OutputName"), &Device::setOutputName, &Device::defaultOutputName)},
++    {ConfigKey::OutputUuid, std::make_shared<ConfigData<QString>>(QByteArrayLiteral("OutputUuid"), &Device::setOutputUuid, &Device::defaultOutputUuid)},
++    {ConfigKey::OutputName, std::make_shared<ConfigData<QString>>(QByteArrayLiteral("OutputName"), &Device::setConfigOutputName, &Device::defaultOutputName)},
+     {ConfigKey::OutputArea, std::make_shared<ConfigData<QRectF>>(QByteArrayLiteral("OutputArea"), &Device::setOutputArea, &Device::defaultOutputArea)},
+     {ConfigKey::MapToWorkspace, std::make_shared<ConfigData<bool>>(QByteArrayLiteral("MapToWorkspace"), &Device::setMapToWorkspace, &Device::defaultMapToWorkspace)},
+     {ConfigKey::TabletToolPressureRangeMin, std::make_shared<ConfigData<double>>(QByteArrayLiteral("TabletToolPressureRangeMin"), &Device::setPressureRangeMin, &Device::defaultPressureRangeMin)},
+@@ -857,25 +863,48 @@ void Device::setOutputName(const QString &name)
+     if (name == m_outputName) {
+         return;
+     }
+-
+-    setOutput(nullptr);
+-    auto outputs = kwinApp()->outputBackend()->outputs();
+-    for (int i = 0; i < outputs.count(); ++i) {
+-        if (!outputs[i]->isEnabled()) {
+-            continue;
+-        }
+-        if (outputs[i]->name() == name) {
+-            setOutput(outputs[i]);
+-            break;
+-        }
++    setConfigOutputName(name);
++    writeEntry(ConfigKey::OutputName, name);
++    if (m_output) {
++        setOutputUuid(m_output->uuid());
+     }
++#endif
++}
+ 
++void Device::setConfigOutputName(const QString &name)
++{
++#ifndef KWIN_BUILD_TESTING
++    if (name == m_outputName) {
++        return;
++    }
++    if (m_outputUuid.isEmpty()) {
++        const auto outputs = workspace()->outputs();
++        const auto it = std::ranges::find_if(outputs, [&name](Output *output) {
++            return output->name() == name;
++        });
++        setOutput(it == outputs.end() ? nullptr : *it);
++    }
+     m_outputName = name;
+-    writeEntry(ConfigKey::OutputName, name);
+     Q_EMIT outputNameChanged();
+ #endif
+ }
+ 
++void Device::setOutputUuid(const QString &uuid)
++{
++#ifndef KWIN_BUILD_TESTING
++    if (uuid == m_outputUuid) {
++        return;
++    }
++    m_outputUuid = uuid;
++    const auto outputs = workspace()->outputs();
++    const auto it = std::ranges::find_if(outputs, [&uuid](Output *output) {
++        return output->uuid() == uuid;
++    });
++    setOutput(it == outputs.end() ? nullptr : *it);
++    writeEntry(ConfigKey::OutputUuid, uuid);
++#endif
++}
++
+ Output *Device::output() const
+ {
+     return m_output;
+diff --git a/src/backends/libinput/device.h b/src/backends/libinput/device.h
+index 2853a1150b..a2c6debb6c 100644
+--- a/src/backends/libinput/device.h
++++ b/src/backends/libinput/device.h
+@@ -244,6 +244,10 @@ public:
+     {
+         return m_outputName;
+     }
++    QString outputUuid() const
++    {
++        return m_outputUuid;
++    }
+     QSizeF size() const
+     {
+         return m_size;
+@@ -662,14 +666,25 @@ public:
+     }
+ 
+     /**
+-     * Used to deserialize monitor data from KConfig when initializing a device
++     * Sets the output name, and if a matching output is found,
++     * also the UUID of that output
++     */
++    void setOutputName(const QString &name) override;
++    /**
++     * Only sets the output name, for config loading purposes
+      */
+-    void setOutputName(const QString &uuid) override;
++    void setConfigOutputName(const QString &name);
+     QString defaultOutputName() const
+     {
+         return {};
+     }
+ 
++    void setOutputUuid(const QString &uuid);
++    QString defaultOutputUuid() const
++    {
++        return QString();
++    }
++
+     /**
+      * Loads the configuration and applies it to the Device
+      */
+@@ -817,6 +832,7 @@ private:
+     QString m_sysName;
+     QString m_sysPath;
+     QString m_outputName;
++    QString m_outputUuid;
+     QSizeF m_size;
+     quint32 m_product;
+     quint32 m_vendor;
+-- 
+2.50.1
+
