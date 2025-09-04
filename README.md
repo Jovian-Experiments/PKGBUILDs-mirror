@@ -1,5 +1,5 @@
 
-`main @ 20250903.1000`
+`main @ 20250904.1000`
 ======================
 
 Valve packages
@@ -50,7 +50,7 @@ Valve packages
  * [`steamos-atomupd-client` — `holo-main/steamos-atomupd-client-0.20250122.1-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-atomupd-client-0.20250122.1-2)
  * [`steamos-efi` — `holo-main/steamos-efi-20250718.1-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-efi-20250718.1-2)
  * [`steamos-kdumpst-layer` — `holo-main/steamos-kdumpst-layer-1.0-4`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-kdumpst-layer-1.0-4)
- * [`steamos-log-submitter` — `holo-main/steamos-log-submitter-0.7.5-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-log-submitter-0.7.5-2)
+ * [`steamos-log-submitter` — `holo-main/steamos-log-submitter-0.7.6-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-log-submitter-0.7.6-1)
  * [`steamos-manager` — `holo-main/steamos-manager-25.7.0-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-manager-25.7.0-2)
  * [`steamos-networking-tools` — `holo-main/steamos-networking-tools-1.2-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-networking-tools-1.2-1)
  * [`steamos-powerbuttond` — `holo-main/steamos-powerbuttond-3.3-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-powerbuttond-3.3-2)
@@ -62,6 +62,8 @@ Valve packages
  * [`systemd-sysvcompat` — `holo-main/systemd-257.7-2.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/systemd-257.7-2.1)
  * [`ttf-twemoji-default` — `holo-main/ttf-twemoji-default-13.1.0-2.4`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/ttf-twemoji-default-13.1.0-2.4)
  * [`udisks2` — `holo-main/udisks2-2.10.1-6.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/udisks2-2.10.1-6.1)
+ * [`udisks2-btrfs` — `holo-main/udisks2-2.10.1-6.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/udisks2-2.10.1-6.1)
+ * [`udisks2-lvm2` — `holo-main/udisks2-2.10.1-6.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/udisks2-2.10.1-6.1)
  * [`umr` — `holo-main/umr-1.0.10-1.3`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/umr-1.0.10-1.3)
  * [`xdg-desktop-portal-gamescope` — `holo-main/xdg-desktop-portal-gamescope-0.1.21.20ac820-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/xdg-desktop-portal-gamescope-0.1.21.20ac820-2)
  * [`xdg-desktop-portal-gtk` — `holo-main/xdg-desktop-portal-gtk-1.15.3-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/xdg-desktop-portal-gtk-1.15.3-1.1)
@@ -86,7 +88,8 @@ Valve packages
  * [`jupiter-hw-support` — `jupiter-main/jupiter-hw-support-20250728.1-3`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-hw-support-20250728.1-3)
  * [`jupiter-legacy-support` — `jupiter-main/jupiter-legacy-support-1.154-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-legacy-support-1.154-1)
  * [`jupiter-steamos-log-submitter` — `jupiter-main/jupiter-steamos-log-submitter-1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-steamos-log-submitter-1-1)
- * [`kwin` — `jupiter-main/kwin-6.4.3-1.3`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/kwin-6.4.3-1.3)
+ * [`kwin` — `jupiter-main/kwin-6.4.3-1.4`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/kwin-6.4.3-1.4)
+ * [`kwin-x11` — `jupiter-main/kwin-x11-6.4.3-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/kwin-x11-6.4.3-1.1)
  * [`libwireplumber` — `jupiter-main/wireplumber-0.5.10-1.4`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/wireplumber-0.5.10-1.4)
  * [`linux-firmware-neptune` — `jupiter-main/linux-firmware-neptune-jupiter.20250731.1-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/linux-firmware-neptune-jupiter.20250731.1-2)
  * [`linux-firmware-neptune-whence` — `jupiter-main/linux-firmware-neptune-jupiter.20250731.1-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/linux-firmware-neptune-jupiter.20250731.1-2)
@@ -430,7 +433,6 @@ Arch Linux packages
  * [`kwallet-pam/6.4.3-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/kwallet-pam/-/tree/6.4.3-1)
  * [`kwayland/6.4.3-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/kwayland/-/tree/6.4.3-1)
  * [`kwidgetsaddons/6.16.0-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/kwidgetsaddons/-/tree/6.16.0-1)
- * [`kwin-x11/6.4.3-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/kwin-x11/-/tree/6.4.3-1)
  * [`kwindowsystem/6.16.0-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/kwindowsystem/-/tree/6.16.0-1)
  * [`kwrited/6.4.3-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/kwrited/-/tree/6.4.3-1)
  * [`kxmlgui/6.16.0-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/kxmlgui/-/tree/6.16.0-1)
@@ -956,8 +958,6 @@ Arch Linux packages
  * [`ttf-hack/3.003-7`](https://gitlab.archlinux.org/archlinux/packaging/packages/ttf-hack/-/tree/3.003-7)
  * [`twolame/0.4.0-4`](https://gitlab.archlinux.org/archlinux/packaging/packages/twolame/-/tree/0.4.0-4)
  * [`tzdata/2025b-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/tzdata/-/tree/2025b-1)
- * [`udisks2-btrfs/2.10.1-6.1`](https://gitlab.archlinux.org/archlinux/packaging/packages/udisks2-btrfs/-/tree/2.10.1-6.1)
- * [`udisks2-lvm2/2.10.1-6.1`](https://gitlab.archlinux.org/archlinux/packaging/packages/udisks2-lvm2/-/tree/2.10.1-6.1)
  * [`unrar/1:7.1.10-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/unrar/-/tree/1:7.1.10-1)
  * [`unzip/6.0-23`](https://gitlab.archlinux.org/archlinux/packaging/packages/unzip/-/tree/6.0-23)
  * [`usb_modeswitch/2.6.2-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/usb_modeswitch/-/tree/2.6.2-1)
