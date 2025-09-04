@@ -6,7 +6,7 @@
 pkgname=kwin
 pkgver=6.4.3
 _dirver=$(echo $pkgver | cut -d. -f1-3)
-pkgrel=1.3 # Holo: Default scale fix
+pkgrel=1.4 # Holo: Default scale fix
 pkgdesc='An easy to use, but flexible, Wayland compositor'
 arch=(x86_64)
 url='https://kde.org/plasma-desktop/'
