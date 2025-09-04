@@ -1,5 +1,5 @@
 
-`main @ 20250826.1000`
+`main @ 20250903.1000`
 ======================
 
 Valve packages
@@ -33,10 +33,12 @@ Valve packages
  * [`ibus` — `holo-main/ibus-1.5.31-2.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/ibus-1.5.31-2.1)
  * [`kdumpst` — `holo-main/kdumpst-1.2-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/kdumpst-1.2-1)
  * [`kmod` — `holo-main/kmod-34.2-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/kmod-34.2-1.1)
+ * [`libdisplay-info` — `holo-main/libdisplay-info-0.3.0-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/libdisplay-info-0.3.0-1)
  * [`libdrm` — `holo-main/libdrm-2.4.123-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/libdrm-2.4.123-1.1)
  * [`libibus` — `holo-main/ibus-1.5.31-2.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/ibus-1.5.31-2.1)
  * [`libnm` — `holo-main/networkmanager-1.52.1-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/networkmanager-1.52.1-1.1)
  * [`libspeechd` — `holo-main/speech-dispatcher-0.12.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/speech-dispatcher-0.12.1-1)
+ * [`libxml2` — `holo-main/libxml2-2.14.5-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/libxml2-2.14.5-1.1)
  * [`lsb-release` — `holo-main/lsb-release-2.0.r55.a25a4fc-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/lsb-release-2.0.r55.a25a4fc-1.1)
  * [`maliit-keyboard` — `holo-main/maliit-keyboard-2.3.1-4.2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/maliit-keyboard-2.3.1-4.2)
  * [`networkmanager` — `holo-main/networkmanager-1.52.1-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/networkmanager-1.52.1-1.1)
@@ -59,6 +61,7 @@ Valve packages
  * [`systemd-libs` — `holo-main/systemd-257.7-2.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/systemd-257.7-2.1)
  * [`systemd-sysvcompat` — `holo-main/systemd-257.7-2.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/systemd-257.7-2.1)
  * [`ttf-twemoji-default` — `holo-main/ttf-twemoji-default-13.1.0-2.4`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/ttf-twemoji-default-13.1.0-2.4)
+ * [`udisks2` — `holo-main/udisks2-2.10.1-6.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/udisks2-2.10.1-6.1)
  * [`umr` — `holo-main/umr-1.0.10-1.3`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/umr-1.0.10-1.3)
  * [`xdg-desktop-portal-gamescope` — `holo-main/xdg-desktop-portal-gamescope-0.1.21.20ac820-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/xdg-desktop-portal-gamescope-0.1.21.20ac820-2)
  * [`xdg-desktop-portal-gtk` — `holo-main/xdg-desktop-portal-gtk-1.15.3-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/xdg-desktop-portal-gtk-1.15.3-1.1)
@@ -83,7 +86,7 @@ Valve packages
  * [`jupiter-hw-support` — `jupiter-main/jupiter-hw-support-20250728.1-3`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-hw-support-20250728.1-3)
  * [`jupiter-legacy-support` — `jupiter-main/jupiter-legacy-support-1.154-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-legacy-support-1.154-1)
  * [`jupiter-steamos-log-submitter` — `jupiter-main/jupiter-steamos-log-submitter-1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-steamos-log-submitter-1-1)
- * [`kwin` — `jupiter-main/kwin-6.4.3-1.2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/kwin-6.4.3-1.2)
+ * [`kwin` — `jupiter-main/kwin-6.4.3-1.3`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/kwin-6.4.3-1.3)
  * [`libwireplumber` — `jupiter-main/wireplumber-0.5.10-1.4`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/wireplumber-0.5.10-1.4)
  * [`linux-firmware-neptune` — `jupiter-main/linux-firmware-neptune-jupiter.20250731.1-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/linux-firmware-neptune-jupiter.20250731.1-2)
  * [`linux-firmware-neptune-whence` — `jupiter-main/linux-firmware-neptune-jupiter.20250731.1-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/linux-firmware-neptune-jupiter.20250731.1-2)
@@ -483,7 +486,6 @@ Arch Linux packages
  * [`libdc1394/2.2.7-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/libdc1394/-/tree/2.2.7-1)
  * [`libdecor/0.2.3-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/libdecor/-/tree/0.2.3-1)
  * [`libdeflate/1.24-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/libdeflate/-/tree/1.24-1)
- * [`libdisplay-info/0.2.0-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/libdisplay-info/-/tree/0.2.0-2)
  * [`libdmtx/0.7.8-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/libdmtx/-/tree/0.7.8-1)
  * [`libdovi/3.3.2-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/libdovi/-/tree/3.3.2-1)
  * [`libdv/1.0.0-11`](https://gitlab.archlinux.org/archlinux/packaging/packages/libdv/-/tree/1.0.0-11)
@@ -642,7 +644,6 @@ Arch Linux packages
  * [`libxkbcommon/1.10.0-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/libxkbcommon/-/tree/1.10.0-1)
  * [`libxkbcommon-x11/1.10.0-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/libxkbcommon-x11/-/tree/1.10.0-1)
  * [`libxkbfile/1.1.3-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/libxkbfile/-/tree/1.1.3-1)
- * [`libxml2/2.14.5-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/libxml2/-/tree/2.14.5-1)
  * [`libxmlb/0.3.22-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/libxmlb/-/tree/0.3.22-1)
  * [`libxmu/1.2.1-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/libxmu/-/tree/1.2.1-1)
  * [`libxpm/3.5.17-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/libxpm/-/tree/3.5.17-2)
@@ -955,9 +956,8 @@ Arch Linux packages
  * [`ttf-hack/3.003-7`](https://gitlab.archlinux.org/archlinux/packaging/packages/ttf-hack/-/tree/3.003-7)
  * [`twolame/0.4.0-4`](https://gitlab.archlinux.org/archlinux/packaging/packages/twolame/-/tree/0.4.0-4)
  * [`tzdata/2025b-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/tzdata/-/tree/2025b-1)
- * [`udisks2/2.10.1-6`](https://gitlab.archlinux.org/archlinux/packaging/packages/udisks2/-/tree/2.10.1-6)
- * [`udisks2-btrfs/2.10.1-6`](https://gitlab.archlinux.org/archlinux/packaging/packages/udisks2-btrfs/-/tree/2.10.1-6)
- * [`udisks2-lvm2/2.10.1-6`](https://gitlab.archlinux.org/archlinux/packaging/packages/udisks2-lvm2/-/tree/2.10.1-6)
+ * [`udisks2-btrfs/2.10.1-6.1`](https://gitlab.archlinux.org/archlinux/packaging/packages/udisks2-btrfs/-/tree/2.10.1-6.1)
+ * [`udisks2-lvm2/2.10.1-6.1`](https://gitlab.archlinux.org/archlinux/packaging/packages/udisks2-lvm2/-/tree/2.10.1-6.1)
  * [`unrar/1:7.1.10-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/unrar/-/tree/1:7.1.10-1)
  * [`unzip/6.0-23`](https://gitlab.archlinux.org/archlinux/packaging/packages/unzip/-/tree/6.0-23)
  * [`usb_modeswitch/2.6.2-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/usb_modeswitch/-/tree/2.6.2-1)
