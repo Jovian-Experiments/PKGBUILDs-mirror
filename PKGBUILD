@@ -3,7 +3,7 @@
 pkgname=gamescope
 _srctag=3.16.15
 pkgver=${_srctag//-/.}
-pkgrel=2
+pkgrel=3
 pkgdesc="gaming shell based on Xwayland, powered by Vulkan and DRM"
 arch=(x86_64)
 url="https://github.com/ValveSoftware/gamescope"
@@ -36,7 +36,7 @@ source=("galileo-mura-setup.service"
         "git+https://github.com/nothings/stb.git#commit=af1a5bc352164740c1cc1354942b1c6b72eacb8a"
         "git+https://github.com/g-truc/glm.git#commit=0af55ccecd98d4e5a8d1fad7de25ba429d60e863")
 sha256sums=('941f5a16a495c9c4de0302819c0069749db6915345ac1e207a12544863391e4b'
-            '10b2d4dba40cc31af1996842f8be2b5c07ab3fce9a77cca19cad0548caf0df85'
+            '8a9886a96a321efef5e2c928cf2e54a075b72ea37b2d12e8412fd2459f4775f2'
             'fe515fce8f151a6c03a89e043044bfddf8cd6ee89027d2cfbcf6f6706c78ca76'
             'e37ba6107f3a84cf47c2799b537a88583e6cb8951167a9c6a48fa1d85996206b'
             'e4add84152c3c0dfa53cf6bd2a1f15c2ce74d2312f7fa945b9476e91c8752544'
@@ -108,7 +108,7 @@ package() {
 	install -D -m 644 gamescope-session.service "$pkgdir"/usr/lib/systemd/user/gamescope-session.service
 	install -D -m 644 gamescope-session.target "$pkgdir"/usr/lib/systemd/user/gamescope-session.target
 	install -D -m 644 gamescope-mangoapp.service "$pkgdir"/usr/lib/systemd/user/gamescope-mangoapp.service
-	install -D -m 644 ibus-gamescope.service  "$pkgdir"/usr/lib/systemd/user/ibus-gamescope.service 
+	install -D -m 644 ibus-gamescope.service  "$pkgdir"/usr/lib/systemd/user/ibus-gamescope.service
 	install -D -m 644 steam-launcher.service "$pkgdir"/usr/lib/systemd/user/steam-launcher.service
 	install -D -m 644 steam-notif-daemon.service "$pkgdir"/usr/lib/systemd/user/steam-notif-daemon.service
 	install -D -m 644 gamescope-xbindkeys.service "$pkgdir"/usr/lib/systemd/user/gamescope-xbindkeys.service
