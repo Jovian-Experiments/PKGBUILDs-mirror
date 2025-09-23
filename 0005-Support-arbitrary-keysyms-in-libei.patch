@@ -1,0 +1,414 @@
+From 05236252fac7869069a9bc80a4dfc029d3356e58 Mon Sep 17 00:00:00 2001
+From: David Edmundson <kde@davidedmundson.co.uk>
+Date: Fri, 29 Aug 2025 23:16:12 +0100
+Subject: [PATCH] Support arbitrary keysyms in libei
+
+---
+ src/inputmethod.cpp            | 29 ++----------------
+ src/plugins/eis/eisbackend.cpp |  6 ++++
+ src/plugins/eis/eisbackend.h   |  1 +
+ src/plugins/eis/eiscontext.cpp | 46 +++++++++++++++++++++++-----
+ src/plugins/eis/eisdevice.cpp  | 43 ++++++++++++++++++++++++++
+ src/plugins/eis/eisdevice.h    |  3 ++
+ src/xkb.cpp                    | 55 ++++++++++++++++++++++++++++++----
+ src/xkb.h                      | 19 ++++++++++--
+ 8 files changed, 159 insertions(+), 43 deletions(-)
+
+diff --git a/src/inputmethod.cpp b/src/inputmethod.cpp
+index 959c81af1d..4a206790e5 100644
+--- a/src/inputmethod.cpp
++++ b/src/inputmethod.cpp
+@@ -54,31 +54,6 @@
+ namespace KWin
+ {
+ 
+-static QList<xkb_keysym_t> textToKey(const QString &inputString)
+-{
+-    QList<xkb_keysym_t> result;
+-
+-    for (int i = 0; i < inputString.size(); ++i) {
+-        char32_t cp = inputString[i].unicode();
+-
+-        // Handle surrogate pair (two QChars → one codepoint)
+-        if (inputString[i].isHighSurrogate() && i + 1 < inputString.size()
+-            && inputString[i + 1].isLowSurrogate()) {
+-            cp = QChar::surrogateToUcs4(inputString[i].unicode(),
+-                                        inputString[i + 1].unicode());
+-            i++; // skip the low surrogate
+-        }
+-
+-        xkb_keysym_t ks = xkb_utf32_to_keysym(cp);
+-        if (ks != XKB_KEY_NoSymbol) {
+-            result.append(ks);
+-        } else {
+-            qCWarning(KWIN_VIRTUALKEYBOARD) << "No keysym for U+" << &std::hex << (int)cp << "\n";
+-        }
+-    }
+-    return result;
+-}
+-
+ InputMethod::InputMethod()
+ {
+     m_internalContext = new InternalInputMethodContext(this);
+@@ -625,7 +600,7 @@ void InputMethod::commitString(qint32 serial, const QString &text)
+         // So instead, try to convert what we get from the input method into
+         // keycodes and send those as fake input to the client.
+ 
+-        const QList<xkb_keysym_t> keySyms = textToKey(text);
++        const QList<xkb_keysym_t> keySyms = Xkb::textToKeySyms(text);
+ 
+         // First, send all the extracted keys as pressed keys to the client.
+         for (const xkb_keysym_t &keySym : keySyms) {
+@@ -633,7 +608,7 @@ void InputMethod::commitString(qint32 serial, const QString &text)
+             if (!keyCode) {
+                 qCWarning(KWIN_VIRTUALKEYBOARD) << "Could not map keysym " << keySym << "to keycode. Trying custom keymap";
+                 static const uint unmappedKeyCode = 247;
+-                auto temporaryKeymap = input()->keyboard()->xkb()->createKeymapForKeysym(unmappedKeyCode, keySym);
++                auto temporaryKeymap = input()->keyboard()->xkb()->keymapContentsForKeysym(unmappedKeyCode, keySym);
+                 if (temporaryKeymap.isEmpty()) {
+                     continue;
+                 }
+diff --git a/src/plugins/eis/eisbackend.cpp b/src/plugins/eis/eisbackend.cpp
+index 3df341fe1a..b7655b057d 100644
+--- a/src/plugins/eis/eisbackend.cpp
++++ b/src/plugins/eis/eisbackend.cpp
+@@ -195,4 +195,10 @@ eis_device *EisBackend::createKeyboard(eis_seat *seat)
+ 
+     return device;
+ }
++eis_device *EisBackend::createText(eis_seat *seat)
++{
++    auto device = createDevice(seat, "eis text");
++    eis_device_configure_capability(device, EIS_DEVICE_CAP_TEXT);
++    return device;
++}
+ }
+diff --git a/src/plugins/eis/eisbackend.h b/src/plugins/eis/eisbackend.h
+index f04282e58c..f63f4dc070 100644
+--- a/src/plugins/eis/eisbackend.h
++++ b/src/plugins/eis/eisbackend.h
+@@ -43,6 +43,7 @@ public:
+     eis_device *createKeyboard(eis_seat *seat);
+     eis_device *createPointer(eis_seat *seat);
+     eis_device *createAbsoluteDevice(eis_seat *seat);
++    eis_device *createText(eis_seat *seat);
+ 
+ private:
+     QDBusServiceWatcher *m_serviceWatcher;
+diff --git a/src/plugins/eis/eiscontext.cpp b/src/plugins/eis/eiscontext.cpp
+index 2c5a8c8b40..3f64f36dda 100644
+--- a/src/plugins/eis/eiscontext.cpp
++++ b/src/plugins/eis/eiscontext.cpp
+@@ -9,6 +9,10 @@
+ #include "eisdevice.h"
+ #include "libeis_logging.h"
+ 
++#include "input.h"
++#include "keyboard_input.h"
++#include "xkb.h"
++
+ #include <unistd.h>
+ 
+ namespace KWin
+@@ -52,6 +56,7 @@ public:
+     std::unique_ptr<EisDevice> absoluteDevice;
+     std::unique_ptr<EisDevice> pointer;
+     std::unique_ptr<EisDevice> keyboard;
++    std::unique_ptr<EisDevice> text;
+ };
+ 
+ DbusEisContext::DbusEisContext(KWin::EisBackend *backend, QFlags<eis_device_capability> allowedCapabilities, int cookie, const QString &dbusService)
+@@ -68,7 +73,7 @@ int DbusEisContext::addClient()
+ }
+ 
+ XWaylandEisContext::XWaylandEisContext(KWin::EisBackend *backend)
+-    : EisContext(backend, {EIS_DEVICE_CAP_POINTER | EIS_DEVICE_CAP_POINTER_ABSOLUTE | EIS_DEVICE_CAP_KEYBOARD | EIS_DEVICE_CAP_TOUCH | EIS_DEVICE_CAP_SCROLL | EIS_DEVICE_CAP_BUTTON})
++    : EisContext(backend, {EIS_DEVICE_CAP_POINTER | EIS_DEVICE_CAP_POINTER_ABSOLUTE | EIS_DEVICE_CAP_KEYBOARD | EIS_DEVICE_CAP_TOUCH | EIS_DEVICE_CAP_SCROLL | EIS_DEVICE_CAP_BUTTON | EIS_DEVICE_CAP_TEXT})
+     , socketName(qgetenv("XDG_RUNTIME_DIR") + QByteArrayLiteral("/kwin-xwayland-eis-socket.") + QByteArray::number(getpid()))
+ {
+     eis_setup_backend_socket(m_eisContext, socketName.constData());
+@@ -99,6 +104,9 @@ EisContext::~EisContext()
+         if (client->keyboard) {
+             Q_EMIT m_backend->deviceRemoved(client->keyboard.get());
+         }
++        if (client->text) {
++            Q_EMIT m_backend->deviceRemoved(client->text.get());
++        }
+     }
+ }
+ 
+@@ -111,6 +119,11 @@ void EisContext::updateScreens()
+     }
+ }
+ 
++static std::chrono::microseconds currentTime()
++{
++    return std::chrono::duration_cast<std::chrono::microseconds>(std::chrono::steady_clock::now().time_since_epoch());
++}
++
+ void EisContext::updateKeymap()
+ {
+     for (const auto &client : m_clients) {
+@@ -120,11 +133,6 @@ void EisContext::updateKeymap()
+     }
+ }
+ 
+-static std::chrono::microseconds currentTime()
+-{
+-    return std::chrono::duration_cast<std::chrono::microseconds>(std::chrono::steady_clock::now().time_since_epoch());
+-}
+-
+ void EisContext::handleEvents()
+ {
+     auto eventDevice = [](eis_event *event) {
+@@ -146,9 +154,11 @@ void EisContext::handleEvents()
+             eis_client_connect(client);
+ 
+             auto seat = eis_client_new_seat(client, QByteArrayLiteral(" seat").prepend(clientName));
+-            constexpr std::array allCapabilities{EIS_DEVICE_CAP_POINTER, EIS_DEVICE_CAP_POINTER_ABSOLUTE, EIS_DEVICE_CAP_KEYBOARD, EIS_DEVICE_CAP_TOUCH, EIS_DEVICE_CAP_SCROLL, EIS_DEVICE_CAP_BUTTON};
++            constexpr std::array allCapabilities{EIS_DEVICE_CAP_POINTER, EIS_DEVICE_CAP_POINTER_ABSOLUTE, EIS_DEVICE_CAP_KEYBOARD, EIS_DEVICE_CAP_TOUCH, EIS_DEVICE_CAP_SCROLL, EIS_DEVICE_CAP_BUTTON, EIS_DEVICE_CAP_TEXT};
+             for (auto capability : allCapabilities) {
++                qDebug() << "testing " << capability;
+                 if (m_allowedCapabilities & capability) {
++                    qDebug() << "allowing" << capability;
+                     eis_seat_configure_capability(seat, capability);
+                 }
+             }
+@@ -185,6 +195,8 @@ void EisContext::handleEvents()
+             updateDevice(clientSeat->absoluteDevice, &EisBackend::createAbsoluteDevice, eis_event_seat_has_capability(event, EIS_DEVICE_CAP_POINTER_ABSOLUTE) || eis_event_seat_has_capability(event, EIS_DEVICE_CAP_TOUCH));
+             updateDevice(clientSeat->pointer, &EisBackend::createPointer, eis_event_seat_has_capability(event, EIS_DEVICE_CAP_POINTER));
+             updateDevice(clientSeat->keyboard, &EisBackend::createKeyboard, eis_event_seat_has_capability(event, EIS_DEVICE_CAP_KEYBOARD));
++            updateDevice(clientSeat->text, &EisBackend::createText, eis_event_seat_has_capability(event, EIS_DEVICE_CAP_TEXT));
++
+             break;
+         }
+         case EIS_EVENT_DEVICE_CLOSED: {
+@@ -198,6 +210,8 @@ void EisContext::handleEvents()
+                 seat->keyboard.reset();
+             } else if (device == seat->pointer.get()) {
+                 seat->pointer.reset();
++            } else if (device == seat->text.get()) {
++                seat->text.reset();
+             }
+             break;
+         }
+@@ -343,6 +357,24 @@ void EisContext::handleEvents()
+             Q_EMIT device->touchMotion(id, {x, y}, currentTime(), device);
+             break;
+         }
++        case EIS_EVENT_TEXT_KEYSYM: {
++            auto device = eventDevice(event);
++            const auto keySym = eis_event_text_get_keysym(event);
++            bool isPress = eis_event_text_get_keysym_is_press(event);
++            device->sendKeySym(keySym, isPress ? KeyboardKeyState::Pressed : KeyboardKeyState::Released);
++            break;
++        }
++        case EIS_EVENT_TEXT_UTF8: {
++            auto device = eventDevice(event);
++            const auto text = QString::fromUtf8(eis_event_text_get_utf8(event));
++            qCDebug(KWIN_EIS) << device->name() << "text" << text;
++            const QList<xkb_keysym_t> keySyms = Xkb::textToKeySyms(text);
++            for (xkb_keysym_t keySym : keySyms) {
++                device->sendKeySym(keySym, KeyboardKeyState::Pressed);
++                device->sendKeySym(keySym, KeyboardKeyState::Released);
++            }
++            break;
++        }
+         }
+         eis_event_unref(event);
+     }
+diff --git a/src/plugins/eis/eisdevice.cpp b/src/plugins/eis/eisdevice.cpp
+index aa58dba19f..361676f3f5 100644
+--- a/src/plugins/eis/eisdevice.cpp
++++ b/src/plugins/eis/eisdevice.cpp
+@@ -5,6 +5,7 @@
+ */
+ 
+ #include "eisdevice.h"
++#include "keyboard_input.h"
+ 
+ #include <libeis.h>
+ 
+@@ -108,4 +109,46 @@ bool EisDevice::isLidSwitch() const
+     return false;
+ }
+ 
++void EisDevice::sendKeySym(xkb_keysym_t keySym, KeyboardKeyState state)
++{
++    std::optional<Xkb::KeyCode> keyCode = input()->keyboard()->xkb()->keycodeFromKeysym(keySym);
++    bool isPress = state == KeyboardKeyState::Pressed;
++    if (keyCode) {
++        // TODO modifiers
++        // if set, translate it into a shift key as we go through the xkb state
++        // or we can force the other path
++        if (isPress) {
++            pressedKeys.insert(keyCode->keyCode);
++            Q_EMIT keyChanged(keyCode->keyCode, KeyboardKeyState::Pressed, currentTime(), this);
++        } else {
++            bool keyWasHeld = pressedKeys.remove(keyCode->keyCode);
++            if (keyWasHeld) {
++                Q_EMIT keyChanged(keyCode->keyCode, KeyboardKeyState::Released, currentTime(), this);
++            }
++        }
++        return;
++    }
++    static const uint unmappedKeyCode = 247; // DAVE
++    bool keymapUpdated = input()->keyboard()->xkb()->updateToKeymapForKeySym(unmappedKeyCode, keySym);
++    if (!keymapUpdated) {
++        return;
++    }
++
++    if (isPress) {
++        pressedKeys.insert(unmappedKeyCode);
++        Q_EMIT keyChanged(unmappedKeyCode, KeyboardKeyState::Pressed, currentTime(), this);
++    } else {
++        bool keyWasHeld = pressedKeys.remove(unmappedKeyCode);
++        if (keyWasHeld) {
++            Q_EMIT keyChanged(unmappedKeyCode, KeyboardKeyState::Released, currentTime(), this);
++        }
++    }
++
++    // reset keymap back, potentially this should be done a bit more lazily next time we get another event
++    for (auto key : std::as_const(pressedKeys)) {
++        Q_EMIT keyChanged(key, KeyboardKeyState::Released, currentTime(), this);
++        pressedKeys.remove(key);
++    }
++    input()->keyboard()->xkb()->reconfigure();
++}
+ }
+diff --git a/src/plugins/eis/eisdevice.h b/src/plugins/eis/eisdevice.h
+index 154936782f..d6fab691a6 100644
+--- a/src/plugins/eis/eisdevice.h
++++ b/src/plugins/eis/eisdevice.h
+@@ -7,6 +7,7 @@
+ #pragma once
+ 
+ #include "core/inputdevice.h"
++#include "xkb.h"
+ 
+ struct eis_device;
+ 
+@@ -44,6 +45,8 @@ public:
+     bool isTabletModeSwitch() const override;
+     bool isLidSwitch() const override;
+ 
++    void sendKeySym(xkb_keysym_t keySym, KeyboardKeyState state);
++
+ private:
+     eis_device *m_device;
+     bool m_enabled;
+diff --git a/src/xkb.cpp b/src/xkb.cpp
+index a8e5266128..a55db6b1b4 100644
+--- a/src/xkb.cpp
++++ b/src/xkb.cpp
+@@ -1320,8 +1320,31 @@ QList<xkb_keysym_t> Xkb::keysymsFromQtKey(QKeyCombination keyQt)
+     return syms;
+ }
+ 
+-QByteArray Xkb::createKeymapForKeysym(xkb_keycode_t newKeycode,
+-                                      xkb_keysym_t customSym)
++QByteArray Xkb::keymapContentsForKeysym(xkb_keycode_t newKeycode, xkb_keysym_t customSym)
++{
++    auto keymap = createKeymapForKeysym(newKeycode, customSym);
++    if (!keymap) {
++        return {};
++    }
++    UniqueCPtr<char> keymapString(xkb_keymap_get_as_string(keymap, XKB_KEYMAP_FORMAT_TEXT_V1));
++    if (!keymapString) {
++        return {};
++    }
++    return keymapString.get();
++}
++
++bool Xkb::updateToKeymapForKeySym(xkb_keycode_t newKeycode, xkb_keysym_t customSym)
++{
++    auto keymap = createKeymapForKeysym(newKeycode, customSym);
++    if (!keymap) {
++        return false;
++    }
++    updateKeymap(keymap);
++    return true;
++}
++
++xkb_keymap *Xkb::createKeymapForKeysym(xkb_keycode_t newKeycode,
++                                       xkb_keysym_t customSym)
+ {
+     char symName[64];
+     if (xkb_keysym_get_name(customSym, symName, sizeof(symName)) <= 0) {
+@@ -1356,12 +1379,32 @@ QByteArray Xkb::createKeymapForKeysym(xkb_keycode_t newKeycode,
+         qWarning() << "Could not create new keymap for keysym" << customSym;
+         return {};
+     }
++    return newMap;
++}
+ 
+-    UniqueCPtr<char> keymapString(xkb_keymap_get_as_string(newMap, XKB_KEYMAP_FORMAT_TEXT_V1));
+-    if (!keymapString) {
+-        return {};
++QList<xkb_keysym_t> Xkb::textToKeySyms(const QString &inputString)
++{
++    QList<xkb_keysym_t> result;
++
++    for (int i = 0; i < inputString.size(); ++i) {
++        char32_t cp = inputString[i].unicode();
++
++        // Handle surrogate pair (two QChars → one codepoint)
++        if (inputString[i].isHighSurrogate() && i + 1 < inputString.size()
++            && inputString[i + 1].isLowSurrogate()) {
++            cp = QChar::surrogateToUcs4(inputString[i].unicode(),
++                                        inputString[i + 1].unicode());
++            i++; // skip the low surrogate
++        }
++
++        xkb_keysym_t ks = xkb_utf32_to_keysym(cp);
++        if (ks != XKB_KEY_NoSymbol) {
++            result.append(ks);
++        } else {
++            qCWarning(KWIN_VIRTUALKEYBOARD) << "No keysym for U+" << &std::hex << (int)cp << "\n";
++        }
+     }
+-    return keymapString.get();
++    return result;
+ }
+ }
+ 
+diff --git a/src/xkb.h b/src/xkb.h
+index de97d0b8c8..4cac1bbeed 100644
+--- a/src/xkb.h
++++ b/src/xkb.h
+@@ -139,9 +139,21 @@ public:
+      */
+     static QList<xkb_keysym_t> keysymsFromQtKey(QKeyCombination keyQt);
+ 
+-    // Create a new keymap with one custom keysym bound to a given keycode.
+-    QByteArray createKeymapForKeysym(xkb_keycode_t newKeycode,
+-                                     xkb_keysym_t customSym);
++    /**
++     *  Create a temporary keymap with one custom keysym bound to a given keycode.
++     *  The underlying keymap used by Xkb is unchanged
++     */
++    QByteArray keymapContentsForKeysym(xkb_keycode_t newKeycode,
++                                       xkb_keysym_t customSym);
++
++    /**
++     * Create a temporary keymap with one custom keysym bound to a given keycode.
++     * The underlying keymap used in this XKb object is changed.
++     */
++    bool updateToKeymapForKeySym(xkb_keycode_t newKeycode,
++                                 xkb_keysym_t customSym);
++
++    static QList<xkb_keysym_t> textToKeySyms(const QString &inputString);
+ 
+ public Q_SLOTS:
+     void reconfigure();
+@@ -155,6 +167,7 @@ private:
+     xkb_keymap *loadKeymapFromConfig();
+     xkb_keymap *loadDefaultKeymap();
+     xkb_keymap *loadKeymapFromLocale1();
++    xkb_keymap *createKeymapForKeysym(xkb_keycode_t newKeycode, xkb_keysym_t customSym);
+     void updateKeymap(xkb_keymap *keymap);
+     void createKeymapFile();
+     void updateModifiers();
+-- 
+2.50.1
+
