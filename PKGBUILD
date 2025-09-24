@@ -8,7 +8,7 @@ pkgname=(
   libwireplumber
 )
 pkgver=0.5.10
-pkgrel=1.4
+pkgrel=1.5
 pkgdesc="Session / policy manager implementation for PipeWire"
 url="https://pipewire.pages.freedesktop.org/wireplumber/"
 arch=(x86_64)
@@ -72,6 +72,11 @@ source=(
   "0003-state-routes-Don-t-save-routes-that-are-not-availabl.patch"
   "0004-apply-routes.lua-Always-set-save-false-when-applying.patch"
   "0005-state-routes.lua-Don-t-save-again-the-route-when-res.patch"
+
+  # Holo: backport of https://gitlab.freedesktop.org/pipewire/wireplumber/-/merge_requests/734
+  # Addresses https://gitlab.steamos.cloud/holo-team/tasks/-/issues/588
+  "0001-modules-Add-notifications-api-module.patch"
+  "0002-scripts-Add-automute-alsa-routes.lua-to-auto-mute-AL.patch"
 )
 b2sums=('5c9d06c4084187ce172e98fb05bef3826e4b7bf1fba505e5543fec0e194d8a957172c81e6fa32c7f53832e204dd794189d48deaae5eca10577b04106f2625ff3'
         '86f80f07bb5f446ae90f88f39870139d4d902f99048a62eb825ac12b654ca248568b17f8a1ca15777b41e0a11054345d023fc36a348372f15cb75b92a0180cfe'
@@ -89,7 +94,9 @@ b2sums=('5c9d06c4084187ce172e98fb05bef3826e4b7bf1fba505e5543fec0e194d8a957172c81
         'd5c8796bd477e19847ea004accaab08ea96f22ac1eeb0e2a50d905385a2947171c1921fd73efc21cbbc18e81588fab258feda549ebd1568859bb710a4e83637e'
         '5e498f32efd015115a9e983475f26ea61a70b8f5fa7a93509ba5a5ba50bbc04ab5f39c2fe18b24969bffb683ba2a561732cb0256e42de323cd6b301123e535d4'
         '8beef92428552a4f17e70459a1669352c93ce4b8a1fd85ac2fc6e6ee7c9a886c2f64e87e7bf2e9e6029a168ad9af17b1faa9249e001afcaeac5a2c32b52dcbdc'
-        '19be7fa178a06365ffb9094e37130f51e2e8aae8027f080b8c36fd135b97f7c7ebc1e2cd32585c025b21b31127059f94aa70c93ee48b8d27c74119f4c7b38504')
+        '19be7fa178a06365ffb9094e37130f51e2e8aae8027f080b8c36fd135b97f7c7ebc1e2cd32585c025b21b31127059f94aa70c93ee48b8d27c74119f4c7b38504'
+        '683282b840c6257e36b24fa4125dc68a4af152451b466621b2eadd959ac2c177caa7fead9494b2131744a596d1c3fd88aaffe99bb1608c1ea3e07b5dfa4f2d7c'
+        'bb310edffbd7b041119344ff82a33562c472a70a76ed33c4121c8cb178df9403036c176c50a8ec58134191a434bbf34a3e560ab83272910a72a10a8e6aa689c8')
 
 prepare() {
   cd $pkgbase
