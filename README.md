@@ -1,5 +1,5 @@
 
-`main @ 20250925.1001`
+`main @ 20251001.1000`
 ======================
 
 Valve packages
@@ -52,7 +52,7 @@ Valve packages
  * [`steamos-efi` — `holo-main/steamos-efi-20250718.1-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-efi-20250718.1-2)
  * [`steamos-kdumpst-layer` — `holo-main/steamos-kdumpst-layer-1.0-4`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-kdumpst-layer-1.0-4)
  * [`steamos-log-submitter` — `holo-main/steamos-log-submitter-0.7.6-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-log-submitter-0.7.6-1)
- * [`steamos-manager` — `holo-main/steamos-manager-25.7.0-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-manager-25.7.0-2)
+ * [`steamos-manager` — `holo-main/steamos-manager-25.9.0-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-manager-25.9.0-1)
  * [`steamos-networking-tools` — `holo-main/steamos-networking-tools-1.2-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-networking-tools-1.2-1)
  * [`steamos-powerbuttond` — `holo-main/steamos-powerbuttond-3.3-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-powerbuttond-3.3-2)
  * [`steamos-reset` — `holo-main/steamos-reset-20241008.1-3`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-reset-20241008.1-3)
@@ -95,7 +95,7 @@ Valve packages
  * [`linux-firmware-neptune` — `jupiter-main/linux-firmware-neptune-jupiter.20250731.1-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/linux-firmware-neptune-jupiter.20250731.1-2)
  * [`linux-firmware-neptune-whence` — `jupiter-main/linux-firmware-neptune-jupiter.20250731.1-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/linux-firmware-neptune-jupiter.20250731.1-2)
  * [`linux-neptune-616` — `jupiter-main/linux-neptune-616-6.16.7.valve1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/linux-neptune-616-6.16.7.valve1-1)
- * [`mangohud` — `jupiter-main/mangohud-0.8.1.r49.ga113f7c-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/mangohud-0.8.1.r49.ga113f7c-2)
+ * [`mangohud` — `jupiter-main/mangohud-0.8.1.r103.g10479eb-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/mangohud-0.8.1.r103.g10479eb-1)
  * [`mesa` — `jupiter-main/mesa-25.2.0.208938.radeonsi_25.2.0-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/mesa-25.2.0.208938.radeonsi_25.2.0-1)
  * [`plasma-remotecontrollers` — `jupiter-main/plasma-remotecontrollers-5.26.90.r258.g9ace9a9-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/plasma-remotecontrollers-5.26.90.r258.g9ace9a9-2)
  * [`plasma-workspace` — `jupiter-main/plasma-workspace-6.4.3-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/plasma-workspace-6.4.3-1.1)
