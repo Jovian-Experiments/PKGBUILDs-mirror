@@ -32,7 +32,7 @@ pkgname=(
   pulse-native-provider
 )
 pkgver=1.4.7
-pkgrel=1.1
+pkgrel=1.2
 epoch=1
 pkgdesc="Low-latency audio/video router and processor"
 url="https://pipewire.org"
@@ -290,8 +290,11 @@ package_pipewire() {
     # Holo: we symlink the .conf.d directories from /etc/pipewire to /run because at
     # runtime the script pipewire-hwconfig picks up the correct config files based
     # on the hw.
+    # TODO: this change needs to happen outside the pipewire package to allow us to
+    # reconcile with the upstream PKGBUILD. Alternatively we need to figure out a
+    # better way to handle hw specific configs that doesn't involve symlinks in /run
     mkdir -p etc/pipewire
-    for _l in {client-rt,client,minimal,pipewire}.conf.d
+    for _l in {client-rt,client,filter-chain,minimal,pipewire}.conf.d
     do
       ln -s /run/pipewire/${_l} etc/pipewire/${_l}
     done
