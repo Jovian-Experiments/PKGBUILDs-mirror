@@ -4,7 +4,7 @@
 # Everything still in here should be either removed or re-homed to a proper package.
 
 pkgname=jupiter-legacy-support
-pkgver=1.154
+pkgver=1.155
 pkgrel=1
 pkgdesc="Legacy jupiter-specific support files that haven't been split to their own package or removed."
 arch=(any)
@@ -61,9 +61,6 @@ package() {
   install -D -m755 -t "$pkgdir"/usr/bin/ usr/bin/*
 
   install -D -m644 {,"$pkgdir"/}usr/share/X11/xorg.conf.d/41-touchscreenrotate.conf
-
-  install -D -m644 {,"$pkgdir"/}usr/share/xsessions/plasma-steamos-oneshot.desktop
-  install -D -m644 {,"$pkgdir"/}usr/share/wayland-sessions/plasma-steamos-wayland-oneshot.desktop
 
   install -D -m644 {,"$pkgdir"/}etc/sddm.conf.d/steamos.conf
   # install -D -m644 {,"$pkgdir"/}etc/pulse/default.pa
