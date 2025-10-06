@@ -23,8 +23,8 @@ pkgname=(
 # When updating the tag, consider if you are adding any shader compiler changes. If so,
 # or if you are not sure, regenerate the radv-build-id below. To update, see
 # https://gitlab.steamos.cloud/jupiter/docs/-/wikis/How-to-make-a-new-Mesa-release#updating-the-radv-build-id
-_tag=steamos-25.6.0
-pkgver=25.2.0_devel.206774.steamos_25.6.0
+_tag=steamos-25.8.0
+pkgver=25.3.0_devel.210207.steamos_25.8.0
 
 pkgrel=2
 epoch=0
@@ -217,7 +217,7 @@ build() {
     -D valgrind=enabled
     -D video-codecs=all
     -D vulkan-drivers=amd
-    -D vulkan-layers=
+    -D vulkan-layers=anti-lag
     # Jupiter specific options below:
     -D b_lto=false
     -D gallium-vdpau=disabled
@@ -231,7 +231,9 @@ build() {
     -D llvm=enabled
     -D lmsensors=disabled
     -D gpuvis=true
-    -D radv-build-id="b0f01041524e5ffa6a44281db9150fe88eae8192"
+    -D display-info=disabled
+    -D amdgpu-virtio=true
+    -D radv-build-id="65ab33a50c0fc47c34344ef1a64d56b4315e9b04"
   )
 
   # Build only minimal debug info to reduce size
