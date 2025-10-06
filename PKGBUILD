@@ -26,7 +26,7 @@ pkgname=(
 _tag=steamos-25.8.0
 pkgver=25.3.0_devel.210207.steamos_25.8.0
 
-pkgrel=2
+pkgrel=1
 epoch=0
 pkgdesc="Open-source OpenGL drivers"
 url="https://www.mesa3d.org/"
@@ -232,7 +232,6 @@ build() {
     -D lmsensors=disabled
     -D gpuvis=true
     -D display-info=disabled
-    -D amdgpu-virtio=true
     -D radv-build-id="65ab33a50c0fc47c34344ef1a64d56b4315e9b04"
   )
 
