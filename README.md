@@ -1,5 +1,5 @@
 
-`main @ 20251006.1000`
+`main @ 20251008.1000`
 ======================
 
 Valve packages
@@ -67,7 +67,7 @@ Valve packages
  * [`udisks2-btrfs` — `holo-main/udisks2-2.10.1-6.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/udisks2-2.10.1-6.1)
  * [`udisks2-lvm2` — `holo-main/udisks2-2.10.1-6.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/udisks2-2.10.1-6.1)
  * [`umr` — `holo-main/umr-1.0.10-1.3`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/umr-1.0.10-1.3)
- * [`xdg-desktop-portal-gamescope` — `holo-main/xdg-desktop-portal-gamescope-0.1.21.20ac820-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/xdg-desktop-portal-gamescope-0.1.21.20ac820-2)
+ * [`xdg-desktop-portal-gamescope` — `holo-main/xdg-desktop-portal-gamescope-0.1.22.bf83640-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/xdg-desktop-portal-gamescope-0.1.22.bf83640-1)
  * [`xdg-desktop-portal-gtk` — `holo-main/xdg-desktop-portal-gtk-1.15.3-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/xdg-desktop-portal-gtk-1.15.3-1.1)
  * [`xdg-desktop-portal-holo` — `holo-main/xdg-desktop-portal-holo-0.1.14.bb73298-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/xdg-desktop-portal-holo-0.1.14.bb73298-2)
  * [`xorg-xwayland` — `holo-main/xorg-xwayland-24.1.8-1.3`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/xorg-xwayland-24.1.8-1.3)
