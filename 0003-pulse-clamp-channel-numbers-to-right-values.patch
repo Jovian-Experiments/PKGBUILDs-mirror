@@ -1,0 +1,173 @@
+From 5cf34b6a5d446f9c722723fb97e1295485fa53c7 Mon Sep 17 00:00:00 2001
+From: Wim Taymans <wtaymans@redhat.com>
+Date: Fri, 4 Apr 2025 15:13:47 +0200
+Subject: [PATCH 3/6] pulse: clamp channel numbers to right values
+
+When converting between pipewire and pulse channelmaps, make sure we
+clamp the channel numbers to the the right limit.
+---
+ src/modules/module-protocol-pulse/format.c | 17 +++++++++--------
+ src/modules/module-protocol-pulse/module.c |  4 ++--
+ src/modules/module-protocol-pulse/volume.c |  6 +++---
+ src/modules/module-pulse-tunnel.c          | 11 ++++++-----
+ 4 files changed, 20 insertions(+), 18 deletions(-)
+
+diff --git a/src/modules/module-protocol-pulse/format.c b/src/modules/module-protocol-pulse/format.c
+index 7ce9757c5..3143e830b 100644
+--- a/src/modules/module-protocol-pulse/format.c
++++ b/src/modules/module-protocol-pulse/format.c
+@@ -348,14 +348,15 @@ uint32_t channel_paname2id(const char *name, size_t size)
+ 
+ void channel_map_to_positions(const struct channel_map *map, uint32_t *pos)
+ {
+-	int i;
+-	for (i = 0; i < map->channels; i++)
++	uint32_t i, channels = SPA_MIN(map->channels, SPA_AUDIO_MAX_CHANNELS);
++	for (i = 0; i < channels; i++)
+ 		pos[i] = map->map[i];
+ }
+ 
+ void positions_to_channel_map(const uint32_t *pos, uint32_t channels, struct channel_map *map)
+ {
+ 	uint32_t i;
++	channels = SPA_MIN(channels, CHANNELS_MAX);
+ 	for (i = 0; i < channels; i++)
+ 		map->map[i] = pos[i];
+ 	map->channels = channels;
+@@ -430,7 +431,7 @@ void channel_map_parse(const char *str, struct channel_map *map)
+ 		};
+ 	} else {
+ 		channels = map->channels = 0;
+-		while (*p && channels < SPA_AUDIO_MAX_CHANNELS) {
++		while (*p && channels < CHANNELS_MAX) {
+ 			uint32_t chname;
+ 
+ 			if ((len = strcspn(p, ",")) == 0)
+@@ -576,11 +577,11 @@ int format_parse_param(const struct spa_pod *param, bool collect,
+ 		if (info.info.raw.rate)
+ 		        ss->rate = info.info.raw.rate;
+ 		if (info.info.raw.channels)
+-		        ss->channels = info.info.raw.channels;
++		        ss->channels = SPA_MIN(info.info.raw.channels, CHANNELS_MAX);
+ 	}
+ 	if (map) {
+ 		if (info.info.raw.channels) {
+-			map->channels = info.info.raw.channels;
++			map->channels = SPA_MIN(info.info.raw.channels, CHANNELS_MAX);
+ 			for (i = 0; i < map->channels; i++)
+ 				map->map[i] = info.info.raw.position[i];
+ 		}
+@@ -654,13 +655,13 @@ int format_info_from_spec(struct format_info *info, const struct sample_spec *ss
+ 	pw_properties_setf(info->props, "format.channels", "%d", ss->channels);
+ 	if (map && map->channels == ss->channels) {
+ 		char chmap[1024] = "";
+-		int i, o, r;
+-		uint32_t aux = 0;
++		int r;
++		uint32_t aux = 0, i, o;
+ 
+ 		for (i = 0, o = 0; i < map->channels; i++) {
+ 			r = snprintf(chmap+o, sizeof(chmap)-o, "%s%s", i == 0 ? "" : ",",
+ 					channel_id2paname(map->map[i], &aux));
+-			if (r < 0 || o + r >= (int)sizeof(chmap))
++			if (r < 0 || o + r >= sizeof(chmap))
+ 				return -ENOSPC;
+ 			o += r;
+ 		}
+diff --git a/src/modules/module-protocol-pulse/module.c b/src/modules/module-protocol-pulse/module.c
+index 0d45399c3..fe4b346d9 100644
+--- a/src/modules/module-protocol-pulse/module.c
++++ b/src/modules/module-protocol-pulse/module.c
+@@ -204,7 +204,7 @@ int module_args_to_audioinfo_keys(struct impl *impl, struct pw_properties *props
+ 	}
+ 	if (key_channels && (str = pw_properties_get(props, key_channels)) != NULL) {
+ 		info->channels = pw_properties_parse_int(str);
+-		if (info->channels == 0 || info->channels > SPA_AUDIO_MAX_CHANNELS) {
++		if (info->channels == 0 || info->channels > CHANNELS_MAX) {
+ 			pw_log_error("invalid %s '%s'", key_channels, str);
+ 			return -EINVAL;
+ 		}
+@@ -214,7 +214,7 @@ int module_args_to_audioinfo_keys(struct impl *impl, struct pw_properties *props
+ 		struct channel_map map;
+ 
+ 		channel_map_parse(str, &map);
+-		if (map.channels == 0 || map.channels > SPA_AUDIO_MAX_CHANNELS) {
++		if (map.channels == 0 || map.channels > CHANNELS_MAX) {
+ 			pw_log_error("invalid %s '%s'", key_channel_map, str);
+ 			return -EINVAL;
+ 		}
+diff --git a/src/modules/module-protocol-pulse/volume.c b/src/modules/module-protocol-pulse/volume.c
+index b47a1d026..de71baa53 100644
+--- a/src/modules/module-protocol-pulse/volume.c
++++ b/src/modules/module-protocol-pulse/volume.c
+@@ -53,7 +53,7 @@ int volume_parse_param(const struct spa_pod *param, struct volume_info *info, bo
+ 			if (monitor)
+ 				continue;
+ 			info->volume.channels = spa_pod_copy_array(&prop->value, SPA_TYPE_Float,
+-					info->volume.values, SPA_AUDIO_MAX_CHANNELS);
++					info->volume.values, CHANNELS_MAX);
+ 			SPA_FLAG_UPDATE(info->flags, VOLUME_HW_VOLUME,
+ 					prop->flags & SPA_POD_PROP_FLAG_HARDWARE);
+ 			break;
+@@ -68,7 +68,7 @@ int volume_parse_param(const struct spa_pod *param, struct volume_info *info, bo
+ 			if (!monitor)
+ 				continue;
+ 			info->volume.channels = spa_pod_copy_array(&prop->value, SPA_TYPE_Float,
+-					info->volume.values, SPA_AUDIO_MAX_CHANNELS);
++					info->volume.values, CHANNELS_MAX);
+ 			SPA_FLAG_CLEAR(info->flags, VOLUME_HW_VOLUME);
+ 			break;
+ 		case SPA_PROP_volumeBase:
+@@ -84,7 +84,7 @@ int volume_parse_param(const struct spa_pod *param, struct volume_info *info, bo
+ 		}
+ 		case SPA_PROP_channelMap:
+ 			info->map.channels = spa_pod_copy_array(&prop->value, SPA_TYPE_Id,
+-					info->map.map, SPA_AUDIO_MAX_CHANNELS);
++					info->map.map, CHANNELS_MAX);
+ 			break;
+ 		default:
+ 			break;
+diff --git a/src/modules/module-pulse-tunnel.c b/src/modules/module-pulse-tunnel.c
+index 32d01122a..4999a199d 100644
+--- a/src/modules/module-pulse-tunnel.c
++++ b/src/modules/module-pulse-tunnel.c
+@@ -298,7 +298,7 @@ static void stream_param_changed(void *d, uint32_t id, const struct spa_pod *par
+ 
+ 			if ((n = spa_pod_copy_array(&prop->value, SPA_TYPE_Float,
+ 					vols, SPA_AUDIO_MAX_CHANNELS)) > 0) {
+-				volume.channels = n;
++				volume.channels = SPA_MIN(PA_CHANNELS_MAX, n);
+ 				for (n = 0; n < volume.channels; n++)
+ 					volume.values[n] = pa_sw_volume_from_linear(vols[n]);
+ 
+@@ -834,11 +834,12 @@ do_stream_sync_volumes(struct spa_loop *loop,
+ 	struct spa_pod_builder b = SPA_POD_BUILDER_INIT(buf, sizeof(buf));
+ 	struct spa_pod_frame f[1];
+ 	struct spa_pod *param;
+-	uint32_t i;
++	uint32_t i, channels;
+ 	float vols[SPA_AUDIO_MAX_CHANNELS];
+ 	float soft_vols[SPA_AUDIO_MAX_CHANNELS];
+ 
+-	for (i = 0; i < impl->volume.channels; i++) {
++	channels = SPA_MIN(impl->volume.channels, SPA_AUDIO_MAX_CHANNELS);
++	for (i = 0; i < channels; i++) {
+ 		vols[i] = (float)pa_sw_volume_to_linear(impl->volume.values[i]);
+ 		soft_vols[i] = 1.0f;
+ 	}
+@@ -851,10 +852,10 @@ do_stream_sync_volumes(struct spa_loop *loop,
+ 
+ 	spa_pod_builder_prop(&b, SPA_PROP_channelVolumes, 0);
+ 	spa_pod_builder_array(&b, sizeof(float), SPA_TYPE_Float,
+-			impl->volume.channels, vols);
++			channels, vols);
+ 	spa_pod_builder_prop(&b, SPA_PROP_softVolumes, 0);
+ 	spa_pod_builder_array(&b, sizeof(float), SPA_TYPE_Float,
+-			impl->volume.channels, soft_vols);
++			channels, soft_vols);
+ 	param = spa_pod_builder_pop(&b, &f[0]);
+ 
+ 	pw_stream_set_param(impl->stream, SPA_PARAM_Props, param);
+-- 
+2.51.0
+

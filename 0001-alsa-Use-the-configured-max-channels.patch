@@ -1,0 +1,35 @@
+From 86e59b76745e5d725de2c30b17fdaa4487cda81c Mon Sep 17 00:00:00 2001
+From: Wim Taymans <wtaymans@redhat.com>
+Date: Fri, 4 Apr 2025 15:00:04 +0200
+Subject: [PATCH 1/6] alsa: Use the configured max channels
+
+Don't hardcode the max channels to 64 but use the globally configured
+SPA_AUDIO_MAX_CHANNELS value.
+---
+ pipewire-alsa/alsa-plugins/pcm_pipewire.c | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
+
+diff --git a/pipewire-alsa/alsa-plugins/pcm_pipewire.c b/pipewire-alsa/alsa-plugins/pcm_pipewire.c
+index 1437702a1..4b92bbb13 100644
+--- a/pipewire-alsa/alsa-plugins/pcm_pipewire.c
++++ b/pipewire-alsa/alsa-plugins/pcm_pipewire.c
+@@ -30,7 +30,6 @@ PW_LOG_TOPIC_STATIC(alsa_log_topic, "alsa.pcm");
+ #define MIN_BUFFERS	2u
+ #define MAX_BUFFERS	64u
+ 
+-#define MAX_CHANNELS	64
+ #define MAX_RATE	(48000*8)
+ 
+ #define MIN_PERIOD	64
+@@ -1098,7 +1097,7 @@ struct param_info infos[] = {
+ 	{ "alsa.rate", SND_PCM_IOPLUG_HW_RATE, TYPE_MIN_MAX,
+ 		{ 1, MAX_RATE }, 2, collect_int },
+ 	{ "alsa.channels", SND_PCM_IOPLUG_HW_CHANNELS, TYPE_MIN_MAX,
+-		{ 1, MAX_CHANNELS }, 2, collect_int },
++		{ 1, SPA_AUDIO_MAX_CHANNELS }, 2, collect_int },
+ 	{ "alsa.buffer-bytes", SND_PCM_IOPLUG_HW_BUFFER_BYTES, TYPE_MIN_MAX,
+ 		{ MIN_BUFFER_BYTES, MAX_BUFFER_BYTES }, 2, collect_int },
+ 	{ "alsa.period-bytes", SND_PCM_IOPLUG_HW_PERIOD_BYTES, TYPE_MIN_MAX,
+-- 
+2.51.0
+

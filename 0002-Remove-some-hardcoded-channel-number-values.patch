@@ -1,0 +1,107 @@
+From 9868d901eae601e08afb96e614efc38ba957f6f7 Mon Sep 17 00:00:00 2001
+From: Wim Taymans <wtaymans@redhat.com>
+Date: Fri, 4 Apr 2025 15:04:09 +0200
+Subject: [PATCH 2/6] Remove some hardcoded channel number values
+
+Mostly related to the number of channels.
+---
+ spa/plugins/alsa/acp/acp.c          | 2 +-
+ spa/plugins/audiomixer/audiomixer.c | 1 -
+ spa/plugins/bluez5/defs.h           | 3 ++-
+ src/modules/module-rtp/opus.c       | 2 +-
+ src/pipewire/stream.c               | 6 ++++--
+ 5 files changed, 8 insertions(+), 6 deletions(-)
+
+diff --git a/spa/plugins/alsa/acp/acp.c b/spa/plugins/alsa/acp/acp.c
+index 11d97d7a1..fc2947cd3 100644
+--- a/spa/plugins/alsa/acp/acp.c
++++ b/spa/plugins/alsa/acp/acp.c
+@@ -1785,7 +1785,7 @@ struct acp_card *acp_card_new(uint32_t index, const struct acp_dict *props)
+ 	impl->auto_port = true;
+ 	impl->ignore_dB = false;
+ 	impl->rate = DEFAULT_RATE;
+-	impl->pro_channels = 64;
++	impl->pro_channels = ACP_MAX_CHANNELS;
+ 
+ 	if (props) {
+ 		if ((s = acp_dict_lookup(props, "api.alsa.use-ucm")) != NULL)
+diff --git a/spa/plugins/audiomixer/audiomixer.c b/spa/plugins/audiomixer/audiomixer.c
+index 8cf7cfdff..0d82474e3 100644
+--- a/spa/plugins/audiomixer/audiomixer.c
++++ b/spa/plugins/audiomixer/audiomixer.c
+@@ -31,7 +31,6 @@ SPA_LOG_TOPIC_DEFINE_STATIC(log_topic, "spa.audiomixer");
+ 
+ #define MAX_BUFFERS     64
+ #define MAX_PORTS       512
+-#define MAX_CHANNELS    64
+ #define MAX_ALIGN	MIX_OPS_MAX_ALIGN
+ 
+ #define PORT_DEFAULT_VOLUME	1.0
+diff --git a/spa/plugins/bluez5/defs.h b/spa/plugins/bluez5/defs.h
+index 230945808..bbf814b3c 100644
+--- a/spa/plugins/bluez5/defs.h
++++ b/spa/plugins/bluez5/defs.h
+@@ -17,6 +17,7 @@ extern "C" {
+ #include <spa/support/plugin.h>
+ #include <spa/monitor/device.h>
+ #include <spa/utils/hook.h>
++#include <spa/param/audio/raw.h>
+ 
+ #include <dbus/dbus.h>
+ 
+@@ -655,7 +656,7 @@ struct spa_bt_transport {
+ 	struct spa_list bap_transport_linked;
+ 
+ 	uint32_t n_channels;
+-	uint32_t channels[64];
++	uint32_t channels[SPA_AUDIO_MAX_CHANNELS];
+ 
+ 	struct spa_bt_transport_volume volumes[SPA_BT_VOLUME_ID_TERM];
+ 
+diff --git a/src/modules/module-rtp/opus.c b/src/modules/module-rtp/opus.c
+index 83857c80b..bc0150386 100644
+--- a/src/modules/module-rtp/opus.c
++++ b/src/modules/module-rtp/opus.c
+@@ -320,7 +320,7 @@ static void rtp_opus_process_capture(void *data)
+ static int rtp_opus_init(struct impl *impl, enum spa_direction direction)
+ {
+ 	int err;
+-	unsigned char mapping[64];
++	unsigned char mapping[SPA_AUDIO_MAX_CHANNELS];
+ 	uint32_t i;
+ 
+ 	if (impl->psamples >= 2880)
+diff --git a/src/pipewire/stream.c b/src/pipewire/stream.c
+index dd14c5601..10834c412 100644
+--- a/src/pipewire/stream.c
++++ b/src/pipewire/stream.c
+@@ -28,7 +28,8 @@
+ PW_LOG_TOPIC_EXTERN(log_stream);
+ #define PW_LOG_TOPIC_DEFAULT log_stream
+ 
+-#define MAX_BUFFERS	64
++#define MAX_BUFFERS	64u
++#define MAX_VALUES	256u
+ 
+ #define MASK_BUFFERS	(MAX_BUFFERS-1)
+ 
+@@ -72,7 +73,7 @@ struct control {
+ 	struct pw_stream_control control;
+ 	struct spa_pod *info;
+ 	unsigned int emitted:1;
+-	float values[64];
++	float values[MAX_VALUES];
+ };
+ 
+ struct stream {
+@@ -1350,6 +1351,7 @@ static int node_event_param(void *object, int seq,
+ 				if ((values = spa_pod_get_array(&prop->value, &n_values)) == NULL ||
+ 				    !spa_pod_is_float(SPA_POD_ARRAY_CHILD(&prop->value)))
+ 					continue;
++				n_values = SPA_MIN(n_values, MAX_VALUES);
+ 				break;
+ 			default:
+ 				continue;
+-- 
+2.51.0
+
