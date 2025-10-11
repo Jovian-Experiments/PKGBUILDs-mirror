@@ -8,7 +8,7 @@ pkgname=(
   libwireplumber
 )
 pkgver=0.5.10
-pkgrel=1.6
+pkgrel=1.7
 pkgdesc="Session / policy manager implementation for PipeWire"
 url="https://pipewire.pages.freedesktop.org/wireplumber/"
 arch=(x86_64)
@@ -81,6 +81,9 @@ source=(
   # Holo: backport of https://gitlab.freedesktop.org/pipewire/wireplumber/-/merge_requests/737
   # Followup of https://gitlab.steamos.cloud/holo-team/tasks/-/issues/1754
   "0001-state-routes.lua-Make-sure-the-device-is-still-valid.patch"
+
+  # Holo: backport of https://gitlab.freedesktop.org/pipewire/wireplumber/-/merge_requests/749
+  "0001-monitor-alsa-Add-a-setting-to-use-HDMI-channel-detec.patch"
 )
 b2sums=('5c9d06c4084187ce172e98fb05bef3826e4b7bf1fba505e5543fec0e194d8a957172c81e6fa32c7f53832e204dd794189d48deaae5eca10577b04106f2625ff3'
         '86f80f07bb5f446ae90f88f39870139d4d902f99048a62eb825ac12b654ca248568b17f8a1ca15777b41e0a11054345d023fc36a348372f15cb75b92a0180cfe'
@@ -101,7 +104,8 @@ b2sums=('5c9d06c4084187ce172e98fb05bef3826e4b7bf1fba505e5543fec0e194d8a957172c81
         '19be7fa178a06365ffb9094e37130f51e2e8aae8027f080b8c36fd135b97f7c7ebc1e2cd32585c025b21b31127059f94aa70c93ee48b8d27c74119f4c7b38504'
         '683282b840c6257e36b24fa4125dc68a4af152451b466621b2eadd959ac2c177caa7fead9494b2131744a596d1c3fd88aaffe99bb1608c1ea3e07b5dfa4f2d7c'
         'bb310edffbd7b041119344ff82a33562c472a70a76ed33c4121c8cb178df9403036c176c50a8ec58134191a434bbf34a3e560ab83272910a72a10a8e6aa689c8'
-        '4d9c5e2e605a37cd670e8248e4f8e5dd244a755337c38527a1959f5ef301466d5d062ed86a334ea673c397d53e0a9dc3a98f2be29cb3faf00fc2e1245dae0929')
+        '4d9c5e2e605a37cd670e8248e4f8e5dd244a755337c38527a1959f5ef301466d5d062ed86a334ea673c397d53e0a9dc3a98f2be29cb3faf00fc2e1245dae0929'
+        'e1b5b58500c2dfb52d8d6a30d55ad485775025b446523edfa42ea96fa8608a26cbdeb894b02128c7098d0833a98ef8c5937c7f478ce267769a61dacf4f501ab8')
 
 prepare() {
   cd $pkgbase

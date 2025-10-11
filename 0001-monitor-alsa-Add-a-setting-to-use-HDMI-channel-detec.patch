@@ -1,0 +1,49 @@
+From aa3b1bfc1363e80f4274718aab50973bb821e2c1 Mon Sep 17 00:00:00 2001
+From: Arun Raghavan <arunr@valvesoftware.com>
+Date: Fri, 10 Oct 2025 13:50:58 -0700
+Subject: [PATCH] monitor/alsa: Add a setting to use HDMI channel detection
+
+This allows us to set up the device to use HDMI ELD information for
+channels. Not yet documented while we experiment with different ways to
+make this work.
+---
+ src/config/wireplumber.conf   | 6 ++++++
+ src/scripts/monitors/alsa.lua | 5 +++++
+ 2 files changed, 11 insertions(+)
+
+diff --git a/src/config/wireplumber.conf b/src/config/wireplumber.conf
+index dcbb67a7..9b04eb54 100644
+--- a/src/config/wireplumber.conf
++++ b/src/config/wireplumber.conf
+@@ -834,6 +834,12 @@ wireplumber.settings.schema = {
+     min = 0
+     max = 60000
+   }
++  monitor.alsa.autodetect-hdmi-channels = {
++    name = "Automatically detect HDMI channels (experimental)"
++    description = "Automatically detect channel count and positions for HDMI devices (experimental)"
++    type = "bool"
++    default = false
++  }
+ 
+   ## Node
+   node.features.audio.no-dsp = {
+diff --git a/src/scripts/monitors/alsa.lua b/src/scripts/monitors/alsa.lua
+index 06b40f20..c0303314 100644
+--- a/src/scripts/monitors/alsa.lua
++++ b/src/scripts/monitors/alsa.lua
+@@ -489,6 +489,11 @@ function prepareDevice(parent, id, obj_type, factory, properties)
+     factory = "api.alsa.acp.device"
+   end
+ 
++  -- use HDMI channel detection if enabled in settings
++  if Settings.get_boolean ("monitor.alsa.autodetect-hdmi-channels") then
++    properties["api.acp.use-eld-channels"] = true
++  end
++
+   -- use device reservation, if available
+   if rd_plugin and properties["api.alsa.card"] then
+     local rd_name = "Audio" .. properties["api.alsa.card"]
+-- 
+2.51.0
+
