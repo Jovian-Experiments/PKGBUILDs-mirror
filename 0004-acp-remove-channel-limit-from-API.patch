@@ -1,0 +1,111 @@
+From ba6c921f683797670eab11d406a46f6010ce44a9 Mon Sep 17 00:00:00 2001
+From: Wim Taymans <wtaymans@redhat.com>
+Date: Fri, 4 Apr 2025 15:34:39 +0200
+Subject: [PATCH 4/6] acp: remove channel limit from API
+
+Internally bump the channel limit and allocate the channel map
+dynamically.
+---
+ spa/plugins/alsa/acp/acp.c         | 9 ++++++---
+ spa/plugins/alsa/acp/acp.h         | 3 +--
+ spa/plugins/alsa/alsa-acp-device.c | 8 ++++----
+ 3 files changed, 11 insertions(+), 9 deletions(-)
+
+diff --git a/spa/plugins/alsa/acp/acp.c b/spa/plugins/alsa/acp/acp.c
+index fc2947cd3..e2dec60ae 100644
+--- a/spa/plugins/alsa/acp/acp.c
++++ b/spa/plugins/alsa/acp/acp.c
+@@ -16,7 +16,8 @@ void *_acp_log_data;
+ 
+ struct spa_i18n *acp_i18n;
+ 
+-#define DEFAULT_RATE	48000
++#define DEFAULT_CHANNELS	256u
++#define DEFAULT_RATE		48000u
+ 
+ #define VOLUME_ACCURACY (PA_VOLUME_NORM/100)  /* don't require volume adjustments to be perfectly correct. don't necessarily extend granularity in software unless the differences get greater than this level */
+ 
+@@ -183,6 +184,7 @@ static void device_free(void *data)
+ 	pa_dynarray_clear(&dev->port_array);
+ 	pa_proplist_free(dev->proplist);
+ 	pa_hashmap_free(dev->ports);
++	free(dev->device.format.map);
+ }
+ 
+ static inline void channelmap_to_acp(pa_channel_map *m, uint32_t *map)
+@@ -213,9 +215,10 @@ static void init_device(pa_card *impl, pa_alsa_device *dev, pa_alsa_direction_t
+ 	dev->device.format.format_mask = m->sample_spec.format;
+ 	dev->device.format.rate_mask = m->sample_spec.rate;
+ 	dev->device.format.channels = m->channel_map.channels;
++	dev->device.format.map = calloc(m->channel_map.channels, sizeof(uint32_t));
++	channelmap_to_acp(&m->channel_map, dev->device.format.map);
+ 	pa_cvolume_reset(&dev->real_volume, dev->device.format.channels);
+ 	pa_cvolume_reset(&dev->soft_volume, dev->device.format.channels);
+-	channelmap_to_acp(&m->channel_map, dev->device.format.map);
+ 	dev->direction = direction;
+ 	dev->proplist = pa_proplist_new();
+ 	pa_proplist_update(dev->proplist, PA_UPDATE_REPLACE, m->proplist);
+@@ -1785,7 +1788,7 @@ struct acp_card *acp_card_new(uint32_t index, const struct acp_dict *props)
+ 	impl->auto_port = true;
+ 	impl->ignore_dB = false;
+ 	impl->rate = DEFAULT_RATE;
+-	impl->pro_channels = ACP_MAX_CHANNELS;
++	impl->pro_channels = DEFAULT_CHANNELS;
+ 
+ 	if (props) {
+ 		if ((s = acp_dict_lookup(props, "api.alsa.use-ucm")) != NULL)
+diff --git a/spa/plugins/alsa/acp/acp.h b/spa/plugins/alsa/acp/acp.h
+index 4b9f2c495..01ad11806 100644
+--- a/spa/plugins/alsa/acp/acp.h
++++ b/spa/plugins/alsa/acp/acp.h
+@@ -24,7 +24,6 @@ extern "C" {
+ #endif
+ 
+ #define ACP_INVALID_INDEX	((uint32_t)-1)
+-#define ACP_MAX_CHANNELS	64
+ 
+ struct acp_dict_item {
+ 	const char *key;
+@@ -93,7 +92,7 @@ struct acp_format {
+ 	uint32_t format_mask;
+ 	uint32_t rate_mask;
+ 	uint32_t channels;
+-	uint32_t map[ACP_MAX_CHANNELS];
++	uint32_t *map;
+ };
+ 
+ #define ACP_DICT_INIT(items,n_items) ((struct acp_dict) { 0, (n_items), (items) })
+diff --git a/spa/plugins/alsa/alsa-acp-device.c b/spa/plugins/alsa/alsa-acp-device.c
+index 9e5e8eeb1..b2e06f67f 100644
+--- a/spa/plugins/alsa/alsa-acp-device.c
++++ b/spa/plugins/alsa/alsa-acp-device.c
+@@ -673,8 +673,8 @@ static int apply_device_props(struct impl *this, struct acp_device *dev, struct
+ 	struct spa_pod_prop *prop;
+ 	struct spa_pod_object *obj = (struct spa_pod_object *) props;
+ 	int changed = 0;
+-	float volumes[ACP_MAX_CHANNELS];
+-	uint32_t channels[ACP_MAX_CHANNELS];
++	float volumes[SPA_AUDIO_MAX_CHANNELS];
++	uint32_t channels[SPA_AUDIO_MAX_CHANNELS];
+ 	uint32_t n_volumes = 0;
+ 
+ 	if (!spa_pod_is_object_type(props, SPA_TYPE_OBJECT_Props))
+@@ -696,13 +696,13 @@ static int apply_device_props(struct impl *this, struct acp_device *dev, struct
+ 			break;
+ 		case SPA_PROP_channelVolumes:
+ 			if ((n_volumes = spa_pod_copy_array(&prop->value, SPA_TYPE_Float,
+-					volumes, ACP_MAX_CHANNELS)) > 0) {
++					volumes, SPA_AUDIO_MAX_CHANNELS)) > 0) {
+ 				changed++;
+ 			}
+ 			break;
+ 		case SPA_PROP_channelMap:
+ 			if (spa_pod_copy_array(&prop->value, SPA_TYPE_Id,
+-					channels, ACP_MAX_CHANNELS) > 0) {
++					channels, SPA_AUDIO_MAX_CHANNELS) > 0) {
+ 				changed++;
+ 			}
+ 			break;
+-- 
+2.51.0
+

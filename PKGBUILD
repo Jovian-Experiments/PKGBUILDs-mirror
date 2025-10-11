@@ -31,8 +31,8 @@ pkgname=(
   pipewire-session-manager
   pulse-native-provider
 )
-pkgver=1.4.7
-pkgrel=1.2
+pkgver=1.4.9
+pkgrel=1.1
 epoch=1
 pkgdesc="Low-latency audio/video router and processor"
 url="https://pipewire.org"
@@ -92,10 +92,25 @@ source=(
     # Holo: Backport https://gitlab.freedesktop.org/pipewire/pipewire/-/merge_requests/2422
     # Part of https://gitlab.steamos.cloud/holo-team/tasks/-/issues/1675
     "0001-alsa-add-option-to-disable-pro-audio-profiles.patch"
+
+    # Holo: Backport https://gitlab.freedesktop.org/pipewire/pipewire/-/merge_requests/2560
+    # First 4 are dependencies, last two are from the MR
+    "0001-alsa-Use-the-configured-max-channels.patch"
+    "0002-Remove-some-hardcoded-channel-number-values.patch"
+    "0003-pulse-clamp-channel-numbers-to-right-values.patch"
+    "0004-acp-remove-channel-limit-from-API.patch"
+    "0005-spa-alsa-Read-and-expose-channel-count-and-position-.patch"
+    "0006-spa-alsa-Add-option-to-use-ELD-detected-channels.patch"
 )
-b2sums=('3d708fd818288432c0963761a35dfc4c716ddd5753e5ccc7cf3ad6db3a4e8c3d3b43babbc0de8b8dc3284c9fec8bc3c26adee8461980b89610a2ec70b5e45ba8'
+b2sums=('44e7ed98e7a4c383e96c5c7a58265e568a1191edb87a9ff472a671d235a7872ea320fbefa1fce31a787d18465e26955b2122af7a77566f7bc5e17a9665239f8f'
         '68ad58cb1a8c532a194b7982167e6b461ff3a2d046f346305c38d3af21a696a2cd18619b73b99cc1b41c55f8786cf26ab5c077f58652e8197a9f5f42416c764f'
-        '98bccdbe20da61ffb5d1e81029983bf947ae010198d70eb93851f8ddce72338944829f8d369da73e71ac4d85bd5279d0fdd923dac307516f15bad8c565aa4d92')
+        '98bccdbe20da61ffb5d1e81029983bf947ae010198d70eb93851f8ddce72338944829f8d369da73e71ac4d85bd5279d0fdd923dac307516f15bad8c565aa4d92'
+        '95427f88ad7d690811c9eca4e9d29fdc6f15ddd8dc64d14d5682749b07765e64552d3a15efe8b350478d32a90499ca2e7820bc1e473cd6cbd26901706995b556'
+        '2bb4bd117024c061364bb9cf44a54c7f633b8ea7106c4cc3ee047b3c591a1ac9d1b9c226f43d790b29968eecad7f6883b652a2b5d4460979a791032645ad8ef4'
+        '23f5357b5aaba0f8e20e77b641af555004780caae68f77f9ca12d214bec3d7429718afac3512a8310bd49a99fa4b6e67b41faf3038e1e9221416c9d0d5deb1b1'
+        '89f8f590134f07b56dd3500265d8195d6bf8e6d6a0d73422bf682f63d8159405362fb85c9057dfc422ce7d1033a0173b26ac26515d46f5c7d32f696204581620'
+        '87f723232450d404b1505299005ac8ac6ad01b4278d87771ebc9675a67feb401249db159cf65c1f44ba3ae78ef3bd0d83255be5546d0f06aa8e41ed0b7005a8d'
+        'eaf1e55589fbfe28db7e16138425969e2e1016a7ba75fb9af507677009bcbd3414a2d86ea4f644ad5b625b49eb8c33679404390ae8e7702e854bd0adf4801757')
 
 prepare() {
   cd pipewire

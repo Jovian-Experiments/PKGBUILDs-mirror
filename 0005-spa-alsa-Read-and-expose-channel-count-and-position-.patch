@@ -1,0 +1,184 @@
+From 3815f7422a9ac5ebb5b48d8734608b7ea7c567ff Mon Sep 17 00:00:00 2001
+From: Arun Raghavan <arunr@valvesoftware.com>
+Date: Wed, 8 Oct 2025 16:38:51 -0700
+Subject: [PATCH 5/6] spa: alsa: Read and expose channel count and position
+ from ELD
+
+The next step will be to propagate this to the correct node.
+---
+ spa/plugins/alsa/acp/acp.c       | 69 ++++++++++++++++++++++++++++++--
+ spa/plugins/alsa/acp/acp.h       | 12 ++++++
+ spa/plugins/alsa/acp/alsa-util.c | 10 +++++
+ spa/plugins/alsa/acp/alsa-util.h |  2 +
+ 4 files changed, 90 insertions(+), 3 deletions(-)
+
+diff --git a/spa/plugins/alsa/acp/acp.c b/spa/plugins/alsa/acp/acp.c
+index e2dec60ae..e432f0c7b 100644
+--- a/spa/plugins/alsa/acp/acp.c
++++ b/spa/plugins/alsa/acp/acp.c
+@@ -9,6 +9,7 @@
+ #include <spa/utils/string.h>
+ #include <spa/utils/json.h>
+ #include <spa/param/audio/iec958-types.h>
++#include <spa/param/audio/raw.h>
+ 
+ int _acp_log_level = 1;
+ acp_log_func _acp_log_func;
+@@ -1055,8 +1056,8 @@ static int hdmi_eld_changed(snd_mixer_elem_t *melem, unsigned int mask)
+ {
+ 	pa_card *impl = snd_mixer_elem_get_callback_private(melem);
+ 	snd_hctl_elem_t **_elem = snd_mixer_elem_get_private(melem), *elem;
+-	int device, i;
+-	const char *old_monitor_name, *old_iec958_codec_list;
++	int device;
++	const char *old_monitor_name, *old_iec958_codec_list, *old_channels, *old_position;
+ 	pa_device_port *p;
+ 	pa_hdmi_eld eld;
+ 	bool changed = false;
+@@ -1078,7 +1079,7 @@ static int hdmi_eld_changed(snd_mixer_elem_t *melem, unsigned int mask)
+ 		memset(&eld, 0, sizeof(eld));
+ 
+ 	// Strip trailing whitespace from monitor_name (primarily an NVidia driver bug for now)
+-	for (i = strlen(eld.monitor_name) - 1; i >= 0; i--) {
++	for (int i = strlen(eld.monitor_name) - 1; i >= 0; i--) {
+ 		if (eld.monitor_name[i] == '\n' || eld.monitor_name[i] == '\r' || eld.monitor_name[i] == '\t' ||
+ 				eld.monitor_name[i] == ' ')
+ 			eld.monitor_name[i] = 0;
+@@ -1106,6 +1107,68 @@ static int hdmi_eld_changed(snd_mixer_elem_t *melem, unsigned int mask)
+ 		pa_proplist_sets(p->proplist, ACP_KEY_IEC958_CODECS_DETECTED, codecs);
+ 	}
+ 
++	old_channels = pa_proplist_gets(p->proplist, ACP_KEY_AUDIO_CHANNELS_DETECTED);
++	if (eld.lpcm_channels == 0) {
++		changed |= old_channels != NULL;
++		pa_proplist_unset(p->proplist, ACP_KEY_AUDIO_CHANNELS_DETECTED);
++	} else {
++		char channels[4];
++		snprintf(channels, sizeof(channels), "%u", eld.lpcm_channels);
++		changed |= (old_channels == NULL) || (!spa_streq(old_channels, channels));
++		pa_proplist_sets(p->proplist, ACP_KEY_AUDIO_CHANNELS_DETECTED, channels);
++	}
++
++	old_position = pa_proplist_gets(p->proplist, ACP_KEY_AUDIO_POSITION_DETECTED);
++	if (eld.speakers == 0) {
++		changed |= old_position != NULL;
++		pa_proplist_unset(p->proplist, ACP_KEY_AUDIO_POSITION_DETECTED);
++	} else {
++		uint32_t positions[eld.lpcm_channels];
++		char position[64];
++		int i = 0, pos = 0;
++
++		if (eld.speakers & 0x01) {
++			positions[i++] = ACP_CHANNEL_FL;
++			positions[i++] = ACP_CHANNEL_FR;
++		}
++		if (eld.speakers & 0x02) {
++			positions[i++] = ACP_CHANNEL_LFE;
++		}
++		if (eld.speakers & 0x04) {
++			positions[i++] = ACP_CHANNEL_FC;
++		}
++		if (eld.speakers & 0x08) {
++			positions[i++] = ACP_CHANNEL_RL;
++			positions[i++] = ACP_CHANNEL_RR;
++		}
++		/* The rest are out of order in order of what channels we would prefer to use/expose first */
++		if (eld.speakers & 0x40) {
++			/* Use SL/SR instead of RLC/RRC */
++			positions[i++] = ACP_CHANNEL_SL;
++			positions[i++] = ACP_CHANNEL_SR;
++		}
++		if (eld.speakers & 0x20) {
++			positions[i++] = ACP_CHANNEL_RLC;
++			positions[i++] = ACP_CHANNEL_RRC;
++		}
++		if (eld.speakers & 0x10) {
++			positions[i++] = ACP_CHANNEL_RC;
++		}
++
++		while (i < eld.lpcm_channels)
++			positions[i++] = ACP_CHANNEL_UNKNOWN;
++
++		for (i = 0, pos = 0; i < eld.lpcm_channels; i++) {
++			pos += snprintf(&position[pos], sizeof(position) - pos, "%s,", channel_names[positions[i]]);
++		}
++
++		/* Overwrite trailing , */
++		position[pos - 1] = 0;
++
++		changed |= (old_position == NULL) || (!spa_streq(old_position, position));
++		pa_proplist_sets(p->proplist, ACP_KEY_AUDIO_POSITION_DETECTED, position);
++	}
++
+ 	pa_proplist_as_dict(p->proplist, &p->port.props);
+ 
+ 	if (changed && mask != 0 && impl->events && impl->events->props_changed)
+diff --git a/spa/plugins/alsa/acp/acp.h b/spa/plugins/alsa/acp/acp.h
+index 01ad11806..7cf337537 100644
+--- a/spa/plugins/alsa/acp/acp.h
++++ b/spa/plugins/alsa/acp/acp.h
+@@ -153,6 +153,18 @@ const char *acp_available_str(enum acp_available status);
+ 		 * values may be incorrect and/or might change, e.g. when external devices such
+ 		 * as receivers are powered on or off.
+ 		 */
++#define ACP_KEY_AUDIO_CHANNELS_DETECTED "audio.channels.detected"
++		/**< The number of channels detected detected via EDID-like data read from a device
++		 * connected via HDMI/DisplayPort. This only serves as a hint, as the auto-detected
++		 * values may be incorrect and/or might change, e.g. when external devices such
++		 * as receivers are powered on or off.
++		 */
++#define ACP_KEY_AUDIO_POSITION_DETECTED "audio.position.detected"
++		/**< The channel positions detected detected via EDID-like data read from a device
++		 * connected via HDMI/DisplayPort. This only serves as a hint, as the auto-detected
++		 * values may be incorrect and/or might change, e.g. when external devices such
++		 * as receivers are powered on or off.
++		 */
+ 
+ struct acp_device;
+ 
+diff --git a/spa/plugins/alsa/acp/alsa-util.c b/spa/plugins/alsa/acp/alsa-util.c
+index 96d6020cd..52b63eb87 100644
+--- a/spa/plugins/alsa/acp/alsa-util.c
++++ b/spa/plugins/alsa/acp/alsa-util.c
+@@ -2020,14 +2020,24 @@ int pa_alsa_get_hdmi_eld(snd_hctl_elem_t *elem, pa_hdmi_eld *eld) {
+         sad_count = 0;
+     }
+ 
++    /* Look up speaker presence in Speaker Allocation Data Block */
++    eld->speakers = elddata[7] & 0x7f;
++
++    eld->lpcm_channels = 0;
+     eld->iec958_codecs = 0;
++
+     for (unsigned i = 0; i < sad_count; i++) {
+         uint8_t *sad = &elddata[20 + mnl + 3 * i];
++	uint8_t lpcm_channels;
+ 
+         /* https://en.wikipedia.org/wiki/Extended_Display_Identification_Data#Audio_Data_Blocks */
+         switch ((sad[0] & 0x78) >> 3) {
+             case 1:
+                 eld->iec958_codecs |= 1ULL << SPA_AUDIO_IEC958_CODEC_PCM;
++		/* Lowest 3 bits are channel count - 1 */
++		lpcm_channels = (sad[0] & 0x07) + 1;
++		if (lpcm_channels > eld->lpcm_channels)
++			eld->lpcm_channels = lpcm_channels;
+                 break;
+             case 2:
+                 eld->iec958_codecs |= 1ULL << SPA_AUDIO_IEC958_CODEC_AC3;
+diff --git a/spa/plugins/alsa/acp/alsa-util.h b/spa/plugins/alsa/acp/alsa-util.h
+index 26c2698c9..f8c8622b5 100644
+--- a/spa/plugins/alsa/acp/alsa-util.h
++++ b/spa/plugins/alsa/acp/alsa-util.h
+@@ -175,7 +175,9 @@ void pa_alsa_mixer_free(pa_alsa_mixer *mixer);
+ typedef struct pa_hdmi_eld pa_hdmi_eld;
+ struct pa_hdmi_eld {
+     char monitor_name[17];
++    uint8_t speakers;
+     uint64_t iec958_codecs;
++    uint8_t lpcm_channels;
+ };
+ 
+ int pa_alsa_get_hdmi_eld(snd_hctl_elem_t *elem, pa_hdmi_eld *eld);
+-- 
+2.51.0
+
