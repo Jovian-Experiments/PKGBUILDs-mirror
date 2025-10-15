@@ -2,7 +2,7 @@
 # Maintainer: Jan Alexander Steffens (heftig) <heftig@archlinux.org>
 
 pkgbase=linux-neptune-616
-_tag=6.16.7-valve1
+_tag=6.16.12-valve1
 pkgver=${_tag//-/.}
 pkgrel=1
 pkgdesc='Linux'
@@ -42,7 +42,7 @@ source=(
   config          # Upstream Arch Linux kernel configuration file, DO NOT EDIT!!!
   config-neptune  # Jupiter: the neptune kernel fragment file (overrides 'config' above)
 )
-sha256sums=('64f34ad7703ea2042d5c72f9d12c672c17769aec4cac780b074cb4697227774e'
+sha256sums=('35b818be5458be9e8af7355b69dcae920a5d02a582c29cca1f8b852b8bbfb7c1'
             '37452b4d09e5e42134ae24a61f2f656790837c327268074cf79d7dab3558b972'
             'd2a270b6440f790922f7b0a2ba1036be7bdfc9e01cac3ffdbfa734420e5e1a33')
 
