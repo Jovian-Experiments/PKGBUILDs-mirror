@@ -1,0 +1,30 @@
+From 181269cafcbf9770011a6b9df183726c86a68c93 Mon Sep 17 00:00:00 2001
+From: Wim Taymans <wtaymans@redhat.com>
+Date: Fri, 26 Sep 2025 13:02:53 +0200
+Subject: [PATCH 7/8] timer-queue: delete next timer event when it got fired
+
+When we fire the timer event, mark the next timeout as NULL because
+nothing else is going to timeout anymore until we rearm the timer.
+
+This has the effect that if we cancel and add the same timer from the
+callback that we will reprogram the timer with the new timeout instead
+of thinking the item as already programmed.
+---
+ src/pipewire/timer-queue.c | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/src/pipewire/timer-queue.c b/src/pipewire/timer-queue.c
+index f40c44bf6..cb7495dc0 100644
+--- a/src/pipewire/timer-queue.c
++++ b/src/pipewire/timer-queue.c
+@@ -58,6 +58,7 @@ static void timer_timeout(void *user_data, uint64_t expirations)
+ 		pw_log_debug("%p: timer was rearmed", queue);
+ 		return;
+ 	}
++	queue->next_timeout = NULL;
+ 
+ 	pw_log_debug("%p: processing timer %p", queue, timer);
+ 	timer->queue = NULL;
+-- 
+2.51.0
+
