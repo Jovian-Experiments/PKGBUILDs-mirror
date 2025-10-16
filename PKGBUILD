@@ -8,7 +8,7 @@ pkgname=(
   libwireplumber
 )
 pkgver=0.5.10
-pkgrel=1.7
+pkgrel=1.8
 pkgdesc="Session / policy manager implementation for PipeWire"
 url="https://pipewire.pages.freedesktop.org/wireplumber/"
 arch=(x86_64)
@@ -84,6 +84,9 @@ source=(
 
   # Holo: backport of https://gitlab.freedesktop.org/pipewire/wireplumber/-/merge_requests/749
   "0001-monitor-alsa-Add-a-setting-to-use-HDMI-channel-detec.patch"
+
+  # Holo: backport of https://gitlab.freedesktop.org/pipewire/wireplumber/-/merge_requests/743
+  "0001-scripts-Add-node-filter-graph.lua.patch"
 )
 b2sums=('5c9d06c4084187ce172e98fb05bef3826e4b7bf1fba505e5543fec0e194d8a957172c81e6fa32c7f53832e204dd794189d48deaae5eca10577b04106f2625ff3'
         '86f80f07bb5f446ae90f88f39870139d4d902f99048a62eb825ac12b654ca248568b17f8a1ca15777b41e0a11054345d023fc36a348372f15cb75b92a0180cfe'
@@ -105,7 +108,8 @@ b2sums=('5c9d06c4084187ce172e98fb05bef3826e4b7bf1fba505e5543fec0e194d8a957172c81
         '683282b840c6257e36b24fa4125dc68a4af152451b466621b2eadd959ac2c177caa7fead9494b2131744a596d1c3fd88aaffe99bb1608c1ea3e07b5dfa4f2d7c'
         'bb310edffbd7b041119344ff82a33562c472a70a76ed33c4121c8cb178df9403036c176c50a8ec58134191a434bbf34a3e560ab83272910a72a10a8e6aa689c8'
         '4d9c5e2e605a37cd670e8248e4f8e5dd244a755337c38527a1959f5ef301466d5d062ed86a334ea673c397d53e0a9dc3a98f2be29cb3faf00fc2e1245dae0929'
-        'e1b5b58500c2dfb52d8d6a30d55ad485775025b446523edfa42ea96fa8608a26cbdeb894b02128c7098d0833a98ef8c5937c7f478ce267769a61dacf4f501ab8')
+        'e1b5b58500c2dfb52d8d6a30d55ad485775025b446523edfa42ea96fa8608a26cbdeb894b02128c7098d0833a98ef8c5937c7f478ce267769a61dacf4f501ab8'
+        '55d54fb9527ab9d7d70eb72abfd337209cdcd88732133a75b14565acc942c7c85d9833e1b577dc387a1cc55f3a89ebe0d8e04bb1ea6acc0509253bb0db5b4512')
 
 prepare() {
   cd $pkgbase
