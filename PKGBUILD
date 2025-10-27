@@ -3,7 +3,7 @@
 
 pkgname=('mangohud' 'lib32-mangohud')
 pkgver=0.8.1.r103.g10479eb
-pkgrel=1
+pkgrel=2
 pkgdesc="Vulkan and OpenGL overlay to display performance information"
 url="https://github.com/flightlessmango/MangoHud"
 arch=(x86_64)
@@ -39,7 +39,7 @@ source=(
   "implot-v0.16-1-wrap.zip::https://wrapdb.mesonbuild.com/v2/implot_0.16-1/get_patch"
 )
 
-sha256sums=('SKIP'
+sha256sums=('a93f51b0da153e0409e54685b8c0dd5d28aa9adefd319022a21503b30db18217'
             '1acc27a778b71d859878121a3f7b287cd81c29d720893d2b2bf74455bf9d52d6'
             '9b21290c597d76bf8d4eeb3f9ffa024b11d9ea6c61e91d648ccc90b42843d584'
             '1586508029a7d0670dfcb2d97575dcdc242d3868a259742b69f100801ab4e16b'
@@ -56,6 +56,9 @@ pkgver() {
 
 prepare() {
   cd mangohud
+
+  # Holo: Backport for hardware support, can drop with next update
+  git cherry-pick -n ff6e5954ea7e340d9bb4509754babf0db1b7c431
 
   # meson subprojects
   ln -sv "$srcdir/imgui-1.89.9" subprojects
