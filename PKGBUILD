@@ -1,23 +1,45 @@
-# Maintainer: Jo Bates <jo@valvesoftware.com>
+# Maintainer: Jan Alexander Steffens (heftig) <heftig@archlinux.org>
+# Contributor: Jan de Groot <jgc@archlinux.org>
+# Maintainer (Holo): Manuel A. Fernandez Montecelo <mafm@igalia.com>
 
 pkgname=upower
-pkgver=0.99.15.jupiter
-pkgrel=1.5
+pkgver=1.90.10
+pkgrel=1.1
 pkgdesc="Abstraction for enumerating power devices, listening to device events and querying history and statistics"
 url="https://upower.freedesktop.org"
 arch=(x86_64)
-license=(GPL)
-depends=(systemd libimobiledevice libgudev)
-makedepends=(docbook-xsl gobject-introspection 'python>=3.13' 'python<3.14' git glib2-devel openssh gtk-doc meson)
-checkdepends=(python-{dbus,dbusmock,gobject,packaging} umockdev)
+license=(GPL-2.0-or-later)
+depends=(
+  gcc-libs
+  glib2
+  glibc
+  libgudev
+  libimobiledevice
+  libplist
+  polkit
+)
+makedepends=(
+  docbook-xsl
+  git
+  glib2-devel
+  gobject-introspection
+  gtk-doc
+  meson
+  python
+  systemd
+  usbmuxd
+)
+optdepends=('usbmuxd: Read charge status of iOS devices')
+checkdepends=(
+  python-dbus
+  python-dbusmock
+  python-gobject
+  python-packaging
+  umockdev
+)
 backup=(etc/UPower/UPower.conf)
-source=("git+ssh://git@gitlab.steamos.cloud/jupiter/upower.git#commit=v$pkgver")
-sha256sums=('SKIP')
-
-pkgver() {
-  cd upower
-  git describe --tags | sed -e 's/^v\|^UPOWER_//;s/_/\./g;s/[^-]*-g/r&/;s/-/+/g'
-}
+source=("git+https://gitlab.freedesktop.org/upower/upower.git#tag=v$pkgver")
+b2sums=('bd3add1a05b237576b6829e92fb83535d5be3d9fe1b46d29fb388984cc6d54684abd6d0ad1482f148a138916528f0f4e9c4252f13b636b3c9359dbcea51c384a')
 
 prepare() {
   cd upower
@@ -28,15 +50,25 @@ build() {
   meson compile -C build
 }
 
-# Holo: self-tests fail on python 3.13.  Can come back after we bump upower.
-#
-# check() {
-#   meson test -C build --print-errorlogs
-# }
+check() {
+  meson test -C build --print-errorlogs
+}
 
 package() {
   depends+=(libg{lib,object,io}-2.0.so)
   provides+=(libupower-glib.so)
 
   meson install -C build --destdir "$pkgdir"
+
+  # Remove installed-tests
+  rm -rv "$pkgdir"/usr/{lib/upower,share/installed-tests}
+
+  # Holo: Set CriticalPowerAction to Ignore, this task is done by vpower/Steam
+  echo "Holo: Setting CriticalPowerAction=Ignore in UPower.conf, done by vpower/Steam" \
+       "      (this will fail if changes did not happen as expected):"
+  sed -i '/^AllowRiskyCriticalPowerAction=/ s/=false/=true/;/^CriticalPowerAction=/ s/=.*$/=Ignore/' "$pkgdir/etc/UPower/UPower.conf"
+  grep '^AllowRiskyCriticalPowerAction=true$' "$pkgdir/etc/UPower/UPower.conf"
+  grep '^CriticalPowerAction=Ignore$' "$pkgdir/etc/UPower/UPower.conf"
 }
+
+# vim:set sw=2 sts=-1 et:
