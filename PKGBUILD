@@ -3,7 +3,7 @@
 
 pkgname=('mangohud' 'lib32-mangohud')
 pkgver=0.8.1.r103.g10479eb
-pkgrel=2
+pkgrel=3
 pkgdesc="Vulkan and OpenGL overlay to display performance information"
 url="https://github.com/flightlessmango/MangoHud"
 arch=(x86_64)
@@ -59,6 +59,10 @@ prepare() {
 
   # Holo: Backport for hardware support, can drop with next update
   git cherry-pick -n ff6e5954ea7e340d9bb4509754babf0db1b7c431
+  # With the above backport, full engine names were shown in preset 2
+  # This can also be dropped with next update
+  sed -i 's/OVERLAY_PARAM_ENABLED_hide_engine_names])/OVERLAY_PARAM_ENABLED_hide_engine_names] || HUDElements.params->enabled[OVERLAY_PARAM_ENABLED_horizontal])/' \
+    src/hud_elements.cpp
 
   # meson subprojects
   ln -sv "$srcdir/imgui-1.89.9" subprojects
