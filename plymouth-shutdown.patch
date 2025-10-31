@@ -1,0 +1,40 @@
+From 2f12aa4c5d27d1ee5a46f412559073f016d236ae Mon Sep 17 00:00:00 2001
+From: Maxim Mikityanskiy <maxtram95@gmail.com>
+Date: Sat, 1 Oct 2022 14:52:19 +0300
+Subject: [PATCH] systemd: Add mkinitcpio support to
+ plymouth-switch-root-initramfs.service
+
+plymouth-switch-root-initramfs.service commands plymouth to release
+rootfs to allow the shutdown ramfs to unmount rootfs. However, it only
+integrates with dracut. Arch Linux uses mkinitcpio by default, and it
+uses shutdown ramfs when layered block storage (e.g. LUKS) is used for
+rootfs. Therefore, it fails to unmount rootfs on shutdown if LUKS and
+plymouth are used together.
+
+Add a new trigger for plymouth-switch-root-initramfs.service to start
+when /run/initramfs/shutdown exists (/run/initramfs/bin/sh may not exist
+with mkinitcpio when systemd-based initramfs is used), and add a
+dependency to start it after mkinitcpio generates the shutdown ramfs.
+---
+ systemd-units/plymouth-switch-root-initramfs.service.in | 5 +++--
+ 1 file changed, 3 insertions(+), 2 deletions(-)
+
+diff --git a/systemd-units/plymouth-switch-root-initramfs.service.in b/systemd-units/plymouth-switch-root-initramfs.service.in
+index 0610803cb..e7b5a5eaf 100644
+--- a/systemd-units/plymouth-switch-root-initramfs.service.in
++++ b/systemd-units/plymouth-switch-root-initramfs.service.in
+@@ -4,8 +4,9 @@ DefaultDependencies=no
+ # dracut-shutdown.service restores the initramfs when it is _stopped_
+ # use Conflicts to make sure its ExecStop has run before we do
+ Conflicts=dracut-shutdown.service
+-After=plymouth-halt.service plymouth-reboot.service plymouth-poweroff.service plymouth-kexec.service dracut-shutdown.service
+-ConditionPathExists=/run/initramfs/bin/sh
++After=plymouth-halt.service plymouth-reboot.service plymouth-poweroff.service plymouth-kexec.service dracut-shutdown.service mkinitcpio-generate-shutdown-ramfs.service
++ConditionPathExists=|/run/initramfs/bin/sh
++ConditionPathExists=|/run/initramfs/shutdown
+ 
+ [Service]
+ Type=oneshot
+-- 
+GitLab
+
