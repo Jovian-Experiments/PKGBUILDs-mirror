@@ -1,5 +1,5 @@
 
-`main @ 20251027.1100`
+`main @ 20251031.1000`
 ======================
 
 Valve packages
@@ -29,6 +29,7 @@ Valve packages
  * [`holo-glibc-locales` — `holo-main/holo-glibc-locales-2.41+r65+ge7c419a29575-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/holo-glibc-locales-2.41+r65+ge7c419a29575-1)
  * [`holo-keyring` — `holo-main/holo-keyring-20250801-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/holo-keyring-20250801-1)
  * [`holo-nfs-utils-tmpfiles` — `holo-main/holo-nfs-utils-tmpfiles-0.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/holo-nfs-utils-tmpfiles-0.1-1)
+ * [`holo-plymouth-themes` — `holo-main/holo-plymouth-themes-0.4-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/holo-plymouth-themes-0.4-2)
  * [`holo-sudo` — `holo-main/steamos-customizations-git-20251010.1-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-customizations-git-20251010.1-2)
  * [`holo-zram-swap` — `holo-main/holo-zram-swap-0.3-0`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/holo-zram-swap-0.3-0)
  * [`ibus` — `holo-main/ibus-1.5.31-2.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/ibus-1.5.31-2.1)
@@ -47,6 +48,7 @@ Valve packages
  * [`noisetorch` — `holo-main/noisetorch-0.12.2.r47.g6d895f3-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/noisetorch-0.12.2.r47.g6d895f3-2)
  * [`orca` — `holo-main/orca-48.6-1.2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/orca-48.6-1.2)
  * [`paru` — `holo-main/paru-2.1.0-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/paru-2.1.0-1.1)
+ * [`plymouth` — `holo-main/plymouth-22.02.122-7.2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/plymouth-22.02.122-7.2)
  * [`podman` — `holo-main/podman-5.5.2-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/podman-5.5.2-1.1)
  * [`rauc` — `holo-main/rauc-1.14-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/rauc-1.14-1.1)
  * [`speech-dispatcher` — `holo-main/speech-dispatcher-0.12.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/speech-dispatcher-0.12.1-1)
@@ -72,7 +74,9 @@ Valve packages
  * [`xdg-desktop-portal-gamescope` — `holo-main/xdg-desktop-portal-gamescope-0.1.22.bf83640-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/xdg-desktop-portal-gamescope-0.1.22.bf83640-1)
  * [`xdg-desktop-portal-gtk` — `holo-main/xdg-desktop-portal-gtk-1.15.3-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/xdg-desktop-portal-gtk-1.15.3-1.1)
  * [`xdg-desktop-portal-holo` — `holo-main/xdg-desktop-portal-holo-0.1.14.bb73298-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/xdg-desktop-portal-holo-0.1.14.bb73298-2)
- * [`xorg-xwayland` — `holo-main/xorg-xwayland-24.1.8-1.3`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/xorg-xwayland-24.1.8-1.3)
+ * [`xorg-server` — `holo-main/xorg-server-21.1.19-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/xorg-server-21.1.19-1.1)
+ * [`xorg-server-common` — `holo-main/xorg-server-21.1.19-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/xorg-server-21.1.19-1.1)
+ * [`xorg-xwayland` — `holo-main/xorg-xwayland-24.1.9-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/xorg-xwayland-24.1.9-1.1)
  * [`zenity-gtk3` — `holo-main/zenity-gtk3-3.44.2-4`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/zenity-gtk3-3.44.2-4)
 
 ### `jupiter-main`
@@ -89,7 +93,7 @@ Valve packages
  * [`jupiter-dock-updater-bin` — `jupiter-main/jupiter-dock-updater-bin-20250220.02-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-dock-updater-bin-20250220.02-1)
  * [`jupiter-fan-control` — `jupiter-main/jupiter-fan-control-20240523.3-4`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-fan-control-20240523.3-4)
  * [`jupiter-firewall` — `jupiter-main/jupiter-firewall-0.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-firewall-0.1-1)
- * [`jupiter-hw-support` — `jupiter-main/jupiter-hw-support-20251020.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-hw-support-20251020.1-1)
+ * [`jupiter-hw-support` — `jupiter-main/jupiter-hw-support-20251022.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-hw-support-20251022.1-1)
  * [`jupiter-legacy-support` — `jupiter-main/jupiter-legacy-support-1.156-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-legacy-support-1.156-1)
  * [`jupiter-steamos-log-submitter` — `jupiter-main/jupiter-steamos-log-submitter-1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-steamos-log-submitter-1-1)
  * [`kwin` — `jupiter-main/kwin-6.4.3-1.5`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/kwin-6.4.3-1.5)
@@ -98,7 +102,7 @@ Valve packages
  * [`linux-firmware-neptune` — `jupiter-main/linux-firmware-neptune-jupiter.20251022.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/linux-firmware-neptune-jupiter.20251022.1-1)
  * [`linux-firmware-neptune-whence` — `jupiter-main/linux-firmware-neptune-jupiter.20251022.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/linux-firmware-neptune-jupiter.20251022.1-1)
  * [`linux-neptune-616` — `jupiter-main/linux-neptune-616-6.16.12.valve2-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/linux-neptune-616-6.16.12.valve2-1)
- * [`mangohud` — `jupiter-main/mangohud-0.8.1.r103.g10479eb-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/mangohud-0.8.1.r103.g10479eb-2)
+ * [`mangohud` — `jupiter-main/mangohud-0.8.1.r103.g10479eb-3`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/mangohud-0.8.1.r103.g10479eb-3)
  * [`mesa` — `jupiter-main/mesa-25.2.0.208938.radeonsi_25.2.0-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/mesa-25.2.0.208938.radeonsi_25.2.0-2)
  * [`plasma-remotecontrollers` — `jupiter-main/plasma-remotecontrollers-5.26.90.r258.g9ace9a9-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/plasma-remotecontrollers-5.26.90.r258.g9ace9a9-2)
  * [`plasma-workspace` — `jupiter-main/plasma-workspace-6.4.3-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/plasma-workspace-6.4.3-1.1)
@@ -107,7 +111,7 @@ Valve packages
  * [`pyzy` — `jupiter-main/pyzy-1.1-2.5`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/pyzy-1.1-2.5)
  * [`renderdoc-minimal` — `jupiter-main/renderdoc-minimal-1.39-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/renderdoc-minimal-1.39-1.1)
  * [`steam-im-modules` — `jupiter-main/steam-im-modules-jupiter.20240131-3`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steam-im-modules-jupiter.20240131-3)
- * [`steam-jupiter-oobe` — `jupiter-main/steam-jupiter-oobe-1.0.0.79-1.11`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steam-jupiter-oobe-1.0.0.79-1.11)
+ * [`steam-jupiter-stable` — `jupiter-main/steam-jupiter-stable-1.0.0.85-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steam-jupiter-stable-1.0.0.85-2)
  * [`steam_notif_daemon` — `jupiter-main/steam_notif_daemon-v1.0.1-3`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steam_notif_daemon-v1.0.1-3)
  * [`steamdeck-dsp` — `jupiter-main/steamdeck-dsp-0.72-3`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steamdeck-dsp-0.72-3)
  * [`steamdeck-kde-presets` — `jupiter-main/steamdeck-kde-presets-3.8.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steamdeck-kde-presets-3.8.1-1)
@@ -186,6 +190,7 @@ Arch Linux packages
  * [`ca-certificates-utils/20240618-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/ca-certificates-utils/-/tree/20240618-1)
  * [`cairo/1.18.4-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/cairo/-/tree/1.18.4-1)
  * [`cairomm-1.16/1.18.0-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/cairomm-1.16/-/tree/1.18.0-1)
+ * [`cantarell-fonts/1:0.303.1-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/cantarell-fonts/-/tree/1:0.303.1-2)
  * [`caps/0.9.26-3`](https://gitlab.archlinux.org/archlinux/packaging/packages/caps/-/tree/0.9.26-3)
  * [`catatonit/0.2.1-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/catatonit/-/tree/0.2.1-2)
  * [`cblas/3.12.1-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/cblas/-/tree/3.12.1-2)
@@ -1033,8 +1038,6 @@ Arch Linux packages
  * [`xf86-video-amdgpu/23.0.0-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/xf86-video-amdgpu/-/tree/23.0.0-2)
  * [`xkeyboard-config/2.45-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/xkeyboard-config/-/tree/2.45-1)
  * [`xorg-fonts-encodings/1.1.0-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/xorg-fonts-encodings/-/tree/1.1.0-1)
- * [`xorg-server/21.1.18-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/xorg-server/-/tree/21.1.18-2)
- * [`xorg-server-common/21.1.18-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/xorg-server/-/tree/21.1.18-2)
  * [`xorg-setxkbmap/1.3.4-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/xorg-setxkbmap/-/tree/1.3.4-2)
  * [`xorg-xauth/1.1.4-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/xorg-xauth/-/tree/1.1.4-1)
  * [`xorg-xdpyinfo/1.3.4-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/xorg-xdpyinfo/-/tree/1.3.4-2)
