@@ -1,7 +1,7 @@
 # Maintainer: Pierre-Loup A. Griffais (pgriffais@valvesoftware.com)
 
 pkgname=jupiter-hw-support
-_srctag=jupiter-20251020.1
+_srctag=jupiter-20251022.1
 _srcver=${_srctag#jupiter-}
 pkgver=${_srcver//-/.}
 pkgrel=1
@@ -18,11 +18,13 @@ depends=('python-evdev'
          'alsa-utils' # for the sound workarounds
          'parted' 'e2fsprogs' # for sdcard formatting
          'udisks2>=2.9.4-1.1' # for mounting external drives with the 'as-user' option
+         'holo-plymouth-themes' # for the splash screen when firmware updates on boot up
+         'plymouth'             # for the splash screen when firmware updates on boot up
         )
 optdepends=('grub-steamos')
 makedepends=('rsync' 'git' 'openssh' 'xorg-xcursorgen')
 source=("git+ssh://git@gitlab.steamos.cloud/jupiter/jupiter-hw-support.git#tag=$_srctag")
-sha512sums=('455ac9a54f883dbcab6213a6374ff1530b19e1667960ec58066c3ed3b0845dbb76a6e424f92811d6c996e42f52c8427458c93e45c34e92c13b2d1472494e0b52')
+sha512sums=('e0359c718383cd91514b14d46d49c2ed3aa9a6f97aaeed35ef9652b85aa097e25420c94b2c91d8805a81865089017e2a20de9443c024dc922896be0ad0f0c889')
 # Some pre-compiled binaries such as `rfp-cli` break when touched by `strip` :-\
 options+=('!strip')
 
