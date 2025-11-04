@@ -1,0 +1,41 @@
+From ae30b4f022e6eae910f1c03f823252951903859a Mon Sep 17 00:00:00 2001
+From: Julian Bouzas <julian.bouzas@collabora.com>
+Date: Tue, 21 Oct 2025 10:12:34 -0400
+Subject: [PATCH] state-profile: Handle new 'session.dont-restore-off-profile'
+ property
+
+This avoids restoring the Off profile if it was saved before. The property can
+be set using the 'monitor.alsa.rules' section of the configuration.
+---
+ src/scripts/device/state-profile.lua | 8 ++++++--
+ 1 file changed, 6 insertions(+), 2 deletions(-)
+
+diff --git a/src/scripts/device/state-profile.lua b/src/scripts/device/state-profile.lua
+index 72e243fe..8d42ef8d 100644
+--- a/src/scripts/device/state-profile.lua
++++ b/src/scripts/device/state-profile.lua
+@@ -34,7 +34,10 @@ find_stored_profile_hook = SimpleEventHook {
+     end
+ 
+     local device = event:get_subject ()
+-    local dev_name = device.properties["device.name"]
++    local device_props = device.properties
++    local dev_name = device_props["device.name"]
++    local dont_restore_off_profile = cutils.parseBool (
++        device_props["session.dont-restore-off-profile"])
+     if not dev_name then
+       log:critical (device, "invalid device.name")
+       return
+@@ -45,7 +48,8 @@ find_stored_profile_hook = SimpleEventHook {
+     if profile_name then
+       for p in device:iterate_params ("EnumProfile") do
+         local profile = cutils.parseParam (p, "EnumProfile")
+-        if profile.name == profile_name and profile.available ~= "no" then
++        if profile.name == profile_name and profile.available ~= "no" and
++            (not dont_restore_off_profile or profile.index ~= 0) then
+           selected_profile = profile
+           break
+         end
+-- 
+2.51.2
+
