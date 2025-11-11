@@ -2,8 +2,8 @@
 # Contributor: Emil Velikov <emil.l.velikov@gmail.com>
 
 pkgname=('mangohud' 'lib32-mangohud')
-pkgver=0.8.1.r103.g10479eb
-pkgrel=3
+pkgver=0.8.2.rc1.r4.g1c0e852
+pkgrel=1
 pkgdesc="Vulkan and OpenGL overlay to display performance information"
 url="https://github.com/flightlessmango/MangoHud"
 arch=(x86_64)
@@ -28,7 +28,7 @@ makedepends=(
 depends=(libxkbcommon lib32-libxkbcommon)
 
 source=(
-  "mangohud"::"git+https://github.com/flightlessmango/MangoHud.git#commit=10479eb59aa6c1c92af9d2afca3e33c5a17d875b"
+  "mangohud"::"git+https://github.com/flightlessmango/MangoHud.git#commit=1c0e8525bf105646b0ac2d002d13e481a4b6f270"
   "imgui-v1.89.9.tar.gz::https://github.com/ocornut/imgui/archive/refs/tags/v1.89.9.tar.gz"
   "imgui-1.89-9-wrap.zip::https://wrapdb.mesonbuild.com/v2/imgui_1.89.9-1/get_patch"
   "spdlog-v1.14.1.tar.gz::https://github.com/gabime/spdlog/archive/refs/tags/v1.14.1.tar.gz"
@@ -39,7 +39,7 @@ source=(
   "implot-v0.16-1-wrap.zip::https://wrapdb.mesonbuild.com/v2/implot_0.16-1/get_patch"
 )
 
-sha256sums=('a93f51b0da153e0409e54685b8c0dd5d28aa9adefd319022a21503b30db18217'
+sha256sums=('SKIP'
             '1acc27a778b71d859878121a3f7b287cd81c29d720893d2b2bf74455bf9d52d6'
             '9b21290c597d76bf8d4eeb3f9ffa024b11d9ea6c61e91d648ccc90b42843d584'
             '1586508029a7d0670dfcb2d97575dcdc242d3868a259742b69f100801ab4e16b'
@@ -56,13 +56,6 @@ pkgver() {
 
 prepare() {
   cd mangohud
-
-  # Holo: Backport for hardware support, can drop with next update
-  git cherry-pick -n ff6e5954ea7e340d9bb4509754babf0db1b7c431
-  # With the above backport, full engine names were shown in preset 2
-  # This can also be dropped with next update
-  sed -i 's/OVERLAY_PARAM_ENABLED_hide_engine_names])/OVERLAY_PARAM_ENABLED_hide_engine_names] || HUDElements.params->enabled[OVERLAY_PARAM_ENABLED_horizontal])/' \
-    src/hud_elements.cpp
 
   # meson subprojects
   ln -sv "$srcdir/imgui-1.89.9" subprojects
