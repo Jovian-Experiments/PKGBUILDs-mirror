@@ -1,0 +1,37 @@
+From f36371ad0c880775d8bea10abab94a9f45a40c30 Mon Sep 17 00:00:00 2001
+From: David Edmundson <kde@davidedmundson.co.uk>
+Date: Wed, 5 Nov 2025 15:06:18 +0000
+Subject: [PATCH] Revert "fix pairing bug"
+
+This reverts commit 27c8634b88014d2e10a3f316d43d307f5085a3dc.
+
+This was apparently a workaround for an upstream issue. Unfortunately that
+upstream report does not have sufficient information to be actionable and is
+now auto-closed.
+
+We shoudln't have hacks in our code, and it causes problems for other devices.
+---
+ src/wizard/pages/pairing.cpp | 7 +------
+ 1 file changed, 1 insertion(+), 6 deletions(-)
+
+diff --git a/src/wizard/pages/pairing.cpp b/src/wizard/pages/pairing.cpp
+index 9f911fa6..81aa14f7 100644
+--- a/src/wizard/pages/pairing.cpp
++++ b/src/wizard/pages/pairing.cpp
+@@ -73,12 +73,7 @@ void PairingPage::pairingFinished(BluezQt::PendingCall *call)
+     qCDebug(BLUEDEVIL_WIZARD_LOG) << "\t errorText : " << call->errorText();
+ 
+     m_success = !call->error();
+-    if (m_device->isConnected()) {
+-        BluezQt::PendingCall *disconnectCall = m_device->disconnectFromDevice();
+-        connect(disconnectCall, &BluezQt::PendingCall::finished, m_wizard, &QWizard::next);
+-    } else {
+-        m_wizard->next();
+-    }
++    m_wizard->next();
+ }
+ 
+ void PairingPage::pinRequested(const QString &pin)
+-- 
+2.51.2
+
