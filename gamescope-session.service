@@ -5,6 +5,10 @@ PartOf=graphical-session.target
 Wants=graphical-session-pre.target
 After=graphical-session-pre.target
 RefuseManualStart=yes
+# The XDG desktop portal frontend relies on the value of $XDG_CURRENT_DESKTOP to
+# decide which backends to load, so its startup should be delayed until after
+# the session is running.
+Before=xdg-desktop-portal.service
 
 [Service]
 TimeoutStartSec=5
