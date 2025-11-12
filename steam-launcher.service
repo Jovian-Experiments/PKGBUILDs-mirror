@@ -2,6 +2,10 @@
 Description=Steam Launcher
 After=graphical-session.target
 PartOf=graphical-session.target
+# The Steam client calls into the XDG desktop portal frontend service
+# (org.freedesktop.portal.Realtime.MakeThreadHighPriorityWithPID) at shutdown,
+# ensure both services are stopped in the right order.
+After=xdg-desktop-portal.service
 
 [Service]
 ExecStart=/usr/lib/steamos/steam-launcher
