@@ -1,0 +1,30 @@
+From f35d4757ea889d06ac0ab455d113a590632aae0d Mon Sep 17 00:00:00 2001
+From: Arun Mani J <j.arunmani@proton.me>
+Date: Thu, 13 Nov 2025 16:48:32 +0530
+Subject: [PATCH] builder: Request name after exporting interfaces
+
+---
+ src/backend/builder.rs | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+diff --git a/src/backend/builder.rs b/src/backend/builder.rs
+index 41aea0ddd..19854481c 100644
+--- a/src/backend/builder.rs
++++ b/src/backend/builder.rs
+@@ -176,7 +176,6 @@ impl Builder {
+ 
+     pub async fn build(self) -> Result<()> {
+         let cnx = zbus::Connection::session().await?;
+-        cnx.request_name_with_flags(self.name, self.flags).await?;
+ 
+         #[cfg(feature = "tokio")]
+         let spawn = self.spawn.unwrap_or(Arc::new(super::spawn::TokioSpawner));
+@@ -339,6 +338,8 @@ impl Builder {
+                 .await?;
+         }
+ 
++        cnx.request_name_with_flags(self.name, self.flags).await?;
++
+         Ok(())
+     }
+ }
