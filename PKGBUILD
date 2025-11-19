@@ -12,8 +12,8 @@
 # but should only apply to Deck. Should never be enabled by default in upstream PKGBUILD.
 
 pkgname=renderdoc-minimal
-pkgver=1.39
-pkgrel=1.1
+pkgver=1.41
+pkgrel=1.0
 pkgdesc="OpenGL and Vulkan debugging tool (minimal, capture + replay server only)"
 arch=(x86_64)
 url="https://github.com/baldurk/renderdoc"
@@ -25,7 +25,7 @@ conflicts=("renderdoc")
 source=("https://github.com/baldurk/renderdoc/archive/v${pkgver}.tar.gz"
         "https://github.com/baldurk/renderdoc/releases/download/v${pkgver}/v${pkgver}.tar.gz.asc")
 validpgpkeys=('1B039DB9A4718A2D699DE031AC612C3120C34695')
-sha384sums=('6679b001ebdda7b323a71f54a4ff3f4f03390da9e65e518039ae09a3b60f0a7a1c97d050b59026ad204fe9154b6fea87'
+sha384sums=('25bb82428fbabb105882d0653eaf0595e2e82ab7695a6dbba575692b75abf9fb9c5d1c6ae3c3a739725dd36e318ce7a2'
             'SKIP')
 
 # Baldur recommends not using LTO.
