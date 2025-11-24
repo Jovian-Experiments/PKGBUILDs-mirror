@@ -6,7 +6,7 @@
 pkgname=kwin
 pkgver=6.4.3
 _dirver=$(echo $pkgver | cut -d. -f1-3)
-pkgrel=1.5 # Holo: Default scale fix
+pkgrel=1.6 # Holo: Default scale fix
 pkgdesc='An easy to use, but flexible, Wayland compositor'
 arch=(x86_64)
 url='https://kde.org/plasma-desktop/'
@@ -84,6 +84,7 @@ source=(https://download.kde.org/stable/plasma/$_dirver/$pkgname-$pkgver.tar.xz{
         0003-Outputconfigurationstore-default-to-internal-display.patch # Deck specific for default scale
         0004-simulate-full-keyboard-handling-in-testFakeEve.patch # Drop in 6.5
         0005-Support-arbitrary-keysyms-in-libei.patch # Currently deck specific, relies on unreleased libei feature that we also patch
+        0006-inputmethod-Skip-input-events-from-fake-input.patch #Currently deck specific, a workaround for the Steam OSK. Test CJK input with both SteamOSK and a physical keyboard both work before dropping
         )
 install=$pkgname.install
 sha256sums=('a13568c918eca7803eb44a3a2778b860edc3f03b36797851c4f3aeeed4b502a8'
@@ -92,7 +93,8 @@ sha256sums=('a13568c918eca7803eb44a3a2778b860edc3f03b36797851c4f3aeeed4b502a8'
             '887985706783d2658637548c8a63220397b9ebbd8fc425839d99c6138e8f19b8'
             '9417723b2a2c2ff81b914707edf6dd759ec1fa729eb80fea0719e1722b004a55'
             '31997f384c70c673624858bd0957a7a136afbc03cd95780e1e32cc7baf00d5e9'
-            '5c9659a4228a39c8011491484ad31bcefb2a1fcffc75f2c18dbb4718212f49a5')
+            '5c9659a4228a39c8011491484ad31bcefb2a1fcffc75f2c18dbb4718212f49a5'
+            'bf08aae2967d3cd4202ee27004eff2feedc98163626fd98f96b7d2acae40dc38')
 validpgpkeys=('E0A3EB202F8E57528E13E72FD7574483BB57B18D'  # Jonathan Esk-Riddell <jr@jriddell.org>
               '0AAC775BB6437A8D9AF7A3ACFE0784117FBCE11D'  # Bhushan Shah <bshah@kde.org>
               'D07BD8662C56CB291B316EB2F5675605C74E02CF'  # David Edmundson <davidedmundson@kde.org>
@@ -105,6 +107,7 @@ prepare() {
   patch -p1 -d "$srcdir/$pkgname-$pkgver" -i "$srcdir/0003-Outputconfigurationstore-default-to-internal-display.patch"
   patch -p1 -d "$srcdir/$pkgname-$pkgver" -i "$srcdir/0004-simulate-full-keyboard-handling-in-testFakeEve.patch"
   patch -p1 -d "$srcdir/$pkgname-$pkgver" -i "$srcdir/0005-Support-arbitrary-keysyms-in-libei.patch"
+  patch -p1 -d "$srcdir/$pkgname-$pkgver" -i "$srcdir/0006-inputmethod-Skip-input-events-from-fake-input.patch"
 }
 
 build() {
