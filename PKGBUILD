@@ -28,8 +28,8 @@ pkgname=(
 # When updating the tag, consider if you are adding any shader compiler changes. If so,
 # or if you are not sure, regenerate the radv-build-id below. To update, see
 # https://gitlab.steamos.cloud/jupiter/docs/-/wikis/How-to-make-a-new-Mesa-release#updating-the-radv-build-id
-_tag=steamos-25.11.1
-pkgver=26.0.0_devel.214782.steamos_25.11.1
+_tag=steamos-25.11.2
+pkgver=26.0.0_devel.214803.steamos_25.11.2
 
 #pkgver=25.2.7
 #pkgver=${pkgver/[a-z]/-&}
@@ -295,7 +295,7 @@ build() {
     -D intel-rt=disabled
     -D sysprof=false
     -D tools=drm-shim
-    -D radv-build-id="f089011635e495dabda9c5730418a399d64096ad"
+    -D radv-build-id="1eb8cad141479029163794277b179859623f0b46"
   )
 
   # Build only minimal debug info to reduce size
