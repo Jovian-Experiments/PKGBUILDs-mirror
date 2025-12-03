@@ -1,0 +1,219 @@
+From 36a111ad007f2f424e6b00155970aaf07e86cee3 Mon Sep 17 00:00:00 2001
+From: Cristian Ciocaltea <cristian.ciocaltea@collabora.com>
+Date: Wed, 21 May 2025 10:24:28 +0300
+Subject: [PATCH] USB-Audio: Add support for DualSense PS5 controller
+
+The Sony DualSense wireless controller (PS5) has an internal mono
+speaker and a microphone, in addition to a 3.5mm jack socket for
+headphone output and headset microphone input.
+
+Because this is a UAC1 device, it doesn't advertise any jack detection
+capability.  However, since kernel v6.18-rc1 the controller is able to
+report HP & MIC insert events via HID, i.e. through a dedicated input
+device managed by the hid-playstation driver.  This is further used by a
+quirk in the generic USB audio driver (added in v6.17), which creates
+the Headphone Jack & Headset Mic Jack controls and receives hotplug
+events from the HID driver via input handlers.
+
+Moreover, the device provides haptic feedback functionality, which is
+controlled by a pair of dedicated channels in a quadraphonic audio
+stream.
+
+Ensure proper support for audio switching between headphones/headset and
+internal speaker/microphone by adding a UCM to split the 4.0 PCM stream
+into 4 mono channels or a pair of stereo (FL+FR) channels, depending on
+the active output device/profile.
+
+Closes: https://github.com/alsa-project/alsa-ucm-conf/pull/634
+Signed-off-by: Cristian Ciocaltea <cristian.ciocaltea@collabora.com>
+Signed-off-by: Jaroslav Kysela <perex@perex.cz>
+---
+ ucm2/USB-Audio/Sony/DualSense-PS5-HiFi.conf | 142 ++++++++++++++++++++
+ ucm2/USB-Audio/Sony/DualSense-PS5.conf      |   6 +
+ ucm2/USB-Audio/USB-Audio.conf               |  11 ++
+ 3 files changed, 159 insertions(+)
+ create mode 100644 ucm2/USB-Audio/Sony/DualSense-PS5-HiFi.conf
+ create mode 100644 ucm2/USB-Audio/Sony/DualSense-PS5.conf
+
+diff --git a/ucm2/USB-Audio/Sony/DualSense-PS5-HiFi.conf b/ucm2/USB-Audio/Sony/DualSense-PS5-HiFi.conf
+new file mode 100644
+index 000000000..e1f982d0f
+--- /dev/null
++++ b/ucm2/USB-Audio/Sony/DualSense-PS5-HiFi.conf
+@@ -0,0 +1,142 @@
++Include.pcm_split.File "/common/pcm/split.conf"
++
++Macro [
++	{
++		SplitPCM {
++			Name "dualsense_mono_out"
++			Direction Playback
++			Channels 1
++			HWChannels 4
++			HWChannelPos0 MONO
++			HWChannelPos1 MONO
++			HWChannelPos2 MONO
++			HWChannelPos3 MONO
++		}
++	}
++	{
++		SplitPCM {
++			Name "dualsense_stereo_out"
++			Direction Playback
++			Channels 2
++			HWChannels 4
++			HWChannelPos0 FL
++			HWChannelPos1 FR
++			HWChannelPos2 FL
++			HWChannelPos3 FR
++		}
++	}
++	{
++		SplitPCM {
++			Name "dualsense_mono_in"
++			Direction Capture
++			Channels 1
++			HWChannels 2
++			HWChannelPos0 MONO
++			HWChannelPos1 MONO
++		}
++	}
++	{
++		SplitPCM {
++			Name "dualsense_stereo_in"
++			Direction Capture
++			Channels 2
++			HWChannels 2
++			HWChannelPos0 FL
++			HWChannelPos1 FR
++		}
++	}
++]
++
++SectionDevice."Speaker" {
++	Comment "Internal Mono Speaker"
++
++	ConflictingDevice [
++		"Headphones"
++	]
++
++	Value {
++		PlaybackPriority 100
++		PlaybackPCM "hw:${CardId}"
++	}
++
++	Macro.pcm_split.SplitPCMDevice {
++		Name "dualsense_mono_out"
++		Direction Playback
++		HWChannels 4
++		Channels 1
++		Channel0 1
++		ChannelPos0 MONO
++	}
++}
++
++SectionDevice."Headphones" {
++	Comment "3.5mm Headphones"
++
++	ConflictingDevice [
++		"Speaker"
++	]
++
++	Value {
++		PlaybackPriority 100
++		PlaybackPCM "hw:${CardId}"
++		JackControl "Headphone Jack"
++	}
++
++	Macro.pcm_split.SplitPCMDevice {
++		Name "dualsense_stereo_out"
++		Direction Playback
++		HWChannels 4
++		Channels 2
++		Channel0 0
++		Channel1 1
++		ChannelPos0 FL
++		ChannelPos1 FR
++	}
++}
++
++SectionDevice."Mic" {
++	Comment "Internal Microphone"
++
++	ConflictingDevice [
++		"Headset"
++	]
++
++	Value {
++		CapturePriority 100
++		CapturePCM "hw:${CardId}"
++	}
++
++	Macro.pcm_split.SplitPCMDevice {
++		Name "dualsense_mono_in"
++		Direction Capture
++		HWChannels 2
++		Channels 1
++		Channel0 0
++		ChannelPos0 MONO
++	}
++}
++
++SectionDevice."Headset" {
++	Comment "Headset Microphone"
++
++	ConflictingDevice [
++		"Mic"
++	]
++
++	Value {
++		CapturePriority 100
++		CapturePCM "hw:${CardId}"
++		JackControl "Headset Mic Jack"
++	}
++
++	Macro.pcm_split.SplitPCMDevice {
++		Name "dualsense_stereo_in"
++		Direction Capture
++		HWChannels 2
++		Channels 2
++		Channel0 0
++		Channel1 1
++		ChannelPos0 FL
++		ChannelPos1 FR
++	}
++}
+diff --git a/ucm2/USB-Audio/Sony/DualSense-PS5.conf b/ucm2/USB-Audio/Sony/DualSense-PS5.conf
+new file mode 100644
+index 000000000..42d525b7e
+--- /dev/null
++++ b/ucm2/USB-Audio/Sony/DualSense-PS5.conf
+@@ -0,0 +1,6 @@
++Comment "Sony Corp. DualSense wireless controller (PS5)"
++
++SectionUseCase."HiFi" {
++	Comment "Default"
++	File "/USB-Audio/Sony/DualSense-PS5-HiFi.conf"
++}
+diff --git a/ucm2/USB-Audio/USB-Audio.conf b/ucm2/USB-Audio/USB-Audio.conf
+index 6f662ee05..4791b57d7 100644
+--- a/ucm2/USB-Audio/USB-Audio.conf
++++ b/ucm2/USB-Audio/USB-Audio.conf
+@@ -176,6 +176,17 @@ If.sony-inzone-h9-h7 {
+ 	True.Define.ProfileName "Sony/Inzone-H9-H7"
+ }
+ 
++If.sony-dualsense-ps5 {
++	Condition {
++		Type RegexMatch
++		String "${CardComponents}"
++		# 054c:0ce6 Sony Corp. DualSense wireless controller (PS5)
++		# 054c:0df2 Sony Corp. DualSense Edge wireless controller (PS5)
++		Regex "USB054c:0((ce6)|(df2))"
++	}
++	True.Define.ProfileName "Sony/DualSense-PS5"
++}
++
+ If.boss-katana {
+ 	Condition {
+ 		Type String
