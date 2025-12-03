@@ -8,7 +8,7 @@ pkgname=(
   libwireplumber
 )
 pkgver=0.5.10
-pkgrel=1.9
+pkgrel=1.10
 pkgdesc="Session / policy manager implementation for PipeWire"
 url="https://pipewire.pages.freedesktop.org/wireplumber/"
 arch=(x86_64)
@@ -47,6 +47,7 @@ source=(
   "0002-monitor-alsa-Add-node.create-loopback-property.patch"
   "0003-monitor-alsa-Don-t-make-the-loopback-device-node-vir.patch"
   "0004-monitor-alsa-Dont-set-node-dont-remix-property.patch"
+  "0005-monitor-alsa-Add-alsa.loopback-true-to-split-PCM-loo.patch"
 
   # Holo: backport final patch of https://gitlab.freedesktop.org/pipewire/wireplumber/-/merge_requests/667/commits
   # Addresses https://gitlab.steamos.cloud/holo-team/tasks/-/issues/1340
@@ -90,12 +91,16 @@ source=(
 
   # Holo: backport of https://gitlab.freedesktop.org/pipewire/wireplumber/-/merge_requests/753
   "0001-state-profile-Handle-new-dont-restore-off-profile-rule.patch"
+
+  # Holo: backport of https://gitlab.freedesktop.org/pipewire/wireplumber/-/merge_requests/761
+  "0001-monitor-alsa-Also-include-alsa.-device-properties-fo.patch"
 )
 b2sums=('5c9d06c4084187ce172e98fb05bef3826e4b7bf1fba505e5543fec0e194d8a957172c81e6fa32c7f53832e204dd794189d48deaae5eca10577b04106f2625ff3'
         '86f80f07bb5f446ae90f88f39870139d4d902f99048a62eb825ac12b654ca248568b17f8a1ca15777b41e0a11054345d023fc36a348372f15cb75b92a0180cfe'
         '09ab29570886efb01148edec25a0bb1bcc2ef20e7b02ed6f1fbaa0a29caa4b1f859717735b33fa93ca3494a36336c6730ed940f580ee78705d3c7b6fdc9d5735'
         '145fd614765ebe212de7e27e78b243bb294bd2fdc1efb1c6852280e8db2c2cbca40d6ce838013a06ced34bc030a16a11f1c4875562cd5d041c0785e7be712636'
         '46f72253266c5b9230678946d7b349a5726801d2dd038fa00748e0b5cf194b1d21812862399a95a11f2ae9942a2319304ba2cdd607f6fcacdf382ac5ca57aa01'
+        '146bcaf65e9646ff9ce6359920959b15ed4bc5991bb59dca6e2af366d292d621e54feb482e56c3effa4b774d8b5ab857e8ae3bfcf844d0d0b605ba09edc9fd16'
         '3b05b23dd3ff1da4f59df814780cf5251769c10ef3b1c07707ef717160631e27113e5e7286cd8b37ad4f37b21f9f14649d8fa5148b6aa90d26fef48a219e7e5e'
         'd8e0ff4f2c0927e1da127442c2c3d9aecaa05cca2753fdcb1786fe2ac6d959b0a995988e02f155de396fbe4fcb5eac3cbd55caa75be6d4a86eaa3e723415d062'
         'aba4d3fd93a4dafac5c1bb425621b176a80b3396f2896102c0c26399e86d9101165dabd0dee2c9d8964415e5098a8b78e87b564d2855de6c81f3eca489b183da'
@@ -113,7 +118,8 @@ b2sums=('5c9d06c4084187ce172e98fb05bef3826e4b7bf1fba505e5543fec0e194d8a957172c81
         '4d9c5e2e605a37cd670e8248e4f8e5dd244a755337c38527a1959f5ef301466d5d062ed86a334ea673c397d53e0a9dc3a98f2be29cb3faf00fc2e1245dae0929'
         'e1b5b58500c2dfb52d8d6a30d55ad485775025b446523edfa42ea96fa8608a26cbdeb894b02128c7098d0833a98ef8c5937c7f478ce267769a61dacf4f501ab8'
         '55d54fb9527ab9d7d70eb72abfd337209cdcd88732133a75b14565acc942c7c85d9833e1b577dc387a1cc55f3a89ebe0d8e04bb1ea6acc0509253bb0db5b4512'
-        'ab233036f723a290d1b72258402550483b68dbc181784c06bf3c1c815fb8c9a7a3ba89ea9e2d44fa68bf2c5199fd1e4fe4a5e447ba830767514d1587b4a25190')
+        'ab233036f723a290d1b72258402550483b68dbc181784c06bf3c1c815fb8c9a7a3ba89ea9e2d44fa68bf2c5199fd1e4fe4a5e447ba830767514d1587b4a25190'
+        'fa814c004a0cb671da80bfecf20bc6d849f6ddd36cd550e6a2781e0592370ebd44516d6740b4a60814b636e15823edcef2db399598a9d2efe8d5056bb17e575e')
 
 prepare() {
   cd $pkgbase

@@ -1,0 +1,47 @@
+From 3983ee51a4eb1a146f3a6ea74a48795cf5f1f396 Mon Sep 17 00:00:00 2001
+From: Julian Bouzas <julian.bouzas@collabora.com>
+Date: Thu, 13 Nov 2025 11:27:47 -0500
+Subject: [PATCH] monitor: alsa: Add alsa.loopback=true to split PCM loopback
+ nodes
+
+This makes both types of loopback nodes to be more consistent.
+---
+ src/scripts/monitors/alsa.lua | 7 +++++++
+ 1 file changed, 7 insertions(+)
+
+diff --git a/src/scripts/monitors/alsa.lua b/src/scripts/monitors/alsa.lua
+index 89aa09db..33f651c7 100644
+--- a/src/scripts/monitors/alsa.lua
++++ b/src/scripts/monitors/alsa.lua
+@@ -189,14 +189,18 @@ function createSplitPCMLoopback(parent, id, obj_type, factory, properties)
+ 
+   if properties["api.alsa.pcm.stream"] == "playback" then
+     props["media.class"] = "Audio/Sink"
++    props["alsa.loopback"] = true
+     split_props["media.class"] = "Stream/Output/Audio/Internal"
++    split_props["alsa.loopback"] = true
+     args = Json.Object {
+       ["capture.props"] = Json.Object (props),
+       ["playback.props"] = Json.Object (split_props),
+     }
+   else
+     props["media.class"] = "Audio/Source"
++    props["alsa.loopback"] = true
+     split_props["media.class"] = "Stream/Input/Audio/Internal"
++    split_props["alsa.loopback"] = true
+     args = Json.Object {
+       ["playback.props"] = Json.Object (props),
+       ["capture.props"] = Json.Object (split_props),
+@@ -420,6 +424,9 @@ function createNode(parent, id, obj_type, factory, properties)
+       end
+     end
+ 
++    -- Clear 'node.create-loopback' as it only makes sense in non-loopback nodes
++    properties["node.create-loopback"] = nil
++
+     -- create split PCM node
+     log:info ("Create ALSA SplitPCM split node " .. properties["node.name"])
+ 
+-- 
+2.51.2
+
