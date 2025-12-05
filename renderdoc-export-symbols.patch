@@ -1,0 +1,40 @@
+diff --git a/renderdoc/api/replay/apidefs.h b/renderdoc/api/replay/apidefs.h
+index 1234567..abcdefg 100644
+--- a/renderdoc/api/replay/apidefs.h
++++ b/renderdoc/api/replay/apidefs.h
+@@ -84,7 +84,11 @@
+ #elif defined(RENDERDOC_PLATFORM_LINUX) || defined(RENDERDOC_PLATFORM_APPLE) || \
+     defined(RENDERDOC_PLATFORM_ANDROID) || defined(RENDERDOC_PLATFORM_SWITCH)
+
+-#define RENDERDOC_EXPORT_API __attribute__((visibility("default"), used))
++#if defined(__GNUC__) && !defined(__clang__)
++#define RENDERDOC_EXPORT_API __attribute__((visibility("default"), externally_visible))
++#else
++#define RENDERDOC_EXPORT_API __attribute__((visibility("default"), used))
++#endif
+ #define RENDERDOC_IMPORT_API
+
+ #define RENDERDOC_CC
+diff --git a/renderdoc_exports.list b/renderdoc_exports.list
+new file mode 100644
+index 0000000..1234567
+--- /dev/null
++++ b/renderdoc_exports.list
+@@ -0,0 +1,4 @@
++{
++  renderdoc_*;
++};
++
+diff --git a/renderdoccmd/CMakeLists.txt b/renderdoccmd/CMakeLists.txt
+index 1234567..abcdefg 100644
+--- a/renderdoccmd/CMakeLists.txt
++++ b/renderdoccmd/CMakeLists.txt
+@@ -67,7 +67,7 @@ elseif(UNIX)
+
+     # Make sure that for the target executable we don't throw away
+     # any shared libraries.
+-    set(LINKER_FLAGS "-Wl,--no-as-needed")
++    set(LINKER_FLAGS "-Wl,--no-as-needed -Wl,--dynamic-list=${CMAKE_SOURCE_DIR}/renderdoc_exports.list")
+ endif()
+
+ if(ANDROID)
