@@ -87,7 +87,7 @@ CONFIG_ZOTAC_ZONE_PLATFORM=m
 
 CONFIG_HID_ASUS_ALLY=m
 CONFIG_ASUS_ARMOURY=m
-ASUS_WMI_DEPRECATED_ATTRS=y
+CONFIG_ASUS_WMI_DEPRECATED_ATTRS=y
 
 # PARAVIRT options have overhead, even on bare metal boots. They can cause
 # spinlocks to not be inlined as well. Either way, we don't intend to run this
@@ -131,3 +131,5 @@ CONFIG_JOYSTICK_XBOX_GIP_LEDS=y
 # Disable drm panic screen
 CONFIG_DRM_PANIC=n
 
+# Enable Valve LEDs driver
+CONFIG_LEDS_VALVE=m
