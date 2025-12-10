@@ -1,0 +1,62 @@
+From 43493088a7b38ad84eb63d79be60965e40909cc9 Mon Sep 17 00:00:00 2001
+From: Xaver Hugl <xaver.hugl@kde.org>
+Date: Mon, 8 Dec 2025 15:35:55 +0100
+Subject: [PATCH] outputconfigurationstore: add special casing for the scale
+ factor on TVs
+
+You generally sit much further away from TVs than from desktop monitors, so the
+default scale factor should also be much larger.
+---
+ autotests/integration/outputchanges_test.cpp | 10 ++++++++++
+ src/outputconfigurationstore.cpp             | 14 ++++++++++++--
+ 2 files changed, 22 insertions(+), 2 deletions(-)
+
+diff --git a/autotests/integration/outputchanges_test.cpp b/autotests/integration/outputchanges_test.cpp
+index 91354ab54f..3e9b3bd1bb 100644
+--- a/autotests/integration/outputchanges_test.cpp
++++ b/autotests/integration/outputchanges_test.cpp
+@@ -1473,6 +1473,16 @@ void OutputChangesTest::testGenerateConfigs_data()
+                .edid = readEdid(QFINDTESTDATA("data/Odyssey G5.bin")),
+            }
+         << ModeInfo(QSize(2560, 1440), 164831, OutputMode::Flag::Preferred) << 1.0 << false;
++
++    QTest::addRow("LG C4 77\"")
++        << DeviceType::Desktop
++        << Test::OutputInfo{
++               .geometry = QRect(),
++               .internal = false,
++               .physicalSizeInMM = QSize(1600, 900),
++               .modes = {ModeInfo(QSize(3840, 2160), 120000, OutputMode::Flag::Preferred)},
++           }
++        << ModeInfo(QSize(3840, 2160), 120000, OutputMode::Flag::Preferred) << 2.0 << true;
+ }
+ 
+ void OutputChangesTest::testGenerateConfigs()
+diff --git a/src/outputconfigurationstore.cpp b/src/outputconfigurationstore.cpp
+index a1c6793bde..ed2948946f 100644
+--- a/src/outputconfigurationstore.cpp
++++ b/src/outputconfigurationstore.cpp
+@@ -740,8 +740,18 @@ double OutputConfigurationStore::chooseScale(BackendOutput *output, OutputMode *
+             minSize = 360;
+         }
+     } else {
+-        // "normal" 1x scale desktop monitor dpi
+-        targetDpi = 96;
++        // NOTE that height is checked instead of diagonal size to avoid
++        // applying the TV heuristic to ultrawide monitors
++        if (output->physicalSize().height() > 500) {
++            // This is a pretty big screen, most likely a TV.
++            // As you generally sit much further away from TVs than desktop monitors,
++            // user elements on it should also be much larger as well.
++            // The specific value results in a scale of 200% for 77" 4k TVs.
++            targetDpi = 30.5;
++        } else {
++            // "normal" 1x scale desktop monitor dpi
++            targetDpi = 96;
++        }
+         minSize = 800;
+     }
+ 
+-- 
+2.52.0
+
