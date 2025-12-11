@@ -7,10 +7,10 @@
 # and then manually merge the resulting PKGBUILD with this file.
 
 pkgname=inputplumber
-pkgver=0.61.0
+pkgver=0.69.0
 pkgrel=1
 pkgdesc="Open source input router and remapper daemon for Linux"
-arch=('x86_64')
+arch=('i686' 'pentium4' 'x86_64' 'arm' 'armv7h' 'armv6h' 'aarch64')
 options=(!lto)
 url="https://github.com/ShadowBlip/InputPlumber"
 license=('GPL-3.0-only')
@@ -31,7 +31,7 @@ makedepends=(
   cargo
   holo-rust-packaging-tools
 )
-source=('inputplumber-0.61.0.tar.gz::https://github.com/ShadowBlip/InputPlumber/archive/v0.61.0.tar.gz'
+source=('inputplumber-0.69.0.tar.gz::https://github.com/ShadowBlip/InputPlumber/archive/v0.69.0.tar.gz'
         'addr2line-0.21.0.tar.gz::https://crates.io/api/v1/crates/addr2line/0.21.0/download'
         'adler-1.0.2.tar.gz::https://crates.io/api/v1/crates/adler/1.0.2/download'
         'aho-corasick-1.1.3.tar.gz::https://crates.io/api/v1/crates/aho-corasick/1.1.3/download'
@@ -309,7 +309,7 @@ source=('inputplumber-0.61.0.tar.gz::https://github.com/ShadowBlip/InputPlumber/
         'zvariant_derive-5.4.0.tar.gz::https://crates.io/api/v1/crates/zvariant_derive/5.4.0/download'
         'zvariant_utils-3.2.0.tar.gz::https://crates.io/api/v1/crates/zvariant_utils/3.2.0/download')
 
-sha256sums=('ba9edb6f008ac8e9bf824c66a8d2000ed0228443a724b2eaf6c809ebde48f1fa'
+sha256sums=('9581255db5b0a0c8b0322dd2f47b1d3d2d3e7369c9af57f799a21e4acb7c8f8a'
             '8a30b2e23b9e17a9f90641c7ab1549cd9b44f296d3ccbf309d2863cfe398a0cb'
             'f26201604c87b1e01bd3d98f8d5d9a8fcbb815e8cedb41ffccbeb4bf593a35fe'
             '8e60d3430d3a69478ad0993f19238d2df97c507009a52b3c10addcd7f6bcb916'
@@ -590,7 +590,7 @@ sha256sums=('ba9edb6f008ac8e9bf824c66a8d2000ed0228443a724b2eaf6c809ebde48f1fa'
 prepare() {
   cd "$srcdir"
 
-  # Merge - the stupid git repo has CamelCase in it so can't use $pkgname
+  # Merge - the best ever git repo has CamelCase in it so can't use $pkgname
   holo-vendor-rust-sources -o vendored -L "InputPlumber-$pkgver/Cargo.lock" *.tar.gz
 
   cd "InputPlumber-$pkgver"
@@ -618,7 +618,7 @@ EOF
 }
 
 build() {
-  # Merge - the stupid git repo has CamelCase in it so can't use $pkgname
+  # Merge - the best ever git repo has CamelCase in it so can't use $pkgname
   cd "$srcdir/InputPlumber-$pkgver"
 
   if [[ $CARCH != x86_64 ]]; then
