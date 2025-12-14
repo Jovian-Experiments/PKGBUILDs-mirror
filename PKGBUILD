@@ -20,7 +20,7 @@ pkgname=(
 #  vulkan-radeon
   vulkan-swrast
 #  vulkan-virtio
-#  vulkan-mesa-implicit-layers
+  vulkan-mesa-implicit-layers
   vulkan-mesa-layers
 #  mesa-docs
 )
@@ -28,7 +28,7 @@ _tag=radeonsi-25.3.0
 pkgver=25.3.0.213835.radeonsi_25.3.0
 #pkgver=25.3.0
 #_pkgver=${pkgver/[a-z]/-&}
-pkgrel=1
+pkgrel=2
 epoch=0
 pkgdesc="Open-source OpenGL drivers"
 url="https://www.mesa3d.org/"
@@ -685,7 +685,7 @@ package_vulkan-mesa-implicit-layers() {
 
   mv vkdevice/* "$pkgdir"
 
-  install -Dm644 mesa-$_pkgver/docs/license.rst -t "$pkgdir/usr/share/licenses/$pkgname"
+  install -Dm644 steamos-mesa/docs/license.rst -t "$pkgdir/usr/share/licenses/$pkgname"
 }
 
 package_vulkan-mesa-layers() {
