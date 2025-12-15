@@ -32,7 +32,7 @@ pkgname=(
   pulse-native-provider
 )
 pkgver=1.4.9
-pkgrel=1.3
+pkgrel=1.4
 epoch=1
 pkgdesc="Low-latency audio/video router and processor"
 url="https://pipewire.org"
@@ -106,6 +106,9 @@ source=(
     "0004-acp-remove-channel-limit-from-API.patch"
     "0005-spa-alsa-Read-and-expose-channel-count-and-position-.patch"
     "0006-spa-alsa-Add-option-to-use-ELD-detected-channels.patch"
+
+    # Holo: Backport https://gitlab.freedesktop.org/pipewire/pipewire/-/merge_requests/2639
+    "0001-spa-alsa-Guard-against-mismatched-LPCM-channel-count.patch"
 )
 b2sums=('d218e4c798b2952506a65a623191a8f967828a2d61fc13d3aeeddf888e5b7f6cd462a37dc4a896265bb4e5d2f05f114cce7d58fc64ed9581273a780d51cbba26'
         '68ad58cb1a8c532a194b7982167e6b461ff3a2d046f346305c38d3af21a696a2cd18619b73b99cc1b41c55f8786cf26ab5c077f58652e8197a9f5f42416c764f'
@@ -115,7 +118,8 @@ b2sums=('d218e4c798b2952506a65a623191a8f967828a2d61fc13d3aeeddf888e5b7f6cd462a37
         '23f5357b5aaba0f8e20e77b641af555004780caae68f77f9ca12d214bec3d7429718afac3512a8310bd49a99fa4b6e67b41faf3038e1e9221416c9d0d5deb1b1'
         '89f8f590134f07b56dd3500265d8195d6bf8e6d6a0d73422bf682f63d8159405362fb85c9057dfc422ce7d1033a0173b26ac26515d46f5c7d32f696204581620'
         '87f723232450d404b1505299005ac8ac6ad01b4278d87771ebc9675a67feb401249db159cf65c1f44ba3ae78ef3bd0d83255be5546d0f06aa8e41ed0b7005a8d'
-        'eaf1e55589fbfe28db7e16138425969e2e1016a7ba75fb9af507677009bcbd3414a2d86ea4f644ad5b625b49eb8c33679404390ae8e7702e854bd0adf4801757')
+        'eaf1e55589fbfe28db7e16138425969e2e1016a7ba75fb9af507677009bcbd3414a2d86ea4f644ad5b625b49eb8c33679404390ae8e7702e854bd0adf4801757'
+        '6632ff50f1de31ab8d520b6af126da6a887ab37b91e9ca1ee0ed0f5e748ccc0f78e8cb4df1fd9d1521fd03f03ec53c32580c3c8d7c881c2330de6dc47847ef98')
 
 prepare() {
   cd pipewire
