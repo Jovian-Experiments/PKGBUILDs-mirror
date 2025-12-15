@@ -8,7 +8,7 @@ pkgname=(
   libwireplumber
 )
 pkgver=0.5.10
-pkgrel=1.11
+pkgrel=1.12
 pkgdesc="Session / policy manager implementation for PipeWire"
 url="https://pipewire.pages.freedesktop.org/wireplumber/"
 arch=(x86_64)
@@ -97,6 +97,9 @@ source=(
 
   # Holo: backport of https://gitlab.freedesktop.org/pipewire/wireplumber/-/merge_requests/769
   "0001-create-item-Only-configure-audio-device-sink-nodes-i.patch"
+
+  # Holo: backport of https://gitlab.freedesktop.org/pipewire/wireplumber/-/merge_requests/714
+  "0001-lib-module-clear-the-impl_module-pointer-when-it-is-.patch"
 )
 b2sums=('5c9d06c4084187ce172e98fb05bef3826e4b7bf1fba505e5543fec0e194d8a957172c81e6fa32c7f53832e204dd794189d48deaae5eca10577b04106f2625ff3'
         '86f80f07bb5f446ae90f88f39870139d4d902f99048a62eb825ac12b654ca248568b17f8a1ca15777b41e0a11054345d023fc36a348372f15cb75b92a0180cfe'
@@ -123,7 +126,8 @@ b2sums=('5c9d06c4084187ce172e98fb05bef3826e4b7bf1fba505e5543fec0e194d8a957172c81
         '55d54fb9527ab9d7d70eb72abfd337209cdcd88732133a75b14565acc942c7c85d9833e1b577dc387a1cc55f3a89ebe0d8e04bb1ea6acc0509253bb0db5b4512'
         'ab233036f723a290d1b72258402550483b68dbc181784c06bf3c1c815fb8c9a7a3ba89ea9e2d44fa68bf2c5199fd1e4fe4a5e447ba830767514d1587b4a25190'
         'fa814c004a0cb671da80bfecf20bc6d849f6ddd36cd550e6a2781e0592370ebd44516d6740b4a60814b636e15823edcef2db399598a9d2efe8d5056bb17e575e'
-        'ada0dd84022808651653bf1fa61c15175bf51157f140f42c0ba854ee578dba4b10ed668a2471013669cc101d67bd3b1864c2693262b5b850dfc72940cce02c0d')
+        'ada0dd84022808651653bf1fa61c15175bf51157f140f42c0ba854ee578dba4b10ed668a2471013669cc101d67bd3b1864c2693262b5b850dfc72940cce02c0d'
+        'cd267ac513e82a1986232e969098187839fd25244cae49c0f5f3dbf5483bd06f41965180009c62819fb72b20667fb3bf1a0907700a033cabd5d433c18a197822')
 
 prepare() {
   cd $pkgbase
