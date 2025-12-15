@@ -32,7 +32,7 @@ pkgname=(
   pulse-native-provider
 )
 pkgver=1.4.9
-pkgrel=1.2
+pkgrel=1.3
 epoch=1
 pkgdesc="Low-latency audio/video router and processor"
 url="https://pipewire.org"
@@ -84,8 +84,13 @@ checkdepends=(
   desktop-file-utils
   openal
 )
+# Tip as of Dec 15, 2025. 1.4.9...
+#   * fix for pulse zombie streams leak
+#   + fix for filter graph crashing when node channels != filter channels
+#   + misc fixes
+commit=be1677f56913706973cbab656dbf0c9d877d0ae5
 source=(
-    "git+https://gitlab.freedesktop.org/pipewire/pipewire.git#tag=$pkgver"
+    "git+https://gitlab.freedesktop.org/pipewire/pipewire.git#commit=$commit"
     # Holo
     "0001-pipeware-bluez5-backend-native-Enable-SCO-offload.patch"
 
@@ -101,19 +106,8 @@ source=(
     "0004-acp-remove-channel-limit-from-API.patch"
     "0005-spa-alsa-Read-and-expose-channel-count-and-position-.patch"
     "0006-spa-alsa-Add-option-to-use-ELD-detected-channels.patch"
-
-    # Holo: Backport https://gitlab.freedesktop.org/pipewire/pipewire/-/merge_requests/2567
-    # Fixes: https://github.com/ValveSoftware/SteamOS/issues/2160
-    "0001-pulse-Handle-timed-out-streams.patch"
-    "0002-pulse-server-make-timer-function-static-and-fix-form.patch"
-    "0003-timer-queue-add-a-new-timer-queue-helper.patch"
-    "0004-pulse-server-use-the-new-timer-queue-for-timeouts.patch"
-    "0005-pulse-server-clear-timer-when-stream-is-created.patch"
-    "0006-timer-fix-compilation-on-arm.patch"
-    "0007-timer-queue-delete-next-timer-event-when-it-got-fire.patch"
-    "0008-modules-use-timer-queue-in-avahi-poll.patch"
 )
-b2sums=('44e7ed98e7a4c383e96c5c7a58265e568a1191edb87a9ff472a671d235a7872ea320fbefa1fce31a787d18465e26955b2122af7a77566f7bc5e17a9665239f8f'
+b2sums=('d218e4c798b2952506a65a623191a8f967828a2d61fc13d3aeeddf888e5b7f6cd462a37dc4a896265bb4e5d2f05f114cce7d58fc64ed9581273a780d51cbba26'
         '68ad58cb1a8c532a194b7982167e6b461ff3a2d046f346305c38d3af21a696a2cd18619b73b99cc1b41c55f8786cf26ab5c077f58652e8197a9f5f42416c764f'
         '98bccdbe20da61ffb5d1e81029983bf947ae010198d70eb93851f8ddce72338944829f8d369da73e71ac4d85bd5279d0fdd923dac307516f15bad8c565aa4d92'
         '95427f88ad7d690811c9eca4e9d29fdc6f15ddd8dc64d14d5682749b07765e64552d3a15efe8b350478d32a90499ca2e7820bc1e473cd6cbd26901706995b556'
@@ -121,15 +115,7 @@ b2sums=('44e7ed98e7a4c383e96c5c7a58265e568a1191edb87a9ff472a671d235a7872ea320fbe
         '23f5357b5aaba0f8e20e77b641af555004780caae68f77f9ca12d214bec3d7429718afac3512a8310bd49a99fa4b6e67b41faf3038e1e9221416c9d0d5deb1b1'
         '89f8f590134f07b56dd3500265d8195d6bf8e6d6a0d73422bf682f63d8159405362fb85c9057dfc422ce7d1033a0173b26ac26515d46f5c7d32f696204581620'
         '87f723232450d404b1505299005ac8ac6ad01b4278d87771ebc9675a67feb401249db159cf65c1f44ba3ae78ef3bd0d83255be5546d0f06aa8e41ed0b7005a8d'
-        'eaf1e55589fbfe28db7e16138425969e2e1016a7ba75fb9af507677009bcbd3414a2d86ea4f644ad5b625b49eb8c33679404390ae8e7702e854bd0adf4801757'
-        'b3fcfa5af5d5bd62fe0797c695509bb7f3670141c98df2a75532b8791025435bab1494e70db8507820e0efabf5cf9dc774417f83712d9176609c76c6332ad4d1'
-        'a7c95b00df95cd85f4578883424f59f028a3f8231d6f1b5213b5fc9472f49c10d8ab252f065966aefb2620df6b80c19899eebad0bb1c835db0108543c878b9e2'
-        'f12dd145118b0b1860a9958feb6c519c4e146b3d78e987f14dd8c573efd94f2bbc38824b5fc7c07431403c3e3818e0039133dd12f8bf2c0e8015e16c11d39ab5'
-        'dd85e69f0deda316438ddeea68c1501c22519a3db82f6bd585e147e7288555fe2dbcfe3857961a0a5e18e9e56182be53174f53df57811388dce8ab9807c60f74'
-        '600d2d8e1ba50ccd49aed469e1d803ca3768327958cc6d2c53ffd8c6307c845ceea0f3295f48b9427b43ab1cb52043409361b83af75047408be1adda9771e1dc'
-        '3cc28998bb06bd9dfc7ee126ca79a9f6a218c605d8eee9938de398e3014ee18e835b87cc6310d76907c2323d7c244d1d7b45e930fbf3a218021d41e26687cd2a'
-        '7094d94221a7b3e6830381e3398df9a2e2c64ac440a75add1de4b6fba7151882ede14ef57f7c3726d01353104b7d59b04de4677e53697ba5cf9ec81feeb8c6d4'
-        '6bab438f9c6f661aa0e216769c49ff0594449410d4660f1b53fe3976daeee49ed733e8b2bd17b3064cc8fdc4f70abc5964760c3476d0caa3474ee6a123664d7f')
+        'eaf1e55589fbfe28db7e16138425969e2e1016a7ba75fb9af507677009bcbd3414a2d86ea4f644ad5b625b49eb8c33679404390ae8e7702e854bd0adf4801757')
 
 prepare() {
   cd pipewire
