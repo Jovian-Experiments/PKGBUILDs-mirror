@@ -1,0 +1,86 @@
+From db69a93b829a7da9c45300e7b3fa7268025ac842 Mon Sep 17 00:00:00 2001
+From: Arun Raghavan <arun@asymptotic.io>
+Date: Wed, 17 Sep 2025 10:58:58 -0400
+Subject: [PATCH 1/8] pulse: Handle timed out streams
+
+If we don't get a link on a stream, we might never send a create stream
+reply. The client handles this fine by timing out after 30s and dropping
+the stream, but the server holds on to the pw_stream forever (or until
+the client quits).
+
+Let's add a timer to clean up such streams on the server.
+
+Fixes: https://gitlab.freedesktop.org/pipewire/pipewire/-/issues/4901
+---
+ src/modules/module-protocol-pulse/stream.c | 28 ++++++++++++++++++++++
+ src/modules/module-protocol-pulse/stream.h |  1 +
+ 2 files changed, 29 insertions(+)
+
+diff --git a/src/modules/module-protocol-pulse/stream.c b/src/modules/module-protocol-pulse/stream.c
+index e3b8b7b0f..9380fa3d2 100644
+--- a/src/modules/module-protocol-pulse/stream.c
++++ b/src/modules/module-protocol-pulse/stream.c
+@@ -40,6 +40,23 @@ static int parse_frac(struct pw_properties *props, const char *key,
+ 	return 0;
+ }
+ 
++void create_stream_timeout(void *user_data, uint64_t expirations) {
++	struct stream *stream = user_data;
++
++	if (stream->create_tag != SPA_ID_INVALID) {
++		pw_log_warn("[%s] timeout on stream %p channel:%d", stream->client->name, stream, stream->channel);
++
++		/* Don't try to signal anything to the client, it's already killed the stream on its end */
++		stream->drain_tag = 0;
++		stream->killed = false;
++
++		stream_free(stream);
++	} else {
++		pw_loop_destroy_source(stream->impl->main_loop, stream->timer);
++		stream->timer = NULL;
++	}
++}
++
+ struct stream *stream_new(struct client *client, enum stream_type type, uint32_t create_tag,
+ 			  const struct sample_spec *ss, const struct channel_map *map,
+ 			  const struct buffer_attr *attr)
+@@ -89,6 +106,12 @@ struct stream *stream_new(struct client *client, enum stream_type type, uint32_t
+ 		spa_assert_not_reached();
+ 	}
+ 
++	/* Time out if we don't get a link and can't send a reply to create in 35s. Client will time out in
++	 * 30s and clean up its stream anyway. */
++	struct timespec create_timeout = { .tv_sec = 35, .tv_nsec = 0 };
++	stream->timer = pw_loop_add_timer(stream->impl->main_loop, create_stream_timeout, stream);
++	pw_loop_update_timer(stream->impl->main_loop, stream->timer, &create_timeout, NULL, false);
++
+ 	return stream;
+ 
+ error_errno:
+@@ -106,6 +129,11 @@ void stream_free(struct stream *stream)
+ 
+ 	pw_log_debug("client %p: stream %p channel:%d", client, stream, stream->channel);
+ 
++	if (stream->timer) {
++		pw_loop_destroy_source(stream->impl->main_loop, stream->timer);
++		stream->timer = NULL;
++	}
++
+ 	if (stream->drain_tag)
+ 		reply_error(client, -1, stream->drain_tag, -ENOENT);
+ 
+diff --git a/src/modules/module-protocol-pulse/stream.h b/src/modules/module-protocol-pulse/stream.h
+index 64ecea680..6f35cbfbc 100644
+--- a/src/modules/module-protocol-pulse/stream.h
++++ b/src/modules/module-protocol-pulse/stream.h
+@@ -50,6 +50,7 @@ struct stream {
+ 
+ 	struct pw_stream *stream;
+ 	struct spa_hook stream_listener;
++	struct spa_source *timer;
+ 
+ 	struct spa_io_position *position;
+ 	struct spa_ringbuffer ring;
+-- 
+2.51.0
+

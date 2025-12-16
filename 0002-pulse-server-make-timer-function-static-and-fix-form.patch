@@ -1,0 +1,27 @@
+From ca51f729002b571e8214eb0849f3df7292a150df Mon Sep 17 00:00:00 2001
+From: Wim Taymans <wtaymans@redhat.com>
+Date: Wed, 17 Sep 2025 19:18:27 +0200
+Subject: [PATCH 2/8] pulse-server: make timer function static and fix
+ formatting
+
+---
+ src/modules/module-protocol-pulse/stream.c | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+diff --git a/src/modules/module-protocol-pulse/stream.c b/src/modules/module-protocol-pulse/stream.c
+index 9380fa3d2..422c0e3a9 100644
+--- a/src/modules/module-protocol-pulse/stream.c
++++ b/src/modules/module-protocol-pulse/stream.c
+@@ -40,7 +40,8 @@ static int parse_frac(struct pw_properties *props, const char *key,
+ 	return 0;
+ }
+ 
+-void create_stream_timeout(void *user_data, uint64_t expirations) {
++static void create_stream_timeout(void *user_data, uint64_t expirations)
++{
+ 	struct stream *stream = user_data;
+ 
+ 	if (stream->create_tag != SPA_ID_INVALID) {
+-- 
+2.51.0
+
