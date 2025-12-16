@@ -1,5 +1,5 @@
 
-`main @ 20251215.1000`
+`main @ 20251216.1000`
 ======================
 
 Valve packages
@@ -147,7 +147,7 @@ Arch Linux packages
  * [`adwaita-icon-theme/48.1-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/adwaita-icon-theme/-/tree/48.1-1)
  * [`adwaita-icon-theme-legacy/46.2-3`](https://gitlab.archlinux.org/archlinux/packaging/packages/adwaita-icon-theme-legacy/-/tree/46.2-3)
  * [`aha/0.5.1-3`](https://gitlab.archlinux.org/archlinux/packaging/packages/aha/-/tree/0.5.1-3)
- * [`alsa-card-profiles/1:1.4.9-1.4`](https://gitlab.archlinux.org/archlinux/packaging/packages/pipewire/-/tree/1:1.4.9-1.4)
+ * [`alsa-card-profiles/1:1.4.9-1.5`](https://gitlab.archlinux.org/archlinux/packaging/packages/pipewire/-/tree/1:1.4.9-1.5)
  * [`alsa-lib/1.2.14-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/alsa-lib/-/tree/1.2.14-1)
  * [`alsa-plugins/1:1.2.12-4`](https://gitlab.archlinux.org/archlinux/packaging/packages/alsa-plugins/-/tree/1:1.2.12-4)
  * [`alsa-topology-conf/1.2.5.1-4`](https://gitlab.archlinux.org/archlinux/packaging/packages/alsa-topology-conf/-/tree/1.2.5.1-4)
@@ -319,7 +319,7 @@ Arch Linux packages
  * [`gsm/1.0.22-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/gsm/-/tree/1.0.22-2)
  * [`gssdp/1.6.4-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/gssdp/-/tree/1.6.4-1)
  * [`gssproxy/0.9.2-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/gssproxy/-/tree/0.9.2-2)
- * [`gst-plugin-pipewire/1:1.4.9-1.4`](https://gitlab.archlinux.org/archlinux/packaging/packages/pipewire/-/tree/1:1.4.9-1.4)
+ * [`gst-plugin-pipewire/1:1.4.9-1.5`](https://gitlab.archlinux.org/archlinux/packaging/packages/pipewire/-/tree/1:1.4.9-1.5)
  * [`gst-plugins-bad-libs/1.26.4-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/gst-plugins-bad-libs/-/tree/1.26.4-1)
  * [`gst-plugins-base/1.26.4-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/gst-plugins-base/-/tree/1.26.4-1)
  * [`gst-plugins-base-libs/1.26.4-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/gst-plugins-base-libs/-/tree/1.26.4-1)
@@ -574,7 +574,7 @@ Arch Linux packages
  * [`libpciaccess/0.18.1-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/libpciaccess/-/tree/0.18.1-2)
  * [`libpfm/4.13.0+r83+g91970fe-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/libpfm/-/tree/4.13.0+r83+g91970fe-1)
  * [`libpgm/5.3.128-3`](https://gitlab.archlinux.org/archlinux/packaging/packages/libpgm/-/tree/5.3.128-3)
- * [`libpipewire/1:1.4.9-1.4`](https://gitlab.archlinux.org/archlinux/packaging/packages/pipewire/-/tree/1:1.4.9-1.4)
+ * [`libpipewire/1:1.4.9-1.5`](https://gitlab.archlinux.org/archlinux/packaging/packages/pipewire/-/tree/1:1.4.9-1.5)
  * [`libplacebo/7.351.0-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/libplacebo/-/tree/7.351.0-2)
  * [`libplasma/6.4.3-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/libplasma/-/tree/6.4.3-1)
  * [`libplist/2.7.0-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/libplist/-/tree/2.7.0-1)
@@ -770,13 +770,13 @@ Arch Linux packages
  * [`phonon-qt6/4.12.0-5`](https://gitlab.archlinux.org/archlinux/packaging/packages/phonon-qt6/-/tree/4.12.0-5)
  * [`phonon-qt6-vlc/0.12.0-5`](https://gitlab.archlinux.org/archlinux/packaging/packages/phonon-qt6-vlc/-/tree/0.12.0-5)
  * [`pinentry/1.3.1-5`](https://gitlab.archlinux.org/archlinux/packaging/packages/pinentry/-/tree/1.3.1-5)
- * [`pipewire/1:1.4.9-1.4`](https://gitlab.archlinux.org/archlinux/packaging/packages/pipewire/-/tree/1:1.4.9-1.4)
- * [`pipewire-alsa/1:1.4.9-1.4`](https://gitlab.archlinux.org/archlinux/packaging/packages/pipewire/-/tree/1:1.4.9-1.4)
- * [`pipewire-audio/1:1.4.9-1.4`](https://gitlab.archlinux.org/archlinux/packaging/packages/pipewire/-/tree/1:1.4.9-1.4)
- * [`pipewire-jack/1:1.4.9-1.4`](https://gitlab.archlinux.org/archlinux/packaging/packages/pipewire/-/tree/1:1.4.9-1.4)
- * [`pipewire-pulse/1:1.4.9-1.4`](https://gitlab.archlinux.org/archlinux/packaging/packages/pipewire/-/tree/1:1.4.9-1.4)
- * [`pipewire-v4l2/1:1.4.9-1.4`](https://gitlab.archlinux.org/archlinux/packaging/packages/pipewire/-/tree/1:1.4.9-1.4)
- * [`pipewire-x11-bell/1:1.4.9-1.4`](https://gitlab.archlinux.org/archlinux/packaging/packages/pipewire/-/tree/1:1.4.9-1.4)
+ * [`pipewire/1:1.4.9-1.5`](https://gitlab.archlinux.org/archlinux/packaging/packages/pipewire/-/tree/1:1.4.9-1.5)
+ * [`pipewire-alsa/1:1.4.9-1.5`](https://gitlab.archlinux.org/archlinux/packaging/packages/pipewire/-/tree/1:1.4.9-1.5)
+ * [`pipewire-audio/1:1.4.9-1.5`](https://gitlab.archlinux.org/archlinux/packaging/packages/pipewire/-/tree/1:1.4.9-1.5)
+ * [`pipewire-jack/1:1.4.9-1.5`](https://gitlab.archlinux.org/archlinux/packaging/packages/pipewire/-/tree/1:1.4.9-1.5)
+ * [`pipewire-pulse/1:1.4.9-1.5`](https://gitlab.archlinux.org/archlinux/packaging/packages/pipewire/-/tree/1:1.4.9-1.5)
+ * [`pipewire-v4l2/1:1.4.9-1.5`](https://gitlab.archlinux.org/archlinux/packaging/packages/pipewire/-/tree/1:1.4.9-1.5)
+ * [`pipewire-x11-bell/1:1.4.9-1.5`](https://gitlab.archlinux.org/archlinux/packaging/packages/pipewire/-/tree/1:1.4.9-1.5)
  * [`pixman/0.46.4-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/pixman/-/tree/0.46.4-1)
  * [`pkcs11-helper/1.30.0-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/pkcs11-helper/-/tree/1.30.0-2)
  * [`plasma-activities/6.4.3-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/plasma-activities/-/tree/6.4.3-1)
@@ -1007,7 +1007,7 @@ Arch Linux packages
  * [`vmaf/3.0.0-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/vmaf/-/tree/3.0.0-1)
  * [`volume_key/0.3.12-11`](https://gitlab.archlinux.org/archlinux/packaging/packages/volume_key/-/tree/0.3.12-11)
  * [`vulkan-icd-loader/1.4.321.0-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/vulkan-icd-loader/-/tree/1.4.321.0-1)
- * [`vulkan-radeon/26.0.0_devel.214805.steamos_25.11.3-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/vulkan-radeon/-/tree/26.0.0_devel.214805.steamos_25.11.3-2)
+ * [`vulkan-radeon/26.0.0_devel.214812.steamos_25.11.4-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/vulkan-radeon/-/tree/26.0.0_devel.214812.steamos_25.11.4-1)
  * [`vulkan-tools/1.4.321.0-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/vulkan-tools/-/tree/1.4.321.0-1)
  * [`wavpack/5.8.1-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/wavpack/-/tree/5.8.1-1)
  * [`wayland/1.23.1-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/wayland/-/tree/1.23.1-2)
