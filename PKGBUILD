@@ -32,7 +32,7 @@ pkgname=(
   pulse-native-provider
 )
 pkgver=1.4.9
-pkgrel=1.6
+pkgrel=1.7
 epoch=1
 pkgdesc="Low-latency audio/video router and processor"
 url="https://pipewire.org"
@@ -115,6 +115,8 @@ source=(
 
     # Holo: Backport https://gitlab.freedesktop.org/pipewire/pipewire/-/merge_requests/2639
     "0001-spa-alsa-Guard-against-mismatched-LPCM-channel-count.patch"
+    # Holo: Backport https://gitlab.freedesktop.org/pipewire/pipewire/-/merge_requests/2642
+    "0002-spa-alsa-Fix-off-by-one-check-in-ELD-channel-positio.patch"
 )
 b2sums=('44e7ed98e7a4c383e96c5c7a58265e568a1191edb87a9ff472a671d235a7872ea320fbefa1fce31a787d18465e26955b2122af7a77566f7bc5e17a9665239f8f'
         '68ad58cb1a8c532a194b7982167e6b461ff3a2d046f346305c38d3af21a696a2cd18619b73b99cc1b41c55f8786cf26ab5c077f58652e8197a9f5f42416c764f'
@@ -133,7 +135,8 @@ b2sums=('44e7ed98e7a4c383e96c5c7a58265e568a1191edb87a9ff472a671d235a7872ea320fbe
         '3cc28998bb06bd9dfc7ee126ca79a9f6a218c605d8eee9938de398e3014ee18e835b87cc6310d76907c2323d7c244d1d7b45e930fbf3a218021d41e26687cd2a'
         '7094d94221a7b3e6830381e3398df9a2e2c64ac440a75add1de4b6fba7151882ede14ef57f7c3726d01353104b7d59b04de4677e53697ba5cf9ec81feeb8c6d4'
         '6bab438f9c6f661aa0e216769c49ff0594449410d4660f1b53fe3976daeee49ed733e8b2bd17b3064cc8fdc4f70abc5964760c3476d0caa3474ee6a123664d7f'
-        '6632ff50f1de31ab8d520b6af126da6a887ab37b91e9ca1ee0ed0f5e748ccc0f78e8cb4df1fd9d1521fd03f03ec53c32580c3c8d7c881c2330de6dc47847ef98')
+        '148f6315f25fb956fdab4935ceea35f83cae36afdbb1d5471103445f5a7a45fd27cb1921b1926a39d382dead0f2be9842c36b01a62ba566b93331cbf45bf38b0'
+        '57aafc323d58e38b781528e21ac5f642fd7de11ad153ff12093e4d1807a1768fe38c40cde8902b888908a8c6484ccf3affe52ac9f2274064bfd50114bae96f5b')
 
 
 prepare() {

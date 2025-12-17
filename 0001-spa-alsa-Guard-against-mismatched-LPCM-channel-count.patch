@@ -1,8 +1,8 @@
-From 772465876ea3712066cf2f6db9bad74a0857426c Mon Sep 17 00:00:00 2001
+From 090a2c777e3889a26362bbf070ff3024607ffeac Mon Sep 17 00:00:00 2001
 From: Arun Raghavan <arunr@valvesoftware.com>
 Date: Mon, 15 Dec 2025 11:48:14 -0800
-Subject: [PATCH] spa: alsa: Guard against mismatched LPCM channel count in ELD
- parsing
+Subject: [PATCH 1/2] spa: alsa: Guard against mismatched LPCM channel count in
+ ELD parsing
 
 With wonky EDID states, we want to make sure we don't overflow the
 available positions.
