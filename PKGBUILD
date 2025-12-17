@@ -32,7 +32,7 @@ pkgname=(
   pulse-native-provider
 )
 pkgver=1.4.9
-pkgrel=1.5
+pkgrel=1.6
 epoch=1
 pkgdesc="Low-latency audio/video router and processor"
 url="https://pipewire.org"
@@ -112,6 +112,9 @@ source=(
     "0006-timer-fix-compilation-on-arm.patch"
     "0007-timer-queue-delete-next-timer-event-when-it-got-fire.patch"
     "0008-modules-use-timer-queue-in-avahi-poll.patch"
+
+    # Holo: Backport https://gitlab.freedesktop.org/pipewire/pipewire/-/merge_requests/2639
+    "0001-spa-alsa-Guard-against-mismatched-LPCM-channel-count.patch"
 )
 b2sums=('44e7ed98e7a4c383e96c5c7a58265e568a1191edb87a9ff472a671d235a7872ea320fbefa1fce31a787d18465e26955b2122af7a77566f7bc5e17a9665239f8f'
         '68ad58cb1a8c532a194b7982167e6b461ff3a2d046f346305c38d3af21a696a2cd18619b73b99cc1b41c55f8786cf26ab5c077f58652e8197a9f5f42416c764f'
@@ -129,7 +132,9 @@ b2sums=('44e7ed98e7a4c383e96c5c7a58265e568a1191edb87a9ff472a671d235a7872ea320fbe
         '600d2d8e1ba50ccd49aed469e1d803ca3768327958cc6d2c53ffd8c6307c845ceea0f3295f48b9427b43ab1cb52043409361b83af75047408be1adda9771e1dc'
         '3cc28998bb06bd9dfc7ee126ca79a9f6a218c605d8eee9938de398e3014ee18e835b87cc6310d76907c2323d7c244d1d7b45e930fbf3a218021d41e26687cd2a'
         '7094d94221a7b3e6830381e3398df9a2e2c64ac440a75add1de4b6fba7151882ede14ef57f7c3726d01353104b7d59b04de4677e53697ba5cf9ec81feeb8c6d4'
-        '6bab438f9c6f661aa0e216769c49ff0594449410d4660f1b53fe3976daeee49ed733e8b2bd17b3064cc8fdc4f70abc5964760c3476d0caa3474ee6a123664d7f')
+        '6bab438f9c6f661aa0e216769c49ff0594449410d4660f1b53fe3976daeee49ed733e8b2bd17b3064cc8fdc4f70abc5964760c3476d0caa3474ee6a123664d7f'
+        '6632ff50f1de31ab8d520b6af126da6a887ab37b91e9ca1ee0ed0f5e748ccc0f78e8cb4df1fd9d1521fd03f03ec53c32580c3c8d7c881c2330de6dc47847ef98')
+
 
 prepare() {
   cd pipewire
