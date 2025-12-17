@@ -1,0 +1,26 @@
+From 881eeedb47d53f00da1c7b2e157adce83452179b Mon Sep 17 00:00:00 2001
+From: Arun Raghavan <arunr@valvesoftware.com>
+Date: Wed, 17 Dec 2025 11:07:20 -0800
+Subject: [PATCH 2/2] spa: alsa: Fix off-by-one check in ELD channel position
+ parsing
+
+---
+ spa/plugins/alsa/acp/acp.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/spa/plugins/alsa/acp/acp.c b/spa/plugins/alsa/acp/acp.c
+index ea46b4dad..9f2e3c469 100644
+--- a/spa/plugins/alsa/acp/acp.c
++++ b/spa/plugins/alsa/acp/acp.c
+@@ -1138,7 +1138,7 @@ static int hdmi_eld_changed(snd_mixer_elem_t *melem, unsigned int mask)
+ 
+ #define _ADD_CHANNEL_POSITION(pos)			\
+ 		{					\
+-			if (i + 1 < eld.lpcm_channels)	\
++			if (i < eld.lpcm_channels)	\
+ 			positions[i++] = pos;		\
+ 		}
+ 
+-- 
+2.52.0
+
