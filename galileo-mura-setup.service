@@ -2,6 +2,8 @@
 Description=galileo mura setup
 PartOf=graphical-session.target
 After=graphical-session.target
+ConditionFirmware=smbios-field(sys_vendor="Valve")
+ConditionFirmware=smbios-field(product_name="Galileo")
 
 [Service]
 Type=oneshot
