@@ -1,0 +1,71 @@
+From d89d1668dc06b09e52514858e6d5d61be79966cb Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Fr=C3=A9d=C3=A9ric=20Danis?= <frederic.danis@collabora.com>
+Date: Thu, 27 Nov 2025 16:38:24 +0100
+Subject: [PATCH] spa: bluez: backend-native: Add support for AT+BLDN for PTS
+ tests
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+
+This allows to fake Last Dial Number call by calling the first memory.
+
+This allows to pass PTS tests HFP/AG/OCL/BV-01-C and HFP/AG/OCL/BV-02-C.
+---
+ spa/plugins/bluez5/backend-native.c | 21 +++++++++++++++++++++
+ 1 file changed, 21 insertions(+)
+
+diff --git a/spa/plugins/bluez5/backend-native.c b/spa/plugins/bluez5/backend-native.c
+index 9a3788483..297334754 100644
+--- a/spa/plugins/bluez5/backend-native.c
++++ b/spa/plugins/bluez5/backend-native.c
+@@ -125,6 +125,7 @@ struct impl {
+ 	struct spa_source *ring_timer;
+ 	void *upower;
+ 	struct spa_bt_telephony *telephony;
++	bool pts;
+ };
+ 
+ struct transport_data {
+@@ -1438,6 +1439,15 @@ next_indicator:
+ 			rfcomm_send_error(rfcomm, error);
+ 			return true;
+ 		}
++	} else if (spa_strstartswith(buf, "AT+BLDN") && backend->pts) {
++		enum cmee_error error;
++
++		/* For PTS tests HFP/AG/OCL/BV-01-C and HFP/AG/OCL/BV-02-C, fake last dial
++		 * number by calling first memory */
++		if (!mm_do_call(backend->modemmanager, ">1", rfcomm, &error)) {
++			rfcomm_send_error(rfcomm, error);
++			return true;
++		}
+ 	} else if (spa_strstartswith(buf, "AT+CHUP")) {
+ 		enum cmee_error error;
+ 
+@@ -4017,6 +4027,16 @@ static void parse_hfp_disable_nrec(struct impl *backend, const struct spa_dict *
+ 		backend->hfp_disable_nrec = false;
+ }
+ 
++static void parse_hfp_pts(struct impl *backend, const struct spa_dict *info)
++{
++	const char *str;
++
++	if ((str = spa_dict_lookup(info, "bluez5.hfphsp-backend-native-pts")) != NULL)
++		backend->pts = spa_atob(str);
++	else
++		backend->pts = false;
++}
++
+ static const struct spa_bt_backend_implementation backend_impl = {
+ 	SPA_VERSION_BT_BACKEND_IMPLEMENTATION,
+ 	.free = backend_native_free,
+@@ -4101,6 +4121,7 @@ struct spa_bt_backend *backend_native_new(struct spa_bt_monitor *monitor,
+ 		goto fail;
+ 
+ 	parse_hfp_disable_nrec(backend, info);
++	parse_hfp_pts(backend, info);
+ 
+ #ifdef HAVE_BLUEZ_5_BACKEND_HSP_NATIVE
+ 	if (!dbus_connection_register_object_path(backend->conn,
+-- 
+2.43.0
+

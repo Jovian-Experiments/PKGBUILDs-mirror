@@ -1,0 +1,29 @@
+From 5d39e1357e66d2654af6f4b05e62ce7aa02e1ef2 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Fr=C3=A9d=C3=A9ric=20Danis?= <frederic.danis@collabora.com>
+Date: Wed, 12 Nov 2025 15:49:50 +0100
+Subject: [PATCH] spa: bluez: backend-native: Fix +CNUM reply
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+
+PTS test HFP/AG/NUM/BV-01-C expects to receive 5 items, the last one
+representing service type which could be 4 for voice or 5 for fax.
+---
+ spa/plugins/bluez5/backend-native.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/spa/plugins/bluez5/backend-native.c b/spa/plugins/bluez5/backend-native.c
+index 503607ca1..3b8759261 100644
+--- a/spa/plugins/bluez5/backend-native.c
++++ b/spa/plugins/bluez5/backend-native.c
+@@ -1307,7 +1307,7 @@ next_indicator:
+ 				type = INTERNATIONAL_NUMBER;
+ 			else
+ 				type = NATIONAL_NUMBER;
+-			rfcomm_send_reply(rfcomm, "+CNUM: ,\"%s\",%u", backend->modem.own_number, type);
++			rfcomm_send_reply(rfcomm, "+CNUM: ,\"%s\",%u,,4", backend->modem.own_number, type);
+ 		}
+ 		rfcomm_send_reply(rfcomm, "OK");
+ 	} else if (spa_strstartswith(buf, "AT+COPS=")) {
+-- 
+2.43.0
+

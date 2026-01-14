@@ -1,0 +1,53 @@
+From f9f08f7f5c6b81c9706ef07b14e0c3fd967d6805 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Fr=C3=A9d=C3=A9ric=20Danis?= <frederic.danis@collabora.com>
+Date: Wed, 19 Nov 2025 15:59:57 +0100
+Subject: [PATCH] spa: bluez: backend-native: Fix CIEV call status support for
+ HFP AG
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+
+Based on HFP specs, the audio connection is independent of the active
+call status, which should be managed by the ModemManager part of the
+plugin.
+But when using HFP AG without modem attached, e.g. during zoom meeting,
+the connection will be closed after a while unless call status has been
+forced to active,
+cf. https://gitlab.freedesktop.org/pipewire/pipewire/-/issues/1744.
+
+Currently and for HFP AG PTS tests requesting to get an audio connection
+in 3 seconds after a call activates, this prevent to start audio
+connection before starting a call.
+
+This commit prevents to force the call status during audio (dis)connection
+if a modem is available.
+---
+ spa/plugins/bluez5/backend-native.c | 6 ++++--
+ 1 file changed, 4 insertions(+), 2 deletions(-)
+
+diff --git a/spa/plugins/bluez5/backend-native.c b/spa/plugins/bluez5/backend-native.c
+index 3b8759261..0c1d353d1 100644
+--- a/spa/plugins/bluez5/backend-native.c
++++ b/spa/plugins/bluez5/backend-native.c
+@@ -2759,7 +2759,8 @@ static int sco_acquire_cb(void *data, bool optional)
+ 		goto fail;
+ 
+ #ifdef HAVE_BLUEZ_5_BACKEND_HFP_NATIVE
+-	rfcomm_hfp_ag_set_cind(td->rfcomm, true);
++	if (!mm_is_available(backend->modemmanager))
++		rfcomm_hfp_ag_set_cind(td->rfcomm, true);
+ #endif
+ 
+ 	t->fd = sock;
+@@ -2813,7 +2814,8 @@ static int sco_release_cb(void *data)
+ 	spa_bt_transport_set_state(t, SPA_BT_TRANSPORT_STATE_IDLE);
+ 
+ #ifdef HAVE_BLUEZ_5_BACKEND_HFP_NATIVE
+-	rfcomm_hfp_ag_set_cind(td->rfcomm, false);
++	if (!mm_is_available(backend->modemmanager))
++		rfcomm_hfp_ag_set_cind(td->rfcomm, false);
+ #endif
+ 
+ 	sco_destroy_cb(t);
+-- 
+2.43.0
+

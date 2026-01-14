@@ -1,0 +1,87 @@
+From 9a48bbaa3657fd4022ab79729fdc3d073365d4e9 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Fr=C3=A9d=C3=A9ric=20Danis?= <frederic.danis@collabora.com>
+Date: Tue, 18 Nov 2025 15:06:50 +0100
+Subject: [PATCH] spa: bluez: modemmanager: Add support for memory dialing for
+ PTS tests
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+
+This add a new property to to allow to fake memory dialing for PTS tests
+HFP/AG/OCM/BV-01-C and HFP/AG/OCM/BV-02-C.
+---
+ doc/dox/config/pipewire-props.7.md |  3 +++
+ spa/plugins/bluez5/modemmanager.c  | 15 ++++++++++++++-
+ 2 files changed, 17 insertions(+), 1 deletion(-)
+
+diff --git a/doc/dox/config/pipewire-props.7.md b/doc/dox/config/pipewire-props.7.md
+index cb06c6775..5c5b1bf2d 100644
+--- a/doc/dox/config/pipewire-props.7.md
++++ b/doc/dox/config/pipewire-props.7.md
+@@ -1138,6 +1138,9 @@ HFP/HSP backend (default: native). Available values: any, none, hsphfpd, ofono,
+ 
+ @PAR@ monitor-prop  bluez5.hfphsp-backend-native-modem   # string
+ 
++@PAR@ monitor-prop  bluez5.hfphsp-backend-native-pts   # boolean
++Enable specific workarounds for Bluetooth qualification.
++
+ @PAR@ monitor-prop  bluez5.disable-dummy-call   # boolean
+ By default a call status event is sent on audio stream connection/disconnection to
+ workaround some headset timeout disconnection when the HFP HF is used by another
+diff --git a/spa/plugins/bluez5/modemmanager.c b/spa/plugins/bluez5/modemmanager.c
+index e42fb3f0e..4fa29b082 100644
+--- a/spa/plugins/bluez5/modemmanager.c
++++ b/spa/plugins/bluez5/modemmanager.c
+@@ -36,6 +36,8 @@ struct impl {
+ 
+ 	struct modem modem;
+ 	struct spa_list call_list;
++
++	bool pts;
+ };
+ 
+ struct dbus_cmd_data {
+@@ -944,8 +946,13 @@ bool mm_do_call(void *modemmanager, const char* number, void *user_data, enum cm
+ 	spa_autofree struct dbus_cmd_data *data = NULL;
+ 	spa_autoptr(DBusMessage) m = NULL;
+ 	DBusMessageIter iter, dict;
++	size_t i = 0;
++
++	/* Allow memory dial for PTS tests HFP/AG/OCM/BV-01-C and HFP/AG/OCM/BV-02-C */
++	if (this->pts && number[0] == '>')
++		i++;
+ 
+-	for (size_t i = 0; number[i]; i++) {
++	for (; number[i]; i++) {
+ 		if (!is_valid_dial_string_char(number[i])) {
+ 			spa_log_warn(this->log, "Call creation canceled, invalid character found in dial string: %c", number[i]);
+ 			if (error)
+@@ -1078,6 +1085,8 @@ void *mm_register(struct spa_log *log, void *dbus_connection, const struct spa_d
+ {
+ 	const char *modem_device_str = NULL;
+ 	bool modem_device_found = false;
++	const char *pts_str = NULL;
++	bool pts = false;
+ 
+ 	spa_assert(log);
+ 	spa_assert(dbus_connection);
+@@ -1087,6 +1096,9 @@ void *mm_register(struct spa_log *log, void *dbus_connection, const struct spa_d
+ 			if (!spa_streq(modem_device_str, "none"))
+ 				modem_device_found = true;
+ 		}
++		if ((pts_str = spa_dict_lookup(info, "bluez5.hfphsp-backend-native-pts")) != NULL) {
++			pts = spa_atob(pts_str);
++		}
+ 	}
+ 	if (!modem_device_found) {
+ 		spa_log_info(log, "No modem allowed, doesn't link to ModemManager");
+@@ -1104,6 +1116,7 @@ void *mm_register(struct spa_log *log, void *dbus_connection, const struct spa_d
+ 	if (modem_device_str && !spa_streq(modem_device_str, "any"))
+ 		this->allowed_modem_device = strdup(modem_device_str);
+ 	spa_list_init(&this->call_list);
++	this->pts = pts;
+ 
+ 	if (add_filters(this) < 0)
+ 		return NULL;
+-- 
+2.43.0
+
