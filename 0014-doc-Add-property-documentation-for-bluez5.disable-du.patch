@@ -1,0 +1,31 @@
+From 04cf29f7cd6ce8847567ab94d670ba64eb4e6a83 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Fr=C3=A9d=C3=A9ric=20Danis?= <frederic.danis@collabora.com>
+Date: Fri, 12 Dec 2025 09:16:55 +0100
+Subject: [PATCH] doc: Add property documentation for bluez5.disable-dummy-call
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+
+---
+ doc/dox/config/pipewire-props.7.md | 6 ++++++
+ 1 file changed, 6 insertions(+)
+
+diff --git a/doc/dox/config/pipewire-props.7.md b/doc/dox/config/pipewire-props.7.md
+index 4840815d9..cb06c6775 100644
+--- a/doc/dox/config/pipewire-props.7.md
++++ b/doc/dox/config/pipewire-props.7.md
+@@ -1138,6 +1138,12 @@ HFP/HSP backend (default: native). Available values: any, none, hsphfpd, ofono,
+ 
+ @PAR@ monitor-prop  bluez5.hfphsp-backend-native-modem   # string
+ 
++@PAR@ monitor-prop  bluez5.disable-dummy-call   # boolean
++By default a call status event is sent on audio stream connection/disconnection to
++workaround some headset timeout disconnection when the HFP HF is used by another
++application than telephony one, e.g. a conference application/website.
++This prevent to send this event.
++
+ @PAR@ monitor-prop  bluez5.dummy-avrcp player   # boolean
+ Register dummy AVRCP player. Some devices have wrongly functioning
+ volume or playback controls if this is not enabled. Default: false
+-- 
+2.43.0
+

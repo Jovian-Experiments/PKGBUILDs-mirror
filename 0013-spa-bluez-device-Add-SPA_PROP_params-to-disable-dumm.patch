@@ -1,0 +1,202 @@
+From 25a6fdcdb1a174aedc5878fb7859a21ef0276764 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Fr=C3=A9d=C3=A9ric=20Danis?= <frederic.danis@collabora.com>
+Date: Fri, 28 Nov 2025 16:10:41 +0100
+Subject: [PATCH] spa: bluez: device: Add SPA_PROP_params to disable dummy call
+ state
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 8bit
+
+The current implementation only send the +CIEV:<call>,<active> event
+if there's an active modem in ModemManager. This may lead to headset
+disconnection as in (1) if the profile is by another application than
+telephony one, e.g. a conference application/website.
+
+This commit improves dummy call status update by adding a new
+"bluez5.disable-dummy-call" props param in bluez5 device, allowing
+external application like WirePlumber to set it dynamically.
+
+(1) https://gitlab.freedesktop.org/pipewire/pipewire/-/issues/1744
+
+Fixes: https://gitlab.freedesktop.org/pipewire/pipewire/-/merge_requests/2606
+---
+ spa/plugins/bluez5/backend-native.c |  4 +-
+ spa/plugins/bluez5/bluez5-device.c  | 81 ++++++++++++++++++++++++++---
+ spa/plugins/bluez5/defs.h           |  2 +
+ 3 files changed, 79 insertions(+), 8 deletions(-)
+
+diff --git a/spa/plugins/bluez5/backend-native.c b/spa/plugins/bluez5/backend-native.c
+index e995c7aa0..9a3788483 100644
+--- a/spa/plugins/bluez5/backend-native.c
++++ b/spa/plugins/bluez5/backend-native.c
+@@ -2763,7 +2763,7 @@ static int sco_acquire_cb(void *data, bool optional)
+ 		goto fail;
+ 
+ #ifdef HAVE_BLUEZ_5_BACKEND_HFP_NATIVE
+-	if (!mm_is_available(backend->modemmanager))
++	if (!td->rfcomm->device->disable_dummy_call)
+ 		rfcomm_hfp_ag_set_cind(td->rfcomm, true);
+ #endif
+ 
+@@ -2818,7 +2818,7 @@ static int sco_release_cb(void *data)
+ 	spa_bt_transport_set_state(t, SPA_BT_TRANSPORT_STATE_IDLE);
+ 
+ #ifdef HAVE_BLUEZ_5_BACKEND_HFP_NATIVE
+-	if (!mm_is_available(backend->modemmanager))
++	if (!td->rfcomm->device->disable_dummy_call)
+ 		rfcomm_hfp_ag_set_cind(td->rfcomm, false);
+ #endif
+ 
+diff --git a/spa/plugins/bluez5/bluez5-device.c b/spa/plugins/bluez5/bluez5-device.c
+index e14c5e0a4..842cbbccc 100644
+--- a/spa/plugins/bluez5/bluez5-device.c
++++ b/spa/plugins/bluez5/bluez5-device.c
+@@ -12,6 +12,7 @@
+ 
+ #include <spa/support/log.h>
+ #include <spa/utils/type.h>
++#include <spa/utils/json.h>
+ #include <spa/utils/keys.h>
+ #include <spa/utils/names.h>
+ #include <spa/utils/string.h>
+@@ -2676,11 +2677,24 @@ static struct spa_pod *build_prop_info_codec(struct impl *this, struct spa_pod_b
+ static struct spa_pod *build_props(struct impl *this, struct spa_pod_builder *b, uint32_t id)
+ {
+ 	struct props *p = &this->props;
++	struct spa_pod_frame f[2];
++	struct spa_pod *param;
++
++	spa_pod_builder_push_object(b, &f[0], SPA_TYPE_OBJECT_Props, id);
++	spa_pod_builder_add(b,
++		SPA_PROP_bluetoothAudioCodec, SPA_POD_Id(p->codec),
++		SPA_PROP_bluetoothOffloadActive, SPA_POD_Bool(p->offload_active),
++		0);
++
++	spa_pod_builder_prop(b, SPA_PROP_params, 0);
++	spa_pod_builder_push_struct(b, &f[1]);
++	spa_pod_builder_string(b, "bluez5.disable-dummy-call");
++	spa_pod_builder_bool(b, this->bt_dev->disable_dummy_call);
++	spa_pod_builder_pop(b, &f[1]);
++
++	param = spa_pod_builder_pop(b, &f[0]);
+ 
+-	return spa_pod_builder_add_object(b,
+-			SPA_TYPE_OBJECT_Props, id,
+-			SPA_PROP_bluetoothAudioCodec, SPA_POD_Id(p->codec),
+-			SPA_PROP_bluetoothOffloadActive, SPA_POD_Bool(p->offload_active));
++	return param;
+ }
+ 
+ static int impl_enum_params(void *object, int seq,
+@@ -3017,6 +3031,47 @@ static void apply_prop_offload_active(struct impl *this, bool active)
+ 	}
+ }
+ 
++static int parse_prop_params(struct impl *this, struct spa_pod *params)
++{
++	struct spa_pod_parser prs;
++	struct spa_pod_frame f;
++	int changed = 0;
++
++	if (params == NULL)
++		return 0;
++
++	spa_pod_parser_pod(&prs, params);
++	if (spa_pod_parser_push_struct(&prs, &f) < 0)
++		return 0;
++
++	while (true) {
++		const char *name;
++		struct spa_pod *pod;
++
++		if (spa_pod_parser_get_string(&prs, &name) < 0)
++			break;
++
++		if (spa_pod_parser_get_pod(&prs, &pod) < 0)
++			break;
++
++		if (spa_streq(name, "bluez5.disable-dummy-call") && spa_pod_is_bool(pod)) {
++			bool disable_dummy_call = SPA_POD_VALUE(struct spa_pod_bool, pod);
++			spa_log_info(this->log, "key:'%s' val:'%u'", name, disable_dummy_call);
++			this->bt_dev->disable_dummy_call = disable_dummy_call;
++		} else
++			continue;
++
++		changed++;
++	}
++
++	if (changed > 0) {
++		this->info.change_mask |= SPA_NODE_CHANGE_MASK_PARAMS;
++		this->params[IDX_Props].user++;
++	}
++
++	return changed;
++}
++
+ static int impl_set_param(void *object,
+ 			  uint32_t id, uint32_t flags,
+ 			  const struct spa_pod *param)
+@@ -3093,6 +3148,7 @@ static int impl_set_param(void *object,
+ 	{
+ 		uint32_t codec_id = SPA_ID_INVALID;
+ 		bool offload_active = this->props.offload_active;
++		struct spa_pod *params = NULL;
+ 
+ 		if (param == NULL)
+ 			return 0;
+@@ -3100,7 +3156,8 @@ static int impl_set_param(void *object,
+ 		if ((res = spa_pod_parse_object(param,
+ 				SPA_TYPE_OBJECT_Props, NULL,
+ 				SPA_PROP_bluetoothAudioCodec, SPA_POD_OPT_Id(&codec_id),
+-				SPA_PROP_bluetoothOffloadActive, SPA_POD_OPT_Bool(&offload_active))) < 0) {
++				SPA_PROP_bluetoothOffloadActive, SPA_POD_OPT_Bool(&offload_active),
++				SPA_PROP_params, SPA_POD_OPT_Pod(&params))) < 0) {
+ 			spa_log_warn(this->log, "can't parse props");
+ 			spa_debug_log_pod(this->log, SPA_LOG_LEVEL_DEBUG, 0, NULL, param);
+ 			return res;
+@@ -3108,10 +3165,15 @@ static int impl_set_param(void *object,
+ 
+ 		spa_log_debug(this->log, "setting props codec:%d offload:%d", (int)codec_id, (int)offload_active);
+ 
++		parse_prop_params(this, params);
++
+ 		apply_prop_offload_active(this, offload_active);
+ 
+-		if (codec_id == SPA_ID_INVALID)
++		if (codec_id == SPA_ID_INVALID) {
++			this->params[IDX_Props].flags ^= SPA_PARAM_INFO_SERIAL;
++			emit_info(this, false);
+ 			return 0;
++		}
+ 
+ 		if (this->profile == DEVICE_PROFILE_A2DP || profile_is_bap(this->profile) ||
+ 				this->profile == DEVICE_PROFILE_ASHA || this->profile == DEVICE_PROFILE_HSP_HFP) {
+@@ -3249,6 +3311,13 @@ impl_init(const struct spa_handle_factory *factory,
+ 			if ((profiles = spa_bt_profiles_from_json_array(str)) >= 0)
+ 				this->bt_dev->hw_volume_profiles = profiles;
+ 		}
++
++		if ((str = spa_dict_lookup(info, "bluez5.disable-dummy-call")) != NULL) {
++			bool value;
++
++			if (spa_json_parse_bool(str, strlen(str), &value) > 0)
++					this->bt_dev->disable_dummy_call = value;
++		}
+ 	}
+ 
+ 	this->device.iface = SPA_INTERFACE_INIT(
+diff --git a/spa/plugins/bluez5/defs.h b/spa/plugins/bluez5/defs.h
+index 0e25592e2..3efec465a 100644
+--- a/spa/plugins/bluez5/defs.h
++++ b/spa/plugins/bluez5/defs.h
+@@ -573,6 +573,8 @@ struct spa_bt_device {
+ 	const struct spa_dict *settings;
+ 
+ 	const struct media_codec *preferred_codec;
++
++	bool disable_dummy_call;
+ };
+ 
+ struct spa_bt_device *spa_bt_device_find(struct spa_bt_monitor *monitor, const char *path);
+-- 
+2.43.0
+

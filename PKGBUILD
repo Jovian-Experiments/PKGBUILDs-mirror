@@ -32,7 +32,7 @@ pkgname=(
   pulse-native-provider
 )
 pkgver=1.4.9
-pkgrel=1.7
+pkgrel=1.8
 epoch=1
 pkgdesc="Low-latency audio/video router and processor"
 url="https://pipewire.org"
@@ -66,6 +66,7 @@ makedepends=(
   libxfixes
   lilv
   meson
+  modemmanager
   ncurses
   opus
   'python>=3.13'
@@ -117,6 +118,24 @@ source=(
     "0001-spa-alsa-Guard-against-mismatched-LPCM-channel-count.patch"
     # Holo: Backport https://gitlab.freedesktop.org/pipewire/pipewire/-/merge_requests/2642
     "0002-spa-alsa-Fix-off-by-one-check-in-ELD-channel-positio.patch"
+
+    # Holo: Backports for HFP AG qualification
+    # Holo: Backport https://gitlab.freedesktop.org/pipewire/pipewire/-/merge_requests/2604
+    "0009-spa-bluez-modemmanager-Fix-NameOwnerChanged.patch"
+    # Holo: Backport https://gitlab.freedesktop.org/pipewire/pipewire/-/merge_requests/2605
+    "0010-spa-bluez-backend-native-Fix-CNUM-reply.patch"
+    # Holo: Backport https://gitlab.freedesktop.org/pipewire/pipewire/-/merge_requests/2606
+    "0011-spa-bluez-backend-native-Fix-CIEV-call-status-suppor.patch"
+    # Holo: Backport https://gitlab.freedesktop.org/pipewire/pipewire/-/merge_requests/2609
+    "0012-spa-bluez-backend-native-Fix-BIEV-HF-indicators-supp.patch"
+    # Holo: Backport https://gitlab.freedesktop.org/pipewire/pipewire/-/merge_requests/2617
+    "0013-spa-bluez-device-Add-SPA_PROP_params-to-disable-dumm.patch"
+    # Holo: Backport https://gitlab.freedesktop.org/pipewire/pipewire/-/merge_requests/2631
+    "0014-doc-Add-property-documentation-for-bluez5.disable-du.patch"
+    "0015-spa-bluez-modemmanager-Add-support-for-memory-dialin.patch"
+    "0016-spa-bluez-backend-native-Add-support-for-AT-BLDN-for.patch"
+    # Holo: Backport https://gitlab.freedesktop.org/pipewire/pipewire/-/merge_requests/2638
+    "0017-spa-bluez-backend-native-Fix-audio-connection-policy.patch"
 )
 b2sums=('44e7ed98e7a4c383e96c5c7a58265e568a1191edb87a9ff472a671d235a7872ea320fbefa1fce31a787d18465e26955b2122af7a77566f7bc5e17a9665239f8f'
         '68ad58cb1a8c532a194b7982167e6b461ff3a2d046f346305c38d3af21a696a2cd18619b73b99cc1b41c55f8786cf26ab5c077f58652e8197a9f5f42416c764f'
@@ -136,8 +155,17 @@ b2sums=('44e7ed98e7a4c383e96c5c7a58265e568a1191edb87a9ff472a671d235a7872ea320fbe
         '7094d94221a7b3e6830381e3398df9a2e2c64ac440a75add1de4b6fba7151882ede14ef57f7c3726d01353104b7d59b04de4677e53697ba5cf9ec81feeb8c6d4'
         '6bab438f9c6f661aa0e216769c49ff0594449410d4660f1b53fe3976daeee49ed733e8b2bd17b3064cc8fdc4f70abc5964760c3476d0caa3474ee6a123664d7f'
         '148f6315f25fb956fdab4935ceea35f83cae36afdbb1d5471103445f5a7a45fd27cb1921b1926a39d382dead0f2be9842c36b01a62ba566b93331cbf45bf38b0'
-        '57aafc323d58e38b781528e21ac5f642fd7de11ad153ff12093e4d1807a1768fe38c40cde8902b888908a8c6484ccf3affe52ac9f2274064bfd50114bae96f5b')
-
+        '57aafc323d58e38b781528e21ac5f642fd7de11ad153ff12093e4d1807a1768fe38c40cde8902b888908a8c6484ccf3affe52ac9f2274064bfd50114bae96f5b'
+        'fd2bfdd8601b142e9812058613bb69066c1e852145b0543ad8705a8415cd24c92e107f8420db6215f9723059fe2acc38825e4f4b4b5acaf9cbda32007aa13cf6'
+        '47d91be7e62f3bab9725ddd1f62ff075619f27e52e90b1b7586a08704067f277ead95affcc2945ba48f9830ed6d95cf001df1c3af21ac7dbe858e578047d65b3'
+        '76366abab04dc24df31d3943b0a28113bfdae54f8f8fec1fd8e8248a45779992b29e8c4870ce3aaf3fcadee0f46e50220bf7afdd93f964d3509811df39815667'
+        '17e52ec774230f6a88de11ef334b5937644e263f8616ac6302eb8ea4c6b5f55593255cd95489cee41c6957b88bf0b69ae050616f9635207d02969d5c867328ff'
+        '9f6ad262db5ac5dce91bf16bb1956f41f4d86c2f80844c2b1ebba119054c3d002bed9ec436a71ee616719aa2428c6a02fb70b4d1074ea1cc66552bc9a1facfec'
+        'c5f75947e36c72496e5c567d471c5fc7f62ea7e7f932a15c14118883bc39f79f4415282142587ff577fa7cf3e9d0938f0d560acac28e639c43c8d0daf9221157'
+        '7c6b745dd09b60e983db422148cef77ef4cf355d050f4a154959b9c95de786eabfa8970a734b67d548aa08e673662264c556736df64b1d7a887ecbbeb599e53b'
+        '9c95db232c9619d417fb0441943ec815df3b6d9a5043082854d295e020f315fc0c83ce8f6af3e0e8c9e946e80ed86df174eafddd72f38d423408afccd4cdcc57'
+        '2c97fa28a82d0f725ff169698edfad53cdb4d3131e79adbb1e7cd896ce96b4cb566bb5ae40d47e56775e61bd533d270c34af38db9f93c1b8e414f1eca445c3b4'
+        )
 
 prepare() {
   cd pipewire
@@ -154,6 +182,7 @@ prepare() {
 
 build() {
   local meson_options=(
+    -D bluez5-backend-native-mm=enabled
     -D bluez5-codec-lc3plus=disabled
     -D docs=enabled
     -D jack-devel=true
