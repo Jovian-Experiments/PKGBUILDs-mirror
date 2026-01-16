@@ -1,18 +1,18 @@
-From 5c81d529b6cd185bbdc9cebc1c241525f04a0bcc Mon Sep 17 00:00:00 2001
+From 3008cf7d21483456c4ed80727c3102a45e8a9fe0 Mon Sep 17 00:00:00 2001
 From: Julian Bouzas <julian.bouzas@collabora.com>
 Date: Mon, 16 Jun 2025 17:35:08 -0400
-Subject: [PATCH] monitor: alsa: Forward the 'session.suspend-timeout-seconds'
- property to loopback device
+Subject: [PATCH 3/6] monitor: alsa: Forward the
+ 'session.suspend-timeout-seconds' property to loopback device
 
 ---
  src/scripts/monitors/alsa.lua | 4 +++-
  1 file changed, 3 insertions(+), 1 deletion(-)
 
 diff --git a/src/scripts/monitors/alsa.lua b/src/scripts/monitors/alsa.lua
-index f149a6fd..ac2a9257 100644
+index 2a5776cc..8bb0bcce 100644
 --- a/src/scripts/monitors/alsa.lua
 +++ b/src/scripts/monitors/alsa.lua
-@@ -40,6 +40,7 @@ function CreateLoopback (properties)
+@@ -47,6 +47,7 @@ function CreateLoopback (properties)
    local pri_driver = properties ["priority.driver"]
    local pri_session = properties ["priority.session"]
    local cpd = properties ["card.profile.device"]
@@ -20,7 +20,7 @@ index f149a6fd..ac2a9257 100644
    local stream_media_class = nil
    local stream_props = nil
    local device_props = nil
-@@ -82,7 +83,8 @@ function CreateLoopback (properties)
+@@ -89,7 +90,8 @@ function CreateLoopback (properties)
      ["device.id"] = dev_id,
      ["card.profile.device"] = cpd,
      ["priority.driver"] = tonumber(pri_driver) + 1,
@@ -31,5 +31,5 @@ index f149a6fd..ac2a9257 100644
  
    -- Set args
 -- 
-2.39.5
+2.52.0
 

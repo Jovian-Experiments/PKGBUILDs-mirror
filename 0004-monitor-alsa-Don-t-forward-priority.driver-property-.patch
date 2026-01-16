@@ -1,0 +1,33 @@
+From 251a7aa282cd55b9563ade370acb9948ae0c5f60 Mon Sep 17 00:00:00 2001
+From: Julian Bouzas <julian.bouzas@collabora.com>
+Date: Thu, 26 Jun 2025 14:11:16 -0400
+Subject: [PATCH 4/6] monitor: alsa: Don't forward 'priority.driver' property
+ to loopback device
+
+---
+ src/scripts/monitors/alsa.lua | 2 --
+ 1 file changed, 2 deletions(-)
+
+diff --git a/src/scripts/monitors/alsa.lua b/src/scripts/monitors/alsa.lua
+index 8bb0bcce..443c03cf 100644
+--- a/src/scripts/monitors/alsa.lua
++++ b/src/scripts/monitors/alsa.lua
+@@ -44,7 +44,6 @@ function CreateLoopback (properties)
+   local dev_id = properties ["device.id"]
+   local channels = properties ["audio.channels"]
+   local position = properties ["audio.position"]
+-  local pri_driver = properties ["priority.driver"]
+   local pri_session = properties ["priority.session"]
+   local cpd = properties ["card.profile.device"]
+   local sts = properties ["session.suspend-timeout-seconds"]
+@@ -89,7 +88,6 @@ function CreateLoopback (properties)
+     ["alsa.loopback"] = true,
+     ["device.id"] = dev_id,
+     ["card.profile.device"] = cpd,
+-    ["priority.driver"] = tonumber(pri_driver) + 1,
+     ["priority.session"] = tonumber(pri_session) + 1,
+     ["session.suspend-timeout-seconds"] = sts
+   }
+-- 
+2.52.0
+

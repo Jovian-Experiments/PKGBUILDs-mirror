@@ -1,8 +1,8 @@
-From 3983ee51a4eb1a146f3a6ea74a48795cf5f1f396 Mon Sep 17 00:00:00 2001
+From 8cca6bb4d5e592a33490e9f05572e23f9b8c5343 Mon Sep 17 00:00:00 2001
 From: Julian Bouzas <julian.bouzas@collabora.com>
 Date: Thu, 13 Nov 2025 11:27:47 -0500
-Subject: [PATCH] monitor: alsa: Add alsa.loopback=true to split PCM loopback
- nodes
+Subject: [PATCH 6/6] monitor: alsa: Add alsa.loopback=true to split PCM
+ loopback nodes
 
 This makes both types of loopback nodes to be more consistent.
 ---
@@ -10,7 +10,7 @@ This makes both types of loopback nodes to be more consistent.
  1 file changed, 7 insertions(+)
 
 diff --git a/src/scripts/monitors/alsa.lua b/src/scripts/monitors/alsa.lua
-index 89aa09db..33f651c7 100644
+index 17e95925..b92de7a6 100644
 --- a/src/scripts/monitors/alsa.lua
 +++ b/src/scripts/monitors/alsa.lua
 @@ -189,14 +189,18 @@ function createSplitPCMLoopback(parent, id, obj_type, factory, properties)
@@ -43,5 +43,5 @@ index 89aa09db..33f651c7 100644
      log:info ("Create ALSA SplitPCM split node " .. properties["node.name"])
  
 -- 
-2.51.2
+2.52.0
 
