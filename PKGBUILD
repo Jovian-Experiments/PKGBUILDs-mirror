@@ -1,9 +1,9 @@
 # Maintainer Ethan Geller (ethang@valvesoftware.com)
 
 pkgname=steamdeck-dsp
-_srctag=0.83
+_srctag=0.84
 pkgver=${_srctag#galileo-}
-pkgrel=1
+pkgrel=2
 arch=('any')
 url=""
 pkgdesc="Steamdeck Audio Processing"
@@ -12,7 +12,7 @@ depends=('pipewire' 'pipewire-audio' 'noisetorch')
 makedepends=('git' 'openssh' 'base-devel' 'glibc' 'faust' 'ladspa' 'lv2' 'boost' 'linux-api-headers' 'qt5-base')
 install="${pkgname}.install"
 source=("git+ssh://git@gitlab.steamos.cloud/jupiter/valve-hardware-audio-processing.git#tag=$_srctag")
-sha512sums=('07007a9bdf6523cebffd18c90436e51a334e49106587d5ba0c671a744567d61e5234b30f34da62658d9c220c9e8f84b9b19bed3241d4d67e7075808405946248')
+sha512sums=('b7b94f4f379beaaeeb00437776643bbbb52cdb036f1f66fa9f53d30aa2712364565aacdacc37ffcbeea3b313050f79bd8c7476ed29099059cae3820d35f75736')
 
 build() {
   cd valve-hardware-audio-processing
