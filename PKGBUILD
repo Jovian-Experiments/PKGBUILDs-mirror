@@ -2,7 +2,7 @@
 # Contributor: Emil Velikov <emil.l.velikov@gmail.com>
 
 pkgname=('mangohud' 'lib32-mangohud')
-pkgver=0.8.2.rc1.r5.g3a2885d
+pkgver=0.8.3.rc1.r13.g756ffcfd
 pkgrel=1
 pkgdesc="Vulkan and OpenGL overlay to display performance information"
 url="https://github.com/flightlessmango/MangoHud"
@@ -28,24 +28,24 @@ makedepends=(
 depends=(libxkbcommon lib32-libxkbcommon)
 
 source=(
-  "mangohud"::"git+https://github.com/flightlessmango/MangoHud.git#commit=3a2885dd91fa53eefd0f164919edccdd82942310"
-  "imgui-v1.89.9.tar.gz::https://github.com/ocornut/imgui/archive/refs/tags/v1.89.9.tar.gz"
-  "imgui-1.89-9-wrap.zip::https://wrapdb.mesonbuild.com/v2/imgui_1.89.9-1/get_patch"
+  "mangohud"::"git+https://github.com/flightlessmango/MangoHud.git#commit=756ffcfdd7a688ecef5716891e84b43cb9c9cb15"
+  "imgui-1.91.6.tar.gz::https://github.com/ocornut/imgui/archive/refs/tags/v1.91.6.tar.gz"
+  "imgui_1.91.6-3_patch.zip::https://wrapdb.mesonbuild.com/v2/imgui_1.91.6-3/get_patch"
   "spdlog-v1.14.1.tar.gz::https://github.com/gabime/spdlog/archive/refs/tags/v1.14.1.tar.gz"
   "spdlog-1.14.1-1-wrap.zip::https://wrapdb.mesonbuild.com/v2/spdlog_1.14.1-1/get_patch"
-  "vulkan-headers-1.2.158.tar.gz::https://github.com/KhronosGroup/Vulkan-Headers/archive/v1.2.158.tar.gz"
-  "vulkan-headers-1.2.158-2-wrap.zip::https://wrapdb.mesonbuild.com/v2/vulkan-headers_1.2.158-2/get_patch"
+  "vulkan-headers-1.3.283.tar.gz::https://github.com/KhronosGroup/Vulkan-Headers/archive/v1.3.283.tar.gz"
+  "vulkan-headers-1.3.283-1-wrap.zip::https://wrapdb.mesonbuild.com/v2/vulkan-headers_1.3.283-1/get_patch"
   "implot-v0.16.zip::https://github.com/epezent/implot/archive/refs/tags/v0.16.zip"
   "implot-v0.16-1-wrap.zip::https://wrapdb.mesonbuild.com/v2/implot_0.16-1/get_patch"
 )
 
 sha256sums=('SKIP'
-            '1acc27a778b71d859878121a3f7b287cd81c29d720893d2b2bf74455bf9d52d6'
-            '9b21290c597d76bf8d4eeb3f9ffa024b11d9ea6c61e91d648ccc90b42843d584'
+            'c5fbc5dcab1d46064001c3b84d7a88812985cde7e0e9ced03f5677bec1ba502a'
+            '2f7977114ba07d06559aaf8890a92a4ebd25186592d4447954605aaf2244634d'
             '1586508029a7d0670dfcb2d97575dcdc242d3868a259742b69f100801ab4e16b'
             'ae878e732330ea1048f90d7e117c40c0cd2a6fb8ae5492c7955818ce3aaade6c'
-            '53361271cfe274df8782e1e47bdc9e61b7af432ba30acbfe31723f9df2c257f3'
-            '860358cf5e73f458cd1e88f8c38116d123ab421d5ce2e4129ec38eaedd820e17'
+            "a76ff77815012c76abc9811215c2167128a73a697bcc23948e858d1f7dd54a85"
+            "00e30d35117ae90a19b5b8878746fceaf31b41778b817ca9e6b3ae6063be8233"
             '24f772c688f6b8a6e19d7efc10e4923a04a915f13d487b08b83553aa62ae1708'
             '1c6b1462066a5452fa50c1da1dd47fed841f28232972c82d778f2962936568c7')
 
@@ -58,10 +58,10 @@ prepare() {
   cd mangohud
 
   # meson subprojects
-  ln -sv "$srcdir/imgui-1.89.9" subprojects
+  ln -sv "$srcdir/imgui-1.91.6" subprojects
   ln -sv "$srcdir/spdlog-1.14.1" subprojects
   ln -sv "$srcdir/implot-0.16" subprojects
-  ln -sv "$srcdir/Vulkan-Headers-1.2.158" subprojects
+  ln -sv "$srcdir/Vulkan-Headers-1.3.283" subprojects
 }
 
 build() {
