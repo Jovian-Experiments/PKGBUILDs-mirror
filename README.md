@@ -1,5 +1,5 @@
 
-`main @ 20260119.1000`
+`main @ 20260123.1000`
 ======================
 
 Valve packages
@@ -21,6 +21,7 @@ Valve packages
  * [`earlyoom` — `holo-main/earlyoom-1.8.2-1.2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/earlyoom-1.8.2-1.2)
  * [`f3` — `holo-main/f3-9.0-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/f3-9.0-1.1)
  * [`filesystem` — `holo-main/filesystem-2021.12.07-1.17`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/filesystem-2021.12.07-1.17)
+ * [`firewalld` — `holo-main/firewalld-2.3.1-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/firewalld-2.3.1-1.1)
  * [`fwupd-minimal` — `holo-main/fwupd-minimal-2.0.18-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/fwupd-minimal-2.0.18-1)
  * [`holo-desync` — `holo-main/steamos-customizations-git-20251010.1-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-customizations-git-20251010.1-2)
  * [`holo-dmi-rules` — `holo-main/holo-dmi-rules-1.0-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/holo-dmi-rules-1.0-2)
@@ -100,16 +101,16 @@ Valve packages
  * [`jupiter-dock-updater-bin` — `jupiter-main/jupiter-dock-updater-bin-20250220.02-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-dock-updater-bin-20250220.02-1)
  * [`jupiter-fan-control` — `jupiter-main/jupiter-fan-control-20240523.3-4`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-fan-control-20240523.3-4)
  * [`jupiter-firewall` — `jupiter-main/jupiter-firewall-0.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-firewall-0.1-1)
- * [`jupiter-hw-support` — `jupiter-main/jupiter-hw-support-20260105.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-hw-support-20260105.1-1)
+ * [`jupiter-hw-support` — `jupiter-main/jupiter-hw-support-20260122.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-hw-support-20260122.1-1)
  * [`jupiter-legacy-support` — `jupiter-main/jupiter-legacy-support-1.156-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-legacy-support-1.156-1)
  * [`jupiter-steamos-log-submitter` — `jupiter-main/jupiter-steamos-log-submitter-1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-steamos-log-submitter-1-1)
  * [`kwin` — `jupiter-main/kwin-6.4.3-1.8`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/kwin-6.4.3-1.8)
  * [`kwin-x11` — `jupiter-main/kwin-x11-6.4.3-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/kwin-x11-6.4.3-1.1)
- * [`libwireplumber` — `jupiter-main/wireplumber-0.5.13-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/wireplumber-0.5.13-1.1)
+ * [`libwireplumber` — `jupiter-main/wireplumber-0.5.13-1.2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/wireplumber-0.5.13-1.2)
  * [`linux-firmware-neptune` — `jupiter-main/linux-firmware-neptune-jupiter.20251210.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/linux-firmware-neptune-jupiter.20251210.1-1)
  * [`linux-firmware-neptune-whence` — `jupiter-main/linux-firmware-neptune-jupiter.20251210.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/linux-firmware-neptune-jupiter.20251210.1-1)
- * [`linux-neptune-616` — `jupiter-main/linux-neptune-616-6.16.12.valve8-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/linux-neptune-616-6.16.12.valve8-1)
- * [`mangohud` — `jupiter-main/mangohud-0.8.2.rc1.r5.g3a2885d-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/mangohud-0.8.2.rc1.r5.g3a2885d-1)
+ * [`linux-neptune-616` — `jupiter-main/linux-neptune-616-6.16.12.valve9-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/linux-neptune-616-6.16.12.valve9-1)
+ * [`mangohud` — `jupiter-main/mangohud-0.8.3.rc1.r13.g756ffcfd-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/mangohud-0.8.3.rc1.r13.g756ffcfd-1)
  * [`mesa` — `jupiter-main/mesa-25.3.0.213835.radeonsi_25.3.0-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/mesa-25.3.0.213835.radeonsi_25.3.0-2)
  * [`plasma-remotecontrollers` — `jupiter-main/plasma-remotecontrollers-5.26.90.r258.g9ace9a9-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/plasma-remotecontrollers-5.26.90.r258.g9ace9a9-2)
  * [`powerdevil` — `jupiter-main/powerdevil-6.4.3-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/powerdevil-6.4.3-1.1)
@@ -118,9 +119,9 @@ Valve packages
  * [`steam-im-modules` — `jupiter-main/steam-im-modules-jupiter.20240131-3`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steam-im-modules-jupiter.20240131-3)
  * [`steam-jupiter-stable` — `jupiter-main/steam-jupiter-stable-1.0.0.85-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steam-jupiter-stable-1.0.0.85-2)
  * [`steam_notif_daemon` — `jupiter-main/steam_notif_daemon-v1.0.1-3`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steam_notif_daemon-v1.0.1-3)
- * [`steamdeck-dsp` — `jupiter-main/steamdeck-dsp-0.83-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steamdeck-dsp-0.83-1)
+ * [`steamdeck-dsp` — `jupiter-main/steamdeck-dsp-0.84-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steamdeck-dsp-0.84-2)
  * [`steamdeck-kde-presets` — `jupiter-main/steamdeck-kde-presets-3.8.3-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steamdeck-kde-presets-3.8.3-1)
- * [`steamos-customizations-jupiter` — `jupiter-main/steamos-customizations-jupiter-20251229.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steamos-customizations-jupiter-20251229.1-1)
+ * [`steamos-customizations-jupiter` — `jupiter-main/steamos-customizations-jupiter-20260112.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steamos-customizations-jupiter-20260112.1-1)
  * [`steamos-devkit-service` — `jupiter-main/steamos-devkit-service-0.20250916.0-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steamos-devkit-service-0.20250916.0-1)
  * [`upower` — `jupiter-main/upower-1.90.10-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/upower-1.90.10-1.1)
  * [`usbhid-gadget-passthru` — `jupiter-main/usbhid-gadget-passthru-0.1.3-5`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/usbhid-gadget-passthru-0.1.3-5)
@@ -128,7 +129,7 @@ Valve packages
  * [`vulkan-intel` — `jupiter-main/mesa-25.3.0.213835.radeonsi_25.3.0-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/mesa-25.3.0.213835.radeonsi_25.3.0-2)
  * [`vulkan-mesa-implicit-layers` — `jupiter-main/mesa-25.3.0.213835.radeonsi_25.3.0-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/mesa-25.3.0.213835.radeonsi_25.3.0-2)
  * [`wakehook` — `jupiter-main/wakehook-2.1-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/wakehook-2.1-2)
- * [`wireplumber` — `jupiter-main/wireplumber-0.5.13-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/wireplumber-0.5.13-1.1)
+ * [`wireplumber` — `jupiter-main/wireplumber-0.5.13-1.2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/wireplumber-0.5.13-1.2)
  * [`xorgproto` — `jupiter-main/xorgproto-2024.1-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/xorgproto-2024.1-2)
 
 Arch Linux packages
@@ -263,7 +264,6 @@ Arch Linux packages
  * [`file/5.46-4`](https://gitlab.archlinux.org/archlinux/packaging/packages/file/-/tree/5.46-4)
  * [`filelight/25.04.3-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/filelight/-/tree/25.04.3-1)
  * [`findutils/4.10.0-3`](https://gitlab.archlinux.org/archlinux/packaging/packages/findutils/-/tree/4.10.0-3)
- * [`firewalld/2.3.1-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/firewalld/-/tree/2.3.1-1)
  * [`fish/4.0.2-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/fish/-/tree/4.0.2-1)
  * [`flac/1.5.0-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/flac/-/tree/1.5.0-1)
  * [`flatpak/1:1.16.1-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/flatpak/-/tree/1:1.16.1-1)
