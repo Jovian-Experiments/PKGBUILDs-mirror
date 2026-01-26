@@ -1,0 +1,62 @@
+From 0d4f43d9ba88ca9f850d1ac268e3448aae230a01 Mon Sep 17 00:00:00 2001
+From: Harald Sitter <sitter@kde.org>
+Date: Wed, 21 Jan 2026 13:09:52 +0100
+Subject: [PATCH] *backendupdater: a cancelled transaction is not done
+
+previously we'd mark transactions as done even when the user had
+cancelled them, a status that is more akin to the initial None than to
+Done.
+
+specifically the updates view filters done resources from the model, so
+what would happen is that the user could trigger an update, cancel it,
+and get an empty view because the updatepage thinks all resources are
+done.
+
+instead we now treat cancelled states as None update state
+---
+ libdiscover/backends/PackageKitBackend/PackageKitUpdater.cpp | 5 ++---
+ libdiscover/resources/StandardBackendUpdater.cpp             | 2 +-
+ 2 files changed, 3 insertions(+), 4 deletions(-)
+
+diff --git a/libdiscover/backends/PackageKitBackend/PackageKitUpdater.cpp b/libdiscover/backends/PackageKitBackend/PackageKitUpdater.cpp
+index d672939424..8a9bbef90b 100644
+--- a/libdiscover/backends/PackageKitBackend/PackageKitUpdater.cpp
++++ b/libdiscover/backends/PackageKitBackend/PackageKitUpdater.cpp
+@@ -823,12 +823,11 @@ AbstractBackendUpdater::State toUpdateState(PackageKit::Transaction::Status t)
+     case PackageKit::Transaction::StatusCommit:
+         return AbstractBackendUpdater::Installing;
+     case PackageKit::Transaction::StatusFinished:
+-    case PackageKit::Transaction::StatusCancel:
+         return AbstractBackendUpdater::Done;
+-    default:
+-        qCDebug(LIBDISCOVER_BACKEND_PACKAGEKIT_LOG) << "unknown packagekit status" << t;
++    case PackageKit::Transaction::StatusCancel:
+         return AbstractBackendUpdater::None;
+     }
++    qCDebug(LIBDISCOVER_BACKEND_PACKAGEKIT_LOG) << "unknown packagekit status" << t;
+     Q_UNREACHABLE();
+ }
+ 
+diff --git a/libdiscover/resources/StandardBackendUpdater.cpp b/libdiscover/resources/StandardBackendUpdater.cpp
+index 7c9b041c0f..0a727cf7b5 100644
+--- a/libdiscover/resources/StandardBackendUpdater.cpp
++++ b/libdiscover/resources/StandardBackendUpdater.cpp
+@@ -110,6 +110,7 @@ AbstractBackendUpdater::State toUpdateState(Transaction *t)
+     switch (t->status()) {
+     case Transaction::SetupStatus:
+     case Transaction::QueuedStatus:
++    case Transaction::CancelledStatus:
+         return AbstractBackendUpdater::None;
+     case Transaction::DownloadingStatus:
+         return AbstractBackendUpdater::Downloading;
+@@ -117,7 +118,6 @@ AbstractBackendUpdater::State toUpdateState(Transaction *t)
+         return AbstractBackendUpdater::Installing;
+     case Transaction::DoneStatus:
+     case Transaction::DoneWithErrorStatus:
+-    case Transaction::CancelledStatus:
+         return AbstractBackendUpdater::Done;
+     }
+     Q_UNREACHABLE();
+-- 
+GitLab
+
