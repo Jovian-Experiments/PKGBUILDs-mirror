@@ -8,7 +8,7 @@ pkgname=(
   libwireplumber
 )
 pkgver=0.5.13
-pkgrel=1.2
+pkgrel=1.3
 pkgdesc="Session / policy manager implementation for PipeWire"
 url="https://pipewire.pages.freedesktop.org/wireplumber/"
 arch=(x86_64)
@@ -56,8 +56,8 @@ source=(
   # Holo: backport of https://gitlab.freedesktop.org/pipewire/wireplumber/-/merge_requests/777
   "0001-autoswitch-bluetooth-profile-Fix-attempt-to-index-a-.patch"
 
-  # Holo: backport of https://gitlab.freedesktop.org/pipewire/wireplumber/-/merge_requests/778
-  "0001-monitors-bluez-Avoid-recreating-A2DP-SCO-nodes-if-lo.patch"
+  # Holo: backport of https://gitlab.freedesktop.org/pipewire/wireplumber/-/merge_requests/782
+  "0001-monitors-bluez-Always-create-loopbacks-if-Device-sup.patch"
 
   # Holo: backport of https://gitlab.freedesktop.org/pipewire/wireplumber/-/merge_requests/781
   "0001-default-nodes-Never-consider-Audio-Sink-nodes-as-bes.patch"
@@ -72,7 +72,7 @@ b2sums=('3b4b3c1b8fd00ff7ed149fa893c4d467a2605d3eb5ef8c8c3e265bd20438db58464d5ed
         'daf1300f45171a549112fc1f2f8800ea14a51ce97159cbcac405beee469114697ce5ff296126be33fbf9bc76eae1f12a2798d65dbc4ec5bbe07fd6a5f081c318'
         '150c5880134409c61fab594d9c5bee38302b9e043ccd57b4c0268d8607b6bfb75b4ca5df2fae146ed13d7447c6b175529cede1bc7032c69440e885692b0d4cef'
         '5af57d070641d83059c1a929a164d653acc17cd66da666cac6206d3961b2f6a17069b0028cad8b7f031bb7583427cb7385b93ff084c882cd359879f4add089e8'
-        'c4a7215ae1d1ceeb2daa55e29435a7e231400f1cc24a0b727784710dbda250f31b6c5141fc7bcb95e1406bbdce8893d38390a03eabc4609dd6dd740d84e13400'
+        'e04a61a1a6e1fda6746dd77a51674d8749ae6444dfbbb6b0d5a0dd0720c0c42907e9d0d48f6532ca19351222b32f342b650da04c448e5d5ad6c95e26195c9b07'
         '5a36d16ca68c6aefa6a83305f2f1e17bdd481cf777544930f80925e4a81bdf897c70eda51337047012b4105c044eb69764972dd5f1194ed641cc47618200d89e')
 
 prepare() {
