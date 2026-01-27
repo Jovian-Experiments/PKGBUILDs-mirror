@@ -1,0 +1,36 @@
+From 553c188087fe694e3c2ea6f2c577473dc581f16b Mon Sep 17 00:00:00 2001
+From: Wim Taymans <wtaymans@redhat.com>
+Date: Tue, 27 Jan 2026 10:17:34 +0100
+Subject: [PATCH 3/3] pulse-server: use null to clear the value
+
+The message makes it seem that you can pass 'clear' to clear the setting
+but in fact you should pass 'null'.
+---
+ src/modules/module-protocol-pulse/message-handler.c | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/src/modules/module-protocol-pulse/message-handler.c b/src/modules/module-protocol-pulse/message-handler.c
+index b7ebd417fe61..dab012975fe2 100644
+--- a/src/modules/module-protocol-pulse/message-handler.c
++++ b/src/modules/module-protocol-pulse/message-handler.c
+@@ -120,7 +120,7 @@ static int core_object_force_mono_output(struct client *client, const char *para
+ 					METADATA_FEATURES_AUDIO_MONO, NULL, NULL);
+ 			client->force_mono_audio = client->default_force_mono_audio;
+ 		} else {
+-			fprintf(response, "Value must be true, false, or clear");
++			fprintf(response, "Value must be true, false, or null");
+ 			return -EINVAL;
+ 		}
+ 
+@@ -162,7 +162,7 @@ static int core_object_bluetooth_headset_autoswitch(struct client *client, const
+ 					METADATA_BLUETOOTH_HEADSET_AUTOSWITCH, NULL, NULL);
+ 			client->bluetooth_headset_autoswitch = client->default_bluetooth_headset_autoswitch;
+ 		} else {
+-			fprintf(response, "Value must be true, false, or clear");
++			fprintf(response, "Value must be true, false, or null");
+ 			return -EINVAL;
+ 		}
+ 
+-- 
+2.52.0
+
