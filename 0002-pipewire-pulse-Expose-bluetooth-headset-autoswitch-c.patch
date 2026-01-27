@@ -1,0 +1,134 @@
+From 9523d3b619158d814bf566963f032330d05cc3cf Mon Sep 17 00:00:00 2001
+From: Arun Raghavan <arunr@valvesoftware.com>
+Date: Mon, 26 Jan 2026 14:44:30 -0800
+Subject: [PATCH 2/3] pipewire-pulse: Expose bluetooth headset autoswitch
+ config as a message
+
+Makes it easier for libpulse-based clients to modify this setting if
+they want.
+---
+ src/modules/module-protocol-pulse/client.h    |  3 ++
+ src/modules/module-protocol-pulse/defs.h      |  1 +
+ .../module-protocol-pulse/message-handler.c   | 44 +++++++++++++++++++
+ .../module-protocol-pulse/pulse-server.c      | 12 +++++
+ 4 files changed, 60 insertions(+)
+
+diff --git a/src/modules/module-protocol-pulse/client.h b/src/modules/module-protocol-pulse/client.h
+index 7998e5deb93b..81d790b510be 100644
+--- a/src/modules/module-protocol-pulse/client.h
++++ b/src/modules/module-protocol-pulse/client.h
+@@ -63,8 +63,11 @@ struct client {
+ 	struct pw_manager_object *metadata_schema_sm_settings;
+ 	bool have_force_mono_audio;
+ 	bool default_force_mono_audio;
++	bool have_bluetooth_headset_autoswitch;
++	bool default_bluetooth_headset_autoswitch;
+ 	struct pw_manager_object *metadata_sm_settings;
+ 	bool force_mono_audio;
++	bool bluetooth_headset_autoswitch;
+ 
+ 	uint32_t connect_tag;
+ 
+diff --git a/src/modules/module-protocol-pulse/defs.h b/src/modules/module-protocol-pulse/defs.h
+index d4529c50cca2..e00762501b2e 100644
+--- a/src/modules/module-protocol-pulse/defs.h
++++ b/src/modules/module-protocol-pulse/defs.h
+@@ -324,5 +324,6 @@ static inline uint32_t port_type_value(const char *port_type)
+ #define METADATA_TARGET_NODE            "target.node"
+ #define METADATA_TARGET_OBJECT          "target.object"
+ #define METADATA_FEATURES_AUDIO_MONO    "node.features.audio.mono"
++#define METADATA_BLUETOOTH_HEADSET_AUTOSWITCH "bluetooth.autoswitch-to-headset-profile"
+ 
+ #endif /* PULSE_SERVER_DEFS_H */
+diff --git a/src/modules/module-protocol-pulse/message-handler.c b/src/modules/module-protocol-pulse/message-handler.c
+index 482db48ecc42..b7ebd417fe61 100644
+--- a/src/modules/module-protocol-pulse/message-handler.c
++++ b/src/modules/module-protocol-pulse/message-handler.c
+@@ -133,6 +133,48 @@ static int core_object_force_mono_output(struct client *client, const char *para
+ 	}
+ }
+ 
++static int core_object_bluetooth_headset_autoswitch(struct client *client, const char *params, FILE *response)
++{
++	if (!client->have_bluetooth_headset_autoswitch) {
++		/* Not supported, return a null value to indicate that */
++		fprintf(response, "null");
++		return 0;
++	}
++
++	if (!params || params[0] == '\0') {
++		/* No parameter => query the current value */
++		fprintf(response, "%s", client->bluetooth_headset_autoswitch ? "true" : "false");
++		return 0;
++	} else {
++		/* The caller is trying to set a value or clear with a null */
++		int ret;
++
++		if (spa_streq(params, "true")) {
++			ret = pw_manager_set_metadata(client->manager, client->metadata_sm_settings, PW_ID_CORE,
++					METADATA_BLUETOOTH_HEADSET_AUTOSWITCH, "Spa:String:JSON", "true");
++			client->bluetooth_headset_autoswitch = true;
++		} else if (spa_streq(params, "false")) {
++			ret = pw_manager_set_metadata(client->manager, client->metadata_sm_settings, PW_ID_CORE,
++					METADATA_BLUETOOTH_HEADSET_AUTOSWITCH, "Spa:String:JSON", "false");
++			client->bluetooth_headset_autoswitch = false;
++		} else if (spa_streq(params, "null")) {
++			ret = pw_manager_set_metadata(client->manager, client->metadata_sm_settings, PW_ID_CORE,
++					METADATA_BLUETOOTH_HEADSET_AUTOSWITCH, NULL, NULL);
++			client->bluetooth_headset_autoswitch = client->default_bluetooth_headset_autoswitch;
++		} else {
++			fprintf(response, "Value must be true, false, or clear");
++			return -EINVAL;
++		}
++
++		if (ret < 0)
++			fprintf(response, "Could not set metadata: %s", spa_strerror(ret));
++		else
++			fprintf(response, "%s", params);
++
++		return ret;
++	}
++}
++
+ static int core_object_message_handler(struct client *client, struct pw_manager_object *o, const char *message, const char *params, FILE *response)
+ {
+ 	pw_log_debug(": core %p object message:'%s' params:'%s'", o, message, params);
+@@ -188,6 +230,8 @@ static int core_object_message_handler(struct client *client, struct pw_manager_
+ 		}
+ 	} else if (spa_streq(message, "pipewire-pulse:force-mono-output")) {
+ 		return core_object_force_mono_output(client, params, response);
++	} else if (spa_streq(message, "pipewire-pulse:bluetooth-headset-autoswitch")) {
++		return core_object_bluetooth_headset_autoswitch(client, params, response);
+ 	} else {
+ 		return -ENOSYS;
+ 	}
+diff --git a/src/modules/module-protocol-pulse/pulse-server.c b/src/modules/module-protocol-pulse/pulse-server.c
+index 20a9cf490313..c4375f59b450 100644
+--- a/src/modules/module-protocol-pulse/pulse-server.c
++++ b/src/modules/module-protocol-pulse/pulse-server.c
+@@ -984,10 +984,22 @@ static void manager_metadata(void *data, struct pw_manager_object *o,
+ 			else
+ 				client->default_force_mono_audio = spa_streq(default_, "true");
+ 		}
++
++		if (spa_streq(key, METADATA_BLUETOOTH_HEADSET_AUTOSWITCH)) {
++			client->have_bluetooth_headset_autoswitch = true;
++
++			if (spa_json_str_object_find(value, strlen(value),
++						"default", default_, sizeof(default_)) < 0)
++				client->default_bluetooth_headset_autoswitch = false;
++			else
++				client->default_bluetooth_headset_autoswitch = spa_streq(default_, "true");
++		}
+ 	}
+ 	if (subject == PW_ID_CORE && o == client->metadata_sm_settings) {
+ 		if (spa_streq(key, METADATA_FEATURES_AUDIO_MONO))
+ 			client->force_mono_audio = spa_streq(value, "true");
++		if (spa_streq(key, METADATA_BLUETOOTH_HEADSET_AUTOSWITCH))
++			client->bluetooth_headset_autoswitch = spa_streq(value, "true");
+ 	}
+ }
+ 
+-- 
+2.52.0
+
