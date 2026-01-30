@@ -37,7 +37,7 @@ Signed-off-by: Jaroslav Kysela <perex@perex.cz>
 
 diff --git a/ucm2/USB-Audio/Sony/DualSense-PS5-HiFi.conf b/ucm2/USB-Audio/Sony/DualSense-PS5-HiFi.conf
 new file mode 100644
-index 000000000..e1f982d0f
+index 00000000..e1f982d0
 --- /dev/null
 +++ b/ucm2/USB-Audio/Sony/DualSense-PS5-HiFi.conf
 @@ -0,0 +1,142 @@
@@ -185,7 +185,7 @@ index 000000000..e1f982d0f
 +}
 diff --git a/ucm2/USB-Audio/Sony/DualSense-PS5.conf b/ucm2/USB-Audio/Sony/DualSense-PS5.conf
 new file mode 100644
-index 000000000..42d525b7e
+index 00000000..42d525b7
 --- /dev/null
 +++ b/ucm2/USB-Audio/Sony/DualSense-PS5.conf
 @@ -0,0 +1,6 @@
@@ -196,7 +196,7 @@ index 000000000..42d525b7e
 +	File "/USB-Audio/Sony/DualSense-PS5-HiFi.conf"
 +}
 diff --git a/ucm2/USB-Audio/USB-Audio.conf b/ucm2/USB-Audio/USB-Audio.conf
-index 6f662ee05..4791b57d7 100644
+index 6f662ee0..4791b57d 100644
 --- a/ucm2/USB-Audio/USB-Audio.conf
 +++ b/ucm2/USB-Audio/USB-Audio.conf
 @@ -176,6 +176,17 @@ If.sony-inzone-h9-h7 {
