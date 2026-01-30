@@ -4,7 +4,7 @@
 
 pkgname=alsa-ucm-conf
 pkgver=1.2.14
-pkgrel=2.2 # Holo: remove Jupiter symlink and backport DualSense UCM
+pkgrel=2.3 # Holo: remove Jupiter symlink and backport DualSense UCM
 pkgdesc="ALSA Use Case Manager configuration (and topologies)"
 arch=(any)
 url="https://alsa-project.org/"
@@ -20,12 +20,12 @@ source=(
 )
 sha512sums=('a224e890919306bdcd606dfb873b089950c9fa89f24c02947692ee8ab1a05c419f2a8dc174440d17c8a9575cab293806630f2cb43d74677f7ef0d956b7883dc5'
             'SKIP'
-            'd5eb3c3b96f6616e39f6d551e1a5fb888f15e1d940785a9d546134298ff46b5dbbb3354a39c885126c8db3dcfcd350ed4195b6930e9ca5846923abf4c8bf0cc6'
-            '4f0bb826e8f5f3ec74ce24147d1c0c15d945971aa7ea020500044db83e3bf9baddfffd46d298c635be836a0b6d51490c3bd77ffa33b1b98e8702e9b911e9f0c4')
+            '2c328ded0d7b72530328d510914381921f7d0477e599f989cb025b4eb1e842b0ce6c0bbce65d3558a1f89c8ac4611cf1f533acd4a0f2cf6c1adfe88e7c88c488'
+            '299170a809ab9a63372bf7ee0e2185f831f69555d207eb9e9f500cc51fc57ceb0e05ebc4f2e87d7e7c1aea05772411a1766983a8774f1b521c7806795ec4ed17')
 b2sums=('cbb4b81db7670207cac5b85ba9cd4d9df93e4aca573da4caffe0f1e0386a9685b837e58b7ed85ddcfecf3c0f2469e706833dad6f0ef020440c943aa41520f8f0'
         'SKIP'
-        'cc6e37135301187d42c6f54950c7ba9d86217dd04d2726a4123b0a357981172fa43605c6ed6034f2df5fa648b2802e4c3ef62e877040ee870a03fda7f13f1b8d'
-        'fe6720b4fef9e79af1007f5da4c4130bba1b2eb43bc336764fde2eb6467c62acf7bfb9bf453580cfb5c7eb8824abafdd002d9546a845e50dae6de39053842cd0')
+        '3c53e0d627021e0d086ce13144b72f6b08b6df09d99a4278ab8cfd5e1d3ba542c04e95483b41557f2c0cc62331718fe059bba46c18c2fc99b26d25f152047e99'
+        '5960187de1dcd99071b6108d2f130356a66df87b54c9f267a61082a39f5802466cae7b5dc1b786ed9affdb6b4e76d33afa5f2867d3ae0b806c5ea12db51b10d1')
 validpgpkeys=('F04DF50737AC1A884C4B3D718380596DA6E59C91') # ALSA Release Team (Package Signing Key v1) <release@alsa-project.org>
 
 prepare() {
