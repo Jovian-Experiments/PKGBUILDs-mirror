@@ -1,5 +1,5 @@
 
-`main @ 20260128.1000`
+`main @ 20260130.1000`
 ======================
 
 Valve packages
@@ -88,7 +88,7 @@ Valve packages
  * [`zenity-gtk3` — `holo-main/zenity-gtk3-3.44.2-4`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/zenity-gtk3-3.44.2-4)
 
 ### `jupiter-main`
- * [`alsa-ucm-conf` — `jupiter-main/alsa-ucm-conf-1.2.14-2.2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/alsa-ucm-conf-1.2.14-2.2)
+ * [`alsa-ucm-conf` — `jupiter-main/alsa-ucm-conf-1.2.14-2.3`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/alsa-ucm-conf-1.2.14-2.3)
  * [`amd-ucode-neptune` — `jupiter-main/linux-firmware-neptune-jupiter.20251210.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/linux-firmware-neptune-jupiter.20251210.1-1)
  * [`galileo-mura` — `jupiter-main/galileo-mura-v0.9-3`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/galileo-mura-v0.9-3)
  * [`gamescope` — `jupiter-main/gamescope-3.16.19-5`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/gamescope-3.16.19-5)
@@ -119,7 +119,7 @@ Valve packages
  * [`steam-im-modules` — `jupiter-main/steam-im-modules-jupiter.20240131-3`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steam-im-modules-jupiter.20240131-3)
  * [`steam-jupiter-stable` — `jupiter-main/steam-jupiter-stable-1.0.0.85-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steam-jupiter-stable-1.0.0.85-2)
  * [`steam_notif_daemon` — `jupiter-main/steam_notif_daemon-v1.0.1-3`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steam_notif_daemon-v1.0.1-3)
- * [`steamdeck-dsp` — `jupiter-main/steamdeck-dsp-0.84-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steamdeck-dsp-0.84-2)
+ * [`steamdeck-dsp` — `jupiter-main/steamdeck-dsp-0.85-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steamdeck-dsp-0.85-1)
  * [`steamdeck-kde-presets` — `jupiter-main/steamdeck-kde-presets-3.8.3-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steamdeck-kde-presets-3.8.3-1)
  * [`steamos-customizations-jupiter` — `jupiter-main/steamos-customizations-jupiter-20260123.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steamos-customizations-jupiter-20260123.1-1)
  * [`steamos-devkit-service` — `jupiter-main/steamos-devkit-service-0.20250916.0-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steamos-devkit-service-0.20250916.0-1)
