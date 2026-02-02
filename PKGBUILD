@@ -19,7 +19,7 @@ pkgname=(
 #  vulkan-nouveau
 #  vulkan-radeon
   vulkan-swrast
-#  vulkan-virtio
+  vulkan-virtio
   vulkan-mesa-implicit-layers
   vulkan-mesa-layers
 #  mesa-docs
@@ -28,7 +28,7 @@ _tag=radeonsi-25.3.0
 pkgver=25.3.0.213835.radeonsi_25.3.0
 #pkgver=25.3.0
 #_pkgver=${pkgver/[a-z]/-&}
-pkgrel=2
+pkgrel=3
 epoch=0
 pkgdesc="Open-source OpenGL drivers"
 url="https://www.mesa3d.org/"
@@ -101,6 +101,11 @@ source=(
   # SteamOS: Change source.
   "steamos-mesa::git+ssh://git@gitlab.steamos.cloud/jupiter/mesa.git#tag=$_tag"
 #  "https://archive.mesa3d.org/mesa-$_pkgver.tar.xz"{,.sig}
+
+  # Cherry-picked patches from upstream Mesa 26.0.0.rc1 fixing gamescope
+  # working with venus. Should be dropped after updating pkgbuild to Mesa 26.
+  0001-virgl-Implement-resource_create_with_modifiers.patch
+  0002-virgl-Support-new-resource-layout-command.patch
 )
 validpgpkeys=(
   946D09B5E4C9845E63075FF1D961C596A7203456 # Andres Gomez <tanty@igalia.com>
@@ -157,6 +162,8 @@ for _crate in "${!_crates[@]}"; do
 done
 
 b2sums=('SKIP'
+        '7c1005123bffb3513ce21850b0fd681ad559906bbf2d166a7503649c47cb8aea9c824e992e7570cae6b80211a2ee716a4aeb940decd2e486e00a022377e9e59b'
+        '3b66570f7cc48dc906eca58b6435cbe8f78ae776483568638a6684e1e8589948167dda78f1dd5958bba656497b4847617ed7466d86919fee6efb59d7ec73fbc7'
         '431439d31632d177aeb15f910b4f546efa76d54fc74fc8e140399dc5e54eca33fd606f11dbfb48fa83067c8474ee512e62751895d5948367b65ab08b984284e5'
         'a6d47c903be6094423d89b8ec3ca899d0a84df6dbd6e76632bb6c9b9f40ad9c216f8fa400310753d392f85072756b43ac3892e0a2c4d55f87ab6463002554823'
         '9a73962e1e38b84131ab2350b69a1f5d611c549533eec73e898c394a9b9442f357bb5d5f59e1be12270dd29bdf237dc2d21786c0c2210736e224ef5d48300dcf'
@@ -187,6 +194,8 @@ b2sums=('SKIP'
 
 # https://docs.mesa3d.org/relnotes.html
 sha256sums=('SKIP'
+            'fd3b71d87cfbf7e884528ed96c2bf803464e024640ea096c0e767362d658f0f9'
+            '5ff9179b25acc3ab1d279bde94703d936a7e326dfbecd8a5d55fb4b70f4ca0f4'
             '67914ab451f3bfd2e69e5e9d2ef3858484e7074d63f204fd166ec391b54de21d'
             'ed646292ffc8188ef8ea4d1e0e0150fb15a5c2e12ad9b8fc191ae7a8a7f3c4b9'
             '7f9f832470494906d1fca5329f8ab5791cc60beb230c74815dff541cbd2b5ca0'
@@ -215,24 +224,24 @@ sha256sums=('SKIP'
             '692fcb63b64b1758029e0a96ee63e049ce8c5948587f2f7208df04625e5f6b56'
             '25aa4ce346d03a6dcd68dd8b4010bcb74e54e62c90c573f394c46eae99aba32d')
 
-#prepare() {
-#  cd mesa-$_pkgver
-#
-#  local src
-#  for src in "${source[@]}"; do
-#    src="${src%%::*}"
-#    src="${src##*/}"
-#    src="${src%.zst}"
-#    [[ $src = *.patch ]] || continue
-#    echo "Applying patch $src..."
-#    patch -Np1 < "../$src"
-#  done
-#
+prepare() {
+  cd steamos-mesa
+
+ local src
+ for src in "${source[@]}"; do
+   src="${src%%::*}"
+   src="${src##*/}"
+   src="${src%.zst}"
+   [[ $src = *.patch ]] || continue
+   echo "Applying patch $src..."
+   patch -Np1 < "../$src"
+ done
+
 #  # Include package release in version string so Chromium invalidates
 #  # its GPU cache; otherwise it can cause pages to render incorrectly.
 #  # https://bugs.launchpad.net/ubuntu/+source/chromium-browser/+bug/2020604
 #  echo "$_pkgver-arch$epoch.$pkgrel" >VERSION
-#}
+}
 
 pkgver() {
   cd steamos-mesa
@@ -261,8 +270,8 @@ build() {
     #-D vulkan-drivers=amd,freedreno,intel,intel_hasvk,swrast,virtio,microsoft-experimental,nouveau,asahi,gfxstream
     #-D vulkan-layers=device-select,intel-nullhw,overlay,screenshot,anti-lag,vram-report-limit
     # SteamOS: Specific build options.
-    -D gallium-drivers=radeonsi,llvmpipe,zink,iris,i915
-    -D vulkan-drivers=intel,swrast
+    -D gallium-drivers=radeonsi,llvmpipe,zink,iris,i915,virgl
+    -D vulkan-drivers=intel,swrast,virtio
     -D vulkan-layers=device-select,intel-nullhw,overlay,screenshot,vram-report-limit
     -D gallium-rusticl=false
     -D html-docs=disabled
@@ -365,8 +374,8 @@ package_mesa() {
     _pick vkswrast $icddir/lvp_icd.*.json
     _pick vkswrast $libdir/libvulkan_lvp.so
 
-    #_pick vkvirtio $icddir/virtio_icd.*.json
-    #_pick vkvirtio $libdir/libvulkan_virtio.so
+    _pick vkvirtio $icddir/virtio_icd.*.json
+    _pick vkvirtio $libdir/libvulkan_virtio.so
 
     #_pick vkdevice $libdir/libVkLayer_MESA_anti_lag.so
     _pick vkdevice $libdir/libVkLayer_MESA_device_select.so
@@ -669,7 +678,7 @@ package_vulkan-virtio() {
 
   mv vkvirtio/* "$pkgdir"
 
-  install -Dm644 mesa-$_pkgver/docs/license.rst -t "$pkgdir/usr/share/licenses/$pkgname"
+  install -Dm644 steamos-mesa/docs/license.rst -t "$pkgdir/usr/share/licenses/$pkgname"
 }
 
 package_vulkan-mesa-implicit-layers() {

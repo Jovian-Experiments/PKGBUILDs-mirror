@@ -1,0 +1,78 @@
+From 2f80b31dbe787df831832e350a8f0486db6fa3ac Mon Sep 17 00:00:00 2001
+From: Dmitry Osipenko <dmitry.osipenko@collabora.com>
+Date: Fri, 5 Sep 2025 10:40:09 +0000
+Subject: [PATCH 1/2] virgl: Implement resource_create_with_modifiers
+
+The .resource_create_with_modifiers() callback became required after
+7d1a32fafd89 for venus to work in KMS mode. This fixes GBM buffer
+allocation failure for vkmark-kms and fixes implicit modifier not
+working on host when using Intel i915 driver for running Steam with
+gamescope-kms on guest. Note that KMS support for venus on QEMU never
+worked before, hence this is not regression fix.
+
+Reviewed-by: Gert Wollny <gert.wollny@collabora.com>
+Signed-off-by: Dmitry Osipenko <dmitry.osipenko@collabora.com>
+Part-of: <https://gitlab.freedesktop.org/mesa/mesa/-/merge_requests/37646>
+---
+ src/gallium/drivers/virgl/virgl_resource.c | 24 ++++++++++++++++++++++
+ 1 file changed, 24 insertions(+)
+
+diff --git a/src/gallium/drivers/virgl/virgl_resource.c b/src/gallium/drivers/virgl/virgl_resource.c
+index 87d610ebbfc4..3ab6cf591c20 100644
+--- a/src/gallium/drivers/virgl/virgl_resource.c
++++ b/src/gallium/drivers/virgl/virgl_resource.c
+@@ -20,6 +20,7 @@
+  * OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE
+  * USE OR OTHER DEALINGS IN THE SOFTWARE.
+  */
++#include "util/u_drm.h"
+ #include "util/format/u_format.h"
+ #include "util/u_inlines.h"
+ #include "util/u_memory.h"
+@@ -30,6 +31,10 @@
+ #include "virgl_staging_mgr.h"
+ #include "virgl_encode.h" // for declaration of virgl_encode_copy_transfer
+ 
++#if !defined(_WIN32)
++#include "drm-uapi/drm_fourcc.h"
++#endif
++
+ /* A (soft) limit for the amount of memory we want to allow for queued staging
+  * resources. This is used to decide when we should force a flush, in order to
+  * avoid exhausting virtio-gpu memory.
+@@ -707,6 +712,22 @@ static struct pipe_resource *virgl_resource_create(struct pipe_screen *screen,
+    return virgl_resource_create_front(screen, templ, NULL);
+ }
+ 
++#if !defined(_WIN32)
++static struct pipe_resource *
++virgl_resource_create_with_modifiers(struct pipe_screen *screen,
++                                     const struct pipe_resource *templ,
++                                     const uint64_t *modifiers,
++                                     int count)
++{
++   if (!drm_find_modifier(DRM_FORMAT_MOD_LINEAR, modifiers, count)) {
++        mesa_loge("unsupported modifier requested\n");
++        return NULL;
++   }
++
++   return virgl_resource_create_front(screen, templ, NULL);
++}
++#endif
++
+ static struct pipe_resource *virgl_resource_from_handle(struct pipe_screen *screen,
+                                                         const struct pipe_resource *templ,
+                                                         struct winsys_handle *whandle,
+@@ -842,6 +863,9 @@ void virgl_init_screen_resource_functions(struct pipe_screen *screen)
+     screen->resource_get_handle = virgl_resource_get_handle;
+     screen->resource_destroy = virgl_resource_destroy;
+     screen->resource_get_param = virgl_resource_get_param;
++#if !defined(_WIN32)
++    screen->resource_create_with_modifiers = virgl_resource_create_with_modifiers;
++#endif
+ }
+ 
+ static void virgl_buffer_subdata(struct pipe_context *pipe,
+-- 
+2.52.0
+
