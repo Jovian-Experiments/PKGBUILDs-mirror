@@ -1,5 +1,5 @@
 
-`main @ 20260130.1001`
+`main @ 20260205.1000`
 ======================
 
 Valve packages
@@ -35,6 +35,7 @@ Valve packages
  * [`holo-zram-swap` — `holo-main/holo-zram-swap-0.3-0`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/holo-zram-swap-0.3-0)
  * [`hwdata` — `holo-main/hwdata-0.397-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/hwdata-0.397-1.1)
  * [`ibus` — `holo-main/ibus-1.5.32-2.2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/ibus-1.5.32-2.2)
+ * [`iwd` — `holo-main/iwd-3.9-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/iwd-3.9-1.1)
  * [`kdeconnect` — `holo-main/kdeconnect-25.04.3-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/kdeconnect-25.04.3-1.1)
  * [`kdumpst` — `holo-main/kdumpst-1.2-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/kdumpst-1.2-1.1)
  * [`kmod` — `holo-main/kmod-34.2-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/kmod-34.2-1.1)
@@ -111,7 +112,7 @@ Valve packages
  * [`linux-firmware-neptune-whence` — `jupiter-main/linux-firmware-neptune-jupiter.20251210.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/linux-firmware-neptune-jupiter.20251210.1-1)
  * [`linux-neptune-616` — `jupiter-main/linux-neptune-616-6.16.12.valve9-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/linux-neptune-616-6.16.12.valve9-1)
  * [`mangohud` — `jupiter-main/mangohud-0.8.3.rc1.r13.g756ffcfd-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/mangohud-0.8.3.rc1.r13.g756ffcfd-1)
- * [`mesa` — `jupiter-main/mesa-25.3.0.213835.radeonsi_25.3.0-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/mesa-25.3.0.213835.radeonsi_25.3.0-2)
+ * [`mesa` — `jupiter-main/mesa-25.3.0.213835.radeonsi_25.3.0-3`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/mesa-25.3.0.213835.radeonsi_25.3.0-3)
  * [`plasma-remotecontrollers` — `jupiter-main/plasma-remotecontrollers-5.26.90.r258.g9ace9a9-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/plasma-remotecontrollers-5.26.90.r258.g9ace9a9-2)
  * [`powerdevil` — `jupiter-main/powerdevil-6.4.3-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/powerdevil-6.4.3-1.1)
  * [`pyzy` — `jupiter-main/pyzy-1.1-2.5`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/pyzy-1.1-2.5)
@@ -125,9 +126,9 @@ Valve packages
  * [`steamos-devkit-service` — `jupiter-main/steamos-devkit-service-0.20250916.0-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steamos-devkit-service-0.20250916.0-1)
  * [`upower` — `jupiter-main/upower-1.90.10-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/upower-1.90.10-1.1)
  * [`usbhid-gadget-passthru` — `jupiter-main/usbhid-gadget-passthru-0.1.3-5`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/usbhid-gadget-passthru-0.1.3-5)
- * [`vpower` — `jupiter-main/vpower-1.5.4-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/vpower-1.5.4-2)
- * [`vulkan-intel` — `jupiter-main/mesa-25.3.0.213835.radeonsi_25.3.0-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/mesa-25.3.0.213835.radeonsi_25.3.0-2)
- * [`vulkan-mesa-implicit-layers` — `jupiter-main/mesa-25.3.0.213835.radeonsi_25.3.0-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/mesa-25.3.0.213835.radeonsi_25.3.0-2)
+ * [`vpower` — `jupiter-main/vpower-1.5.5-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/vpower-1.5.5-1)
+ * [`vulkan-intel` — `jupiter-main/mesa-25.3.0.213835.radeonsi_25.3.0-3`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/mesa-25.3.0.213835.radeonsi_25.3.0-3)
+ * [`vulkan-mesa-implicit-layers` — `jupiter-main/mesa-25.3.0.213835.radeonsi_25.3.0-3`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/mesa-25.3.0.213835.radeonsi_25.3.0-3)
  * [`wakehook` — `jupiter-main/wakehook-2.1-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/wakehook-2.1-2)
  * [`wireplumber` — `jupiter-main/wireplumber-0.5.13-1.3`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/wireplumber-0.5.13-1.3)
  * [`xorgproto` — `jupiter-main/xorgproto-2024.1-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/xorgproto-2024.1-2)
@@ -356,7 +357,6 @@ Arch Linux packages
  * [`iputils/20250605-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/iputils/-/tree/20250605-1)
  * [`iso-codes/4.18.0-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/iso-codes/-/tree/4.18.0-1)
  * [`iw/6.9-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/iw/-/tree/6.9-1)
- * [`iwd/3.9-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/iwd/-/tree/3.9-1)
  * [`jansson/2.14.1-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/jansson/-/tree/2.14.1-1)
  * [`jasper/4.2.5-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/jasper/-/tree/4.2.5-1)
  * [`jbig2dec/0.20-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/jbig2dec/-/tree/0.20-1)
@@ -1009,6 +1009,7 @@ Arch Linux packages
  * [`vulkan-icd-loader/1.4.321.0-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/vulkan-icd-loader/-/tree/1.4.321.0-1)
  * [`vulkan-radeon/26.0.0_devel.214812.steamos_25.11.4-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/vulkan-radeon/-/tree/26.0.0_devel.214812.steamos_25.11.4-1)
  * [`vulkan-tools/1.4.321.0-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/vulkan-tools/-/tree/1.4.321.0-1)
+ * [`vulkan-virtio/25.3.0.213835.radeonsi_25.3.0-3`](https://gitlab.archlinux.org/archlinux/packaging/packages/vulkan-virtio/-/tree/25.3.0.213835.radeonsi_25.3.0-3)
  * [`wavpack/5.8.1-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/wavpack/-/tree/5.8.1-1)
  * [`wayland/1.23.1-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/wayland/-/tree/1.23.1-2)
  * [`wayland-utils/1.2.0-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/wayland-utils/-/tree/1.2.0-2)
