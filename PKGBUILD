@@ -8,7 +8,7 @@ pkgname=(
   libwireplumber
 )
 pkgver=0.5.13
-pkgrel=1.3
+pkgrel=1.4
 pkgdesc="Session / policy manager implementation for PipeWire"
 url="https://pipewire.pages.freedesktop.org/wireplumber/"
 arch=(x86_64)
@@ -61,6 +61,12 @@ source=(
 
   # Holo: backport of https://gitlab.freedesktop.org/pipewire/wireplumber/-/merge_requests/781
   "0001-default-nodes-Never-consider-Audio-Sink-nodes-as-bes.patch"
+
+  # Holo: backport of https://gitlab.freedesktop.org/pipewire/wireplumber/-/merge_requests/792
+  "0001-bluez-Use-target.object-instead-of-smart-filters-for.patch"
+
+  # Holo: backport of https://gitlab.freedesktop.org/pipewire/wireplumber/-/merge_requests/794
+  "0001-bluez-Remove-sink-loopback-node.patch"
 )
 b2sums=('3b4b3c1b8fd00ff7ed149fa893c4d467a2605d3eb5ef8c8c3e265bd20438db58464d5ede4f8deabb48f2200fca5616d8511e022c0c6497062b15cbdbae97c83e'
         '6c1d7b3577d7836559ec5a896e275405764fc2fc0a7a9840e027e575bac47489e51b3c3f127e963335a8eb7d714068e0222c1dc05e8be38590e04205388113a8'
@@ -73,7 +79,9 @@ b2sums=('3b4b3c1b8fd00ff7ed149fa893c4d467a2605d3eb5ef8c8c3e265bd20438db58464d5ed
         '150c5880134409c61fab594d9c5bee38302b9e043ccd57b4c0268d8607b6bfb75b4ca5df2fae146ed13d7447c6b175529cede1bc7032c69440e885692b0d4cef'
         '5af57d070641d83059c1a929a164d653acc17cd66da666cac6206d3961b2f6a17069b0028cad8b7f031bb7583427cb7385b93ff084c882cd359879f4add089e8'
         'e04a61a1a6e1fda6746dd77a51674d8749ae6444dfbbb6b0d5a0dd0720c0c42907e9d0d48f6532ca19351222b32f342b650da04c448e5d5ad6c95e26195c9b07'
-        '5a36d16ca68c6aefa6a83305f2f1e17bdd481cf777544930f80925e4a81bdf897c70eda51337047012b4105c044eb69764972dd5f1194ed641cc47618200d89e')
+        '5a36d16ca68c6aefa6a83305f2f1e17bdd481cf777544930f80925e4a81bdf897c70eda51337047012b4105c044eb69764972dd5f1194ed641cc47618200d89e'
+        '0cbf5f8150d3334d7baa571f69fb6c0b24b833cd975c702e7a3545cef54921ae32690169b7f299b718c76aaf5c1eca2e27162a60b7f59723e13cdd099da914fa'
+        '6b8b2c8afe869b34c080002e714a756cdf48e3ca1b1d88abedb3fb2f9d396983e5b375441d521f3c56fc986db374afdce3921734f6b2623b0b7664d8b1ecb6ca')
 
 prepare() {
   cd $pkgbase
