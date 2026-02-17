@@ -163,9 +163,6 @@ export XCURSOR_SCALE=256
 # Chromium (and therefore Steam) ignore XCursor and use on the GTK config
 kwriteconfig6 --file gtk-3.0/settings.ini  --group Settings --key gtk-cursor-theme-name steam
 
-# Workaround for Steam login issue while Steam client change propagates out of Beta
-touch ~/.steam/root/config/SteamAppData.vdf || true
-
 board_name=$(cat /sys/class/dmi/id/board_name)
 if [[ $board_name = "Galileo" ]]; then
 	ui_background=/usr/share/plymouth/themes/steamos/steamos-galileo.png
