@@ -3,7 +3,7 @@
 pkgname=gamescope
 _srctag=3.16.19
 pkgver=${_srctag//-/.}
-pkgrel=5
+pkgrel=6
 pkgdesc="gaming shell based on Xwayland, powered by Vulkan and DRM"
 arch=(x86_64)
 url="https://github.com/ValveSoftware/gamescope"
@@ -36,7 +36,7 @@ source=("galileo-mura-setup.service"
         "git+https://github.com/nothings/stb.git#commit=af1a5bc352164740c1cc1354942b1c6b72eacb8a"
         "git+https://github.com/g-truc/glm.git#commit=0af55ccecd98d4e5a8d1fad7de25ba429d60e863")
 sha256sums=('1eb4da00224a23ad89c78fb18f7d280461f2d5033712edfabc59f45f6a6fad55'
-            '8a9886a96a321efef5e2c928cf2e54a075b72ea37b2d12e8412fd2459f4775f2'
+            '0d27d010423376dfb4533162b14c5621856700341b17487b2a4c345f7e112ddb'
             'fe515fce8f151a6c03a89e043044bfddf8cd6ee89027d2cfbcf6f6706c78ca76'
             'e37ba6107f3a84cf47c2799b537a88583e6cb8951167a9c6a48fa1d85996206b'
             '78f9bb2a97ff5cb08e5e648bed9984a6ffba68a7fff9d214b0d28a532ee66601'
