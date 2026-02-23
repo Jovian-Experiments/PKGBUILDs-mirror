@@ -1,0 +1,126 @@
+From 48af6eac3651158b14a045661df71a4bb655c41f Mon Sep 17 00:00:00 2001
+From: Cristian Ciocaltea <cristian.ciocaltea@collabora.com>
+Date: Mon, 5 Jan 2026 20:59:11 +0200
+Subject: [PATCH] USB-Audio: DualSense-PS5: Add support for haptic feedback
+
+The Sony DualSense PS5 controller is able to provide haptic feedback
+through audio channels 3 (RL) and 4 (RR).
+
+Add a haptic variant of the Speaker and Headphones devices,
+respectively.
+
+Signed-off-by: Cristian Ciocaltea <cristian.ciocaltea@collabora.com>
+---
+ ucm2/USB-Audio/Sony/DualSense-PS5-HiFi.conf | 73 +++++++++++++++++++++
+ 1 file changed, 73 insertions(+)
+
+diff --git a/ucm2/USB-Audio/Sony/DualSense-PS5-HiFi.conf b/ucm2/USB-Audio/Sony/DualSense-PS5-HiFi.conf
+index e1f982d0..901f7020 100644
+--- a/ucm2/USB-Audio/Sony/DualSense-PS5-HiFi.conf
++++ b/ucm2/USB-Audio/Sony/DualSense-PS5-HiFi.conf
+@@ -25,6 +25,18 @@ Macro [
+ 			HWChannelPos3 FR
+ 		}
+ 	}
++	{
++		SplitPCM {
++			Name "dualsense_haptic_out"
++			Direction Playback
++			Channels 4
++			HWChannels 4
++			HWChannelPos0 FL
++			HWChannelPos1 FR
++			HWChannelPos2 RL
++			HWChannelPos3 RR
++		}
++	}
+ 	{
+ 		SplitPCM {
+ 			Name "dualsense_mono_in"
+@@ -52,6 +64,7 @@ SectionDevice."Speaker" {
+ 
+ 	ConflictingDevice [
+ 		"Headphones"
++		"HeadphonesHaptic"
+ 	]
+ 
+ 	Value {
+@@ -69,11 +82,41 @@ SectionDevice."Speaker" {
+ 	}
+ }
+ 
++SectionDevice."SpeakerHaptic" {
++	Comment "Internal Mono Speaker + Haptic Feedback"
++
++	ConflictingDevice [
++		"Headphones"
++		"HeadphonesHaptic"
++	]
++
++	Value {
++		PlaybackPriority 200
++		PlaybackPCM "hw:${CardId}"
++	}
++
++	Macro.pcm_split.SplitPCMDevice {
++		Name "dualsense_haptic_out"
++		Direction Playback
++		HWChannels 4
++		Channels 4
++		Channel0 1
++		Channel1 1
++		Channel2 2
++		Channel3 3
++		ChannelPos0 FL
++		ChannelPos1 FR
++		ChannelPos2 RL
++		ChannelPos3 RR
++	}
++}
++
+ SectionDevice."Headphones" {
+ 	Comment "3.5mm Headphones"
+ 
+ 	ConflictingDevice [
+ 		"Speaker"
++		"SpeakerHaptic"
+ 	]
+ 
+ 	Value {
+@@ -94,6 +137,36 @@ SectionDevice."Headphones" {
+ 	}
+ }
+ 
++SectionDevice."HeadphonesHaptic" {
++	Comment "3.5mm Headphones + Haptic Feedback"
++
++	ConflictingDevice [
++		"Speaker"
++		"SpeakerHaptic"
++	]
++
++	Value {
++		PlaybackPriority 200
++		PlaybackPCM "hw:${CardId}"
++		JackControl "Headphone Jack"
++	}
++
++	Macro.pcm_split.SplitPCMDevice {
++		Name "dualsense_haptic_out"
++		Direction Playback
++		HWChannels 4
++		Channels 4
++		Channel0 0
++		Channel1 1
++		Channel2 2
++		Channel3 3
++		ChannelPos0 FL
++		ChannelPos1 FR
++		ChannelPos2 RL
++		ChannelPos3 RR
++	}
++}
++
+ SectionDevice."Mic" {
+ 	Comment "Internal Microphone"
+ 
