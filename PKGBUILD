@@ -1,9 +1,9 @@
 # Maintainer: Pierre-Loup A. Griffais <pgriffais@valvesoftware.com>
 
 pkgname=gamescope
-_srctag=3.16.19
+_srctag=3.16.20
 pkgver=${_srctag//-/.}
-pkgrel=6
+pkgrel=1
 pkgdesc="gaming shell based on Xwayland, powered by Vulkan and DRM"
 arch=(x86_64)
 url="https://github.com/ValveSoftware/gamescope"
@@ -52,7 +52,7 @@ sha256sums=('1eb4da00224a23ad89c78fb18f7d280461f2d5033712edfabc59f45f6a6fad55'
             '674367927b9d0665a1e1c57ebcd7373683659b1dc1020d2bffd4ab50e4af73fa'
             '525060896abef2da9db8d8294253b7444d60e48cf6cc0496ca48fc7084cc8590'
             'f57fcba25b211381a9402d3d0c4723301afaef185e9ecffc75839e5af2aee4c8'
-            'e61eb70768a1b581a73edafd42b5dafe93a7246338d595ca98934739a6ec3c3f'
+            '1f4731ff8504afc18c987cea604a17e683e8a57e0ef6d83bf74d9c82d3a9305f'
             'SKIP'
             'SKIP'
             '03726f2fb44ae79e6a398e8f9aaaf8054800dda9b8298726157522fe5f7296b1'
