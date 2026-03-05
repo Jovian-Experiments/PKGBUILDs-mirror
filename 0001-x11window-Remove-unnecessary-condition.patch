@@ -1,0 +1,29 @@
+From 0fb55e580a4026429d48d589a61194d865697e19 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?R=C3=A9mi=20Bernon?= <rbernon@codeweavers.com>
+Date: Thu, 20 Mar 2025 14:52:30 +0100
+Subject: [PATCH 1/2] x11window: Remove unnecessary condition.
+
+isMaximizable already checks for the same conditions.
+
+(cherry picked from commit 51197c5088ab3560c3f87a488986bb9260b3a95f)
+---
+ src/x11window.cpp | 3 ---
+ 1 file changed, 3 deletions(-)
+
+diff --git a/src/x11window.cpp b/src/x11window.cpp
+index c1224627c7..2703b534c4 100644
+--- a/src/x11window.cpp
++++ b/src/x11window.cpp
+@@ -4540,9 +4540,6 @@ void X11Window::maximize(MaximizeMode mode, const QRectF &restore)
+         return;
+     }
+ 
+-    if (!isResizable() || isToolbar()) { // SELI isToolbar() ?
+-        return;
+-    }
+     if (!isMaximizable()) {
+         return;
+     }
+-- 
+2.43.0
+

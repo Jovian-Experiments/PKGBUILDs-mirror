@@ -1,0 +1,64 @@
+From 2b0986a3a10f4130d6d4291b2692b097ab665e6e Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?R=C3=A9mi=20Bernon?= <rbernon@codeweavers.com>
+Date: Thu, 20 Mar 2025 14:54:12 +0100
+Subject: [PATCH 2/2] x11window: Allow restoring fullscreen windows from
+ maximized.
+
+Wine windows sometimes add the fullscreen _NET_WM_STATE bit to then
+remove the maximized bit when windows are being made fullscreen,
+from a maximized decorated state to a fullscreen undecorated state.
+
+Allowing the maximized _NET_WM_STATE bit to be removed while the
+fullscreen bit is being added avoids complications from Wine side.
+
+As there's no way to tell between a user action and this window manager
+specific behavior, Wine otherwise has no other option than to handle the
+sticky maximized state by applying it again to the Win32 window style,
+which might then confuse applications.
+
+(cherry picked from commit da3ea6663c0a3babc8440915fa14a3bd5a7cfe6c)
+---
+ src/x11window.cpp | 19 ++++++++++++-------
+ 1 file changed, 12 insertions(+), 7 deletions(-)
+
+diff --git a/src/x11window.cpp b/src/x11window.cpp
+index 2703b534c4..5d9499673c 100644
+--- a/src/x11window.cpp
++++ b/src/x11window.cpp
+@@ -4540,7 +4540,7 @@ void X11Window::maximize(MaximizeMode mode, const QRectF &restore)
+         return;
+     }
+ 
+-    if (!isMaximizable()) {
++    if (!isMaximizable() && mode != MaximizeRestore) {
+         return;
+     }
+ 
+@@ -4701,13 +4701,18 @@ void X11Window::maximize(MaximizeMode mode, const QRectF &restore)
+         }
+ 
+         restore.setSize(constrainFrameSize(restore.size(), SizeModeAny));
+-        if (isInteractiveMove()) {
+-            if (!isFullScreen()) {
+-                const QPointF anchor = interactiveMoveResizeAnchor();
+-                const QPointF offset = interactiveMoveOffset();
+-                restore.moveTopLeft(QPointF(anchor.x() - offset.x() * restore.width(),
+-                                            anchor.y() - offset.y() * restore.height()));
++
++        if (isFullScreen()) {
++            if (info->fullscreenMonitors().isSet()) {
++                restore = fullscreenMonitorsArea(info->fullscreenMonitors());
++            } else {
++                restore = workspace()->clientArea(FullScreenArea, this, moveResizeOutput());
+             }
++        } else if (isInteractiveMove()) {
++            const QPointF anchor = interactiveMoveResizeAnchor();
++            const QPointF offset = interactiveMoveOffset();
++            restore.moveTopLeft(QPointF(anchor.x() - offset.x() * restore.width(),
++                                        anchor.y() - offset.y() * restore.height()));
+         }
+ 
+         moveResize(restore);
+-- 
+2.43.0
+
