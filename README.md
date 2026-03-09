@@ -1,5 +1,5 @@
 
-`main @ 20260305.1000`
+`main @ 20260309.1000`
 ======================
 
 Valve packages
@@ -115,7 +115,7 @@ Valve packages
  * [`libwireplumber` — `jupiter-main/wireplumber-0.5.13-1.4`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/wireplumber-0.5.13-1.4)
  * [`linux-firmware-neptune` — `jupiter-main/linux-firmware-neptune-jupiter.20260216.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/linux-firmware-neptune-jupiter.20260216.1-1)
  * [`linux-firmware-neptune-whence` — `jupiter-main/linux-firmware-neptune-jupiter.20260216.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/linux-firmware-neptune-jupiter.20260216.1-1)
- * [`linux-neptune-618` — `jupiter-main/linux-neptune-618-6.18.12.valve1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/linux-neptune-618-6.18.12.valve1-1)
+ * [`linux-neptune-618` — `jupiter-main/linux-neptune-618-6.18.16.valve1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/linux-neptune-618-6.18.16.valve1-1)
  * [`mangohud` — `jupiter-main/mangohud-0.8.3.rc1.r18.g01b724d3-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/mangohud-0.8.3.rc1.r18.g01b724d3-1)
  * [`mesa` — `jupiter-main/mesa-25.3.0.213835.radeonsi_25.3.0-3`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/mesa-25.3.0.213835.radeonsi_25.3.0-3)
  * [`powerdevil` — `jupiter-main/powerdevil-6.4.3-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/powerdevil-6.4.3-1.1)
@@ -1008,7 +1008,7 @@ Arch Linux packages
  * [`vmaf/3.0.0-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/vmaf/-/tree/3.0.0-1)
  * [`volume_key/0.3.12-11`](https://gitlab.archlinux.org/archlinux/packaging/packages/volume_key/-/tree/0.3.12-11)
  * [`vulkan-icd-loader/1.4.321.0-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/vulkan-icd-loader/-/tree/1.4.321.0-1)
- * [`vulkan-radeon/26.0.0_devel.214812.steamos_25.11.4-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/vulkan-radeon/-/tree/26.0.0_devel.214812.steamos_25.11.4-1)
+ * [`vulkan-radeon/26.0.0_devel.214821.steamos_25.11.5-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/vulkan-radeon/-/tree/26.0.0_devel.214821.steamos_25.11.5-1)
  * [`vulkan-tools/1.4.321.0-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/vulkan-tools/-/tree/1.4.321.0-1)
  * [`wavpack/5.8.1-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/wavpack/-/tree/5.8.1-1)
  * [`wayland/1.23.1-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/wayland/-/tree/1.23.1-2)
