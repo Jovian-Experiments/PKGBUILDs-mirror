@@ -1,5 +1,5 @@
 
-`main @ 20260309.1000`
+`main @ 20260309.1001`
 ======================
 
 Valve packages
@@ -8,13 +8,13 @@ Valve packages
 ### `holo-main`
  * [`7zip` — `holo-main/7zip-25.01-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/7zip-25.01-1.1)
  * [`atomupd-daemon` — `holo-main/atomupd-daemon-0.20260210.0-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/atomupd-daemon-0.20260210.0-1)
- * [`bluez` — `holo-main/bluez-5.83-1.2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/bluez-5.83-1.2)
- * [`bluez-libs` — `holo-main/bluez-5.83-1.2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/bluez-5.83-1.2)
- * [`bluez-utils` — `holo-main/bluez-5.83-1.2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/bluez-5.83-1.2)
+ * [`bluez` — `holo-main/bluez-5.86-4.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/bluez-5.86-4.1)
+ * [`bluez-libs` — `holo-main/bluez-5.86-4.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/bluez-5.86-4.1)
+ * [`bluez-utils` — `holo-main/bluez-5.86-4.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/bluez-5.86-4.1)
  * [`breakpad` — `holo-main/breakpad-v2024.02.16-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/breakpad-v2024.02.16-1)
  * [`casync` — `holo-main/casync-2.r227.g99559cd-4.5`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/casync-2.r227.g99559cd-4.5)
  * [`cecd` — `holo-main/cecd-0.1.0-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/cecd-0.1.0-1)
- * [`desync` — `holo-main/desync-0.9.6-1.2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/desync-0.9.6-1.2)
+ * [`desync` — `holo-main/desync-1.0.0-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/desync-1.0.0-1.1)
  * [`dirlock` — `holo-main/dirlock-0.0.1.214.177064e-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/dirlock-0.0.1.214.177064e-2)
  * [`discover` — `holo-main/discover-6.4.3-1.3`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/discover-6.4.3-1.3)
  * [`drm_info` — `holo-main/drm_info-2.8.0-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/drm_info-2.8.0-1)
