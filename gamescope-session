@@ -133,6 +133,9 @@ export STEAM_GAMESCOPE_VIRTUAL_WHITE=1
 # HDMI-CEC support
 export STEAM_ENABLE_CEC=1
 
+# One-cgroup-per-game for VRAM management
+export STEAM_LAUNCH_WRAPPER_SCOPE=1
+
 # Set input method modules for Qt/GTK that will show the Steam keyboard
 export QT_IM_MODULE=steam
 export GTK_IM_MODULE=Steam
