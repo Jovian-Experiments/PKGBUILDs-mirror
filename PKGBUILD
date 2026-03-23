@@ -32,7 +32,7 @@ pkgname=(
   pulse-native-provider
 )
 pkgver=1.4.10
-pkgrel=1.2
+pkgrel=1.3
 epoch=1
 pkgdesc="Low-latency audio/video router and processor"
 url="https://pipewire.org"
@@ -132,6 +132,9 @@ source=(
     "0001-pulse-server-Fix-querying-after-setting-of-mono-mixd.patch"
     "0002-pipewire-pulse-Expose-bluetooth-headset-autoswitch-c.patch"
     "0003-pulse-server-use-null-to-clear-the-value.patch"
+
+    # Holo: Backport https://gitlab.freedesktop.org/pipewire/pipewire/-/merge_requests/2752
+    "0001-bluez-Add-A2DP-auto-quality-and-latency-profiles.patch"
 )
 b2sums=('5c7c50e83200001fbaac5bdb9497eed56e68ebe3be5a75f1cb843d73ef855870f8da09b456b3530a7c66ce6a87665b386c00d4bbffb6c96f88ab9d65ba60c8ae'
         '68ad58cb1a8c532a194b7982167e6b461ff3a2d046f346305c38d3af21a696a2cd18619b73b99cc1b41c55f8786cf26ab5c077f58652e8197a9f5f42416c764f'
@@ -155,7 +158,8 @@ b2sums=('5c7c50e83200001fbaac5bdb9497eed56e68ebe3be5a75f1cb843d73ef855870f8da09b
         '2c97fa28a82d0f725ff169698edfad53cdb4d3131e79adbb1e7cd896ce96b4cb566bb5ae40d47e56775e61bd533d270c34af38db9f93c1b8e414f1eca445c3b4'
         '257adcde47c4eb618f86d8d16c479ca56057bc88fb44f5539b00ab4278fbe8d74d0ec820acff8e986f6df6c63076f0541c52ad931fd2bde8ee1da5dc79915b02'
         '5910c022a8604edea4629d5f9250c984c6f7b21c24b90e12e57ca0329fa85a8c2249c77f9ed7dd0defd8c99f8e583ff28aa91a22fd2522bde7212ab11f616b91'
-        '17f420873f14f67b86b9521dd8e34b1cadad3dd2d2ba790e92a3bbda49593e33436fa8fcfa6ab3c4d873793beab9fcd032de6aca0baf7b9c1ec3a3df6045bce5')
+        '17f420873f14f67b86b9521dd8e34b1cadad3dd2d2ba790e92a3bbda49593e33436fa8fcfa6ab3c4d873793beab9fcd032de6aca0baf7b9c1ec3a3df6045bce5'
+        'd386030c992eb6dc874706cde1b743dca4470246065aa0c3692808614ba3b1f3664876c34d6e67c5505efcee7ca9936af057798a9b67f922e9470e012e86dd2a')
 
 prepare() {
   cd pipewire
