@@ -1,0 +1,87 @@
+From 5e25d96ad30ba10191447f0e292f111b47518048 Mon Sep 17 00:00:00 2001
+From: Julian Bouzas <julian.bouzas@collabora.com>
+Date: Mon, 23 Mar 2026 11:13:26 -0400
+Subject: [PATCH 3/3] bluez: Discard latency and quality codecs worse than SBC
+ for A2DP auto profiles.
+
+Since SBC is mandatory in all devices that support A2DP, we dont need to inclide
+them in the priority tables.
+
+This change also increases the priority of OPUS_G codec as it has better latency
+and quality than SBC.
+---
+ spa/plugins/bluez5/bluez5-device.c | 34 +++++-------------------------
+ 1 file changed, 5 insertions(+), 29 deletions(-)
+
+diff --git a/spa/plugins/bluez5/bluez5-device.c b/spa/plugins/bluez5/bluez5-device.c
+index 5f3561a1f..7b4cce3e3 100644
+--- a/spa/plugins/bluez5/bluez5-device.c
++++ b/spa/plugins/bluez5/bluez5-device.c
+@@ -212,29 +212,17 @@ static size_t get_media_codec_quality_priority (const struct media_codec *mc)
+ 	/* From lowest quality to highest quality */
+ 	static const enum spa_bluetooth_audio_codec quality_priorities[] = {
+ 		SPA_BLUETOOTH_AUDIO_CODEC_START,
+-		SPA_BLUETOOTH_AUDIO_CODEC_OPUS_05_DUPLEX,
+-		SPA_BLUETOOTH_AUDIO_CODEC_OPUS_05,
+-		SPA_BLUETOOTH_AUDIO_CODEC_OPUS_05_51,
+-		SPA_BLUETOOTH_AUDIO_CODEC_OPUS_05_71,
+-		SPA_BLUETOOTH_AUDIO_CODEC_OPUS_G,
+-		SPA_BLUETOOTH_AUDIO_CODEC_OPUS_05_PRO,
+-		SPA_BLUETOOTH_AUDIO_CODEC_FASTSTREAM_DUPLEX,
+-		SPA_BLUETOOTH_AUDIO_CODEC_FASTSTREAM,
+-		SPA_BLUETOOTH_AUDIO_CODEC_MPEG,
+-		SPA_BLUETOOTH_AUDIO_CODEC_APTX_LL_DUPLEX,
+-		SPA_BLUETOOTH_AUDIO_CODEC_APTX_LL,
+ 		SPA_BLUETOOTH_AUDIO_CODEC_SBC,
+ 		SPA_BLUETOOTH_AUDIO_CODEC_APTX,
+-		SPA_BLUETOOTH_AUDIO_CODEC_SBC_XQ,
+-		SPA_BLUETOOTH_AUDIO_CODEC_AAC_ELD,
+ 		SPA_BLUETOOTH_AUDIO_CODEC_AAC,
++		SPA_BLUETOOTH_AUDIO_CODEC_OPUS_G,
+ 		SPA_BLUETOOTH_AUDIO_CODEC_LC3PLUS_HR,
+ 		SPA_BLUETOOTH_AUDIO_CODEC_APTX_HD,
+-		SPA_BLUETOOTH_AUDIO_CODEC_LDAC
++		SPA_BLUETOOTH_AUDIO_CODEC_LDAC,
+ 	};
+ 	size_t i;
+ 
+-	for (i = 0; SPA_N_ELEMENTS(quality_priorities); ++i) {
++	for (i = 0; i < SPA_N_ELEMENTS(quality_priorities); ++i) {
+ 		if (quality_priorities[i] == mc->id)
+ 			return i;
+ 	}
+@@ -247,21 +235,9 @@ static size_t get_media_codec_latency_priority (const struct media_codec *mc)
+ 	/* From highest latency to lowest latency */
+ 	static const enum spa_bluetooth_audio_codec latency_priorities[] = {
+ 		SPA_BLUETOOTH_AUDIO_CODEC_START,
+-		SPA_BLUETOOTH_AUDIO_CODEC_OPUS_05_71,
+-		SPA_BLUETOOTH_AUDIO_CODEC_OPUS_05_51,
+-		SPA_BLUETOOTH_AUDIO_CODEC_OPUS_05_PRO,
+-		SPA_BLUETOOTH_AUDIO_CODEC_OPUS_G,
+-		SPA_BLUETOOTH_AUDIO_CODEC_OPUS_05,
+-		SPA_BLUETOOTH_AUDIO_CODEC_OPUS_05_DUPLEX,
+-		SPA_BLUETOOTH_AUDIO_CODEC_MPEG,
+-		SPA_BLUETOOTH_AUDIO_CODEC_AAC,
+-		SPA_BLUETOOTH_AUDIO_CODEC_AAC_ELD,
+-		SPA_BLUETOOTH_AUDIO_CODEC_APTX_HD,
+-		SPA_BLUETOOTH_AUDIO_CODEC_LDAC,
+-		SPA_BLUETOOTH_AUDIO_CODEC_LC3PLUS_HR,
+ 		SPA_BLUETOOTH_AUDIO_CODEC_SBC,
+ 		SPA_BLUETOOTH_AUDIO_CODEC_APTX,
+-		SPA_BLUETOOTH_AUDIO_CODEC_SBC_XQ,
++		SPA_BLUETOOTH_AUDIO_CODEC_OPUS_G,
+ 		SPA_BLUETOOTH_AUDIO_CODEC_FASTSTREAM_DUPLEX,
+ 		SPA_BLUETOOTH_AUDIO_CODEC_FASTSTREAM,
+ 		SPA_BLUETOOTH_AUDIO_CODEC_APTX_LL_DUPLEX,
+@@ -269,7 +245,7 @@ static size_t get_media_codec_latency_priority (const struct media_codec *mc)
+ 	};
+ 	size_t i;
+ 
+-	for (i = 0; SPA_N_ELEMENTS(latency_priorities); ++i) {
++	for (i = 0; i < SPA_N_ELEMENTS(latency_priorities); ++i) {
+ 		if (latency_priorities[i] == mc->id)
+ 			return i;
+ 	}
+-- 
+2.50.1
+
