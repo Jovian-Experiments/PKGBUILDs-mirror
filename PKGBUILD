@@ -7,7 +7,7 @@
 _basename=steam
 pkgname=steam-jupiter-stable
 pkgver=1.0.0.85
-pkgrel=2
+pkgrel=3
 pkgdesc="Valve's digital software delivery system - Jupiter bootstrapped packaging"
 url='https://steampowered.com/'
 arch=('x86_64')
@@ -77,6 +77,7 @@ noextract=("$_fat_bootstrap")
 source=(https://repo.steampowered.com/${_basename}/archive/beta/${_basename}_${pkgver}{.tar.gz,.dsc}
         https://steamdeck-packages.steamos.cloud/misc/steam-snapshots/"$_fat_bootstrap"
         70-steam-jupiter-input.rules
+        70-steam-jupiter-leds.rules
         steam-jupiter.sh
         steam-runtime.sh
         # Remove when we go to 1.0.0.81 (https://gitlab.steamos.cloud/holo-team/tasks/-/issues/1398)
@@ -85,14 +86,16 @@ source=(https://repo.steampowered.com/${_basename}/archive/beta/${_basename}_${p
 sha512sums=('81d404fcbd516fa1d984a991be3530855c0ded826ea8aca68c8cb5492e95d3d430cd7c556a9997a7c0780055a810239322181b1785e78f8d8fabe01c39fee2f7'
             'e3722d006485249fc91113feee0df018d341dc8d7327199a9161022c84b04ca5faa2be36268d50ae0bc29b6fd6063fe2b69a29a354adb32dd6b75d78dc7f9702'
             'a013473d28a9d10a865b543ee1c42fa514c4af383b63f7dbf8e38d18e358ebdbc247caff1e39cc372a71b05fdd506f2356e1af0c5404a95f6615191d994e0fbf'
-            'a761b4935af41477bdcfb1123e197b8bcd1ebd98e2a85e0a2b8bc330745f3a53d08ec51dcc5405cb459fb31e92b9ec2a734f3dc62a63db261bbdf6af3d504a33'
+            '15cf483d9febd72cd702c306818a2af53131953cedd53750df50dceca427d2dcf5ff6e40d1b5cac7676653d3f920f420b897d456d239fcc62dc2c617d4c0291f'
+            '814bd6714ea712fed8ebb128c9344507e47f3d7ca5c77b655f9a8e7398067ce7ac6f0e2ea199d83bb6058495be17fbc680d887690661a2279e78cd32471b538b'
             '7d568c24f46902715c08797fc1148cfab9ee924d49c9bcd97cd1bd4106dfdd35409912ca1b598f50a50c62394f9618b595ca5bafdc4b9ee3b013398826cc4b01'
             '5e75c019e9fe8c67d686c4e3343dac1180a69a4bdb7d39b333415c63201eef9b98da5619dbf6fd8daa6884e65bc7f8afc9e52778682425e5a75987d527eae6f0'
             '47e2b8d2ecdb40ef2d5555e31122f1e863920998089f9dc7ce58b112ba72df6745ae30927ef158cfa735faad41b82bd6cdf25e9c69d7e780374648f57bdc3b72')
 b2sums=('6cc699e7b740693529845ef76d39570a977716735da46e21b681629aebf3e5ee80b09a3b47b1c84debb066ca43456f1c78509de7ddfe8e35df21903cceebde4f'
         '833edc4b6b8aa32861fb6caccdc4f7441a0462600315b68eae0bbbebf7c94cc64a8be61ce2e30842ea2f354ac0630898b7829d0d9eafd97eb7b621a72befb897'
         '05d91f055a0ce36737d065705d4817d57381a6e28a055cc505b4ddd3e2546e4bee8fa5e0d0c17df45bbb3caac0e8fd57aed7277f8c43b0f5a40c0feb83218c81'
-        'a968b8577b3133f0160e436b16db0112b76f565045a72bd0b8c103a8f4293b690540bba0cb41e289eabcb7f60a101a6c765e82cb1268d7f69d7def7941a334be'
+        '8d8df71b056f595b3e5fb47118b067a74e9066962bf0d181e15aea237b586cc1ee146d682a76c345cf41ed08fa49ac4b80b9f5e8a4bdac8176d6b5e1220df779'
+        '65fed9b6427eb448a65727abae3505a79ead57051a9806c5a96de04fe2f583ffedad84211b7f8fd606c0c3eb31ba18b945f4d31d85162ff1ffd86ce230f9b955'
         '987eeed26caf80e31ce289116f7d2fc7742949a6b5681005c0257a0fa490bb0bbbdde5ab1ec4794732bf58a22cabe9859c4c6a0f19b8be8aa97b5df659304657'
         'c6bac99336b7c30fec7cdbaf9e949555c687dd9dff50bcae136134d6314f4b841f5fc66ddb2caac1b003690b926fd4afbdc11da143b4674db4b75f27709fdd23'
         'fb6df965a9e537835262a2e0e722469799d72b2a7afa1793efa69685a60dfb8624e25f9dced7dcde2549eb4c2a37fc588593e6182c83a77956e4263e0c87853e')
@@ -124,6 +127,8 @@ package() {
   # (e.g. some tty rules)
   install -Dm 644 "${srcdir}/70-steam-jupiter-input.rules" \
     "${pkgdir}/usr/lib/udev/rules.d/70-steam-jupiter-input.rules"
+  install -Dm 644 "${srcdir}/70-steam-jupiter-leds.rules" \
+    "${pkgdir}/usr/lib/udev/rules.d/70-steam-jupiter-leds.rules"
 
   # Jupiter
   # Replace the runtime with our own wrapper
