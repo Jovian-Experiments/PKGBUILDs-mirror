@@ -90,6 +90,9 @@ CONFIG_HID_ASUS_ALLY=m
 CONFIG_ASUS_ARMOURY=m
 CONFIG_ASUS_WMI_DEPRECATED_ATTRS=y
 
+#enable OneXPlayer HID driver
+CONFIG_HID_OXP=m
+
 # PARAVIRT options have overhead, even on bare metal boots. They can cause
 # spinlocks to not be inlined as well. Either way, we don't intend to run this
 # kernel as a guest, so this also clears out a whole bunch of
