@@ -7,7 +7,7 @@
 # and then manually merge the resulting PKGBUILD with this file.
 
 pkgname=inputplumber
-pkgver=0.72.0
+pkgver=0.75.2
 pkgrel=1
 pkgdesc="Open source input router and remapper daemon for Linux"
 arch=('i686' 'pentium4' 'x86_64' 'arm' 'armv7h' 'armv6h' 'aarch64')
@@ -31,7 +31,7 @@ makedepends=(
   cargo
   holo-rust-packaging-tools
 )
-source=('inputplumber-0.72.0.tar.gz::https://github.com/ShadowBlip/InputPlumber/archive/v0.72.0.tar.gz'
+source=('inputplumber-0.75.2.tar.gz::https://github.com/ShadowBlip/InputPlumber/archive/v0.75.2.tar.gz'
         'adler2-2.0.1.tar.gz::https://crates.io/api/v1/crates/adler2/2.0.1/download'
         'aho-corasick-1.1.4.tar.gz::https://crates.io/api/v1/crates/aho-corasick/1.1.4/download'
         'allocator-api2-0.2.21.tar.gz::https://crates.io/api/v1/crates/allocator-api2/0.2.21/download'
@@ -384,7 +384,7 @@ source=('inputplumber-0.72.0.tar.gz::https://github.com/ShadowBlip/InputPlumber/
         'zvariant_derive-5.8.0.tar.gz::https://crates.io/api/v1/crates/zvariant_derive/5.8.0/download'
         'zvariant_utils-3.2.1.tar.gz::https://crates.io/api/v1/crates/zvariant_utils/3.2.1/download')
 
-sha256sums=('dbd8b36f2feb19200bcdf5117ac0ff1791e3024f38a5bffcf5db3d4090064867'
+sha256sums=('595dfe58bd45b00a94f468df98ff3bb107870f0a4e45ab5077238902db723f7d'
             '320119579fcad9c21884f5c4861d16174d0e06250625266f50fe6898340abefa'
             'ddd31a130427c27518df266943a5308ed92d4b226cc639f5a8f1002816174301'
             '683d7910e743518b0e34f1186f92494becacb047c7b6bf616c96772180fef923'
