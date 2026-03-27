@@ -6,9 +6,10 @@ pkgbase=wireplumber
 pkgname=(
   wireplumber
   libwireplumber
+  wireplumber-docs
 )
-pkgver=0.5.13
-pkgrel=1.4
+pkgver=0.5.14
+pkgrel=1.1
 pkgdesc="Session / policy manager implementation for PipeWire"
 url="https://pipewire.pages.freedesktop.org/wireplumber/"
 arch=(x86_64)
@@ -26,8 +27,6 @@ makedepends=(
   lua
   meson
   pipewire
-  'python>=3.13'
-  'python<3.14'
   python-breathe
   python-lxml
   python-sphinx
@@ -49,39 +48,15 @@ source=(
   "0004-monitor-alsa-Don-t-forward-priority.driver-property-.patch"
   "0005-monitor-alsa-Dont-set-node.dont-remix-property-to-lo.patch"
   "0006-monitor-alsa-Add-alsa.loopback-true-to-split-PCM-loo.patch"
-
-  # Holo: backport of https://gitlab.freedesktop.org/pipewire/wireplumber/-/merge_requests/772
-  "0001-apply-routes.lua-Add-a-mechanism-for-per-device-defa.patch"
-
-  # Holo: backport of https://gitlab.freedesktop.org/pipewire/wireplumber/-/merge_requests/777
-  "0001-autoswitch-bluetooth-profile-Fix-attempt-to-index-a-.patch"
-
-  # Holo: backport of https://gitlab.freedesktop.org/pipewire/wireplumber/-/merge_requests/782
-  "0001-monitors-bluez-Always-create-loopbacks-if-Device-sup.patch"
-
-  # Holo: backport of https://gitlab.freedesktop.org/pipewire/wireplumber/-/merge_requests/781
-  "0001-default-nodes-Never-consider-Audio-Sink-nodes-as-bes.patch"
-
-  # Holo: backport of https://gitlab.freedesktop.org/pipewire/wireplumber/-/merge_requests/792
-  "0001-bluez-Use-target.object-instead-of-smart-filters-for.patch"
-
-  # Holo: backport of https://gitlab.freedesktop.org/pipewire/wireplumber/-/merge_requests/794
-  "0001-bluez-Remove-sink-loopback-node.patch"
 )
-b2sums=('3b4b3c1b8fd00ff7ed149fa893c4d467a2605d3eb5ef8c8c3e265bd20438db58464d5ede4f8deabb48f2200fca5616d8511e022c0c6497062b15cbdbae97c83e'
+b2sums=('bdf2b17806b2ac30f4f40b4e1e35a9aecdf0660b24f75978e546e59d525bf4a97ad079a13d5b08d76d2d79d8b89f7093b777c5d92590ce2681490e3e114938e7'
         '6c1d7b3577d7836559ec5a896e275405764fc2fc0a7a9840e027e575bac47489e51b3c3f127e963335a8eb7d714068e0222c1dc05e8be38590e04205388113a8'
         '50cae746a48d2ec1700679bd7fe14227ab46fd0b26f829fedf7ef96f7bdd4edc6bac703c99acab586163f8c7d848c9465bcbc05a891a6a25422ff10b1b261140'
         '5a59c19d22c505e66c2aca7d888ab080be46fc2ac5d97090f9d01940a898dd4c42cd08868484ff4c4ef2006801f0385b803b1a4a9f922ce50fee43d5a5ab08da'
         'da1f9a77934203cb3f92f634e57aa5121e1e732a5f86e1068da955a0d07b663d64bef2c2868dde80c16ab24f5afc234267635a83ed2b64c61bf2913533762cd3'
         '5653ea6c4a01f275614f05c7ea3c52f2ad311a42fbad4b9780f4021609574327a96e9e91df493bc13593ac35daa0e77be2f1a672b7d12eaceb4cca0e3790e32a'
         'bc2633425fb1ff3aec54b09a1ef8ab9714b482c014ba7fd4af234196dbd9aa038101c84f862583331bb15c572bd95cc21cf83650c09963c13d22c3cbfbe62fd0'
-        'daf1300f45171a549112fc1f2f8800ea14a51ce97159cbcac405beee469114697ce5ff296126be33fbf9bc76eae1f12a2798d65dbc4ec5bbe07fd6a5f081c318'
-        '150c5880134409c61fab594d9c5bee38302b9e043ccd57b4c0268d8607b6bfb75b4ca5df2fae146ed13d7447c6b175529cede1bc7032c69440e885692b0d4cef'
-        '5af57d070641d83059c1a929a164d653acc17cd66da666cac6206d3961b2f6a17069b0028cad8b7f031bb7583427cb7385b93ff084c882cd359879f4add089e8'
-        'e04a61a1a6e1fda6746dd77a51674d8749ae6444dfbbb6b0d5a0dd0720c0c42907e9d0d48f6532ca19351222b32f342b650da04c448e5d5ad6c95e26195c9b07'
-        '5a36d16ca68c6aefa6a83305f2f1e17bdd481cf777544930f80925e4a81bdf897c70eda51337047012b4105c044eb69764972dd5f1194ed641cc47618200d89e'
-        '0cbf5f8150d3334d7baa571f69fb6c0b24b833cd975c702e7a3545cef54921ae32690169b7f299b718c76aaf5c1eca2e27162a60b7f59723e13cdd099da914fa'
-        '6b8b2c8afe869b34c080002e714a756cdf48e3ca1b1d88abedb3fb2f9d396983e5b375441d521f3c56fc986db374afdce3921734f6b2623b0b7664d8b1ecb6ca')
+        'daf1300f45171a549112fc1f2f8800ea14a51ce97159cbcac405beee469114697ce5ff296126be33fbf9bc76eae1f12a2798d65dbc4ec5bbe07fd6a5f081c318')
 
 prepare() {
   cd $pkgbase
@@ -172,6 +147,14 @@ package_libwireplumber() {
   provides=(libwireplumber-$_ver.so)
 
   mv libw/* "$pkgdir"
+
+  install -Dt "$pkgdir/usr/share/licenses/$pkgname" -m644 $pkgbase/LICENSE
+}
+
+package_wireplumber-docs() {
+  pkgdesc+=" - documentation"
+
+  mv docs/* "$pkgdir"
 
   install -Dt "$pkgdir/usr/share/licenses/$pkgname" -m644 $pkgbase/LICENSE
 }
