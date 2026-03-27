@@ -1,5 +1,5 @@
 
-`main @ 20260327.1000`
+`main @ 20260327.1001`
 ======================
 
 Valve packages
@@ -110,12 +110,12 @@ Valve packages
  * [`jupiter-dock-updater-bin` — `jupiter-main/jupiter-dock-updater-bin-20250220.02-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-dock-updater-bin-20250220.02-1)
  * [`jupiter-fan-control` — `jupiter-main/jupiter-fan-control-20260319.1-4`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-fan-control-20260319.1-4)
  * [`jupiter-firewall` — `jupiter-main/jupiter-firewall-0.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-firewall-0.1-1)
- * [`jupiter-hw-support` — `jupiter-main/jupiter-hw-support-20260318.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-hw-support-20260318.1-1)
+ * [`jupiter-hw-support` — `jupiter-main/jupiter-hw-support-20260327.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-hw-support-20260327.1-1)
  * [`jupiter-legacy-support` — `jupiter-main/jupiter-legacy-support-1.156-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-legacy-support-1.156-1)
  * [`jupiter-steamos-log-submitter` — `jupiter-main/jupiter-steamos-log-submitter-1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-steamos-log-submitter-1-1)
  * [`kwin` — `jupiter-main/kwin-6.4.3-1.8`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/kwin-6.4.3-1.8)
  * [`kwin-x11` — `jupiter-main/kwin-x11-6.4.3-1.2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/kwin-x11-6.4.3-1.2)
- * [`libwireplumber` — `jupiter-main/wireplumber-0.5.13-1.4`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/wireplumber-0.5.13-1.4)
+ * [`libwireplumber` — `jupiter-main/wireplumber-0.5.14-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/wireplumber-0.5.14-1.1)
  * [`linux-firmware-neptune` — `jupiter-main/linux-firmware-neptune-jupiter.20260216.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/linux-firmware-neptune-jupiter.20260216.1-1)
  * [`linux-firmware-neptune-whence` — `jupiter-main/linux-firmware-neptune-jupiter.20260216.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/linux-firmware-neptune-jupiter.20260216.1-1)
  * [`linux-neptune-618` — `jupiter-main/linux-neptune-618-6.18.20.valve1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/linux-neptune-618-6.18.20.valve1-1)
@@ -137,7 +137,7 @@ Valve packages
  * [`vulkan-intel` — `jupiter-main/mesa-25.3.0.213835.radeonsi_25.3.0-3`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/mesa-25.3.0.213835.radeonsi_25.3.0-3)
  * [`vulkan-mesa-implicit-layers` — `jupiter-main/mesa-25.3.0.213835.radeonsi_25.3.0-3`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/mesa-25.3.0.213835.radeonsi_25.3.0-3)
  * [`vulkan-virtio` — `jupiter-main/mesa-25.3.0.213835.radeonsi_25.3.0-3`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/mesa-25.3.0.213835.radeonsi_25.3.0-3)
- * [`wireplumber` — `jupiter-main/wireplumber-0.5.13-1.4`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/wireplumber-0.5.13-1.4)
+ * [`wireplumber` — `jupiter-main/wireplumber-0.5.14-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/wireplumber-0.5.14-1.1)
  * [`xorgproto` — `jupiter-main/xorgproto-2024.1-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/xorgproto-2024.1-2)
 
 Arch Linux packages
