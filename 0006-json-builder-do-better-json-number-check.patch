@@ -1,0 +1,157 @@
+From 7a7931e4885867363eae902a4dcacbe7b81f0a75 Mon Sep 17 00:00:00 2001
+From: Wim Taymans <wtaymans@redhat.com>
+Date: Mon, 9 Mar 2026 13:33:20 +0100
+Subject: [PATCH 06/17] json-builder: do better json number check
+
+If we are going to produce valid JSON we need to do a better JSON number
+check because our own float and int parser can accept more variants
+and will let through numbers that are not valid JSON.
+
+See #5161
+---
+ spa/include/spa/utils/json-builder.h |  8 +++--
+ spa/include/spa/utils/json-core.h    | 38 +++++++++++++++++++++
+ test/test-spa-json.c                 | 49 ++++++++++++++++++++--------
+ 3 files changed, 78 insertions(+), 17 deletions(-)
+
+diff --git a/spa/include/spa/utils/json-builder.h b/spa/include/spa/utils/json-builder.h
+index 8da256dcc96e..3fdb99271db9 100644
+--- a/spa/include/spa/utils/json-builder.h
++++ b/spa/include/spa/utils/json-builder.h
+@@ -169,11 +169,13 @@ void spa_json_builder_add_simple(struct spa_json_builder *b, const char *key, in
+ 		else if (spa_json_is_null(val, val_len) ||
+ 			 spa_json_is_bool(val, val_len))
+ 			type = 'l';
+-		else if (spa_json_is_float(val, val_len) ||
+-			 spa_json_is_int(val, val_len))
+-			type = 'd';
+ 		else if (spa_json_is_string(val, val_len))
+ 			type = 's';
++		else if (spa_json_is_json_number(val, val_len))
++			type = 'd';
++		else if (simple && (spa_json_is_float(val, val_len) ||
++			 spa_json_is_int(val, val_len)))
++			type = 'd';
+ 		else
+ 			type = 'S';
+ 	}
+diff --git a/spa/include/spa/utils/json-core.h b/spa/include/spa/utils/json-core.h
+index 527412c8e7df..e75468c32917 100644
+--- a/spa/include/spa/utils/json-core.h
++++ b/spa/include/spa/utils/json-core.h
+@@ -484,6 +484,44 @@ SPA_API_JSON bool spa_json_is_int(const char *val, int len)
+ 	return spa_json_parse_int(val, len, &dummy);
+ }
+ 
++SPA_API_JSON bool spa_json_is_json_number(const char *val, int len)
++{
++        int pos = 0, first;
++        /* integer */
++        if (len == 0)
++                return 0;
++        if (pos < len && val[pos] == '-')
++                pos++;
++	first = pos;
++        while(pos < len && val[pos] >= '0' && val[pos] <= '9')
++		pos++;
++	if (pos == first || (first + 1 < pos && val[first] == '0'))
++		return 0;
++        /* fraction */
++        if (pos == len)
++                return 1;
++        if (val[pos++] != '.')
++                return 0;
++	first = pos;
++        while(pos < len && val[pos] >= '0' && val[pos] <= '9')
++		pos++;
++	if (pos == first)
++		return 0;
++        /* exponent */
++        if (pos == len)
++                return 1;
++        if (val[pos] != 'e' && val[pos] != 'E')
++                return 0;
++	pos++;
++        if (val[pos] == '-' || val[pos] == '+')
++		pos++;
++        while(pos < len && val[pos] >= '0' && val[pos] <= '9')
++		pos++;
++        if (pos != len)
++                return 0;
++        return 1;
++}
++
+ /* bool */
+ SPA_API_JSON bool spa_json_is_true(const char *val, int len)
+ {
+diff --git a/test/test-spa-json.c b/test/test-spa-json.c
+index 0c3c46f59ee9..b7c4572f627b 100644
+--- a/test/test-spa-json.c
++++ b/test/test-spa-json.c
+@@ -702,21 +702,39 @@ PWTEST(json_float_check)
+ 	struct {
+ 		const char *str;
+ 		int res;
++		int jsonres;
+ 	} val[] = {
+-		{ "0.0", 1 },
+-		{ ".0", 1 },
+-		{ "+.0E0", 1 },
+-		{ "-.0e0", 1 },
+-
+-		{ "0,0", 0 },
+-		{ "0.0.5", 0 },
+-		{ "0x0", 0 },
+-		{ "0x0.0", 0 },
+-		{ "E10", 0 },
+-		{ "e20", 0 },
+-		{ " 0.0", 0 },
+-		{ "0.0 ", 0 },
+-		{ " 0.0 ", 0 },
++		{ "0.0", 1, 1},
++		{ ".0", 1, 0 },
++		{ "+.0E0", 1, 0 },
++		{ "-.0e0", 1, 0 },
++
++		{ "0,0", 0, 0 },
++		{ "0.0.5", 0, 0 },
++		{ "0x0", 0, 0 },
++		{ "0x0.0", 0, 0 },
++		{ "E10", 0, 0 },
++		{ "e20", 0, 0 },
++		{ " 0.0", 0, 0 },
++		{ "0.0 ", 0, 0 },
++		{ " 0.0 ", 0, 0 },
++
++		{ "+", 0, 0 },
++		{ "+0", 1, 0 },
++		{ "-", 0, 0 },
++		{ "-0", 1, 1 },
++		{ "-0", 1, 1 },
++		{ "-01", 1, 0 },
++		{ "-00", 1, 0 },
++		{ "-1", 1, 1 },
++		{ "-10", 1, 1 },
++		{ "-.", 0, 0 },
++		{ "-0.", 1, 0 },
++		{ "-01.", 1, 0 },
++		{ "-1.", 1, 0 },
++
++		{ "-.0", 1, 0 },
++
+ 	};
+ 	unsigned i;
+ 	float v;
+@@ -724,6 +742,9 @@ PWTEST(json_float_check)
+ 	for (i = 0; i < SPA_N_ELEMENTS(val); i++) {
+ 		pwtest_int_eq(spa_json_parse_float(val[i].str, strlen(val[i].str), &v), val[i].res);
+ 	}
++	for (i = 0; i < SPA_N_ELEMENTS(val); i++) {
++		pwtest_int_eq(spa_json_is_json_number(val[i].str, strlen(val[i].str)), val[i].jsonres);
++	}
+ 	return PWTEST_PASS;
+ }
+ 
+-- 
+2.53.0
+

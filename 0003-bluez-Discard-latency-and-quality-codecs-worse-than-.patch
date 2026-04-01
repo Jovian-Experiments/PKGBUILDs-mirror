@@ -1,4 +1,4 @@
-From 5e25d96ad30ba10191447f0e292f111b47518048 Mon Sep 17 00:00:00 2001
+From ee82866089a9e8acb069dd61b8fc10dcf72277c7 Mon Sep 17 00:00:00 2001
 From: Julian Bouzas <julian.bouzas@collabora.com>
 Date: Mon, 23 Mar 2026 11:13:26 -0400
 Subject: [PATCH 3/3] bluez: Discard latency and quality codecs worse than SBC
@@ -14,10 +14,10 @@ and quality than SBC.
  1 file changed, 5 insertions(+), 29 deletions(-)
 
 diff --git a/spa/plugins/bluez5/bluez5-device.c b/spa/plugins/bluez5/bluez5-device.c
-index 5f3561a1f..7b4cce3e3 100644
+index 231e3084191d..8972419542b7 100644
 --- a/spa/plugins/bluez5/bluez5-device.c
 +++ b/spa/plugins/bluez5/bluez5-device.c
-@@ -212,29 +212,17 @@ static size_t get_media_codec_quality_priority (const struct media_codec *mc)
+@@ -230,29 +230,17 @@ static size_t get_media_codec_quality_priority (const struct media_codec *mc)
  	/* From lowest quality to highest quality */
  	static const enum spa_bluetooth_audio_codec quality_priorities[] = {
  		SPA_BLUETOOTH_AUDIO_CODEC_START,
@@ -50,7 +50,7 @@ index 5f3561a1f..7b4cce3e3 100644
  		if (quality_priorities[i] == mc->id)
  			return i;
  	}
-@@ -247,21 +235,9 @@ static size_t get_media_codec_latency_priority (const struct media_codec *mc)
+@@ -265,21 +253,9 @@ static size_t get_media_codec_latency_priority (const struct media_codec *mc)
  	/* From highest latency to lowest latency */
  	static const enum spa_bluetooth_audio_codec latency_priorities[] = {
  		SPA_BLUETOOTH_AUDIO_CODEC_START,
@@ -73,7 +73,7 @@ index 5f3561a1f..7b4cce3e3 100644
  		SPA_BLUETOOTH_AUDIO_CODEC_FASTSTREAM_DUPLEX,
  		SPA_BLUETOOTH_AUDIO_CODEC_FASTSTREAM,
  		SPA_BLUETOOTH_AUDIO_CODEC_APTX_LL_DUPLEX,
-@@ -269,7 +245,7 @@ static size_t get_media_codec_latency_priority (const struct media_codec *mc)
+@@ -287,7 +263,7 @@ static size_t get_media_codec_latency_priority (const struct media_codec *mc)
  	};
  	size_t i;
  
@@ -83,5 +83,5 @@ index 5f3561a1f..7b4cce3e3 100644
  			return i;
  	}
 -- 
-2.50.1
+2.53.0
 

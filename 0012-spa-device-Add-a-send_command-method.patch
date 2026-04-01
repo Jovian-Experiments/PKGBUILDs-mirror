@@ -1,0 +1,154 @@
+From 2caa4ccfd4ca313dec517035c1dac0abbe3c9c02 Mon Sep 17 00:00:00 2001
+From: Arun Raghavan <arunr@valvesoftware.com>
+Date: Tue, 3 Mar 2026 12:17:25 -0800
+Subject: [PATCH 12/17] spa: device: Add a send_command() method
+
+We don't currently have a mechanism to send commands to devices, which
+can be handy.
+---
+ spa/include/spa/monitor/device.h    | 48 +++++++++++++++++++++++++++--
+ spa/include/spa/monitor/type-info.h | 19 +++++++++++-
+ spa/include/spa/utils/type-info.h   |  2 +-
+ 3 files changed, 65 insertions(+), 4 deletions(-)
+
+diff --git a/spa/include/spa/monitor/device.h b/spa/include/spa/monitor/device.h
+index cc51f9ef1ee0..57c84a963a18 100644
+--- a/spa/include/spa/monitor/device.h
++++ b/spa/include/spa/monitor/device.h
+@@ -8,6 +8,7 @@
+ #include <spa/utils/defs.h>
+ #include <spa/utils/hook.h>
+ #include <spa/utils/dict.h>
++#include <spa/pod/command.h>
+ #include <spa/pod/event.h>
+ 
+ #ifdef __cplusplus
+@@ -126,7 +127,27 @@ struct spa_device_events {
+ #define SPA_DEVICE_METHOD_SYNC		1
+ #define SPA_DEVICE_METHOD_ENUM_PARAMS	2
+ #define SPA_DEVICE_METHOD_SET_PARAM	3
+-#define SPA_DEVICE_METHOD_NUM		4
++#define SPA_DEVICE_METHOD_SEND_COMMAND	4
++#define SPA_DEVICE_METHOD_NUM		5
++
++/* object id of SPA_TYPE_COMMAND_Device */
++enum spa_device_commands {
++	SPA_DEVICE_COMMAND_User,
++};
++
++#define SPA_DEVICE_COMMAND_ID(cmd)	SPA_COMMAND_ID(cmd, SPA_TYPE_COMMAND_Device)
++#define SPA_DEVICE_COMMAND_INIT(id)	SPA_COMMAND_INIT(SPA_TYPE_COMMAND_Device, id)
++
++
++/* properties for SPA_TYPE_COMMAND_Device */
++enum spa_command_device {
++	SPA_COMMAND_DEVICE_START,
++
++	SPA_COMMAND_DEVICE_START_User 		= 0x1000,
++	SPA_COMMAND_DEVICE_extra,		/** extra info (String) */
++
++	SPA_COMMAND_DEVICE_START_CUSTOM   	= 0x1000000,
++};
+ 
+ /**
+  * spa_device_methods:
+@@ -134,7 +155,7 @@ struct spa_device_events {
+ struct spa_device_methods {
+ 	/* the version of the methods. This can be used to expand this
+ 	 * structure in the future */
+-#define SPA_VERSION_DEVICE_METHODS	0
++#define SPA_VERSION_DEVICE_METHODS	1
+ 	uint32_t version;
+ 
+ 	/**
+@@ -226,6 +247,23 @@ struct spa_device_methods {
+ 	int (*set_param) (void *object,
+ 			  uint32_t id, uint32_t flags,
+ 			  const struct spa_pod *param);
++
++	/**
++	 * Send a command to a device.
++	 *
++	 * This function must be called from the main thread.
++	 *
++	 * \param object a \ref spa_device
++	 * \param command a \ref spa_command of type \ref spa_command_device
++	 * \return 0 on success
++	 *         -EINVAL when node or command is NULL
++	 *         -ENOTSUP when this node can't process commands
++	 *         -EINVAL \a command is an invalid command
++	 *
++	 * \since 1
++	 */
++	int (*send_command) (void *object, const struct spa_command *command);
++
+ };
+ 
+ SPA_API_DEVICE int spa_device_add_listener(struct spa_device *object,
+@@ -256,6 +294,12 @@ SPA_API_DEVICE int spa_device_set_param(struct spa_device *object,
+ 	return spa_api_method_r(int, -ENOTSUP, spa_device, &object->iface, set_param, 0,
+ 			id, flags, param);
+ }
++SPA_API_DEVICE int spa_device_send_command(struct spa_device *object,
++			  const struct spa_command *command)
++{
++	return spa_api_method_r(int, -ENOTSUP, spa_device, &object->iface, send_command, 1,
++			command);
++}
+ 
+ #define SPA_KEY_DEVICE_ENUM_API		"device.enum.api"	/**< the api used to discover this
+ 								  *  device */
+diff --git a/spa/include/spa/monitor/type-info.h b/spa/include/spa/monitor/type-info.h
+index 1658594b4ac7..f7c66799c8e5 100644
+--- a/spa/include/spa/monitor/type-info.h
++++ b/spa/include/spa/monitor/type-info.h
+@@ -5,8 +5,9 @@
+ #ifndef SPA_DEVICE_TYPE_INFO_H
+ #define SPA_DEVICE_TYPE_INFO_H
+ 
+-#include <spa/utils/type-info.h>
++#include <spa/utils/type.h>
+ 
++#include <spa/monitor/device.h>
+ #include <spa/monitor/event.h>
+ 
+ #ifdef __cplusplus
+@@ -36,6 +37,22 @@ static const struct spa_type_info spa_type_device_event[] = {
+ 	{ 0, 0, NULL, NULL },
+ };
+ 
++#define SPA_TYPE_INFO_DeviceCommand			SPA_TYPE_INFO_COMMAND_BASE "Device"
++#define SPA_TYPE_INFO_DEVICE_COMMAND_BASE		SPA_TYPE_INFO_DeviceCommand ":"
++
++static const struct spa_type_info spa_type_device_command_id[] = {
++	{ SPA_DEVICE_COMMAND_User, SPA_TYPE_COMMAND_Device, SPA_TYPE_INFO_DEVICE_COMMAND_BASE "User",  NULL },
++	{ 0, 0, NULL, NULL },
++};
++
++static const struct spa_type_info spa_type_device_command[] = {
++	{ SPA_COMMAND_DEVICE_START, SPA_TYPE_Id, SPA_TYPE_INFO_DEVICE_COMMAND_BASE, spa_type_device_command_id },
++
++	{ SPA_COMMAND_DEVICE_extra, SPA_TYPE_String, SPA_TYPE_INFO_DEVICE_COMMAND_BASE "extra", NULL },
++
++	{ 0, 0, NULL, NULL },
++};
++
+ /**
+  * \}
+  */
+diff --git a/spa/include/spa/utils/type-info.h b/spa/include/spa/utils/type-info.h
+index 5eece4db2b99..eefff174adec 100644
+--- a/spa/include/spa/utils/type-info.h
++++ b/spa/include/spa/utils/type-info.h
+@@ -62,7 +62,7 @@ static const struct spa_type_info spa_types[] = {
+ 	{ SPA_TYPE_EVENT_Node, SPA_TYPE_Object, SPA_TYPE_INFO_EVENT_BASE "Node", spa_type_node_event },
+ 
+ 	{ SPA_TYPE_COMMAND_START, SPA_TYPE_Object, SPA_TYPE_INFO_Command, NULL },
+-	{ SPA_TYPE_COMMAND_Device, SPA_TYPE_Object, SPA_TYPE_INFO_COMMAND_BASE "Device", NULL },
++	{ SPA_TYPE_COMMAND_Device, SPA_TYPE_Object, SPA_TYPE_INFO_COMMAND_BASE "Device", spa_type_device_command },
+ 	{ SPA_TYPE_COMMAND_Node, SPA_TYPE_Object, SPA_TYPE_INFO_COMMAND_BASE "Node", spa_type_node_command },
+ 
+ 	{ SPA_TYPE_OBJECT_START, SPA_TYPE_Object, SPA_TYPE_INFO_Object, NULL },
+-- 
+2.53.0
+

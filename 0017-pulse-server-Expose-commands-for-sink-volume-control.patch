@@ -1,0 +1,103 @@
+From f302f9407eeddef6715c54c816409ada371f4814 Mon Sep 17 00:00:00 2001
+From: Arun Raghavan <arunr@valvesoftware.com>
+Date: Wed, 4 Mar 2026 19:15:42 -0800
+Subject: [PATCH 17/17] pulse-server: Expose commands for sink volume control
+
+Useful for things like HDMI CEC.
+---
+ .../module-protocol-pulse/message-handler.c   | 65 +++++++++++++++++++
+ 1 file changed, 65 insertions(+)
+
+diff --git a/src/modules/module-protocol-pulse/message-handler.c b/src/modules/module-protocol-pulse/message-handler.c
+index b44d4f4224a9..80aefbeb1938 100644
+--- a/src/modules/module-protocol-pulse/message-handler.c
++++ b/src/modules/module-protocol-pulse/message-handler.c
+@@ -8,6 +8,7 @@
+ #include <regex.h>
+ #include <malloc.h>
+ 
++#include <spa/monitor/device.h>
+ #include <spa/param/props.h>
+ #include <spa/pod/builder.h>
+ #include <spa/pod/pod.h>
+@@ -23,8 +24,62 @@
+ #include "log.h"
+ #include "manager.h"
+ #include "module.h"
++#include "pipewire/properties.h"
+ #include "message-handler.h"
+ 
++static int sink_object_message_handler(struct client *client, struct pw_manager_object *o, const char *message, const char *params, FILE *response)
++{
++	struct device_info dev_info;
++	struct pw_manager_object *card = NULL;
++	char buf[1024];
++	struct spa_pod_builder b = SPA_POD_BUILDER_INIT(buf, sizeof(buf));
++	struct spa_pod_frame f[1];
++	struct spa_command *command;
++	uint32_t card_id, command_id;
++
++	pw_log_debug(": sink %p object message:'%s' params:'%s'", o, message, params);
++
++	get_device_info(o, &dev_info, PW_DIRECTION_OUTPUT, false);
++
++	if (spa_streq(message, "volume-up"))
++		command_id = SPA_COMMAND_DEVICE_volumeUp;
++	else if (spa_streq(message, "volume-down"))
++		command_id = SPA_COMMAND_DEVICE_volumeDown;
++	else if (spa_streq(message, "mute-toggle"))
++		command_id = SPA_COMMAND_DEVICE_muteToggle;
++	else {
++		fprintf(response, "Unknown message %s (must be volume-up, volume-down or mute-toggle)", message);
++		return -EINVAL;
++	}
++
++	card_id = pw_properties_get_uint32(o->props, PW_KEY_DEVICE_ID, SPA_ID_INVALID);
++
++	spa_list_for_each(o, &client->manager->object_list, link) {
++		if (o->id == card_id) {
++			card = o;
++			break;
++		}
++	}
++
++	if (!card) {
++		pw_log_error("Could not find card");
++		return -EINVAL;
++	}
++
++	spa_pod_builder_push_object(&b, &f[0],
++			SPA_TYPE_COMMAND_Device, SPA_DEVICE_COMMAND_VolumeControl);
++	spa_pod_builder_add(&b,
++			command_id, SPA_POD_Id(dev_info.active_port), 0);
++
++	command = spa_pod_builder_pop(&b, &f[0]);
++
++	pw_device_send_command((struct pw_device *)card->proxy, command);
++
++	fprintf(response, "true");
++
++	return 0;
++}
++
+ static int bluez_card_object_message_handler(struct client *client, struct pw_manager_object *o, const char *message, const char *params, FILE *response)
+ {
+ 	struct transport_codec_info codecs[64];
+@@ -285,4 +340,14 @@ void register_object_message_handlers(struct pw_manager_object *o)
+ 		}
+ 		return;
+ 	}
++
++	if (pw_manager_object_is_sink(o)) {
++		str = pw_properties_get(o->props, PW_KEY_NODE_NAME);
++		if (str) {
++			free(o->message_object_path);
++			o->message_object_path = spa_aprintf("/sink/%s/volume-control", str);
++			o->message_handler = sink_object_message_handler;
++		}
++		return;
++	}
+ }
+-- 
+2.53.0
+

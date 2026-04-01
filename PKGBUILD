@@ -22,6 +22,7 @@ pkgname=(
   pipewire-ffado
   pipewire-jack-client
   pipewire-jack
+  pipewire-onnx
   pipewire-pulse
   pipewire-roc
   gst-plugin-pipewire
@@ -31,8 +32,8 @@ pkgname=(
   pipewire-session-manager
   pulse-native-provider
 )
-pkgver=1.4.10
-pkgrel=1.4
+pkgver=1.6.2
+pkgrel=1.1
 epoch=1
 pkgdesc="Low-latency audio/video router and processor"
 url="https://pipewire.org"
@@ -44,6 +45,7 @@ makedepends=(
   bluez-libs
   dbus
   doxygen
+  fftw
   git
   glib2
   glib2-devel
@@ -69,6 +71,7 @@ makedepends=(
   # Holo: For HFP certification
   modemmanager
   ncurses
+  onnxruntime
   opus
   'python>=3.13'
   'python<3.14'
@@ -78,6 +81,7 @@ makedepends=(
   rtkit
   sbc
   sdl2
+  spandsp
   systemd
   valgrind
   webrtc-audio-processing-1
@@ -89,50 +93,6 @@ checkdepends=(
 source=(
     "git+https://gitlab.freedesktop.org/pipewire/pipewire.git#tag=$pkgver"
     # Holo
-    "0001-pipeware-bluez5-backend-native-Enable-SCO-offload.patch"
-
-    # Holo: Backport https://gitlab.freedesktop.org/pipewire/pipewire/-/merge_requests/2422
-    # Part of https://gitlab.steamos.cloud/holo-team/tasks/-/issues/1675
-    "0001-alsa-add-option-to-disable-pro-audio-profiles.patch"
-
-    # Holo: Backport https://gitlab.freedesktop.org/pipewire/pipewire/-/merge_requests/2560
-    # First 4 are dependencies, last two are from the MR
-    "0001-alsa-Use-the-configured-max-channels.patch"
-    "0002-Remove-some-hardcoded-channel-number-values.patch"
-    "0003-pulse-clamp-channel-numbers-to-right-values.patch"
-    "0004-acp-remove-channel-limit-from-API.patch"
-    "0005-spa-alsa-Read-and-expose-channel-count-and-position-.patch"
-    "0006-spa-alsa-Add-option-to-use-ELD-detected-channels.patch"
-
-    # Holo: Backport https://gitlab.freedesktop.org/pipewire/pipewire/-/merge_requests/2639
-    "0001-spa-alsa-Guard-against-mismatched-LPCM-channel-count.patch"
-    # Holo: Backport https://gitlab.freedesktop.org/pipewire/pipewire/-/merge_requests/2642
-    "0002-spa-alsa-Fix-off-by-one-check-in-ELD-channel-positio.patch"
-
-    # Holo: Backports for HFP AG qualification
-    # Holo: Backport https://gitlab.freedesktop.org/pipewire/pipewire/-/merge_requests/2604
-    "0009-spa-bluez-modemmanager-Fix-NameOwnerChanged.patch"
-    # Holo: Backport https://gitlab.freedesktop.org/pipewire/pipewire/-/merge_requests/2605
-    "0010-spa-bluez-backend-native-Fix-CNUM-reply.patch"
-    # Holo: Backport https://gitlab.freedesktop.org/pipewire/pipewire/-/merge_requests/2606
-    "0011-spa-bluez-backend-native-Fix-CIEV-call-status-suppor.patch"
-    # Holo: Backport https://gitlab.freedesktop.org/pipewire/pipewire/-/merge_requests/2609
-    "0012-spa-bluez-backend-native-Fix-BIEV-HF-indicators-supp.patch"
-    # Holo: Backport https://gitlab.freedesktop.org/pipewire/pipewire/-/merge_requests/2617
-    "0013-spa-bluez-device-Add-SPA_PROP_params-to-disable-dumm.patch"
-    # Holo: Backport https://gitlab.freedesktop.org/pipewire/pipewire/-/merge_requests/2631
-    "0014-doc-Add-property-documentation-for-bluez5.disable-du.patch"
-    "0015-spa-bluez-modemmanager-Add-support-for-memory-dialin.patch"
-    "0016-spa-bluez-backend-native-Add-support-for-AT-BLDN-for.patch"
-    # Holo: Backport https://gitlab.freedesktop.org/pipewire/pipewire/-/merge_requests/2638
-    "0017-spa-bluez-backend-native-Fix-audio-connection-policy.patch"
-
-    # Holo: Backport https://gitlab.freedesktop.org/pipewire/pipewire/-/merge_requests/2646
-    # Holo: Backport https://gitlab.freedesktop.org/pipewire/pipewire/-/merge_requests/2674
-    "0001-pulse-server-Fix-querying-after-setting-of-mono-mixd.patch"
-    "0002-pipewire-pulse-Expose-bluetooth-headset-autoswitch-c.patch"
-    "0003-pulse-server-use-null-to-clear-the-value.patch"
-
     # Holo: Backport https://gitlab.freedesktop.org/pipewire/pipewire/-/merge_requests/2752
     "0001-bluez-Add-A2DP-auto-quality-and-latency-profiles.patch"
 
@@ -140,34 +100,47 @@ source=(
     "0001-bluez-Increase-priority-of-A2DP-quality-and-latency-.patch"
     "0002-bluez-Set-initial-profile-to-quality-A2DP.patch"
     "0003-bluez-Discard-latency-and-quality-codecs-worse-than-.patch"
-)
-b2sums=('5c7c50e83200001fbaac5bdb9497eed56e68ebe3be5a75f1cb843d73ef855870f8da09b456b3530a7c66ce6a87665b386c00d4bbffb6c96f88ab9d65ba60c8ae'
-        '68ad58cb1a8c532a194b7982167e6b461ff3a2d046f346305c38d3af21a696a2cd18619b73b99cc1b41c55f8786cf26ab5c077f58652e8197a9f5f42416c764f'
-        '98bccdbe20da61ffb5d1e81029983bf947ae010198d70eb93851f8ddce72338944829f8d369da73e71ac4d85bd5279d0fdd923dac307516f15bad8c565aa4d92'
-        '95427f88ad7d690811c9eca4e9d29fdc6f15ddd8dc64d14d5682749b07765e64552d3a15efe8b350478d32a90499ca2e7820bc1e473cd6cbd26901706995b556'
-        '2bb4bd117024c061364bb9cf44a54c7f633b8ea7106c4cc3ee047b3c591a1ac9d1b9c226f43d790b29968eecad7f6883b652a2b5d4460979a791032645ad8ef4'
-        '23f5357b5aaba0f8e20e77b641af555004780caae68f77f9ca12d214bec3d7429718afac3512a8310bd49a99fa4b6e67b41faf3038e1e9221416c9d0d5deb1b1'
-        '89f8f590134f07b56dd3500265d8195d6bf8e6d6a0d73422bf682f63d8159405362fb85c9057dfc422ce7d1033a0173b26ac26515d46f5c7d32f696204581620'
-        '87f723232450d404b1505299005ac8ac6ad01b4278d87771ebc9675a67feb401249db159cf65c1f44ba3ae78ef3bd0d83255be5546d0f06aa8e41ed0b7005a8d'
-        'eaf1e55589fbfe28db7e16138425969e2e1016a7ba75fb9af507677009bcbd3414a2d86ea4f644ad5b625b49eb8c33679404390ae8e7702e854bd0adf4801757'
-        '148f6315f25fb956fdab4935ceea35f83cae36afdbb1d5471103445f5a7a45fd27cb1921b1926a39d382dead0f2be9842c36b01a62ba566b93331cbf45bf38b0'
-        '57aafc323d58e38b781528e21ac5f642fd7de11ad153ff12093e4d1807a1768fe38c40cde8902b888908a8c6484ccf3affe52ac9f2274064bfd50114bae96f5b'
-        'fd2bfdd8601b142e9812058613bb69066c1e852145b0543ad8705a8415cd24c92e107f8420db6215f9723059fe2acc38825e4f4b4b5acaf9cbda32007aa13cf6'
-        '47d91be7e62f3bab9725ddd1f62ff075619f27e52e90b1b7586a08704067f277ead95affcc2945ba48f9830ed6d95cf001df1c3af21ac7dbe858e578047d65b3'
-        '76366abab04dc24df31d3943b0a28113bfdae54f8f8fec1fd8e8248a45779992b29e8c4870ce3aaf3fcadee0f46e50220bf7afdd93f964d3509811df39815667'
-        '17e52ec774230f6a88de11ef334b5937644e263f8616ac6302eb8ea4c6b5f55593255cd95489cee41c6957b88bf0b69ae050616f9635207d02969d5c867328ff'
-        '9f6ad262db5ac5dce91bf16bb1956f41f4d86c2f80844c2b1ebba119054c3d002bed9ec436a71ee616719aa2428c6a02fb70b4d1074ea1cc66552bc9a1facfec'
-        'c5f75947e36c72496e5c567d471c5fc7f62ea7e7f932a15c14118883bc39f79f4415282142587ff577fa7cf3e9d0938f0d560acac28e639c43c8d0daf9221157'
-        '7c6b745dd09b60e983db422148cef77ef4cf355d050f4a154959b9c95de786eabfa8970a734b67d548aa08e673662264c556736df64b1d7a887ecbbeb599e53b'
-        '9c95db232c9619d417fb0441943ec815df3b6d9a5043082854d295e020f315fc0c83ce8f6af3e0e8c9e946e80ed86df174eafddd72f38d423408afccd4cdcc57'
-        '2c97fa28a82d0f725ff169698edfad53cdb4d3131e79adbb1e7cd896ce96b4cb566bb5ae40d47e56775e61bd533d270c34af38db9f93c1b8e414f1eca445c3b4'
-        '257adcde47c4eb618f86d8d16c479ca56057bc88fb44f5539b00ab4278fbe8d74d0ec820acff8e986f6df6c63076f0541c52ad931fd2bde8ee1da5dc79915b02'
-        '5910c022a8604edea4629d5f9250c984c6f7b21c24b90e12e57ca0329fa85a8c2249c77f9ed7dd0defd8c99f8e583ff28aa91a22fd2522bde7212ab11f616b91'
-        '17f420873f14f67b86b9521dd8e34b1cadad3dd2d2ba790e92a3bbda49593e33436fa8fcfa6ab3c4d873793beab9fcd032de6aca0baf7b9c1ec3a3df6045bce5'
-        'd386030c992eb6dc874706cde1b743dca4470246065aa0c3692808614ba3b1f3664876c34d6e67c5505efcee7ca9936af057798a9b67f922e9470e012e86dd2a'
-        '14c14b8fdb95aadbfefe56120b01f1b754348f690aa4133eccc20ae2c40432ee24e565b7278863b46257d6acc3c6d73605e992e6fa7da2931904ea896aafde38'
-        '0f471dc7b89a57f817e2ffba5d79739a20644de3025d859870188f5d79a62e3418872de4ac95aa28745bb976442b33808ae91d5d5c8358eee69b426f43595d8c'
-        'b865f3dd1e88f96bc14d793a445fa7be545fb71ed44dda0c7a8461c1c2ab3ae55cc04736cd8b034f751c1f38922321fadb73fb00c2154f21bc3f7f57a8943097')
+
+    # Holo: Backport https://gitlab.freedesktop.org/pipewire/pipewire/-/merge_requests/2722
+    "0001-spa-add-a-new-json-builder-helper.patch"
+    "0002-json-builder-add-raw-mode-that-leaves-keys-strings-l.patch"
+    "0003-json-builder-avoid-indent-on-the-first-item.patch"
+    "0004-json-builder-zero-the-struct.patch"
+    "0005-json-builder-handle-allocation-failures-in-vasprintf.patch"
+    "0006-json-builder-do-better-json-number-check.patch"
+    "0007-spa-dbus-Minor-fix-for-incorrect-documentation.patch"
+    "0008-spa-Add-a-varlink-client-support-library.patch"
+    "0009-spa-Add-a-param-for-audio-volume-control-flags.patch"
+    "0010-alsa-Add-a-varlink-interface-definition-for-external.patch"
+    "0011-spa-alsa-Add-a-mechanism-for-external-volume-control.patch"
+    "0012-spa-device-Add-a-send_command-method.patch"
+    "0013-pipewire-device-Add-a-send_command-method.patch"
+    "0014-spa-device-Commands-for-external-volume-control.patch"
+    "0015-spa-alsa-Support-volume-control-commands-for-externa.patch"
+    "0016-pulse-server-Surface-volume-control-flags-as-propert.patch"
+    "0017-pulse-server-Expose-commands-for-sink-volume-control.patch")
+b2sums=('27c3f29c85791a7c524256c6e52dbd086f346ecc9d33b5f075f82cdfdef4f31e04af5f937c3d95c501a5f94d6e26160585bec4bb96808c8dc766396d99763aaa'
+        'b999796fc69ecd661b7cd761b98daf81412e4a02e649d74d8d8ec7d2c6cf0169f6062ea03131313a5b03a50529e956289baf0068f0631ea58243d42f1fae4d6e'
+        'ba33b056d13739e24b7e6c46bf9268357eea5a989f8af5021c737978a9a0bd9fb9882cc7e2c6eb8477d7c1e50684c3083ea33123f29a949e600ee1849cfe5cdf'
+        '2708c004cbfccc56b6342785f117f2f2ec16aba474df96acf4c9d028462b4c0b8f443f13f387465e24eb628f797615c58e91b53672e01729d18b46da72686d93'
+        '23b4ff805917e71741672b5fd2efcccbd9ba65504f3ed776960c70742a29ee8b1c2ec0ba8c068792b949e58da59cc9978ad5b02fe9aa7f6074848c765cc8e906'
+        '7e0017bc79a7a852140e8710ad3bdd0d6c72e5b175a6103dd1c8d4952774e7ba20f42b1edd9e69ab3ff42f13be016f9844bffcad327bc6c6379bbad242a5d5a4'
+        '07edc2b29f9e7e8a7bf626112491688c07d2aa8cbc4e9434c67216859538cf537762a34bf7b1cf34453ea3f78435a51c45b467af8d23caf4a2802a86fcedf6d7'
+        'c12144b97ea833c39b76b27f0f9eef486ac25e5683603dcb976106e0962206f20537283d3ad81cd6baf68e52975ac6583bef93cb2dc15ddb152bb564fa4fb617'
+        '748cd41a2d971acf834c94460054324cdac8523576204a624346288f6e4397da3cd8eea72b0cc34f921c8e963b9f229f966307d452dfdde816429512acc0761b'
+        '88fcf89e5ae2132e16d15973d7af74a343122a813d52ab3912594a1f57935edba44748ce8dd08546f01b8ae2d8e961ddafc95fdd6efc84ad7ffe56be35cf31a6'
+        '3b927d315ce16b4eb5a1fa0a4de976bbe5b7c9686c6fd4cb73c7086d5f6298c1d8c472db52767c377bc8a96d3b16e4dd8007b661882a2c6da1c30c98cff0e66d'
+        '2df5613411e79e086ab4abb18ea17c3758cca24b9a16e0ecf4c9c7a01536bdbd4b1664403dd020f42930405cb6be74f838bc2965e3fdb6d93b41d43f96966b18'
+        'e745c8e3cc52120f91e4bccfae30f25741025faf1acbf36eae2da59f2866281b3129e6d3cfedf24086bf72fcc08d301d40956cc54b10d50f9c946ef282f440d1'
+        '7323bd24802a954d8bdff8d8d434d47e79f10db6197752d6f28a1b66e27bd2240acb53a4d42c81f66b69dfa3a07688bf3fce9e210e2cad49ef04860f8b8236fa'
+        'd4017423357d63d0e316cb2efb072a5af46b4bb93bc3dbc9f6b4dbddcb34fe9f070a082785ecbdda00662d0f3b54f31b91289d7ac58189f404233a9472f8c26a'
+        'ab9be739cb37345f53c5abe0915fe020e1fac97392a975cd4ef17445caf45172a96403fcc16ef4d46da907a797751441797baaae04f21d728a080fced0392c58'
+        'fc73bca74c2f7bc48a9854d5f691409aaffc28e94ca94d95d9d13ee0fee3b17c6cdaf40843277041177c701067c70c72cd27da3e4e85840c03d34d858f7a1e05'
+        '573fc501a8b8f432d1f79fff502181e72f7f24569ff6a70208c4b43015b9e3f8977801f5b65cccfb9c4476e4e44b38162ec79389e103c8006e6519aa32e802d1'
+        '78f4aef18b74550b4695c6c1a6bd76ba3037f769f1efff1c4bfd4859d2368a552a20bf239f6516ea06835c8c8f3b3d55b3aa1ac52ada27c02d4c009f4e8c4ff0'
+        '0ff89a9b49626da19b235067669b5fd1d8e9f7f1ec09783ba28a3d873edef54dae0aba65adf49eacf0b72bc90caee9538995476bad4d0f3cb9e89a96a09c5fed'
+        '5f6d26da50dadaf406acc3ab423b4d6c06d5996cda6db88b7befdedca9dfcbe751727cb4a2466e5c6e60b4c7c005b6b9490c4e51117814e34dc201e0fb1e53d1'
+        'd3fb1483429d7e29cb4a383c59e08dc39e95a04cfefcf49b4e4966d35545f0a869700749684f3f6672fc41779d83530f794eb0d0e1548634a560616408bf9eaa')
 
 prepare() {
   cd pipewire
@@ -187,6 +160,7 @@ build() {
     # Holo: Enable for HFP certification
     -D bluez5-backend-native-mm=enabled
     -D bluez5-codec-lc3plus=disabled
+    -D bluez5-codec-ldac-dec=disabled
     -D docs=enabled
     -D jack-devel=true
     -D libjack-path=/usr/lib
@@ -245,6 +219,7 @@ package_pipewire() {
     'pipewire-jack-client: PipeWire as JACK client'
     'pipewire-jack: JACK replacement'
     'pipewire-libcamera: Libcamera support'
+    'pipewire-onnx: ONNX filter support'
     'pipewire-pulse: PulseAudio replacement'
     'pipewire-roc: ROC streaming'
     'pipewire-session-manager: Session manager'
@@ -279,8 +254,10 @@ package_pipewire() {
 
     _pick libcamera usr/lib/$_spaname/libcamera
 
+    _pick onnx usr/lib/$_spaname/filter-graph/libspa-filter-graph-plugin-onnx.so
+
     _pick audio usr/bin/pipewire-{aes67,avb}
-    _pick audio usr/bin/pw-{cat,loopback,mididump}
+    _pick audio usr/bin/pw-{cat,loopback,mididump,midi2play,midi2record,sysex}
     _pick audio usr/bin/pw-{dsd,enc,midi,}play
     _pick audio usr/bin/pw-{midi,}record
     _pick audio usr/bin/spa-{acp-tool,resample}
@@ -361,6 +338,9 @@ package_pipewire() {
     _pick x11-bell usr/lib/$_pwname/libpipewire-module-x11-bell.so
     _pick x11-bell usr/share/man/man7/libpipewire-module-x11-bell.7
 
+    # directories for overrides
+    mkdir -p etc/pipewire/{client-rt,client,minimal,pipewire}.conf.d
+
     # Holo: we symlink the .conf.d directories from /etc/pipewire to /run because at
     # runtime the script pipewire-hwconfig picks up the correct config files based
     # on the hw.
@@ -429,6 +409,7 @@ package_pipewire-audio() {
     bluez-libs libbluetooth.so
     dbus libdbus-1.so
     gcc-libs
+    fftw libfftw3f.so
     glib2 libg{lib,object,io}-2.0.so
     glibc
     libebur128
@@ -442,8 +423,14 @@ package_pipewire-audio() {
     lilv liblilv-0.so
     opus libopus.so
     sbc libsbc.so
+    # Holo: upstream has libspandsp.so, but we don't have a new enough spandsp in base yet
+    spandsp
     systemd-libs
     webrtc-audio-processing-1 libwebrtc-audio-processing-1.so
+  )
+  provides=(
+    ladspa-host
+    lv2-host
   )
 
   mv audio/* "$pkgdir"
@@ -543,11 +530,28 @@ package_pipewire-jack() {
   install -Dm644 /dev/null \
     "$pkgdir/usr/share/pipewire/media-session.d/with-jack"
 
+  # directories for overrides
+  mkdir -p "$pkgdir/etc/pipewire/jack.conf.d"
+
+  install -Dt "$pkgdir/usr/share/licenses/$pkgname" -m644 pipewire/COPYING
+
   # Holo: we symlink the jack.conf.d directory from /etc/pipewire to /run because at
   # runtime the script pipewire-hwconfig picks up the correct config files based
   # on the hw.
   mkdir -p "$pkgdir/etc/pipewire"
   ln -s /run/pipewire/jack.conf.d "$pkgdir"/etc/pipewire/jack.conf.d
+}
+
+package_pipewire-onnx() {
+  pkgdesc+=" - ONNX filter support"
+  depends=(
+    "pipewire-audio=$epoch:$pkgver-$pkgrel"
+    "pipewire=$epoch:$pkgver-$pkgrel"
+    glibc
+    onnxruntime
+  )
+
+  mv onnx/* "$pkgdir"
 
   install -Dt "$pkgdir/usr/share/licenses/$pkgname" -m644 pipewire/COPYING
 }
@@ -575,6 +579,9 @@ package_pipewire-pulse() {
   install=pipewire-pulse.install
 
   mv pulse/* "$pkgdir"
+
+  # directory for overrides
+  mkdir -p "$pkgdir/etc/pipewire/pipewire-pulse.conf.d"
 
   # Holo: we symlink the pipewire-pulse.conf.d directory from /etc/pipewire to /run
   # because at runtime the script pipewire-hwconfig picks up the correct config files

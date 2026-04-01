@@ -1,0 +1,77 @@
+From d805b69013fd4bf61ac93f3723bc6f82573ae1c7 Mon Sep 17 00:00:00 2001
+From: Arun Raghavan <arunr@valvesoftware.com>
+Date: Wed, 4 Feb 2026 16:58:21 -0800
+Subject: [PATCH 09/17] spa: Add a param for audio volume control flags
+
+Should be usable to signal to clients what volume control capabilities a
+device supports.
+---
+ spa/include/spa/param/audio/volume.h | 29 ++++++++++++++++++++++++++++
+ spa/include/spa/param/props-types.h  |  1 +
+ spa/include/spa/param/props.h        |  2 ++
+ 3 files changed, 32 insertions(+)
+ create mode 100644 spa/include/spa/param/audio/volume.h
+
+diff --git a/spa/include/spa/param/audio/volume.h b/spa/include/spa/param/audio/volume.h
+new file mode 100644
+index 000000000000..56df180648db
+--- /dev/null
++++ b/spa/include/spa/param/audio/volume.h
+@@ -0,0 +1,29 @@
++/* Simple Plugin API */
++/* SPDX-FileCopyrightText: Copyright © 2026 Arun Raghavan */
++/* SPDX-License-Identifier: MIT */
++
++#ifndef SPA_AUDIO_VOLUME_H
++#define SPA_AUDIO_VOLUME_H
++
++#ifdef __cplusplus
++extern "C" {
++#endif
++
++/** Flags for volume control capabilities */
++enum spa_audio_volume_control_flags {
++	SPA_AUDIO_VOLUME_CONTROL_NONE = 0,				/**<< No flags */
++	SPA_AUDIO_VOLUME_CONTROL_READ_VOLUME = (1 << 0),		/**<< Volume value can be read */
++	SPA_AUDIO_VOLUME_CONTROL_WRITE_VOLUME_VALUE = (1 << 1),		/**<< Volume value can be set */
++	SPA_AUDIO_VOLUME_CONTROL_WRITE_VOLUME_UPDOWN = (1 << 2),	/**<< Volume value can incremented/decremented */
++	SPA_AUDIO_VOLUME_CONTROL_READ_MUTE = (1 << 3),			/**<< Mute state can be read */
++	SPA_AUDIO_VOLUME_CONTROL_WRITE_MUTE_VALUE = (1 << 4),		/**<< Mute state can be set */
++	SPA_AUDIO_VOLUME_CONTROL_WRITE_MUTE_TOGGLE = (1 << 5),		/**<< Mute state can be toggled */
++	SPA_AUDIO_VOLUME_CONTROL_READ_BALANCE = (1 << 6),		/**<< Per-channel volumes can be read */
++	SPA_AUDIO_VOLUME_CONTROL_WRITE_BALANCE = (1 << 7),		/**<< Per-channel volumes can be set */
++};
++
++#ifdef __cplusplus
++} /* extern "C" */
++#endif
++
++#endif /* SPA_AUDIO_VOLUME_H */
+diff --git a/spa/include/spa/param/props-types.h b/spa/include/spa/param/props-types.h
+index 0a7c916b82bb..239770e59114 100644
+--- a/spa/include/spa/param/props-types.h
++++ b/spa/include/spa/param/props-types.h
+@@ -66,6 +66,7 @@ static const struct spa_type_info spa_type_props[] = {
+ 	{ SPA_PROP_volumeRampTime, SPA_TYPE_Int, SPA_TYPE_INFO_PROPS_BASE "volumeRampTime", NULL },
+ 	{ SPA_PROP_volumeRampStepTime, SPA_TYPE_Int, SPA_TYPE_INFO_PROPS_BASE "volumeRampStepTime", NULL },
+ 	{ SPA_PROP_volumeRampScale, SPA_TYPE_Id, SPA_TYPE_INFO_PROPS_BASE "volumeRampScale", spa_type_audio_volume_ramp_scale },
++	{ SPA_PROP_volumeControlFlags, SPA_TYPE_Int, SPA_TYPE_INFO_PROPS_BASE "volumeControlFlags", NULL },
+ 
+ 	{ SPA_PROP_brightness, SPA_TYPE_Float, SPA_TYPE_INFO_PROPS_BASE "brightness", NULL },
+ 	{ SPA_PROP_contrast, SPA_TYPE_Float, SPA_TYPE_INFO_PROPS_BASE "contrast", NULL },
+diff --git a/spa/include/spa/param/props.h b/spa/include/spa/param/props.h
+index 48338b870ed7..94862ea88d4c 100644
+--- a/spa/include/spa/param/props.h
++++ b/spa/include/spa/param/props.h
+@@ -98,6 +98,8 @@ enum spa_prop {
+ 						  *  to ramp the */
+ 	SPA_PROP_volumeRampScale,		/**< the scale or graph to used to ramp the
+ 						  *  volume */
++	SPA_PROP_volumeControlFlags,		/**< Available volume control features
++						  * (Id enum spa_audio_volume_control_flags) */
+ 
+ 	SPA_PROP_START_Video	= 0x20000,	/**< video related properties */
+ 	SPA_PROP_brightness,
+-- 
+2.53.0
+

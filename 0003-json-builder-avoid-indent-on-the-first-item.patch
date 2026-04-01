@@ -1,0 +1,26 @@
+From 287b4af31eb62a02e4bfd564ebd7a74359581c14 Mon Sep 17 00:00:00 2001
+From: Wim Taymans <wtaymans@redhat.com>
+Date: Thu, 26 Feb 2026 11:17:17 +0100
+Subject: [PATCH 03/17] json-builder: avoid indent on the first item
+
+Avoids putting a \n or (now also) space as the first item.
+---
+ spa/include/spa/utils/json-builder.h | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/spa/include/spa/utils/json-builder.h b/spa/include/spa/utils/json-builder.h
+index 3fa6b7dc8b56..473723026cc7 100644
+--- a/spa/include/spa/utils/json-builder.h
++++ b/spa/include/spa/utils/json-builder.h
+@@ -184,7 +184,7 @@ void spa_json_builder_add_simple(struct spa_json_builder *b, const char *key, in
+ 		break;
+ 	}
+ 
+-	fprintf(b->f, "%s%s%*s", b->delim, indent ? b->count == 0 ? "" : "\n" : space ? " " : "",
++	fprintf(b->f, "%s%s%*s", b->delim, b->count == 0 ? "" : indent ? "\n" : space ? " " : "",
+ 			indent ? b->level : 0, "");
+ 	if (key) {
+ 		bool key_raw = force_raw || (simple && spa_json_make_simple_string(&key, &key_len)) ||
+-- 
+2.53.0
+
