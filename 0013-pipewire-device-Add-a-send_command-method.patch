@@ -1,0 +1,288 @@
+From e31a0ba199d97cd3a9bbc873ab82c0059cdc1447 Mon Sep 17 00:00:00 2001
+From: Arun Raghavan <arunr@valvesoftware.com>
+Date: Tue, 3 Mar 2026 12:34:45 -0800
+Subject: [PATCH 13/17] pipewire: device: Add a send_command method
+
+For now, useful for sending custom commands to devices. Using this from
+the command line might look something like:
+
+```sh
+$ pw-cli send-command <device-id> VolumeControl '{"volumeUp": <route-id>}'
+```
+---
+ .../module-client-device/protocol-native.c    | 34 ++++++++++++++++++-
+ .../module-protocol-native/protocol-native.c  | 30 ++++++++++++++++
+ src/pipewire/device.h                         | 22 ++++++++++--
+ src/pipewire/impl-device.c                    | 21 +++++++++++-
+ src/tests/test-interfaces.c                   |  4 ++-
+ src/tools/pw-cli.c                            | 11 ++++--
+ 6 files changed, 115 insertions(+), 7 deletions(-)
+
+diff --git a/src/modules/module-client-device/protocol-native.c b/src/modules/module-client-device/protocol-native.c
+index cbcca0c9a415..b5b20f1900b6 100644
+--- a/src/modules/module-client-device/protocol-native.c
++++ b/src/modules/module-client-device/protocol-native.c
+@@ -200,6 +200,36 @@ static int device_demarshal_set_param(void *object, const struct pw_protocol_nat
+ 	return 0;
+ }
+ 
++static int device_marshal_send_command(void *object,
++		const struct spa_command *command)
++{
++	struct pw_resource *resource = object;
++	struct spa_pod_builder *b;
++
++	b = pw_protocol_native_begin_resource(resource, SPA_DEVICE_METHOD_SEND_COMMAND, NULL);
++
++	spa_pod_builder_add_struct(b,
++			SPA_POD_Pod(command));
++
++	return pw_protocol_native_end_resource(resource, b);
++}
++
++static int device_demarshal_send_command(void *object, const struct pw_protocol_native_message *msg)
++{
++	struct pw_proxy *proxy = object;
++	struct spa_pod_parser prs;
++	struct spa_command *command;
++
++	spa_pod_parser_init(&prs, msg->data, msg->size);
++	if (spa_pod_parser_get_struct(&prs,
++			SPA_POD_Pod(&command)) < 0)
++		return -EINVAL;
++
++	pw_proxy_notify(proxy, struct spa_device_methods, send_command, 1,
++					command);
++	return 0;
++}
++
+ static void device_marshal_info(void *data,
+ 		const struct spa_device_info *info)
+ {
+@@ -482,7 +512,8 @@ static const struct spa_device_methods pw_protocol_native_device_method_marshal
+ 	.add_listener = &device_marshal_add_listener,
+ 	.sync = &device_marshal_sync,
+ 	.enum_params = &device_marshal_enum_params,
+-	.set_param = &device_marshal_set_param
++	.set_param = &device_marshal_set_param,
++	.send_command = &device_marshal_send_command,
+ };
+ 
+ static const struct pw_protocol_native_demarshal
+@@ -492,6 +523,7 @@ pw_protocol_native_device_method_demarshal[SPA_DEVICE_METHOD_NUM] =
+ 	[SPA_DEVICE_METHOD_SYNC] = { &device_demarshal_sync, 0 },
+ 	[SPA_DEVICE_METHOD_ENUM_PARAMS] = { &device_demarshal_enum_params, 0 },
+ 	[SPA_DEVICE_METHOD_SET_PARAM] = { &device_demarshal_set_param, 0 },
++	[SPA_DEVICE_METHOD_SEND_COMMAND] = { &device_demarshal_send_command, 0 },
+ };
+ 
+ static const struct spa_device_events pw_protocol_native_device_event_marshal = {
+diff --git a/src/modules/module-protocol-native/protocol-native.c b/src/modules/module-protocol-native/protocol-native.c
+index 3a8580efb284..78f2f7a59b82 100644
+--- a/src/modules/module-protocol-native/protocol-native.c
++++ b/src/modules/module-protocol-native/protocol-native.c
+@@ -1056,6 +1056,34 @@ static int device_demarshal_set_param(void *object, const struct pw_protocol_nat
+ 	return pw_resource_notify(resource, struct pw_device_methods, set_param, 0, id, flags, param);
+ }
+ 
++static int device_marshal_send_command(void *object, const struct spa_command *command)
++{
++	struct pw_proxy *proxy = object;
++	struct spa_pod_builder *b;
++
++	b = pw_protocol_native_begin_proxy(proxy, PW_NODE_METHOD_SEND_COMMAND, NULL);
++	spa_pod_builder_add_struct(b,
++			SPA_POD_Pod(command));
++	return pw_protocol_native_end_proxy(proxy, b);
++}
++
++static int device_demarshal_send_command(void *object, const struct pw_protocol_native_message *msg)
++{
++	struct pw_resource *resource = object;
++	struct spa_pod_parser prs;
++	struct spa_command *command;
++
++	spa_pod_parser_init(&prs, msg->data, msg->size);
++	if (spa_pod_parser_get_struct(&prs,
++				SPA_POD_Pod(&command)) < 0)
++		return -EINVAL;
++
++	if (command == NULL)
++		return -EINVAL;
++
++	return pw_resource_notify(resource, struct pw_device_methods, send_command, 1, command);
++}
++
+ static int factory_method_marshal_add_listener(void *object,
+ 			struct spa_hook *listener,
+ 			const struct pw_factory_events *events,
+@@ -2110,6 +2138,7 @@ static const struct pw_device_methods pw_protocol_native_device_method_marshal =
+ 	.subscribe_params = &device_marshal_subscribe_params,
+ 	.enum_params = &device_marshal_enum_params,
+ 	.set_param = &device_marshal_set_param,
++	.send_command = &device_marshal_send_command,
+ };
+ 
+ static const struct pw_protocol_native_demarshal
+@@ -2118,6 +2147,7 @@ pw_protocol_native_device_method_demarshal[PW_DEVICE_METHOD_NUM] = {
+ 	[PW_DEVICE_METHOD_SUBSCRIBE_PARAMS] = { &device_demarshal_subscribe_params, 0, },
+ 	[PW_DEVICE_METHOD_ENUM_PARAMS] = { &device_demarshal_enum_params, 0, },
+ 	[PW_DEVICE_METHOD_SET_PARAM] = { &device_demarshal_set_param, PW_PERM_W, },
++	[PW_DEVICE_METHOD_SEND_COMMAND] = { &device_demarshal_send_command, PW_PERM_W, },
+ };
+ 
+ static const struct pw_device_events pw_protocol_native_device_event_marshal = {
+diff --git a/src/pipewire/device.h b/src/pipewire/device.h
+index bff40530f9bc..fbaa4465d35a 100644
+--- a/src/pipewire/device.h
++++ b/src/pipewire/device.h
+@@ -5,6 +5,7 @@
+ #ifndef PIPEWIRE_DEVICE_H
+ #define PIPEWIRE_DEVICE_H
+ 
++#include <spa/pod/command.h>
+ #include <spa/utils/defs.h>
+ #include <spa/utils/hook.h>
+ 
+@@ -92,11 +93,12 @@ struct pw_device_events {
+ #define PW_DEVICE_METHOD_SUBSCRIBE_PARAMS	1
+ #define PW_DEVICE_METHOD_ENUM_PARAMS		2
+ #define PW_DEVICE_METHOD_SET_PARAM		3
+-#define PW_DEVICE_METHOD_NUM			4
++#define PW_DEVICE_METHOD_SEND_COMMAND		4
++#define PW_DEVICE_METHOD_NUM			5
+ 
+ /** Device methods */
+ struct pw_device_methods {
+-#define PW_VERSION_DEVICE_METHODS	0
++#define PW_VERSION_DEVICE_METHODS	1
+ 	uint32_t version;
+ 
+ 	int (*add_listener) (void *object,
+@@ -143,6 +145,15 @@ struct pw_device_methods {
+ 	 */
+ 	int (*set_param) (void *object, uint32_t id, uint32_t flags,
+ 			  const struct spa_pod *param);
++
++	/**
++	 * Send a command to the device
++	 *
++	 * \param command the command to send
++	 *
++	 * This requires X and W permissions on the device.
++	 */
++	int (*send_command) (void *object, const struct spa_command *command);
+ };
+ 
+ /** \copydoc pw_device_methods.add_listener
+@@ -183,6 +194,13 @@ PW_API_DEVICE_IMPL int pw_device_set_param(struct pw_device *object, uint32_t id
+ 			pw_device, (struct spa_interface*)object, set_param, 0,
+ 			id, flags, param);
+ }
++/** \copydoc pw_device_methods.send_command
++ * \sa pw_device_methods.send_command */
++PW_API_DEVICE_IMPL int pw_device_send_command(struct pw_device *object, const struct spa_command *command)
++{
++	return spa_api_method_r(int, -ENOTSUP,
++			pw_device, (struct spa_interface*)object, send_command, 0, command);
++}
+ 
+ /**
+  * \}
+diff --git a/src/pipewire/impl-device.c b/src/pipewire/impl-device.c
+index 53b76b23659f..9a8b999a6e55 100644
+--- a/src/pipewire/impl-device.c
++++ b/src/pipewire/impl-device.c
+@@ -529,11 +529,30 @@ static int device_set_param(void *object, uint32_t id, uint32_t flags,
+ 	return res;
+ }
+ 
++static int device_send_command(void *object, const struct spa_command *command)
++{
++	struct resource_data *data = object;
++	struct pw_impl_device *device = data->device;
++	uint32_t id = SPA_DEVICE_COMMAND_ID(command);
++	int res;
++
++	pw_log_debug("%p: got command %d (%s)", device, id,
++		    spa_debug_type_find_name(spa_type_device_command_id, id));
++
++	switch (id) {
++	default:
++		res = spa_device_send_command(device->device, command);
++		break;
++	}
++	return res;
++}
++
+ static const struct pw_device_methods device_methods = {
+ 	PW_VERSION_DEVICE_METHODS,
+ 	.subscribe_params = device_subscribe_params,
+ 	.enum_params = device_enum_params,
+-	.set_param = device_set_param
++	.set_param = device_set_param,
++	.send_command = device_send_command,
+ };
+ 
+ static int
+diff --git a/src/tests/test-interfaces.c b/src/tests/test-interfaces.c
+index 3b3f47ab93de..8569b198adda 100644
+--- a/src/tests/test-interfaces.c
++++ b/src/tests/test-interfaces.c
+@@ -153,6 +153,7 @@ static void test_device_abi(void)
+ 			const struct spa_pod *filter);
+ 		int (*set_param) (void *object, uint32_t id, uint32_t flags,
+ 			const struct spa_pod *param);
++		int (*send_command) (void *object, const struct spa_command *command);
+ 	} methods = { PW_VERSION_DEVICE_METHODS, };
+ 	struct {
+ 		uint32_t version;
+@@ -167,7 +168,8 @@ static void test_device_abi(void)
+ 	TEST_FUNC(m, methods, subscribe_params);
+ 	TEST_FUNC(m, methods, enum_params);
+ 	TEST_FUNC(m, methods, set_param);
+-	spa_assert_se(PW_VERSION_DEVICE_METHODS == 0);
++	TEST_FUNC(m, methods, send_command);
++	spa_assert_se(PW_VERSION_DEVICE_METHODS == 1);
+ 	spa_assert_se(sizeof(m) == sizeof(methods));
+ 
+ 	TEST_FUNC(e, events, version);
+diff --git a/src/tools/pw-cli.c b/src/tools/pw-cli.c
+index 88356cb8fc20..ab1be3ea01c8 100644
+--- a/src/tools/pw-cli.c
++++ b/src/tools/pw-cli.c
+@@ -2047,6 +2047,8 @@ static bool do_send_command(struct data *data, const char *cmd, char *args, char
+ 
+ 	if (spa_streq(global->type, PW_TYPE_INTERFACE_Node)) {
+ 		ti = spa_debug_type_find_short(spa_type_node_command_id, a[1]);
++	} else if (spa_streq(global->type, PW_TYPE_INTERFACE_Device)) {
++		ti = spa_debug_type_find_short(spa_type_device_command_id, a[1]);
+ 	} else {
+ 		*error = spa_aprintf("send-command not implemented on object %d type:%s",
+ 				atoi(a[0]), global->type);
+@@ -2054,7 +2056,7 @@ static bool do_send_command(struct data *data, const char *cmd, char *args, char
+ 	}
+ 
+ 	if (ti == NULL) {
+-		*error = spa_aprintf("%s: unknown node command type: %s", cmd, a[1]);
++		*error = spa_aprintf("%s: unknown command type: %s", cmd, a[1]);
+ 		return false;
+ 	}
+ 	if ((res = spa_json_to_pod(&b.b, 0, ti, a[2], strlen(a[2]))) < 0) {
+@@ -2067,7 +2069,12 @@ static bool do_send_command(struct data *data, const char *cmd, char *args, char
+ 	}
+ 	spa_debug_pod(0, NULL, pod);
+ 
+-	pw_node_send_command((struct pw_node*)global->proxy, (struct spa_command*)pod);
++	if (spa_streq(global->type, PW_TYPE_INTERFACE_Node)) {
++		pw_node_send_command((struct pw_node*)global->proxy, (struct spa_command*)pod);
++	} else if (spa_streq(global->type, PW_TYPE_INTERFACE_Device)) {
++		pw_device_send_command((struct pw_device*)global->proxy, (struct spa_command*)pod);
++	}
++
+ 	return true;
+ }
+ 
+-- 
+2.53.0
+

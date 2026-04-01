@@ -1,0 +1,62 @@
+From c25d2e194e0765a5b1db9afc048b3e6005466107 Mon Sep 17 00:00:00 2001
+From: Arun Raghavan <arunr@valvesoftware.com>
+Date: Tue, 3 Mar 2026 15:44:22 -0800
+Subject: [PATCH 14/17] spa: device: Commands for (external) volume control
+
+---
+ spa/include/spa/monitor/device.h    | 8 ++++++++
+ spa/include/spa/monitor/type-info.h | 5 +++++
+ 2 files changed, 13 insertions(+)
+
+diff --git a/spa/include/spa/monitor/device.h b/spa/include/spa/monitor/device.h
+index 57c84a963a18..ca17221b55e6 100644
+--- a/spa/include/spa/monitor/device.h
++++ b/spa/include/spa/monitor/device.h
+@@ -133,6 +133,9 @@ struct spa_device_events {
+ /* object id of SPA_TYPE_COMMAND_Device */
+ enum spa_device_commands {
+ 	SPA_DEVICE_COMMAND_User,
++	SPA_DEVICE_COMMAND_VolumeControl,	/**< Volume control for devices which do not
++						  * support standard volume control via route
++						  * props */
+ };
+ 
+ #define SPA_DEVICE_COMMAND_ID(cmd)	SPA_COMMAND_ID(cmd, SPA_TYPE_COMMAND_Device)
+@@ -146,6 +149,11 @@ enum spa_command_device {
+ 	SPA_COMMAND_DEVICE_START_User 		= 0x1000,
+ 	SPA_COMMAND_DEVICE_extra,		/** extra info (String) */
+ 
++	SPA_COMMAND_DEVICE_START_VolumeControl	= 0x2000,
++	SPA_COMMAND_DEVICE_volumeUp,		/** Send a volume up command. route id (Id) */
++	SPA_COMMAND_DEVICE_volumeDown,		/** Send a volume down command. route id (Id) */
++	SPA_COMMAND_DEVICE_muteToggle,		/** Send a mute toggle command. route id (Id) */
++
+ 	SPA_COMMAND_DEVICE_START_CUSTOM   	= 0x1000000,
+ };
+ 
+diff --git a/spa/include/spa/monitor/type-info.h b/spa/include/spa/monitor/type-info.h
+index f7c66799c8e5..6a10c1819b91 100644
+--- a/spa/include/spa/monitor/type-info.h
++++ b/spa/include/spa/monitor/type-info.h
+@@ -42,6 +42,7 @@ static const struct spa_type_info spa_type_device_event[] = {
+ 
+ static const struct spa_type_info spa_type_device_command_id[] = {
+ 	{ SPA_DEVICE_COMMAND_User, SPA_TYPE_COMMAND_Device, SPA_TYPE_INFO_DEVICE_COMMAND_BASE "User",  NULL },
++	{ SPA_DEVICE_COMMAND_VolumeControl, SPA_TYPE_COMMAND_Device, SPA_TYPE_INFO_DEVICE_COMMAND_BASE "VolumeControl",  NULL },
+ 	{ 0, 0, NULL, NULL },
+ };
+ 
+@@ -50,6 +51,10 @@ static const struct spa_type_info spa_type_device_command[] = {
+ 
+ 	{ SPA_COMMAND_DEVICE_extra, SPA_TYPE_String, SPA_TYPE_INFO_DEVICE_COMMAND_BASE "extra", NULL },
+ 
++	{ SPA_COMMAND_DEVICE_volumeUp, SPA_TYPE_Id, SPA_TYPE_INFO_DEVICE_COMMAND_BASE "volumeUp", NULL },
++	{ SPA_COMMAND_DEVICE_volumeDown, SPA_TYPE_Id, SPA_TYPE_INFO_DEVICE_COMMAND_BASE "volumeDown", NULL },
++	{ SPA_COMMAND_DEVICE_muteToggle, SPA_TYPE_Id, SPA_TYPE_INFO_DEVICE_COMMAND_BASE "muteToggle", NULL },
++
+ 	{ 0, 0, NULL, NULL },
+ };
+ 
+-- 
+2.53.0
+

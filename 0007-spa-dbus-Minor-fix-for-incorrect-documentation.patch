@@ -1,0 +1,30 @@
+From e7fff1bdfd55707e0247abe58b519c8128aed8f0 Mon Sep 17 00:00:00 2001
+From: Arun Raghavan <arunr@valvesoftware.com>
+Date: Tue, 17 Feb 2026 16:49:30 -0800
+Subject: [PATCH 07/17] spa: dbus: Minor fix for incorrect documentation
+
+The function does not have a parameter for return an error if getting
+the connection fails.
+---
+ spa/include/spa/support/dbus.h | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
+
+diff --git a/spa/include/spa/support/dbus.h b/spa/include/spa/support/dbus.h
+index d781bc1ba321..f468b9bec502 100644
+--- a/spa/include/spa/support/dbus.h
++++ b/spa/include/spa/support/dbus.h
+@@ -122,10 +122,9 @@ struct spa_dbus_methods {
+ 	 *
+ 	 * \param dbus the dbus manager
+ 	 * \param type the bus type to wrap
+-	 * \param error location for the DBusError
+ 	 * \return a new dbus connection wrapper or NULL on error
+ 	 */
+-	struct spa_dbus_connection * (*get_connection) (void *object,
++	struct spa_dbus_connection * (*get_connection) (void *dbus,
+ 							enum spa_dbus_type type);
+ };
+ 
+-- 
+2.53.0
+

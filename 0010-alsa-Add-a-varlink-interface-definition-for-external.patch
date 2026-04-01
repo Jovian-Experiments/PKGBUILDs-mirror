@@ -1,0 +1,111 @@
+From 4571791213bd57838d3f38ecb8ba87c7d4452a17 Mon Sep 17 00:00:00 2001
+From: Arun Raghavan <arunr@valvesoftware.com>
+Date: Thu, 19 Feb 2026 11:15:44 -0800
+Subject: [PATCH 10/17] alsa: Add a varlink interface definition for external
+ volume control
+
+The interface itself isn't really ALSA-specific, but we can move it out
+of we find other uses for it.
+---
+ .../acp/org.pipewire.ExternalVolume.varlink   | 89 +++++++++++++++++++
+ 1 file changed, 89 insertions(+)
+ create mode 100644 spa/plugins/alsa/acp/org.pipewire.ExternalVolume.varlink
+
+diff --git a/spa/plugins/alsa/acp/org.pipewire.ExternalVolume.varlink b/spa/plugins/alsa/acp/org.pipewire.ExternalVolume.varlink
+new file mode 100644
+index 000000000000..526595bbbea2
+--- /dev/null
++++ b/spa/plugins/alsa/acp/org.pipewire.ExternalVolume.varlink
+@@ -0,0 +1,89 @@
++# Allows an external service to provide volume control for a PipeWire device.
++interface org.pipewire.ExternalVolume
++
++# Describes what kind of volume control operations are supported for a given
++# device.
++type Capabilities (
++  # Whether the current volume value can be read
++  readVolume: bool,
++
++  # Whether volume values are reported per-channel
++  readBalance: bool,
++
++  # The range of valid volume values and the granularity of steps
++  volumeRange: (
++    min: float,
++    max: float,
++    step: float
++  ),
++
++  # Whether the volume can be set as an absolute value
++  writeVolumeAbsolute: bool,
++
++  # Whether volume adjustments can be made relative to the current volume
++  writeVolumeRelative: bool,
++
++  # The size of relative volume adjustments, if known
++  writeVolumeRelativeStep: (min: float, max: float),
++
++  # Whether per-channel volumes can be written
++  writeBalance: bool,
++
++  # Whether the current mute state can be read
++  readMute: bool,
++
++  # Whether the current mute state can be set
++  writeMuteValue: bool,
++
++  # Whether the current mute state can be toggled
++  writeMuteToggle: bool,
++
++  # The known set of routes for the device
++  routes: []string
++)
++
++# Query volume control capabilities for the given device.
++method GetCapabilities(device: string) -> (capabilities: Capabilities)
++
++# Query the volume for the given device route. If the volume can be read, the
++# returned value will be an array of floats (if per-channel volumes are not
++# supported, the array will have one float value).
++method ReadVolume(device: string, route: string) -> (volume: []float)
++
++# Query the mute state for the given device route.
++method ReadMute(device: string, route: string) -> (mute: bool)
++
++# Monitor changes to volume or mute state. Volume changes will be signalled by
++# a non-empty volume array (with a single value if per-channel volumes are not
++# supported). Mute state changes will be signalled by a non-null mute value.
++method Monitor(device: string) -> (
++  route: string,
++  volume: []float,
++  mute: ?bool
++)
++
++# Set the volume of the given device route. If supported, the provided value
++# can be an array of per-channel float values. If per-channel volumes are not
++# supported, the array should consist of a single value.
++method WriteVolumeAbsolute(
++  device: string,
++  route: string,
++  volume: []float
++) -> ()
++
++# Increase or decrease the volume of the device route by the given amount.
++method WriteVolumeRelative(
++  device: string,
++  route: string,
++  step: float
++) -> ()
++
++# Set the mute state for the given device route.
++method WriteMuteValue(
++  device: string,
++  route: string,
++  mute: bool
++) -> ()
++
++# Toggle the mute state for the given device route.
++method WriteMuteToggle(device: string, route: string) -> ()
+-- 
+2.53.0
+

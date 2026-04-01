@@ -1,0 +1,1174 @@
+From 3890f4f864f513eb971b4b1451e4d62a7fcb2713 Mon Sep 17 00:00:00 2001
+From: Arun Raghavan <arunr@valvesoftware.com>
+Date: Wed, 11 Feb 2026 15:06:56 -0800
+Subject: [PATCH 11/17] spa: alsa: Add a mechanism for external volume control
+
+Currently enabled at device creation and delegated to an external entity
+via a varlink protocol.
+---
+ spa/plugins/alsa/acp/acp.c         | 337 +++++++++++++++++------
+ spa/plugins/alsa/acp/acp.h         |   9 +
+ spa/plugins/alsa/acp/card.h        |   2 +
+ spa/plugins/alsa/acp/ext-volume.c  | 414 +++++++++++++++++++++++++++++
+ spa/plugins/alsa/acp/ext-volume.h  |  47 ++++
+ spa/plugins/alsa/acp/meson.build   |   3 +-
+ spa/plugins/alsa/alsa-acp-device.c |   9 +
+ src/pipewire/context.c             |  24 +-
+ src/pipewire/keys.h                |   1 +
+ 9 files changed, 758 insertions(+), 88 deletions(-)
+ create mode 100644 spa/plugins/alsa/acp/ext-volume.c
+ create mode 100644 spa/plugins/alsa/acp/ext-volume.h
+
+diff --git a/spa/plugins/alsa/acp/acp.c b/spa/plugins/alsa/acp/acp.c
+index 8f5ea18c2fdf..c6f37e04af7e 100644
+--- a/spa/plugins/alsa/acp/acp.c
++++ b/spa/plugins/alsa/acp/acp.c
+@@ -5,18 +5,23 @@
+ #include "acp.h"
+ #include "alsa-mixer.h"
+ #include "alsa-ucm.h"
++#include "ext-volume.h"
+ 
+ #include <spa/utils/string.h>
+ #include <spa/utils/json.h>
++#include <spa/utils/json-builder.h>
+ #include <spa/utils/cleanup.h>
+ #include <spa/param/audio/iec958-types.h>
+ #include <spa/param/audio/raw.h>
++#include <spa/param/audio/volume.h>
++#include <spa/support/varlink.h>
+ 
+ int _acp_log_level = 1;
+ acp_log_func _acp_log_func;
+ void *_acp_log_data;
+ 
+ struct spa_i18n *acp_i18n;
++struct spa_varlink *acp_varlink;
+ 
+ #define DEFAULT_CHANNELS	255u
+ #define DEFAULT_RATE		48000u
+@@ -1245,6 +1250,30 @@ static void init_eld_ctls(pa_card *impl)
+ 	}
+ }
+ 
++static void init_ext_volume(pa_card *impl)
++{
++	struct acp_card *card = &impl->card;
++	int res;
++
++	if (!impl->ext_volume_path)
++		return;
++
++	if (!acp_varlink) {
++		pa_log_error("External volume control requires support.varlink = true");
++		return;
++	}
++
++	res = spa_acp_ext_volume_init(&card->ext_volume, acp_varlink, impl->ext_volume_path, impl->name, NULL);
++	if (res < 0) {
++		goto error;
++	}
++
++	/* FIXME: Set up monitor callback */
++
++error:
++	return;
++}
++
+ uint32_t acp_card_find_best_profile_index(struct acp_card *card, const char *name)
+ {
+ 	uint32_t i;
+@@ -1356,21 +1385,47 @@ static int read_volume(pa_alsa_device *dev)
+ 			return 0;
+ 	}
+ 
+-	if (!dev->mixer_handle)
+-		return 0;
++	if (impl->card.ext_volume.client &&
++			(impl->card.ext_volume.flags & SPA_AUDIO_VOLUME_CONTROL_READ_VOLUME)) {
++		/* Externally managed volume */
++		pa_cvolume ext_vol;
+ 
+-	if (dev->mixer_path->has_volume_mute && dev->muted) {
+-		/* Shift up by the base volume */
+-		pa_sw_cvolume_divide_scalar(&r, &dev->hardware_volume, dev->base_volume);
+-		pa_log_debug("Reading cached volume only.");
+-	} else {
+-		if ((res = pa_alsa_path_get_volume(dev->mixer_path, dev->mixer_handle,
+-						   &dev->mapping->channel_map, &r)) < 0)
+-			return res;
+-	}
++		if ((res = spa_acp_ext_volume_read_volume(&impl->card.ext_volume, impl->name,
++						dev->active_port->name, &ext_vol)) < 0) {
++			pa_log_error("Could not read volume: %s", snd_strerror(res));
++			return 0;
++		}
++
++		/* FIXME: scale to the range from capabilities */
++		if (ext_vol.channels == 1) {
++			r.channels = dev->device.format.channels;
++			for (unsigned int i = 0; i < r.channels; i++)
++				r.values[i] = ext_vol.values[0];
++		} else if (ext_vol.channels == dev->device.format.channels) {
++			r = ext_vol;
++		} else {
++			pa_log_error("Mismatch channel count: device %u != volume %u",
++					dev->device.format.channels, ext_vol.channels);
++			return 0;
++		}
++	} else if (dev->mixer_handle) {
++		/* ALSA mixer for volume */
++		if (dev->mixer_path->has_volume_mute && dev->muted) {
++			/* Shift up by the base volume */
++			pa_sw_cvolume_divide_scalar(&r, &dev->hardware_volume, dev->base_volume);
++			pa_log_debug("Reading cached volume only.");
++		} else {
++			if ((res = pa_alsa_path_get_volume(dev->mixer_path, dev->mixer_handle,
++							   &dev->mapping->channel_map, &r)) < 0)
++				return res;
++		}
++
++		/* Shift down by the base volume, so that 0dB becomes maximum volume */
++		pa_sw_cvolume_multiply_scalar(&r, &r, dev->base_volume);
++
++	} else
++		return 0;
+ 
+-	/* Shift down by the base volume, so that 0dB becomes maximum volume */
+-	pa_sw_cvolume_multiply_scalar(&r, &r, dev->base_volume);
+ 
+ 	if (pa_cvolume_equal(&dev->hardware_volume, &r))
+ 		return 0;
+@@ -1393,12 +1448,10 @@ static int read_volume(pa_alsa_device *dev)
+ 
+ static void set_volume(pa_alsa_device *dev, const pa_cvolume *v)
+ {
++	pa_card *impl = dev->card;
+ 	pa_cvolume r;
+ 	bool write_to_hw;
+ 
+-	if (v != &dev->real_volume)
+-		dev->real_volume = *v;
+-
+ 	if (dev->ucm_context) {
+ 		if (!dev->active_port)
+ 			return;
+@@ -1407,52 +1460,99 @@ static void set_volume(pa_alsa_device *dev, const pa_cvolume *v)
+ 			return;
+ 	}
+ 
+-	if (!dev->mixer_handle)
+-		return;
++	if (impl->card.ext_volume.client) {
++		if (impl->card.ext_volume.flags & SPA_AUDIO_VOLUME_CONTROL_WRITE_VOLUME_VALUE) {
++			/* External volume control by value */
++			if (spa_acp_ext_volume_write_volume_absolute(&impl->card.ext_volume,
++						impl->name, dev->active_port->name,
++						&dev->real_volume) < 0) {
++				pa_log_error("Could not write volume");
++				return;
++			}
+ 
+-	/* Shift up by the base volume */
+-	pa_sw_cvolume_divide_scalar(&r, &dev->real_volume, dev->base_volume);
++			/* Update volume if we were successful */
++			if (v != &dev->real_volume)
++				dev->real_volume = *v;
++		} else if ((impl->card.ext_volume.flags & SPA_AUDIO_VOLUME_CONTROL_READ_VOLUME) &&
++				(impl->card.ext_volume.flags & SPA_AUDIO_VOLUME_CONTROL_WRITE_VOLUME_UPDOWN)) {
++			/* External volume control by increment/decrement only */
++			pa_volume_t cur, new;
++			float step;
++			int i;
++
++			cur = pa_cvolume_max(&dev->real_volume);
++			new = pa_cvolume_max(v);
++
++			if (cur < new)
++				step = 1;
++			else if (cur > new)
++				step = -1;
++			else
++				return;
+ 
+-	write_to_hw = !(dev->mixer_path->has_volume_mute && dev->muted);
++			if (spa_acp_ext_volume_write_volume_relative(&impl->card.ext_volume,
++						impl->name, dev->active_port->name, step) < 0) {
++				pa_log_error("Could not write volume");
++				return;
++			}
+ 
+-	if (pa_alsa_path_set_volume(dev->mixer_path, dev->mixer_handle, &dev->mapping->channel_map,
+-		&r, false, write_to_hw) < 0)
+-		return;
++			/* Update volume if we were successful */
++			dev->real_volume.channels = v->channels;
++			for (i = 0; i < (int)v->channels; i++)
++				dev->real_volume.values[i] = v->values[i] + (int)step;
++		} else {
++			pa_log_debug("Ignoring volume setting, ext volume control does not support it");
++		}
++	} else if (dev->mixer_handle) {
++		/* ALSA mixer control for volume */
++
++		if (v != &dev->real_volume)
++			dev->real_volume = *v;
+ 
+-	/* Shift down by the base volume, so that 0dB becomes maximum volume */
+-	pa_sw_cvolume_multiply_scalar(&r, &r, dev->base_volume);
++		/* Shift up by the base volume */
++		pa_sw_cvolume_divide_scalar(&r, &dev->real_volume, dev->base_volume);
+ 
+-	dev->hardware_volume = r;
++		write_to_hw = !(dev->mixer_path->has_volume_mute && dev->muted);
+ 
+-	if (dev->mixer_path->has_dB) {
+-		pa_cvolume new_soft_volume;
+-		bool accurate_enough;
++		if (pa_alsa_path_set_volume(dev->mixer_path, dev->mixer_handle, &dev->mapping->channel_map,
++			&r, false, write_to_hw) < 0)
++			return;
+ 
+-		/* Match exactly what the user requested by software */
+-		pa_sw_cvolume_divide(&new_soft_volume, &dev->real_volume, &dev->hardware_volume);
++		/* Shift down by the base volume, so that 0dB becomes maximum volume */
++		pa_sw_cvolume_multiply_scalar(&r, &r, dev->base_volume);
+ 
+-		/* If the adjustment to do in software is only minimal we
+-		 * can skip it. That saves us CPU at the expense of a bit of
+-		 * accuracy */
+-		accurate_enough =
+-			(pa_cvolume_min(&new_soft_volume) >= (PA_VOLUME_NORM - VOLUME_ACCURACY)) &&
+-			(pa_cvolume_max(&new_soft_volume) <= (PA_VOLUME_NORM + VOLUME_ACCURACY));
++		dev->hardware_volume = r;
+ 
+-		pa_log_debug("Requested volume: %d", pa_cvolume_max(&dev->real_volume));
+-		pa_log_debug("Got hardware volume: %d", pa_cvolume_max(&dev->hardware_volume));
+-		pa_log_debug("Calculated software volume: %d (accurate-enough=%s)",
+-				pa_cvolume_max(&new_soft_volume),
+-				pa_yes_no(accurate_enough));
++		if (dev->mixer_path->has_dB) {
++			pa_cvolume new_soft_volume;
++			bool accurate_enough;
+ 
+-		if (accurate_enough)
+-			pa_cvolume_reset(&new_soft_volume, new_soft_volume.channels);
++			/* Match exactly what the user requested by software */
++			pa_sw_cvolume_divide(&new_soft_volume, &dev->real_volume, &dev->hardware_volume);
+ 
+-		dev->soft_volume = new_soft_volume;
+-	} else {
+-		pa_log_debug("Wrote hardware volume: %d", pa_cvolume_max(&r));
+-		/* We can't match exactly what the user requested, hence let's
+-		 * at least tell the user about it */
+-		dev->real_volume = r;
++			/* If the adjustment to do in software is only minimal we
++			 * can skip it. That saves us CPU at the expense of a bit of
++			 * accuracy */
++			accurate_enough =
++				(pa_cvolume_min(&new_soft_volume) >= (PA_VOLUME_NORM - VOLUME_ACCURACY)) &&
++				(pa_cvolume_max(&new_soft_volume) <= (PA_VOLUME_NORM + VOLUME_ACCURACY));
++
++			pa_log_debug("Requested volume: %d", pa_cvolume_max(&dev->real_volume));
++			pa_log_debug("Got hardware volume: %d", pa_cvolume_max(&dev->hardware_volume));
++			pa_log_debug("Calculated software volume: %d (accurate-enough=%s)",
++					pa_cvolume_max(&new_soft_volume),
++					pa_yes_no(accurate_enough));
++
++			if (accurate_enough)
++				pa_cvolume_reset(&new_soft_volume, new_soft_volume.channels);
++
++			dev->soft_volume = new_soft_volume;
++		} else {
++			pa_log_debug("Wrote hardware volume: %d", pa_cvolume_max(&r));
++			/* We can't match exactly what the user requested, hence let's
++			 * at least tell the user about it */
++			dev->real_volume = r;
++		}
+ 	}
+ }
+ 
+@@ -1470,22 +1570,31 @@ static int read_mute(pa_alsa_device *dev)
+ 			return 0;
+ 	}
+ 
+-	if (!dev->mixer_handle)
++	if (impl->card.ext_volume.client &&
++			(impl->card.ext_volume.flags & SPA_AUDIO_VOLUME_CONTROL_READ_MUTE)) {
++		/* Externally managed mute state */
++		if (spa_acp_ext_volume_read_mute(&impl->card.ext_volume, impl->name,
++					dev->active_port->name, &mute) < 0) {
++			pa_log_error("Could not read mute state");
++			return 0;
++		}
++	} else if (dev->mixer_handle) {
++		/* ALSA mixer for mute state */
++		if (dev->mixer_path->has_volume_mute) {
++			pa_cvolume mute_vol;
++			pa_cvolume r;
++
++			pa_cvolume_mute(&mute_vol, dev->mapping->channel_map.channels);
++			if ((res = pa_alsa_path_get_volume(dev->mixer_path, dev->mixer_handle, &dev->mapping->channel_map, &r)) < 0)
++				return res;
++			mute = pa_cvolume_equal(&mute_vol, &r);
++		} else {
++			if ((res = pa_alsa_path_get_mute(dev->mixer_path, dev->mixer_handle, &mute)) < 0)
++				return res;
++		}
++	} else
+ 		return 0;
+ 
+-	if (dev->mixer_path->has_volume_mute) {
+-		pa_cvolume mute_vol;
+-		pa_cvolume r;
+-
+-		pa_cvolume_mute(&mute_vol, dev->mapping->channel_map.channels);
+-		if ((res = pa_alsa_path_get_volume(dev->mixer_path, dev->mixer_handle, &dev->mapping->channel_map, &r)) < 0)
+-			return res;
+-		mute = pa_cvolume_equal(&mute_vol, &r);
+-	} else {
+-		if ((res = pa_alsa_path_get_mute(dev->mixer_path, dev->mixer_handle, &mute)) < 0)
+-			return res;
+-	}
+-
+ 	if (mute == dev->muted)
+ 		return 0;
+ 
+@@ -1500,7 +1609,7 @@ static int read_mute(pa_alsa_device *dev)
+ 
+ static void set_mute(pa_alsa_device *dev, bool mute)
+ {
+-	dev->muted = mute;
++	pa_card *impl = dev->card;
+ 
+ 	if (dev->ucm_context) {
+ 		if (!dev->active_port)
+@@ -1510,27 +1619,52 @@ static void set_mute(pa_alsa_device *dev, bool mute)
+ 			return;
+ 	}
+ 
+-	if (!dev->mixer_handle)
+-		return;
++	if (impl->card.ext_volume.client) {
++		if ((impl->card.ext_volume.flags & SPA_AUDIO_VOLUME_CONTROL_WRITE_MUTE_VALUE)) {
++			/* Externally managed mute state by value*/
++			if (spa_acp_ext_volume_write_mute_value(&impl->card.ext_volume, impl->name,
++						dev->active_port->name, mute) < 0) {
++				pa_log_error("Could not write mute state");
++				return;
++			}
+ 
+-	if (dev->mixer_path->has_volume_mute) {
+-		pa_cvolume r;
++			dev->muted = mute;
++		} else if ((impl->card.ext_volume.flags & SPA_AUDIO_VOLUME_CONTROL_READ_MUTE) &&
++				(impl->card.ext_volume.flags & SPA_AUDIO_VOLUME_CONTROL_WRITE_MUTE_TOGGLE)) {
++			/* Externally managed mute state toggle */
++			if (spa_acp_ext_volume_write_mute_toggle(&impl->card.ext_volume, impl->name,
++						dev->active_port->name) < 0) {
++				pa_log_error("Could not write mute toggle");
++				return;
++			}
+ 
+-		if (mute) {
+-			pa_cvolume_mute(&r, dev->mapping->channel_map.channels);
+-			pa_alsa_path_set_volume(dev->mixer_path, dev->mixer_handle, &dev->mapping->channel_map,
+-				&r, false, true);
++			dev->muted = mute;
+ 		} else {
+-			/* Shift up by the base volume */
+-			pa_sw_cvolume_divide_scalar(&r, &dev->real_volume, dev->base_volume);
+-			pa_log_debug("Restoring volume: %d", pa_cvolume_max(&dev->real_volume));
+-			if (pa_alsa_path_set_volume(dev->mixer_path, dev->mixer_handle, &dev->mapping->channel_map,
+-				&r, false, true) < 0)
+-				pa_log_error("Unable to restore volume %d during unmute",
+-					     pa_cvolume_max(&dev->real_volume));
++			pa_log_debug("Ignoring mute setting, ext volume control does not support it");
++		}
++	} else if (dev->mixer_handle) {
++		/* ALSA mixer for mute state */
++		dev->muted = mute;
++
++		if (dev->mixer_path->has_volume_mute) {
++			pa_cvolume r;
++
++			if (mute) {
++				pa_cvolume_mute(&r, dev->mapping->channel_map.channels);
++				pa_alsa_path_set_volume(dev->mixer_path, dev->mixer_handle, &dev->mapping->channel_map,
++					&r, false, true);
++			} else {
++				/* Shift up by the base volume */
++				pa_sw_cvolume_divide_scalar(&r, &dev->real_volume, dev->base_volume);
++				pa_log_debug("Restoring volume: %d", pa_cvolume_max(&dev->real_volume));
++				if (pa_alsa_path_set_volume(dev->mixer_path, dev->mixer_handle, &dev->mapping->channel_map,
++					&r, false, true) < 0)
++					pa_log_error("Unable to restore volume %d during unmute",
++						     pa_cvolume_max(&dev->real_volume));
++			}
++		} else {
++			pa_alsa_path_set_mute(dev->mixer_path, dev->mixer_handle, mute);
+ 		}
+-	} else {
+-		pa_alsa_path_set_mute(dev->mixer_path, dev->mixer_handle, mute);
+ 	}
+ }
+ 
+@@ -1538,7 +1672,15 @@ static void mixer_volume_init(pa_card *impl, pa_alsa_device *dev)
+ {
+ 	pa_assert(dev);
+ 
+-	if (impl->soft_mixer || !dev->mixer_path || !dev->mixer_path->has_volume) {
++	if (impl->ext_volume_path) {
++		dev->device.flags |= ACP_DEVICE_HW_VOLUME;
++		if (impl->card.ext_volume.flags & SPA_AUDIO_VOLUME_CONTROL_READ_VOLUME)
++			dev->read_volume = read_volume;
++		if (impl->card.ext_volume.flags &
++				(SPA_AUDIO_VOLUME_CONTROL_WRITE_VOLUME_VALUE |
++				 SPA_AUDIO_VOLUME_CONTROL_WRITE_VOLUME_UPDOWN))
++			dev->set_volume = set_volume;
++	} else if (impl->soft_mixer || !dev->mixer_path || !dev->mixer_path->has_volume) {
+ 		dev->read_volume = NULL;
+ 		dev->set_volume = NULL;
+ 		pa_log_info("Driver does not support hardware volume control, "
+@@ -1586,7 +1728,15 @@ static void mixer_volume_init(pa_card *impl, pa_alsa_device *dev)
+ 	dev->device.base_volume = (float)pa_sw_volume_to_linear(dev->base_volume);
+ 	dev->device.volume_step = 1.0f / dev->n_volume_steps;
+ 
+-	if (impl->soft_mixer || !dev->mixer_path ||
++	if (impl->ext_volume_path) {
++		dev->device.flags |= ACP_DEVICE_HW_MUTE;
++		if (impl->card.ext_volume.flags & SPA_AUDIO_VOLUME_CONTROL_READ_MUTE)
++			dev->read_mute = read_mute;
++		if (impl->card.ext_volume.flags &
++				(SPA_AUDIO_VOLUME_CONTROL_WRITE_MUTE_VALUE |
++				 SPA_AUDIO_VOLUME_CONTROL_WRITE_MUTE_TOGGLE))
++			dev->set_mute = set_mute;
++	} else if (impl->soft_mixer || !dev->mixer_path ||
+ 	    (!dev->mixer_path->has_mute && !dev->mixer_path->has_volume_mute)) {
+ 		dev->read_mute = NULL;
+ 		dev->set_mute = NULL;
+@@ -1596,7 +1746,7 @@ static void mixer_volume_init(pa_card *impl, pa_alsa_device *dev)
+ 		dev->read_mute = read_mute;
+ 		dev->set_mute = set_mute;
+ 		pa_log_info("Using hardware %smute control.",
+-			    dev->mixer_path->has_volume_mute ? "volume-" : "");
++			    dev->mixer_path->has_volume_mute ? "volume-" : NULL);
+ 		dev->device.flags |= ACP_DEVICE_HW_MUTE;
+ 	}
+ }
+@@ -1655,6 +1805,12 @@ static int setup_mixer(pa_card *impl, pa_alsa_device *dev, bool ignore_dB)
+ 			return 0;
+ 	}
+ 
++	if (impl->ext_volume_path) {
++		/* We've been told to use an external service to manage volume */
++		init_ext_volume(impl);
++		dev->device.ext_volume_flags = impl->card.ext_volume.flags;
++	}
++
+ 	mixer_volume_init(impl, dev);
+ 
+ 	/* Will we need to register callbacks? */
+@@ -1677,6 +1833,7 @@ static int setup_mixer(pa_card *impl, pa_alsa_device *dev, bool ignore_dB)
+ 		else
+ 			pa_alsa_path_set_callback(dev->mixer_path, dev->mixer_handle, mixer_callback, dev);
+ 	}
++
+ 	return 0;
+ }
+ 
+@@ -1972,6 +2129,8 @@ struct acp_card *acp_card_new(uint32_t index, const struct acp_dict *props)
+ 			impl->disable_pro_audio = spa_atob(s);
+ 		if ((s = acp_dict_lookup(props, "api.acp.use-eld-channels")) != NULL)
+ 			impl->use_eld_channels = spa_atob(s);
++		if ((s = acp_dict_lookup(props, "api.alsa.external-volume-control")) != NULL)
++			impl->ext_volume_path = strdup(s);
+ 	}
+ 
+ #if SND_LIB_VERSION < 0x10207
+@@ -2057,6 +2216,7 @@ struct acp_card *acp_card_new(uint32_t index, const struct acp_dict *props)
+ 	return &impl->card;
+ error:
+ 	pa_alsa_refcnt_dec();
++	free(impl->ext_volume_path);
+ 	free(impl);
+ 	errno = -res;
+ 	return NULL;
+@@ -2089,6 +2249,10 @@ void acp_card_destroy(struct acp_card *card)
+ 	pa_alsa_ucm_free(&impl->ucm);
+ 	pa_proplist_free(impl->proplist);
+ 	pa_alsa_refcnt_dec();
++	if (impl->ext_volume_path) {
++		spa_acp_ext_volume_destroy(&impl->card.ext_volume);
++		free(impl->ext_volume_path);
++	}
+ 	free(impl);
+ }
+ 
+@@ -2357,6 +2521,7 @@ int acp_device_set_mute(struct acp_device *dev, bool mute)
+ 
+ 	if (d->set_mute) {
+ 		d->set_mute(d, mute);
++		mute = d->muted;
+ 	} else  {
+ 		d->muted = mute;
+ 	}
+diff --git a/spa/plugins/alsa/acp/acp.h b/spa/plugins/alsa/acp/acp.h
+index 5fb5b96f7cb0..da305b1adf10 100644
+--- a/spa/plugins/alsa/acp/acp.h
++++ b/spa/plugins/alsa/acp/acp.h
+@@ -11,6 +11,11 @@
+ #include <poll.h>
+ #include <string.h>
+ 
++#include <spa/param/audio/volume.h>
++#include <spa/support/varlink.h>
++
++#include "ext-volume.h"
++
+ #ifdef __cplusplus
+ extern "C" {
+ #else
+@@ -239,6 +244,8 @@ struct acp_device {
+ 	int64_t latency_ns;
+ 	uint32_t codecs[32];
+ 	uint32_t n_codecs;
++
++	uint32_t ext_volume_flags;
+ };
+ 
+ struct acp_card_profile {
+@@ -277,6 +284,8 @@ struct acp_card {
+ 	struct acp_port **ports;
+ 	uint32_t preferred_input_port_index;
+ 	uint32_t preferred_output_port_index;
++
++	struct spa_acp_ext_volume ext_volume;
+ };
+ 
+ struct acp_card *acp_card_new(uint32_t index, const struct acp_dict *props);
+diff --git a/spa/plugins/alsa/acp/card.h b/spa/plugins/alsa/acp/card.h
+index f75222dbf503..399e4f665416 100644
+--- a/spa/plugins/alsa/acp/card.h
++++ b/spa/plugins/alsa/acp/card.h
+@@ -68,6 +68,8 @@ struct pa_card {
+ 
+ 	const struct acp_card_events *events;
+ 	void *user_data;
++
++	char *ext_volume_path;
+ };
+ 
+ bool pa_alsa_device_init_description(pa_proplist *p, pa_card *card);
+diff --git a/spa/plugins/alsa/acp/ext-volume.c b/spa/plugins/alsa/acp/ext-volume.c
+new file mode 100644
+index 000000000000..a4e3638b7cf1
+--- /dev/null
++++ b/spa/plugins/alsa/acp/ext-volume.c
+@@ -0,0 +1,414 @@
++/* External Volume Control */
++/* SPDX-FileCopyrightText: Copyright © 2026 Arun Raghavan */
++/* SPDX-License-Identifier: MIT */
++
++#include <spa/support/varlink.h>
++#include <spa/utils/cleanup.h>
++#include <spa/utils/json.h>
++#include <spa/utils/json-builder.h>
++#include <spa/utils/result.h>
++
++#include "alsa-mixer.h"
++#include "channelmap.h"
++#include "volume.h"
++#include "ext-volume.h"
++
++#define VOLUME_CONTROL_BASE "org.pipewire.ExternalVolume."
++#define METHOD_GET_CAPABILITIES VOLUME_CONTROL_BASE "GetCapabilities"
++#define METHOD_READ_VOLUME VOLUME_CONTROL_BASE "ReadVolume"
++#define METHOD_WRITE_VOLUME_ABSOLUTE VOLUME_CONTROL_BASE "WriteVolumeAbsolute"
++#define METHOD_WRITE_VOLUME_RELATIVE VOLUME_CONTROL_BASE "WriteVolumeRelative"
++#define METHOD_READ_MUTE VOLUME_CONTROL_BASE "ReadMute"
++#define METHOD_WRITE_MUTE_VALUE VOLUME_CONTROL_BASE "WriteMuteValue"
++#define METHOD_WRITE_MUTE_TOGGLE VOLUME_CONTROL_BASE "WriteMuteToggle"
++
++static void client_disconnect(void *userdata)
++{
++	/* TODO: reconnect? bail? */
++}
++
++static void client_destroy(void *userdata)
++{
++	pa_log_debug("varlink client destroyed\n");
++}
++
++static struct spa_varlink_client_events client_events = {
++	.disconnect = client_disconnect,
++	.destroy = client_destroy,
++};
++
++static void check_reply(void *data, const char *params, const char *error,
++		size_t len, bool continues)
++{
++	const char *method = (const char *) data;
++
++	if (error != NULL)
++		pa_log_error("Error calling %s: %s", method, error);
++}
++
++int
++spa_acp_ext_volume_init(struct spa_acp_ext_volume *ext_volume, struct spa_varlink *varlink,
++		const char *path, const char *device, const char *route)
++{
++	struct spa_json_builder params_json;
++	struct spa_json reply_json;
++	spa_autofree char *params = NULL;
++	spa_autofree char *reply = NULL;
++	char key[64];
++	const char *str;
++	size_t len;
++	int res;
++
++	pa_log_info("Connecting to external volume control at '%s'", path);
++
++	ext_volume->client = spa_varlink_connect(varlink, path);
++
++	if (!ext_volume->client) {
++		pa_log_error("Could not connect to volume control service at: %s", path);
++		return -EINVAL;
++	}
++
++	spa_varlink_client_add_listener(ext_volume->client, &ext_volume->listener, &client_events, ext_volume);
++
++	spa_json_builder_memstream(&params_json, &params, &len, 0);
++
++	spa_json_builder_object_push(&params_json, NULL, "{");
++	spa_json_builder_object_string(&params_json, "device", device ? device : "");
++	spa_json_builder_pop(&params_json, "}");
++
++	spa_json_builder_close(&params_json);
++
++	res = spa_varlink_client_call_sync(ext_volume->client, METHOD_GET_CAPABILITIES, params, &reply);
++
++	if (res < 0) {
++		pa_log_error("Failed to query volume control capabilities: %s", spa_strerror(res));
++		return res;
++	}
++
++	spa_json_begin_object(&reply_json, reply, res);
++
++	while ((res = spa_json_object_next(&reply_json, key, sizeof(key), &str)) > 0) {
++		struct spa_json sub;
++		char key2[64];
++		const char *val;
++		int len;
++		bool value;
++
++		if (spa_streq(key, "error")) {
++			pa_log_error("Error reading volume control capabilities: %s", str);
++			res = -EINVAL;
++			goto done;
++		}
++
++		if (!spa_streq(key, "parameters"))
++			continue;
++
++		len = spa_json_container_len(&reply_json, str, res);
++		spa_json_begin_object(&sub, str, len);
++
++		while ((len = spa_json_object_next(&sub, key2, sizeof(key2), &val)) > 0) {
++			if (spa_streq(key2, "readVolume") && spa_json_parse_bool(val, len, &value) && value)
++				ext_volume->flags |= SPA_AUDIO_VOLUME_CONTROL_READ_VOLUME;
++			if (spa_streq(key2, "writeVolumeAbsolute") && spa_json_parse_bool(val, len, &value) && value)
++				ext_volume->flags |= SPA_AUDIO_VOLUME_CONTROL_WRITE_VOLUME_VALUE;
++			if (spa_streq(key2, "writeVolumeRelative") && spa_json_parse_bool(val, len, &value) && value)
++				ext_volume->flags |= SPA_AUDIO_VOLUME_CONTROL_WRITE_VOLUME_UPDOWN;
++			if (spa_streq(key2, "readMute") && spa_json_parse_bool(val, len, &value) && value)
++				ext_volume->flags |= SPA_AUDIO_VOLUME_CONTROL_READ_MUTE;
++			if (spa_streq(key2, "writeMuteValue") && spa_json_parse_bool(val, len, &value) && value)
++				ext_volume->flags |= SPA_AUDIO_VOLUME_CONTROL_WRITE_MUTE_VALUE;
++			if (spa_streq(key2, "writeMuteToggle") && spa_json_parse_bool(val, len, &value) && value)
++				ext_volume->flags |= SPA_AUDIO_VOLUME_CONTROL_WRITE_MUTE_TOGGLE;
++			if (spa_streq(key2, "readBalance") && spa_json_parse_bool(val, len, &value) && value)
++				ext_volume->flags |= SPA_AUDIO_VOLUME_CONTROL_READ_BALANCE;
++			if (spa_streq(key2, "writeBalance") && spa_json_parse_bool(val, len, &value) && value)
++				ext_volume->flags |= SPA_AUDIO_VOLUME_CONTROL_WRITE_BALANCE;
++		}
++
++		break;
++	}
++
++	res = 0;
++done:
++	return res;
++}
++
++void
++spa_acp_ext_volume_destroy(struct spa_acp_ext_volume *ext_volume)
++{
++	if (ext_volume->client) {
++		spa_varlink_client_destroy(ext_volume->client);
++		ext_volume->client = NULL;
++	}
++}
++
++int
++spa_acp_ext_volume_read_volume(struct spa_acp_ext_volume *ext_volume,
++		const char *device, const char *route, pa_cvolume *cvol)
++{
++	struct spa_json_builder params_json;
++	struct spa_json reply_json;
++	spa_autofree char *params = NULL;
++	spa_autofree char *reply = NULL;
++	char key[64];
++	const char *str;
++	size_t len;
++	int res;
++
++	spa_json_builder_memstream(&params_json, &params, &len, 0);
++
++	spa_json_builder_object_push(&params_json, NULL, "{");
++	spa_json_builder_object_string(&params_json, "device", device ? device : "");
++	spa_json_builder_object_string(&params_json, "route", route ? route : "");
++	spa_json_builder_pop(&params_json, "}");
++
++	spa_json_builder_close(&params_json);
++
++	res = spa_varlink_client_call_sync(ext_volume->client, METHOD_READ_VOLUME, params, &reply);
++
++	if (res < 0) {
++		pa_log_error("Failed to query volume : %s", spa_strerror(res));
++		return res;
++	}
++
++	spa_json_begin_object(&reply_json, reply, res);
++
++	while ((res = spa_json_object_next(&reply_json, key, sizeof(key), &str)) > 0) {
++		struct spa_json sub = {0,}, volume_json;
++		float v = 0;
++
++		if (spa_streq(key, "error")) {
++			pa_log_error("Error reading volume: %s", str);
++			res = -EINVAL;
++			goto done;
++		}
++
++		if (!spa_streq(key, "parameters"))
++			continue;
++
++		if (spa_json_enter_object(&reply_json, &sub) < 0) {
++			pa_log_error("Could not read volume parameters");
++			res = -EINVAL;
++			goto done;
++		}
++
++		res = spa_json_object_find(&sub, "volume", &str);
++
++		if (res < 0) {
++			pa_log_error("Could not read volume");
++			res = -EINVAL;
++			goto done;
++		}
++
++		spa_json_enter_array(&sub, &volume_json);
++
++		cvol->channels = 0;
++		while (spa_json_get_float(&volume_json, &v) && cvol->channels < PA_CHANNELS_MAX) {
++			cvol->values[cvol->channels++] = lrint(v * PA_VOLUME_NORM);
++		}
++
++		break;
++	}
++
++	res = 0;
++done:
++	return res;
++}
++
++int
++spa_acp_ext_volume_write_volume_absolute(struct spa_acp_ext_volume *ext_volume,
++		const char *device, const char *route, pa_cvolume *cvol)
++{
++	struct spa_json_builder params_json;
++	spa_autofree char *params = NULL;
++	size_t len;
++	int i, res;
++
++	spa_json_builder_memstream(&params_json, &params, &len, 0);
++
++	spa_json_builder_object_push(&params_json, NULL, "{");
++	spa_json_builder_object_string(&params_json, "device", device ? device : "");
++	spa_json_builder_object_string(&params_json, "route", route ? route : "");
++
++	spa_json_builder_object_push(&params_json, "volume", "[");
++
++	/* FIXME: scale to the range from capabilities */
++	if (ext_volume->flags & SPA_AUDIO_VOLUME_CONTROL_WRITE_BALANCE) {
++		/* Write all channels */
++		for (i = 0; i < (int)cvol->channels; i++)
++			spa_json_builder_array_double(&params_json,
++					(double) cvol->values[i] / PA_VOLUME_NORM);
++	} else {
++		/* Single volume */
++		spa_json_builder_array_double(&params_json,
++				(double) pa_cvolume_max(cvol) / PA_VOLUME_NORM);
++	}
++
++	spa_json_builder_pop(&params_json, "]");
++	spa_json_builder_pop(&params_json, "}");
++	spa_json_builder_close(&params_json);
++
++	res = spa_varlink_client_call(ext_volume->client, METHOD_WRITE_VOLUME_ABSOLUTE,
++			params, false, false, check_reply, METHOD_WRITE_VOLUME_ABSOLUTE);
++
++	if (res < 0) {
++		pa_log_error("Failed to write volume: %s", spa_strerror(res));
++		return res;
++	}
++
++	return res;
++}
++
++int
++spa_acp_ext_volume_write_volume_relative(struct spa_acp_ext_volume *ext_volume,
++		const char *device, const char *route, float step)
++{
++	struct spa_json_builder params_json;
++	spa_autofree char *params = NULL;
++	size_t len;
++	int res;
++
++	spa_json_builder_memstream(&params_json, &params, &len, 0);
++
++	spa_json_builder_object_push(&params_json, NULL, "{");
++	spa_json_builder_object_string(&params_json, "device", device ? device : "");
++	spa_json_builder_object_string(&params_json, "route", route ? route : "");
++	spa_json_builder_object_double(&params_json, "step", step);
++	spa_json_builder_pop(&params_json, "}");
++
++	spa_json_builder_close(&params_json);
++
++	res = spa_varlink_client_call(ext_volume->client, METHOD_WRITE_VOLUME_RELATIVE,
++			params, false, false, check_reply, METHOD_WRITE_VOLUME_RELATIVE);
++
++	if (res < 0) {
++		pa_log_error("Failed to write volume: %s", spa_strerror(res));
++		return res;
++	}
++
++	return res;
++}
++
++int
++spa_acp_ext_volume_read_mute(struct spa_acp_ext_volume *ext_volume,
++		const char *device, const char *route, bool *mute)
++{
++	struct spa_json_builder params_json;
++	struct spa_json reply_json;
++	spa_autofree char *params = NULL;
++	spa_autofree char *reply = NULL;
++	char key[64];
++	const char *str;
++	size_t len;
++	int res;
++
++	spa_json_builder_memstream(&params_json, &params, &len, 0);
++
++	spa_json_builder_object_push(&params_json, NULL, "{");
++	spa_json_builder_object_string(&params_json, "device", device ? device : "");
++	spa_json_builder_object_string(&params_json, "route", route ? route : "");
++	spa_json_builder_pop(&params_json, "}");
++
++	spa_json_builder_close(&params_json);
++
++	res = spa_varlink_client_call_sync(ext_volume->client, METHOD_READ_MUTE, params, &reply);
++
++	if (res < 0) {
++		pa_log_error("Failed to query mute state: %s", spa_strerror(res));
++		return res;
++	}
++
++	spa_json_begin_object(&reply_json, reply, res);
++
++	while ((res = spa_json_object_next(&reply_json, key, sizeof(key), &str)) > 0) {
++		struct spa_json sub = { 0, };
++
++		if (spa_streq(key, "error")) {
++			pa_log_error("Error reading mute state: %s", str);
++			res = -EINVAL;
++			goto done;
++		}
++
++		if (!spa_streq(key, "parameters"))
++			continue;
++
++		if (spa_json_enter_object(&reply_json, &sub) < 0) {
++			pa_log_error("Could not read mute parameters");
++			res = -EINVAL;
++			goto done;
++		}
++
++		res = spa_json_object_find(&sub, "mute", &str);
++
++		if (res < 0 || spa_json_get_bool(&reply_json, mute) < 0) {
++			pa_log_error("Could not read mute");
++			res = -EINVAL;
++			goto done;
++		}
++
++		break;
++	}
++
++	res = 0;
++done:
++	return res;
++}
++
++int
++spa_acp_ext_volume_write_mute_value(struct spa_acp_ext_volume *ext_volume,
++		const char *device, const char *route, bool mute)
++{
++	struct spa_json_builder params_json;
++	spa_autofree char *params = NULL;
++	size_t len;
++	int res;
++
++	spa_json_builder_memstream(&params_json, &params, &len, 0);
++
++	spa_json_builder_object_push(&params_json, NULL, "{");
++	spa_json_builder_object_string(&params_json, "device", device ? device : "");
++	spa_json_builder_object_string(&params_json, "route", route ? route : "");
++	spa_json_builder_object_bool(&params_json, "mute", mute);
++	spa_json_builder_pop(&params_json, "}");
++
++	spa_json_builder_close(&params_json);
++
++	res = spa_varlink_client_call(ext_volume->client, METHOD_WRITE_MUTE_VALUE,
++			params, false, false, check_reply, METHOD_WRITE_MUTE_VALUE);
++
++	if (res < 0) {
++		pa_log_error("Failed to write mute state: %s", spa_strerror(res));
++		return res;
++	}
++
++	return res;
++}
++
++int
++spa_acp_ext_volume_write_mute_toggle(struct spa_acp_ext_volume *ext_volume,
++		const char *device, const char *route)
++{
++	struct spa_json_builder params_json;
++	spa_autofree char *params = NULL;
++	size_t len;
++	int res;
++
++	spa_json_builder_memstream(&params_json, &params, &len, 0);
++
++	spa_json_builder_object_push(&params_json, NULL, "{");
++	spa_json_builder_object_string(&params_json, "device", device ? device : "");
++	spa_json_builder_object_string(&params_json, "route", route ? route : "");
++	spa_json_builder_pop(&params_json, "}");
++
++	spa_json_builder_close(&params_json);
++
++	res = spa_varlink_client_call(ext_volume->client, METHOD_WRITE_MUTE_TOGGLE,
++			params, false, false, check_reply, METHOD_WRITE_MUTE_TOGGLE);
++
++	if (res < 0) {
++		pa_log_error("Failed to write mute toggle: %s", spa_strerror(res));
++		return res;
++	}
++
++	return 0;
++}
+diff --git a/spa/plugins/alsa/acp/ext-volume.h b/spa/plugins/alsa/acp/ext-volume.h
+new file mode 100644
+index 000000000000..6879ad30d41a
+--- /dev/null
++++ b/spa/plugins/alsa/acp/ext-volume.h
+@@ -0,0 +1,47 @@
++/* External Volume Control */
++/* SPDX-FileCopyrightText: Copyright © 2026 Arun Raghavan */
++/* SPDX-License-Identifier: MIT */
++
++#ifndef ACP_EXT_VOLUME_H
++#define ACP_EXT_VOLUME_H
++
++#include <stdint.h>
++
++#include <spa/param/audio/volume.h>
++#include <spa/support/varlink.h>
++
++typedef struct pa_cvolume pa_cvolume;
++
++struct acp_card;
++
++struct spa_acp_ext_volume {
++	struct spa_varlink_client *client;
++	struct spa_hook listener;
++
++	enum spa_audio_volume_control_flags flags;
++};
++
++int spa_acp_ext_volume_init(struct spa_acp_ext_volume *ext_volume, struct spa_varlink *varlink,
++		const char *path, const char *device, const char *route);
++
++void spa_acp_ext_volume_destroy(struct spa_acp_ext_volume *ext_volume);
++
++int spa_acp_ext_volume_read_volume(struct spa_acp_ext_volume *ext_volume,
++		const char *device, const char *route, pa_cvolume *cvol);
++
++int spa_acp_ext_volume_write_volume_absolute(struct spa_acp_ext_volume *ext_volume,
++		const char *device, const char *route, pa_cvolume *cvol);
++
++int spa_acp_ext_volume_write_volume_relative(struct spa_acp_ext_volume *ext_volume,
++		const char *device, const char *route, float step);
++
++int spa_acp_ext_volume_read_mute(struct spa_acp_ext_volume *ext_volume,
++		const char *device, const char *route, bool *mute);
++
++int spa_acp_ext_volume_write_mute_value(struct spa_acp_ext_volume *ext_volume,
++		const char *device, const char *route, bool mute);
++
++int spa_acp_ext_volume_write_mute_toggle(struct spa_acp_ext_volume *ext_volume,
++		const char *device, const char *route);
++
++#endif /* ACP_EXT_VOLUME_H */
+diff --git a/spa/plugins/alsa/acp/meson.build b/spa/plugins/alsa/acp/meson.build
+index 0ec97e2b405e..c907e6fbc85a 100644
+--- a/spa/plugins/alsa/acp/meson.build
++++ b/spa/plugins/alsa/acp/meson.build
+@@ -5,6 +5,7 @@ acp_sources = [
+   'alsa-ucm.c',
+   'alsa-util.c',
+   'conf-parser.c',
++  'ext-volume.c',
+ ]
+ 
+ acp_c_args = [
+@@ -17,6 +18,6 @@ acp_lib = static_library(
+   acp_sources,
+   c_args : acp_c_args,
+   include_directories : [configinc, includes_inc ],
+-  dependencies : [ spa_dep, alsa_dep, mathlib, ]
++  dependencies : [ spa_dep, alsa_dep, mathlib ]
+   )
+ acp_dep = declare_dependency(link_with: acp_lib)
+diff --git a/spa/plugins/alsa/alsa-acp-device.c b/spa/plugins/alsa/alsa-acp-device.c
+index 44342a7a3e7b..b5274670c37a 100644
+--- a/spa/plugins/alsa/alsa-acp-device.c
++++ b/spa/plugins/alsa/alsa-acp-device.c
+@@ -21,6 +21,7 @@
+ #include <spa/support/loop.h>
+ #include <spa/support/plugin.h>
+ #include <spa/support/i18n.h>
++#include <spa/support/varlink.h>
+ #include <spa/monitor/device.h>
+ #include <spa/monitor/utils.h>
+ #include <spa/monitor/event.h>
+@@ -36,6 +37,7 @@
+ #include "acp/acp.h"
+ 
+ extern struct spa_i18n *acp_i18n;
++extern struct spa_varlink *acp_varlink;
+ 
+ #define MAX_POLL	16
+ #define MAX_CHANNELS	SPA_AUDIO_MAX_CHANNELS
+@@ -63,6 +65,7 @@ struct impl {
+ 
+ 	struct spa_log *log;
+ 	struct spa_loop *loop;
++	struct spa_varlink *varlink;
+ 
+ 	uint32_t info_all;
+ 	struct spa_device_info info;
+@@ -490,6 +493,11 @@ static struct spa_pod *build_route(struct spa_pod_builder *b, uint32_t id,
+ 					dev->n_codecs, dev->codecs);
+ 		}
+ 
++		if (dev->ext_volume_flags) {
++			spa_pod_builder_prop(b, SPA_PROP_volumeControlFlags, 0);
++			spa_pod_builder_id(b, dev->ext_volume_flags);
++		}
++
+ 		spa_pod_builder_pop(b, &f[1]);
+ 	}
+ 	spa_pod_builder_prop(b, SPA_PARAM_ROUTE_devices, 0);
+@@ -1152,6 +1160,7 @@ impl_init(const struct spa_handle_factory *factory,
+ 
+ 	this->loop = spa_support_find(support, n_support, SPA_TYPE_INTERFACE_Loop);
+ 	acp_i18n = spa_support_find(support, n_support, SPA_TYPE_INTERFACE_I18N);
++	acp_varlink = spa_support_find(support, n_support, SPA_TYPE_INTERFACE_Varlink);
+ 	if (this->loop == NULL) {
+ 		spa_log_error(this->log, "a Loop interface is needed");
+ 		return -EINVAL;
+diff --git a/src/pipewire/context.c b/src/pipewire/context.c
+index 1c30be70aa30..6eaa4e7d1775 100644
+--- a/src/pipewire/context.c
++++ b/src/pipewire/context.c
+@@ -18,6 +18,7 @@
+ #include <spa/support/dbus.h>
+ #include <spa/support/plugin.h>
+ #include <spa/support/plugin-loader.h>
++#include <spa/support/varlink.h>
+ #include <spa/node/utils.h>
+ #include <spa/utils/atomic.h>
+ #include <spa/utils/names.h>
+@@ -57,6 +58,7 @@ struct data_loop {
+ struct impl {
+ 	struct pw_context this;
+ 	struct spa_handle *dbus_handle;
++	struct spa_handle *varlink_handle;
+ 	struct spa_plugin_loader plugin_loader;
+ 	unsigned int recalc:1;
+ 	unsigned int recalc_pending:1;
+@@ -398,7 +400,7 @@ struct pw_context *pw_context_new(struct pw_loop *main_loop,
+ 	struct impl *impl;
+ 	struct pw_context *this;
+ 	const char *lib, *str;
+-	void *dbus_iface = NULL;
++	void *dbus_iface = NULL, *varlink_iface = NULL;
+ 	uint32_t i, n_support, vm_type;
+ 	struct pw_properties *conf;
+ 	struct spa_cpu *cpu;
+@@ -550,6 +552,26 @@ struct pw_context *pw_context_new(struct pw_loop *main_loop,
+ 			this->support[n_support++] = SPA_SUPPORT_INIT(SPA_TYPE_INTERFACE_DBus, dbus_iface);
+ 		}
+ 	}
++	/* Only load varlink support if explicitly requested */
++	if ((str = pw_properties_get(properties, "support.varlink")) != NULL &&
++			pw_properties_parse_bool(str)) {
++		lib = pw_properties_get(properties, PW_KEY_LIBRARY_NAME_VARLINK);
++		if (lib == NULL)
++			lib = "support/libspa-varlink";
++
++		impl->varlink_handle = pw_load_spa_handle(lib,
++				SPA_NAME_SUPPORT_VARLINK, NULL,
++				n_support, this->support);
++
++		if (impl->varlink_handle == NULL) {
++			pw_log_warn("%p: can't load varlink library: %s", this, lib);
++		} else if ((res = spa_handle_get_interface(impl->varlink_handle,
++						SPA_TYPE_INTERFACE_Varlink, &varlink_iface)) < 0) {
++			pw_log_warn("%p: can't load varlink interface: %s", this, spa_strerror(res));
++		} else {
++			this->support[n_support++] = SPA_SUPPORT_INIT(SPA_TYPE_INTERFACE_Varlink, varlink_iface);
++		}
++	}
+ 	this->n_support = n_support;
+ 	spa_assert(n_support <= SPA_N_ELEMENTS(this->support));
+ 
+diff --git a/src/pipewire/keys.h b/src/pipewire/keys.h
+index 13694bc29712..0dfcb61b78c2 100644
+--- a/src/pipewire/keys.h
++++ b/src/pipewire/keys.h
+@@ -50,6 +50,7 @@ extern "C" {
+ #define PW_KEY_LIBRARY_NAME_SYSTEM	"library.name.system"	/**< name of the system library to use */
+ #define PW_KEY_LIBRARY_NAME_LOOP	"library.name.loop"	/**< name of the loop library to use */
+ #define PW_KEY_LIBRARY_NAME_DBUS	"library.name.dbus"	/**< name of the dbus library to use */
++#define PW_KEY_LIBRARY_NAME_VARLINK	"library.name.varlink"	/**< name of the varlink library to use */
+ 
+ /** object properties */
+ #define PW_KEY_OBJECT_PATH		"object.path"		/**< unique path to construct the object */
+-- 
+2.53.0
+

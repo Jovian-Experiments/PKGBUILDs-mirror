@@ -1,0 +1,128 @@
+From d869d5a1b523b9d65c7dd63a40e3ed576d4ffa7b Mon Sep 17 00:00:00 2001
+From: Arun Raghavan <arunr@valvesoftware.com>
+Date: Wed, 4 Mar 2026 18:52:06 -0800
+Subject: [PATCH 16/17] pulse-server: Surface volume control flags as
+ properties
+
+We could udpate the libpulse protocol to add more flag types, but this
+seems simpler than requiring a protocol and ABI update.
+---
+ .../module-protocol-pulse/pulse-server.c      | 24 +++++++++++++++++--
+ src/modules/module-protocol-pulse/volume.c    | 24 +++++++++++++++++++
+ src/modules/module-protocol-pulse/volume.h    |  9 +++++++
+ 3 files changed, 55 insertions(+), 2 deletions(-)
+
+diff --git a/src/modules/module-protocol-pulse/pulse-server.c b/src/modules/module-protocol-pulse/pulse-server.c
+index 59610ef5702b..be9a1adbf921 100644
+--- a/src/modules/module-protocol-pulse/pulse-server.c
++++ b/src/modules/module-protocol-pulse/pulse-server.c
+@@ -3692,7 +3692,7 @@ static int fill_card_info(struct client *client, struct message *m,
+ }
+ 
+ static int fill_sink_info_proplist(struct message *m, const struct spa_dict *sink_props,
+-		const struct pw_manager_object *card)
++		const struct device_info *dev_info, const struct pw_manager_object *card)
+ {
+ 	struct pw_device_info *card_info = card ? card->info : NULL;
+ 	spa_autoptr(pw_properties) props = NULL;
+@@ -3706,6 +3706,26 @@ static int fill_sink_info_proplist(struct message *m, const struct spa_dict *sin
+ 		sink_props = &props->dict;
+ 	}
+ 
++	if (dev_info->volume_info.flags & VOLUME_CONTROL_MASK) {
++		props = pw_properties_new_dict(sink_props);
++		if (props == NULL)
++			return -ENOMEM;
++
++#define SET_PROP(k, f) pw_properties_set(props, k, dev_info->volume_info.flags & (f) ? "true" : "false")
++
++		SET_PROP("device.volume.read-volume", VOLUME_READ);
++		SET_PROP("device.volume.write-volume-value", VOLUME_WRITE);
++		SET_PROP("device.volume.write-volume-updown", VOLUME_UPDOWN);
++		SET_PROP("device.volume.read-mute", VOLUME_READ_MUTE);
++		SET_PROP("device.volume.write-mute-value", VOLUME_WRITE_MUTE);
++		SET_PROP("device.volume.write-mute-toggle", VOLUME_TOGGLE_MUTE);
++		SET_PROP("device.volume.read-balance", VOLUME_READ_BALANCE);
++		SET_PROP("device.volume.write-balance", VOLUME_WRITE_BALANCE);
++
++		pw_properties_add(props, card_info->props);
++		sink_props = &props->dict;
++	}
++
+ 	message_put(m, TAG_PROPLIST, sink_props, TAG_INVALID);
+ 
+ 	return 0;
+@@ -3804,7 +3824,7 @@ static int fill_sink_info(struct client *client, struct message *m,
+ 
+ 	if (client->version >= 13) {
+ 		int res;
+-		if ((res = fill_sink_info_proplist(m, info->props, card)) < 0)
++		if ((res = fill_sink_info_proplist(m, info->props, &dev_info, card)) < 0)
+ 			return res;
+ 		message_put(m,
+ 			TAG_USEC, 0LL,			/* requested latency */
+diff --git a/src/modules/module-protocol-pulse/volume.c b/src/modules/module-protocol-pulse/volume.c
+index e53f967ec089..a0658e495f50 100644
+--- a/src/modules/module-protocol-pulse/volume.c
++++ b/src/modules/module-protocol-pulse/volume.c
+@@ -4,6 +4,7 @@
+ 
+ #include <spa/param/props.h>
+ #include <spa/param/audio/raw.h>
++#include <spa/param/audio/volume.h>
+ #include <spa/pod/iter.h>
+ #include <spa/utils/defs.h>
+ #include <pipewire/log.h>
+@@ -86,6 +87,29 @@ int volume_parse_param(const struct spa_pod *param, struct volume_info *info, bo
+ 			info->map.channels = spa_pod_copy_array(&prop->value, SPA_TYPE_Id,
+ 					info->map.map, SPA_N_ELEMENTS(info->map.map));
+ 			break;
++		case SPA_PROP_volumeControlFlags:
++		{
++			uint32_t flags;
++			if (spa_pod_get_id(&prop->value, &flags) >= 0) {
++				SPA_FLAG_UPDATE(info->flags,  VOLUME_READ,
++						flags & SPA_AUDIO_VOLUME_CONTROL_READ_VOLUME);
++				SPA_FLAG_UPDATE(info->flags,  VOLUME_WRITE,
++						flags & SPA_AUDIO_VOLUME_CONTROL_WRITE_VOLUME_VALUE);
++				SPA_FLAG_UPDATE(info->flags,  VOLUME_UPDOWN,
++						flags & SPA_AUDIO_VOLUME_CONTROL_WRITE_VOLUME_UPDOWN);
++				SPA_FLAG_UPDATE(info->flags,  VOLUME_READ_MUTE,
++						flags & SPA_AUDIO_VOLUME_CONTROL_READ_MUTE);
++				SPA_FLAG_UPDATE(info->flags,  VOLUME_WRITE_MUTE,
++						flags & SPA_AUDIO_VOLUME_CONTROL_WRITE_MUTE_VALUE);
++				SPA_FLAG_UPDATE(info->flags,  VOLUME_TOGGLE_MUTE,
++						flags & SPA_AUDIO_VOLUME_CONTROL_WRITE_MUTE_TOGGLE);
++				SPA_FLAG_UPDATE(info->flags,  VOLUME_READ_BALANCE,
++						flags & SPA_AUDIO_VOLUME_CONTROL_READ_BALANCE);
++				SPA_FLAG_UPDATE(info->flags,  VOLUME_WRITE_BALANCE,
++						flags & SPA_AUDIO_VOLUME_CONTROL_WRITE_BALANCE);
++			}
++			break;
++		}
+ 		default:
+ 			break;
+ 		}
+diff --git a/src/modules/module-protocol-pulse/volume.h b/src/modules/module-protocol-pulse/volume.h
+index dcb19880353d..4cfb6d9275d5 100644
+--- a/src/modules/module-protocol-pulse/volume.h
++++ b/src/modules/module-protocol-pulse/volume.h
+@@ -32,6 +32,15 @@ struct volume_info {
+ 	uint32_t steps;
+ #define VOLUME_HW_VOLUME	(1<<0)
+ #define VOLUME_HW_MUTE		(1<<1)
++#define VOLUME_READ		(1<<2)
++#define VOLUME_WRITE		(1<<3)
++#define VOLUME_UPDOWN		(1<<4)
++#define VOLUME_READ_MUTE	(1<<5)
++#define VOLUME_WRITE_MUTE	(1<<6)
++#define VOLUME_TOGGLE_MUTE	(1<<7)
++#define VOLUME_READ_BALANCE	(1<<8)
++#define VOLUME_WRITE_BALANCE	(1<<9)
++#define VOLUME_CONTROL_MASK	(0x01FC)
+ 	uint32_t flags;
+ };
+ 
+-- 
+2.53.0
+

@@ -1,0 +1,46 @@
+From 564a8c647d3355466fe5582e3f54791258bc8b60 Mon Sep 17 00:00:00 2001
+From: Wim Taymans <wtaymans@redhat.com>
+Date: Thu, 26 Feb 2026 12:08:26 +0100
+Subject: [PATCH 04/17] json-builder: zero the struct
+
+---
+ spa/include/spa/utils/json-builder.h | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/spa/include/spa/utils/json-builder.h b/spa/include/spa/utils/json-builder.h
+index 473723026cc7..883931bcd27e 100644
+--- a/spa/include/spa/utils/json-builder.h
++++ b/spa/include/spa/utils/json-builder.h
+@@ -72,12 +72,10 @@ SPA_API_JSON_BUILDER int spa_json_builder_file(struct spa_json_builder *b, FILE
+ 	bool color = flags & SPA_JSON_BUILDER_FLAG_COLOR;
+ 	bool simple = flags & SPA_JSON_BUILDER_FLAG_SIMPLE;
+ 	bool space = flags & SPA_JSON_BUILDER_FLAG_SPACE;
++	spa_zero(*b);
+ 	b->f = f;
+ 	b->flags = flags;
+-	b->level = 0;
+-	b->indent_off = 0;
+ 	b->indent = 2;
+-	b->count = 0;
+ 	b->delim = "";
+ 	b->comma = simple ? space ? "" : " " : ",";
+ 	b->key_sep = simple ? space ? " =" : "=" : ":";
+@@ -94,6 +92,7 @@ SPA_API_JSON_BUILDER int spa_json_builder_memstream(struct spa_json_builder *b,
+ 		char **mem, size_t *size, uint32_t flags)
+ {
+ 	FILE *f;
++	spa_zero(*b);
+ 	if ((f = open_memstream(mem, size)) == NULL)
+ 		return -errno;
+ 	return spa_json_builder_file(b, f, flags | SPA_JSON_BUILDER_FLAG_CLOSE);
+@@ -103,6 +102,7 @@ SPA_API_JSON_BUILDER int spa_json_builder_membuf(struct spa_json_builder *b,
+ 		char *mem, size_t size, uint32_t flags)
+ {
+ 	FILE *f;
++	spa_zero(*b);
+ 	if ((f = fmemopen(mem, size, "w")) == NULL)
+ 		return -errno;
+ 	return spa_json_builder_file(b, f, flags | SPA_JSON_BUILDER_FLAG_CLOSE);
+-- 
+2.53.0
+

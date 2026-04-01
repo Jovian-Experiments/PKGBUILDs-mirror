@@ -1,17 +1,17 @@
-From adbdcdc7ff1eeb0f2bbc28af9d760900dd0f0291 Mon Sep 17 00:00:00 2001
+From 03a2f6863ad9e9a36b03658e6ad659847afc2681 Mon Sep 17 00:00:00 2001
 From: Julian Bouzas <julian.bouzas@collabora.com>
 Date: Mon, 23 Mar 2026 11:38:57 -0400
-Subject: [PATCH] bluez: Set initial profile to quality A2DP
+Subject: [PATCH 2/3] bluez: Set initial profile to quality A2DP
 
 ---
- spa/plugins/bluez5/bluez5-device.c | 32 ++++++++++++++++++++++++------
- 1 file changed, 26 insertions(+), 6 deletions(-)
+ spa/plugins/bluez5/bluez5-device.c | 34 ++++++++++++++++++++++++------
+ 1 file changed, 28 insertions(+), 6 deletions(-)
 
 diff --git a/spa/plugins/bluez5/bluez5-device.c b/spa/plugins/bluez5/bluez5-device.c
-index bae2780a5..29c5966b9 100644
+index 4b3dcbfa21e1..231e3084191d 100644
 --- a/spa/plugins/bluez5/bluez5-device.c
 +++ b/spa/plugins/bluez5/bluez5-device.c
-@@ -1899,15 +1899,35 @@ static void set_initial_profile(struct impl *this)
+@@ -2121,15 +2121,37 @@ static void set_initial_profile(struct impl *this)
  
  		t = find_transport(this, i);
  		if (t) {
@@ -37,8 +37,10 @@ index bae2780a5..29c5966b9 100644
 +
 +				get_media_codecs(this, CODEC_ORDER_QUALITY, 0, codecs, SPA_N_ELEMENTS(codecs));
 +				for (j = 0; codecs[j] != NULL; ++j) {
-+					quality_codec = codecs[j];
-+					break;
++					if (codecs[j]->kind == MEDIA_CODEC_A2DP) {
++						quality_codec = codecs[j];
++						break;
++					}
 +				}
 +
 +				if (quality_codec) {
@@ -54,5 +56,5 @@ index bae2780a5..29c5966b9 100644
  					this->profile, this->props.codec);
  			return;
 -- 
-2.50.1
+2.53.0
 
