@@ -1,5 +1,5 @@
 
-`main @ 20260413.1001`
+`main @ 20260414.1000`
 ======================
 
 Valve packages
@@ -25,7 +25,7 @@ Valve packages
  * [`filesystem` — `holo-main/filesystem-2021.12.07-1.17`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/filesystem-2021.12.07-1.17)
  * [`firewalld` — `holo-main/firewalld-2.3.1-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/firewalld-2.3.1-1.1)
  * [`fwupd-minimal` — `holo-main/fwupd-minimal-2.0.18-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/fwupd-minimal-2.0.18-1)
- * [`holo-desync` — `holo-main/steamos-customizations-git-20260330.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-customizations-git-20260330.1-1)
+ * [`holo-desync` — `holo-main/steamos-customizations-git-20260330.1-3`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-customizations-git-20260330.1-3)
  * [`holo-dmi-rules` — `holo-main/holo-dmi-rules-1.0-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/holo-dmi-rules-1.0-2)
  * [`holo-earlyoom` — `holo-main/holo-earlyoom-1.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/holo-earlyoom-1.1-1)
  * [`holo-fstab-repair` — `holo-main/holo-fstab-repair-0.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/holo-fstab-repair-0.1-1)
@@ -33,13 +33,14 @@ Valve packages
  * [`holo-keyring` — `holo-main/holo-keyring-20250801-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/holo-keyring-20250801-1)
  * [`holo-nfs-utils-tmpfiles` — `holo-main/holo-nfs-utils-tmpfiles-0.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/holo-nfs-utils-tmpfiles-0.1-1)
  * [`holo-plymouth-themes` — `holo-main/holo-plymouth-themes-0.5-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/holo-plymouth-themes-0.5-1)
- * [`holo-sudo` — `holo-main/steamos-customizations-git-20260330.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-customizations-git-20260330.1-1)
+ * [`holo-sudo` — `holo-main/steamos-customizations-git-20260330.1-3`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-customizations-git-20260330.1-3)
  * [`holo-zram-swap` — `holo-main/holo-zram-swap-0.3-0`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/holo-zram-swap-0.3-0)
  * [`hwdata` — `holo-main/hwdata-0.397-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/hwdata-0.397-1.1)
  * [`ibus` — `holo-main/ibus-1.5.32-2.2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/ibus-1.5.32-2.2)
  * [`inputattach-cec-units` — `holo-main/inputattach-cec-units-1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/inputattach-cec-units-1-1)
  * [`iwd` — `holo-main/iwd-3.9-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/iwd-3.9-1.1)
  * [`kcgroups` — `holo-main/kcgroups-0.0.dmemcg.experimental.3-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/kcgroups-0.0.dmemcg.experimental.3-1)
+ * [`kcoreaddons` — `holo-main/kcoreaddons-6.16.0-1.2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/kcoreaddons-6.16.0-1.2)
  * [`kdeconnect` — `holo-main/kdeconnect-25.04.3-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/kdeconnect-25.04.3-1.1)
  * [`kdumpst` — `holo-main/kdumpst-1.2-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/kdumpst-1.2-1.1)
  * [`kmod` — `holo-main/kmod-34.2-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/kmod-34.2-1.1)
@@ -68,7 +69,7 @@ Valve packages
  * [`rtkit` — `holo-main/rtkit-0.14-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/rtkit-0.14-1)
  * [`scx-scheds` — `holo-main/scx-scheds-1.1.0.linux.steamos-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/scx-scheds-1.1.0.linux.steamos-1)
  * [`speech-dispatcher` — `holo-main/speech-dispatcher-0.12.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/speech-dispatcher-0.12.1-1)
- * [`steamos-atomupd-client` — `holo-main/steamos-atomupd-client-0.20260331.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-atomupd-client-0.20260331.1-1)
+ * [`steamos-atomupd-client` — `holo-main/steamos-atomupd-client-0.20260331.1-3`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-atomupd-client-0.20260331.1-3)
  * [`steamos-efi` — `holo-main/steamos-efi-20251023.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-efi-20251023.1-1)
  * [`steamos-kdumpst-layer` — `holo-main/steamos-kdumpst-layer-1.0-4`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-kdumpst-layer-1.0-4)
  * [`steamos-log-submitter` — `holo-main/steamos-log-submitter-0.7.7-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-log-submitter-0.7.7-1)
@@ -119,7 +120,7 @@ Valve packages
  * [`libwireplumber` — `jupiter-main/wireplumber-0.5.14-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/wireplumber-0.5.14-1.1)
  * [`linux-firmware-neptune` — `jupiter-main/linux-firmware-neptune-jupiter.20260216.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/linux-firmware-neptune-jupiter.20260216.1-1)
  * [`linux-firmware-neptune-whence` — `jupiter-main/linux-firmware-neptune-jupiter.20260216.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/linux-firmware-neptune-jupiter.20260216.1-1)
- * [`linux-neptune-618` — `jupiter-main/linux-neptune-618-6.18.20.valve1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/linux-neptune-618-6.18.20.valve1-1)
+ * [`linux-neptune-618` — `jupiter-main/linux-neptune-618-6.18.22.valve1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/linux-neptune-618-6.18.22.valve1-1)
  * [`mangohud` — `jupiter-main/mangohud-0.8.3.rc1.r24.g33c2c7dd-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/mangohud-0.8.3.rc1.r24.g33c2c7dd-1)
  * [`mesa` — `jupiter-main/mesa-25.3.0.213835.radeonsi_25.3.0-3`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/mesa-25.3.0.213835.radeonsi_25.3.0-3)
  * [`powerdevil` — `jupiter-main/powerdevil-6.4.3-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/powerdevil-6.4.3-1.1)
@@ -130,7 +131,7 @@ Valve packages
  * [`steam_notif_daemon` — `jupiter-main/steam_notif_daemon-v1.0.1-3`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steam_notif_daemon-v1.0.1-3)
  * [`steamdeck-dsp` — `jupiter-main/steamdeck-dsp-0.88-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steamdeck-dsp-0.88-1)
  * [`steamdeck-kde-presets` — `jupiter-main/steamdeck-kde-presets-3.8.3-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steamdeck-kde-presets-3.8.3-1)
- * [`steamos-customizations-jupiter` — `jupiter-main/steamos-customizations-jupiter-20260330.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steamos-customizations-jupiter-20260330.1-1)
+ * [`steamos-customizations-jupiter` — `jupiter-main/steamos-customizations-jupiter-20260330.1-3`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steamos-customizations-jupiter-20260330.1-3)
  * [`steamos-devkit-service` — `jupiter-main/steamos-devkit-service-0.20250916.0-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steamos-devkit-service-0.20250916.0-1)
  * [`upower` — `jupiter-main/upower-1.90.10-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/upower-1.90.10-1.1)
  * [`usbhid-gadget-passthru` — `jupiter-main/usbhid-gadget-passthru-0.1.3-5`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/usbhid-gadget-passthru-0.1.3-5)
@@ -388,7 +389,6 @@ Arch Linux packages
  * [`kconfig/6.16.0-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/kconfig/-/tree/6.16.0-1)
  * [`kconfigwidgets/6.16.0-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/kconfigwidgets/-/tree/6.16.0-1)
  * [`kcontacts/1:6.16.0-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/kcontacts/-/tree/1:6.16.0-1)
- * [`kcoreaddons/6.16.0-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/kcoreaddons/-/tree/6.16.0-1)
  * [`kcrash/6.16.0-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/kcrash/-/tree/6.16.0-1)
  * [`kdbusaddons/6.16.0-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/kdbusaddons/-/tree/6.16.0-1)
  * [`kde-cli-tools/6.4.3-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/kde-cli-tools/-/tree/6.4.3-1)
