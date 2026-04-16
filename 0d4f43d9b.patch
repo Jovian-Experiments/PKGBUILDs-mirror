@@ -19,7 +19,7 @@ instead we now treat cancelled states as None update state
  2 files changed, 3 insertions(+), 4 deletions(-)
 
 diff --git a/libdiscover/backends/PackageKitBackend/PackageKitUpdater.cpp b/libdiscover/backends/PackageKitBackend/PackageKitUpdater.cpp
-index d672939424..8a9bbef90b 100644
+index d67293942..8a9bbef90 100644
 --- a/libdiscover/backends/PackageKitBackend/PackageKitUpdater.cpp
 +++ b/libdiscover/backends/PackageKitBackend/PackageKitUpdater.cpp
 @@ -823,12 +823,11 @@ AbstractBackendUpdater::State toUpdateState(PackageKit::Transaction::Status t)
@@ -38,7 +38,7 @@ index d672939424..8a9bbef90b 100644
  }
  
 diff --git a/libdiscover/resources/StandardBackendUpdater.cpp b/libdiscover/resources/StandardBackendUpdater.cpp
-index 7c9b041c0f..0a727cf7b5 100644
+index 7c9b041c0..0a727cf7b 100644
 --- a/libdiscover/resources/StandardBackendUpdater.cpp
 +++ b/libdiscover/resources/StandardBackendUpdater.cpp
 @@ -110,6 +110,7 @@ AbstractBackendUpdater::State toUpdateState(Transaction *t)

@@ -18,7 +18,7 @@ BUG: 510072
  2 files changed, 13 insertions(+), 5 deletions(-)
 
 diff --git a/kcm/CMakeLists.txt b/kcm/CMakeLists.txt
-index 745f8ceb82..a3c895f7cc 100644
+index 745f8ceb8..a3c895f7c 100644
 --- a/kcm/CMakeLists.txt
 +++ b/kcm/CMakeLists.txt
 @@ -26,8 +26,10 @@ target_link_libraries(kcm_updates PRIVATE
@@ -37,7 +37,7 @@ index 745f8ceb82..a3c895f7cc 100644
 +    target_compile_definitions(kcm_updates PRIVATE WITH_SYSUPDATE_BACKEND)
  endif()
 diff --git a/kcm/updates.cpp b/kcm/updates.cpp
-index a269ca3b93..28c4eb68ed 100644
+index a269ca3b9..28c4eb68e 100644
 --- a/kcm/updates.cpp
 +++ b/kcm/updates.cpp
 @@ -40,7 +40,13 @@ DiscoverSettings *Updates::discoverSettings() const

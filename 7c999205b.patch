@@ -1,0 +1,70 @@
+From 7c999205b8e7e6854404e5ae0124eece0eab0669 Mon Sep 17 00:00:00 2001
+From: Aleix Pol <aleixpol@kde.org>
+Date: Sat, 27 Sep 2025 18:28:21 +0200
+Subject: [PATCH] Do not initialise ResourcesModel after
+ QCoreApplication::aboutToQuit
+
+It can happen because for any reason ResourcesModel::global() is called
+on the shutdown process, so provide a short-lived object so nothing
+crashes and make sure all backends get initialised.
+---
+ libdiscover/resources/ResourcesModel.cpp | 15 ++++++++++++++-
+ libdiscover/resources/ResourcesModel.h   |  2 ++
+ 2 files changed, 16 insertions(+), 1 deletion(-)
+
+diff --git a/libdiscover/resources/ResourcesModel.cpp b/libdiscover/resources/ResourcesModel.cpp
+index fe413e6c6..1e628c2b7 100644
+--- a/libdiscover/resources/ResourcesModel.cpp
++++ b/libdiscover/resources/ResourcesModel.cpp
+@@ -31,16 +31,29 @@
+ using namespace Qt::StringLiterals;
+ 
+ ResourcesModel *ResourcesModel::s_self = nullptr;
++bool ResourcesModel::s_quitting = false;
+ 
+ ResourcesModel *ResourcesModel::global()
+ {
+     if (!s_self) {
+         s_self = new ResourcesModel;
+-        s_self->init(true);
++        Q_ASSERT(!s_quitting);
++        if (!s_quitting) {
++            s_self->init(true);
++        } else {
++            // Only should happen if the singleton is instantiated after aboutToQuit
++            QTimer::singleShot(0, s_self, &ResourcesModel::destroyObject);
++        }
+     }
+     return s_self;
+ }
+ 
++void ResourcesModel::destroyObject()
++{
++    s_quitting = true;
++    deleteLater();
++}
++
+ ResourcesModel::ResourcesModel(QObject *parent)
+     : QObject(parent)
+     , m_currentApplicationBackend(nullptr)
+diff --git a/libdiscover/resources/ResourcesModel.h b/libdiscover/resources/ResourcesModel.h
+index 088619f19..9341b8b3a 100644
+--- a/libdiscover/resources/ResourcesModel.h
++++ b/libdiscover/resources/ResourcesModel.h
+@@ -157,6 +157,7 @@ private:
+     bool addResourcesBackend(AbstractResourcesBackend *backend);
+     void registerBackendByName(const QString &name);
+     void initApplicationsBackend();
++    void destroyObject();
+ 
+     bool m_isInitializing = true;
+     QVector<AbstractResourcesBackend *> m_backends;
+@@ -169,4 +170,5 @@ private:
+     QSharedPointer<InlineMessage> m_inlineMessage;
+ 
+     static ResourcesModel *s_self;
++    static bool s_quitting;
+ };
+-- 
+GitLab
+
