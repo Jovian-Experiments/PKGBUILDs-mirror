@@ -1,0 +1,123 @@
+From 2258061c66ac5c02c06dd9eb763ff7760221e3a3 Mon Sep 17 00:00:00 2001
+From: Vlad Zahorodnii <vlad.zahorodnii@kde.org>
+Date: Thu, 16 Apr 2026 12:30:52 +0300
+Subject: [PATCH] backends/libinput: Fix dangling InputDevices on shutdown
+
+The current logic assumes that when
+
+    m_thread.quit();
+    m_thread.wait();
+
+runs, the Connection will emit the deviceRemoved() signal for every
+available input device and the InputRedirection will perform cleanup.
+
+Unfortunately, it is not quite the case. There are two relevant
+connections:
+
+    connect(m_connection, &LibInput::Connection::deviceRemoved,
+            this, &InputBackend::deviceRemoved, Qt::DirectConnection);
+
+in LibinputBackend::LibinputBackend(), and
+
+    connect(inputBackend.get(), &InputBackend::deviceRemoved, this, &InputRedirection::removeInputDevice);
+
+in InputRedirection::addInputBackend().
+
+The one in the LibinputBackend constructor works as expected, but the
+one in the InputRedirection effectively becomes queued because the
+current thread is the connection thread.
+
+This can lead to InputRedirection::devices() including dangling pointers.
+
+There are two ways to fix the issue:
+
+* make the connection in InputRedirection direct
+* or somehow make sure that the LibinputBackend emits the
+  deviceRemoved() signal on the correct thread
+
+The problem with the first approach is that it breaks encapsulation and
+it's just not a good fix, the API should remain intuitive without hidden
+footguns.
+
+So this patch aims to fix the thread on which the
+LibinputBackend::deviceRemoved() signal gets emitted.
+---
+ src/backends/libinput/connection.cpp      |  9 +++++----
+ src/backends/libinput/connection.h        |  1 +
+ src/backends/libinput/libinputbackend.cpp | 14 +++++++++-----
+ 3 files changed, 15 insertions(+), 9 deletions(-)
+
+diff --git a/src/backends/libinput/connection.cpp b/src/backends/libinput/connection.cpp
+index 74612e36ff..9d5581e03d 100644
+--- a/src/backends/libinput/connection.cpp
++++ b/src/backends/libinput/connection.cpp
+@@ -126,10 +126,6 @@ Connection::Connection(std::unique_ptr<Context> &&input)
+ 
+ Connection::~Connection()
+ {
+-    for (Device *device : std::as_const(m_devices)) {
+-        Q_EMIT deviceRemoved(device);
+-    }
+-
+     m_eventQueue.clear();
+     qDeleteAll(m_devices);
+     qDeleteAll(m_tools);
+@@ -719,6 +715,11 @@ void Connection::slotKGlobalSettingsNotifyChange(int type, int arg)
+     }
+ }
+ 
++QList<Device *> Connection::devices() const
++{
++    return m_devices;
++}
++
+ QStringList Connection::devicesSysNames() const
+ {
+     QStringList sl;
+diff --git a/src/backends/libinput/connection.h b/src/backends/libinput/connection.h
+index 77b90c3b89..0eccd47358 100644
+--- a/src/backends/libinput/connection.h
++++ b/src/backends/libinput/connection.h
+@@ -57,6 +57,7 @@ public:
+     void deactivate();
+     void processEvents();
+ 
++    QList<Device *> devices() const;
+     QStringList devicesSysNames() const;
+ 
+     QStringList ListPointers() const;
+diff --git a/src/backends/libinput/libinputbackend.cpp b/src/backends/libinput/libinputbackend.cpp
+index 509b66d4b5..934d822615 100644
+--- a/src/backends/libinput/libinputbackend.cpp
++++ b/src/backends/libinput/libinputbackend.cpp
+@@ -24,18 +24,22 @@ LibinputBackend::LibinputBackend(Session *session, QObject *parent)
+         m_connection->processEvents();
+     }, Qt::QueuedConnection);
+ 
+-    // Direct connection because the deviceAdded() and the deviceRemoved() signals are emitted
+-    // from the main thread.
+     connect(m_connection, &LibInput::Connection::deviceAdded,
+-            this, &InputBackend::deviceAdded, Qt::DirectConnection);
++            this, &InputBackend::deviceAdded);
+     connect(m_connection, &LibInput::Connection::deviceRemoved,
+-            this, &InputBackend::deviceRemoved, Qt::DirectConnection);
++            this, &InputBackend::deviceRemoved);
+ }
+ 
+ LibinputBackend::~LibinputBackend()
+ {
+-    m_connection->deleteLater();
++    // Notify the main thread about removed input devices. The deviceRemoved() signal cannot
++    // be emitted from the connection thread otherwise it will be queued, which we don't want.
++    const auto devices = m_connection->devices();
++    for (const auto device : devices) {
++        Q_EMIT deviceRemoved(device);
++    }
+ 
++    m_connection->deleteLater();
+     m_thread.quit();
+     m_thread.wait();
+ }
+-- 
+2.53.0
+
