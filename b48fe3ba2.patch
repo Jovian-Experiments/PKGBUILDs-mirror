@@ -11,7 +11,7 @@ reboot after update.
  2 files changed, 6 insertions(+), 1 deletion(-)
 
 diff --git a/kcm/CMakeLists.txt b/kcm/CMakeLists.txt
-index a3c895f7cc..fd4472ddb6 100644
+index a3c895f7c..fd4472ddb 100644
 --- a/kcm/CMakeLists.txt
 +++ b/kcm/CMakeLists.txt
 @@ -26,6 +26,10 @@ target_link_libraries(kcm_updates PRIVATE
@@ -26,7 +26,7 @@ index a3c895f7cc..fd4472ddb6 100644
      target_compile_definitions(kcm_updates PRIVATE WITH_OSTREE_BACKEND)
  endif()
 diff --git a/kcm/updates.cpp b/kcm/updates.cpp
-index 28c4eb68ed..3ccdbc4354 100644
+index 28c4eb68e..3ccdbc435 100644
 --- a/kcm/updates.cpp
 +++ b/kcm/updates.cpp
 @@ -40,7 +40,8 @@ DiscoverSettings *Updates::discoverSettings() const

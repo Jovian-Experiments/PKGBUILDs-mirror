@@ -15,7 +15,7 @@ BUG: 508556
  4 files changed, 14 insertions(+), 8 deletions(-)
 
 diff --git a/kcm/CMakeLists.txt b/kcm/CMakeLists.txt
-index 0fe1885863..745f8ceb82 100644
+index 0fe188586..745f8ceb8 100644
 --- a/kcm/CMakeLists.txt
 +++ b/kcm/CMakeLists.txt
 @@ -25,3 +25,9 @@ target_link_libraries(kcm_updates PRIVATE
@@ -29,7 +29,7 @@ index 0fe1885863..745f8ceb82 100644
 +    target_compile_definitions(kcm_updates PRIVATE UPDATE_NEEDS_REBOOT=0)
 +endif()
 diff --git a/kcm/ui/main.qml b/kcm/ui/main.qml
-index 4defaece04..ff64bf1ba7 100644
+index 4defaece0..ff64bf1ba 100644
 --- a/kcm/ui/main.qml
 +++ b/kcm/ui/main.qml
 @@ -118,7 +118,7 @@ SimpleKCM {
@@ -42,7 +42,7 @@ index 4defaece04..ff64bf1ba7 100644
  
              QQC2.RadioButton {
 diff --git a/kcm/updates.cpp b/kcm/updates.cpp
-index 0b2bb5e4d0..a269ca3b93 100644
+index 0b2bb5e4d..a269ca3b9 100644
 --- a/kcm/updates.cpp
 +++ b/kcm/updates.cpp
 @@ -38,9 +38,9 @@ DiscoverSettings *Updates::discoverSettings() const
@@ -58,7 +58,7 @@ index 0b2bb5e4d0..a269ca3b93 100644
  
  #include "moc_updates.cpp"
 diff --git a/kcm/updates.h b/kcm/updates.h
-index adc786e24d..aeb68254d2 100644
+index adc786e24..aeb68254d 100644
 --- a/kcm/updates.h
 +++ b/kcm/updates.h
 @@ -20,7 +20,7 @@ class Updates : public KQuickManagedConfigModule
