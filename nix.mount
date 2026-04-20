@@ -8,7 +8,7 @@
 #  or (at your option) any later version.
 
 [Unit]
-Description=SteamOS Offload - /nix
+Description=Holo Offload - /nix
 ConditionPathExists=/nix
 
 [Mount]
@@ -18,4 +18,4 @@ Type=none
 Options=bind
 
 [Install]
-WantedBy=steamos-offload.target
+WantedBy=holo-offload.target
