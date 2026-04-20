@@ -2,7 +2,7 @@
 # Maintainer: Vivek Das Mohapatra <vivek.dasmohapatra@collabora.com>
 
 pkgname=steamos-customizations-jupiter
-_srctag=jupiter-20260415.1
+_srctag=jupiter-20260417.1
 _srcver=${_srctag#jupiter-}
 pkgver=${_srcver//-/.}
 pkgrel=1
@@ -15,7 +15,7 @@ makedepends=('git' 'openssh' 'systemd')
 provides=("${pkgname%-git}")
 conflicts=("${pkgname%-git}")
 source=("${pkgname%-git}::git+ssh://git@gitlab.steamos.cloud/holo/steamos-customizations.git#tag=${_srctag}")
-sha256sums=('ac10c7b1fe6c9fba91ce07a49e6f119b42e1001dd15e373b2de6e14dfa326fa9')
+sha256sums=('bd13d5582afa95b6b55ead94772c9feca3df0eb7dc6653ef7df08b971891bf4f')
 
 package() {
 	cd "${pkgname%-git}"
@@ -27,9 +27,9 @@ package() {
 		 install
 	make DESTDIR="$pkgdir" prefix="/usr" sbindir="/usr/bin" libexecdir="/usr/lib" -C mkinitcpio install
 
-	echo "Symlink grub binaries using steamos helpers from libdir..."
-	ln -sf "/usr/lib/steamos/steamos-grub-install" "${pkgdir}/usr/bin/grub-install"
-	ln -sf "/usr/lib/steamos/steamos-grub-mkimage" "${pkgdir}/usr/bin/grub-mkimage"
+	echo "Symlink grub binaries using holo helpers from libdir..."
+	ln -sf "/usr/lib/holo/holo-grub-install" "${pkgdir}/usr/bin/grub-install"
+	ln -sf "/usr/lib/holo/holo-grub-mkimage" "${pkgdir}/usr/bin/grub-mkimage"
 
 	# The desync configs live in separate package
 	rm -rf "${pkgdir}/etc/desync"
