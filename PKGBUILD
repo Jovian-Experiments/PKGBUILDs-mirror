@@ -4,7 +4,7 @@
 # Everything still in here should be either removed or re-homed to a proper package.
 
 pkgname=jupiter-legacy-support
-pkgver=1.156
+pkgver=1.157
 pkgrel=1
 pkgdesc="Legacy jupiter-specific support files that haven't been split to their own package or removed."
 arch=(any)
@@ -14,8 +14,9 @@ source=(steam-web-debug-portforward.service
         killuserprocesses.conf
         flathub-beta.flatpakrepo
         flatpak-modify-flathub-beta.service
-        steamos-prepare-oobe-test
+        holo-prepare-oobe-test
         sudoers.d-wheel-prepare-oobe-test
+        org.valve.holo.jupiter-legacy-support.policy
         org.valve.steamos.jupiter-legacy-support.policy
         black_800x1280.png
         white_800x1280.png)
@@ -24,8 +25,9 @@ sha256sums=('7fbb99b93049f19260da6a3add0222302c0c568a6d3e3a2d592e3674a614b3d0'
             'e34a9dc905771bd99cd04cdf88262481cab7a7808d99dfaa968366fcb1b99a0b'
             '582cae3c9f9d4639f027defafe6fa33bda0a3a4d441290d926ad85a2be0f7206'
             'a7b8b21e285dac1f255546d1acc46d4423a1fa0e964153a96118b884001d0648'
-            'ed5f393af68b2a8f39eefd1866087b8536d6474d823aff738ea8a9165a1e032b'
+            '5bddd1cd200e2a1d9274b3c94bd70075372b24cfe152ccb712ec95f582461064'
             '3f3491c7ccf72b62094379495c73e6fdecd182d5aa30072b3b2407e331b96806'
+            'cf27c629ed21d86de73cf2c17cd93cc713781e38701cc76ccbef370cc0015e68'
             '27739fb50e5c2dd50e3373b22b5ceabb6eb2f6f34b723794cf9a2f911a483f65'
             '942fbb9436835bdb3a87aa8d73b3461f4cee0bc2f58bfa308eeb1be6b52ccb39'
             'fd55e252b11a0b0d48b7147298f159b0470f29ccb6118a79a5692cc8c4635f5b')
@@ -45,8 +47,11 @@ package() {
   ln -sv ../flatpak-modify-flathub-beta.service "$pkgdir"/usr/lib/systemd/system/multi-user.target.wants/
 
   # janky OOBE test utility
-  install -D -m755 "$srcdir"/steamos-prepare-oobe-test "$pkgdir"/usr/bin/steamos-prepare-oobe-test
+  install -D -m755 "$srcdir"/holo-prepare-oobe-test "$pkgdir"/usr/bin/holo-prepare-oobe-test
+  # Create a compatibility alias because it could still be referenced in some internal developers documentation
+  ln -sf "/usr/bin/holo-alias" "$pkgdir"/usr/bin/steamos-prepare-oobe-test
   install -D -m440 "$srcdir"/sudoers.d-wheel-prepare-oobe-test "$pkgdir"/etc/sudoers.d/wheel-prepare-oobe-test
+  install -D -m755 "$srcdir"/org.valve.holo.jupiter-legacy-support.policy "$pkgdir"/usr/share/polkit-1/actions/org.valve.holo.jupiter-legacy-support.policy
   install -D -m755 "$srcdir"/org.valve.steamos.jupiter-legacy-support.policy "$pkgdir"/usr/share/polkit-1/actions/org.valve.steamos.jupiter-legacy-support.policy
 
   install -D -m644 "$srcdir"/killuserprocesses.conf "$pkgdir"/etc/systemd/logind.conf.d/killuserprocesses.conf
@@ -59,9 +64,15 @@ package() {
   # Stats daemon will be enabled/started by bootstrap
 
   install -D -m755 -t "$pkgdir"/usr/bin/ usr/bin/*
+  # Create a compatibility alias because it could still be referenced in some internal developers documentation
+  ln -sf "/usr/bin/holo-alias" "$pkgdir"/usr/bin/steamos-update
+  ln -sf "/usr/bin/holo-alias" "$pkgdir"/usr/bin/steamos-session-select
+  # The Steam client is still relying on `steamos-select-branch`
+  ln -sf "/usr/bin/holo-alias" "$pkgdir"/usr/bin/steamos-select-branch
 
   install -D -m644 {,"$pkgdir"/}usr/share/X11/xorg.conf.d/41-touchscreenrotate.conf
 
+  # Please keep this filename in sync with steamos-manager's session.rs
   install -D -m644 {,"$pkgdir"/}etc/sddm.conf.d/steamos.conf
   # install -D -m644 {,"$pkgdir"/}etc/pulse/default.pa
 
@@ -77,8 +88,7 @@ package() {
   #
   # Symlinking to /dev/null is actually what `systemctl mask` does. Really.
   ln -sv /dev/null "$pkgdir"/etc/systemd/system/boot.mount
-  ln -sv /dev/null "$pkgdir"/etc/systemd/system/steamos-mkvarboot.service
-  ln -sv /dev/null "$pkgdir"/etc/systemd/system/steamos-install-grub.service
+  ln -sv /dev/null "$pkgdir"/etc/systemd/system/holo-install-grub.service
 
   # Horrible workaround. We should fix this.
   # (the full bootstrap package should not need this)
