@@ -9,7 +9,7 @@ pkgname=(
   wireplumber-docs
 )
 pkgver=0.5.14
-pkgrel=1.1
+pkgrel=1.2
 pkgdesc="Session / policy manager implementation for PipeWire"
 url="https://pipewire.pages.freedesktop.org/wireplumber/"
 arch=(x86_64)
@@ -48,6 +48,10 @@ source=(
   "0004-monitor-alsa-Don-t-forward-priority.driver-property-.patch"
   "0005-monitor-alsa-Dont-set-node.dont-remix-property-to-lo.patch"
   "0006-monitor-alsa-Add-alsa.loopback-true-to-split-PCM-loo.patch"
+
+  # Holo: Add ALSA setting to toggle external volume control. This cannot be merged upstream.
+  # More info: https://gitlab.steamos.cloud/holo-team/tasks/-/work_items/2049
+  "0001-alsa-Add-new-monitor.alsa.enable-external-volume-con.patch"
 )
 b2sums=('bdf2b17806b2ac30f4f40b4e1e35a9aecdf0660b24f75978e546e59d525bf4a97ad079a13d5b08d76d2d79d8b89f7093b777c5d92590ce2681490e3e114938e7'
         '6c1d7b3577d7836559ec5a896e275405764fc2fc0a7a9840e027e575bac47489e51b3c3f127e963335a8eb7d714068e0222c1dc05e8be38590e04205388113a8'
@@ -56,7 +60,8 @@ b2sums=('bdf2b17806b2ac30f4f40b4e1e35a9aecdf0660b24f75978e546e59d525bf4a97ad079a
         'da1f9a77934203cb3f92f634e57aa5121e1e732a5f86e1068da955a0d07b663d64bef2c2868dde80c16ab24f5afc234267635a83ed2b64c61bf2913533762cd3'
         '5653ea6c4a01f275614f05c7ea3c52f2ad311a42fbad4b9780f4021609574327a96e9e91df493bc13593ac35daa0e77be2f1a672b7d12eaceb4cca0e3790e32a'
         'bc2633425fb1ff3aec54b09a1ef8ab9714b482c014ba7fd4af234196dbd9aa038101c84f862583331bb15c572bd95cc21cf83650c09963c13d22c3cbfbe62fd0'
-        'daf1300f45171a549112fc1f2f8800ea14a51ce97159cbcac405beee469114697ce5ff296126be33fbf9bc76eae1f12a2798d65dbc4ec5bbe07fd6a5f081c318')
+        'daf1300f45171a549112fc1f2f8800ea14a51ce97159cbcac405beee469114697ce5ff296126be33fbf9bc76eae1f12a2798d65dbc4ec5bbe07fd6a5f081c318'
+        '1d74a32c602d233d41961507802a59ec95da2d3945208d4643a75af7df0cb341bed91e6a4fa6306d5c64101cbd03525611e67d8349d17f2d0cb2719bc507bad0')
 
 prepare() {
   cd $pkgbase

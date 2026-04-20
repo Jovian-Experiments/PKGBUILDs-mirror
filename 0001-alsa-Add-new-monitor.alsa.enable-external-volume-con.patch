@@ -1,0 +1,89 @@
+From c9f63cc0f5c00ebada452318b3ee22d5ab1c5f60 Mon Sep 17 00:00:00 2001
+From: Julian Bouzas <julian.bouzas@collabora.com>
+Date: Fri, 27 Mar 2026 13:41:09 -0400
+Subject: [PATCH] alsa: Add new 'monitor.alsa.enable-external-volume-control'
+ setting
+
+This enables/disables external volume control in ALSA devices by reloading them.
+---
+ po/conf.pot                   | 10 ++++++++++
+ src/config/wireplumber.conf   |  6 ++++++
+ src/scripts/monitors/alsa.lua | 17 +++++++++++++++++
+ 3 files changed, 33 insertions(+)
+
+diff --git a/po/conf.pot b/po/conf.pot
+index 13641209..d3fad6a2 100644
+--- a/po/conf.pot
++++ b/po/conf.pot
+@@ -133,6 +133,16 @@ msgstr ""
+ msgid "Automatically detect HDMI channels (experimental)"
+ msgstr ""
+ 
++#. /wireplumber.settings.schema/monitor.alsa.enable-external-volume-control/description
++#: wireplumber.conf
++msgid "Volume control will be enabled externaly for ALSA devices that have an external volume control socket path configured"
++msgstr ""
++
++#. /wireplumber.settings.schema/monitor.alsa.enable-external-volume-control/name
++#: wireplumber.conf
++msgid "Volume control will be enabled externaly"
++msgstr ""
++
+ #. /wireplumber.settings.schema/monitor.camera-discovery-timeout/description
+ #: wireplumber.conf
+ msgid "The camera discovery timeout in milliseconds"
+diff --git a/src/config/wireplumber.conf b/src/config/wireplumber.conf
+index 1f90077e..476ed42b 100644
+--- a/src/config/wireplumber.conf
++++ b/src/config/wireplumber.conf
+@@ -943,6 +943,12 @@ wireplumber.settings.schema = {
+     type = "bool"
+     default = false
+   }
++  monitor.alsa.enable-external-volume-control = {
++    name = "Volume control will be enabled externaly"
++    description = "Volume control will be enabled externaly for ALSA devices that have an external volume control socket path configured"
++    type = "bool"
++    default = false
++  }
+ 
+   ## Node
+   node.features.audio.no-dsp = {
+diff --git a/src/scripts/monitors/alsa.lua b/src/scripts/monitors/alsa.lua
+index 1557997b..39e2b904 100644
+--- a/src/scripts/monitors/alsa.lua
++++ b/src/scripts/monitors/alsa.lua
+@@ -387,6 +387,13 @@ end
+ function createDevice(parent, id, factory, properties)
+   id_name_table[id] = {}
+   properties["spa.object.id"] = id
++
++  -- Check if we need to disable external volume control
++  local enable_ext_vol_control = Settings.get_boolean ("monitor.alsa.enable-external-volume-control")
++  if not enable_ext_vol_control then
++    properties["api.alsa.external-volume-control"] = nil
++  end
++
+   local device = SpaDevice(factory, properties)
+   if device then
+     device:connect("create-object", createNode)
+@@ -612,6 +619,16 @@ if rd_plugin then
+   end)
+ end
+ 
++-- Handle external volume control setting changes to destroy and re-create
++-- the ALSA monitor so that all the Devices have the property updated
++Settings.subscribe ("monitor.alsa.enable-external-volume-control", function ()
++  log:info ("Destroying ALSA monitor")
++  monitor:deactivate(Feature.SpaDevice.ENABLED)
++  monitor = nil
++  log:info ("Creating ALSA monitor")
++  monitor = createMonitor()
++end)
++
+ -- create the monitor
+ monitor = createMonitor()
+ 
+-- 
+2.53.0
+
