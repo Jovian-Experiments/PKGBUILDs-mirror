@@ -1,5 +1,5 @@
 
-`main @ 20260420.1000`
+`main @ 20260421.1000`
 ======================
 
 Valve packages
@@ -14,7 +14,7 @@ Valve packages
  * [`breakpad` — `holo-main/breakpad-v2024.02.16-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/breakpad-v2024.02.16-1)
  * [`casync` — `holo-main/casync-2.r227.g99559cd-4.5`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/casync-2.r227.g99559cd-4.5)
  * [`cecd` — `holo-main/cecd-0.1.0-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/cecd-0.1.0-1)
- * [`desync` — `holo-main/desync-1.0.0-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/desync-1.0.0-1.1)
+ * [`desync` — `holo-main/desync-1.0.0-1.2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/desync-1.0.0-1.2)
  * [`dirlock` — `holo-main/dirlock-0.0.1.214.177064e-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/dirlock-0.0.1.214.177064e-2)
  * [`discover` — `holo-main/discover-6.4.3-1.5`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/discover-6.4.3-1.5)
  * [`dmemcg-booster` — `holo-main/dmemcg-booster-0.1.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/dmemcg-booster-0.1.1-1)
@@ -25,7 +25,7 @@ Valve packages
  * [`firewalld` — `holo-main/firewalld-2.3.1-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/firewalld-2.3.1-1.1)
  * [`fwupd-minimal` — `holo-main/fwupd-minimal-2.0.18-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/fwupd-minimal-2.0.18-1)
  * [`holo-desync` — `holo-main/steamos-customizations-git-20260420.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-customizations-git-20260420.1-1)
- * [`holo-dmi-rules` — `holo-main/holo-dmi-rules-1.0-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/holo-dmi-rules-1.0-2)
+ * [`holo-dmi-rules` — `holo-main/holo-dmi-rules-1.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/holo-dmi-rules-1.1-1)
  * [`holo-earlyoom` — `holo-main/holo-earlyoom-1.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/holo-earlyoom-1.1-1)
  * [`holo-fstab-repair` — `holo-main/holo-fstab-repair-0.2-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/holo-fstab-repair-0.2-1)
  * [`holo-glibc-locales` — `holo-main/holo-glibc-locales-2.41+r65+ge7c419a29575-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/holo-glibc-locales-2.41+r65+ge7c419a29575-1)
