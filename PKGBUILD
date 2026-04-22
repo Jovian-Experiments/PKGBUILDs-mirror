@@ -6,7 +6,7 @@
 pkgname=kwin
 pkgver=6.4.3
 _dirver=$(echo $pkgver | cut -d. -f1-3)
-pkgrel=1.8 # kwin: default to more sensible scale factors on TVs
+pkgrel=1.9 # kwin: default to more sensible scale factors on TVs
 pkgdesc='An easy to use, but flexible, Wayland compositor'
 arch=(x86_64)
 url='https://kde.org/plasma-desktop/'
@@ -87,6 +87,7 @@ source=(https://download.kde.org/stable/plasma/$_dirver/$pkgname-$pkgver.tar.xz{
         0006-inputmethod-Skip-input-events-from-fake-input.patch #Currently deck specific, a workaround for the Steam OSK. Test CJK input with both SteamOSK and a physical keyboard both work before dropping
         0006-inputmethod-Improve-keysym-lookup-from-input-methods.patch # Drop in 6.5
         0007-outputconfigurationstore-add-special-casing-for-the-.patch # Drop in 6.6
+        0008-backends-libinput-Fix-dangling-InputDevices-on-shutd.patch # Drop in 6.7
         )
 install=$pkgname.install
 sha256sums=('a13568c918eca7803eb44a3a2778b860edc3f03b36797851c4f3aeeed4b502a8'
@@ -98,7 +99,8 @@ sha256sums=('a13568c918eca7803eb44a3a2778b860edc3f03b36797851c4f3aeeed4b502a8'
             '5c9659a4228a39c8011491484ad31bcefb2a1fcffc75f2c18dbb4718212f49a5'
             'bf08aae2967d3cd4202ee27004eff2feedc98163626fd98f96b7d2acae40dc38'
             '7df6f28e7b6945ffcd29ec363b9f3a2b902d65350b93dd1f85ca95b0a9290770'
-            'SKIP')
+            '3beeafa65cdd74fffd2cd8c2a704fb2ffa5fc8e3e2124180744ade6bdfb3a519'
+            '6959025844eb0fd99687f539d6bcedb5dd4a48f5626ecbf8184cacb065f7ab1a')
 
 validpgpkeys=('E0A3EB202F8E57528E13E72FD7574483BB57B18D'  # Jonathan Esk-Riddell <jr@jriddell.org>
               '0AAC775BB6437A8D9AF7A3ACFE0784117FBCE11D'  # Bhushan Shah <bshah@kde.org>
@@ -115,6 +117,7 @@ prepare() {
   patch -p1 -d "$srcdir/$pkgname-$pkgver" -i "$srcdir/0006-inputmethod-Skip-input-events-from-fake-input.patch"
   patch -p1 -d "$srcdir/$pkgname-$pkgver" -i "$srcdir/0006-inputmethod-Improve-keysym-lookup-from-input-methods.patch"
   patch -p1 -d "$srcdir/$pkgname-$pkgver" -i "$srcdir/0007-outputconfigurationstore-add-special-casing-for-the-.patch"
+  patch -p1 -d "$srcdir/$pkgname-$pkgver" -i "$srcdir/0008-backends-libinput-Fix-dangling-InputDevices-on-shutd.patch"
 }
 
 build() {
