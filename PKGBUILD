@@ -32,7 +32,7 @@ pkgname=(
   pipewire-session-manager
   pulse-native-provider
 )
-pkgver=1.6.2
+pkgver=1.6.4
 pkgrel=1.1
 epoch=1
 pkgdesc="Low-latency audio/video router and processor"
@@ -119,7 +119,7 @@ source=(
     "0015-spa-alsa-Support-volume-control-commands-for-externa.patch"
     "0016-pulse-server-Surface-volume-control-flags-as-propert.patch"
     "0017-pulse-server-Expose-commands-for-sink-volume-control.patch")
-b2sums=('27c3f29c85791a7c524256c6e52dbd086f346ecc9d33b5f075f82cdfdef4f31e04af5f937c3d95c501a5f94d6e26160585bec4bb96808c8dc766396d99763aaa'
+b2sums=('054c756beae00a1dc9b757864633f9698a8f6cf5c7c187b2f0d0cb762eec74990e3403e949684b24a5e67d499c9257a91fbd7ebbe764ee34fd02f92844419427'
         'b999796fc69ecd661b7cd761b98daf81412e4a02e649d74d8d8ec7d2c6cf0169f6062ea03131313a5b03a50529e956289baf0068f0631ea58243d42f1fae4d6e'
         'ba33b056d13739e24b7e6c46bf9268357eea5a989f8af5021c737978a9a0bd9fb9882cc7e2c6eb8477d7c1e50684c3083ea33123f29a949e600ee1849cfe5cdf'
         '2708c004cbfccc56b6342785f117f2f2ec16aba474df96acf4c9d028462b4c0b8f443f13f387465e24eb628f797615c58e91b53672e01729d18b46da72686d93'
