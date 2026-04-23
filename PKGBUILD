@@ -7,7 +7,7 @@
 _basename=steam
 pkgname=steam-jupiter-stable
 pkgver=1.0.0.85
-pkgrel=4
+pkgrel=6
 pkgdesc="Valve's digital software delivery system - Jupiter bootstrapped packaging"
 url='https://steampowered.com/'
 arch=('x86_64')
@@ -78,6 +78,7 @@ source=(https://repo.steampowered.com/${_basename}/archive/beta/${_basename}_${p
         https://steamdeck-packages.steamos.cloud/misc/steam-snapshots/"$_fat_bootstrap"
         70-steam-jupiter-input.rules
         70-steam-jupiter-leds.rules
+        99-power-wakeup.rules
         steam-jupiter.sh
         steam-runtime.sh
         # Remove when we go to 1.0.0.81 (https://gitlab.steamos.cloud/holo-team/tasks/-/issues/1398)
@@ -88,6 +89,7 @@ sha512sums=('81d404fcbd516fa1d984a991be3530855c0ded826ea8aca68c8cb5492e95d3d430c
             'a013473d28a9d10a865b543ee1c42fa514c4af383b63f7dbf8e38d18e358ebdbc247caff1e39cc372a71b05fdd506f2356e1af0c5404a95f6615191d994e0fbf'
             '15cf483d9febd72cd702c306818a2af53131953cedd53750df50dceca427d2dcf5ff6e40d1b5cac7676653d3f920f420b897d456d239fcc62dc2c617d4c0291f'
             'c2ffa0d3895cb49f2533e864ffccedc88502cca796a2e9d739e4a93617f3ab4559a50227bf3c8f601809b3ac007fb8511f7931a987c08f22168efb480b649cca'
+            '34f667354b8e0b1bd28c4c4abd3072fa36d3e470a5d1dcab5461ae8f7025f3862079e70396afe561af0d2d52ac4191336a3c595427e20429ca97a33c1eae0b2d'
             '7d568c24f46902715c08797fc1148cfab9ee924d49c9bcd97cd1bd4106dfdd35409912ca1b598f50a50c62394f9618b595ca5bafdc4b9ee3b013398826cc4b01'
             '5e75c019e9fe8c67d686c4e3343dac1180a69a4bdb7d39b333415c63201eef9b98da5619dbf6fd8daa6884e65bc7f8afc9e52778682425e5a75987d527eae6f0'
             '47e2b8d2ecdb40ef2d5555e31122f1e863920998089f9dc7ce58b112ba72df6745ae30927ef158cfa735faad41b82bd6cdf25e9c69d7e780374648f57bdc3b72')
@@ -96,6 +98,7 @@ b2sums=('6cc699e7b740693529845ef76d39570a977716735da46e21b681629aebf3e5ee80b09a3
         '05d91f055a0ce36737d065705d4817d57381a6e28a055cc505b4ddd3e2546e4bee8fa5e0d0c17df45bbb3caac0e8fd57aed7277f8c43b0f5a40c0feb83218c81'
         '8d8df71b056f595b3e5fb47118b067a74e9066962bf0d181e15aea237b586cc1ee146d682a76c345cf41ed08fa49ac4b80b9f5e8a4bdac8176d6b5e1220df779'
         '08b7b8a361b605274ac26a45f71c66732d57686fae9ef225c53a110be7d5f5cdbd8f6cb75d252face8249848da0e17c71b62f0de29e09229c185c20c66fd077f'
+        '5165ac5f212abb2bcf31fdcb492c06a49772f9203bdb2e6c66d4ecc620b863f34405d228ffa314935d00b08f7539e5007ed37af90d119029075b1d7a4d02bc62'
         '987eeed26caf80e31ce289116f7d2fc7742949a6b5681005c0257a0fa490bb0bbbdde5ab1ec4794732bf58a22cabe9859c4c6a0f19b8be8aa97b5df659304657'
         'c6bac99336b7c30fec7cdbaf9e949555c687dd9dff50bcae136134d6314f4b841f5fc66ddb2caac1b003690b926fd4afbdc11da143b4674db4b75f27709fdd23'
         'fb6df965a9e537835262a2e0e722469799d72b2a7afa1793efa69685a60dfb8624e25f9dced7dcde2549eb4c2a37fc588593e6182c83a77956e4263e0c87853e')
@@ -129,6 +132,10 @@ package() {
     "${pkgdir}/usr/lib/udev/rules.d/70-steam-jupiter-input.rules"
   install -Dm 644 "${srcdir}/70-steam-jupiter-leds.rules" \
     "${pkgdir}/usr/lib/udev/rules.d/70-steam-jupiter-leds.rules"
+
+  # Additional wakeup rules for fremont. These should be upstreamed
+  install -Dm 644 "${srcdir}/99-power-wakeup.rules" \
+    "${pkgdir}/usr/lib/udev/rules.d/99-power-wakeup.rules"
 
   # Jupiter
   # Replace the runtime with our own wrapper
