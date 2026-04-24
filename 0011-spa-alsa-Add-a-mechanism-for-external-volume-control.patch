@@ -1,7 +1,7 @@
-From 3890f4f864f513eb971b4b1451e4d62a7fcb2713 Mon Sep 17 00:00:00 2001
+From d4340c9e529027f05a8cf15e6fb51ea402e8ae94 Mon Sep 17 00:00:00 2001
 From: Arun Raghavan <arunr@valvesoftware.com>
 Date: Wed, 11 Feb 2026 15:06:56 -0800
-Subject: [PATCH 11/17] spa: alsa: Add a mechanism for external volume control
+Subject: [PATCH 11/18] spa: alsa: Add a mechanism for external volume control
 
 Currently enabled at device creation and delegated to an external entity
 via a varlink protocol.
@@ -1054,7 +1054,7 @@ index 0ec97e2b405e..c907e6fbc85a 100644
    )
  acp_dep = declare_dependency(link_with: acp_lib)
 diff --git a/spa/plugins/alsa/alsa-acp-device.c b/spa/plugins/alsa/alsa-acp-device.c
-index 44342a7a3e7b..b5274670c37a 100644
+index eb38b3f9e670..b4032db95325 100644
 --- a/spa/plugins/alsa/alsa-acp-device.c
 +++ b/spa/plugins/alsa/alsa-acp-device.c
 @@ -21,6 +21,7 @@
@@ -1093,7 +1093,7 @@ index 44342a7a3e7b..b5274670c37a 100644
  		spa_pod_builder_pop(b, &f[1]);
  	}
  	spa_pod_builder_prop(b, SPA_PARAM_ROUTE_devices, 0);
-@@ -1152,6 +1160,7 @@ impl_init(const struct spa_handle_factory *factory,
+@@ -1163,6 +1171,7 @@ impl_init(const struct spa_handle_factory *factory,
  
  	this->loop = spa_support_find(support, n_support, SPA_TYPE_INTERFACE_Loop);
  	acp_i18n = spa_support_find(support, n_support, SPA_TYPE_INTERFACE_I18N);

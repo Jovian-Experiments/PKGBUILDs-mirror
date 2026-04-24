@@ -1,7 +1,7 @@
-From d805b69013fd4bf61ac93f3723bc6f82573ae1c7 Mon Sep 17 00:00:00 2001
+From 380a7d6d8eb76047bf40d7e3613541bf889c2c72 Mon Sep 17 00:00:00 2001
 From: Arun Raghavan <arunr@valvesoftware.com>
 Date: Wed, 4 Feb 2026 16:58:21 -0800
-Subject: [PATCH 09/17] spa: Add a param for audio volume control flags
+Subject: [PATCH 09/18] spa: Add a param for audio volume control flags
 
 Should be usable to signal to clients what volume control capabilities a
 device supports.

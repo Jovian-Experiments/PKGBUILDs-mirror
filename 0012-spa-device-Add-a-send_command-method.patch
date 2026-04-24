@@ -1,7 +1,7 @@
-From 2caa4ccfd4ca313dec517035c1dac0abbe3c9c02 Mon Sep 17 00:00:00 2001
+From 716fe1d18652413aa7525685124c08729910b98c Mon Sep 17 00:00:00 2001
 From: Arun Raghavan <arunr@valvesoftware.com>
 Date: Tue, 3 Mar 2026 12:17:25 -0800
-Subject: [PATCH 12/17] spa: device: Add a send_command() method
+Subject: [PATCH 12/18] spa: device: Add a send_command() method
 
 We don't currently have a mechanism to send commands to devices, which
 can be handy.

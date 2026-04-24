@@ -1,7 +1,7 @@
-From 287b4af31eb62a02e4bfd564ebd7a74359581c14 Mon Sep 17 00:00:00 2001
+From ae331bca3f77c4e48fe8379b95468440eabe6d53 Mon Sep 17 00:00:00 2001
 From: Wim Taymans <wtaymans@redhat.com>
 Date: Thu, 26 Feb 2026 11:17:17 +0100
-Subject: [PATCH 03/17] json-builder: avoid indent on the first item
+Subject: [PATCH 03/18] json-builder: avoid indent on the first item
 
 Avoids putting a \n or (now also) space as the first item.
 ---

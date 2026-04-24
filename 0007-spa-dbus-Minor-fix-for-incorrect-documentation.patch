@@ -1,7 +1,7 @@
-From e7fff1bdfd55707e0247abe58b519c8128aed8f0 Mon Sep 17 00:00:00 2001
+From 1ec8f4958d67ae54ac71f0e56be05a8a5bb60e4e Mon Sep 17 00:00:00 2001
 From: Arun Raghavan <arunr@valvesoftware.com>
 Date: Tue, 17 Feb 2026 16:49:30 -0800
-Subject: [PATCH 07/17] spa: dbus: Minor fix for incorrect documentation
+Subject: [PATCH 07/18] spa: dbus: Minor fix for incorrect documentation
 
 The function does not have a parameter for return an error if getting
 the connection fails.

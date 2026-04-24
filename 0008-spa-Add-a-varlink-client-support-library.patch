@@ -1,7 +1,7 @@
-From a0022874af9bdee243ae979f071f1bb77d6575a0 Mon Sep 17 00:00:00 2001
+From 0909e3511ac9d55ce190fa02c36af970aabce98c Mon Sep 17 00:00:00 2001
 From: Arun Raghavan <arunr@valvesoftware.com>
 Date: Wed, 18 Feb 2026 16:46:15 -0800
-Subject: [PATCH 08/17] spa: Add a varlink client support library
+Subject: [PATCH 08/18] spa: Add a varlink client support library
 
 ---
  spa/include/spa/support/varlink.h | 163 ++++++++

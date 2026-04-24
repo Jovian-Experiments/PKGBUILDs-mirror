@@ -1,7 +1,7 @@
-From 564a8c647d3355466fe5582e3f54791258bc8b60 Mon Sep 17 00:00:00 2001
+From 125d69a41c19a6c6ad57451a33d94aa7ec783be3 Mon Sep 17 00:00:00 2001
 From: Wim Taymans <wtaymans@redhat.com>
 Date: Thu, 26 Feb 2026 12:08:26 +0100
-Subject: [PATCH 04/17] json-builder: zero the struct
+Subject: [PATCH 04/18] json-builder: zero the struct
 
 ---
  spa/include/spa/utils/json-builder.h | 6 +++---

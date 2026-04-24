@@ -1,0 +1,135 @@
+From 10d2b57893c4030c41a2a517597c5ddfb62ae604 Mon Sep 17 00:00:00 2001
+From: Arun Raghavan <arunr@valvesoftware.com>
+Date: Fri, 24 Apr 2026 11:54:48 -0700
+Subject: [PATCH 18/18] spa: varlink: Set a default read timeout for sync calls
+
+Makes sure we don't end up blocking forever, and timeouts are treated as
+errors.
+---
+ spa/include/spa/support/varlink.h | 8 +++++---
+ spa/plugins/alsa/acp/ext-volume.c | 8 +++++---
+ spa/plugins/support/varlink.c     | 9 +++++----
+ spa/tests/varlink-call.c          | 2 +-
+ 4 files changed, 16 insertions(+), 11 deletions(-)
+
+diff --git a/spa/include/spa/support/varlink.h b/spa/include/spa/support/varlink.h
+index 52d93218cf04..9031d3d181eb 100644
+--- a/spa/include/spa/support/varlink.h
++++ b/spa/include/spa/support/varlink.h
+@@ -79,10 +79,12 @@ struct spa_varlink_client {
+          *		 object).
+          * \param reply The reply string. The caller is responsible for freeing
+          *		this data with `free()`
++         * \param timeout If non-negative, specifies how long (in milliseconds)
++         *		  to wait for a reply
+          * \return 0 on success, or a negative error code on failure.
+          */
+         int (*call_sync) (void *object, const char *method, const char *params,
+-			char **reply);
++			char **reply, int timeout);
+ 
+ 	/** Destroy a varlink client.
+ 	 *
+@@ -117,10 +119,10 @@ spa_varlink_client_call(struct spa_varlink_client *client, const char *method,
+  * \sa spa_varlink_client_methods.call_sync */
+ SPA_API_VARLINK int
+ spa_varlink_client_call_sync(struct spa_varlink_client *client, const char *method,
+-		const char *params, char **reply)
++		const char *params, char **reply, int timeout)
+ {
+ 	return spa_api_func_r(int, -EINVAL, client, call_sync, 0, method,
+-			params, reply);
++			params, reply, timeout);
+ }
+ 
+ /** \copydoc spa_varlink_client_methods.destroy
+diff --git a/spa/plugins/alsa/acp/ext-volume.c b/spa/plugins/alsa/acp/ext-volume.c
+index a4e3638b7cf1..3e8b10ed8a4b 100644
+--- a/spa/plugins/alsa/acp/ext-volume.c
++++ b/spa/plugins/alsa/acp/ext-volume.c
+@@ -22,6 +22,8 @@
+ #define METHOD_WRITE_MUTE_VALUE VOLUME_CONTROL_BASE "WriteMuteValue"
+ #define METHOD_WRITE_MUTE_TOGGLE VOLUME_CONTROL_BASE "WriteMuteToggle"
+ 
++#define DEFAULT_TIMEOUT_MSEC 500
++
+ static void client_disconnect(void *userdata)
+ {
+ 	/* TODO: reconnect? bail? */
+@@ -78,7 +80,7 @@ spa_acp_ext_volume_init(struct spa_acp_ext_volume *ext_volume, struct spa_varlin
+ 
+ 	spa_json_builder_close(&params_json);
+ 
+-	res = spa_varlink_client_call_sync(ext_volume->client, METHOD_GET_CAPABILITIES, params, &reply);
++	res = spa_varlink_client_call_sync(ext_volume->client, METHOD_GET_CAPABILITIES, params, &reply, DEFAULT_TIMEOUT_MSEC);
+ 
+ 	if (res < 0) {
+ 		pa_log_error("Failed to query volume control capabilities: %s", spa_strerror(res));
+@@ -164,7 +166,7 @@ spa_acp_ext_volume_read_volume(struct spa_acp_ext_volume *ext_volume,
+ 
+ 	spa_json_builder_close(&params_json);
+ 
+-	res = spa_varlink_client_call_sync(ext_volume->client, METHOD_READ_VOLUME, params, &reply);
++	res = spa_varlink_client_call_sync(ext_volume->client, METHOD_READ_VOLUME, params, &reply, DEFAULT_TIMEOUT_MSEC);
+ 
+ 	if (res < 0) {
+ 		pa_log_error("Failed to query volume : %s", spa_strerror(res));
+@@ -311,7 +313,7 @@ spa_acp_ext_volume_read_mute(struct spa_acp_ext_volume *ext_volume,
+ 
+ 	spa_json_builder_close(&params_json);
+ 
+-	res = spa_varlink_client_call_sync(ext_volume->client, METHOD_READ_MUTE, params, &reply);
++	res = spa_varlink_client_call_sync(ext_volume->client, METHOD_READ_MUTE, params, &reply, DEFAULT_TIMEOUT_MSEC);
+ 
+ 	if (res < 0) {
+ 		pa_log_error("Failed to query mute state: %s", spa_strerror(res));
+diff --git a/spa/plugins/support/varlink.c b/spa/plugins/support/varlink.c
+index aa13f16b2a95..99b50256f75a 100644
+--- a/spa/plugins/support/varlink.c
++++ b/spa/plugins/support/varlink.c
+@@ -153,7 +153,7 @@ done:
+ 
+ static int
+ client_call_sync(void *object, const char *method, const char *params,
+-		char **reply)
++		char **reply, int timeout)
+ {
+ 	struct client *this = SPA_CONTAINER_OF(object, struct client, client);
+ 	struct impl *impl = this->impl;
+@@ -174,6 +174,10 @@ client_call_sync(void *object, const char *method, const char *params,
+ 			this->source->mask & ~SPA_IO_IN);
+ 
+ 	fcntl(this->fd, F_SETFL, fcntl(this->fd, F_GETFL) & ~O_NONBLOCK);
++	if (timeout >= 0) {
++		struct timeval tv = { .tv_sec = 0, .tv_usec = timeout * 1000 };
++		setsockopt(this->fd, SOL_SOCKET, SO_RCVTIMEO, &tv, sizeof(tv));
++	}
+ 
+         buf = build_call(method, params, false, false, &len);
+ 
+@@ -201,9 +205,6 @@ client_call_sync(void *object, const char *method, const char *params,
+ 			if (res == -EINTR)
+ 				continue;
+ 
+-			if (res == -EAGAIN || res == -EWOULDBLOCK)
+-				continue;
+-
+ 			spa_log_error(impl->log, "Error reading from socket: %s",
+ 					spa_strerror(res));
+ 
+diff --git a/spa/tests/varlink-call.c b/spa/tests/varlink-call.c
+index e422c723e410..06e0e8976d02 100644
+--- a/spa/tests/varlink-call.c
++++ b/spa/tests/varlink-call.c
+@@ -236,7 +236,7 @@ int main(int argc, char *argv[])
+ 
+ 	if (sync) {
+ 		char *reply;
+-		res = spa_varlink_client_call_sync(data.client, argv[2], argv[3], &reply);
++		res = spa_varlink_client_call_sync(data.client, argv[2], argv[3], &reply, 1000);
+ 		if (res < 0) {
+ 			printf("Call failed: %s\n", spa_strerror(res));
+ 			return -1;
+-- 
+2.53.0
+

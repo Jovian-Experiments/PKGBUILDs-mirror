@@ -1,7 +1,7 @@
-From 5eb89e3c63db7bc54228feeb9b14bb6f9621d1c3 Mon Sep 17 00:00:00 2001
+From 36e26769668c117f0733225d7f84093d5cd5e68d Mon Sep 17 00:00:00 2001
 From: Arun Raghavan <arunr@valvesoftware.com>
 Date: Tue, 3 Mar 2026 15:44:44 -0800
-Subject: [PATCH 15/17] spa: alsa: Support volume control commands for external
+Subject: [PATCH 15/18] spa: alsa: Support volume control commands for external
  volume control
 
 ---
@@ -80,7 +80,7 @@ index da305b1adf10..491c96991e0a 100644
  
  typedef void (*acp_log_func) (void *data,
 diff --git a/spa/plugins/alsa/alsa-acp-device.c b/spa/plugins/alsa/alsa-acp-device.c
-index b5274670c37a..38daf6e4b9cc 100644
+index b4032db95325..766d668aa7f3 100644
 --- a/spa/plugins/alsa/alsa-acp-device.c
 +++ b/spa/plugins/alsa/alsa-acp-device.c
 @@ -893,12 +893,74 @@ static int impl_set_param(void *object,

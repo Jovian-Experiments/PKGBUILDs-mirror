@@ -1,7 +1,7 @@
-From d869d5a1b523b9d65c7dd63a40e3ed576d4ffa7b Mon Sep 17 00:00:00 2001
+From 828c14cf7a5694e2ac7d2d89cee812391b4f6fa0 Mon Sep 17 00:00:00 2001
 From: Arun Raghavan <arunr@valvesoftware.com>
 Date: Wed, 4 Mar 2026 18:52:06 -0800
-Subject: [PATCH 16/17] pulse-server: Surface volume control flags as
+Subject: [PATCH 16/18] pulse-server: Surface volume control flags as
  properties
 
 We could udpate the libpulse protocol to add more flag types, but this

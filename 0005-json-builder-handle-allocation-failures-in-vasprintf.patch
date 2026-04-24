@@ -1,7 +1,7 @@
-From ab550827f5030f63356c6adb5207eca82b8d1b8c Mon Sep 17 00:00:00 2001
+From 6200fcfbd66af4c0e7abb133df20a91975bb46d3 Mon Sep 17 00:00:00 2001
 From: Wim Taymans <wtaymans@redhat.com>
 Date: Sun, 1 Mar 2026 12:40:34 +0100
-Subject: [PATCH 05/17] json-builder: handle allocation failures in vasprintf
+Subject: [PATCH 05/18] json-builder: handle allocation failures in vasprintf
 
 ---
  spa/include/spa/utils/json-builder.h | 21 ++++++++++++---------
