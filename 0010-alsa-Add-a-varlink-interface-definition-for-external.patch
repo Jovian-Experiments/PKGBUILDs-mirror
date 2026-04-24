@@ -1,7 +1,7 @@
-From 4571791213bd57838d3f38ecb8ba87c7d4452a17 Mon Sep 17 00:00:00 2001
+From f6ac16003d18e0fbdb182100168026828e587917 Mon Sep 17 00:00:00 2001
 From: Arun Raghavan <arunr@valvesoftware.com>
 Date: Thu, 19 Feb 2026 11:15:44 -0800
-Subject: [PATCH 10/17] alsa: Add a varlink interface definition for external
+Subject: [PATCH 10/18] alsa: Add a varlink interface definition for external
  volume control
 
 The interface itself isn't really ALSA-specific, but we can move it out

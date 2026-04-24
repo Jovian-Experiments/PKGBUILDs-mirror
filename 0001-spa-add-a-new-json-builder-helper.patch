@@ -1,7 +1,7 @@
-From 75aa401ee7f0aee77bcb2f6796142878d3b0628e Mon Sep 17 00:00:00 2001
+From edbfeea3de4ad4f6b9eb0370e033dfc02efe512d Mon Sep 17 00:00:00 2001
 From: Wim Taymans <wtaymans@redhat.com>
 Date: Thu, 26 Feb 2026 10:48:53 +0100
-Subject: [PATCH 01/17] spa: add a new json-builder helper
+Subject: [PATCH 01/18] spa: add a new json-builder helper
 
 It keeps track of the json bits like commas and indentation, supports
 colors and recursive reformatting. It also supports a simple mode that

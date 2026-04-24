@@ -1,7 +1,7 @@
-From 5db4bee1dccfb2b53fa003eaaa4833953ca4f019 Mon Sep 17 00:00:00 2001
+From a11d92ba1eaeff4618f3437b1d2a75ac1cd5faba Mon Sep 17 00:00:00 2001
 From: Wim Taymans <wtaymans@redhat.com>
 Date: Thu, 26 Feb 2026 11:09:13 +0100
-Subject: [PATCH 02/17] json-builder: add raw mode that leaves keys/strings
+Subject: [PATCH 02/18] json-builder: add raw mode that leaves keys/strings
  like they are
 
 ---

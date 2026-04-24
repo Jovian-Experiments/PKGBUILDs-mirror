@@ -1,7 +1,7 @@
-From c25d2e194e0765a5b1db9afc048b3e6005466107 Mon Sep 17 00:00:00 2001
+From 95ea6449271627a0aa5388b2cfa96c0d24f8e83a Mon Sep 17 00:00:00 2001
 From: Arun Raghavan <arunr@valvesoftware.com>
 Date: Tue, 3 Mar 2026 15:44:22 -0800
-Subject: [PATCH 14/17] spa: device: Commands for (external) volume control
+Subject: [PATCH 14/18] spa: device: Commands for (external) volume control
 
 ---
  spa/include/spa/monitor/device.h    | 8 ++++++++

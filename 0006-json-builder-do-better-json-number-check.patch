@@ -1,7 +1,7 @@
-From 7a7931e4885867363eae902a4dcacbe7b81f0a75 Mon Sep 17 00:00:00 2001
+From 2756e88d3ab0c0b63ae0a0d829c6147c0a0ae60e Mon Sep 17 00:00:00 2001
 From: Wim Taymans <wtaymans@redhat.com>
 Date: Mon, 9 Mar 2026 13:33:20 +0100
-Subject: [PATCH 06/17] json-builder: do better json number check
+Subject: [PATCH 06/18] json-builder: do better json number check
 
 If we are going to produce valid JSON we need to do a better JSON number
 check because our own float and int parser can accept more variants

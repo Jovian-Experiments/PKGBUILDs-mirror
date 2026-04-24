@@ -1,7 +1,7 @@
-From e31a0ba199d97cd3a9bbc873ab82c0059cdc1447 Mon Sep 17 00:00:00 2001
+From aaa523ba3f93e395a53b0d00cf5748dcde499006 Mon Sep 17 00:00:00 2001
 From: Arun Raghavan <arunr@valvesoftware.com>
 Date: Tue, 3 Mar 2026 12:34:45 -0800
-Subject: [PATCH 13/17] pipewire: device: Add a send_command method
+Subject: [PATCH 13/18] pipewire: device: Add a send_command method
 
 For now, useful for sending custom commands to devices. Using this from
 the command line might look something like:
