@@ -1,0 +1,55 @@
+From 63f69ff43b1dff97d98aac60e5bc99a01f8d40ff Mon Sep 17 00:00:00 2001
+From: Julian Bouzas <julian.bouzas@collabora.com>
+Date: Tue, 21 Apr 2026 08:01:03 -0400
+Subject: [PATCH 1/4] properties: Add API to clear all properties
+
+This is useful if we want to clear all properties without destroying the instance.
+---
+ lib/wp/properties.c | 16 ++++++++++++++++
+ lib/wp/properties.h |  3 +++
+ 2 files changed, 19 insertions(+)
+
+diff --git a/lib/wp/properties.c b/lib/wp/properties.c
+index c6a106f5..80716408 100644
+--- a/lib/wp/properties.c
++++ b/lib/wp/properties.c
+@@ -440,6 +440,22 @@ wp_properties_update_from_json (WpProperties * self, const WpSpaJson * json)
+       wp_spa_json_get_size (json));
+ }
+ 
++/*!
++ * \brief Clears all properties from \a self.
++ *
++ * \ingroup wpproperties
++ * \param self a properties object
++ */
++void
++wp_properties_clear (WpProperties *self)
++{
++  g_return_if_fail (self != NULL);
++  g_return_if_fail (!(self->flags & FLAG_IS_DICT));
++  g_return_if_fail (!(self->flags & FLAG_NO_OWNERSHIP));
++
++  pw_properties_clear (self->props);
++}
++
+ /*!
+  * \brief Adds new properties in \a self, using the given \a props as a source.
+  *
+diff --git a/lib/wp/properties.h b/lib/wp/properties.h
+index 92a2652f..1433b761 100644
+--- a/lib/wp/properties.h
++++ b/lib/wp/properties.h
+@@ -85,6 +85,9 @@ gint wp_properties_update_from_dict (WpProperties * self,
+ WP_API
+ gint wp_properties_update_from_json (WpProperties * self, const WpSpaJson * json);
+ 
++WP_API
++void wp_properties_clear (WpProperties *self);
++
+ /* add */
+ 
+ WP_API
+-- 
+2.54.0
+
