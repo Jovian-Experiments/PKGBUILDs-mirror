@@ -28,8 +28,8 @@ pkgname=(
 # When updating the tag, consider if you are adding any shader compiler changes. If so,
 # or if you are not sure, regenerate the radv-build-id below. To update, see
 # https://gitlab.steamos.cloud/jupiter/docs/-/wikis/How-to-make-a-new-Mesa-release#updating-the-radv-build-id
-_tag=steamos-25.11.11
-pkgver=26.0.0_devel.214831.steamos_25.11.11
+_tag=steamos-25.11.12
+pkgver=26.0.0_devel.214832.steamos_25.11.12
 
 #pkgver=25.2.7
 #pkgver=${pkgver/[a-z]/-&}
