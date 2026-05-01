@@ -1,4 +1,4 @@
-From 10d2b57893c4030c41a2a517597c5ddfb62ae604 Mon Sep 17 00:00:00 2001
+From 9557898fa4ae43011ff03a9f28082038e212dc8d Mon Sep 17 00:00:00 2001
 From: Arun Raghavan <arunr@valvesoftware.com>
 Date: Fri, 24 Apr 2026 11:54:48 -0700
 Subject: [PATCH 18/18] spa: varlink: Set a default read timeout for sync calls
@@ -7,10 +7,10 @@ Makes sure we don't end up blocking forever, and timeouts are treated as
 errors.
 ---
  spa/include/spa/support/varlink.h | 8 +++++---
- spa/plugins/alsa/acp/ext-volume.c | 8 +++++---
+ spa/plugins/alsa/acp/ext-volume.c | 9 ++++++---
  spa/plugins/support/varlink.c     | 9 +++++----
  spa/tests/varlink-call.c          | 2 +-
- 4 files changed, 16 insertions(+), 11 deletions(-)
+ 4 files changed, 17 insertions(+), 11 deletions(-)
 
 diff --git a/spa/include/spa/support/varlink.h b/spa/include/spa/support/varlink.h
 index 52d93218cf04..9031d3d181eb 100644
@@ -44,7 +44,7 @@ index 52d93218cf04..9031d3d181eb 100644
  
  /** \copydoc spa_varlink_client_methods.destroy
 diff --git a/spa/plugins/alsa/acp/ext-volume.c b/spa/plugins/alsa/acp/ext-volume.c
-index a4e3638b7cf1..3e8b10ed8a4b 100644
+index a4e3638b7cf1..6f08e7b8b8ea 100644
 --- a/spa/plugins/alsa/acp/ext-volume.c
 +++ b/spa/plugins/alsa/acp/ext-volume.c
 @@ -22,6 +22,8 @@
@@ -56,16 +56,17 @@ index a4e3638b7cf1..3e8b10ed8a4b 100644
  static void client_disconnect(void *userdata)
  {
  	/* TODO: reconnect? bail? */
-@@ -78,7 +80,7 @@ spa_acp_ext_volume_init(struct spa_acp_ext_volume *ext_volume, struct spa_varlin
+@@ -78,7 +80,8 @@ spa_acp_ext_volume_init(struct spa_acp_ext_volume *ext_volume, struct spa_varlin
  
  	spa_json_builder_close(&params_json);
  
 -	res = spa_varlink_client_call_sync(ext_volume->client, METHOD_GET_CAPABILITIES, params, &reply);
-+	res = spa_varlink_client_call_sync(ext_volume->client, METHOD_GET_CAPABILITIES, params, &reply, DEFAULT_TIMEOUT_MSEC);
++	/* Initial probe for capabilities might take a bit longer than the default timeout */
++	res = spa_varlink_client_call_sync(ext_volume->client, METHOD_GET_CAPABILITIES, params, &reply, 2000);
  
  	if (res < 0) {
  		pa_log_error("Failed to query volume control capabilities: %s", spa_strerror(res));
-@@ -164,7 +166,7 @@ spa_acp_ext_volume_read_volume(struct spa_acp_ext_volume *ext_volume,
+@@ -164,7 +167,7 @@ spa_acp_ext_volume_read_volume(struct spa_acp_ext_volume *ext_volume,
  
  	spa_json_builder_close(&params_json);
  
@@ -74,7 +75,7 @@ index a4e3638b7cf1..3e8b10ed8a4b 100644
  
  	if (res < 0) {
  		pa_log_error("Failed to query volume : %s", spa_strerror(res));
-@@ -311,7 +313,7 @@ spa_acp_ext_volume_read_mute(struct spa_acp_ext_volume *ext_volume,
+@@ -311,7 +314,7 @@ spa_acp_ext_volume_read_mute(struct spa_acp_ext_volume *ext_volume,
  
  	spa_json_builder_close(&params_json);
  
