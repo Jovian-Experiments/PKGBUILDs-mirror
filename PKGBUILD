@@ -1,7 +1,7 @@
 # Maintainer David Edmundson (bluesystems@davidedmundson.co.uk)
 
 pkgname=steamdeck-kde-presets
-_srctag=3.9.0
+_srctag=3.9.1
 pkgver=${_srctag#jupiter-}
 pkgrel=1
 arch=('any')
@@ -16,7 +16,7 @@ makedepends=('git' 'openssh')
 _aliases=(/usr/bin/holo-{add-to-steam,nested-desktop,setup-kwallet} \
           /usr/lib/holo/holo-rotate-x11-screen)
 source=("git+ssh://git@gitlab.steamos.cloud/jupiter/steamdeck-kde-presets.git#tag=$_srctag")
-sha512sums=('81743bb8cdf1239b6be65a858321bec14eb48637dfccc6da8b97898fd4c6cc6cc790b5f8540242344f62da8a26aae3dea8138e5f1fe4ede11bc56f17d03df10d')
+sha512sums=('0ad9c29baf6d8f513f3a4337d2e7c59d352a661c277962b6b93f47f61bbcd17ffb59f2b2d86b3e6f8cee53e2a55cc87a1b1f28fc067db2dae5b4eb91a9f3a99d')
 
 _make_steamos_alias ()
 {
