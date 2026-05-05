@@ -33,7 +33,7 @@ pkgname=(
   pulse-native-provider
 )
 pkgver=1.6.4
-pkgrel=1.3
+pkgrel=1.4
 epoch=1
 pkgdesc="Low-latency audio/video router and processor"
 url="https://pipewire.org"
@@ -341,7 +341,8 @@ package_pipewire() {
     _pick x11-bell usr/share/man/man7/libpipewire-module-x11-bell.7
 
     # directories for overrides
-    mkdir -p etc/pipewire/{client-rt,client,minimal,pipewire}.conf.d
+    # Holo: don't create the libraries since we symlink to /run/...
+    #mkdir -p etc/pipewire/{client-rt,client,minimal,pipewire}.conf.d
 
     # Holo: we symlink the .conf.d directories from /etc/pipewire to /run because at
     # runtime the script pipewire-hwconfig picks up the correct config files based
@@ -533,7 +534,8 @@ package_pipewire-jack() {
     "$pkgdir/usr/share/pipewire/media-session.d/with-jack"
 
   # directories for overrides
-  mkdir -p "$pkgdir/etc/pipewire/jack.conf.d"
+  # Holo: don't create the libraries since we symlink to /run/...
+  #mkdir -p "$pkgdir/etc/pipewire/jack.conf.d"
 
   install -Dt "$pkgdir/usr/share/licenses/$pkgname" -m644 pipewire/COPYING
 
@@ -583,7 +585,8 @@ package_pipewire-pulse() {
   mv pulse/* "$pkgdir"
 
   # directory for overrides
-  mkdir -p "$pkgdir/etc/pipewire/pipewire-pulse.conf.d"
+  # Holo: don't create the libraries since we symlink to /run/...
+  #mkdir -p "$pkgdir/etc/pipewire/pipewire-pulse.conf.d"
 
   # Holo: we symlink the pipewire-pulse.conf.d directory from /etc/pipewire to /run
   # because at runtime the script pipewire-hwconfig picks up the correct config files
