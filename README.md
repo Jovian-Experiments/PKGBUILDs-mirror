@@ -1,5 +1,5 @@
 
-`main @ 20260505.1000`
+`main @ 20260506.1000`
 ======================
 
 Valve packages
@@ -24,7 +24,7 @@ Valve packages
  * [`earlyoom` — `holo-main/earlyoom-1.8.2-1.2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/earlyoom-1.8.2-1.2)
  * [`f3` — `holo-main/f3-9.0-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/f3-9.0-1.1)
  * [`firewalld` — `holo-main/firewalld-2.3.1-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/firewalld-2.3.1-1.1)
- * [`fremont-hw-support` — `holo-main/fremont-hw-support-20251217.1-3`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/fremont-hw-support-20251217.1-3)
+ * [`fremont-hw-support` — `holo-main/fremont-hw-support-20260506.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/fremont-hw-support-20260506.1-1)
  * [`fwupd-minimal` — `holo-main/fwupd-minimal-2.0.18-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/fwupd-minimal-2.0.18-1)
  * [`gnutls` — `holo-main/gnutls-3.8.13-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/gnutls-3.8.13-1.1)
  * [`holo-desync` — `holo-main/steamos-customizations-git-20260428.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-customizations-git-20260428.1-1)
@@ -131,7 +131,7 @@ Valve packages
  * [`pyzy` — `jupiter-main/pyzy-1.1-2.5`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/pyzy-1.1-2.5)
  * [`renderdoc-minimal` — `jupiter-main/renderdoc-minimal-1.43-1.0`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/renderdoc-minimal-1.43-1.0)
  * [`steam-im-modules` — `jupiter-main/steam-im-modules-jupiter.20240131-3`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steam-im-modules-jupiter.20240131-3)
- * [`steam-jupiter-stable` — `jupiter-main/steam-jupiter-stable-1.0.0.85-7`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steam-jupiter-stable-1.0.0.85-7)
+ * [`steam-jupiter-stable` — `jupiter-main/steam-jupiter-stable-1.0.0.85-8`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steam-jupiter-stable-1.0.0.85-8)
  * [`steam_notif_daemon` — `jupiter-main/steam_notif_daemon-v1.0.1-3`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steam_notif_daemon-v1.0.1-3)
  * [`steamdeck-dsp` — `jupiter-main/steamdeck-dsp-0.91-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steamdeck-dsp-0.91-1)
  * [`steamdeck-kde-presets` — `jupiter-main/steamdeck-kde-presets-3.9.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steamdeck-kde-presets-3.9.1-1)
@@ -326,7 +326,7 @@ Arch Linux packages
  * [`graphene/1.10.8-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/graphene/-/tree/1.10.8-2)
  * [`graphite/1:1.3.14-5`](https://gitlab.archlinux.org/archlinux/packaging/packages/graphite/-/tree/1:1.3.14-5)
  * [`grep/3.12-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/grep/-/tree/3.12-2)
- * [`grub/2:2.14-1.2`](https://gitlab.archlinux.org/archlinux/packaging/packages/grub/-/tree/2:2.14-1.2)
+ * [`grub/2:2.14-1.3`](https://gitlab.archlinux.org/archlinux/packaging/packages/grub/-/tree/2:2.14-1.3)
  * [`gsettings-desktop-schemas/48.0-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/gsettings-desktop-schemas/-/tree/48.0-1)
  * [`gsettings-system-schemas/48.0-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/gsettings-system-schemas/-/tree/48.0-1)
  * [`gsm/1.0.22-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/gsm/-/tree/1.0.22-2)
