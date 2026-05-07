@@ -6,6 +6,6 @@ ConditionFirmware=smbios-field(sys_vendor="Valve")
 ConditionFirmware=smbios-field(product_name="Galileo")
 
 [Service]
-Type=oneshot
+Type=simple
 ExecStart=/usr/bin/galileo-mura-setup
 EnvironmentFile=%t/gamescope-environment
