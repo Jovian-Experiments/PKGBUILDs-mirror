@@ -1,5 +1,5 @@
 
-`main @ 20260519.1000`
+`main @ 20260520.1000`
 ======================
 
 Valve packages
@@ -39,7 +39,7 @@ Valve packages
  * [`holo-zram-swap` — `holo-main/holo-zram-swap-0.3-0`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/holo-zram-swap-0.3-0)
  * [`hwdata` — `holo-main/hwdata-0.397-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/hwdata-0.397-1.1)
  * [`ibus` — `holo-main/ibus-1.5.32-2.2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/ibus-1.5.32-2.2)
- * [`inputattach-cec-units` — `holo-main/inputattach-cec-units-1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/inputattach-cec-units-1-1)
+ * [`inputattach-cec-units` — `holo-main/inputattach-cec-units-2-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/inputattach-cec-units-2-1)
  * [`iwd` — `holo-main/iwd-3.9-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/iwd-3.9-1.1)
  * [`kcgroups` — `holo-main/kcgroups-0.0.dmemcg.experimental.3-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/kcgroups-0.0.dmemcg.experimental.3-1)
  * [`kcoreaddons` — `holo-main/kcoreaddons-6.16.0-1.2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/kcoreaddons-6.16.0-1.2)
@@ -1016,7 +1016,7 @@ Arch Linux packages
  * [`vmaf/3.0.0-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/vmaf/-/tree/3.0.0-1)
  * [`volume_key/0.3.12-11`](https://gitlab.archlinux.org/archlinux/packaging/packages/volume_key/-/tree/0.3.12-11)
  * [`vulkan-icd-loader/1.4.321.0-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/vulkan-icd-loader/-/tree/1.4.321.0-1)
- * [`vulkan-radeon/26.2.0_devel.222055.steamos_26.05.1-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/vulkan-radeon/-/tree/26.2.0_devel.222055.steamos_26.05.1-1)
+ * [`vulkan-radeon/26.2.0_devel.222064.steamos_26.05.3-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/vulkan-radeon/-/tree/26.2.0_devel.222064.steamos_26.05.3-1)
  * [`vulkan-tools/1.4.321.0-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/vulkan-tools/-/tree/1.4.321.0-1)
  * [`wavpack/5.8.1-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/wavpack/-/tree/5.8.1-1)
  * [`wayland/1.23.1-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/wayland/-/tree/1.23.1-2)
