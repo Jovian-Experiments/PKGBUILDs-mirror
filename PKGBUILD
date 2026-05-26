@@ -1,15 +1,15 @@
 # Maintainer: Pierre-Loup A. Griffais <pgriffais@valvesoftware.com>
 
 pkgname=gamescope
-_srctag=3.16.23
+_srctag=3.16.24
 pkgver=${_srctag//-/.}
-pkgrel=3
+pkgrel=1
 pkgdesc="gaming shell based on Xwayland, powered by Vulkan and DRM"
 arch=(x86_64)
 url="https://github.com/ValveSoftware/gamescope"
 license=('MIT')
 depends=('xorg-xwayland' 'libavif' 'aom' 'rav1e' 'libxres' 'xcb-util-errors' 'freerdp' 'xcb-util-wm' 'libxcomposite' 'pixman' 'libinput' 'seatd' 'pipewire' 'libxmu' 'libxcursor' 'libdecor' 'libei' 'luajit')
-makedepends=(openssh git meson cmake wayland-protocols ninja glslang glm vulkan-headers benchmark)
+makedepends=(openssh git meson cmake wayland-protocols ninja glslang glm vulkan-headers benchmark catch2)
 source=("galileo-mura-setup.service"
         "gamescope-session"
         "gamescope-wayland.desktop"
@@ -52,7 +52,7 @@ sha256sums=('2cfacf10f311a02d1c94ab5e927094639dfbb57bd322acc628374fef048a12bb'
             '674367927b9d0665a1e1c57ebcd7373683659b1dc1020d2bffd4ab50e4af73fa'
             '525060896abef2da9db8d8294253b7444d60e48cf6cc0496ca48fc7084cc8590'
             'f57fcba25b211381a9402d3d0c4723301afaef185e9ecffc75839e5af2aee4c8'
-            'c492b39038c33d5cdff389ad75dab165db552095d86a1c61ec378e18062c0a5a'
+            'a269de023fc53d8bb052e35c2741f51eb4a10402028a1977aa0388cc6035734d'
             'SKIP'
             'SKIP'
             '03726f2fb44ae79e6a398e8f9aaaf8054800dda9b8298726157522fe5f7296b1'
@@ -82,12 +82,14 @@ prepare() {
 
 build() {
 	cd "$pkgname"
-
 	rm -rf build
-	mkdir build
-	cd build
-	arch-meson --buildtype release --prefix /usr ..
-	ninja
+	arch-meson --buildtype release --prefix /usr build
+	meson compile -C build
+}
+
+check() {
+	cd "$pkgname"
+	meson test -C build --suite gamescope -v
 }
 
 package() {
@@ -120,9 +122,9 @@ package() {
 	cp -r "$srcdir"/GamescopeShaders/* "$pkgdir"/usr/share/gamescope/reshade/
 	chmod -R 655 "$pkgdir"/usr/share/gamescope
 
-	cd "$pkgname/build"
+	cd "$pkgname"
 
-	DESTDIR="$pkgdir" meson install --skip-subprojects
+	meson install -C build --destdir "$pkgdir" --skip-subprojects
 
 	rm -rf "$pkgdir"/usr/include
 	rm -rf "$pkgdir"/usr/lib/libwlroots*
