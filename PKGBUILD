@@ -28,7 +28,7 @@ _tag=radeonsi-26.1.0
 pkgver=26.1.0.221388.radeonsi_26.1.0
 #pkgver=25.3.0
 #_pkgver=${pkgver/[a-z]/-&}
-pkgrel=1
+pkgrel=3
 epoch=0
 pkgdesc="Open-source OpenGL drivers"
 url="https://www.mesa3d.org/"
@@ -152,7 +152,7 @@ _gencrates() {
 for _crate in "${!_crates[@]}"; do
   _ver="${_crates[$_crate]}"
   source+=(
-    "$_crate-$_ver.tar.gz::https://crates.io/api/v1/crates/$_crate/$_ver/download"
+    "$_crate-$_ver.tar.gz::https://static.crates.io/crates/$_crate/$_ver/download"
   )
 done
 
@@ -268,7 +268,7 @@ build() {
     -D html-docs=disabled
     -D amdgpu-virtio=true
     -D sysprof=false
-    -D radeonsi-build-id=00684ec50709d96dce03241f91027ffff982358a
+    -D radeonsi-build-id=709e95945cd50542d2ede3482cf574493058b427
   )
 
   # Build only minimal debug info to reduce size
