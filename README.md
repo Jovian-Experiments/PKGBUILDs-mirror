@@ -1,5 +1,5 @@
 
-`main @ 20260604.1000`
+`main @ 20260604.1001`
 ======================
 
 Valve packages
@@ -85,9 +85,9 @@ Valve packages
  * [`steamos-reset` — `holo-main/steamos-reset-20260414.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-reset-20260414.1-1)
  * [`steamos-systemreport` — `holo-main/steamos-systemreport-0.17-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-systemreport-0.17-1)
  * [`steamos-tweak-mtu-probing` — `holo-main/steamos-tweak-mtu-probing-1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-tweak-mtu-probing-1-1)
- * [`systemd` — `holo-main/systemd-257.7-2.3`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/systemd-257.7-2.3)
- * [`systemd-libs` — `holo-main/systemd-257.7-2.3`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/systemd-257.7-2.3)
- * [`systemd-sysvcompat` — `holo-main/systemd-257.7-2.3`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/systemd-257.7-2.3)
+ * [`systemd` — `holo-main/systemd-257.7-2.4`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/systemd-257.7-2.4)
+ * [`systemd-libs` — `holo-main/systemd-257.7-2.4`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/systemd-257.7-2.4)
+ * [`systemd-sysvcompat` — `holo-main/systemd-257.7-2.4`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/systemd-257.7-2.4)
  * [`ttf-twemoji-default` — `holo-main/ttf-twemoji-default-13.1.0-2.4`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/ttf-twemoji-default-13.1.0-2.4)
  * [`udisks2` — `holo-main/udisks2-2.10.1-6.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/udisks2-2.10.1-6.1)
  * [`udisks2-btrfs` — `holo-main/udisks2-2.10.1-6.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/udisks2-2.10.1-6.1)
@@ -106,7 +106,7 @@ Valve packages
 
 ### `jupiter-main`
  * [`alsa-ucm-conf` — `jupiter-main/alsa-ucm-conf-1.2.14-2.4`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/alsa-ucm-conf-1.2.14-2.4)
- * [`amd-ucode-neptune` — `jupiter-main/linux-firmware-neptune-jupiter.20260504.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/linux-firmware-neptune-jupiter.20260504.1-1)
+ * [`amd-ucode-neptune` — `jupiter-main/linux-firmware-neptune-jupiter.20260604.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/linux-firmware-neptune-jupiter.20260604.1-1)
  * [`filesystem` — `jupiter-main/filesystem-2021.12.07-1.18`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/filesystem-2021.12.07-1.18)
  * [`galileo-mura` — `jupiter-main/galileo-mura-v0.10-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/galileo-mura-v0.10-1)
  * [`gamescope` — `jupiter-main/gamescope-3.16.24-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/gamescope-3.16.24-2)
@@ -125,8 +125,8 @@ Valve packages
  * [`kwin` — `jupiter-main/kwin-6.4.3-1.10`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/kwin-6.4.3-1.10)
  * [`kwin-x11` — `jupiter-main/kwin-x11-6.4.3-1.2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/kwin-x11-6.4.3-1.2)
  * [`libwireplumber` — `jupiter-main/wireplumber-0.5.14-1.4`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/wireplumber-0.5.14-1.4)
- * [`linux-firmware-neptune` — `jupiter-main/linux-firmware-neptune-jupiter.20260504.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/linux-firmware-neptune-jupiter.20260504.1-1)
- * [`linux-firmware-neptune-whence` — `jupiter-main/linux-firmware-neptune-jupiter.20260504.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/linux-firmware-neptune-jupiter.20260504.1-1)
+ * [`linux-firmware-neptune` — `jupiter-main/linux-firmware-neptune-jupiter.20260604.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/linux-firmware-neptune-jupiter.20260604.1-1)
+ * [`linux-firmware-neptune-whence` — `jupiter-main/linux-firmware-neptune-jupiter.20260604.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/linux-firmware-neptune-jupiter.20260604.1-1)
  * [`linux-neptune-618` — `jupiter-main/linux-neptune-618-6.18.33.valve1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/linux-neptune-618-6.18.33.valve1-1)
  * [`mangohud` — `jupiter-main/mangohud-0.8.3.rc1.r24.g33c2c7dd-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/mangohud-0.8.3.rc1.r24.g33c2c7dd-1)
  * [`mesa` — `jupiter-main/mesa-26.1.0.221388.radeonsi_26.1.0-3`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/mesa-26.1.0.221388.radeonsi_26.1.0-3)
@@ -134,7 +134,7 @@ Valve packages
  * [`pyzy` — `jupiter-main/pyzy-1.1-2.5`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/pyzy-1.1-2.5)
  * [`renderdoc-minimal` — `jupiter-main/renderdoc-minimal-1.43-1.0`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/renderdoc-minimal-1.43-1.0)
  * [`steam-im-modules` — `jupiter-main/steam-im-modules-jupiter.20240131-3`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steam-im-modules-jupiter.20240131-3)
- * [`steam-jupiter-stable` — `jupiter-main/steam-jupiter-stable-1.0.0.85-8`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steam-jupiter-stable-1.0.0.85-8)
+ * [`steam-jupiter-stable` — `jupiter-main/steam-jupiter-stable-1.0.0.85-9`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steam-jupiter-stable-1.0.0.85-9)
  * [`steam_notif_daemon` — `jupiter-main/steam_notif_daemon-v1.0.1-3`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steam_notif_daemon-v1.0.1-3)
  * [`steamdeck-dsp` — `jupiter-main/steamdeck-dsp-0.95-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steamdeck-dsp-0.95-1)
  * [`steamdeck-kde-presets` — `jupiter-main/steamdeck-kde-presets-3.9.2-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steamdeck-kde-presets-3.9.2-1)
