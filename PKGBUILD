@@ -24,11 +24,11 @@ pkgname=(
   vulkan-mesa-layers
 #  mesa-docs
 )
-_tag=radeonsi-26.1.0
-pkgver=26.1.0.221388.radeonsi_26.1.0
+_tag=radeonsi-26.1.2
+pkgver=26.1.2.221562.radeonsi_26.1.2
 #pkgver=25.3.0
 #_pkgver=${pkgver/[a-z]/-&}
-pkgrel=3
+pkgrel=1
 epoch=0
 pkgdesc="Open-source OpenGL drivers"
 url="https://www.mesa3d.org/"
@@ -268,7 +268,7 @@ build() {
     -D html-docs=disabled
     -D amdgpu-virtio=true
     -D sysprof=false
-    -D radeonsi-build-id=709e95945cd50542d2ede3482cf574493058b427
+    -D radeonsi-build-id=6dc25ea2b40438949c158970db654d9db358d5b1
   )
 
   # Build only minimal debug info to reduce size
