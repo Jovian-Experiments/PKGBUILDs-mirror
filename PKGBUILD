@@ -3,7 +3,7 @@
 
 pkgname=('mangohud' 'lib32-mangohud')
 pkgver=0.8.3.rc1.r24.g33c2c7dd
-pkgrel=2
+pkgrel=3
 pkgdesc="Vulkan and OpenGL overlay to display performance information"
 url="https://github.com/flightlessmango/MangoHud"
 arch=(x86_64)
@@ -62,6 +62,8 @@ prepare() {
   git cherry-pick -n 0805396e579c5f1ea27e2e2a78030d8ef6ce1994
   # can be removed after 0.8.3-rc2
   git cherry-pick -n 9400280e0daa000def18931c3fce80511d53b1c0
+  # vrr fix, can be removed once the base includes 2c1dc5283
+  git cherry-pick -n 2c1dc5283c045e9a7e424dc913fbafcdcc7e3be1
   # meson subprojects
   ln -sv "$srcdir/imgui-1.91.6" subprojects
   ln -sv "$srcdir/spdlog-1.14.1" subprojects
