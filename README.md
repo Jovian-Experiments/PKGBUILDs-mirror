@@ -1,5 +1,5 @@
 
-`main @ 20260609.1000`
+`main @ 20260610.1000`
 ======================
 
 Valve packages
@@ -110,7 +110,7 @@ Valve packages
 
 ### `jupiter-main`
  * [`alsa-ucm-conf` — `jupiter-main/alsa-ucm-conf-1.2.14-2.4`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/alsa-ucm-conf-1.2.14-2.4)
- * [`amd-ucode-neptune` — `jupiter-main/linux-firmware-neptune-jupiter.20260604.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/linux-firmware-neptune-jupiter.20260604.1-1)
+ * [`amd-ucode-neptune` — `jupiter-main/linux-firmware-neptune-jupiter.20260610.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/linux-firmware-neptune-jupiter.20260610.1-1)
  * [`filesystem` — `jupiter-main/filesystem-2021.12.07-1.18`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/filesystem-2021.12.07-1.18)
  * [`galileo-mura` — `jupiter-main/galileo-mura-v0.10-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/galileo-mura-v0.10-1)
  * [`gamescope` — `jupiter-main/gamescope-3.16.24-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/gamescope-3.16.24-2)
@@ -129,8 +129,9 @@ Valve packages
  * [`kwin` — `jupiter-main/kwin-6.4.3-1.10`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/kwin-6.4.3-1.10)
  * [`kwin-x11` — `jupiter-main/kwin-x11-6.4.3-1.2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/kwin-x11-6.4.3-1.2)
  * [`libwireplumber` — `jupiter-main/wireplumber-0.5.14-1.4`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/wireplumber-0.5.14-1.4)
- * [`linux-firmware-neptune` — `jupiter-main/linux-firmware-neptune-jupiter.20260604.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/linux-firmware-neptune-jupiter.20260604.1-1)
- * [`linux-firmware-neptune-whence` — `jupiter-main/linux-firmware-neptune-jupiter.20260604.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/linux-firmware-neptune-jupiter.20260604.1-1)
+ * [`linux-firmware-neptune` — `jupiter-main/linux-firmware-neptune-jupiter.20260610.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/linux-firmware-neptune-jupiter.20260610.1-1)
+ * [`linux-firmware-neptune-whence` — `jupiter-main/linux-firmware-neptune-jupiter.20260610.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/linux-firmware-neptune-jupiter.20260610.1-1)
+ * [`linux-neptune-618` — `jupiter-main/linux-neptune-618-6.18.33.valve2-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/linux-neptune-618-6.18.33.valve2-1)
  * [`mangohud` — `jupiter-main/mangohud-0.8.3.rc1.r24.g33c2c7dd-3`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/mangohud-0.8.3.rc1.r24.g33c2c7dd-3)
  * [`mesa` — `jupiter-main/mesa-26.1.2.221562.radeonsi_26.1.2-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/mesa-26.1.2.221562.radeonsi_26.1.2-1)
  * [`powerdevil` — `jupiter-main/powerdevil-6.4.3-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/powerdevil-6.4.3-1.1)
@@ -689,7 +690,6 @@ Arch Linux packages
  * [`licenses/20240728-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/licenses/-/tree/20240728-1)
  * [`lilv/0.24.26-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/lilv/-/tree/0.24.26-1)
  * [`linux-api-headers/6.15-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/linux-api-headers/-/tree/6.15-1)
- * [`linux-neptune-618/6.18.33.valve2-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/linux-neptune-618/-/tree/6.18.33.valve2-1)
  * [`linuxconsole/1.8.1-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/linuxconsole/-/tree/1.8.1-1)
  * [`llhttp/9.2.1-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/llhttp/-/tree/9.2.1-2)
  * [`llvm-libs/20.1.8-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/llvm-libs/-/tree/20.1.8-1)
