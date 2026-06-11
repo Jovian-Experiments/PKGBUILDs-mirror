@@ -1,0 +1,32 @@
+From 3a9ffbb56d2cfbfcec4fbd5223a2b47279a51cd5 Mon Sep 17 00:00:00 2001
+From: Julian Bouzas <julian.bouzas@collabora.com>
+Date: Thu, 11 Jun 2026 11:03:11 -0400
+Subject: [PATCH] alsa: acp: emit route param updates when card properties
+ change
+
+When jack state changes cause port properties to be updated, mark EnumRoute and
+Route params as changed and call emit_info() so that the device re-emits the
+route parameters with the updated port properties.
+---
+ spa/plugins/alsa/alsa-acp-device.c | 5 +++++
+ 1 file changed, 5 insertions(+)
+
+diff --git a/spa/plugins/alsa/alsa-acp-device.c b/spa/plugins/alsa/alsa-acp-device.c
+index f066cf9e8..57b60c92b 100644
+--- a/spa/plugins/alsa/alsa-acp-device.c
++++ b/spa/plugins/alsa/alsa-acp-device.c
+@@ -911,6 +911,11 @@ static void card_props_changed(void *data)
+ {
+ 	struct impl *this = data;
+ 	spa_log_info(this->log, "card properties changed");
++
++	this->info.change_mask |= SPA_DEVICE_CHANGE_MASK_PARAMS;
++	this->params[IDX_EnumRoute].user++;
++	this->params[IDX_Route].user++;
++	emit_info(this, false);
+ }
+ 
+ static bool has_device(struct acp_card_profile *pr, uint32_t index)
+-- 
+2.50.1
+
