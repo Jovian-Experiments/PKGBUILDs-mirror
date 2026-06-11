@@ -33,7 +33,7 @@ pkgname=(
   pulse-native-provider
 )
 pkgver=1.6.4
-pkgrel=1.5
+pkgrel=1.6
 epoch=1
 pkgdesc="Low-latency audio/video router and processor"
 url="https://pipewire.org"
@@ -124,7 +124,10 @@ source=(
     # Holo: include patch to emit a node error event when snd_pcm_start() fails
     # Note that this patch is too specific for the Deck and there is no upstream MR for it
     # See holo-team/tasks#1808
-    "0001-alsa-emit-a-node-error-event-when-snd_pcm_start-fail.patch")
+    "0001-alsa-emit-a-node-error-event-when-snd_pcm_start-fail.patch"
+
+    # Holo: Backport https://gitlab.freedesktop.org/pipewire/pipewire/-/merge_requests/2856
+    "0001-alsa-acp-emit-route-param-updates-when-card-properti.patch")
 b2sums=('054c756beae00a1dc9b757864633f9698a8f6cf5c7c187b2f0d0cb762eec74990e3403e949684b24a5e67d499c9257a91fbd7ebbe764ee34fd02f92844419427'
         'b999796fc69ecd661b7cd761b98daf81412e4a02e649d74d8d8ec7d2c6cf0169f6062ea03131313a5b03a50529e956289baf0068f0631ea58243d42f1fae4d6e'
         'ba33b056d13739e24b7e6c46bf9268357eea5a989f8af5021c737978a9a0bd9fb9882cc7e2c6eb8477d7c1e50684c3083ea33123f29a949e600ee1849cfe5cdf'
@@ -148,7 +151,8 @@ b2sums=('054c756beae00a1dc9b757864633f9698a8f6cf5c7c187b2f0d0cb762eec74990e3403e
         '8f1cb3be599496ab2bc898a6ebbdaf131f286644ad23f57f76d79884d9d2b7757c7247a84e964abffb259721c87474b058a38df118ecb69a4542870caebe94f8'
         '46656b0301e0a8516762f4f7d6933e642fa4ab83d4e3b6bbf1d7bfa9c1a54e6c679724f092b8ef32f28e410cb593a0917318c061eebecad48c91a6ca1a25df6a'
         '585b5f0dcd6f04f890cad851aa3bb462125db4219da2da1a3edf0e63706be11542ca72dff0d357838e5f02ce247014e7e1b4be8f1feef2cc8f4b22200723a750'
-        '3d3664007c21b4c9d2c555bda8d9c8b8695baf9bdf2946f5583905ac5e9420fb60b9e82bf4e68175752032d3de0ca13e71c4e1ab139cb648c2d62b5e3430b3c9')
+        '3d3664007c21b4c9d2c555bda8d9c8b8695baf9bdf2946f5583905ac5e9420fb60b9e82bf4e68175752032d3de0ca13e71c4e1ab139cb648c2d62b5e3430b3c9'
+        'c0b40436099a3278c97cd96fdc007a5dd9a28eb692e494baba3e09cf428ffe4c96e087d77fcb12b3b24994933028aa4eb21618da90c424346d752f53ce5c9d61')
 
 prepare() {
   cd pipewire
