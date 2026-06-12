@@ -3,7 +3,7 @@
 pkgname=gamescope
 _srctag=3.16.24
 pkgver=${_srctag//-/.}
-pkgrel=2
+pkgrel=3
 pkgdesc="gaming shell based on Xwayland, powered by Vulkan and DRM"
 arch=(x86_64)
 url="https://github.com/ValveSoftware/gamescope"
@@ -17,7 +17,6 @@ source=("galileo-mura-setup.service"
         "gamescope-session.service"
         "gamescope-session.target"
         "gamescope-portals.conf"
-        "gamescope-xbindkeys.service"
         "gamescope-mangoapp.service"
         "ibus-gamescope.service"
         "start-gamescope-session"
@@ -40,9 +39,8 @@ sha256sums=('2cfacf10f311a02d1c94ab5e927094639dfbb57bd322acc628374fef048a12bb'
             'fe515fce8f151a6c03a89e043044bfddf8cd6ee89027d2cfbcf6f6706c78ca76'
             'e37ba6107f3a84cf47c2799b537a88583e6cb8951167a9c6a48fa1d85996206b'
             '78f9bb2a97ff5cb08e5e648bed9984a6ffba68a7fff9d214b0d28a532ee66601'
-            'ce7e26d4145b44a1161d8ec050fb97f3c8786b7c5b719f36aa1dfb984b5863c1'
+            '6fbac560ef24747c3e45621e0dc188fc031418a2f60dde9a1cd0efeb0c3827c5'
             'eae6b5cbd0735d6732c8b7de99ed3362f24f6aa76bbba0950a14b99040f4e6d0'
-            'd9a8e593bea8ea0afc96cec3849c48e87b686d263a5d7a09a272237cc35acb52'
             '81da49a733a757a4848a5c95011c3f9d3e584373244722ed9b26687ae0126793'
             'd010a36f52f2122b51f8a0bdc983560a553759f85c2eb5a9ccb2b1a6de367059'
             '10462d319e9d2a97a8fc9265628c03819bd6fd86dc13cee6e38151fc9b270407'
@@ -113,7 +111,6 @@ package() {
 	install -D -m 644 ibus-gamescope.service  "$pkgdir"/usr/lib/systemd/user/ibus-gamescope.service
 	install -D -m 644 steam-launcher.service "$pkgdir"/usr/lib/systemd/user/steam-launcher.service
 	install -D -m 644 steam-notif-daemon.service "$pkgdir"/usr/lib/systemd/user/steam-notif-daemon.service
-	install -D -m 644 gamescope-xbindkeys.service "$pkgdir"/usr/lib/systemd/user/gamescope-xbindkeys.service
 
 	# portals
 	install -D -m 644 gamescope-portals.conf "$pkgdir"/usr/share/xdg-desktop-portal/gamescope-portals/gamescope-portals.conf
