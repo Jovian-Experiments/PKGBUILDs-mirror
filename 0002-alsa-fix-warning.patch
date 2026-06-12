@@ -1,0 +1,28 @@
+From 8e00d38db307b08df1e449254e6d859859d3ef63 Mon Sep 17 00:00:00 2001
+From: Wim Taymans <wtaymans@redhat.com>
+Date: Sat, 6 Jun 2026 21:23:45 +0200
+Subject: [PATCH 2/2] alsa: fix warning
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+warning: the address of ‘dev_id’ will always evaluate as ‘true’ [-Waddress]
+---
+ spa/plugins/alsa/acp/alsa-mixer.c | 1 -
+ 1 file changed, 1 deletion(-)
+
+diff --git a/spa/plugins/alsa/acp/alsa-mixer.c b/spa/plugins/alsa/acp/alsa-mixer.c
+index b655e1feca84..f2aab13f906b 100644
+--- a/spa/plugins/alsa/acp/alsa-mixer.c
++++ b/spa/plugins/alsa/acp/alsa-mixer.c
+@@ -5122,7 +5122,6 @@ void pa_alsa_profile_set_probe(
+     snprintf(dev_id, sizeof(dev_id), "%d", card_index);
+ 
+     pa_assert(ps);
+-    pa_assert(dev_id);
+     pa_assert(ss);
+ 
+     if (ps->probed)
+-- 
+2.54.0
+
