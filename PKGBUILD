@@ -4,7 +4,7 @@
 # Everything still in here should be either removed or re-homed to a proper package.
 
 pkgname=jupiter-legacy-support
-pkgver=1.158
+pkgver=1.159
 pkgrel=1
 pkgdesc="Legacy jupiter-specific support files that haven't been split to their own package or removed."
 arch=(any)
@@ -58,8 +58,6 @@ package() {
 
   install -D -m644 "$srcdir"/steam-web-debug-portforward.service "$pkgdir"/usr/lib/systemd/system/steam-web-debug-portforward.service
   install -D -m644 "$srcdir"/steam-web-debug-portforward.socket "$pkgdir"/usr/lib/systemd/system/steam-web-debug-portforward.socket
-
-  install -D -m644 xbindkeysrc "$pkgdir"/etc/xbindkeysrc
 
   # Stats daemon will be enabled/started by bootstrap
 
