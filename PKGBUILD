@@ -6,10 +6,10 @@
 pkgname=scx-scheds
 gitname=scx
 pkgver=1.1.1.linux.steamos
-pkgrel=1
+pkgrel=4
 pkgdesc="sched_ext schedulers"
 arch=('x86_64')
-url="https://gitlab.steamos.cloud/holo/scx/-/tree/v$pkgver"
+url="https://gitlab.steamos.cloud/holo/scx/-/tree/v$pkgver-$pkgrel"
 license=('GPL-2.0-only')
 depends=('libelf' 'zlib' 'jq')
 makedepends=('git' 'openssh' 'python' 'clang' 'llvm' 'llvm-libs' 'rust' 'cargo' 'upx')
