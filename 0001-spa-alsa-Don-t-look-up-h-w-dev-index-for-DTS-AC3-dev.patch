@@ -1,0 +1,53 @@
+From 8d1fc2cebdd3380ab85a30a455a93e29f2256c15 Mon Sep 17 00:00:00 2001
+From: Arun Raghavan <arunr@valvesoftware.com>
+Date: Mon, 15 Jun 2026 17:07:56 -0700
+Subject: [PATCH] spa: alsa: Don't look up h/w dev index for DTS/AC3 devices
+
+Since we know DTS and AC3 devices don't provide the snd_pcm_info of the
+real underlying device, let's look for them by name (doesn't seem to be
+a better way to detect this case), and avoid overwriting any previously
+detected h/w device index (from one of the PCM paths).
+---
+ spa/plugins/alsa/acp/alsa-mixer.c | 12 ++++++++----
+ 1 file changed, 8 insertions(+), 4 deletions(-)
+
+diff --git a/spa/plugins/alsa/acp/alsa-mixer.c b/spa/plugins/alsa/acp/alsa-mixer.c
+index 6e976a56d7cf..8a725057912a 100644
+--- a/spa/plugins/alsa/acp/alsa-mixer.c
++++ b/spa/plugins/alsa/acp/alsa-mixer.c
+@@ -4500,7 +4500,7 @@ static void mapping_paths_probe(pa_alsa_mapping *m, pa_alsa_profile *profile,
+     }
+ 
+     PA_HASHMAP_FOREACH(p, ps->paths, state) {
+-        if (p->autodetect_eld_device)
++        if (p->autodetect_eld_device && m->hw_device_index >= 0)
+             p->eld_device = m->hw_device_index;
+ 
+         if (pa_alsa_path_probe(p, m, mixer_handle, m->profile_set->ignore_dB) < 0)
+@@ -5087,6 +5087,7 @@ static int add_profiles_to_probe(
+ static void mapping_query_hw_device(pa_alsa_mapping *mapping, snd_pcm_t *pcm) {
+     int r;
+     snd_pcm_info_t* pcm_info;
++    const char *name;
+     snd_pcm_info_alloca(&pcm_info);
+ 
+     r = snd_pcm_info(pcm, pcm_info);
+@@ -5098,9 +5099,12 @@ static void mapping_query_hw_device(pa_alsa_mapping *mapping, snd_pcm_t *pcm) {
+     /* XXX: It's not clear what snd_pcm_info_get_device() does if the device is
+      * not backed by a hw device or if it's backed by multiple hw devices. We
+      * only use hw_device_index for HDMI devices, however, and for those the
+-     * return value is expected to be always valid, so this shouldn't be a
+-     * significant problem. */
+-    mapping->hw_device_index = snd_pcm_info_get_device(pcm_info);
++     * return value is expected to be always valid with a couple of known
++     * exceptions, which we try to avoid below */
++    name = snd_pcm_info_get_name(pcm_info);
++
++    if (!spa_strstartswith(name, "a52") && !spa_strstartswith(name, "dcahdmi"))
++        mapping->hw_device_index = snd_pcm_info_get_device(pcm_info);
+ }
+ 
+ void pa_alsa_profile_set_probe(
+-- 
+2.54.0
+
