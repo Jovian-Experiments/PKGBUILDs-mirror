@@ -1,18 +1,18 @@
-From 05236252fac7869069a9bc80a4dfc029d3356e58 Mon Sep 17 00:00:00 2001
+From 00382432fa187e99b5ad46a4d83d909712352e3a Mon Sep 17 00:00:00 2001
 From: David Edmundson <kde@davidedmundson.co.uk>
 Date: Fri, 29 Aug 2025 23:16:12 +0100
 Subject: [PATCH] Support arbitrary keysyms in libei
 
 ---
- src/inputmethod.cpp            | 29 ++----------------
- src/plugins/eis/eisbackend.cpp |  6 ++++
+ src/inputmethod.cpp            | 29 +-------------
+ src/plugins/eis/eisbackend.cpp |  6 +++
  src/plugins/eis/eisbackend.h   |  1 +
- src/plugins/eis/eiscontext.cpp | 46 +++++++++++++++++++++++-----
- src/plugins/eis/eisdevice.cpp  | 43 ++++++++++++++++++++++++++
+ src/plugins/eis/eiscontext.cpp | 46 +++++++++++++++++----
+ src/plugins/eis/eisdevice.cpp  | 73 ++++++++++++++++++++++++++++++++++
  src/plugins/eis/eisdevice.h    |  3 ++
- src/xkb.cpp                    | 55 ++++++++++++++++++++++++++++++----
- src/xkb.h                      | 19 ++++++++++--
- 8 files changed, 159 insertions(+), 43 deletions(-)
+ src/xkb.cpp                    | 55 ++++++++++++++++++++++---
+ src/xkb.h                      | 19 +++++++--
+ 8 files changed, 189 insertions(+), 43 deletions(-)
 
 diff --git a/src/inputmethod.cpp b/src/inputmethod.cpp
 index 959c81af1d..4a206790e5 100644
@@ -218,38 +218,68 @@ index 2c5a8c8b40..3f64f36dda 100644
          eis_event_unref(event);
      }
 diff --git a/src/plugins/eis/eisdevice.cpp b/src/plugins/eis/eisdevice.cpp
-index aa58dba19f..361676f3f5 100644
+index aa58dba19f..40f0b82b0f 100644
 --- a/src/plugins/eis/eisdevice.cpp
 +++ b/src/plugins/eis/eisdevice.cpp
-@@ -5,6 +5,7 @@
+@@ -5,6 +5,8 @@
  */
  
  #include "eisdevice.h"
++#include "core/inputdevice.h"
 +#include "keyboard_input.h"
  
  #include <libeis.h>
  
-@@ -108,4 +109,46 @@ bool EisDevice::isLidSwitch() const
+@@ -108,4 +110,75 @@ bool EisDevice::isLidSwitch() const
      return false;
  }
  
 +void EisDevice::sendKeySym(xkb_keysym_t keySym, KeyboardKeyState state)
 +{
-+    std::optional<Xkb::KeyCode> keyCode = input()->keyboard()->xkb()->keycodeFromKeysym(keySym);
-+    bool isPress = state == KeyboardKeyState::Pressed;
-+    if (keyCode) {
-+        // TODO modifiers
-+        // if set, translate it into a shift key as we go through the xkb state
-+        // or we can force the other path
++    auto sendKey = [this](xkb_keycode_t keycode, KeyboardKeyState state) {
++        bool isPress = state == KeyboardKeyState::Pressed;
 +        if (isPress) {
-+            pressedKeys.insert(keyCode->keyCode);
-+            Q_EMIT keyChanged(keyCode->keyCode, KeyboardKeyState::Pressed, currentTime(), this);
++            pressedKeys.insert(keycode);
++            Q_EMIT keyChanged(keycode, KeyboardKeyState::Pressed, currentTime(), this);
 +        } else {
-+            bool keyWasHeld = pressedKeys.remove(keyCode->keyCode);
++            bool keyWasHeld = pressedKeys.remove(keycode);
 +            if (keyWasHeld) {
-+                Q_EMIT keyChanged(keyCode->keyCode, KeyboardKeyState::Released, currentTime(), this);
++                Q_EMIT keyChanged(keycode, KeyboardKeyState::Released, currentTime(), this);
 +            }
 +        }
++    };
++
++    std::optional<Xkb::KeyCode> keyCode = input()->keyboard()->xkb()->keycodeFromKeysym(keySym);
++    if (keyCode) {
++        static const QSet<xkb_keysym_t> modifierKeySyms = {
++            XKB_KEY_Shift_L,
++            XKB_KEY_Shift_R,
++            XKB_KEY_Control_L,
++            XKB_KEY_Control_R,
++            XKB_KEY_Alt_L,
++            XKB_KEY_Alt_R,
++            XKB_KEY_Meta_L,
++            XKB_KEY_Meta_R,
++            XKB_KEY_Super_L,
++            XKB_KEY_Super_R,
++        };
++
++        const bool isModifier = modifierKeySyms.contains(keySym);
++        if (isModifier) {
++            sendKey(keyCode->keyCode, state);
++            return;
++        }
++        // grab the current modifier state, cache it, send our key with our own modifiers at a known state, then reset back
++        xkb_state *xkbstate = input()->keyboard()->xkb()->state();
++        xkb_mod_mask_t formerDepressed = xkb_state_serialize_mods(xkbstate, XKB_STATE_MODS_DEPRESSED);
++        xkb_mod_mask_t formerLatched = xkb_state_serialize_mods(xkbstate, XKB_STATE_MODS_LATCHED);
++        xkb_mod_mask_t formerLocked = xkb_state_serialize_mods(xkbstate, XKB_STATE_MODS_LOCKED);
++        xkb_layout_index_t formerLayout = xkb_state_serialize_layout(xkbstate, XKB_STATE_LAYOUT_EFFECTIVE);
++
++        input()->keyboard()->xkb()->updateModifiers(formerDepressed | keyCode->modifiers, formerLatched, formerLocked, formerLayout);
++        sendKey(keyCode->keyCode, state);
++        input()->keyboard()->xkb()->updateModifiers(formerDepressed, formerLatched, formerLocked, formerLayout);
++
 +        return;
 +    }
 +    static const uint unmappedKeyCode = 247; // DAVE
@@ -258,7 +288,7 @@ index aa58dba19f..361676f3f5 100644
 +        return;
 +    }
 +
-+    if (isPress) {
++    if (state == KeyboardKeyState::Pressed) {
 +        pressedKeys.insert(unmappedKeyCode);
 +        Q_EMIT keyChanged(unmappedKeyCode, KeyboardKeyState::Pressed, currentTime(), this);
 +    } else {
@@ -410,5 +440,5 @@ index de97d0b8c8..4cac1bbeed 100644
      void createKeymapFile();
      void updateModifiers();
 -- 
-2.50.1
+2.43.0
 
