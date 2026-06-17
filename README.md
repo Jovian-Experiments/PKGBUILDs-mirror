@@ -1,5 +1,5 @@
 
-`main @ 20260616.1000`
+`main @ 20260617.1000`
 ======================
 
 Valve packages
@@ -87,7 +87,7 @@ Valve packages
  * [`steamos-passwd` — `holo-main/steamos-passwd-1.0-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-passwd-1.0-1)
  * [`steamos-powerbuttond` — `holo-main/steamos-powerbuttond-4.2-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-powerbuttond-4.2-1)
  * [`steamos-reset` — `holo-main/steamos-reset-20260414.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-reset-20260414.1-1)
- * [`steamos-systemreport` — `holo-main/steamos-systemreport-0.17-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-systemreport-0.17-1)
+ * [`steamos-systemreport` — `holo-main/steamos-systemreport-0.18-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-systemreport-0.18-1)
  * [`steamos-tweak-mtu-probing` — `holo-main/steamos-tweak-mtu-probing-1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-tweak-mtu-probing-1-1)
  * [`systemd` — `holo-main/systemd-257.7-2.5`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/systemd-257.7-2.5)
  * [`systemd-libs` — `holo-main/systemd-257.7-2.5`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/systemd-257.7-2.5)
@@ -112,6 +112,7 @@ Valve packages
 ### `jupiter-main`
  * [`alsa-ucm-conf` — `jupiter-main/alsa-ucm-conf-1.2.14-2.4`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/alsa-ucm-conf-1.2.14-2.4)
  * [`amd-ucode-neptune` — `jupiter-main/linux-firmware-neptune-jupiter.20260610.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/linux-firmware-neptune-jupiter.20260610.1-1)
+ * [`ec-log` — `jupiter-main/ec-log-0.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/ec-log-0.1-1)
  * [`filesystem` — `jupiter-main/filesystem-2021.12.07-1.18`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/filesystem-2021.12.07-1.18)
  * [`galileo-mura` — `jupiter-main/galileo-mura-v0.10-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/galileo-mura-v0.10-1)
  * [`gamescope` — `jupiter-main/gamescope-3.16.24-3`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/gamescope-3.16.24-3)
