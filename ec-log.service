@@ -1,0 +1,15 @@
+[Unit]
+Description=Forward EC log to system log
+ConditionPathExists=/sys/kernel/debug/cros_ec/console_log
+Requires=sys-kernel-debug.mount
+After=sys-kernel-debug.mount
+
+[Service]
+LogNamespace=ec-log
+ExecStart=logger --tag ec-log --file /sys/kernel/debug/cros_ec/console_log
+Restart=always
+RestartSteps=4
+RestartMaxDelaySec=10s
+
+[Install]
+WantedBy=multi-user.target
