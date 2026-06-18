@@ -4,7 +4,7 @@
 pkgbase=linux-neptune-616-drm-exec
 _tag=6.16.12-drmexec2-valve24
 pkgver=${_tag//-/.}
-pkgrel=1
+pkgrel=2
 pkgdesc='Linux'
 url="https://gitlab.steamos.cloud/jupiter/linux-integration/-/tree/$_tag"
 arch=(x86_64)
@@ -44,7 +44,7 @@ source=(
 )
 sha256sums=('1e2fa383c73f49ccb5ba6686955ad7ffd0ed4154772c8e9207cced78fc774f0f'
             '37452b4d09e5e42134ae24a61f2f656790837c327268074cf79d7dab3558b972'
-            'd88eaf0f94bae470040e4882f334c05b1bb2ab0a99e4b7299aa0b2337810ab8d')
+            '77496cd22951ef96c5b9a041bd881f015d20f280dd26547c2e3a04be6ae98441')
 
 export KBUILD_BUILD_HOST=archlinux
 export KBUILD_BUILD_USER=$pkgbase
