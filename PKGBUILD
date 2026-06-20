@@ -4,7 +4,7 @@
 pkgbase=linux-neptune-611
 _tag=6.11.11-valve29
 pkgver=${_tag//-/.}
-pkgrel=1
+pkgrel=1.1
 pkgdesc='Linux'
 url="https://gitlab.steamos.cloud/jupiter/linux-integration/-/tree/$_tag"
 arch=(x86_64)
