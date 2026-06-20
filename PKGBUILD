@@ -2,7 +2,7 @@
 # Maintainer: Jan Alexander Steffens (heftig) <heftig@archlinux.org>
 
 pkgbase=linux-neptune-616-drm-exec
-_tag=6.16.12-drmexec4-valve24
+_tag=6.16.12-drmexec5-valve24
 pkgver=${_tag//-/.}
 pkgrel=1
 pkgdesc='Linux'
@@ -42,7 +42,7 @@ source=(
   config          # Upstream Arch Linux kernel configuration file, DO NOT EDIT!!!
   config-neptune  # Jupiter: the neptune kernel fragment file (overrides 'config' above)
 )
-sha256sums=('ed9acf72d3374474c4c086709d0ee8f712a280c746c1611c17e31e657176b57a'
+sha256sums=('7757195926dc77179f8becb74a22ac5e8d7f4c3ed54893cd7f777317903b29f1'
             '37452b4d09e5e42134ae24a61f2f656790837c327268074cf79d7dab3558b972'
             '77496cd22951ef96c5b9a041bd881f015d20f280dd26547c2e3a04be6ae98441')
 
