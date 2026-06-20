@@ -8,7 +8,7 @@
 
 pkgname=inputplumber
 pkgver=0.77.5
-pkgrel=1
+pkgrel=1.1
 pkgdesc="Open source input router and remapper daemon for Linux"
 arch=('i686' 'pentium4' 'x86_64' 'arm' 'armv7h' 'armv6h' 'aarch64')
 options=(!lto)
