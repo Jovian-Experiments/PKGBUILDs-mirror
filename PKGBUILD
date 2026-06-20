@@ -1,7 +1,7 @@
 # Maintainer: Nícolas F. R. A. Prado <nfraprado@collabora.com>
 pkgname=ec-log
 pkgver=0.1
-pkgrel=1
+pkgrel=1.1
 pkgdesc="Forward EC log to system log"
 arch=('any')
 license=('MIT')
