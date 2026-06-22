@@ -9,7 +9,7 @@ pkgname=(
   wireplumber-docs
 )
 pkgver=0.5.14
-pkgrel=1.4
+pkgrel=1.5
 pkgdesc="Session / policy manager implementation for PipeWire"
 url="https://pipewire.pages.freedesktop.org/wireplumber/"
 arch=(x86_64)
@@ -66,6 +66,12 @@ source=(
   # Note that this patch is too specific for the Deck and there is no upstream MR for it
   # See holo-team/tasks#1808
   "0001-monitors-alsa-Set-profile-to-Off-and-restore-it-back.patch"
+
+  # Holo: backport of https://gitlab.freedesktop.org/pipewire/wireplumber/-/merge_requests/848
+  "0001-wpctl-add-reset-command.patch"
+
+  # Holo: backport of https://gitlab.freedesktop.org/pipewire/wireplumber/-/merge_requests/850
+  "0001-wpctl-add-yes-flag-to-reset-sub-command.patch"
 )
 b2sums=('bdf2b17806b2ac30f4f40b4e1e35a9aecdf0660b24f75978e546e59d525bf4a97ad079a13d5b08d76d2d79d8b89f7093b777c5d92590ce2681490e3e114938e7'
         '6c1d7b3577d7836559ec5a896e275405764fc2fc0a7a9840e027e575bac47489e51b3c3f127e963335a8eb7d714068e0222c1dc05e8be38590e04205388113a8'
@@ -81,7 +87,9 @@ b2sums=('bdf2b17806b2ac30f4f40b4e1e35a9aecdf0660b24f75978e546e59d525bf4a97ad079a
         'f845596209389f6cc5fc7a73238e0f4e559c69d3fe216c93f25e5170ace558f2169f4c15de29bbb05aad222b1d9e83e7d799112feb2439864dc9a833f1373cad'
         '1069051c36c8e8c0470ff65560d9085317f32854661d68a8e4e137a6c0b51b66855358302fbb7d77a71016f1cae77703ba7295bc4ef5cfa6234f2a93dd4a7528'
         'a4fe84e7aa1bf13f467af6fca0469e280693b00632c3de5d985139b1e8b1b4b450016e4a8579ce26ea7c0fae4f1629cceaad86beab02a9fa78e4f53ac2660b74'
-        '33ecb8c2b33513560ef62c71dd383ca055b01627cd0ee074f1a50d784d5e62746469ac5ee4e8171533ae813fc52a9b72f53c79433784b367135bb2d8f24b238e')
+        '33ecb8c2b33513560ef62c71dd383ca055b01627cd0ee074f1a50d784d5e62746469ac5ee4e8171533ae813fc52a9b72f53c79433784b367135bb2d8f24b238e'
+        'de2c08279902bd9bb5614a550b8d6a26583be8029da390d9f00832f9ca8dc2e9fadbdb61c8530cc1fb2b65d8b7f5187d87cee84c073d05de8049a721f589fd73'
+        'fb649c179b08a9a7558f6df497d5eb6160c3a90e8b8202edf628bea166f384e2d2f844f0ccd957831349fae6d28a20089c8d5fc98eaaafa3e738903149aea3b6')
 
 prepare() {
   cd $pkgbase
