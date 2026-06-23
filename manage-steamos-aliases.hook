@@ -1,0 +1,20 @@
+[Trigger]
+Type = Path
+Operation = Install
+Operation = Upgrade
+Operation = Remove
+Target = usr/bin/holo-*
+Target = usr/bin/holo-polkit-helpers/holo-*
+Target = usr/bin/mount.holo
+Target = usr/lib/holo/holo-*
+Target = usr/lib/hwsupport/holo-automount.sh
+
+# This script needs to be a direct link, which is handled by the
+# steamos-customizations package.
+Target = !usr/lib/holo/holo-shellutil.sh
+
+[Action]
+Description = Updating holo command aliases...
+When = PostTransaction
+Exec = /usr/share/libalpm/scripts/manage-steamos-aliases
+NeedsTargets
