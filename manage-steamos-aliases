@@ -1,0 +1,73 @@
+#!/bin/bash
+
+# Create aliases for "holo" utilities using the "steamos" name to support
+# legacy use of the steamos name.
+
+set -euo pipefail
+
+RETVAL=0
+
+while IFS= read -r FILENAME; do
+    # We need to generate the alias name. The path passed to us is missing the
+    # leading "/" as it's a relative path in the package archive that will be
+    # copied to the root directory. Note that the directory may also need to
+    # change from a holo to steamos name.
+    FILENAME="/$FILENAME"
+
+    # We don't alias directories directly
+    if [[ -d "$FILENAME" ]]; then
+        echo "$FILENAME is a directory, skipping"
+        continue
+    fi
+
+    if [[ "$FILENAME" != *holo* ]]; then
+        echo "ERROR: Filename '$FILENAME' does not contain 'holo', skipping" >&2
+        RETVAL=1
+        continue
+    fi
+
+    ALIAS=${FILENAME//holo/steamos}
+
+    # The directory may change from a holo named one to a steamos one, so we
+    # need to check to see if the directory for the alias exists and whether we
+    # can create it.
+    ALIASDIR="${ALIAS%/*}"
+
+    if [ ! -d "$ALIASDIR" ]; then
+        if ! mkdir -p "$ALIASDIR"; then
+            echo "ERROR: Can't create '$ALIASDIR', skipping" >&2
+            RETVAL=1
+            continue
+        fi
+    fi
+
+    if [ -f "$FILENAME" ]; then
+        if [[ -h "$ALIAS" && "$(readlink -f "$ALIAS")" == "$FILENAME" ]]; then
+            echo "$FILENAME and $ALIAS found, nothing to do"
+        elif [ -e "$ALIAS" ]; then
+            echo "WARNING: $ALIAS already exists and is not an alias to $FILENAME" >&2
+        else
+            echo "$FILENAME found, adding alias $ALIAS to $FILENAME"
+            if ! ln -s "$FILENAME" "$ALIAS"; then
+                echo "ERROR: Can't create '$FILENAME', skipping" >&2
+                RETVAL=1
+                continue
+            fi
+        fi
+    else
+        if [ ! -e "$ALIAS" ] && [ ! -h "$ALIAS" ]; then
+            echo "Neither $FILENAME nor $ALIAS found, nothing to do"
+        elif [[ -h "$ALIAS" && "$(readlink -f "$ALIAS")" == "$FILENAME" ]]; then
+            echo "$ALIAS found for removed file $FILENAME, deleting"
+            if ! rm "$ALIAS"; then
+                echo "ERROR: Can't delete '$FILENAME', skipping" >&2
+                RETVAL=1
+                continue
+            fi
+        else
+            echo "WARNING: $ALIAS found but not symlink to $FILENAME, leaving" >&2
+        fi
+    fi
+done
+
+exit "$RETVAL"
