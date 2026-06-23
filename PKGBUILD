@@ -5,10 +5,13 @@
 
 pkgname=jupiter-legacy-support
 pkgver=1.159
-pkgrel=1
+pkgrel=2
 pkgdesc="Legacy jupiter-specific support files that haven't been split to their own package or removed."
 arch=(any)
 depends=(python3 python-psutil python-aiohttp nvme-cli)
+optdepends=(
+  'steamos-alias: for steamos-alias compatibility symlinks'
+)
 source=(steam-web-debug-portforward.service
         steam-web-debug-portforward.socket
         killuserprocesses.conf
@@ -48,8 +51,6 @@ package() {
 
   # janky OOBE test utility
   install -D -m755 "$srcdir"/holo-prepare-oobe-test "$pkgdir"/usr/bin/holo-prepare-oobe-test
-  # Create a compatibility alias because it could still be referenced in some internal developers documentation
-  ln -sf "/usr/bin/holo-alias" "$pkgdir"/usr/bin/steamos-prepare-oobe-test
   install -D -m440 "$srcdir"/sudoers.d-wheel-prepare-oobe-test "$pkgdir"/etc/sudoers.d/wheel-prepare-oobe-test
   install -D -m755 "$srcdir"/org.valve.holo.jupiter-legacy-support.policy "$pkgdir"/usr/share/polkit-1/actions/org.valve.holo.jupiter-legacy-support.policy
   install -D -m755 "$srcdir"/org.valve.steamos.jupiter-legacy-support.policy "$pkgdir"/usr/share/polkit-1/actions/org.valve.steamos.jupiter-legacy-support.policy
@@ -62,11 +63,6 @@ package() {
   # Stats daemon will be enabled/started by bootstrap
 
   install -D -m755 -t "$pkgdir"/usr/bin/ usr/bin/*
-  # Create a compatibility alias because it could still be referenced in some internal developers documentation
-  ln -sf "/usr/bin/holo-alias" "$pkgdir"/usr/bin/steamos-update
-  ln -sf "/usr/bin/holo-alias" "$pkgdir"/usr/bin/steamos-session-select
-  # The Steam client is still relying on `steamos-select-branch`
-  ln -sf "/usr/bin/holo-alias" "$pkgdir"/usr/bin/steamos-select-branch
 
   install -D -m644 {,"$pkgdir"/}usr/share/X11/xorg.conf.d/41-touchscreenrotate.conf
 
