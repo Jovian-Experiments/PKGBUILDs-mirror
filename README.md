@@ -1,5 +1,5 @@
 
-`main @ 20260623.1000`
+`main @ 20260626.1000`
 ======================
 
 Valve packages
@@ -60,6 +60,7 @@ Valve packages
  * [`libnm` — `holo-main/networkmanager-1.52.1-1.2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/networkmanager-1.52.1-1.2)
  * [`libpng` — `holo-main/libpng-1.6.58-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/libpng-1.6.58-1.1)
  * [`libspeechd` — `holo-main/speech-dispatcher-0.12.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/speech-dispatcher-0.12.1-1)
+ * [`libssh2` — `holo-main/libssh2-1.11.1-4.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/libssh2-1.11.1-4.1)
  * [`libxml2` — `holo-main/libxml2-2.14.5-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/libxml2-2.14.5-1.1)
  * [`lsb-release` — `holo-main/lsb-release-2.0.r55.a25a4fc-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/lsb-release-2.0.r55.a25a4fc-1.1)
  * [`maliit-keyboard` — `holo-main/maliit-keyboard-2.3.1-4.2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/maliit-keyboard-2.3.1-4.2)
@@ -74,7 +75,7 @@ Valve packages
  * [`plasma-pa` — `holo-main/plasma-pa-6.4.3-3`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/plasma-pa-6.4.3-3)
  * [`plasma-workspace` — `holo-main/plasma-workspace-6.4.3-1.4`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/plasma-workspace-6.4.3-1.4)
  * [`plasma-x11-session` — `holo-main/plasma-workspace-6.4.3-1.4`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/plasma-workspace-6.4.3-1.4)
- * [`plymouth` — `holo-main/plymouth-22.02.122-7.3`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/plymouth-22.02.122-7.3)
+ * [`plymouth` — `holo-main/plymouth-22.02.122-7.4`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/plymouth-22.02.122-7.4)
  * [`podman` — `holo-main/podman-5.5.2-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/podman-5.5.2-1.1)
  * [`pulseaudio-qt` — `holo-main/pulseaudio-qt-1.7.0-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/pulseaudio-qt-1.7.0-2)
  * [`rauc` — `holo-main/rauc-1.14-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/rauc-1.14-1.1)
@@ -90,7 +91,7 @@ Valve packages
  * [`steamos-passwd` — `holo-main/steamos-passwd-1.0-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-passwd-1.0-1)
  * [`steamos-powerbuttond` — `holo-main/steamos-powerbuttond-4.2-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-powerbuttond-4.2-1)
  * [`steamos-reset` — `holo-main/steamos-reset-20260602.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-reset-20260602.1-1)
- * [`steamos-systemreport` — `holo-main/steamos-systemreport-0.18-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-systemreport-0.18-2)
+ * [`steamos-systemreport` — `holo-main/steamos-systemreport-0.20-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-systemreport-0.20-1)
  * [`steamos-tweak-mtu-probing` — `holo-main/steamos-tweak-mtu-probing-1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-tweak-mtu-probing-1-1)
  * [`systemd` — `holo-main/systemd-257.7-2.6`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/systemd-257.7-2.6)
  * [`systemd-libs` — `holo-main/systemd-257.7-2.6`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/systemd-257.7-2.6)
@@ -624,7 +625,6 @@ Arch Linux packages
  * [`libsoxr/0.1.3-4`](https://gitlab.archlinux.org/archlinux/packaging/packages/libsoxr/-/tree/0.1.3-4)
  * [`libspectre/0.2.12-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/libspectre/-/tree/0.2.12-2)
  * [`libssh/0.11.2-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/libssh/-/tree/0.11.2-1)
- * [`libssh2/1.11.1-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/libssh2/-/tree/1.11.1-1)
  * [`libstemmer/3.0.1-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/libstemmer/-/tree/3.0.1-1)
  * [`libsysprof-capture/48.0-5`](https://gitlab.archlinux.org/archlinux/packaging/packages/libsysprof-capture/-/tree/48.0-5)
  * [`libtasn1/4.20.0-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/libtasn1/-/tree/4.20.0-1)
