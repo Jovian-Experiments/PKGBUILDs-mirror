@@ -1,0 +1,13 @@
+diff --git a/src/backends/drm/drm_egl_layer.cpp b/src/backends/drm/drm_egl_layer.cpp
+index 9efd242608..14d7d6f113 100644
+--- a/src/backends/drm/drm_egl_layer.cpp
++++ b/src/backends/drm/drm_egl_layer.cpp
+@@ -83,7 +83,7 @@ std::shared_ptr<GLTexture> EglGbmLayer::texture() const
+     if (m_scanoutBuffer) {
+         const auto ret = m_surface.eglBackend()->importDmaBufAsTexture(*m_scanoutBuffer->buffer()->dmabufAttributes());
+         if (ret) {
+-            ret->setContentTransform(offloadTransform().combine(OutputTransform::FlipY));
++            ret->setContentTransform(offloadTransform().combine(m_pipeline->output()->transform()).combine(OutputTransform::FlipY));
+         }
+         return ret;
+     } else {
