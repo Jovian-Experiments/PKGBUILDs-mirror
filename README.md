@@ -1,5 +1,5 @@
 
-`main @ 20260626.1000`
+`main @ 20260629.1000`
 ======================
 
 Valve packages
@@ -132,7 +132,7 @@ Valve packages
  * [`jupiter-hw-support` — `jupiter-main/jupiter-hw-support-20260602.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-hw-support-20260602.1-1)
  * [`jupiter-legacy-support` — `jupiter-main/jupiter-legacy-support-1.160-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-legacy-support-1.160-1)
  * [`jupiter-steamos-log-submitter` — `jupiter-main/jupiter-steamos-log-submitter-1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-steamos-log-submitter-1-1)
- * [`kwin` — `jupiter-main/kwin-6.4.3-1.11`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/kwin-6.4.3-1.11)
+ * [`kwin` — `jupiter-main/kwin-6.4.3-1.12`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/kwin-6.4.3-1.12)
  * [`kwin-x11` — `jupiter-main/kwin-x11-6.4.3-1.2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/kwin-x11-6.4.3-1.2)
  * [`libwireplumber` — `jupiter-main/wireplumber-0.5.14-1.5`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/wireplumber-0.5.14-1.5)
  * [`linux-firmware-neptune` — `jupiter-main/linux-firmware-neptune-jupiter.20260610.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/linux-firmware-neptune-jupiter.20260610.1-1)
@@ -1024,6 +1024,7 @@ Arch Linux packages
  * [`vmaf/3.0.0-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/vmaf/-/tree/3.0.0-1)
  * [`volume_key/0.3.12-11`](https://gitlab.archlinux.org/archlinux/packaging/packages/volume_key/-/tree/0.3.12-11)
  * [`vulkan-icd-loader/1.4.321.0-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/vulkan-icd-loader/-/tree/1.4.321.0-1)
+ * [`vulkan-nouveau/1:25.1.6-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/vulkan-nouveau/-/tree/1:25.1.6-1)
  * [`vulkan-radeon/26.2.0_devel.222114.steamos_26.05.13-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/vulkan-radeon/-/tree/26.2.0_devel.222114.steamos_26.05.13-1)
  * [`vulkan-tools/1.4.321.0-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/vulkan-tools/-/tree/1.4.321.0-1)
  * [`wavpack/5.8.1-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/wavpack/-/tree/5.8.1-1)
