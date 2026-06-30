@@ -37,7 +37,7 @@ fi
 
 # Query version
 log "Querying available OOBE test image version"
-url=$(cmd curl --netrc -L "$OOBE_IMAGE_VER_URL" | grep -v '^#')
+url=$(cmd curl -L "$OOBE_IMAGE_VER_URL" | grep -v '^#')
 
 log "Target OOBE image: $url"
 
