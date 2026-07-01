@@ -4,22 +4,18 @@
 # Everything still in here should be either removed or re-homed to a proper package.
 
 pkgname=jupiter-legacy-support
-pkgver=1.161
+pkgver=1.156.4
 pkgrel=1
 pkgdesc="Legacy jupiter-specific support files that haven't been split to their own package or removed."
 arch=(any)
 depends=(python3 python-psutil python-aiohttp nvme-cli)
-optdepends=(
-  'steamos-alias: for steamos-alias compatibility symlinks'
-)
 source=(steam-web-debug-portforward.service
         steam-web-debug-portforward.socket
         killuserprocesses.conf
         flathub-beta.flatpakrepo
         flatpak-modify-flathub-beta.service
-        holo-prepare-oobe-test
+        steamos-prepare-oobe-test
         sudoers.d-wheel-prepare-oobe-test
-        org.valve.holo.jupiter-legacy-support.policy
         org.valve.steamos.jupiter-legacy-support.policy
         black_800x1280.png
         white_800x1280.png)
@@ -28,9 +24,8 @@ sha256sums=('7fbb99b93049f19260da6a3add0222302c0c568a6d3e3a2d592e3674a614b3d0'
             'e34a9dc905771bd99cd04cdf88262481cab7a7808d99dfaa968366fcb1b99a0b'
             '582cae3c9f9d4639f027defafe6fa33bda0a3a4d441290d926ad85a2be0f7206'
             'a7b8b21e285dac1f255546d1acc46d4423a1fa0e964153a96118b884001d0648'
-            '2d04bc21aaf029f380b66980c4e235bc270e05c3930e202c9f68a3533643729a'
+            'e27a51525e372933861c4315d505d77a4548ca1f7bf7178062d4509708752556'
             '3f3491c7ccf72b62094379495c73e6fdecd182d5aa30072b3b2407e331b96806'
-            'cf27c629ed21d86de73cf2c17cd93cc713781e38701cc76ccbef370cc0015e68'
             '27739fb50e5c2dd50e3373b22b5ceabb6eb2f6f34b723794cf9a2f911a483f65'
             '942fbb9436835bdb3a87aa8d73b3461f4cee0bc2f58bfa308eeb1be6b52ccb39'
             'fd55e252b11a0b0d48b7147298f159b0470f29ccb6118a79a5692cc8c4635f5b')
@@ -50,9 +45,8 @@ package() {
   ln -sv ../flatpak-modify-flathub-beta.service "$pkgdir"/usr/lib/systemd/system/multi-user.target.wants/
 
   # janky OOBE test utility
-  install -D -m755 "$srcdir"/holo-prepare-oobe-test "$pkgdir"/usr/bin/holo-prepare-oobe-test
+  install -D -m755 "$srcdir"/steamos-prepare-oobe-test "$pkgdir"/usr/bin/steamos-prepare-oobe-test
   install -D -m440 "$srcdir"/sudoers.d-wheel-prepare-oobe-test "$pkgdir"/etc/sudoers.d/wheel-prepare-oobe-test
-  install -D -m755 "$srcdir"/org.valve.holo.jupiter-legacy-support.policy "$pkgdir"/usr/share/polkit-1/actions/org.valve.holo.jupiter-legacy-support.policy
   install -D -m755 "$srcdir"/org.valve.steamos.jupiter-legacy-support.policy "$pkgdir"/usr/share/polkit-1/actions/org.valve.steamos.jupiter-legacy-support.policy
 
   install -D -m644 "$srcdir"/killuserprocesses.conf "$pkgdir"/etc/systemd/logind.conf.d/killuserprocesses.conf
@@ -60,12 +54,15 @@ package() {
   install -D -m644 "$srcdir"/steam-web-debug-portforward.service "$pkgdir"/usr/lib/systemd/system/steam-web-debug-portforward.service
   install -D -m644 "$srcdir"/steam-web-debug-portforward.socket "$pkgdir"/usr/lib/systemd/system/steam-web-debug-portforward.socket
 
+  install -D -m644 xbindkeysrc "$pkgdir"/etc/xbindkeysrc
+
   # Stats daemon will be enabled/started by bootstrap
 
   install -D -m755 -t "$pkgdir"/usr/bin/ usr/bin/*
 
   install -D -m644 {,"$pkgdir"/}usr/share/X11/xorg.conf.d/41-touchscreenrotate.conf
 
+  install -D -m644 {,"$pkgdir"/}etc/sddm.conf.d/steamos.conf
   # install -D -m644 {,"$pkgdir"/}etc/pulse/default.pa
 
   # FIXME reconcile with grub-steamos
@@ -80,7 +77,8 @@ package() {
   #
   # Symlinking to /dev/null is actually what `systemctl mask` does. Really.
   ln -sv /dev/null "$pkgdir"/etc/systemd/system/boot.mount
-  ln -sv /dev/null "$pkgdir"/etc/systemd/system/holo-install-grub.service
+  ln -sv /dev/null "$pkgdir"/etc/systemd/system/steamos-mkvarboot.service
+  ln -sv /dev/null "$pkgdir"/etc/systemd/system/steamos-install-grub.service
 
   # Horrible workaround. We should fix this.
   # (the full bootstrap package should not need this)
