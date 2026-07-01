@@ -1,7 +1,7 @@
 # Maintainer: Pierre-Loup A. Griffais (pgriffais@valvesoftware.com)
 
 pkgname=jupiter-hw-support
-_srctag=jupiter-20260602.1
+_srctag=jupiter-20260630.2
 _srcver=${_srctag#jupiter-}
 pkgver=${_srcver//-/.}
 pkgrel=1
@@ -24,7 +24,7 @@ depends=('python-evdev'
 optdepends=('grub-steamos')
 makedepends=('rsync' 'git' 'openssh' 'xorg-xcursorgen')
 source=("git+ssh://git@gitlab.steamos.cloud/jupiter/jupiter-hw-support.git#tag=$_srctag")
-sha512sums=('6210d637e26f0f9004c9d2a50e113b9004b9135196d8154fdcc8bf21e7291523ee9809b21ae6269f55d8e9f04232005157b0f0ffaa53eb1e55e94dab40b3c4ab')
+sha512sums=('f8ceedddd16fefd60db88567ce0360985944a4414def887507f6b042b0cba6e09788b4ccad9dd9148b31f59a256200e90c4f4a8a3adab4acaaea17b44f76988f')
 # Some pre-compiled binaries such as `rfp-cli` break when touched by `strip` :-\
 options+=('!strip')
 
