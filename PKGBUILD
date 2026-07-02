@@ -9,7 +9,7 @@ pkgname=(
   wireplumber-docs
 )
 pkgver=0.5.14
-pkgrel=1.5
+pkgrel=1.6
 pkgdesc="Session / policy manager implementation for PipeWire"
 url="https://pipewire.pages.freedesktop.org/wireplumber/"
 arch=(x86_64)
@@ -72,6 +72,9 @@ source=(
 
   # Holo: backport of https://gitlab.freedesktop.org/pipewire/wireplumber/-/merge_requests/850
   "0001-wpctl-add-yes-flag-to-reset-sub-command.patch"
+
+  # Holo: backport of https://gitlab.freedesktop.org/pipewire/wireplumber/-/merge_requests/857
+  "0001-default-nodes-Ignore-smart-filters-as-best-default-n.patch"
 )
 b2sums=('bdf2b17806b2ac30f4f40b4e1e35a9aecdf0660b24f75978e546e59d525bf4a97ad079a13d5b08d76d2d79d8b89f7093b777c5d92590ce2681490e3e114938e7'
         '6c1d7b3577d7836559ec5a896e275405764fc2fc0a7a9840e027e575bac47489e51b3c3f127e963335a8eb7d714068e0222c1dc05e8be38590e04205388113a8'
@@ -89,7 +92,8 @@ b2sums=('bdf2b17806b2ac30f4f40b4e1e35a9aecdf0660b24f75978e546e59d525bf4a97ad079a
         'a4fe84e7aa1bf13f467af6fca0469e280693b00632c3de5d985139b1e8b1b4b450016e4a8579ce26ea7c0fae4f1629cceaad86beab02a9fa78e4f53ac2660b74'
         '33ecb8c2b33513560ef62c71dd383ca055b01627cd0ee074f1a50d784d5e62746469ac5ee4e8171533ae813fc52a9b72f53c79433784b367135bb2d8f24b238e'
         'de2c08279902bd9bb5614a550b8d6a26583be8029da390d9f00832f9ca8dc2e9fadbdb61c8530cc1fb2b65d8b7f5187d87cee84c073d05de8049a721f589fd73'
-        'fb649c179b08a9a7558f6df497d5eb6160c3a90e8b8202edf628bea166f384e2d2f844f0ccd957831349fae6d28a20089c8d5fc98eaaafa3e738903149aea3b6')
+        'fb649c179b08a9a7558f6df497d5eb6160c3a90e8b8202edf628bea166f384e2d2f844f0ccd957831349fae6d28a20089c8d5fc98eaaafa3e738903149aea3b6'
+        'a129c1004d6fd8bf73ee8e296901a02652c89bd934d1aed9309314a0bc57407770b48fa6371c9320e04740b835d74267b25ed9c7dd19d10171d4747e1afeb1aa')
 
 prepare() {
   cd $pkgbase
