@@ -1,0 +1,56 @@
+From aa01ea5820ea59c97bff32728d94cafded99dffb Mon Sep 17 00:00:00 2001
+From: Julian Bouzas <julian.bouzas@collabora.com>
+Date: Fri, 26 Jun 2026 11:55:05 -0400
+Subject: [PATCH] pulse-server: don't consider monitor nodes when finding the
+ default source
+
+If a system does not have any Audio/Source node, clients that want to capture
+audio from the default source should fail instead of capturing audio from a
+monitor Audio/Sink node.
+---
+ src/modules/module-protocol-pulse/pulse-server.c | 15 ++-------------
+ 1 file changed, 2 insertions(+), 13 deletions(-)
+
+diff --git a/src/modules/module-protocol-pulse/pulse-server.c b/src/modules/module-protocol-pulse/pulse-server.c
+index be9a1adbf..a71faac7a 100644
+--- a/src/modules/module-protocol-pulse/pulse-server.c
++++ b/src/modules/module-protocol-pulse/pulse-server.c
+@@ -2471,7 +2471,7 @@ static const char *get_default(struct client *client, bool sink)
+ 	struct selector sel;
+ 	struct pw_manager *manager = client->manager;
+ 	struct pw_manager_object *o;
+-	const char *def, *str, *mon;
++	const char *def, *str;
+ 
+ 	spa_zero(sel);
+ 	if (sink) {
+@@ -2480,7 +2480,7 @@ static const char *get_default(struct client *client, bool sink)
+ 		sel.value = client->default_sink;
+ 		def = DEFAULT_SINK;
+ 	} else {
+-		sel.type = pw_manager_object_is_source_or_monitor;
++		sel.type = pw_manager_object_is_source;
+ 		sel.key = PW_KEY_NODE_NAME;
+ 		sel.value = client->default_source;
+ 		def = DEFAULT_SOURCE;
+@@ -2491,17 +2491,6 @@ static const char *get_default(struct client *client, bool sink)
+ 	if (o == NULL || o->props == NULL)
+ 		return def;
+ 	str = pw_properties_get(o->props, PW_KEY_NODE_NAME);
+-
+-	if (!sink && pw_manager_object_is_monitor(o)) {
+-		def = DEFAULT_MONITOR;
+-		if (str != NULL &&
+-		    (mon = pw_properties_get(o->props, PW_KEY_NODE_NAME".monitor")) == NULL) {
+-			pw_properties_setf(o->props,
+-					PW_KEY_NODE_NAME".monitor",
+-					"%s.monitor", str);
+-		}
+-		str = pw_properties_get(o->props, PW_KEY_NODE_NAME".monitor");
+-	}
+ 	if (str == NULL)
+ 		str = def;
+ 	return str;
+-- 
+2.50.1
+
