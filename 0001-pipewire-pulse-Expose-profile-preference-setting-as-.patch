@@ -1,0 +1,168 @@
+From 29895ce1046060978e5e753b7d4012f9be1792e3 Mon Sep 17 00:00:00 2001
+From: Julian Bouzas <julian.bouzas@collabora.com>
+Date: Mon, 22 Jun 2026 15:29:15 -0400
+Subject: [PATCH] pipewire-pulse: Expose profile preference setting as a
+ message
+
+Makes it easier for libpulse-based clients to modify this setting if they want.
+---
+ src/modules/module-protocol-pulse/client.c    |  3 ++
+ src/modules/module-protocol-pulse/client.h    |  3 ++
+ src/modules/module-protocol-pulse/defs.h      |  1 +
+ .../module-protocol-pulse/message-handler.c   | 49 ++++++++++++++++++-
+ .../module-protocol-pulse/pulse-server.c      | 17 +++++++
+ 5 files changed, 72 insertions(+), 1 deletion(-)
+
+diff --git a/src/modules/module-protocol-pulse/client.c b/src/modules/module-protocol-pulse/client.c
+index b189fdbe7..e33f01fb9 100644
+--- a/src/modules/module-protocol-pulse/client.c
++++ b/src/modules/module-protocol-pulse/client.c
+@@ -162,6 +162,9 @@ void client_free(struct client *client)
+ 	free(client->temporary_default_sink);
+ 	free(client->temporary_default_source);
+ 
++	free(client->bluetooth_profile_preference);
++	free(client->default_bluetooth_profile_preference);
++
+ 	pw_properties_free(client->props);
+ 	pw_properties_free(client->routes);
+ 
+diff --git a/src/modules/module-protocol-pulse/client.h b/src/modules/module-protocol-pulse/client.h
+index 81d790b51..855d3d43c 100644
+--- a/src/modules/module-protocol-pulse/client.h
++++ b/src/modules/module-protocol-pulse/client.h
+@@ -65,9 +65,12 @@ struct client {
+ 	bool default_force_mono_audio;
+ 	bool have_bluetooth_headset_autoswitch;
+ 	bool default_bluetooth_headset_autoswitch;
++	bool have_bluetooth_profile_preference;
++	char *default_bluetooth_profile_preference;
+ 	struct pw_manager_object *metadata_sm_settings;
+ 	bool force_mono_audio;
+ 	bool bluetooth_headset_autoswitch;
++	char *bluetooth_profile_preference;
+ 
+ 	uint32_t connect_tag;
+ 
+diff --git a/src/modules/module-protocol-pulse/defs.h b/src/modules/module-protocol-pulse/defs.h
+index f3e25f137..3d414e9d7 100644
+--- a/src/modules/module-protocol-pulse/defs.h
++++ b/src/modules/module-protocol-pulse/defs.h
+@@ -327,5 +327,6 @@ static inline uint32_t port_type_value(const char *port_type)
+ #define METADATA_TARGET_OBJECT          "target.object"
+ #define METADATA_FEATURES_AUDIO_MONO    "node.features.audio.mono"
+ #define METADATA_BLUETOOTH_HEADSET_AUTOSWITCH "bluetooth.autoswitch-to-headset-profile"
++#define METADATA_BLUETOOTH_PROFILE_PREFERENCE "bluetooth.profile-preference"
+ 
+ #endif /* PULSE_SERVER_DEFS_H */
+diff --git a/src/modules/module-protocol-pulse/message-handler.c b/src/modules/module-protocol-pulse/message-handler.c
+index 80aefbeb1..d0904064d 100644
+--- a/src/modules/module-protocol-pulse/message-handler.c
++++ b/src/modules/module-protocol-pulse/message-handler.c
+@@ -230,6 +230,50 @@ static int core_object_bluetooth_headset_autoswitch(struct client *client, const
+ 	}
+ }
+ 
++static int core_object_bluetooth_profile_preference(struct client *client, const char *params, FILE *response)
++{
++	if (!client->have_bluetooth_profile_preference) {
++		/* Not supported, return a null value to indicate that */
++		fprintf(response, "null");
++		return 0;
++	}
++
++	if (!params || params[0] == '\0') {
++		/* No parameter => query the current value */
++		if (client->bluetooth_profile_preference)
++			fprintf(response, "%s", client->bluetooth_profile_preference);
++		else
++			fprintf(response, "null");
++		return 0;
++	} else {
++		/* The caller is trying to set a value or clear with a null */
++		int ret;
++
++		if (spa_streq(params, "latency") || spa_streq(params, "quality")) {
++			ret = pw_manager_set_metadata(client->manager, client->metadata_sm_settings, PW_ID_CORE,
++					METADATA_BLUETOOTH_PROFILE_PREFERENCE, "Spa:String:JSON", "%s", params);
++			free(client->bluetooth_profile_preference);
++			client->bluetooth_profile_preference = strdup(params);
++		} else if (spa_streq(params, "null")) {
++			ret = pw_manager_set_metadata(client->manager, client->metadata_sm_settings, PW_ID_CORE,
++					METADATA_BLUETOOTH_PROFILE_PREFERENCE, NULL, NULL);
++			free(client->bluetooth_profile_preference);
++			client->bluetooth_profile_preference = client->default_bluetooth_profile_preference ?
++				strdup(client->default_bluetooth_profile_preference) : NULL;
++		} else {
++			fprintf(response, "Value must be latency or quality");
++			return -EINVAL;
++		}
++
++		if (ret < 0)
++			fprintf(response, "Could not set metadata: %s", spa_strerror(ret));
++		else
++			fprintf(response, "%s", params);
++
++		return ret;
++	}
++}
++
+ static int core_object_message_handler(struct client *client, struct pw_manager_object *o, const char *message, const char *params, FILE *response)
+ {
+ 	pw_log_debug(": core %p object message:'%s' params:'%s'", o, message, params);
+@@ -246,7 +290,8 @@ static int core_object_message_handler(struct client *client, struct pw_manager_
+ 				"  pipewire-pulse:list-modules    		list all module names\n"
+ 				"  pipewire-pulse:describe-module 		describe module info for <params>\n"
+ 				"  pipewire-pulse:force-mono-output		force mono mixdown on all hardware outputs\n"
+-				"  pipewire-pulse:bluetooth-headset-autoswitch	use bluetooth headset mic if available"
++				"  pipewire-pulse:bluetooth-headset-autoswitch\tuse bluetooth headset mic if available\n"
++				"  pipewire-pulse:bluetooth-profile-preference\tbluetooth profile preference (latency or quality)"
+ 				);
+ 	} else if (spa_streq(message, "list-handlers")) {
+ 		bool first = true;
+@@ -311,6 +356,8 @@ static int core_object_message_handler(struct client *client, struct pw_manager_
+ 		return core_object_force_mono_output(client, params, response);
+ 	} else if (spa_streq(message, "pipewire-pulse:bluetooth-headset-autoswitch")) {
+ 		return core_object_bluetooth_headset_autoswitch(client, params, response);
++	} else if (spa_streq(message, "pipewire-pulse:bluetooth-profile-preference")) {
++		return core_object_bluetooth_profile_preference(client, params, response);
+ 	} else {
+ 		return -ENOSYS;
+ 	}
+diff --git a/src/modules/module-protocol-pulse/pulse-server.c b/src/modules/module-protocol-pulse/pulse-server.c
+index be9a1adbf..85dba8468 100644
+--- a/src/modules/module-protocol-pulse/pulse-server.c
++++ b/src/modules/module-protocol-pulse/pulse-server.c
+@@ -994,12 +994,29 @@ static void manager_metadata(void *data, struct pw_manager_object *o,
+ 			else
+ 				client->default_bluetooth_headset_autoswitch = spa_streq(default_, "true");
+ 		}
++
++		if (spa_streq(key, METADATA_BLUETOOTH_PROFILE_PREFERENCE)) {
++			char default_pref[16];
++
++			client->have_bluetooth_profile_preference = true;
++
++			free(client->default_bluetooth_profile_preference);
++			if (spa_json_str_object_find(value, strlen(value),
++						"default", default_pref, sizeof(default_pref)) < 0)
++				client->default_bluetooth_profile_preference = NULL;
++			else
++				client->default_bluetooth_profile_preference = strdup(default_pref);
++		}
+ 	}
+ 	if (subject == PW_ID_CORE && o == client->metadata_sm_settings) {
+ 		if (spa_streq(key, METADATA_FEATURES_AUDIO_MONO))
+ 			client->force_mono_audio = spa_streq(value, "true");
+ 		if (spa_streq(key, METADATA_BLUETOOTH_HEADSET_AUTOSWITCH))
+ 			client->bluetooth_headset_autoswitch = spa_streq(value, "true");
++		if (spa_streq(key, METADATA_BLUETOOTH_PROFILE_PREFERENCE)) {
++			free(client->bluetooth_profile_preference);
++			client->bluetooth_profile_preference = value ? strdup(value) : NULL;
++		}
+ 	}
+ }
+ 
+-- 
+2.50.1
+
