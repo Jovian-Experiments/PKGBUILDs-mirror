@@ -1,0 +1,778 @@
+From b7a21d30d5645ab289d609c2e52a67b42d203dce Mon Sep 17 00:00:00 2001
+From: David Edmundson <kde@davidedmundson.co.uk>
+Date: Mon, 20 Apr 2026 11:03:30 +0100
+Subject: [PATCH] Eis: Support 1.6 additions
+
+1.6 adds support for arbitrary keysyms and text.
+
+keysyms uses a tested path used by fakeinput already, text is sent via
+text input if available, falling back to fake keysyms.
+
+This also adds a new unit test for libei.
+---
+ autotests/integration/CMakeLists.txt        |   5 +
+ autotests/integration/kwin_wayland_test.cpp |   6 +
+ autotests/integration/kwin_wayland_test.h   |   1 +
+ autotests/integration/libei_test.cpp        | 350 ++++++++++++++++++++
+ src/inputmethod.cpp                         |   5 +
+ src/inputmethod.h                           |   5 +
+ src/plugins/eis/eisbackend.cpp              |   9 +
+ src/plugins/eis/eisbackend.h                |   1 +
+ src/plugins/eis/eiscontext.cpp              |  62 ++--
+ src/plugins/eis/eisdevice.cpp               |  84 ++++-
+ src/plugins/eis/eisdevice.h                 |   7 +-
+ 11 files changed, 513 insertions(+), 22 deletions(-)
+ create mode 100644 autotests/integration/libei_test.cpp
+
+diff --git a/autotests/integration/CMakeLists.txt b/autotests/integration/CMakeLists.txt
+index 772fed90cd..9b6c9da274 100644
+--- a/autotests/integration/CMakeLists.txt
++++ b/autotests/integration/CMakeLists.txt
+@@ -180,6 +180,11 @@ if (KWIN_BUILD_EIS)
+     else()
+         target_compile_definitions(testInputCapture PRIVATE -DHAVE_EI_EVENT_SYNC=0)
+     endif()
++    integrationTest(NAME testLibeiInput SRCS libei_test.cpp LIBS PkgConfig::PKG_libei PROPERTIES RUN_SERIAL TRUE)
++    # NOTE We patch the relevant feature into holo
++    # if (PKG_libei_VERSION VERSION_GREATER_EQUAL "1.6")
++        target_compile_definitions(testLibeiInput PRIVATE -DEIS_HAVE_16=1)
++    # endif()
+ endif()
+ 
+ 
+diff --git a/autotests/integration/kwin_wayland_test.cpp b/autotests/integration/kwin_wayland_test.cpp
+index 9429455159..67b6c514e7 100644
+--- a/autotests/integration/kwin_wayland_test.cpp
++++ b/autotests/integration/kwin_wayland_test.cpp
+@@ -390,6 +390,12 @@ KWayland::Client::Keyboard *Test::SimpleKeyboard::keyboard()
+     return m_keyboard;
+ }
+ 
++void Test::SimpleKeyboard::clearReceivedText()
++{
++    m_receviedText.clear();
++    Q_EMIT receviedTextChanged();
++}
++
+ QString Test::SimpleKeyboard::receviedText()
+ {
+     return m_receviedText;
+diff --git a/autotests/integration/kwin_wayland_test.h b/autotests/integration/kwin_wayland_test.h
+index dec538dacf..d3b7f5a2ef 100644
+--- a/autotests/integration/kwin_wayland_test.h
++++ b/autotests/integration/kwin_wayland_test.h
+@@ -1054,6 +1054,7 @@ class SimpleKeyboard : public QObject
+ public:
+     explicit SimpleKeyboard(QObject *parent = nullptr);
+     KWayland::Client::Keyboard *keyboard();
++    void clearReceivedText();
+     QString receviedText();
+ Q_SIGNALS:
+     void receviedTextChanged();
+diff --git a/autotests/integration/libei_test.cpp b/autotests/integration/libei_test.cpp
+new file mode 100644
+index 0000000000..f878156b03
+--- /dev/null
++++ b/autotests/integration/libei_test.cpp
+@@ -0,0 +1,350 @@
++/*
++    SPDX-FileCopyrightText: 2026 David Redondo <kde@david-redondo.de>
++    SPDX-FileCopyrightText: 2026 David Edmundson <davidedmundson@kde.org>
++
++    SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted-GPL
++*/
++
++#include "input.h"
++#include "kwin_wayland_test.h"
++#include "main.h"
++#include "pluginmanager.h"
++#include "wayland_server.h"
++
++#include <KWayland/Client/keyboard.h>
++#include <KWayland/Client/pointer.h>
++#include <KWayland/Client/seat.h>
++
++#include <QDBusConnection>
++#include <QDBusMessage>
++#include <QDBusReply>
++#include <QDBusUnixFileDescriptor>
++#include <QObject>
++#include <QSignalSpy>
++#include <QSocketNotifier>
++
++#include <libei.h>
++
++#include <linux/input-event-codes.h>
++#include <xkbcommon/xkbcommon-keysyms.h>
++
++using namespace KWin;
++
++static constexpr auto s_remoteDesktopPath = "/org/kde/KWin/EIS/RemoteDesktop";
++static constexpr auto s_remoteDesktopInterface = "org.kde.KWin.EIS.RemoteDesktop";
++
++enum class PortalCapabilities {
++    Keyboard = 1,
++    Pointer = 2,
++};
++
++class RemoteDesktopEiConnection
++{
++public:
++    explicit RemoteDesktopEiConnection(uint capabilities)
++    {
++        QDBusMessage msg = QDBusMessage::createMethodCall(QDBusConnection::sessionBus().baseService(), QString::fromLatin1(s_remoteDesktopPath), QString::fromLatin1(s_remoteDesktopInterface), QStringLiteral("connectToEIS"));
++        msg << static_cast<int>(capabilities);
++        const QDBusMessage reply = QDBusConnection::sessionBus().call(msg);
++        QVERIFY2(reply.type() == QDBusMessage::ReplyMessage, qPrintable(reply.errorMessage()));
++        QCOMPARE(reply.arguments().size(), 2);
++
++        m_cookie = reply.arguments().at(1).toInt();
++        m_sender = ei_new_sender(nullptr);
++        QVERIFY(m_sender);
++        ei_configure_name(m_sender, "kwin-libei-test");
++        const int fd = reply.arguments().at(0).value<QDBusUnixFileDescriptor>().takeFileDescriptor();
++        QVERIFY(fd != -1);
++        QCOMPARE(ei_setup_backend_fd(m_sender, fd), 0);
++    }
++
++    RemoteDesktopEiConnection(const RemoteDesktopEiConnection &) = delete;
++    RemoteDesktopEiConnection &operator=(const RemoteDesktopEiConnection &) = delete;
++
++    ~RemoteDesktopEiConnection()
++    {
++        if (m_pointerDevice) {
++            ei_device_unref(m_pointerDevice);
++        }
++        if (m_keyboardDevice) {
++            ei_device_unref(m_keyboardDevice);
++        }
++#if EIS_HAVE_16
++        if (m_textDevice) {
++            ei_device_unref(m_textDevice);
++        }
++#endif
++        if (m_sender) {
++            ei_unref(m_sender);
++        }
++        if (m_cookie != -1) {
++            QDBusMessage msg = QDBusMessage::createMethodCall(QDBusConnection::sessionBus().baseService(), QString::fromLatin1(s_remoteDesktopPath), QString::fromLatin1(s_remoteDesktopInterface), QStringLiteral("disconnect"));
++            msg << m_cookie;
++            const QDBusReply<void> reply = QDBusConnection::sessionBus().call(msg);
++            QVERIFY2(reply.isValid(), QTest::toString(reply.error()));
++        }
++    }
++
++    void waitForDevices()
++    {
++        QSocketNotifier notifier(ei_get_fd(m_sender), QSocketNotifier::Read);
++        QSignalSpy readableSpy(&notifier, &QSocketNotifier::activated);
++
++        bool pointerResumed = false;
++        bool keyboardResumed = false;
++#if EIS_HAVE_16
++        bool textResumed = false;
++#endif
++
++        while ((!m_pointerDevice || !m_keyboardDevice
++#if EIS_HAVE_16
++                || !m_textDevice || !pointerResumed || !keyboardResumed || !textResumed
++#else
++                || !pointerResumed || !keyboardResumed
++#endif
++                )
++               && readableSpy.wait()) {
++            ei_dispatch(m_sender);
++            while (ei_event *event = ei_get_event(m_sender)) {
++                switch (ei_event_get_type(event)) {
++                case EI_EVENT_CONNECT:
++                case EI_EVENT_SYNC:
++                    break;
++                case EI_EVENT_SEAT_ADDED:
++                    ei_seat_bind_capabilities(ei_event_get_seat(event),
++                                              EI_DEVICE_CAP_POINTER,
++                                              EI_DEVICE_CAP_POINTER_ABSOLUTE,
++                                              EI_DEVICE_CAP_BUTTON,
++                                              EI_DEVICE_CAP_SCROLL,
++                                              EI_DEVICE_CAP_KEYBOARD,
++#if EIS_HAVE_16
++                                              EI_DEVICE_CAP_TEXT,
++#endif
++                                              nullptr);
++                    break;
++                case EI_EVENT_DEVICE_ADDED: {
++                    ei_device *device = ei_event_get_device(event);
++                    if (!m_pointerDevice && ei_device_has_capability(device, EI_DEVICE_CAP_POINTER) && ei_device_has_capability(device, EI_DEVICE_CAP_BUTTON)) {
++                        m_pointerDevice = ei_device_ref(device);
++                    } else if (!m_keyboardDevice && ei_device_has_capability(device, EI_DEVICE_CAP_KEYBOARD)) {
++                        m_keyboardDevice = ei_device_ref(device);
++#if EIS_HAVE_16
++                    } else if (!m_textDevice && ei_device_has_capability(device, EI_DEVICE_CAP_TEXT)) {
++                        m_textDevice = ei_device_ref(device);
++#endif
++                    }
++                    break;
++                }
++                case EI_EVENT_DEVICE_RESUMED: {
++                    ei_device *device = ei_event_get_device(event);
++                    pointerResumed |= device == m_pointerDevice;
++                    keyboardResumed |= device == m_keyboardDevice;
++#if EIS_HAVE_16
++                    textResumed |= device == m_textDevice;
++#endif
++                    break;
++                }
++                default:
++                    break;
++                }
++                ei_event_unref(event);
++            }
++        }
++
++        QVERIFY(m_pointerDevice);
++        QVERIFY(m_keyboardDevice);
++#if EIS_HAVE_16
++        QVERIFY(m_textDevice);
++#endif
++        QVERIFY(pointerResumed);
++        QVERIFY(keyboardResumed);
++#if EIS_HAVE_16
++        QVERIFY(textResumed);
++#endif
++    }
++
++    ei *sender() const
++    {
++        return m_sender;
++    }
++
++    ei_device *pointerDevice() const
++    {
++        return m_pointerDevice;
++    }
++
++    ei_device *keyboardDevice() const
++    {
++        return m_keyboardDevice;
++    }
++
++    ei_device *textDevice() const
++    {
++#if EIS_HAVE_16
++        return m_textDevice;
++#else
++        return nullptr;
++#endif
++    }
++
++private:
++    int m_cookie = -1;
++    ei *m_sender = nullptr;
++    ei_device *m_pointerDevice = nullptr;
++    ei_device *m_keyboardDevice = nullptr;
++#if EIS_HAVE_16
++    ei_device *m_textDevice = nullptr;
++#endif
++};
++
++class TestLibei : public QObject
++{
++    Q_OBJECT
++
++private Q_SLOTS:
++    void initTestCase();
++    void init();
++    void cleanup();
++
++    void testSender();
++};
++
++void TestLibei::initTestCase()
++{
++    QVERIFY(waylandServer()->init(qAppName()));
++    static_cast<WaylandTestApplication *>(kwinApp())->setInputMethodServerToStart("internal");
++    kwinApp()->start();
++    Test::setOutputConfig({Rect(0, 0, 1280, 1024)});
++    QVERIFY(kwinApp()->pluginManager()->loadedPlugins().contains("eis"));
++}
++
++void TestLibei::init()
++{
++    QVERIFY(Test::setupWaylandConnection(Test::AdditionalWaylandInterface::Seat));
++}
++
++void TestLibei::cleanup()
++{
++    if (Test::waylandConnection()) {
++        Test::destroyWaylandConnection();
++    }
++}
++
++void TestLibei::testSender()
++{
++    QVERIFY(Test::waitForWaylandPointer());
++    QVERIFY(Test::waitForWaylandKeyboard());
++
++    auto pointer = std::unique_ptr<KWayland::Client::Pointer>(Test::waylandSeat()->createPointer());
++    auto keyboard = std::unique_ptr<KWayland::Client::Keyboard>(Test::waylandSeat()->createKeyboard());
++    auto simpleKeyboard = std::make_unique<Test::SimpleKeyboard>();
++    auto surface = Test::createSurface();
++    auto shellSurface = Test::createXdgToplevelSurface(surface.get());
++
++    Window *window = Test::renderAndWaitForShown(surface.get(), QSize(1280, 1024), Qt::cyan);
++    QVERIFY(window);
++    window->move(QPoint(0, 0));
++
++    quint32 timestamp = 0;
++    Test::pointerMotion(QPoint(100, 100), ++timestamp);
++    Test::waylandSync();
++    QCOMPARE(pointer->enteredSurface(), surface.get());
++    QCOMPARE(keyboard->enteredSurface(), surface.get());
++    QCOMPARE(simpleKeyboard->keyboard()->enteredSurface(), surface.get());
++
++    RemoteDesktopEiConnection sender(static_cast<uint>(PortalCapabilities::Keyboard) | static_cast<uint>(PortalCapabilities::Pointer));
++    sender.waitForDevices();
++
++    QSignalSpy motionSpy(pointer.get(), &KWayland::Client::Pointer::motion);
++    QSignalSpy buttonSpy(pointer.get(), &KWayland::Client::Pointer::buttonStateChanged);
++    QSignalSpy keySpy(keyboard.get(), &KWayland::Client::Keyboard::keyChanged);
++#if EIS_HAVE_16
++    QSignalSpy keySymSpy(simpleKeyboard.get(), &Test::SimpleKeyboard::keySymRecevied);
++    QSignalSpy receivedTextChangedSpy(simpleKeyboard.get(), &Test::SimpleKeyboard::receviedTextChanged);
++#endif
++
++    uint32_t sequence = 1;
++    ei_device_start_emulating(sender.pointerDevice(), sequence);
++    ei_device_start_emulating(sender.keyboardDevice(), sequence);
++#if EIS_HAVE_16
++    ei_device_start_emulating(sender.textDevice(), sequence);
++#endif
++
++    ei_device_pointer_motion(sender.pointerDevice(), 12, -7);
++    ei_device_frame(sender.pointerDevice(), ei_now(sender.sender()));
++    QVERIFY(motionSpy.wait());
++    QCOMPARE(motionSpy.last().at(0).toPointF(), QPointF(112, 93));
++    QCOMPARE(input()->globalPointer(), QPoint(112, 93));
++
++    ei_device_button_button(sender.pointerDevice(), BTN_LEFT, true);
++    ei_device_frame(sender.pointerDevice(), ei_now(sender.sender()));
++    QVERIFY(buttonSpy.wait());
++    QCOMPARE(buttonSpy.last().at(2).value<quint32>(), BTN_LEFT);
++    QCOMPARE(buttonSpy.last().at(3).value<KWayland::Client::Pointer::ButtonState>(), KWayland::Client::Pointer::ButtonState::Pressed);
++
++    ei_device_button_button(sender.pointerDevice(), BTN_LEFT, false);
++    ei_device_frame(sender.pointerDevice(), ei_now(sender.sender()));
++    QVERIFY(buttonSpy.count() == 2 || buttonSpy.wait());
++    QCOMPARE(buttonSpy.last().at(2).value<quint32>(), BTN_LEFT);
++    QCOMPARE(buttonSpy.last().at(3).value<KWayland::Client::Pointer::ButtonState>(), KWayland::Client::Pointer::ButtonState::Released);
++
++    ei_device_keyboard_key(sender.keyboardDevice(), KEY_F1, true);
++    ei_device_frame(sender.keyboardDevice(), ei_now(sender.sender()));
++    QVERIFY(keySpy.wait());
++    QCOMPARE(keySpy.last().at(0).value<quint32>(), KEY_F1);
++    QCOMPARE(keySpy.last().at(1).value<KWayland::Client::Keyboard::KeyState>(), KWayland::Client::Keyboard::KeyState::Pressed);
++
++    ei_device_keyboard_key(sender.keyboardDevice(), KEY_F1, false);
++    ei_device_frame(sender.keyboardDevice(), ei_now(sender.sender()));
++    QVERIFY(keySpy.count() == 2 || keySpy.wait());
++    QCOMPARE(keySpy.last().at(0).value<quint32>(), KEY_F1);
++    QCOMPARE(keySpy.last().at(1).value<KWayland::Client::Keyboard::KeyState>(), KWayland::Client::Keyboard::KeyState::Released);
++
++#if EIS_HAVE_16
++    keySymSpy.clear();
++
++    ei_device_text_keysym(sender.textDevice(), XKB_KEY_a, true);
++    ei_device_text_keysym(sender.textDevice(), XKB_KEY_a, false);
++    ei_device_frame(sender.textDevice(), ei_now(sender.sender()));
++    keySymSpy.wait();
++    QCOMPARE(keySymSpy.at(0).at(0).toUInt(), XKB_KEY_a);
++    keySymSpy.clear();
++
++    ei_device_text_keysym(sender.textDevice(), XKB_KEY_A, true);
++    ei_device_text_keysym(sender.textDevice(), XKB_KEY_A, false);
++    ei_device_frame(sender.textDevice(), ei_now(sender.sender()));
++    keySymSpy.wait();
++    QCOMPARE(keySymSpy.at(0).at(0).toUInt(), XKB_KEY_A);
++    keySymSpy.clear();
++
++    ei_device_text_keysym(sender.textDevice(), XKB_KEY_Left, true);
++    ei_device_text_keysym(sender.textDevice(), XKB_KEY_Left, false);
++    ei_device_frame(sender.textDevice(), ei_now(sender.sender()));
++    keySymSpy.wait();
++    QCOMPARE(keySymSpy.at(0).at(0).toUInt(), XKB_KEY_Left);
++    keySymSpy.clear();
++
++    simpleKeyboard->clearReceivedText();
++    const QByteArray helloText = QStringLiteral("hello 😀").toUtf8();
++    ei_device_text_utf8_with_length(sender.textDevice(), helloText.constData(), helloText.size());
++    ei_device_frame(sender.textDevice(), ei_now(sender.sender()));
++
++    bool matched = false;
++    for (int i = 0; i < 20; ++i) {
++        if (simpleKeyboard->receviedText() == QStringLiteral("hello 😀")) {
++            matched = true;
++            break;
++        }
++        receivedTextChangedSpy.wait();
++    }
++    QVERIFY(matched);
++
++    ei_device_stop_emulating(sender.textDevice());
++#endif
++    ei_device_stop_emulating(sender.keyboardDevice());
++    ei_device_stop_emulating(sender.pointerDevice());
++}
++
++WAYLANDTEST_MAIN(TestLibei)
++
++#include "libei_test.moc"
+diff --git a/src/inputmethod.cpp b/src/inputmethod.cpp
+index 2714a88599..72bf1cc875 100644
+--- a/src/inputmethod.cpp
++++ b/src/inputmethod.cpp
+@@ -577,6 +577,11 @@ void InputMethod::keysymReceived(quint32 serial, quint32 time, quint32 sym, bool
+     }
+ }
+ 
++void InputMethod::sendText(const QString &text)
++{
++    commitString(m_serial++, text);
++}
++
+ void InputMethod::commitString(qint32 serial, const QString &text)
+ {
+     if (auto t1 = waylandServer()->seat()->textInputV1(); t1 && t1->isEnabled()) {
+diff --git a/src/inputmethod.h b/src/inputmethod.h
+index beb6c1277e..72a4dcbcca 100644
+--- a/src/inputmethod.h
++++ b/src/inputmethod.h
+@@ -72,6 +72,11 @@ public:
+     bool activeClientSupportsTextInput() const;
+     void forceActivate();
+ 
++    /**
++     * This is for injecting text input directly from sources other than the input method.
++     */
++    void sendText(const QString &text);
++
+     void commitPendingText();
+ 
+     // for use by the QPA
+diff --git a/src/plugins/eis/eisbackend.cpp b/src/plugins/eis/eisbackend.cpp
+index 3df341fe1a..a816959d46 100644
+--- a/src/plugins/eis/eisbackend.cpp
++++ b/src/plugins/eis/eisbackend.cpp
+@@ -111,6 +111,9 @@ QDBusUnixFileDescriptor EisBackend::connectToEIS(const int &capabilities, int &c
+     QFlags<eis_device_capability> eisCapabilities;
+     if (capabilities & keyboardPortal) {
+         eisCapabilities |= EIS_DEVICE_CAP_KEYBOARD;
++// #if EIS_HAVE_16
++        eisCapabilities |= EIS_DEVICE_CAP_TEXT;
++// #endif
+     }
+     if (capabilities & pointerPortal) {
+         eisCapabilities |= EIS_DEVICE_CAP_POINTER;
+@@ -195,4 +198,10 @@ eis_device *EisBackend::createKeyboard(eis_seat *seat)
+ 
+     return device;
+ }
++eis_device *EisBackend::createText(eis_seat *seat)
++{
++    auto device = createDevice(seat, "eis text");
++    eis_device_configure_capability(device, EIS_DEVICE_CAP_TEXT);
++    return device;
++}
+ }
+diff --git a/src/plugins/eis/eisbackend.h b/src/plugins/eis/eisbackend.h
+index f04282e58c..f63f4dc070 100644
+--- a/src/plugins/eis/eisbackend.h
++++ b/src/plugins/eis/eisbackend.h
+@@ -43,6 +43,7 @@ public:
+     eis_device *createKeyboard(eis_seat *seat);
+     eis_device *createPointer(eis_seat *seat);
+     eis_device *createAbsoluteDevice(eis_seat *seat);
++    eis_device *createText(eis_seat *seat);
+ 
+ private:
+     QDBusServiceWatcher *m_serviceWatcher;
+diff --git a/src/plugins/eis/eiscontext.cpp b/src/plugins/eis/eiscontext.cpp
+index 2c5a8c8b40..58705d7483 100644
+--- a/src/plugins/eis/eiscontext.cpp
++++ b/src/plugins/eis/eiscontext.cpp
+@@ -1,10 +1,16 @@
+ /*
+-    SPDX-FileCopyrightText: 2024 David Redondo <kde@david-redondo>
++
++    SPDX-FileCopyrightText: 2024 David Redondo <kde@david-redondo.de>
++    SPDX-FileCopyrightText: 2026 David Edmundson <davidedmundson@kde.org>
+ 
+     SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted-GPL
+ */
+ 
+ #include "eiscontext.h"
++
++#include "inputmethod.h"
++#include "main.h"
++
+ #include "eisbackend.h"
+ #include "eisdevice.h"
+ #include "libeis_logging.h"
+@@ -52,6 +58,7 @@ public:
+     std::unique_ptr<EisDevice> absoluteDevice;
+     std::unique_ptr<EisDevice> pointer;
+     std::unique_ptr<EisDevice> keyboard;
++    std::unique_ptr<EisDevice> text;
+ };
+ 
+ DbusEisContext::DbusEisContext(KWin::EisBackend *backend, QFlags<eis_device_capability> allowedCapabilities, int cookie, const QString &dbusService)
+@@ -68,7 +75,7 @@ int DbusEisContext::addClient()
+ }
+ 
+ XWaylandEisContext::XWaylandEisContext(KWin::EisBackend *backend)
+-    : EisContext(backend, {EIS_DEVICE_CAP_POINTER | EIS_DEVICE_CAP_POINTER_ABSOLUTE | EIS_DEVICE_CAP_KEYBOARD | EIS_DEVICE_CAP_TOUCH | EIS_DEVICE_CAP_SCROLL | EIS_DEVICE_CAP_BUTTON})
++    : EisContext(backend, {EIS_DEVICE_CAP_POINTER | EIS_DEVICE_CAP_POINTER_ABSOLUTE | EIS_DEVICE_CAP_KEYBOARD | EIS_DEVICE_CAP_TOUCH | EIS_DEVICE_CAP_SCROLL | EIS_DEVICE_CAP_BUTTON | EIS_DEVICE_CAP_TEXT})
+     , socketName(qgetenv("XDG_RUNTIME_DIR") + QByteArrayLiteral("/kwin-xwayland-eis-socket.") + QByteArray::number(getpid()))
+ {
+     eis_setup_backend_socket(m_eisContext, socketName.constData());
+@@ -99,6 +106,9 @@ EisContext::~EisContext()
+         if (client->keyboard) {
+             Q_EMIT m_backend->deviceRemoved(client->keyboard.get());
+         }
++        if (client->text) {
++            Q_EMIT m_backend->deviceRemoved(client->text.get());
++        }
+     }
+ }
+ 
+@@ -111,6 +121,11 @@ void EisContext::updateScreens()
+     }
+ }
+ 
++static std::chrono::microseconds currentTime()
++{
++    return std::chrono::duration_cast<std::chrono::microseconds>(std::chrono::steady_clock::now().time_since_epoch());
++}
++
+ void EisContext::updateKeymap()
+ {
+     for (const auto &client : m_clients) {
+@@ -120,11 +135,6 @@ void EisContext::updateKeymap()
+     }
+ }
+ 
+-static std::chrono::microseconds currentTime()
+-{
+-    return std::chrono::duration_cast<std::chrono::microseconds>(std::chrono::steady_clock::now().time_since_epoch());
+-}
+-
+ void EisContext::handleEvents()
+ {
+     auto eventDevice = [](eis_event *event) {
+@@ -146,7 +156,7 @@ void EisContext::handleEvents()
+             eis_client_connect(client);
+ 
+             auto seat = eis_client_new_seat(client, QByteArrayLiteral(" seat").prepend(clientName));
+-            constexpr std::array allCapabilities{EIS_DEVICE_CAP_POINTER, EIS_DEVICE_CAP_POINTER_ABSOLUTE, EIS_DEVICE_CAP_KEYBOARD, EIS_DEVICE_CAP_TOUCH, EIS_DEVICE_CAP_SCROLL, EIS_DEVICE_CAP_BUTTON};
++            constexpr std::array allCapabilities{EIS_DEVICE_CAP_POINTER, EIS_DEVICE_CAP_POINTER_ABSOLUTE, EIS_DEVICE_CAP_KEYBOARD, EIS_DEVICE_CAP_TOUCH, EIS_DEVICE_CAP_SCROLL, EIS_DEVICE_CAP_BUTTON, EIS_DEVICE_CAP_TEXT};
+             for (auto capability : allCapabilities) {
+                 if (m_allowedCapabilities & capability) {
+                     eis_seat_configure_capability(seat, capability);
+@@ -185,6 +195,10 @@ void EisContext::handleEvents()
+             updateDevice(clientSeat->absoluteDevice, &EisBackend::createAbsoluteDevice, eis_event_seat_has_capability(event, EIS_DEVICE_CAP_POINTER_ABSOLUTE) || eis_event_seat_has_capability(event, EIS_DEVICE_CAP_TOUCH));
+             updateDevice(clientSeat->pointer, &EisBackend::createPointer, eis_event_seat_has_capability(event, EIS_DEVICE_CAP_POINTER));
+             updateDevice(clientSeat->keyboard, &EisBackend::createKeyboard, eis_event_seat_has_capability(event, EIS_DEVICE_CAP_KEYBOARD));
++// #if EIS_HAVE_16
++            updateDevice(clientSeat->text, &EisBackend::createText, eis_event_seat_has_capability(event, EIS_DEVICE_CAP_TEXT));
++// #endif
++
+             break;
+         }
+         case EIS_EVENT_DEVICE_CLOSED: {
+@@ -198,6 +212,10 @@ void EisContext::handleEvents()
+                 seat->keyboard.reset();
+             } else if (device == seat->pointer.get()) {
+                 seat->pointer.reset();
++// #if EIS_HAVE_16
++            } else if (device == seat->text.get()) {
++                seat->text.reset();
++// #endif
+             }
+             break;
+         }
+@@ -302,18 +320,7 @@ void EisContext::handleEvents()
+             auto device = eventDevice(event);
+             const quint32 key = eis_event_keyboard_get_key(event);
+             const bool press = eis_event_keyboard_get_key_is_press(event);
+-            qCDebug(KWIN_EIS) << device->name() << "key" << key << press;
+-            if (press) {
+-                if (device->pressedKeys.contains(key)) {
+-                    continue;
+-                }
+-                device->pressedKeys.insert(key);
+-            } else {
+-                if (!device->pressedKeys.remove(key)) {
+-                    continue;
+-                }
+-            }
+-            Q_EMIT device->keyChanged(key, press ? KeyboardKeyState::Pressed : KeyboardKeyState::Released, currentTime(), device);
++            device->sendKey(key, press ? KeyboardKeyState::Pressed : KeyboardKeyState::Released);
+             break;
+         }
+         case EIS_EVENT_TOUCH_DOWN: {
+@@ -343,6 +350,21 @@ void EisContext::handleEvents()
+             Q_EMIT device->touchMotion(id, {x, y}, currentTime(), device);
+             break;
+         }
++        case EIS_EVENT_TEXT_KEYSYM: {
++            auto device = eventDevice(event);
++            const auto keySym = eis_event_text_get_keysym(event);
++            const bool isPress = eis_event_text_get_keysym_is_press(event);
++            device->sendKeySym(keySym, isPress ? KeyboardKeyState::Pressed : KeyboardKeyState::Released);
++            break;
++        }
++        case EIS_EVENT_TEXT_UTF8: {
++            const auto text = QString::fromUtf8(eis_event_text_get_utf8(event));
++            kwinApp()->inputMethod()->sendText(text);
++            break;
++        }
++        case EIS_EVENT_PONG:
++        case EIS_EVENT_SYNC:
++            break;
+         }
+         eis_event_unref(event);
+     }
+diff --git a/src/plugins/eis/eisdevice.cpp b/src/plugins/eis/eisdevice.cpp
+index aa58dba19f..7ed4fa33f0 100644
+--- a/src/plugins/eis/eisdevice.cpp
++++ b/src/plugins/eis/eisdevice.cpp
+@@ -1,10 +1,13 @@
+ /*
+-    SPDX-FileCopyrightText: 2024 David Redondo <kde@david-redondo>
++
++    SPDX-FileCopyrightText: 2024 David Redondo <kde@david-redondo.de>
++    SPDX-FileCopyrightText: 2026 David Edmundson <davidedmundson@kde.org>
+ 
+     SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted-GPL
+ */
+ 
+ #include "eisdevice.h"
++#include "keyboard_input.h"
+ 
+ #include <libeis.h>
+ 
+@@ -108,4 +111,83 @@ bool EisDevice::isLidSwitch() const
+     return false;
+ }
+ 
++void EisDevice::sendKey(uint32_t keyCode, KeyboardKeyState state)
++{
++    switch (state) {
++    case KeyboardKeyState::Pressed:
++        if (pressedKeys.contains(keyCode)) {
++            return;
++        }
++        pressedKeys.insert(keyCode);
++        break;
++
++    case KeyboardKeyState::Released:
++        if (!pressedKeys.remove(keyCode)) {
++            return;
++        }
++        break;
++    default:
++        return;
++    }
++
++    Q_EMIT keyChanged(keyCode, state, currentTime(), this);
++}
++
++void EisDevice::sendKeySym(xkb_keysym_t keySym, KeyboardKeyState keyState)
++{
++    std::optional<Xkb::KeyCode> keyCode = input()->keyboard()->xkb()->keycodeFromKeysym(keySym);
++    if (keyCode) {
++        // grab the current modifier state, cache it, send our key with our own modifiers at a known state, then reset back
++        xkb_state *state = input()->keyboard()->xkb()->state();
++        xkb_mod_mask_t formerDepressed = xkb_state_serialize_mods(state, XKB_STATE_MODS_DEPRESSED);
++        xkb_mod_mask_t formerLatched = xkb_state_serialize_mods(state, XKB_STATE_MODS_LATCHED);
++        xkb_mod_mask_t formerLocked = xkb_state_serialize_mods(state, XKB_STATE_MODS_LOCKED);
++        xkb_layout_index_t formerLayout = xkb_state_serialize_layout(state, XKB_STATE_LAYOUT_EFFECTIVE);
++
++        // if the keysym is "F" we need to temporarily depress shift before the F key and most importantly unset it after
++        // however we still want modifiers like pressing control and alt to still work.
++
++        // In addition if a modifier key is received we want that modifier state to persist until released, so don't set/unset modifiers when forwarding
++        static const QSet<xkb_keysym_t> modifierKeySyms = {
++            XKB_KEY_Shift_L,
++            XKB_KEY_Shift_R,
++            XKB_KEY_Control_L,
++            XKB_KEY_Control_R,
++            XKB_KEY_Alt_L,
++            XKB_KEY_Alt_R,
++            XKB_KEY_Meta_L,
++            XKB_KEY_Meta_R,
++            XKB_KEY_Super_L,
++            XKB_KEY_Super_R,
++        };
++
++        const bool isModifier = modifierKeySyms.contains(keySym);
++        if (isModifier) {
++            sendKey(keyCode->keyCode, keyState);
++        } else {
++            input()->keyboard()->xkb()->updateModifiers(formerDepressed | keyCode->modifiers, formerLatched, formerLocked, formerLayout);
++            sendKey(keyCode->keyCode, keyState);
++            input()->keyboard()->xkb()->updateModifiers(formerDepressed, formerLatched, formerLocked, formerLayout);
++        }
++        return;
++    }
++
++    // otherwise create a new keymap and send that one key
++    // clients don't seem to like having a keymap change whilst a key is pressed
++    // for now send a fake release with every press and ignore other releases. We can make the keymap resetting more lazy if it's an issue IRL
++    if (keyState == KeyboardKeyState::Pressed) {
++        static const uint unmappedKeyCode = 247;
++        bool keymapUpdated = input()->keyboard()->xkb()->updateToKeymapForKeySym(unmappedKeyCode, keySym);
++        if (!keymapUpdated) {
++            return;
++        }
++        sendKey(unmappedKeyCode, KeyboardKeyState::Pressed);
++
++        for (quint32 key : std::as_const(pressedKeys)) {
++            sendKey(key, KeyboardKeyState::Released);
++        }
++        // reset keyboard back
++        input()->keyboard()->xkb()->reconfigure();
++    }
++}
+ }
+diff --git a/src/plugins/eis/eisdevice.h b/src/plugins/eis/eisdevice.h
+index 154936782f..3f59d43a92 100644
+--- a/src/plugins/eis/eisdevice.h
++++ b/src/plugins/eis/eisdevice.h
+@@ -1,5 +1,6 @@
+ /*
+-    SPDX-FileCopyrightText: 2024 David Redondo <kde@david-redondo>
++    SPDX-FileCopyrightText: 2024 David Redondo <kde@david-redondo.de>
++    SPDX-FileCopyrightText: 2026 David Edmundson <davidedmundson@kde.org>
+ 
+     SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted-GPL
+ */
+@@ -7,6 +8,7 @@
+ #pragma once
+ 
+ #include "core/inputdevice.h"
++#include "xkb.h"
+ 
+ struct eis_device;
+ 
+@@ -44,6 +46,9 @@ public:
+     bool isTabletModeSwitch() const override;
+     bool isLidSwitch() const override;
+ 
++    void sendKey(uint32_t keyCode, KeyboardKeyState state);
++    void sendKeySym(xkb_keysym_t keySym, KeyboardKeyState state);
++
+ private:
+     eis_device *m_device;
+     bool m_enabled;
+-- 
+2.43.0
+
