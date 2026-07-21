@@ -1,5 +1,5 @@
 
-`main @ 20260715.1000`
+`main @ 20260721.1000`
 ======================
 
 Valve packages
@@ -75,7 +75,7 @@ Valve packages
  * [`plasma-pa` — `holo-main/plasma-pa-6.4.3-3`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/plasma-pa-6.4.3-3)
  * [`plasma-workspace` — `holo-main/plasma-workspace-6.4.3-1.4`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/plasma-workspace-6.4.3-1.4)
  * [`plasma-x11-session` — `holo-main/plasma-workspace-6.4.3-1.4`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/plasma-workspace-6.4.3-1.4)
- * [`plymouth` — `holo-main/plymouth-22.02.122-7.4`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/plymouth-22.02.122-7.4)
+ * [`plymouth` — `holo-main/plymouth-22.02.122-7.5`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/plymouth-22.02.122-7.5)
  * [`podman` — `holo-main/podman-5.5.2-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/podman-5.5.2-1.1)
  * [`pulseaudio-qt` — `holo-main/pulseaudio-qt-1.7.0-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/pulseaudio-qt-1.7.0-2)
  * [`rauc` — `holo-main/rauc-1.14-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/rauc-1.14-1.1)
@@ -86,7 +86,7 @@ Valve packages
  * [`steamos-efi` — `holo-main/steamos-efi-20260602.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-efi-20260602.1-1)
  * [`steamos-kdumpst-layer` — `holo-main/steamos-kdumpst-layer-1.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-kdumpst-layer-1.1-1)
  * [`steamos-log-submitter` — `holo-main/steamos-log-submitter-0.8.2-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-log-submitter-0.8.2-1)
- * [`steamos-manager` — `holo-main/steamos-manager-26.3.0-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-manager-26.3.0-1)
+ * [`steamos-manager` — `holo-main/steamos-manager-26.4.0-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-manager-26.4.0-1)
  * [`steamos-networking-tools` — `holo-main/steamos-networking-tools-1.2-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-networking-tools-1.2-1)
  * [`steamos-passwd` — `holo-main/steamos-passwd-1.0-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-passwd-1.0-1)
  * [`steamos-powerbuttond` — `holo-main/steamos-powerbuttond-4.2-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-powerbuttond-4.2-1)
@@ -125,7 +125,7 @@ Valve packages
  * [`ibus-anthy` — `jupiter-main/ibus-anthy-1.5.14-4.4`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/ibus-anthy-1.5.14-4.4)
  * [`ibus-pinyin` — `jupiter-main/ibus-pinyin-1.5.1-2.3`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/ibus-pinyin-1.5.1-2.3)
  * [`ibus-table-cangjie-lite` — `jupiter-main/ibus-table-cangjie-lite-1.8.8-2.4`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/ibus-table-cangjie-lite-1.8.8-2.4)
- * [`inputplumber` — `jupiter-main/inputplumber-0.77.7-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/inputplumber-0.77.7-1)
+ * [`inputplumber` — `jupiter-main/inputplumber-0.78.0-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/inputplumber-0.78.0-1)
  * [`jupiter-dock-updater-bin` — `jupiter-main/jupiter-dock-updater-bin-20260602.01-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-dock-updater-bin-20260602.01-1)
  * [`jupiter-fan-control` — `jupiter-main/jupiter-fan-control-20260422.2-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-fan-control-20260422.2-1)
  * [`jupiter-firewall` — `jupiter-main/jupiter-firewall-0.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-firewall-0.1-1)
@@ -377,6 +377,8 @@ Arch Linux packages
  * [`ijs/0.35-6`](https://gitlab.archlinux.org/archlinux/packaging/packages/ijs/-/tree/0.35-6)
  * [`imath/3.1.12-4`](https://gitlab.archlinux.org/archlinux/packaging/packages/imath/-/tree/3.1.12-4)
  * [`imlib2/1.12.5-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/imlib2/-/tree/1.12.5-1)
+ * [`intel-gmmlib/22.7.2-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/intel-gmmlib/-/tree/22.7.2-1)
+ * [`intel-media-driver/25.2.5-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/intel-media-driver/-/tree/25.2.5-1)
  * [`iotop/0.6-12`](https://gitlab.archlinux.org/archlinux/packaging/packages/iotop/-/tree/0.6-12)
  * [`iproute2/6.16.0-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/iproute2/-/tree/6.16.0-1)
  * [`iptables/1:1.8.11-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/iptables/-/tree/1:1.8.11-2)
