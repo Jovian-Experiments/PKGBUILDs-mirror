@@ -1,5 +1,5 @@
 
-`main @ 20260721.1000`
+`main @ 20260721.1001`
 ======================
 
 Valve packages
@@ -28,7 +28,7 @@ Valve packages
  * [`fremont-hw-support` — `holo-main/fremont-hw-support-20260506.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/fremont-hw-support-20260506.1-1)
  * [`fwupd-minimal` — `holo-main/fwupd-minimal-2.0.18-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/fwupd-minimal-2.0.18-1)
  * [`gnutls` — `holo-main/gnutls-3.8.13-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/gnutls-3.8.13-1.1)
- * [`holo-desync` — `holo-main/steamos-customizations-git-20260602.2-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-customizations-git-20260602.2-1)
+ * [`holo-desync` — `holo-main/steamos-customizations-git-20260721.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-customizations-git-20260721.1-1)
  * [`holo-dmi-rules` — `holo-main/holo-dmi-rules-1.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/holo-dmi-rules-1.1-1)
  * [`holo-earlyoom` — `holo-main/holo-earlyoom-1.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/holo-earlyoom-1.1-1)
  * [`holo-fstab-repair` — `holo-main/holo-fstab-repair-0.2-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/holo-fstab-repair-0.2-1)
@@ -39,7 +39,7 @@ Valve packages
  * [`holo-plymouth-themes` — `holo-main/holo-plymouth-themes-0.7-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/holo-plymouth-themes-0.7-1)
  * [`holo-realtek-firmware-toggles` — `holo-main/holo-realtek-firmware-toggles-1.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/holo-realtek-firmware-toggles-1.1-1)
  * [`holo-session-selection` — `holo-main/holo-session-selection-1.0-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/holo-session-selection-1.0-1)
- * [`holo-sudo` — `holo-main/steamos-customizations-git-20260602.2-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-customizations-git-20260602.2-1)
+ * [`holo-sudo` — `holo-main/steamos-customizations-git-20260721.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-customizations-git-20260721.1-1)
  * [`holo-zram-swap` — `holo-main/holo-zram-swap-0.3-0`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/holo-zram-swap-0.3-0)
  * [`hwdata` — `holo-main/hwdata-0.397-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/hwdata-0.397-1.1)
  * [`ibus` — `holo-main/ibus-1.5.32-2.2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/ibus-1.5.32-2.2)
@@ -101,7 +101,7 @@ Valve packages
  * [`udisks2-btrfs` — `holo-main/udisks2-2.10.1-6.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/udisks2-2.10.1-6.1)
  * [`udisks2-lvm2` — `holo-main/udisks2-2.10.1-6.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/udisks2-2.10.1-6.1)
  * [`umr` — `holo-main/umr-1.0.10-1.4`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/umr-1.0.10-1.4)
- * [`wireless-domain-setter` — `holo-main/wireless-domain-setter-1.0-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/wireless-domain-setter-1.0-1)
+ * [`wireless-domain-setter` — `holo-main/wireless-domain-setter-1.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/wireless-domain-setter-1.1-1)
  * [`xdg-dbus-proxy` — `holo-main/xdg-dbus-proxy-0.1.7-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/xdg-dbus-proxy-0.1.7-1.1)
  * [`xdg-desktop-portal` — `holo-main/xdg-desktop-portal-1.20.4-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/xdg-desktop-portal-1.20.4-1.1)
  * [`xdg-desktop-portal-gamescope` — `holo-main/xdg-desktop-portal-gamescope-0.1.33.412a4bf-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/xdg-desktop-portal-gamescope-0.1.33.412a4bf-2)
@@ -149,7 +149,7 @@ Valve packages
  * [`steamdeck-dsp` — `jupiter-main/steamdeck-dsp-0.99-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steamdeck-dsp-0.99-1)
  * [`steamdeck-kde-presets` — `jupiter-main/steamdeck-kde-presets-3.9.3-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steamdeck-kde-presets-3.9.3-2)
  * [`steamos-alias` — `jupiter-main/steamos-alias-2.0-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steamos-alias-2.0-1)
- * [`steamos-customizations-jupiter` — `jupiter-main/steamos-customizations-jupiter-20260602.2-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steamos-customizations-jupiter-20260602.2-1)
+ * [`steamos-customizations-jupiter` — `jupiter-main/steamos-customizations-jupiter-20260721.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steamos-customizations-jupiter-20260721.1-1)
  * [`steamos-devkit-service` — `jupiter-main/steamos-devkit-service-0.20250916.0-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steamos-devkit-service-0.20250916.0-1)
  * [`upower` — `jupiter-main/upower-1.90.10-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/upower-1.90.10-1.1)
  * [`usbhid-gadget-passthru` — `jupiter-main/usbhid-gadget-passthru-0.1.3-5`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/usbhid-gadget-passthru-0.1.3-5)
@@ -234,6 +234,7 @@ Arch Linux packages
  * [`cifs-utils/7.4-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/cifs-utils/-/tree/7.4-1)
  * [`clinfo/3.0.23.01.25-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/clinfo/-/tree/3.0.23.01.25-1)
  * [`composefs/1.0.8-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/composefs/-/tree/1.0.8-1)
+ * [`compsize/1.5-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/compsize/-/tree/1.5-2)
  * [`conmon/1:2.1.13-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/conmon/-/tree/1:2.1.13-1)
  * [`containers-common/1:0.63.1-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/containers-common/-/tree/1:0.63.1-1)
  * [`convertlit/1.8-12`](https://gitlab.archlinux.org/archlinux/packaging/packages/convertlit/-/tree/1.8-12)
