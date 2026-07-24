@@ -1,0 +1,30 @@
+From 2ae2a103b45322a6f592655d28a424b9e6770db1 Mon Sep 17 00:00:00 2001
+From: Julian Bouzas <julian.bouzas@collabora.com>
+Date: Thu, 16 Jul 2026 08:54:36 -0400
+Subject: [PATCH] monitor: alsa: Add 'device.form-factor' node property
+
+This allows users to match against it in the alsa rules
+---
+ src/scripts/monitors/alsa.lua | 6 ++++++
+ 1 file changed, 6 insertions(+)
+
+diff --git a/src/scripts/monitors/alsa.lua b/src/scripts/monitors/alsa.lua
+index c592f93e..4ec7897d 100644
+--- a/src/scripts/monitors/alsa.lua
++++ b/src/scripts/monitors/alsa.lua
+@@ -435,6 +435,12 @@ function createNode(parent, id, obj_type, factory, properties)
+     end
+   end
+ 
++  -- add device form-factor property for rule matching purposes
++  local dev_form_factor = dev_props["device.form-factor"]
++  if dev_form_factor ~= nil then
++    properties["device.form-factor"] = dev_form_factor
++  end
++
+   -- add cpu.vm.name for rule matching purposes
+   local vm_type = Core.get_vm_type()
+   if nonempty(vm_type) then
+-- 
+2.50.1
+
