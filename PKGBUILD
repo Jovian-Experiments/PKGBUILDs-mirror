@@ -33,7 +33,7 @@ pkgname=(
   pulse-native-provider
 )
 pkgver=1.6.4
-pkgrel=1.10
+pkgrel=1.11
 epoch=1
 pkgdesc="Low-latency audio/video router and processor"
 url="https://pipewire.org"
@@ -138,7 +138,13 @@ source=(
     "0001-pulse-server-don-t-consider-monitor-nodes-when-findi.patch"
 
     # Holo: Backport of https://gitlab.freedesktop.org/pipewire/pipewire/-/merge_requests/2873
-    "0001-pipewire-pulse-Expose-profile-preference-setting-as-.patch")
+    "0001-pipewire-pulse-Expose-profile-preference-setting-as-.patch"
+
+    # Holo: Backport of https://gitlab.freedesktop.org/pipewire/pipewire/-/merge_requests/2922
+    "0001-spa-alsa-recheck-ACP-profile-set-on-HDMI-ELD-changes.patch"
+
+    # Holo: Backport of https://gitlab.freedesktop.org/pipewire/pipewire/-/merge_requests/2994
+    "0001-spa-alsa-pass-ELD-data-to-ACP-HDMI-profile-recheck.patch")
 b2sums=('054c756beae00a1dc9b757864633f9698a8f6cf5c7c187b2f0d0cb762eec74990e3403e949684b24a5e67d499c9257a91fbd7ebbe764ee34fd02f92844419427'
         'b999796fc69ecd661b7cd761b98daf81412e4a02e649d74d8d8ec7d2c6cf0169f6062ea03131313a5b03a50529e956289baf0068f0631ea58243d42f1fae4d6e'
         'ba33b056d13739e24b7e6c46bf9268357eea5a989f8af5021c737978a9a0bd9fb9882cc7e2c6eb8477d7c1e50684c3083ea33123f29a949e600ee1849cfe5cdf'
@@ -168,7 +174,9 @@ b2sums=('054c756beae00a1dc9b757864633f9698a8f6cf5c7c187b2f0d0cb762eec74990e3403e
         '0c07c7488e6463d83ed2c0e89df4ad8e2e10c5fcdfb1b66610aaf26672a08204d313d6cced8c4ebd2152b9f0211358b8ec3db42e1674355d32808de9a85b5b10'
         'ac9cadb5252779f86825b778e7c79ea7e926b1ebaba0b9fc504167b6d944b6fe33f4b4833ecf5751b4723592749dd1c856a419426dde864b620b08cb23a38ba7'
         '8dc405657ce215407e7189c4c35e38618568763b07aea30ce805da38cd593943e434fcf55fb6a77f172408f99ac6fb701eefdf0da8d7c30f280e9b79163e3e2c'
-        'adc941999ee419b3f25bf155cf59e29344a32ea94067ec1530c1b069912eb825fdc908c72a89ef536df50293b1807f403a8560319a366838a4a55ed6ead8e852')
+        'adc941999ee419b3f25bf155cf59e29344a32ea94067ec1530c1b069912eb825fdc908c72a89ef536df50293b1807f403a8560319a366838a4a55ed6ead8e852'
+        '43c150e442e62b1c5da74572aa280804c06e60323e527404a3369310186fd3a230d0248c90c1e008b0cfa313f260876ecaf08a4a6dd6f82a4db1ddefaa06984c'
+        '1b2f8b5c201706c2faaedb95de487d1af70394f8f446819d82fc7163d142010bb3b212457a7b5c02bc4e3605d7a5e2be3fcb562cfb80ff551998343264160a6b')
 
 prepare() {
   cd pipewire
