@@ -1,12 +1,12 @@
 
-`main @ 20260729.1000`
+`main @ 20260731.1000`
 ======================
 
 Valve packages
 --------------
 
 ### `holo-main`
- * [`7zip` — `holo-main/7zip-25.01-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/7zip-25.01-1.1)
+ * [`7zip` — `holo-main/7zip-26.02-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/7zip-26.02-1.1)
  * [`atomupd-daemon` — `holo-main/atomupd-daemon-0.20260519.0-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/atomupd-daemon-0.20260519.0-1)
  * [`bluez` — `holo-main/bluez-5.86-4.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/bluez-5.86-4.1)
  * [`bluez-deprecated-tools` — `holo-main/bluez-5.86-4.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/bluez-5.86-4.1)
@@ -37,7 +37,7 @@ Valve packages
  * [`holo-keyring` — `holo-main/holo-keyring-20250801-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/holo-keyring-20250801-1)
  * [`holo-nfs-utils-tmpfiles` — `holo-main/holo-nfs-utils-tmpfiles-0.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/holo-nfs-utils-tmpfiles-0.1-1)
  * [`holo-plymouth-themes` — `holo-main/holo-plymouth-themes-0.7-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/holo-plymouth-themes-0.7-1)
- * [`holo-realtek-firmware-toggles` — `holo-main/holo-realtek-firmware-toggles-1.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/holo-realtek-firmware-toggles-1.1-1)
+ * [`holo-realtek-firmware-toggles` — `holo-main/holo-realtek-firmware-toggles-1.2-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/holo-realtek-firmware-toggles-1.2-1)
  * [`holo-session-selection` — `holo-main/holo-session-selection-1.0-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/holo-session-selection-1.0-1)
  * [`holo-sudo` — `holo-main/steamos-customizations-git-20260721.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-customizations-git-20260721.1-1)
  * [`holo-zram-swap` — `holo-main/holo-zram-swap-0.3-0`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/holo-zram-swap-0.3-0)
@@ -61,6 +61,7 @@ Valve packages
  * [`libpng` — `holo-main/libpng-1.6.58-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/libpng-1.6.58-1.1)
  * [`libspeechd` — `holo-main/speech-dispatcher-0.12.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/speech-dispatcher-0.12.1-1)
  * [`libssh2` — `holo-main/libssh2-1.11.1-4.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/libssh2-1.11.1-4.1)
+ * [`libxfont2` — `holo-main/libxfont2-2.0.8-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/libxfont2-2.0.8-1.1)
  * [`libxml2` — `holo-main/libxml2-2.14.5-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/libxml2-2.14.5-1.1)
  * [`lsb-release` — `holo-main/lsb-release-2.0.r55.a25a4fc-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/lsb-release-2.0.r55.a25a4fc-1.1)
  * [`maliit-keyboard` — `holo-main/maliit-keyboard-2.3.1-4.2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/maliit-keyboard-2.3.1-4.2)
@@ -80,10 +81,10 @@ Valve packages
  * [`pulseaudio-qt` — `holo-main/pulseaudio-qt-1.7.0-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/pulseaudio-qt-1.7.0-2)
  * [`rauc` — `holo-main/rauc-1.14-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/rauc-1.14-1.1)
  * [`rtkit` — `holo-main/rtkit-0.14-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/rtkit-0.14-1)
- * [`scx-scheds` — `holo-main/scx-scheds-1.1.1.linux.steamos-4`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/scx-scheds-1.1.1.linux.steamos-4)
+ * [`scx-scheds` — `holo-main/scx-scheds-1.1.2.linux.steamos-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/scx-scheds-1.1.2.linux.steamos-2)
  * [`speech-dispatcher` — `holo-main/speech-dispatcher-0.12.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/speech-dispatcher-0.12.1-1)
  * [`steamos-atomupd-client` — `holo-main/steamos-atomupd-client-0.20260625.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-atomupd-client-0.20260625.1-1)
- * [`steamos-efi` — `holo-main/steamos-efi-20260602.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-efi-20260602.1-1)
+ * [`steamos-efi` — `holo-main/steamos-efi-20260723.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-efi-20260723.1-1)
  * [`steamos-kdumpst-layer` — `holo-main/steamos-kdumpst-layer-1.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-kdumpst-layer-1.1-1)
  * [`steamos-log-submitter` — `holo-main/steamos-log-submitter-0.8.2-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-log-submitter-0.8.2-1)
  * [`steamos-manager` — `holo-main/steamos-manager-26.4.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-manager-26.4.1-1)
@@ -108,9 +109,9 @@ Valve packages
  * [`xdg-desktop-portal-gtk` — `holo-main/xdg-desktop-portal-gtk-1.15.3-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/xdg-desktop-portal-gtk-1.15.3-1.1)
  * [`xdg-desktop-portal-holo` — `holo-main/xdg-desktop-portal-holo-0.1.18.5ad92bf-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/xdg-desktop-portal-holo-0.1.18.5ad92bf-1)
  * [`xdg-desktop-portal-kde` — `holo-main/xdg-desktop-portal-kde-6.4.3-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/xdg-desktop-portal-kde-6.4.3-2)
- * [`xorg-server` — `holo-main/xorg-server-21.1.23-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/xorg-server-21.1.23-1.1)
- * [`xorg-server-common` — `holo-main/xorg-server-21.1.23-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/xorg-server-21.1.23-1.1)
- * [`xorg-xwayland` — `holo-main/xorg-xwayland-24.1.12-1.2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/xorg-xwayland-24.1.12-1.2)
+ * [`xorg-server` — `holo-main/xorg-server-21.1.24-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/xorg-server-21.1.24-1.1)
+ * [`xorg-server-common` — `holo-main/xorg-server-21.1.24-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/xorg-server-21.1.24-1.1)
+ * [`xorg-xwayland` — `holo-main/xorg-xwayland-24.1.13-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/xorg-xwayland-24.1.13-1.1)
  * [`zenity-gtk3` — `holo-main/zenity-gtk3-3.44.2-4`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/zenity-gtk3-3.44.2-4)
 
 ### `jupiter-main`
@@ -119,7 +120,7 @@ Valve packages
  * [`ec-log` — `jupiter-main/ec-log-0.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/ec-log-0.1-1)
  * [`filesystem` — `jupiter-main/filesystem-2021.12.07-1.18`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/filesystem-2021.12.07-1.18)
  * [`galileo-mura` — `jupiter-main/galileo-mura-v0.10-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/galileo-mura-v0.10-1)
- * [`gamescope` — `jupiter-main/gamescope-3.16.24-3`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/gamescope-3.16.24-3)
+ * [`gamescope` — `jupiter-main/gamescope-3.16.25-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/gamescope-3.16.25-2)
  * [`gpu-trace` — `jupiter-main/gpu-trace-2.14-1.3`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/gpu-trace-2.14-1.3)
  * [`holo-nix-offload` — `jupiter-main/holo-nix-offload-0.3-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/holo-nix-offload-0.3-1)
  * [`ibus-anthy` — `jupiter-main/ibus-anthy-1.5.14-4.4`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/ibus-anthy-1.5.14-4.4)
@@ -153,7 +154,7 @@ Valve packages
  * [`steamos-devkit-service` — `jupiter-main/steamos-devkit-service-0.20250916.0-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steamos-devkit-service-0.20250916.0-1)
  * [`upower` — `jupiter-main/upower-1.90.10-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/upower-1.90.10-1.1)
  * [`usbhid-gadget-passthru` — `jupiter-main/usbhid-gadget-passthru-0.1.3-5`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/usbhid-gadget-passthru-0.1.3-5)
- * [`vpower` — `jupiter-main/vpower-1.6.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/vpower-1.6.1-1)
+ * [`vpower` — `jupiter-main/vpower-1.6.2-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/vpower-1.6.2-1)
  * [`vulkan-intel` — `jupiter-main/mesa-26.1.2.221562.radeonsi_26.1.2-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/mesa-26.1.2.221562.radeonsi_26.1.2-1)
  * [`vulkan-mesa-implicit-layers` — `jupiter-main/mesa-26.1.2.221562.radeonsi_26.1.2-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/mesa-26.1.2.221562.radeonsi_26.1.2-1)
  * [`vulkan-virtio` — `jupiter-main/mesa-26.1.2.221562.radeonsi_26.1.2-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/mesa-26.1.2.221562.radeonsi_26.1.2-1)
@@ -672,7 +673,6 @@ Arch Linux packages
  * [`libxdmcp/1.1.5-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/libxdmcp/-/tree/1.1.5-1)
  * [`libxext/1.3.6-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/libxext/-/tree/1.3.6-1)
  * [`libxfixes/6.0.1-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/libxfixes/-/tree/6.0.1-2)
- * [`libxfont2/2.0.7-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/libxfont2/-/tree/2.0.7-1)
  * [`libxft/2.3.9-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/libxft/-/tree/2.3.9-1)
  * [`libxi/1.8.2-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/libxi/-/tree/1.8.2-1)
  * [`libxinerama/1.1.5-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/libxinerama/-/tree/1.1.5-2)
