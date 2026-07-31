@@ -2,7 +2,7 @@
 # Maintainer: Manuel A. Fernandez Montecelo <mafm@igalia.com>
 
 pkgname=vpower
-pkgver=1.6.1
+pkgver=1.6.2
 pkgrel=1
 pkgdesc="Service that calculates battery metrics and handles critical battery scenarios"
 url=https://gitlab.steamos.cloud/jupiter/vpower
