@@ -3,7 +3,7 @@
 pkgname=gamescope
 _srctag=3.16.25
 pkgver=${_srctag//-/.}
-pkgrel=1
+pkgrel=2
 pkgdesc="gaming shell based on Xwayland, powered by Vulkan and DRM"
 arch=(x86_64)
 url="https://github.com/ValveSoftware/gamescope"
@@ -61,6 +61,10 @@ install=gamescope.install
 
 prepare() {
 	cd "$pkgname"
+
+	# Fixes startup failure with the Venus driver
+	# https://github.com/ValveSoftware/gamescope/issues/2281
+	git cherry-pick -n 8c676c399c761e4540587f61004c957993d12fea
 
 	# git submodules
 	git submodule init
