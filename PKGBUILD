@@ -6,7 +6,7 @@
 pkgname=kwin
 pkgver=6.4.3
 _dirver=$(echo $pkgver | cut -d. -f1-3)
-pkgrel=1.13 # support libei 1.6 features
+pkgrel=1.14 # fix output changes with direct scanout
 pkgdesc='An easy to use, but flexible, Wayland compositor'
 arch=(x86_64)
 url='https://kde.org/plasma-desktop/'
@@ -91,6 +91,7 @@ source=(https://download.kde.org/stable/plasma/$_dirver/$pkgname-$pkgver.tar.xz{
         0009-Fix-passing-fullscreen-to-the-X11-backend.patch # Drop after upstreaming
         0010-fix-hw-rotation-screencast.patch # Drop in 6.5+
         0011-Eis-Support-1.6-additions.patch # relies on a libei 1.6 feature that we patch in on deck; Drop in 6.8
+        0012-dont-test-with-scanout.patch # Drop in 6.5+
         )
 install=$pkgname.install
 sha256sums=('a13568c918eca7803eb44a3a2778b860edc3f03b36797851c4f3aeeed4b502a8'
@@ -106,7 +107,8 @@ sha256sums=('a13568c918eca7803eb44a3a2778b860edc3f03b36797851c4f3aeeed4b502a8'
             '6959025844eb0fd99687f539d6bcedb5dd4a48f5626ecbf8184cacb065f7ab1a'
             '264086d1982cb034811d6239ee59ad3c2f3f611a32b42cfc9dcc596c6baf4d11'
             '26bd648ed3a998e99ebdf945a1ab3cd6a2a925fb39f6e8039f8729fd2b68a868'
-            '6a2df9bd8ad9afc3ebf07aadba172b9444eeab535b805392bfcc391d7ac836ba')
+            '6a2df9bd8ad9afc3ebf07aadba172b9444eeab535b805392bfcc391d7ac836ba'
+            '97fd0a931efda42fe050ef7c9315acc23287c12a1f52bb32de849d83b31231d9')
 
 validpgpkeys=('E0A3EB202F8E57528E13E72FD7574483BB57B18D'  # Jonathan Esk-Riddell <jr@jriddell.org>
               '0AAC775BB6437A8D9AF7A3ACFE0784117FBCE11D'  # Bhushan Shah <bshah@kde.org>
@@ -127,6 +129,7 @@ prepare() {
   patch -p1 -d "$srcdir/$pkgname-$pkgver" -i "$srcdir/0009-Fix-passing-fullscreen-to-the-X11-backend.patch" # Drop after 6.7.0
   patch -p1 -d "$srcdir/$pkgname-$pkgver" -i "$srcdir/0010-fix-hw-rotation-screencast.patch"
   patch -p1 -d "$srcdir/$pkgname-$pkgver" -i "$srcdir/0011-Eis-Support-1.6-additions.patch"
+  patch -p1 -d "$srcdir/$pkgname-$pkgver" -i "$srcdir/0012-dont-test-with-scanout.patch"
 }
 
 build() {

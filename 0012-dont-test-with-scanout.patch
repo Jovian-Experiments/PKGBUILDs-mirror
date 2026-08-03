@@ -1,0 +1,12 @@
+diff --git a/src/backends/drm/drm_egl_layer.cpp b/src/backends/drm/drm_egl_layer.cpp
+index 9efd242608..f3511fd9c4 100644
+--- a/src/backends/drm/drm_egl_layer.cpp
++++ b/src/backends/drm/drm_egl_layer.cpp
+@@ -75,6 +75,7 @@ bool EglGbmLayer::doEndFrame(const QRegion &renderedRegion, const QRegion &damag
+ 
+ bool EglGbmLayer::checkTestBuffer()
+ {
++    m_scanoutBuffer.reset();
+     return m_surface.renderTestBuffer(targetRect().size(), m_pipeline->formats(m_type), m_pipeline->output()->colorPowerTradeoff()) != nullptr;
+ }
+ 
