@@ -3,7 +3,7 @@
 pkgname=galileo-mura
 _srctag=v0.10
 pkgver=${_srctag//-/.}
-pkgrel=1
+pkgrel=2
 pkgdesc="Utilities for setting and reading mura correction on Galileo"
 arch=(x86_64)
 url="https://gitlab.steamos.cloud/jupiter/galileo-mura-extractor"
