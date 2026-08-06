@@ -7,7 +7,7 @@
 _basename=steam
 pkgname=steam-jupiter-stable
 pkgver=1.0.0.85
-pkgrel=9
+pkgrel=10
 pkgdesc="Valve's digital software delivery system - Jupiter bootstrapped packaging"
 url='https://steampowered.com/'
 arch=('x86_64')
@@ -30,8 +30,8 @@ depends=(
   vulkan-driver
   vulkan-icd-loader
   lsof
-  'python>=3.13'
-  'python<3.14'
+  'python>=3.14'
+  'python<3.15'
   xdg-user-dirs
   glibc
   libxcrypt
