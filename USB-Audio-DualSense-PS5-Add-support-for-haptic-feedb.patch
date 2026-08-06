@@ -15,7 +15,7 @@ Signed-off-by: Cristian Ciocaltea <cristian.ciocaltea@collabora.com>
  1 file changed, 73 insertions(+)
 
 diff --git a/ucm2/USB-Audio/Sony/DualSense-PS5-HiFi.conf b/ucm2/USB-Audio/Sony/DualSense-PS5-HiFi.conf
-index e1f982d0..901f7020 100644
+index e1f982d0f..901f70204 100644
 --- a/ucm2/USB-Audio/Sony/DualSense-PS5-HiFi.conf
 +++ b/ucm2/USB-Audio/Sony/DualSense-PS5-HiFi.conf
 @@ -25,6 +25,18 @@ Macro [
