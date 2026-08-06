@@ -1,7 +1,7 @@
 pkgname=steam-im-modules
 _srctag=jupiter-20240131
 pkgver=${_srctag//-/.}
-pkgrel=3
+pkgrel=4
 pkgdesc="Steam Qt Keyboard Plug-in"
 arch=(x86_64 i686 arm armv6h armv7h aarch64)
 url="https://github.com/valve-project/steam-qt-keyboard-plugin"
