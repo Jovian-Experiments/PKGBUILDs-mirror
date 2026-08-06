@@ -3,28 +3,17 @@
 
 pkgname=pyzy
 pkgver=1.1
-pkgrel=2.5
+pkgrel=2.6
 pkgdesc='The Chinese PinYin and Bopomofo conversion library'
 arch=('x86_64')
 license=('LGPL')
 depends=('glib2' 'sqlite' 'util-linux')
-makedepends=('doxygen' 'gnome-common' 'python>=3.13' 'python<3.14')
-_commit=ec719d053bd491ec64fe68fe0d1699ca6039ad80
+makedepends=('doxygen' 'gnome-common' 'python>=3.14' 'python<3.15')
+_commit=5ac51d833777a881e80f0b23d704345cf0feb0d0
 source=(
   "git+https://github.com/openSUSE/pyzy#commit=${_commit}"
-  'fix_preedit.patch'
 )
-sha512sums=(
-  'SKIP'
-  '8580c7b1a4b421294e2430c392709f4e57fb534ff6e9b6373c4975301c2d15057eaecdc9fd418418fca80f9a6465465ae5b7e7fdf8017f9a1eee7255777af54f'
-)
-
-prepare() {
-  cd ${pkgname}
-  # https://github.com/openSUSE/pyzy/commit/0949bb294c29a2790554884093d82ff40ed40759
-  # this looks like a bug that snuck through - see comments
-  patch -p1 -R -i ../fix_preedit.patch
-}
+sha512sums=('8775834dbe93c92cbc8b3a021df2e25624894d8ee159a22f0a8ee3b07c640dfc564eb37a67f22e3e6ff6301d236646abb8afb68dfec248bda010bc67f92f0d35')
 
 build() {
   cd ${pkgname}
