@@ -3,7 +3,7 @@
 pkgname=wakehook
 _srctag=v2.1
 pkgver=${_srctag##v}
-pkgrel=2
+pkgrel=3
 arch=('x86_64')
 url="https://gitlab.steamos.cloud/endrift/wakehook"
 pkgdesc="Simple HDMI-CEC wakeup-on-resume daemon"
