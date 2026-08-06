@@ -4,12 +4,12 @@
 pkgname=jupiter-fan-control
 _srctag=20260422.2
 pkgver=${_srctag//-/.}
-pkgrel=1
+pkgrel=2
 arch=('any')
 license=('MIT')
 pkgdesc="Jupiter fan controller"
 url='https://gitlab.steamos.cloud/jupiter/jupiter-fan-control/-/tree/$_srctag'
-depends=('python-pyaml' 'python>=3.13' 'python<3.14')
+depends=('python-pyaml' 'python>=3.14' 'python<3.15')
 sha512sums=(SKIP)
 makedepends=('git' 'rsync' 'openssh')
 
