@@ -3,7 +3,7 @@
 pkgname=plasma-remotecontrollers
 pkgver=5.26.90.r258.g9ace9a9
 # _dirver=$(echo $pkgver | cut -d. -f1-3)
-pkgrel=2
+pkgrel=3
 pkgdesc='Translate various input device events into keyboard and pointer events'
 arch=(x86_64)
 url='https://plasma-bigscreen.org/'
