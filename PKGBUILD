@@ -34,7 +34,7 @@ pkgver=26.2.0_devel.222118.steamos_26.05.14
 #pkgver=25.2.7
 #pkgver=${pkgver/[a-z]/-&}
 
-pkgrel=1
+pkgrel=2
 epoch=0
 pkgdesc="Open-source OpenGL drivers"
 url="https://www.mesa3d.org/"
