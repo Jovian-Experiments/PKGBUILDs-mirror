@@ -7,7 +7,7 @@ pkgname=(linux-firmware-neptune-whence linux-firmware-neptune  amd-ucode-neptune
 )
 _tag=jupiter-20260712.1
 pkgver=${_tag//-/.}
-pkgrel=1
+pkgrel=2
 pkgdesc="Firmware files for Linux"
 url="https://gitlab.steamos.cloud/jupiter/linux-firmware-neptune"
 license=(
