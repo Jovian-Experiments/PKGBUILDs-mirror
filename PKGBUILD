@@ -9,7 +9,7 @@ pkgname=(
   wireplumber-docs
 )
 pkgver=0.5.14
-pkgrel=1.7
+pkgrel=1.8
 pkgdesc="Session / policy manager implementation for PipeWire"
 url="https://pipewire.pages.freedesktop.org/wireplumber/"
 arch=(x86_64)
