@@ -33,7 +33,7 @@ pkgname=(
   pulse-native-provider
 )
 pkgver=1.6.8
-pkgrel=1.1
+pkgrel=1.2
 epoch=1
 pkgdesc="Low-latency audio/video router and processor"
 url="https://pipewire.org"
@@ -73,8 +73,8 @@ makedepends=(
   ncurses
   onnxruntime
   opus
-  'python>=3.13'
-  'python<3.14'
+  'python>=3.14'
+  'python<3.15'
   python-docutils
   readline
   roc-toolkit
