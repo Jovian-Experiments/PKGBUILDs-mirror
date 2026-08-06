@@ -4,15 +4,14 @@
 # Contributor: Andrea Scarpino <andrea@archlinux.org>
 
 pkgname=powerdevil
-pkgver=6.4.3
+pkgver=6.7.3
 _dirver=$(echo $pkgver | cut -d. -f1-3)
-pkgrel=1.1 # Holo: Hide unactionable message to install power-profiles-daemon
+pkgrel=2.1 # Holo: Hide unactionable message to install power-profiles-daemon
 pkgdesc='Manages the power consumption settings of a Plasma Shell'
 arch=(x86_64)
 url='https://kde.org/plasma-desktop/'
 license=(LGPL-2.0-or-later)
 depends=(ddcutil
-         gcc-libs
          glibc
          plasma-activities
          kauth
@@ -27,18 +26,17 @@ depends=(ddcutil
          kirigami
          kitemmodels
          knotifications
+         kpackage
          kservice
-         ksvg
-         kwindowsystem
          kxmlgui
          libkscreen
          libplasma
+         libstdc++
          libxcb
          plasma-workspace
          qcoro
          qt6-base
          qt6-declarative
-         qt6-wayland
          solid
          systemd-libs
          wayland)
@@ -52,9 +50,9 @@ groups=(plasma)
 source=(https://download.kde.org/stable/plasma/$_dirver/$pkgname-$pkgver.tar.xz{,.sig}
         0001-Hide-power-profiles-daemon-when-not-supported.patch  # See https://gitlab.steamos.cloud/holo-team/tasks/-/issues/1674
        )
-sha256sums=('c247d0c414905de09f1c0133028481fb0f1ecfa26d89372acefaffab15052bd6'
+sha256sums=('72e362963d67488cb55b9d6c563a66bbe043553980269f2e2c2b691f023e2f35'
             'SKIP'
-            '89e9b44c94f905a00c01afc768309df1c76eb7ab91fcfd257ccfdb293ef1e421')
+            '6d7063672c3d1900f012bc9f732cb8975eb38e19ba615da58cdf6f57ef08b39d')
 validpgpkeys=('E0A3EB202F8E57528E13E72FD7574483BB57B18D'  # Jonathan Esk-Riddell <jr@jriddell.org>
               '0AAC775BB6437A8D9AF7A3ACFE0784117FBCE11D'  # Bhushan Shah <bshah@kde.org>
               'D07BD8662C56CB291B316EB2F5675605C74E02CF'  # David Edmundson <davidedmundson@kde.org>
