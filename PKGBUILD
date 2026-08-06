@@ -4,7 +4,7 @@
 
 pkgname=upower
 pkgver=1.90.10
-pkgrel=1.1
+pkgrel=1.2
 pkgdesc="Abstraction for enumerating power devices, listening to device events and querying history and statistics"
 url="https://upower.freedesktop.org"
 arch=(x86_64)
