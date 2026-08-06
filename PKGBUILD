@@ -4,7 +4,7 @@
 pkgbase=linux-neptune-618-drm-exec
 _tag=6.18.33-drmexec-valve2
 pkgver=${_tag//-/.}
-pkgrel=1
+pkgrel=2
 pkgdesc='Linux'
 url="https://gitlab.steamos.cloud/jupiter/linux-integration/-/tree/$_tag"
 arch=(x86_64)
