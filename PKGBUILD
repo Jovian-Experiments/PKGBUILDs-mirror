@@ -4,17 +4,17 @@
 # Contributor: Andrea Scarpino <andrea@archlinux.org>
 
 pkgname=kwin
-pkgver=6.4.3
+pkgver=6.7.3
 _dirver=$(echo $pkgver | cut -d. -f1-3)
-pkgrel=1.14 # fix output changes with direct scanout
+pkgrel=1.2 # support libei 1.6 features
 pkgdesc='An easy to use, but flexible, Wayland compositor'
 arch=(x86_64)
 url='https://kde.org/plasma-desktop/'
 license=(LGPL-2.0-or-later)
 depends=(aurorae
          breeze
-         gcc-libs
          glibc
+         iio-sensor-proxy
          plasma-activities
          kauth
          kcmutils
@@ -33,6 +33,7 @@ depends=(aurorae
          kirigami
          kitemmodels
          knewstuff
+         knighttime
          knotifications
          kpackage
          kquickcharts
@@ -49,24 +50,27 @@ depends=(aurorae
          libdrm
          libei
          libepoxy
+         libevdev
+         libgcc
          libinput
          libpipewire
          libqaccessibilityclient-qt6
+         libstdc++
          libxcb
          libxcvt
          libxkbcommon
          mesa
+         milou
          pipewire-session-manager
          libplasma
          qt6-5compat
          qt6-base
          qt6-declarative
-         qt6-sensors
          qt6-svg
          qt6-tools
          systemd-libs
+         vulkan-icd-loader
          wayland
-         xcb-util-cursor
          xcb-util-keysyms
          xcb-util-wm)
 makedepends=(extra-cmake-modules
@@ -74,41 +78,23 @@ makedepends=(extra-cmake-modules
              krunner
              plasma-wayland-protocols
              python
+             vulkan-headers
              wayland-protocols
              xorg-xwayland)
-optdepends=('maliit-keyboard: virtual keyboard')
+optdepends=('plasma-keyboard: virtual keyboard')
 groups=(plasma)
 source=(https://download.kde.org/stable/plasma/$_dirver/$pkgname-$pkgver.tar.xz{,.sig}
-        0001-backends-libinput-prefer-output-UUID-over-output-nam.patch # Drop in 6.5
         0002-Load-current-brightness-from-device.patch # Keep screen brightness from gamescope, track at https://bugs.kde.org/show_bug.cgi?id=508163
         0003-Outputconfigurationstore-default-to-internal-display.patch # Deck specific for default scale
-        0004-simulate-full-keyboard-handling-in-testFakeEve.patch # Drop in 6.5
-        0005-fakeinput-Support-arbitrary-keysyms.patch # prerequisite Drop in 6.6
         0006-inputmethod-Skip-input-events-from-fake-input.patch #Currently deck specific, a workaround for the Steam OSK. Test CJK input with both SteamOSK and a physical keyboard both work before dropping
-        0006-inputmethod-Improve-keysym-lookup-from-input-methods.patch # Drop in 6.5
-        0007-outputconfigurationstore-add-special-casing-for-the-.patch # Drop in 6.6
-        0008-backends-libinput-Fix-dangling-InputDevices-on-shutd.patch # Drop in 6.7
-        0009-Fix-passing-fullscreen-to-the-X11-backend.patch # Drop after upstreaming
-        0010-fix-hw-rotation-screencast.patch # Drop in 6.5+
         0011-Eis-Support-1.6-additions.patch # relies on a libei 1.6 feature that we patch in on deck; Drop in 6.8
-        0012-dont-test-with-scanout.patch # Drop in 6.5+
         )
-install=$pkgname.install
-sha256sums=('a13568c918eca7803eb44a3a2778b860edc3f03b36797851c4f3aeeed4b502a8'
+sha256sums=('345b45d400884cc6b00f4b3585cc056aa2780f32afe2df394d20c5a98273c559'
             'SKIP'
-            '4c24a5b9d2b181f3c4d7f4927f760d2302702eeae67592112bcb35a6c1d3a0af'
-            '887985706783d2658637548c8a63220397b9ebbd8fc425839d99c6138e8f19b8'
+            '81aabc16f054ba3cd47d0fe5d9169df17cd1f14d7dfc324786e86cbe08c84b48'
             '9417723b2a2c2ff81b914707edf6dd759ec1fa729eb80fea0719e1722b004a55'
-            '31997f384c70c673624858bd0957a7a136afbc03cd95780e1e32cc7baf00d5e9'
-            '2c492440092d929fa08a80fce2a08f88a045e31b79bfa66957127dbd598ec434'
             'bf08aae2967d3cd4202ee27004eff2feedc98163626fd98f96b7d2acae40dc38'
-            '7df6f28e7b6945ffcd29ec363b9f3a2b902d65350b93dd1f85ca95b0a9290770'
-            '3beeafa65cdd74fffd2cd8c2a704fb2ffa5fc8e3e2124180744ade6bdfb3a519'
-            '6959025844eb0fd99687f539d6bcedb5dd4a48f5626ecbf8184cacb065f7ab1a'
-            '264086d1982cb034811d6239ee59ad3c2f3f611a32b42cfc9dcc596c6baf4d11'
-            '26bd648ed3a998e99ebdf945a1ab3cd6a2a925fb39f6e8039f8729fd2b68a868'
-            '6a2df9bd8ad9afc3ebf07aadba172b9444eeab535b805392bfcc391d7ac836ba'
-            '97fd0a931efda42fe050ef7c9315acc23287c12a1f52bb32de849d83b31231d9')
+            '36ba3e57ac5ef8d3e5b4f17ad3623231d60267077bdcfb5566deb07fd103d11d')
 
 validpgpkeys=('E0A3EB202F8E57528E13E72FD7574483BB57B18D'  # Jonathan Esk-Riddell <jr@jriddell.org>
               '0AAC775BB6437A8D9AF7A3ACFE0784117FBCE11D'  # Bhushan Shah <bshah@kde.org>
@@ -117,19 +103,10 @@ validpgpkeys=('E0A3EB202F8E57528E13E72FD7574483BB57B18D'  # Jonathan Esk-Riddell
               '1FA881591C26B276D7A5518EEAAF29B42A678C20') # Marco Martin <notmart@gmail.com>
 
 prepare() {
-  patch -p1 -d "$srcdir/$pkgname-$pkgver" -i "$srcdir/0001-backends-libinput-prefer-output-UUID-over-output-nam.patch"
   patch -p1 -d "$srcdir/$pkgname-$pkgver" -i "$srcdir/0002-Load-current-brightness-from-device.patch"
   patch -p1 -d "$srcdir/$pkgname-$pkgver" -i "$srcdir/0003-Outputconfigurationstore-default-to-internal-display.patch"
-  patch -p1 -d "$srcdir/$pkgname-$pkgver" -i "$srcdir/0004-simulate-full-keyboard-handling-in-testFakeEve.patch"
-  patch -p1 -d "$srcdir/$pkgname-$pkgver" -i "$srcdir/0005-fakeinput-Support-arbitrary-keysyms.patch"
   patch -p1 -d "$srcdir/$pkgname-$pkgver" -i "$srcdir/0006-inputmethod-Skip-input-events-from-fake-input.patch"
-  patch -p1 -d "$srcdir/$pkgname-$pkgver" -i "$srcdir/0006-inputmethod-Improve-keysym-lookup-from-input-methods.patch"
-  patch -p1 -d "$srcdir/$pkgname-$pkgver" -i "$srcdir/0007-outputconfigurationstore-add-special-casing-for-the-.patch"
-  patch -p1 -d "$srcdir/$pkgname-$pkgver" -i "$srcdir/0008-backends-libinput-Fix-dangling-InputDevices-on-shutd.patch"
-  patch -p1 -d "$srcdir/$pkgname-$pkgver" -i "$srcdir/0009-Fix-passing-fullscreen-to-the-X11-backend.patch" # Drop after 6.7.0
-  patch -p1 -d "$srcdir/$pkgname-$pkgver" -i "$srcdir/0010-fix-hw-rotation-screencast.patch"
   patch -p1 -d "$srcdir/$pkgname-$pkgver" -i "$srcdir/0011-Eis-Support-1.6-additions.patch"
-  patch -p1 -d "$srcdir/$pkgname-$pkgver" -i "$srcdir/0012-dont-test-with-scanout.patch"
 }
 
 build() {
@@ -141,4 +118,5 @@ build() {
 
 package() {
   DESTDIR="$pkgdir" cmake --install build
+  setcap CAP_SYS_NICE=+ep "$pkgdir"/usr/bin/kwin_wayland
 }
