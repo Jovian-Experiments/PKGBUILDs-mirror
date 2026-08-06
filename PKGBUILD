@@ -3,7 +3,7 @@
 pkgname=usbhid-gadget-passthru
 _srctag=0.1.3
 pkgver=${_srctag}
-pkgrel=5
+pkgrel=6
 pkgdesc="USB HID device passthrough via gadget subsystem"
 url="https://gitlab.steamos.cloud/endrift/usbhid-gadget-passthru"
 arch=('x86_64')
