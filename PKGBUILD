@@ -3,7 +3,7 @@
 pkgname=steamos-efi
 _srctag=jupiter-20260723.1
 pkgver=${_srctag#jupiter-}
-pkgrel=1
+pkgrel=3
 arch=('x86_64')
 url='https://gitlab.steamos.cloud/holo/steamos-efi'
 pkgdesc='Stage 1 bootloader for SteamOS 3+'
