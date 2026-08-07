@@ -1,5 +1,5 @@
 
-`main @ 20260806.1000`
+`main @ 20260807.1000`
 ======================
 
 Valve packages
@@ -77,7 +77,7 @@ Valve packages
  * [`systemd-sysvcompat` — `holo-main/systemd-261.2-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/systemd-261.2-1.1)
  * [`ttf-twemoji-default` — `holo-main/ttf-twemoji-default-13.1.0-2.5`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/ttf-twemoji-default-13.1.0-2.5)
  * [`umr` — `holo-main/umr-1.0.10-1.5`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/umr-1.0.10-1.5)
- * [`wireless-domain-setter` — `holo-main/wireless-domain-setter-1.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/wireless-domain-setter-1.1-1)
+ * [`wireless-domain-setter` — `holo-main/wireless-domain-setter-1.2-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/wireless-domain-setter-1.2-1)
  * [`xdg-desktop-portal-gamescope` — `holo-main/xdg-desktop-portal-gamescope-0.1.33.412a4bf-3`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/xdg-desktop-portal-gamescope-0.1.33.412a4bf-3)
  * [`xdg-desktop-portal-gtk` — `holo-main/xdg-desktop-portal-gtk-1.15.3-1.2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/xdg-desktop-portal-gtk-1.15.3-1.2)
  * [`xdg-desktop-portal-holo` — `holo-main/xdg-desktop-portal-holo-0.1.18.5ad92bf-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/xdg-desktop-portal-holo-0.1.18.5ad92bf-2)
