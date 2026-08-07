@@ -10,3 +10,6 @@ SUBSYSTEM=="leds", RUN+="/usr/bin/chown deck:deck '/sys/class/leds/%k/multi_inte
 SUBSYSTEM=="leds", RUN+="/usr/bin/chown deck:deck '/sys/class/leds/%k/profile'"
 SUBSYSTEM=="leds", RUN+="/usr/bin/chown deck:deck '/sys/class/leds/%k/speed'"
 SUBSYSTEM=="leds", RUN+="/usr/bin/chown deck:deck '/sys/class/leds/%k/delay'"
+SUBSYSTEM=="leds", RUN+="/usr/bin/chown deck:deck '/sys/class/leds/%k/trigger'"
+SUBSYSTEM=="leds", RUN+="/usr/bin/chown deck:deck '/sys/class/leds/%k/delay_on'"
+SUBSYSTEM=="leds", RUN+="/usr/bin/chown deck:deck '/sys/class/leds/%k/delay_off'"
