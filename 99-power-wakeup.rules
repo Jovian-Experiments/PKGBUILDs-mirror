@@ -1,5 +1,11 @@
-# 3x PIDs (USB-Puck, USB-Neried (internal), USB-Controller) need to wake up Fremont
+# Steam Controller 2015 (wired controller, receiver)
+ACTION=="add", SUBSYSTEM=="usb", ATTRS{idVendor}=="28de", ATTRS{idProduct}=="1102", ATTR{power/wakeup}="enabled"
+ACTION=="add", SUBSYSTEM=="usb", ATTRS{idVendor}=="28de", ATTRS{idProduct}=="1142", ATTR{power/wakeup}="enabled"
 
+# Steam Controller 2026 (Puck, Machine internal Puck, USB controller)
 ACTION=="add", SUBSYSTEM=="usb", ATTRS{idVendor}=="28de", ATTRS{idProduct}=="1302", ATTR{power/wakeup}="enabled"
 ACTION=="add", SUBSYSTEM=="usb", ATTRS{idVendor}=="28de", ATTRS{idProduct}=="1304", ATTR{power/wakeup}="enabled"
 ACTION=="add", SUBSYSTEM=="usb", ATTRS{idVendor}=="28de", ATTRS{idProduct}=="1305", ATTR{power/wakeup}="enabled"
+
+# Frame Wireless receiver
+ACTION=="add", SUBSYSTEM=="usb", ATTRS{idVendor}=="28de", ATTRS{idProduct}=="2432", ATTR{power/wakeup}="enabled"
