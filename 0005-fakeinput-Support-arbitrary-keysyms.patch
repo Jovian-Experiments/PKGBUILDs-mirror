@@ -1,0 +1,347 @@
+From 6100f62be859dd37c84541b26bcf0b1f88acc37e Mon Sep 17 00:00:00 2001
+From: David Edmundson <kde@davidedmundson.co.uk>
+Date: Thu, 25 Sep 2025 16:21:37 +0100
+Subject: [PATCH] fakeinput: Support arbitrary keysyms
+
+When getting a keycode that cannot map to a given keycode in the current
+keymap install a temporary keymap within kwin and for all clients that
+contains the current symbol. This allows us to inject any unicode symbol
+from fake input regardless of the current keymap.
+
+This commit also improves the mapping of artbitrary levels to be more
+technically correct.
+
+This will also be relevant when libei gets keysym support.
+---
+ autotests/integration/fakeinput_test.cpp    | 46 +++++++++-
+ src/backends/fakeinput/fakeinputbackend.cpp | 93 ++++++++++++++++++---
+ src/inputmethod.cpp                         |  2 +-
+ src/xkb.cpp                                 | 34 ++++++--
+ src/xkb.h                                   | 18 +++-
+ 5 files changed, 167 insertions(+), 26 deletions(-)
+
+diff --git a/autotests/integration/fakeinput_test.cpp b/autotests/integration/fakeinput_test.cpp
+index 334dbf7be6..3679e27359 100644
+--- a/autotests/integration/fakeinput_test.cpp
++++ b/autotests/integration/fakeinput_test.cpp
+@@ -13,6 +13,7 @@
+ #include "wayland_server.h"
+ 
+ #include <linux/input-event-codes.h>
++#include <xkbcommon/xkbcommon-keysyms.h>
+ 
+ namespace KWin
+ {
+@@ -36,6 +37,7 @@ private Q_SLOTS:
+     void testTouch();
+     void testKeyboardKey_data();
+     void testKeyboardKey();
++    void testKeySym();
+ 
+ private:
+     InputDevice *m_inputDevice = nullptr;
+@@ -54,7 +56,7 @@ void FakeInputTest::initTestCase()
+ void FakeInputTest::init()
+ {
+     QSignalSpy deviceAddedSpy(input(), &InputRedirection::deviceAdded);
+-    QVERIFY(Test::setupWaylandConnection(Test::AdditionalWaylandInterface::FakeInput));
++    QVERIFY(Test::setupWaylandConnection(Test::AdditionalWaylandInterface::FakeInput | Test::AdditionalWaylandInterface::Seat));
+ 
+     QVERIFY(deviceAddedSpy.wait());
+     m_inputDevice = deviceAddedSpy.last().at(0).value<InputDevice *>();
+@@ -297,6 +299,48 @@ void FakeInputTest::testKeyboardKey()
+     QCOMPARE(keyboardKeySpy.last().at(1).value<KeyboardKeyState>(), KeyboardKeyState::Released);
+ }
+ 
++void FakeInputTest::testKeySym()
++{
++    // as keyboard input is complex, test the client gets the right keys as well as kwin
++    Test::FakeInput *fakeInput = Test::waylandFakeInput();
++    fakeInput->authenticate(QStringLiteral("org.kde.foobar"), QStringLiteral("foobar"));
++
++    std::unique_ptr<KWayland::Client::Surface> surface = Test::createSurface();
++    std::unique_ptr<Test::XdgToplevel> shellSurface(Test::createXdgToplevelSurface(surface.get()));
++    Window *window = Test::renderAndWaitForShown(surface.get(), QSize(1280, 1024), Qt::red);
++    QVERIFY(window);
++    QVERIFY(window->isActive());
++    QCOMPARE(window->frameGeometry().size(), QSize(1280, 1024));
++
++    auto keyboard = new Test::SimpleKeyboard(window);
++
++    auto sendKey = [fakeInput](uint32_t keySym) {
++        fakeInput->keyboard_keysym(keySym, WL_KEYBOARD_KEY_STATE_PRESSED);
++        fakeInput->keyboard_keysym(keySym, WL_KEYBOARD_KEY_STATE_RELEASED);
++    };
++
++    sendKey(XKB_KEY_a);
++    sendKey(XKB_KEY_B);
++    sendKey(XKB_KEY_space);
++    sendKey(XKB_KEY_adiaeresis); // lowercase a with umlauts
++    sendKey(XKB_KEY_Adiaeresis); // uppercase a with umlauts
++    sendKey(XKB_KEY_space);
++    sendKey(0x01000000 | 0xC548); // korean symbol
++    sendKey(0x01000000 | 0x1F60A); // smily face
++    sendKey(XKB_KEY_f);
++
++    QSignalSpy receivedTextChangedSpy(keyboard, &Test::SimpleKeyboard::receviedTextChanged);
++    bool matched = false;
++    for (int i = 0; i < 10; ++i) {
++        if (keyboard->receviedText() == "aB äÄ 안😊f") {
++            matched = true;
++            break;
++        }
++        receivedTextChangedSpy.wait();
++    }
++    QVERIFY(matched);
++}
++
+ } // namespace KWin
+ 
+ WAYLANDTEST_MAIN(KWin::FakeInputTest)
+diff --git a/src/backends/fakeinput/fakeinputbackend.cpp b/src/backends/fakeinput/fakeinputbackend.cpp
+index fffdb0da11..2c3b58130b 100644
+--- a/src/backends/fakeinput/fakeinputbackend.cpp
++++ b/src/backends/fakeinput/fakeinputbackend.cpp
+@@ -25,7 +25,7 @@ public:
+     FakeInputDevice *findDevice(Resource *resource);
+     void removeDeviceByResource(Resource *resource);
+     void removeDeviceByIterator(FakeInputDeviceMap::iterator it);
+-    std::chrono::microseconds currentTime() const;
++    static void sendKey(FakeInputDevice *device, uint32_t keyCode, KeyboardKeyState state);
+ 
+     FakeInputBackend *q;
+     Display *display;
+@@ -48,6 +48,11 @@ protected:
+     void org_kde_kwin_fake_input_destroy(Resource *resource) override;
+ };
+ 
++static std::chrono::microseconds currentTime()
++{
++    return std::chrono::duration_cast<std::chrono::microseconds>(std::chrono::steady_clock::now().time_since_epoch());
++}
++
+ FakeInputBackendPrivate::FakeInputBackendPrivate(FakeInputBackend *q, Display *display)
+     : q(q)
+     , display(display)
+@@ -99,11 +104,6 @@ void FakeInputBackendPrivate::removeDeviceByIterator(FakeInputDeviceMap::iterato
+     Q_EMIT q->deviceRemoved(device.get());
+ }
+ 
+-std::chrono::microseconds FakeInputBackendPrivate::currentTime() const
+-{
+-    return std::chrono::duration_cast<std::chrono::microseconds>(std::chrono::steady_clock::now().time_since_epoch());
+-}
+-
+ void FakeInputBackendPrivate::org_kde_kwin_fake_input_authenticate(Resource *resource, const QString &application, const QString &reason)
+ {
+     FakeInputDevice *device = findDevice(resource);
+@@ -247,6 +247,28 @@ void FakeInputBackendPrivate::org_kde_kwin_fake_input_pointer_motion_absolute(Re
+ }
+ 
+ void FakeInputBackendPrivate::org_kde_kwin_fake_input_keyboard_key(Resource *resource, uint32_t key, uint32_t state)
++{
++    FakeInputDevice *device = findDevice(resource);
++    if (!device->isAuthenticated()) {
++        return;
++    }
++    KeyboardKeyState nativeState;
++    switch (state) {
++    case WL_KEYBOARD_KEY_STATE_PRESSED:
++        nativeState = KeyboardKeyState::Pressed;
++        break;
++
++    case WL_KEYBOARD_KEY_STATE_RELEASED:
++        nativeState = KeyboardKeyState::Released;
++        break;
++
++    default:
++        return;
++    }
++    sendKey(device, key, nativeState);
++}
++/*
++void FakeInputBackendPrivate::org_kde_kwin_fake_input_keyboard_keysym(Resource *resource, uint32_t keySym, uint32_t state)
+ {
+     FakeInputDevice *device = findDevice(resource);
+     if (!device->isAuthenticated()) {
+@@ -257,24 +279,69 @@ void FakeInputBackendPrivate::org_kde_kwin_fake_input_keyboard_key(Resource *res
+     switch (state) {
+     case WL_KEYBOARD_KEY_STATE_PRESSED:
+         nativeState = KeyboardKeyState::Pressed;
+-        if (device->pressedKeys.contains(key)) {
++        break;
++    case WL_KEYBOARD_KEY_STATE_RELEASED:
++        nativeState = KeyboardKeyState::Released;
++        break;
++    default:
++        return;
++    }
++
++    std::optional<Xkb::KeyCode> keyCode = input()->keyboard()->xkb()->keycodeFromKeysym(keySym);
++    if (keyCode) {
++        // grab the current modifier state, cache it, send our key with our own modifiers at a known state, then reset back
++        xkb_state *state = input()->keyboard()->xkb()->state();
++        xkb_mod_mask_t formerDepressed = xkb_state_serialize_mods(state, XKB_STATE_MODS_DEPRESSED);
++        xkb_mod_mask_t formerLatched = xkb_state_serialize_mods(state, XKB_STATE_MODS_LATCHED);
++        xkb_mod_mask_t formerLocked = xkb_state_serialize_mods(state, XKB_STATE_MODS_LOCKED);
++        xkb_layout_index_t formerLayout = xkb_state_serialize_layout(state, XKB_STATE_LAYOUT_EFFECTIVE);
++
++        input()->keyboard()->xkb()->updateModifiers(keyCode->modifiers, 0, 0, 0);
++        sendKey(device, keyCode->keyCode, nativeState);
++
++        input()->keyboard()->xkb()->updateModifiers(formerDepressed, formerLatched, formerLocked, formerLayout);
++        return;
++    }
++
++    // otherwise create a new keymap and send that one key
++    // clients don't seem to like having a keymap change whilst a key is pressed
++    // for now send a fake release with every press and ignore other releases. We can make the keymap resetting more lazy if it's an issue IRL
++    if (nativeState == KeyboardKeyState::Pressed) {
++        static const uint unmappedKeyCode = 247;
++        bool keymapUpdated = input()->keyboard()->xkb()->updateToKeymapForKeySym(unmappedKeyCode, keySym);
++        if (!keymapUpdated) {
+             return;
+         }
+-        device->pressedKeys.insert(key);
+-        break;
++        sendKey(device, unmappedKeyCode, KeyboardKeyState::Pressed);
+ 
+-    case WL_KEYBOARD_KEY_STATE_RELEASED:
+-        if (!device->pressedKeys.remove(key)) {
++        for (quint32 key : std::as_const(device->pressedKeys)) {
++            sendKey(device, key, KeyboardKeyState::Released);
++        }
++        // reset keyboard back
++        input()->keyboard()->xkb()->reconfigure();
++    }
++}*/
++
++void FakeInputBackendPrivate::sendKey(FakeInputDevice *device, uint32_t keyCode, KeyboardKeyState state)
++{
++    switch (state) {
++    case KeyboardKeyState::Pressed:
++        if (device->pressedKeys.contains(keyCode)) {
+             return;
+         }
+-        nativeState = KeyboardKeyState::Released;
++        device->pressedKeys.insert(keyCode);
+         break;
+ 
++    case KeyboardKeyState::Released:
++        if (!device->pressedKeys.remove(keyCode)) {
++            return;
++        }
++        break;
+     default:
+         return;
+     }
+ 
+-    Q_EMIT device->keyChanged(key, nativeState, currentTime(), device);
++    Q_EMIT device->keyChanged(keyCode, state, currentTime(), device);
+ }
+ 
+ FakeInputBackend::FakeInputBackend(Display *display)
+diff --git a/src/inputmethod.cpp b/src/inputmethod.cpp
+index 959c81af1d..d32a64ce45 100644
+--- a/src/inputmethod.cpp
++++ b/src/inputmethod.cpp
+@@ -633,7 +633,7 @@ void InputMethod::commitString(qint32 serial, const QString &text)
+             if (!keyCode) {
+                 qCWarning(KWIN_VIRTUALKEYBOARD) << "Could not map keysym " << keySym << "to keycode. Trying custom keymap";
+                 static const uint unmappedKeyCode = 247;
+-                auto temporaryKeymap = input()->keyboard()->xkb()->createKeymapForKeysym(unmappedKeyCode, keySym);
++                auto temporaryKeymap = input()->keyboard()->xkb()->keymapContentsForKeysym(unmappedKeyCode, keySym);
+                 if (temporaryKeymap.isEmpty()) {
+                     continue;
+                 }
+diff --git a/src/xkb.cpp b/src/xkb.cpp
+index a8e5266128..28395c1b5e 100644
+--- a/src/xkb.cpp
++++ b/src/xkb.cpp
+@@ -1320,8 +1320,31 @@ QList<xkb_keysym_t> Xkb::keysymsFromQtKey(QKeyCombination keyQt)
+     return syms;
+ }
+ 
+-QByteArray Xkb::createKeymapForKeysym(xkb_keycode_t newKeycode,
+-                                      xkb_keysym_t customSym)
++QByteArray Xkb::keymapContentsForKeysym(xkb_keycode_t newKeycode, xkb_keysym_t customSym)
++{
++    auto keymap = createKeymapForKeysym(newKeycode, customSym);
++    if (!keymap) {
++        return {};
++    }
++    UniqueCPtr<char> keymapString(xkb_keymap_get_as_string(keymap, XKB_KEYMAP_FORMAT_TEXT_V1));
++    if (!keymapString) {
++        return {};
++    }
++    return keymapString.get();
++}
++
++bool Xkb::updateToKeymapForKeySym(xkb_keycode_t newKeycode, xkb_keysym_t customSym)
++{
++    auto keymap = createKeymapForKeysym(newKeycode, customSym);
++    if (!keymap) {
++        return false;
++    }
++    updateKeymap(keymap);
++    return true;
++}
++
++xkb_keymap *Xkb::createKeymapForKeysym(xkb_keycode_t newKeycode,
++                                       xkb_keysym_t customSym)
+ {
+     char symName[64];
+     if (xkb_keysym_get_name(customSym, symName, sizeof(symName)) <= 0) {
+@@ -1356,12 +1379,7 @@ QByteArray Xkb::createKeymapForKeysym(xkb_keycode_t newKeycode,
+         qWarning() << "Could not create new keymap for keysym" << customSym;
+         return {};
+     }
+-
+-    UniqueCPtr<char> keymapString(xkb_keymap_get_as_string(newMap, XKB_KEYMAP_FORMAT_TEXT_V1));
+-    if (!keymapString) {
+-        return {};
+-    }
+-    return keymapString.get();
++    return newMap;
+ }
+ }
+ 
+diff --git a/src/xkb.h b/src/xkb.h
+index de97d0b8c8..3c751e3fe0 100644
+--- a/src/xkb.h
++++ b/src/xkb.h
+@@ -139,9 +139,20 @@ public:
+      */
+     static QList<xkb_keysym_t> keysymsFromQtKey(QKeyCombination keyQt);
+ 
+-    // Create a new keymap with one custom keysym bound to a given keycode.
+-    QByteArray createKeymapForKeysym(xkb_keycode_t newKeycode,
+-                                     xkb_keysym_t customSym);
++    /**
++     *  Create a temporary keymap with one custom keysym bound to a given keycode.
++     *  The underlying keymap used by Xkb is unchanged
++     */
++    QByteArray keymapContentsForKeysym(xkb_keycode_t newKeycode,
++                                       xkb_keysym_t customSym);
++
++    /**
++     * Create a temporary keymap with one custom keysym bound to a given keycode.
++     * The underlying keymap used in this XKb object is changed.
++     */
++    bool updateToKeymapForKeySym(xkb_keycode_t newKeycode,
++                                 xkb_keysym_t customSym);
++
+ 
+ public Q_SLOTS:
+     void reconfigure();
+@@ -155,6 +166,7 @@ private:
+     xkb_keymap *loadKeymapFromConfig();
+     xkb_keymap *loadDefaultKeymap();
+     xkb_keymap *loadKeymapFromLocale1();
++    xkb_keymap *createKeymapForKeysym(xkb_keycode_t newKeycode, xkb_keysym_t customSym);
+     void updateKeymap(xkb_keymap *keymap);
+     void createKeymapFile();
+     void updateModifiers();
+-- 
+2.43.0
+
