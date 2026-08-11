@@ -1,0 +1,14 @@
+#
+# Neptune devel stuff
+#
+
+CONFIG_LOCALVERSION="-devel"
+
+# Disable module signing for devel packages
+CONFIG_MODULE_SIG=n
+CONFIG_MODULE_SIG_FORCE=n
+CONFIG_MODULE_SIG_ALL=n
+CONFIG_SECURITY_LOCKDOWN_LSM=n
+
+# Allow BTF mismatch
+CONFIG_MODULE_ALLOW_BTF_MISMATCH=y
