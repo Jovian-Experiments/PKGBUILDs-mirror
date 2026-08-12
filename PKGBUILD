@@ -8,8 +8,8 @@ pkgname=(
   libwireplumber
   wireplumber-docs
 )
-pkgver=0.5.14
-pkgrel=1.8
+pkgver=0.5.15
+pkgrel=1.1
 pkgdesc="Session / policy manager implementation for PipeWire"
 url="https://pipewire.pages.freedesktop.org/wireplumber/"
 arch=(x86_64)
@@ -38,9 +38,6 @@ checkdepends=(pipewire-audio)
 source=(
   "git+https://gitlab.freedesktop.org/pipewire/$pkgbase.git#tag=$pkgver"
 
-  # Holo: backport of https://gitlab.freedesktop.org/pipewire/wireplumber/-/merge_requests/643
-  "0001-access-default-Allow-defining-object-specific-permis.patch"
-
   # Holo: backport of https://gitlab.freedesktop.org/pipewire/wireplumber/-/merge_requests/667
   "0001-monitor-alsa-Add-node.create-loopback-property.patch"
   "0002-monitor-alsa-Don-t-make-the-loopback-device-node-vir.patch"
@@ -53,23 +50,6 @@ source=(
   # More info: https://gitlab.steamos.cloud/holo-team/tasks/-/work_items/2049
   "0001-alsa-Add-new-monitor.alsa.enable-external-volume-con.patch"
 
-  # Holo: backport of https://gitlab.freedesktop.org/pipewire/wireplumber/-/merge_requests/818
-  "0001-properties-Add-API-to-clear-all-properties.patch"
-  "0002-state-Add-new-WpStateMetadata-class.patch"
-  "0003-m-lua-scripting-Add-Lua-API-for-new-WpStateMetadata-.patch"
-  "0004-state-profile-Use-state-metadata-to-store-saved-prof.patch"
-
-  # Holo: backport of https://gitlab.freedesktop.org/pipewire/wireplumber/-/merge_requests/819
-  "0001-find-preferred-profile-Add-new-bluetooth.profile-pre.patch"
-
-  # Holo: include patch to recover ALSA device if an error happened
-  # Note that this patch is too specific for the Deck and there is no upstream MR for it
-  # See holo-team/tasks#1808
-  "0001-monitors-alsa-Set-profile-to-Off-and-restore-it-back.patch"
-
-  # Holo: backport of https://gitlab.freedesktop.org/pipewire/wireplumber/-/merge_requests/848
-  "0001-wpctl-add-reset-command.patch"
-
   # Holo: backport of https://gitlab.freedesktop.org/pipewire/wireplumber/-/merge_requests/850
   "0001-wpctl-add-yes-flag-to-reset-sub-command.patch"
 
@@ -79,8 +59,7 @@ source=(
   # Holo: backport of https://gitlab.freedesktop.org/pipewire/wireplumber/-/merge_requests/862
   "0001-monitor-alsa-Add-device.form-factor-node-property.patch"
 )
-b2sums=('bdf2b17806b2ac30f4f40b4e1e35a9aecdf0660b24f75978e546e59d525bf4a97ad079a13d5b08d76d2d79d8b89f7093b777c5d92590ce2681490e3e114938e7'
-        '6c1d7b3577d7836559ec5a896e275405764fc2fc0a7a9840e027e575bac47489e51b3c3f127e963335a8eb7d714068e0222c1dc05e8be38590e04205388113a8'
+b2sums=('303838f09331f4c551d6a14b6d7c7e7cf91e6f58f90214397b07010ed0ab652a6cbde2ef9492bf6522a08a33b60f82ed3715e073ca0fb9602a76623ea6159932'
         '50cae746a48d2ec1700679bd7fe14227ab46fd0b26f829fedf7ef96f7bdd4edc6bac703c99acab586163f8c7d848c9465bcbc05a891a6a25422ff10b1b261140'
         '5a59c19d22c505e66c2aca7d888ab080be46fc2ac5d97090f9d01940a898dd4c42cd08868484ff4c4ef2006801f0385b803b1a4a9f922ce50fee43d5a5ab08da'
         'da1f9a77934203cb3f92f634e57aa5121e1e732a5f86e1068da955a0d07b663d64bef2c2868dde80c16ab24f5afc234267635a83ed2b64c61bf2913533762cd3'
@@ -88,13 +67,6 @@ b2sums=('bdf2b17806b2ac30f4f40b4e1e35a9aecdf0660b24f75978e546e59d525bf4a97ad079a
         'bc2633425fb1ff3aec54b09a1ef8ab9714b482c014ba7fd4af234196dbd9aa038101c84f862583331bb15c572bd95cc21cf83650c09963c13d22c3cbfbe62fd0'
         'daf1300f45171a549112fc1f2f8800ea14a51ce97159cbcac405beee469114697ce5ff296126be33fbf9bc76eae1f12a2798d65dbc4ec5bbe07fd6a5f081c318'
         '1d74a32c602d233d41961507802a59ec95da2d3945208d4643a75af7df0cb341bed91e6a4fa6306d5c64101cbd03525611e67d8349d17f2d0cb2719bc507bad0'
-        '8b41df3a8b1309134868ef0ef421537da2e26661af3a92ed5aae8007b26c93abe1d2d351a8006ecc70d9fa5c8e43d7f34b2b679c6fc784808103c8ad1077ce53'
-        '484cbbe10f24f001833ac276eb1fbbf64af4676006f566e6f2634ce0c48c13e44dc98182d034d15bb5ffcafdcf2f38881201f730d19231187dc5f1c0c4df1a1c'
-        'f845596209389f6cc5fc7a73238e0f4e559c69d3fe216c93f25e5170ace558f2169f4c15de29bbb05aad222b1d9e83e7d799112feb2439864dc9a833f1373cad'
-        '1069051c36c8e8c0470ff65560d9085317f32854661d68a8e4e137a6c0b51b66855358302fbb7d77a71016f1cae77703ba7295bc4ef5cfa6234f2a93dd4a7528'
-        'a4fe84e7aa1bf13f467af6fca0469e280693b00632c3de5d985139b1e8b1b4b450016e4a8579ce26ea7c0fae4f1629cceaad86beab02a9fa78e4f53ac2660b74'
-        '33ecb8c2b33513560ef62c71dd383ca055b01627cd0ee074f1a50d784d5e62746469ac5ee4e8171533ae813fc52a9b72f53c79433784b367135bb2d8f24b238e'
-        'de2c08279902bd9bb5614a550b8d6a26583be8029da390d9f00832f9ca8dc2e9fadbdb61c8530cc1fb2b65d8b7f5187d87cee84c073d05de8049a721f589fd73'
         'fb649c179b08a9a7558f6df497d5eb6160c3a90e8b8202edf628bea166f384e2d2f844f0ccd957831349fae6d28a20089c8d5fc98eaaafa3e738903149aea3b6'
         'a129c1004d6fd8bf73ee8e296901a02652c89bd934d1aed9309314a0bc57407770b48fa6371c9320e04740b835d74267b25ed9c7dd19d10171d4747e1afeb1aa'
         'c7e2d8a2c556f7245e74faebe798ecb2b3681c1a018a6a32562e08d505fe47c3eb873878f3e3855962df6650752188f6b12f9238865c05136f37053f65901b38')
