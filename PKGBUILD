@@ -33,7 +33,7 @@ pkgname=(
   pulse-native-provider
 )
 pkgver=1.6.8
-pkgrel=1.2
+pkgrel=1.3
 epoch=1
 pkgdesc="Low-latency audio/video router and processor"
 url="https://pipewire.org"
@@ -141,7 +141,10 @@ source=(
     "0001-spa-alsa-recheck-ACP-profile-set-on-HDMI-ELD-changes.patch"
 
     # Holo: Backport of https://gitlab.freedesktop.org/pipewire/pipewire/-/merge_requests/2994
-    "0001-spa-alsa-pass-ELD-data-to-ACP-HDMI-profile-recheck.patch")
+    "0001-spa-alsa-pass-ELD-data-to-ACP-HDMI-profile-recheck.patch"
+
+    # Holo: Backport of https://gitlab.freedesktop.org/pipewire/pipewire/-/merge_requests/2776
+    "0001-tools-connect-to-the-manager-socket-by-default.patch")
 b2sums=('f4425c8fa9ab33918e52bb0c1272079dd510e1c08b1d228802ad60e7080629f1e82ec30f19dd9e344cd6476803773d79f50957ddfeecfc01d657550a712fd6ba'
         'b999796fc69ecd661b7cd761b98daf81412e4a02e649d74d8d8ec7d2c6cf0169f6062ea03131313a5b03a50529e956289baf0068f0631ea58243d42f1fae4d6e'
         'ba33b056d13739e24b7e6c46bf9268357eea5a989f8af5021c737978a9a0bd9fb9882cc7e2c6eb8477d7c1e50684c3083ea33123f29a949e600ee1849cfe5cdf'
@@ -172,7 +175,8 @@ b2sums=('f4425c8fa9ab33918e52bb0c1272079dd510e1c08b1d228802ad60e7080629f1e82ec30
         '8dc405657ce215407e7189c4c35e38618568763b07aea30ce805da38cd593943e434fcf55fb6a77f172408f99ac6fb701eefdf0da8d7c30f280e9b79163e3e2c'
         'adc941999ee419b3f25bf155cf59e29344a32ea94067ec1530c1b069912eb825fdc908c72a89ef536df50293b1807f403a8560319a366838a4a55ed6ead8e852'
         '43c150e442e62b1c5da74572aa280804c06e60323e527404a3369310186fd3a230d0248c90c1e008b0cfa313f260876ecaf08a4a6dd6f82a4db1ddefaa06984c'
-        '1b2f8b5c201706c2faaedb95de487d1af70394f8f446819d82fc7163d142010bb3b212457a7b5c02bc4e3605d7a5e2be3fcb562cfb80ff551998343264160a6b')
+        '1b2f8b5c201706c2faaedb95de487d1af70394f8f446819d82fc7163d142010bb3b212457a7b5c02bc4e3605d7a5e2be3fcb562cfb80ff551998343264160a6b'
+        '8e2ac88c4b35ee1e0773baebffcf96f051ca4b0c814d16fb3520bae131f1809634ddc470924fa4a7b6c0365cc45d703ce5dd8fa464ef35c85b848491d99e9c28')
 
 prepare() {
   cd pipewire

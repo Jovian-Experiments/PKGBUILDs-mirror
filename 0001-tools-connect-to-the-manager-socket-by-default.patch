@@ -1,0 +1,276 @@
+From 86ca1ee4aa6bd49b04f32bb2c34dbb3d3a4c4311 Mon Sep 17 00:00:00 2001
+From: Julian Bouzas <julian.bouzas@collabora.com>
+Date: Tue, 7 Apr 2026 11:39:36 -0400
+Subject: [PATCH] tools: connect to the manager socket by default
+
+This gives the tools unrestricted access by default if access.socket is defined
+in the configuration access module.
+---
+ src/tools/pw-dot.c      |  7 ++++++-
+ src/tools/pw-dump.c     |  8 ++++++--
+ src/tools/pw-link.c     |  7 ++++++-
+ src/tools/pw-loopback.c | 10 +++++++---
+ src/tools/pw-metadata.c |  7 ++++++-
+ src/tools/pw-mididump.c |  8 +++++++-
+ src/tools/pw-mon.c      |  8 ++++++--
+ src/tools/pw-profiler.c |  8 ++++++--
+ src/tools/pw-top.c      |  8 ++++++--
+ 9 files changed, 56 insertions(+), 15 deletions(-)
+
+diff --git a/src/tools/pw-dot.c b/src/tools/pw-dot.c
+index 8536e1303..8491e1279 100644
+--- a/src/tools/pw-dot.c
++++ b/src/tools/pw-dot.c
+@@ -1025,6 +1025,7 @@ static int get_data_from_pipewire(struct data *data, const char *opt_remote)
+ {
+ 	struct pw_loop *l;
+ 	struct global *g;
++	const char *remote_name;
+ 
+ 	data->loop = pw_main_loop_new(NULL);
+ 	if (data->loop == NULL) {
+@@ -1043,9 +1044,13 @@ static int get_data_from_pipewire(struct data *data, const char *opt_remote)
+ 		return -1;
+ 	}
+ 
++	remote_name = "[" PW_DEFAULT_REMOTE "-manager," PW_DEFAULT_REMOTE "]";
++	if (opt_remote)
++		remote_name = opt_remote;
++
+ 	data->core = pw_context_connect(data->context,
+ 			pw_properties_new(
+-				PW_KEY_REMOTE_NAME, opt_remote,
++				PW_KEY_REMOTE_NAME, remote_name,
+ 				NULL),
+ 			0);
+ 	if (data->core == NULL) {
+diff --git a/src/tools/pw-dump.c b/src/tools/pw-dump.c
+index e72e7d257..a878bc1d0 100644
+--- a/src/tools/pw-dump.c
++++ b/src/tools/pw-dump.c
+@@ -1573,7 +1573,7 @@ int main(int argc, char *argv[])
+ 	struct data data = { 0 };
+ 	struct object *o;
+ 	struct pw_loop *l;
+-	const char *opt_remote = NULL;
++	const char *opt_remote = NULL, *remote_name;
+ 	static const struct option long_options[] = {
+ 		{ "help",	no_argument,		NULL, 'h' },
+ 		{ "version",	no_argument,		NULL, 'V' },
+@@ -1674,10 +1674,14 @@ int main(int argc, char *argv[])
+ 		return -1;
+ 	}
+ 
++	remote_name = "[" PW_DEFAULT_REMOTE "-manager," PW_DEFAULT_REMOTE "]";
++	if (opt_remote)
++		remote_name = opt_remote;
++
+ 	data.core = pw_context_connect(data.context,
+ 			pw_properties_new(
+ 				PW_KEY_REMOTE_INTENTION, "manager",
+-				PW_KEY_REMOTE_NAME, opt_remote,
++				PW_KEY_REMOTE_NAME, remote_name,
+ 				NULL),
+ 			0);
+ 	if (data.core == NULL) {
+diff --git a/src/tools/pw-link.c b/src/tools/pw-link.c
+index e33ceda7f..ee5a76cc7 100644
+--- a/src/tools/pw-link.c
++++ b/src/tools/pw-link.c
+@@ -932,6 +932,7 @@ static int run(int argc, char *argv[])
+ 		.target_links = SPA_LIST_INIT(&data.target_links),
+ 	};
+ 	int res = 0, c;
++	const char *remote_name;
+ 	struct spa_error_location loc;
+ 	static const struct option long_options[] = {
+ 		{ "help",	no_argument,		NULL, 'h' },
+@@ -1070,9 +1071,13 @@ static int run(int argc, char *argv[])
+ 		return -1;
+ 	}
+ 
++	remote_name = "[" PW_DEFAULT_REMOTE "-manager," PW_DEFAULT_REMOTE "]";
++	if (data.opt_remote)
++		remote_name = data.opt_remote;
++
+ 	data.core = pw_context_connect(data.context,
+ 			pw_properties_new(
+-				PW_KEY_REMOTE_NAME, data.opt_remote,
++				PW_KEY_REMOTE_NAME, remote_name,
+ 				NULL),
+ 			0);
+ 	if (data.core == NULL) {
+diff --git a/src/tools/pw-loopback.c b/src/tools/pw-loopback.c
+index 1d76eb284..991934a37 100644
+--- a/src/tools/pw-loopback.c
++++ b/src/tools/pw-loopback.c
+@@ -91,7 +91,7 @@ int main(int argc, char *argv[])
+ {
+ 	struct data data = { 0 };
+ 	struct pw_loop *l;
+-	const char *opt_remote = NULL;
++	const char *opt_remote = NULL, *remote_name;
+ 	char cname[256], value[256];
+ 	char *args;
+ 	size_t size;
+@@ -221,8 +221,12 @@ int main(int argc, char *argv[])
+ 
+ 	fprintf(f, "{");
+ 
+-	if (opt_remote != NULL)
+-		fprintf(f, " remote.name = \"%s\"", opt_remote);
++	remote_name = "[" PW_DEFAULT_REMOTE "-manager," PW_DEFAULT_REMOTE "]";
++	if (opt_remote)
++		remote_name = opt_remote;
++
++	fprintf(f, " remote.name = \"%s\"", remote_name);
++
+ 	if (data.latency != 0)
+ 		fprintf(f, " node.latency = %u/%u", data.latency, DEFAULT_RATE);
+ 	if (data.delay != 0.0f)
+diff --git a/src/tools/pw-metadata.c b/src/tools/pw-metadata.c
+index 15236cc91..8abcc3bb3 100644
+--- a/src/tools/pw-metadata.c
++++ b/src/tools/pw-metadata.c
+@@ -180,6 +180,7 @@ int main(int argc, char *argv[])
+ {
+ 	struct data data = { 0, };
+ 	int res = 0, c;
++	const char *remote_name;
+ 	static const struct option long_options[] = {
+ 		{ "help",	no_argument,		NULL, 'h' },
+ 		{ "version",	no_argument,		NULL, 'V' },
+@@ -257,9 +258,13 @@ int main(int argc, char *argv[])
+ 		return -1;
+ 	}
+ 
++	remote_name = "[" PW_DEFAULT_REMOTE "-manager," PW_DEFAULT_REMOTE "]";
++	if (data.opt_remote)
++		remote_name = data.opt_remote;
++
+ 	data.core = pw_context_connect(data.context,
+ 			pw_properties_new(
+-				PW_KEY_REMOTE_NAME, data.opt_remote,
++				PW_KEY_REMOTE_NAME, remote_name,
+ 				NULL),
+ 			0);
+ 	if (data.core == NULL) {
+diff --git a/src/tools/pw-mididump.c b/src/tools/pw-mididump.c
+index 882bd4702..9c5858750 100644
+--- a/src/tools/pw-mididump.c
++++ b/src/tools/pw-mididump.c
+@@ -150,6 +150,8 @@ static void do_quit(void *userdata, int signal_number)
+ 
+ static int dump_filter(struct data *data)
+ {
++	const char *remote_name;
++
+ 	data->loop = pw_main_loop_new(NULL);
+ 	if (data->loop == NULL)
+ 		return -errno;
+@@ -157,11 +159,15 @@ static int dump_filter(struct data *data)
+ 	pw_loop_add_signal(pw_main_loop_get_loop(data->loop), SIGINT, do_quit, data);
+ 	pw_loop_add_signal(pw_main_loop_get_loop(data->loop), SIGTERM, do_quit, data);
+ 
++	remote_name = "[" PW_DEFAULT_REMOTE "-manager," PW_DEFAULT_REMOTE "]";
++	if (data->opt_remote)
++		remote_name = data->opt_remote;
++
+ 	data->filter = pw_filter_new_simple(
+ 			pw_main_loop_get_loop(data->loop),
+ 			"midi-dump",
+ 			pw_properties_new(
+-				PW_KEY_REMOTE_NAME, data->opt_remote,
++				PW_KEY_REMOTE_NAME, remote_name,
+ 				PW_KEY_MEDIA_TYPE, "Midi",
+ 				PW_KEY_MEDIA_CATEGORY, "Filter",
+ 				PW_KEY_MEDIA_ROLE, "DSP",
+diff --git a/src/tools/pw-mon.c b/src/tools/pw-mon.c
+index b4601b906..62bd63313 100644
+--- a/src/tools/pw-mon.c
++++ b/src/tools/pw-mon.c
+@@ -789,7 +789,7 @@ int main(int argc, char *argv[])
+ {
+ 	struct data data = { 0 };
+ 	struct pw_loop *l;
+-	const char *opt_remote = NULL;
++	const char *opt_remote = NULL, *remote_name;
+ 	static const struct option long_options[] = {
+ 		{ "help",		no_argument,		NULL, 'h' },
+ 		{ "version",		no_argument,		NULL, 'V' },
+@@ -884,10 +884,14 @@ int main(int argc, char *argv[])
+ 	spa_list_init(&data.pending_list);
+ 	spa_list_init(&data.global_list);
+ 
++	remote_name = "[" PW_DEFAULT_REMOTE "-manager," PW_DEFAULT_REMOTE "]";
++	if (opt_remote)
++		remote_name = opt_remote;
++
+ 	data.core = pw_context_connect(data.context,
+ 			pw_properties_new(
+ 				PW_KEY_REMOTE_INTENTION, "manager",
+-				PW_KEY_REMOTE_NAME, opt_remote,
++				PW_KEY_REMOTE_NAME, remote_name,
+ 				NULL),
+ 			0);
+ 	if (data.core == NULL) {
+diff --git a/src/tools/pw-profiler.c b/src/tools/pw-profiler.c
+index 2115a0899..bc9f2a583 100644
+--- a/src/tools/pw-profiler.c
++++ b/src/tools/pw-profiler.c
+@@ -678,7 +678,7 @@ int main(int argc, char *argv[])
+ {
+ 	struct data data = { 0 };
+ 	struct pw_loop *l;
+-	const char *opt_remote = NULL;
++	const char *opt_remote = NULL, *remote_name;
+ 	const char *opt_output = DEFAULT_FILENAME;
+ 	static const struct option long_options[] = {
+ 		{ "help",	no_argument,		NULL, 'h' },
+@@ -743,9 +743,13 @@ int main(int argc, char *argv[])
+ 
+ 	pw_context_load_module(data.context, PW_EXTENSION_MODULE_PROFILER, NULL, NULL);
+ 
++	remote_name = "[" PW_DEFAULT_REMOTE "-manager," PW_DEFAULT_REMOTE "]";
++	if (opt_remote)
++		remote_name = opt_remote;
++
+ 	data.core = pw_context_connect(data.context,
+ 			pw_properties_new(
+-				PW_KEY_REMOTE_NAME, opt_remote,
++				PW_KEY_REMOTE_NAME, remote_name,
+ 				NULL),
+ 			0);
+ 	if (data.core == NULL) {
+diff --git a/src/tools/pw-top.c b/src/tools/pw-top.c
+index 6b936a9bf..1a2cf69b3 100644
+--- a/src/tools/pw-top.c
++++ b/src/tools/pw-top.c
+@@ -818,7 +818,7 @@ int main(int argc, char *argv[])
+ {
+ 	struct data data = { 0 };
+ 	struct pw_loop *l;
+-	const char *opt_remote = NULL;
++	const char *opt_remote = NULL, *remote_name;
+ 	static const struct option long_options[] = {
+ 		{ "batch-mode",	no_argument,		NULL, 'b' },
+ 		{ "iterations",	required_argument,	NULL, 'n' },
+@@ -887,10 +887,14 @@ int main(int argc, char *argv[])
+ 
+ 	pw_context_load_module(data.context, PW_EXTENSION_MODULE_PROFILER, NULL, NULL);
+ 
++	remote_name = "[" PW_DEFAULT_REMOTE "-manager," PW_DEFAULT_REMOTE "]";
++	if (opt_remote)
++		remote_name = opt_remote;
++
+ 	data.core = pw_context_connect(data.context,
+ 			pw_properties_new(
+ 				PW_KEY_REMOTE_INTENTION, "manager",
+-				PW_KEY_REMOTE_NAME, opt_remote,
++				PW_KEY_REMOTE_NAME, remote_name,
+ 				NULL),
+ 			0);
+ 	if (data.core == NULL) {
+-- 
+2.50.1
+
