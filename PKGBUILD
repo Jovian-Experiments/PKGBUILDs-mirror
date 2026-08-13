@@ -1,7 +1,7 @@
 # Maintainer David Edmundson (bluesystems@davidedmundson.co.uk)
 
 pkgname=steamdeck-kde-presets
-_srctag=3.9.3
+_srctag=3.9.4
 pkgver=${_srctag#jupiter-}
 pkgrel=2
 arch=('any')
@@ -14,10 +14,11 @@ optdepends=(
 )
 makedepends=('git' 'openssh')
 source=("git+ssh://git@gitlab.steamos.cloud/jupiter/steamdeck-kde-presets.git#tag=$_srctag")
-sha512sums=('595b493fcceb489a2fa66f4bb5b21c5cfdad0392cb675bcfd7a3f85e3f92347556a01bb8f7e441b76859c614c96c4347358bc9cab2650d705e3ae21796fcab47')
+sha512sums=('7e0d49186a036ac2972b471e858ee1e0d7cc7897ad300f295a0645f9c741a1943a6d078c5becc4a66db75942283e43f42247ebf001d0b5bc7278c503158e7be3')
 
 package() {
   local aliased=
+  rm "$srcdir"/steamdeck-kde-presets/README.md
   cp -R "$srcdir"/steamdeck-kde-presets/* "$pkgdir"
   install -d -m0755 "$pkgdir/usr/lib/systemd/system/multi-user.target.wants/"
   ln -s ../steamos-set-plasma-theme.service "$pkgdir/usr/lib/systemd/system/multi-user.target.wants/"
