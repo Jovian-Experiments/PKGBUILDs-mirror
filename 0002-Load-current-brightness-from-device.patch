@@ -21,7 +21,7 @@ index 866abb8080..ec04c96d30 100644
              }
 +            if (changeset->brightnessDevice && *changeset->brightnessDevice != output->brightnessDevice()) {
 +                changeset->brightness = device->observedBrightness();
-+                changeset->currentBrightness = device->observedBrightness();
++                changeset->currentHardwareBrightness = device->observedBrightness();
 +            }
              if (changeset->allowSdrSoftwareBrightness.value_or(output->allowSdrSoftwareBrightness())) {
                  changeset->allowSdrSoftwareBrightness = false;
