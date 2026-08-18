@@ -1,0 +1,25 @@
+From 9b7712b41dbfa1b87098cf10da8d9acad6b38ebb Mon Sep 17 00:00:00 2001
+From: Hans-Kristian Arntzen <post@arntzen-software.no>
+Date: Tue, 11 Aug 2026 14:24:32 +0200
+Subject: [PATCH] Always force XCB platform
+
+---
+ qrenderdoc/Code/qrenderdoc.cpp | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/qrenderdoc/Code/qrenderdoc.cpp b/qrenderdoc/Code/qrenderdoc.cpp
+index 9b9f112fa..4134745c9 100644
+--- a/qrenderdoc/Code/qrenderdoc.cpp
++++ b/qrenderdoc/Code/qrenderdoc.cpp
+@@ -198,7 +198,7 @@ int main(int argc, char *argv[])
+   if(IsRunningAsAdmin())
+     qInfo() << "Running as administrator";
+ 
+-#if defined(RENDERDOC_PLATFORM_LINUX) && !defined(RENDERDOC_WINDOWING_WAYLAND)
++#if defined(RENDERDOC_PLATFORM_LINUX)
+   bool envChanged = false;
+   {
+     const char *qpa_plat = getenv("QT_QPA_PLATFORM");
+-- 
+2.55.0
+
