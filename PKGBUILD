@@ -28,13 +28,13 @@ pkgname=(
 # When updating the tag, consider if you are adding any shader compiler changes. If so,
 # or if you are not sure, regenerate the radv-build-id below. To update, see
 # https://gitlab.steamos.cloud/jupiter/docs/-/wikis/How-to-make-a-new-Mesa-release#updating-the-radv-build-id
-_tag=steamos-26.05.14
-pkgver=26.2.0_devel.222118.steamos_26.05.14
+_tag=steamos-26.05.16
+pkgver=26.2.0_devel.222131.steamos_26.05.16
 
 #pkgver=25.2.7
 #pkgver=${pkgver/[a-z]/-&}
 
-pkgrel=2
+pkgrel=1
 epoch=0
 pkgdesc="Open-source OpenGL drivers"
 url="https://www.mesa3d.org/"
@@ -167,7 +167,7 @@ for _crate in "${!_crates[@]}"; do
   )
 done
 
-sha256sums=('df95104ae3839ea8565ec9eb036c4f99aef0555a884426eff260fc280bcc4f87'
+sha256sums=('7174fdbd60c894791a9788f8b802aa318fea3c75f81a1dc998b694c5d1384ae0'
             '67914ab451f3bfd2e69e5e9d2ef3858484e7074d63f204fd166ec391b54de21d'
             'ed646292ffc8188ef8ea4d1e0e0150fb15a5c2e12ad9b8fc191ae7a8a7f3c4b9'
             '7f9f832470494906d1fca5329f8ab5791cc60beb230c74815dff541cbd2b5ca0'
@@ -195,7 +195,7 @@ sha256sums=('df95104ae3839ea8565ec9eb036c4f99aef0555a884426eff260fc280bcc4f87'
             'db7d01726be8ab66ab32f9df467ae8b1148906685bbe75c82d1e65d7f5b3f841'
             '692fcb63b64b1758029e0a96ee63e049ce8c5948587f2f7208df04625e5f6b56'
             '25aa4ce346d03a6dcd68dd8b4010bcb74e54e62c90c573f394c46eae99aba32d')
-b2sums=('66467e3de1090ee7504b818ade76df913cd0d8b7b5b282a8868e8bb264170781d1b88485442e555d13cf0e77f3714d09d661c3ad8c96902b95fdee2018a9343d'
+b2sums=('4ffa634e57aeb2933ee5bbf67d0be598907be96c79baac8b45061c11f92d71197e9765349205fda4078d7796f89c4ccf28026419da3948fb2631cc36a095aef5'
         '431439d31632d177aeb15f910b4f546efa76d54fc74fc8e140399dc5e54eca33fd606f11dbfb48fa83067c8474ee512e62751895d5948367b65ab08b984284e5'
         'a6d47c903be6094423d89b8ec3ca899d0a84df6dbd6e76632bb6c9b9f40ad9c216f8fa400310753d392f85072756b43ac3892e0a2c4d55f87ab6463002554823'
         '9a73962e1e38b84131ab2350b69a1f5d611c549533eec73e898c394a9b9442f357bb5d5f59e1be12270dd29bdf237dc2d21786c0c2210736e224ef5d48300dcf'
@@ -295,7 +295,7 @@ build() {
     -D intel-rt=disabled
     -D sysprof=false
     -D tools=drm-shim
-    -D radv-build-id="5b8964a5eef0d2c6ecc9880e4ab275b1bc9d2e3d"
+    -D radv-build-id="bd9f32d9c69a2f09efd03302a15f5f067433ab87"
   )
 
   # Build only minimal debug info to reduce size
