@@ -262,7 +262,6 @@ exec gamescope \
 	--hide-cursor-delay 3000 \
 	--max-scale 2 \
 	--fade-out-duration 200 \
-	--cursor-scale-height 720 \
 	-e -R "$socket" -T "$stats" \
 	-O '*',eDP-1 \
 
