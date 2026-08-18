@@ -1,0 +1,24 @@
+From c20aaec9b6486b48e746c4e5838f9629569c2ecd Mon Sep 17 00:00:00 2001
+From: David Edmundson <kde@davidedmundson.co.uk>
+Date: Fri, 24 Apr 2026 17:16:22 +0100
+Subject: [PATCH] Fix passing fullscreen to the X11 backend
+
+---
+ src/main_wayland.cpp | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/src/main_wayland.cpp b/src/main_wayland.cpp
+index 9d1f05d5ac..955321ef60 100644
+--- a/src/main_wayland.cpp
++++ b/src/main_wayland.cpp
+@@ -544,6 +544,7 @@ int main(int argc, char *argv[])
+             .outputCount = outputCount,
+             .outputScale = outputScale,
+             .outputSize = initialWindowSize,
++            .fullscreen = fullscreen,
+         }));
+         break;
+     }
+-- 
+2.53.0
+
