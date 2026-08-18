@@ -10,7 +10,7 @@
 
 pkgname=renderdoc
 pkgver=1.45
-pkgrel=1.1
+pkgrel=1.2
 pkgdesc="OpenGL and Vulkan debugging tool"
 arch=(x86_64)
 url="https://github.com/baldurk/renderdoc"
@@ -18,9 +18,11 @@ license=("MIT")
 makedepends=("pcre" "cmake" "python" "clang")
 depends=("libx11" "libxcb" "mesa" "libgl" "qt5-base" "qt5-svg" "qt5-x11extras" "xcb-util-keysyms")
 source=("https://github.com/baldurk/renderdoc/archive/v${pkgver}.tar.gz"
-        "https://github.com/baldurk/renderdoc/releases/download/v${pkgver}/v${pkgver}.tar.gz.asc")
+        "https://github.com/baldurk/renderdoc/releases/download/v${pkgver}/v${pkgver}.tar.gz.asc"
+        "0001-Always-force-XCB-platform.patch")
 validpgpkeys=('1B039DB9A4718A2D699DE031AC612C3120C34695')
 sha384sums=('936290e8bc46c5653e84a53b9ecc7a53fd7526f81533e5d1bf81425f80178d8a234ae459898dba050339f068ba83b232'
+            'SKIP'
             'SKIP')
 
 # Baldur recommends not using LTO.
@@ -28,6 +30,10 @@ options=(!lto)
 
 prepare() {
   cd "${srcdir}/renderdoc-${pkgver}"
+
+  # Workaround UI issue where Wayland platform is used.
+  # We only want wayland support for capture, not in the UI, since it's broken on the Qt version RenderDoc uses.
+  patch -Np1 -i "${srcdir}/0001-Always-force-XCB-platform.patch"
 }
 
 build() {
