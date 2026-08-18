@@ -1,0 +1,89 @@
+From 1096c90c5c52c1d8f4cb5dab569d9454673fb19b Mon Sep 17 00:00:00 2001
+From: Vlad Zahorodnii <vlad.zahorodnii@kde.org>
+Date: Fri, 14 Aug 2026 12:28:21 +0300
+Subject: [PATCH] Handle WM_TAKE_FOCUS more gracefully
+
+Most clients that don't accept focus only set the corresponding icccm
+flag and leave the WM_TAKE_FOCUS protocol in WM_PROTOCOLS as is.
+---
+ src/activation.cpp | 4 +++-
+ src/window.cpp     | 5 +++++
+ src/window.h       | 1 +
+ src/x11window.cpp  | 5 +++++
+ src/x11window.h    | 1 +
+ 5 files changed, 15 insertions(+), 1 deletion(-)
+
+diff --git a/src/activation.cpp b/src/activation.cpp
+index c587bb06e8..e78050c95d 100644
+--- a/src/activation.cpp
++++ b/src/activation.cpp
+@@ -396,7 +396,9 @@ bool Workspace::requestFocus(Window *window, bool force)
+     }
+ 
+     window->takeFocus();
+-    setActiveWindow(window);
++    if (!window->takesAsyncFocus()) {
++        setActiveWindow(window);
++    }
+ 
+     return true;
+ }
+diff --git a/src/window.cpp b/src/window.cpp
+index a4460a9ecb..fdb7c62038 100644
+--- a/src/window.cpp
++++ b/src/window.cpp
+@@ -667,6 +667,11 @@ void Window::takeFocus()
+ {
+ }
+ 
++bool Window::takesAsyncFocus() const
++{
++    return false;
++}
++
+ bool Window::isSpecialWindow() const
+ {
+     // TODO
+diff --git a/src/window.h b/src/window.h
+index bf2c61d7c7..796b5454ed 100644
+--- a/src/window.h
++++ b/src/window.h
+@@ -1115,6 +1115,7 @@ public:
+ 
+     bool wantsTabFocus() const;
+     virtual void takeFocus();
++    virtual bool takesAsyncFocus() const;
+     virtual bool wantsInput() const = 0;
+     void checkWorkspacePosition(RectF oldGeometry = RectF(), LogicalOutput *oldOutput = nullptr);
+ #if KWIN_BUILD_X11
+diff --git a/src/x11window.cpp b/src/x11window.cpp
+index ba55ac83dc..3f477e2cb1 100644
+--- a/src/x11window.cpp
++++ b/src/x11window.cpp
+@@ -1659,6 +1659,11 @@ void X11Window::takeFocus()
+     }
+ }
+ 
++bool X11Window::takesAsyncFocus() const
++{
++    return !acceptsFocus() && info->supportsProtocol(NET::TakeFocusProtocol);
++}
++
+ /**
+  * Returns whether the window provides context help or not. If it does,
+  * you should show a help menu item or a help button like '?' and call
+diff --git a/src/x11window.h b/src/x11window.h
+index 67cf57bf81..fc13023600 100644
+--- a/src/x11window.h
++++ b/src/x11window.h
+@@ -148,6 +148,7 @@ public:
+     bool isCloseable() const override; ///< May be closed by the user (May have a close button)
+ 
+     void takeFocus() override;
++    bool takesAsyncFocus() const override;
+ 
+     void invalidateDecoration() override;
+ 
+-- 
+2.55.0
+
