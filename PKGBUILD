@@ -1,7 +1,7 @@
 # Maintainer: Umang Jain (uajain) <uajain@igalia.com>
 
 pkgbase=linux-neptune-618-devel
-_tag=6.18.42-valve2
+_tag=6.18.45-valve1
 pkgver=${_tag//-/.}
 pkgrel=1
 pkgdesc='Linux'
@@ -34,7 +34,7 @@ source=(
   config-neptune  # Jupiter: the neptune kernel fragment file (overrides 'config.x86_64' above)
   config-neptune-devel  # Jupiter: the neptune devel kernel fragment file
 )
-sha256sums=('c05bc3c3fd72be6d534433ab2c02cc905082cef5d120961efcaf6d5b211840b9'
+sha256sums=('4f5d67e90dfe8a1eef4d01741fcc6fe07d337903820402a887514bea3f939ba7'
             'e765199f6fbafbe57d013d40e0d2918cbab30fb2a090e01eb7821a515b6b1b8a'
             'b91c3ed65067704c8fdb8289d44ed18aa62f98f52c3b6d91fb72bc5b1606ae79'
             'a9e0f3aa421a4cd2ccc840853d52b7aaeb2e2792238e4e953d0776f0f3061bc6')
