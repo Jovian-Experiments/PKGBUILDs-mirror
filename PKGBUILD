@@ -2,10 +2,10 @@
 # Maintainer: Vivek Das Mohapatra <vivek.dasmohapatra@collabora.com>
 
 pkgname=steamos-customizations-jupiter
-_srctag=jupiter-20260721.1
+_srctag=jupiter-20260811.1
 _srcver=${_srctag#jupiter-}
 pkgver=${_srcver//-/.}
-pkgrel=2
+pkgrel=1
 pkgdesc='SteamOS customizations (Jupiter fork) - This package installs various SteamOS-specific files'
 arch=('any')
 url='http://repo.steampowered.com'
@@ -15,7 +15,7 @@ makedepends=('git' 'openssh' 'systemd')
 provides=("${pkgname%-git}")
 conflicts=("${pkgname%-git}")
 source=("${pkgname%-git}::git+ssh://git@gitlab.steamos.cloud/holo/steamos-customizations.git#tag=${_srctag}")
-sha256sums=('8eb9561dcfe9f11cde717d484c70fa7605f6cb9889087166aae5ad14131b5e82')
+sha256sums=('3a86c94c6c0d0359888afb265cc711d3f9f584faf515c4ba3268ae2461c4c103')
 
 package() {
 	cd "${pkgname%-git}"
