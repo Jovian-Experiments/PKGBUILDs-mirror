@@ -12,7 +12,7 @@ source filesystem_common.pkgbuild
 pkgname=filesystem
 pkgver=2021.12.07
 # https://bugs.archlinux.org/task/72284
-pkgrel=1.19
+pkgrel=1.20
 pkgdesc='Base SteamOS Linux files'
 sha256sums=('e03bede3d258d680548696623d5979c6edf03272e801a813c81ba5a5c64f4f82'
             'ed0cb4f1db4021f8c3b5ce78fdf91d2c0624708f58f36c9cf867f4d93c3bc6da'
@@ -44,6 +44,6 @@ sha256sums=('e03bede3d258d680548696623d5979c6edf03272e801a813c81ba5a5c64f4f82'
             '0c695976070be67822551215fc74a4c2d4e0892665c3cb0c8c64a58b8644b2a3'
             'c3e409ac247f13c47c0d3f5627e9544ffe9a4aa9403dab079f695025d9c76fee'
             '5660b669eea8739dd7c671aa92300c15c6f836e0df3402476d53e88bad99446b'
-            '8fc6f45f30b24005b1eed8f9c1caacb5eeb11d86422b96f60e2f1e003c4020bc')
+            'b6bd80265aabc94fcc556fdc759019fa26961acf588874b929329290ac13132c')
 
 # vim:set ts=2 sw=2 et:
