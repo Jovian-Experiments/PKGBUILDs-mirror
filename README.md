@@ -1,5 +1,5 @@
 
-`main @ 20260821.1000`
+`main @ 20260824.1000`
 ======================
 
 Valve packages
@@ -23,7 +23,7 @@ Valve packages
  * [`f3` — `holo-main/f3-10.0-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/f3-10.0-1.1)
  * [`fremont-hw-support` — `holo-main/fremont-hw-support-20260807.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/fremont-hw-support-20260807.1-1)
  * [`fwupd-minimal` — `holo-main/fwupd-minimal-2.1.7-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/fwupd-minimal-2.1.7-1)
- * [`holo-desync` — `holo-main/steamos-customizations-git-20260821.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-customizations-git-20260821.1-1)
+ * [`holo-desync` — `holo-main/steamos-customizations-git-20260823.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-customizations-git-20260823.1-1)
  * [`holo-dmi-rules` — `holo-main/holo-dmi-rules-1.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/holo-dmi-rules-1.1-1)
  * [`holo-earlyoom` — `holo-main/holo-earlyoom-1.1-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/holo-earlyoom-1.1-2)
  * [`holo-fstab-repair` — `holo-main/holo-fstab-repair-0.2-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/holo-fstab-repair-0.2-1)
@@ -34,7 +34,7 @@ Valve packages
  * [`holo-plymouth-themes` — `holo-main/holo-plymouth-themes-0.7-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/holo-plymouth-themes-0.7-1)
  * [`holo-realtek-firmware-toggles` — `holo-main/holo-realtek-firmware-toggles-1.3-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/holo-realtek-firmware-toggles-1.3-2)
  * [`holo-session-selection` — `holo-main/holo-session-selection-1.0-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/holo-session-selection-1.0-1)
- * [`holo-sudo` — `holo-main/steamos-customizations-git-20260821.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-customizations-git-20260821.1-1)
+ * [`holo-sudo` — `holo-main/steamos-customizations-git-20260823.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-customizations-git-20260823.1-1)
  * [`holo-zram-swap` — `holo-main/holo-zram-swap-0.3-0`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/holo-zram-swap-0.3-0)
  * [`inputattach-cec-units` — `holo-main/inputattach-cec-units-2-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/inputattach-cec-units-2-2)
  * [`iwd` — `holo-main/iwd-3.12-1.2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/iwd-3.12-1.2)
@@ -60,7 +60,7 @@ Valve packages
  * [`rtkit` — `holo-main/rtkit-0.14-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/rtkit-0.14-1)
  * [`scx-scheds` — `holo-main/scx-scheds-1.1.2.linux.steamos-2.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/scx-scheds-1.1.2.linux.steamos-2.1)
  * [`steamos-atomupd-client` — `holo-main/steamos-atomupd-client-0.20260821.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-atomupd-client-0.20260821.1-1)
- * [`steamos-efi` — `holo-main/steamos-efi-20260723.1-3`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-efi-20260723.1-3)
+ * [`steamos-efi` — `holo-main/steamos-efi-20260824.1-3`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-efi-20260824.1-3)
  * [`steamos-kdumpst-layer` — `holo-main/steamos-kdumpst-layer-1.1-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-kdumpst-layer-1.1-2)
  * [`steamos-log-submitter` — `holo-main/steamos-log-submitter-0.8.3-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-log-submitter-0.8.3-1)
  * [`steamos-manager` — `holo-main/steamos-manager-26.4.1-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-manager-26.4.1-2)
@@ -88,7 +88,7 @@ Valve packages
  * [`alsa-ucm-conf` — `jupiter-main/alsa-ucm-conf-1.2.16.1-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/alsa-ucm-conf-1.2.16.1-1.1)
  * [`amd-ucode-neptune` — `jupiter-main/linux-firmware-neptune-jupiter.20260712.1-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/linux-firmware-neptune-jupiter.20260712.1-2)
  * [`ec-log` — `jupiter-main/ec-log-0.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/ec-log-0.1-1)
- * [`filesystem` — `jupiter-main/filesystem-2021.12.07-1.19`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/filesystem-2021.12.07-1.19)
+ * [`filesystem` — `jupiter-main/filesystem-2021.12.07-1.20`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/filesystem-2021.12.07-1.20)
  * [`galileo-mura` — `jupiter-main/galileo-mura-v0.10-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/galileo-mura-v0.10-2)
  * [`gamescope` — `jupiter-main/gamescope-3.16.25-4`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/gamescope-3.16.25-4)
  * [`gpu-trace` — `jupiter-main/gpu-trace-2.15-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/gpu-trace-2.15-1.1)
@@ -119,7 +119,7 @@ Valve packages
  * [`steamdeck-dsp` — `jupiter-main/steamdeck-dsp-1.01-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steamdeck-dsp-1.01-1)
  * [`steamdeck-kde-presets` — `jupiter-main/steamdeck-kde-presets-3.9.4-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steamdeck-kde-presets-3.9.4-2)
  * [`steamos-alias` — `jupiter-main/steamos-alias-2.0-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steamos-alias-2.0-1)
- * [`steamos-customizations-jupiter` — `jupiter-main/steamos-customizations-jupiter-20260821.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steamos-customizations-jupiter-20260821.1-1)
+ * [`steamos-customizations-jupiter` — `jupiter-main/steamos-customizations-jupiter-20260823.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steamos-customizations-jupiter-20260823.1-1)
  * [`steamos-devkit-service` — `jupiter-main/steamos-devkit-service-0.20250916.0-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steamos-devkit-service-0.20250916.0-1)
  * [`upower` — `jupiter-main/upower-1.90.10-1.2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/upower-1.90.10-1.2)
  * [`usbhid-gadget-passthru` — `jupiter-main/usbhid-gadget-passthru-0.1.3-6`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/usbhid-gadget-passthru-0.1.3-6)
