@@ -1,5 +1,5 @@
 
-`main @ 20260824.1000`
+`main @ 20260824.1001`
 ======================
 
 Valve packages
@@ -123,7 +123,7 @@ Valve packages
  * [`steamos-devkit-service` — `jupiter-main/steamos-devkit-service-0.20250916.0-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/steamos-devkit-service-0.20250916.0-1)
  * [`upower` — `jupiter-main/upower-1.90.10-1.2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/upower-1.90.10-1.2)
  * [`usbhid-gadget-passthru` — `jupiter-main/usbhid-gadget-passthru-0.1.3-6`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/usbhid-gadget-passthru-0.1.3-6)
- * [`vpower` — `jupiter-main/vpower-1.6.2-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/vpower-1.6.2-2)
+ * [`vpower` — `jupiter-main/vpower-1.6.3-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/vpower-1.6.3-1)
  * [`vulkan-intel` — `jupiter-main/mesa-26.1.2.221562.radeonsi_26.1.2-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/mesa-26.1.2.221562.radeonsi_26.1.2-2)
  * [`vulkan-mesa-implicit-layers` — `jupiter-main/mesa-26.1.2.221562.radeonsi_26.1.2-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/mesa-26.1.2.221562.radeonsi_26.1.2-2)
  * [`vulkan-virtio` — `jupiter-main/mesa-26.1.2.221562.radeonsi_26.1.2-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/mesa-26.1.2.221562.radeonsi_26.1.2-2)
@@ -1071,7 +1071,7 @@ Arch Linux packages
  * [`wireguard-tools/1.0.20260223-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/wireguard-tools/-/tree/1.0.20260223-1)
  * [`wireless-regdb/2026.05.30-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/wireless-regdb/-/tree/2026.05.30-1)
  * [`wireless_tools/30.pre9-5`](https://gitlab.archlinux.org/archlinux/packaging/packages/wireless_tools/-/tree/30.pre9-5)
- * [`wpa_supplicant/2:2.11-5.1`](https://gitlab.archlinux.org/archlinux/packaging/packages/wpa_supplicant/-/tree/2:2.11-5.1)
+ * [`wpa_supplicant/2:2.12-1.2`](https://gitlab.archlinux.org/archlinux/packaging/packages/wpa_supplicant/-/tree/2:2.12-1.2)
  * [`x264/3:0.165.r3222.b35605a-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/x264/-/tree/3:0.165.r3222.b35605a-2)
  * [`x265/4.2-2`](https://gitlab.archlinux.org/archlinux/packaging/packages/x265/-/tree/4.2-2)
  * [`xcb-proto/1.17.0-4`](https://gitlab.archlinux.org/archlinux/packaging/packages/xcb-proto/-/tree/1.17.0-4)
