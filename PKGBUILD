@@ -3,7 +3,7 @@
 pkgname=gamescope
 _srctag=3.16.26
 pkgver=${_srctag//-/.}
-pkgrel=1
+pkgrel=2
 pkgdesc="gaming shell based on Xwayland, powered by Vulkan and DRM"
 arch=(x86_64)
 url="https://github.com/ValveSoftware/gamescope"
@@ -27,7 +27,7 @@ source=("galileo-mura-setup.service"
         "steam_http_loader.desktop"
         "steam-http-loader"
         "git+https://github.com/ValveSoftware/gamescope.git#tag=$_srctag"
-        "git+https://gitlab.freedesktop.org/wlroots/wlroots.git#tag=0.19.3"
+        "git+https://gitlab.freedesktop.org/wlroots/wlroots.git#tag=0.20.2"
         "git+https://gitlab.freedesktop.org/emersion/libliftoff.git"
         "git+https://github.com/Joshua-Ashton/GamescopeShaders.git#tag=v0.1"
         # FIXME Upstream gamescope is just selecting master branch at build time, so we are arbitrarily snapshotting a
@@ -51,7 +51,7 @@ sha256sums=('2cfacf10f311a02d1c94ab5e927094639dfbb57bd322acc628374fef048a12bb'
             '525060896abef2da9db8d8294253b7444d60e48cf6cc0496ca48fc7084cc8590'
             'f57fcba25b211381a9402d3d0c4723301afaef185e9ecffc75839e5af2aee4c8'
             'c7063796cb35af06e0e26cec4754d0aeefd5c7518078f3bc7a44e554b79d0193'
-            '3312cbdb0b64c797bab75ebbc5b80c5b8e3a3aa2e7e13719a6232c2fdfb7bd0d'
+            '6c8595da579a8df74bc307294c2485e90f5379b84390381f500da33ff3f276d2'
             'SKIP'
             '03726f2fb44ae79e6a398e8f9aaaf8054800dda9b8298726157522fe5f7296b1'
             'e39e0c91b297bfd707afcda84ecdc15a08c22e2ad4c347fc3533b1ed98fb3f85'
@@ -97,7 +97,7 @@ check() {
 package() {
 	install -D -m 755 gamescope-session "$pkgdir"/usr/lib/steamos/gamescope-session
 	install -D -m 755 steam-launcher "$pkgdir"/usr/lib/steamos/steam-launcher
-  install -D -m 755 steam-short-session-tracker "$pkgdir"/usr/lib/steamos/steam-short-session-tracker
+	install -D -m 755 steam-short-session-tracker "$pkgdir"/usr/lib/steamos/steam-short-session-tracker
 
 	install -D -m 755 start-gamescope-session "$pkgdir"/usr/bin/start-gamescope-session
 	install -D -m 644 gamescope-wayland.desktop "$pkgdir"/usr/share/wayland-sessions/gamescope-wayland.desktop
@@ -126,8 +126,4 @@ package() {
 	cd "$pkgname"
 
 	meson install -C build --destdir "$pkgdir" --skip-subprojects
-
-	rm -rf "$pkgdir"/usr/include
-	rm -rf "$pkgdir"/usr/lib/libwlroots*
-	rm -rf "$pkgdir"/usr/lib/pkgconfig
 }
