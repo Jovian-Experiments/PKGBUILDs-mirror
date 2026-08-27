@@ -9,7 +9,7 @@ pkgname=(
   wireplumber-docs
 )
 pkgver=0.5.15
-pkgrel=1.1
+pkgrel=1.2
 pkgdesc="Session / policy manager implementation for PipeWire"
 url="https://pipewire.pages.freedesktop.org/wireplumber/"
 arch=(x86_64)
@@ -58,6 +58,11 @@ source=(
 
   # Holo: backport of https://gitlab.freedesktop.org/pipewire/wireplumber/-/merge_requests/862
   "0001-monitor-alsa-Add-device.form-factor-node-property.patch"
+
+  # Holo: backport of https://gitlab.freedesktop.org/pipewire/wireplumber/-/merge_requests/872
+  "0001-lib-Add-WpDynamicRules-class.patch"
+  "0002-m-lua-scripting-Add-Lua-API-for-the-WpDynamicRules-c.patch"
+  "0003-filter-graph-Use-dynamic-rules-instead-of-static-rul.patch"
 )
 b2sums=('303838f09331f4c551d6a14b6d7c7e7cf91e6f58f90214397b07010ed0ab652a6cbde2ef9492bf6522a08a33b60f82ed3715e073ca0fb9602a76623ea6159932'
         '50cae746a48d2ec1700679bd7fe14227ab46fd0b26f829fedf7ef96f7bdd4edc6bac703c99acab586163f8c7d848c9465bcbc05a891a6a25422ff10b1b261140'
@@ -69,7 +74,10 @@ b2sums=('303838f09331f4c551d6a14b6d7c7e7cf91e6f58f90214397b07010ed0ab652a6cbde2e
         '1d74a32c602d233d41961507802a59ec95da2d3945208d4643a75af7df0cb341bed91e6a4fa6306d5c64101cbd03525611e67d8349d17f2d0cb2719bc507bad0'
         'fb649c179b08a9a7558f6df497d5eb6160c3a90e8b8202edf628bea166f384e2d2f844f0ccd957831349fae6d28a20089c8d5fc98eaaafa3e738903149aea3b6'
         'a129c1004d6fd8bf73ee8e296901a02652c89bd934d1aed9309314a0bc57407770b48fa6371c9320e04740b835d74267b25ed9c7dd19d10171d4747e1afeb1aa'
-        'c7e2d8a2c556f7245e74faebe798ecb2b3681c1a018a6a32562e08d505fe47c3eb873878f3e3855962df6650752188f6b12f9238865c05136f37053f65901b38')
+        'c7e2d8a2c556f7245e74faebe798ecb2b3681c1a018a6a32562e08d505fe47c3eb873878f3e3855962df6650752188f6b12f9238865c05136f37053f65901b38'
+        '9a7d7a7ca63353e6546b5e0152d4d124b62f868d7eccefbae8c3ea5e1b6f6c8c587f7e413ef2e2a2f06a8678b23d95f180a3792cef84edcf5e3126cb50c36c76'
+        '127b0fee060348f52db8376acfc83105bb2fd455ca67a98e4ba9525f5e48d13320754c97f3d025c7649b7e175f4661c65ad9e2b00fd5b423c44c0837b2b41572'
+        'e0950ab753a59c33bc15e7a9e28fc3d3575bcd2555b0d81df27f53c420595d59828ed49fa4a63038e88a5ee91b393be67703934074de85d07d784ec6c48d3992')
 
 prepare() {
   cd $pkgbase
