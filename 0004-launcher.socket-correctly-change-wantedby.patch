@@ -1,0 +1,38 @@
+From c0c803d3f57ceed080f80004313d90fb8e1aa7c7 Mon Sep 17 00:00:00 2001
+From: Harald Sitter <sitter@kde.org>
+Date: Tue, 25 Aug 2026 12:51:41 +0200
+Subject: [PATCH 4/7] launcher.socket: correctly change wantedby
+
+---
+ src/coredump/launcher/CMakeLists.txt                   | 3 ++-
+ src/coredump/launcher/drkonqi-coredump-launcher.socket | 1 +
+ 2 files changed, 3 insertions(+), 1 deletion(-)
+
+diff --git a/src/coredump/launcher/CMakeLists.txt b/src/coredump/launcher/CMakeLists.txt
+index 2e22ec403..12db559bb 100644
+--- a/src/coredump/launcher/CMakeLists.txt
++++ b/src/coredump/launcher/CMakeLists.txt
+@@ -28,8 +28,9 @@ install(
+     FILES drkonqi-coredump-launcher.socket ${CMAKE_CURRENT_BINARY_DIR}/drkonqi-coredump-launcher@.service
+     DESTINATION ${KDE_INSTALL_SYSTEMDUSERUNITDIR}
+ )
++# When making changes here also make sure to replicate them in the unit.
+ install(CODE "
+     include(${CMAKE_SOURCE_DIR}/cmake/SystemctlEnable.cmake)
+-    systemctl_enable(drkonqi-coredump-launcher.socket sockets.target ${KDE_INSTALL_FULL_SYSTEMDUSERUNITDIR})
++    systemctl_enable(drkonqi-coredump-launcher.socket plasma-core.target ${KDE_INSTALL_FULL_SYSTEMDUSERUNITDIR})
+ ")
+ install( FILES drkonqi-coredump-launcher.notifyrc DESTINATION  ${KDE_INSTALL_KNOTIFYRCDIR})
+diff --git a/src/coredump/launcher/drkonqi-coredump-launcher.socket b/src/coredump/launcher/drkonqi-coredump-launcher.socket
+index 0086a0634..880d1c573 100644
+--- a/src/coredump/launcher/drkonqi-coredump-launcher.socket
++++ b/src/coredump/launcher/drkonqi-coredump-launcher.socket
+@@ -29,4 +29,5 @@ PollLimitIntervalSec=2s
+ MaxConnections=16
+ 
+ [Install]
++# When making changes here also make sure to replicate them in CMake.
+ WantedBy=plasma-core.target
+-- 
+2.55.0
+

@@ -1,0 +1,70 @@
+From 0988446f89099ae185c9e457e40ffb5f0b9ab7f8 Mon Sep 17 00:00:00 2001
+From: Harald Sitter <sitter@kde.org>
+Date: Tue, 25 Aug 2026 12:52:00 +0200
+Subject: [PATCH 6/7] cleanup.timer: do not start outside plasma
+
+---
+ src/coredump/cleanup/CMakeLists.txt                       | 4 ++--
+ .../cleanup/drkonqi-coredump-cleanup.service.cmake        | 8 +++++---
+ src/coredump/cleanup/drkonqi-coredump-cleanup.timer       | 5 ++++-
+ 3 files changed, 11 insertions(+), 6 deletions(-)
+
+diff --git a/src/coredump/cleanup/CMakeLists.txt b/src/coredump/cleanup/CMakeLists.txt
+index 3ce78698a..3235e5285 100644
+--- a/src/coredump/cleanup/CMakeLists.txt
++++ b/src/coredump/cleanup/CMakeLists.txt
+@@ -15,6 +15,6 @@ install(
+ )
+ install(CODE "
+     include(${CMAKE_SOURCE_DIR}/cmake/SystemctlEnable.cmake)
+-    systemctl_enable(drkonqi-coredump-cleanup.service default.target ${KDE_INSTALL_FULL_SYSTEMDUSERUNITDIR})
+-    systemctl_enable(drkonqi-coredump-cleanup.timer timers.target ${KDE_INSTALL_FULL_SYSTEMDUSERUNITDIR})
++    systemctl_enable(drkonqi-coredump-cleanup.service plasma-core.target ${KDE_INSTALL_FULL_SYSTEMDUSERUNITDIR})
++    systemctl_enable(drkonqi-coredump-cleanup.timer plasma-core.target ${KDE_INSTALL_FULL_SYSTEMDUSERUNITDIR})
+ ")
+diff --git a/src/coredump/cleanup/drkonqi-coredump-cleanup.service.cmake b/src/coredump/cleanup/drkonqi-coredump-cleanup.service.cmake
+index 47b7682f2..db7617a89 100644
+--- a/src/coredump/cleanup/drkonqi-coredump-cleanup.service.cmake
++++ b/src/coredump/cleanup/drkonqi-coredump-cleanup.service.cmake
+@@ -5,8 +5,8 @@
+ Description=Cleaning DrKonqi data
+ ConditionPathExistsGlob=|%C/kcrash-metadata/*.ini
+ ConditionPathExistsGlob=|%C/drkonqi/cores/*
+-PartOf=graphical-session.target
+-After=plasma-core.target
++PartOf=plasma-core.target
++After=default.target
+ 
+ [Service]
+ ExecStart=@KDE_INSTALL_FULL_LIBEXECDIR@/drkonqi-coredump-cleanup %C
+@@ -18,4 +18,6 @@ RuntimeMaxSec=30 minutes
+ # left over should then get cleaned up (if the file is old enough).
+ # Since we currently lack the UI infrastructure for that we had better clean up on login
+ # unconditionally.
+-WantedBy=default.target
++#
++# When making changes here also make sure to replicate them in CMake.
++WantedBy=plasma-core.target
+diff --git a/src/coredump/cleanup/drkonqi-coredump-cleanup.timer b/src/coredump/cleanup/drkonqi-coredump-cleanup.timer
+index ef36ac2ed..70a6027b3 100644
+--- a/src/coredump/cleanup/drkonqi-coredump-cleanup.timer
++++ b/src/coredump/cleanup/drkonqi-coredump-cleanup.timer
+@@ -3,6 +3,8 @@
+ 
+ [Unit]
+ Description=Cleaning DrKonqi data
++PartOf=plasma-core.target
++After=timers.target
+ 
+ [Timer]
+ # Purely for users that always supend, they'd not get cruft cleaned up on login.
+@@ -11,4 +13,5 @@ OnCalendar=weekly
+ Persistent=false
+ 
+ [Install]
+-WantedBy=timers.target
++# When making changes here also make sure to replicate them in CMake.
++WantedBy=plasma-core.target
+-- 
+2.55.0
+
