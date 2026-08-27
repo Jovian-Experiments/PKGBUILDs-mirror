@@ -1,0 +1,38 @@
+From 3ef618e6fa0f139ed46fa0f8fd4e924452dc179c Mon Sep 17 00:00:00 2001
+From: Harald Sitter <sitter@kde.org>
+Date: Mon, 24 Aug 2026 08:33:57 +0200
+Subject: [PATCH 2/7] launcher.socket: attach the unit to plasma
+
+it's not really tested or supported outside, plus having it wanted by
+sockets meant it was even queued for e.g. ssh sessions
+
+BUG: 524490
+---
+ src/coredump/launcher/drkonqi-coredump-launcher.socket | 7 ++++++-
+ 1 file changed, 6 insertions(+), 1 deletion(-)
+
+diff --git a/src/coredump/launcher/drkonqi-coredump-launcher.socket b/src/coredump/launcher/drkonqi-coredump-launcher.socket
+index ff563c8dd..0086a0634 100644
+--- a/src/coredump/launcher/drkonqi-coredump-launcher.socket
++++ b/src/coredump/launcher/drkonqi-coredump-launcher.socket
+@@ -5,6 +5,11 @@
+ Description=Socket to launch DrKonqi for a systemd-coredump crash
+ DefaultDependencies=no
+ ConditionUser=!@system
++Requisite=plasma-core.target
++PartOf=plasma-core.target
++# We need kwin to actually be able to render the drkonqi windows
++After=plasma-kwin_wayland.service
++After=sockets.target
+ 
+ [Socket]
+ # This is a bit problematic. Technically the user should be able to set the runtime dir via env as well, but we need
+@@ -24,4 +29,4 @@ PollLimitIntervalSec=2s
+ MaxConnections=16
+ 
+ [Install]
+-WantedBy=sockets.target
++WantedBy=plasma-core.target
+-- 
+2.55.0
+

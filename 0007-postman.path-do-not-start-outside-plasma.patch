@@ -1,0 +1,82 @@
+From af23df73e8e21e273f3ccfb81105ad4a2e1ecbb6 Mon Sep 17 00:00:00 2001
+From: Harald Sitter <sitter@kde.org>
+Date: Tue, 25 Aug 2026 12:52:10 +0200
+Subject: [PATCH 7/7] postman.path: do not start outside plasma
+
+---
+ src/sentry/postman/CMakeLists.txt                       | 2 --
+ src/sentry/postman/drkonqi-sentry-postman.path          | 7 +++++--
+ src/sentry/postman/drkonqi-sentry-postman.service.cmake | 2 +-
+ src/sentry/postman/drkonqi-sentry-postman.timer         | 4 +++-
+ 4 files changed, 9 insertions(+), 6 deletions(-)
+
+diff --git a/src/sentry/postman/CMakeLists.txt b/src/sentry/postman/CMakeLists.txt
+index d4ccedc51..605a5ff4f 100644
+--- a/src/sentry/postman/CMakeLists.txt
++++ b/src/sentry/postman/CMakeLists.txt
+@@ -15,8 +15,6 @@ install(
+ )
+ install(CODE "
+     include(${CMAKE_SOURCE_DIR}/cmake/SystemctlEnable.cmake)
+-    systemctl_enable(drkonqi-sentry-postman.path default.target ${KDE_INSTALL_FULL_SYSTEMDUSERUNITDIR})
+     systemctl_enable(drkonqi-sentry-postman.path plasma-core.target ${KDE_INSTALL_FULL_SYSTEMDUSERUNITDIR})
+-    systemctl_enable(drkonqi-sentry-postman.timer timers.target ${KDE_INSTALL_FULL_SYSTEMDUSERUNITDIR})
+     systemctl_enable(drkonqi-sentry-postman.timer plasma-core.target ${KDE_INSTALL_FULL_SYSTEMDUSERUNITDIR})
+ ")
+diff --git a/src/sentry/postman/drkonqi-sentry-postman.path b/src/sentry/postman/drkonqi-sentry-postman.path
+index 1b09ceb48..b44bea0a0 100644
+--- a/src/sentry/postman/drkonqi-sentry-postman.path
++++ b/src/sentry/postman/drkonqi-sentry-postman.path
+@@ -1,8 +1,10 @@
+ # SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted-GPL
+-# SPDX-FileCopyrightText: 2023 Harald Sitter <sitter@kde.org>
++# SPDX-FileCopyrightText: 2023-2026 Harald Sitter <sitter@kde.org>
+ 
+ [Unit]
+ Description=Submitting pending crash events (file monitor)
++PartOf=plasma-core.target
++After=default.target
+ 
+ [Path]
+ PathExistsGlob=%C/drkonqi/sentry-envelopes/*
+@@ -11,4 +13,5 @@ TriggerLimitIntervalSec=30 minutes
+ TriggerLimitBurst=4
+ 
+ [Install]
+-WantedBy=default.target plasma-core.target
++# When making changes here also make sure to replicate them in CMake.
++WantedBy=plasma-core.target
+diff --git a/src/sentry/postman/drkonqi-sentry-postman.service.cmake b/src/sentry/postman/drkonqi-sentry-postman.service.cmake
+index f7fcb3761..133273c4d 100644
+--- a/src/sentry/postman/drkonqi-sentry-postman.service.cmake
++++ b/src/sentry/postman/drkonqi-sentry-postman.service.cmake
+@@ -3,7 +3,7 @@
+ 
+ [Unit]
+ Description=Submitting pending crash events
+-PartOf=graphical-session.target
++PartOf=plasma-core.target
+ After=plasma-core.target
+ 
+ [Service]
+diff --git a/src/sentry/postman/drkonqi-sentry-postman.timer b/src/sentry/postman/drkonqi-sentry-postman.timer
+index 7f6fec5b0..9c9d1ef91 100644
+--- a/src/sentry/postman/drkonqi-sentry-postman.timer
++++ b/src/sentry/postman/drkonqi-sentry-postman.timer
+@@ -4,10 +4,12 @@
+ [Unit]
+ Description=Submitting pending crash events
+ ConditionPathExistsGlob=%C/drkonqi/sentry-envelopes/*
++PartOf=plasma-core.target
+ 
+ [Timer]
+ OnCalendar=hourly
+ Persistent=false
+ 
+ [Install]
+-WantedBy=timers.target plasma-core.target
++# When making changes here also make sure to replicate them in CMake.
++WantedBy=plasma-core.target
+-- 
+2.55.0
+

@@ -1,0 +1,32 @@
+From 54bf73f8b0f6fe9b85f073e6b1003342ec13432b Mon Sep 17 00:00:00 2001
+From: Harald Sitter <sitter@kde.org>
+Date: Tue, 25 Aug 2026 15:57:00 +0200
+Subject: [PATCH 5/7] launcher.socket: loosen grip on plasma-core.target
+
+plasma-core.target is very weakly linked to the rest of the session and
+doesn't reliably stop / garbage collect if it still is being referenced
+such as by Requisite.
+
+we shouldn't technically need Requisite so let's just drop it and leave
+a warning behind for future changes
+---
+ src/coredump/launcher/drkonqi-coredump-launcher.socket | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+diff --git a/src/coredump/launcher/drkonqi-coredump-launcher.socket b/src/coredump/launcher/drkonqi-coredump-launcher.socket
+index 880d1c573..7033e7273 100644
+--- a/src/coredump/launcher/drkonqi-coredump-launcher.socket
++++ b/src/coredump/launcher/drkonqi-coredump-launcher.socket
+@@ -5,7 +5,8 @@
+ Description=Socket to launch DrKonqi for a systemd-coredump crash
+ DefaultDependencies=no
+ ConditionUser=!@system
+-Requisite=plasma-core.target
++# Be careful with how we related to plasma-core.target. In (at least) Plasma 6.8 it is somewhat easily kept
++# alive by other units. e.g. on the Steam devices when switching session type between desktop mode and game mode
+ PartOf=plasma-core.target
+ # We need kwin to actually be able to render the drkonqi windows
+ After=plasma-kwin_wayland.service
+-- 
+2.55.0
+

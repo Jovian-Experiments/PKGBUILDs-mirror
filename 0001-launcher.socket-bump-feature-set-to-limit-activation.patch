@@ -1,0 +1,61 @@
+From 7e4a8684dcc49bb878b6d7191fa569101c41530c Mon Sep 17 00:00:00 2001
+From: Harald Sitter <sitter@kde.org>
+Date: Mon, 24 Aug 2026 08:31:48 +0200
+Subject: [PATCH 1/7] launcher.socket: bump feature set to limit activation
+ bursts
+
+255 is even in ubuntu 24.04. plenty time for other distros to also have
+adopted it
+---
+ CMakeLists.txt                                      |  2 +-
+ .../launcher/drkonqi-coredump-launcher.socket       | 13 ++++++++-----
+ 2 files changed, 9 insertions(+), 6 deletions(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 49aba501c..41e417f94 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -96,7 +96,7 @@ ecm_set_disabled_deprecation_versions(QT 5.15.2
+     KF 5.240
+ )
+ 
+-find_package(Systemd 254)
++find_package(Systemd 255)
+ set_package_properties(Systemd PROPERTIES TYPE REQUIRED PURPOSE "Coredumpd integration.")
+ 
+ find_package(PolkitQt6-1) # This is only used when extracting crashes from coredumpd
+diff --git a/src/coredump/launcher/drkonqi-coredump-launcher.socket b/src/coredump/launcher/drkonqi-coredump-launcher.socket
+index 65a5fa5d6..ff563c8dd 100644
+--- a/src/coredump/launcher/drkonqi-coredump-launcher.socket
++++ b/src/coredump/launcher/drkonqi-coredump-launcher.socket
+@@ -1,5 +1,5 @@
+ # SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted-GPL
+-# SPDX-FileCopyrightText: 2021 Harald Sitter <sitter@kde.org>
++# SPDX-FileCopyrightText: 2021-2026 Harald Sitter <sitter@kde.org>
+ 
+ [Unit]
+ Description=Socket to launch DrKonqi for a systemd-coredump crash
+@@ -12,13 +12,16 @@ ConditionUser=!@system
+ ListenSequentialPacket=/run/user/%U/drkonqi-coredump-launcher
+ SocketMode=0600
+ Accept=yes
+-# Disable trigger limit for the benefit of older systemds
+-# TODO: remove in favor of PollLimitBurst mechanism once systemd 255 is in ubuntu LTS
++
++# Disable hard-limiting (would fail the unit when exhausted)
+ TriggerLimitBurst=0
++
++# Enable soft-limiting (does not fail the unit but limits the rate of polling)
++PollLimitBurst=15
++PollLimitIntervalSec=2s
++
+ # NB: this effectively also limits how many concurrent drkonqis run!
+ MaxConnections=16
+ 
+ [Install]
+ WantedBy=sockets.target
+-# Prevents trigger-limit-hit failure state by restarting the unit (systemd 250[?])
+-UpheldBy=sockets.target
+-- 
+2.55.0
+

@@ -1,0 +1,29 @@
+From 621e53262faa720aa8a17e3c30aadca4f3c6848f Mon Sep 17 00:00:00 2001
+From: Harald Sitter <sitter@kde.org>
+Date: Mon, 24 Aug 2026 09:07:39 +0200
+Subject: [PATCH 3/7] launcher.service: ensure it doesn't participate in
+ session management
+
+(on x11)
+
+BUG: 524213
+---
+ src/coredump/launcher/drkonqi-coredump-launcher@.service.cmake | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/src/coredump/launcher/drkonqi-coredump-launcher@.service.cmake b/src/coredump/launcher/drkonqi-coredump-launcher@.service.cmake
+index 36c401cd8..384613a2a 100644
+--- a/src/coredump/launcher/drkonqi-coredump-launcher@.service.cmake
++++ b/src/coredump/launcher/drkonqi-coredump-launcher@.service.cmake
+@@ -8,6 +8,8 @@ Requisite=graphical-session.target
+ ConditionUser=!@system
+ 
+ [Service]
++# Make extra sure the launcher is not part of session management. It only works when started from systemd!
++Environment=SESSION_MANAGER=
+ # Don't need to be working anywhere specific, use tmp.
+ WorkingDirectory=%T
+ ExecStart=@KDE_INSTALL_FULL_LIBEXECDIR@/drkonqi-coredump-launcher
+-- 
+2.55.0
+
