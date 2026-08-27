@@ -4,7 +4,7 @@
 # PKGBUILD we only have access to prebuilt binaries.
 
 pkgname=jupiter-dock-updater-bin
-_srctag=jupiter-20260602.01
+_srctag=jupiter-20260811.01
 _srcver=${_srctag#jupiter-}
 pkgver=${_srcver//-/.}
 pkgrel=1
@@ -15,7 +15,7 @@ license=(proprietary)
 depends=()
 makedepends=(git openssh)
 source=("git+ssh://git@gitlab.steamos.cloud/jupiter/jupiter-dock-updater-bin.git#tag=$_srctag")
-sha256sums=('e977a6bb339437e58ad5b05b8a7853f9f8f36f8c721ef9e0f32f40e6fc700d65')
+sha256sums=('eca9ffbe405c7ee448a623c8843edb6479761d9af77619f63440bf4d7dd171c6')
 
 prepare() {
     cd "$pkgname"
