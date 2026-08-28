@@ -1,15 +1,15 @@
 # Maintainer: Pierre-Loup A. Griffais <pgriffais@valvesoftware.com>
 
 pkgname=gamescope
-_srctag=3.16.26
+_srctag=3.16.23.6
 pkgver=${_srctag//-/.}
-pkgrel=2
+pkgrel=1
 pkgdesc="gaming shell based on Xwayland, powered by Vulkan and DRM"
 arch=(x86_64)
 url="https://github.com/ValveSoftware/gamescope"
 license=('MIT')
 depends=('xorg-xwayland' 'libavif' 'aom' 'rav1e' 'libxres' 'xcb-util-errors' 'freerdp' 'xcb-util-wm' 'libxcomposite' 'pixman' 'libinput' 'seatd' 'pipewire' 'libxmu' 'libxcursor' 'libdecor' 'libei' 'luajit')
-makedepends=(openssh git meson cmake wayland-protocols ninja glslang glm vulkan-headers benchmark catch2)
+makedepends=(openssh git meson cmake wayland-protocols ninja glslang glm vulkan-headers benchmark)
 source=("galileo-mura-setup.service"
         "gamescope-session"
         "gamescope-wayland.desktop"
@@ -17,6 +17,7 @@ source=("galileo-mura-setup.service"
         "gamescope-session.service"
         "gamescope-session.target"
         "gamescope-portals.conf"
+        "gamescope-xbindkeys.service"
         "gamescope-mangoapp.service"
         "ibus-gamescope.service"
         "start-gamescope-session"
@@ -27,7 +28,7 @@ source=("galileo-mura-setup.service"
         "steam_http_loader.desktop"
         "steam-http-loader"
         "git+https://github.com/ValveSoftware/gamescope.git#tag=$_srctag"
-        "git+https://gitlab.freedesktop.org/wlroots/wlroots.git#tag=0.20.2"
+        "git+https://github.com/Joshua-Ashton/wlroots.git"
         "git+https://gitlab.freedesktop.org/emersion/libliftoff.git"
         "git+https://github.com/Joshua-Ashton/GamescopeShaders.git#tag=v0.1"
         # FIXME Upstream gamescope is just selecting master branch at build time, so we are arbitrarily snapshotting a
@@ -35,12 +36,13 @@ source=("galileo-mura-setup.service"
         "git+https://github.com/nothings/stb.git#commit=af1a5bc352164740c1cc1354942b1c6b72eacb8a"
         "git+https://github.com/g-truc/glm.git#commit=0af55ccecd98d4e5a8d1fad7de25ba429d60e863")
 sha256sums=('2cfacf10f311a02d1c94ab5e927094639dfbb57bd322acc628374fef048a12bb'
-            'da4e61a38edc3568229a8def2bcf24480db80d85c3507ea6a7d73d774f639abb'
+            'e6fec58aa7f71f623a3a5e865c7754925ee4627f95368291c2b6c0051f1fb62f'
             'fe515fce8f151a6c03a89e043044bfddf8cd6ee89027d2cfbcf6f6706c78ca76'
             'e37ba6107f3a84cf47c2799b537a88583e6cb8951167a9c6a48fa1d85996206b'
             '78f9bb2a97ff5cb08e5e648bed9984a6ffba68a7fff9d214b0d28a532ee66601'
-            '6fbac560ef24747c3e45621e0dc188fc031418a2f60dde9a1cd0efeb0c3827c5'
+            'ce7e26d4145b44a1161d8ec050fb97f3c8786b7c5b719f36aa1dfb984b5863c1'
             'eae6b5cbd0735d6732c8b7de99ed3362f24f6aa76bbba0950a14b99040f4e6d0'
+            'd9a8e593bea8ea0afc96cec3849c48e87b686d263a5d7a09a272237cc35acb52'
             '81da49a733a757a4848a5c95011c3f9d3e584373244722ed9b26687ae0126793'
             'd010a36f52f2122b51f8a0bdc983560a553759f85c2eb5a9ccb2b1a6de367059'
             '10462d319e9d2a97a8fc9265628c03819bd6fd86dc13cee6e38151fc9b270407'
@@ -50,8 +52,8 @@ sha256sums=('2cfacf10f311a02d1c94ab5e927094639dfbb57bd322acc628374fef048a12bb'
             '674367927b9d0665a1e1c57ebcd7373683659b1dc1020d2bffd4ab50e4af73fa'
             '525060896abef2da9db8d8294253b7444d60e48cf6cc0496ca48fc7084cc8590'
             'f57fcba25b211381a9402d3d0c4723301afaef185e9ecffc75839e5af2aee4c8'
-            'c7063796cb35af06e0e26cec4754d0aeefd5c7518078f3bc7a44e554b79d0193'
-            '6c8595da579a8df74bc307294c2485e90f5379b84390381f500da33ff3f276d2'
+            'b651b28209529f051824f91b2fc5d0377190f7d4c4f57389f8600d48504c8c01'
+            'SKIP'
             'SKIP'
             '03726f2fb44ae79e6a398e8f9aaaf8054800dda9b8298726157522fe5f7296b1'
             'e39e0c91b297bfd707afcda84ecdc15a08c22e2ad4c347fc3533b1ed98fb3f85'
@@ -61,10 +63,6 @@ install=gamescope.install
 
 prepare() {
 	cd "$pkgname"
-
-	# Fixes startup failure with the Venus driver
-	# https://github.com/ValveSoftware/gamescope/issues/2281
-	git cherry-pick -n 8c676c399c761e4540587f61004c957993d12fea
 
 	# git submodules
 	git submodule init
@@ -84,20 +82,18 @@ prepare() {
 
 build() {
 	cd "$pkgname"
-	rm -rf build
-	arch-meson --buildtype release --prefix /usr build
-	meson compile -C build
-}
 
-check() {
-	cd "$pkgname"
-	meson test -C build --suite gamescope -v
+	rm -rf build
+	mkdir build
+	cd build
+	arch-meson --buildtype release --prefix /usr ..
+	ninja
 }
 
 package() {
 	install -D -m 755 gamescope-session "$pkgdir"/usr/lib/steamos/gamescope-session
 	install -D -m 755 steam-launcher "$pkgdir"/usr/lib/steamos/steam-launcher
-	install -D -m 755 steam-short-session-tracker "$pkgdir"/usr/lib/steamos/steam-short-session-tracker
+  install -D -m 755 steam-short-session-tracker "$pkgdir"/usr/lib/steamos/steam-short-session-tracker
 
 	install -D -m 755 start-gamescope-session "$pkgdir"/usr/bin/start-gamescope-session
 	install -D -m 644 gamescope-wayland.desktop "$pkgdir"/usr/share/wayland-sessions/gamescope-wayland.desktop
@@ -115,6 +111,7 @@ package() {
 	install -D -m 644 ibus-gamescope.service  "$pkgdir"/usr/lib/systemd/user/ibus-gamescope.service
 	install -D -m 644 steam-launcher.service "$pkgdir"/usr/lib/systemd/user/steam-launcher.service
 	install -D -m 644 steam-notif-daemon.service "$pkgdir"/usr/lib/systemd/user/steam-notif-daemon.service
+	install -D -m 644 gamescope-xbindkeys.service "$pkgdir"/usr/lib/systemd/user/gamescope-xbindkeys.service
 
 	# portals
 	install -D -m 644 gamescope-portals.conf "$pkgdir"/usr/share/xdg-desktop-portal/gamescope-portals/gamescope-portals.conf
@@ -123,7 +120,11 @@ package() {
 	cp -r "$srcdir"/GamescopeShaders/* "$pkgdir"/usr/share/gamescope/reshade/
 	chmod -R 655 "$pkgdir"/usr/share/gamescope
 
-	cd "$pkgname"
+	cd "$pkgname/build"
 
-	meson install -C build --destdir "$pkgdir" --skip-subprojects
+	DESTDIR="$pkgdir" meson install --skip-subprojects
+
+	rm -rf "$pkgdir"/usr/include
+	rm -rf "$pkgdir"/usr/lib/libwlroots*
+	rm -rf "$pkgdir"/usr/lib/pkgconfig
 }
