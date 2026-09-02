@@ -4,7 +4,7 @@
 pkgname=drkonqi
 pkgver=6.7.3
 _dirver=$(echo $pkgver | cut -d. -f1-3)
-pkgrel=1
+pkgrel=2
 pkgdesc='The KDE crash handler'
 arch=(x86_64)
 url='https://kde.org/plasma-desktop/'
@@ -48,6 +48,7 @@ source=(https://download.kde.org/stable/plasma/$_dirver/$pkgname-$pkgver.tar.xz{
         0005-launcher.socket-loosen-grip-on-plasma-core.target.patch # Drop after 6.8
         0006-cleanup.timer-do-not-start-outside-plasma.patch # Drop after 6.8
         0007-postman.path-do-not-start-outside-plasma.patch # Drop after 6.8
+        0008-coredump-don-t-process-crashes-of-our-own-binaries.patch # Drop after 6.7.5
         )
 sha256sums=('d2e2c158c0e3f7e47f1a2529c30caffc3bff1aa8398dd6dff8c9645244f9ce26'
             'SKIP'
@@ -57,7 +58,8 @@ sha256sums=('d2e2c158c0e3f7e47f1a2529c30caffc3bff1aa8398dd6dff8c9645244f9ce26'
             '6cf509781317511d98684cc88086ef7ff84252c68c87987597c85a3344a612e2'
             '0ae347615b4621ca101bc895696db5e4ec6c11f0eb989951b843f58dcac0c9d7'
             'c2831925110f51e3eb145550bb3d9fc53a133eb9a446b909d009fbcebda5bd06'
-            '74bed8754dc96afa51a09bc4110e8ffe95d0b2b1c87be0e7f3cddada48dbf23c')
+            '74bed8754dc96afa51a09bc4110e8ffe95d0b2b1c87be0e7f3cddada48dbf23c'
+            'e4f3e62a0def31cb388f184a0df6bcbef3de99f4c09727820b0a78dc6392f73e')
 validpgpkeys=('E0A3EB202F8E57528E13E72FD7574483BB57B18D'  # Jonathan Esk-Riddell <jr@jriddell.org>
               '0AAC775BB6437A8D9AF7A3ACFE0784117FBCE11D'  # Bhushan Shah <bshah@kde.org>
               'D07BD8662C56CB291B316EB2F5675605C74E02CF'  # David Edmundson <davidedmundson@kde.org>
@@ -72,6 +74,7 @@ prepare() {
   patch -Np1 -i ../0005-launcher.socket-loosen-grip-on-plasma-core.target.patch
   patch -Np1 -i ../0006-cleanup.timer-do-not-start-outside-plasma.patch
   patch -Np1 -i ../0007-postman.path-do-not-start-outside-plasma.patch
+  patch -Np1 -i ../0008-coredump-don-t-process-crashes-of-our-own-binaries.patch
 }
 
 build() {
