@@ -9,8 +9,8 @@ pkgname=(
   libxml2
   libxml2-docs
 )
-pkgver=2.14.5
-pkgrel=1.1 # Holo: add mitigation against libxslt's CVE-2025-7425
+pkgver=2.15.4
+pkgrel=1.1 # Rebuild for Holo
 pkgdesc="XML C parser and toolkit"
 url="https://gitlab.gnome.org/GNOME/libxml2/-/wikis/home"
 arch=(x86_64)
@@ -20,10 +20,11 @@ depends=(
   glibc
   icu
   readline
-  xz
   zlib
 )
 makedepends=(
+  docbook-xsl
+  doxygen
   git
   meson
   python
@@ -32,13 +33,11 @@ source=(
   "git+https://gitlab.gnome.org/GNOME/libxml2.git#tag=v$pkgver"
   https://www.w3.org/XML/Test/xmlts20130923.tar.gz
 )
-b2sums=('c4104e9f98671c591df9bd539c24c5dd232644750c3e8ec1664592638b01f61148150d44c50f919eacf4b63750a486ec87b4a5a65535d2872d42c7d9c9fd768a'
+b2sums=('ef8e27efaffb141925019219ce3fba969d41d52007688e02ba24e8e3f8b521209d6ac975ac91e8350ea44baca9b3bb44fe2b1297003e897c79c6bb1dec4149e3'
         '63a47bc69278ef510cd0b3779aed729e1b309e30efa0015d28ed051cc03f9dfddb447ab57b07b3393e8f47393d15473b0e199c34cb1f5f746b15ddfaa55670be')
 
 prepare() {
   cd libxml2
-
-  git cherry-pick -n 9de92ed78d8495527c5d7a4d0cc76c1f83768195 # Holo: add mitigation against libxslt's CVE-2025-7425
 
   # Use xmlconf from conformance test suite
   ln -s ../xmlconf
@@ -59,6 +58,7 @@ check() {
 }
 
 package_libxml2() {
+  depends+=(libicuuc.so)
   optdepends=('python: Python bindings')
   provides=(libxml2.so)
 
@@ -67,7 +67,7 @@ package_libxml2() {
 
   # Split docs
   mkdir -p doc/usr/share
-  mv "$pkgdir"/usr/share/{doc,gtk-doc} -t doc/usr/share
+  mv "$pkgdir"/usr/share/doc -t doc/usr/share
 
   install -Dm644 libxml2/Copyright -t "$pkgdir/usr/share/licenses/$pkgname"
 }
