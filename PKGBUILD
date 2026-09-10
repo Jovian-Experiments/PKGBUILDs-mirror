@@ -5,7 +5,7 @@ pkgbase=linux-firmware-neptune
 pkgname=(linux-firmware-neptune-whence linux-firmware-neptune  amd-ucode-neptune
          linux-firmware-neptune-{nfp,mellanox,marvell,qcom,liquidio,qlogic,bnx2x}
 )
-_tag=jupiter-20260827.1
+_tag=jupiter-20260910.1
 pkgver=${_tag//-/.}
 pkgrel=1
 pkgdesc="Firmware files for Linux"
@@ -29,7 +29,7 @@ options=(
   !debug
 )
 source=("git+ssh://git@gitlab.steamos.cloud/jupiter/linux-firmware-neptune.git#tag=$_tag")
-sha256sums=('71cd98b18edda9af9ce09bb97c6f4cb650f454fd3cd652701fb95eb3bf6c9b52')
+sha256sums=('3a3ae315969db89e5b72596ba11566df35ec3bea0739b389351cd8c05a5a32a5')
 validpgpkeys=('4CDE8575E547BF835FE15807A31B6BD72486CFD6') # Josh Boyer <jwboyer@fedoraproject.org>
 
 _backports=(
