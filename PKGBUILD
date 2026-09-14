@@ -28,7 +28,7 @@ _tag=radeonsi-26.1.2
 pkgver=26.1.2.221562.radeonsi_26.1.2
 #pkgver=25.3.0
 #_pkgver=${pkgver/[a-z]/-&}
-pkgrel=2
+pkgrel=2.1 # Has upstream 4 but not 3
 epoch=0
 pkgdesc="Open-source OpenGL drivers"
 url="https://www.mesa3d.org/"
@@ -267,6 +267,7 @@ build() {
     -D gallium-rusticl=false
     -D html-docs=disabled
     -D amdgpu-virtio=true
+    -D intel-virtio-experimental=true
     -D sysprof=false
     -D radeonsi-build-id=6dc25ea2b40438949c158970db654d9db358d5b1
   )
