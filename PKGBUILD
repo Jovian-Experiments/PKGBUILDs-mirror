@@ -3,7 +3,7 @@
 pkgname=gamescope
 _srctag=3.16.26
 pkgver=${_srctag//-/.}
-pkgrel=2
+pkgrel=3
 pkgdesc="gaming shell based on Xwayland, powered by Vulkan and DRM"
 arch=(x86_64)
 url="https://github.com/ValveSoftware/gamescope"
@@ -121,7 +121,7 @@ package() {
 
 	install -d "$pkgdir"/usr/share/gamescope/reshade
 	cp -r "$srcdir"/GamescopeShaders/* "$pkgdir"/usr/share/gamescope/reshade/
-	chmod -R 655 "$pkgdir"/usr/share/gamescope
+	chmod -R 755 "$pkgdir"/usr/share/gamescope
 
 	cd "$pkgname"
 
