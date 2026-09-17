@@ -2,7 +2,7 @@
 # Maintainer: Vivek Das Mohapatra <vivek.dasmohapatra@collabora.com>
 
 pkgname=steamos-customizations-jupiter
-_srctag=jupiter-20260911.1
+_srctag=jupiter-20260914.1
 _srcver=${_srctag#jupiter-}
 pkgver=${_srcver//-/.}
 pkgrel=1
@@ -15,7 +15,7 @@ makedepends=('git' 'openssh' 'systemd')
 provides=("${pkgname%-git}")
 conflicts=("${pkgname%-git}")
 source=("${pkgname%-git}::git+ssh://git@gitlab.steamos.cloud/holo/steamos-customizations.git#tag=${_srctag}")
-sha256sums=('cb434f3fcc30667db0918fdd23175db80483193b3849260b24a67c9ac53f37b5')
+sha256sums=('0d53c1a815adb56e7c7eee5ebb1f899115ea08a253d769a41f470511715ed8a0')
 
 package() {
 	cd "${pkgname%-git}"
@@ -33,6 +33,4 @@ package() {
 
 	# The pacman keyring services live in separate package
 	rm -rf "${pkgdir}"/usr/lib/systemd/system/{multi-user.target.wants/,}pacman-{init,cleanup}.service
-	# The sudo settings live in separate package
-	rm -rf "${pkgdir}/etc/sudoers.d"
 }
