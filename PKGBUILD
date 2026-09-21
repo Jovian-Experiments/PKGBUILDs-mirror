@@ -2,12 +2,14 @@
 
 pkgname='holo-desync-config'
 pkgver=1.0
-pkgrel=1
+pkgrel=2
 pkgdesc='Holo customizations - configuration for desync'
 arch=('any')
 license=('MIT')
 url='https://gitlab.steamos.cloud/holo/holo'
 depends=('desync')
+replaces=('holo-desync')
+conflicts=('holo-desync')
 source=(
   'config.json'
 )
