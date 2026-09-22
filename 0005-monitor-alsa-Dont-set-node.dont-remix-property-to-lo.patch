@@ -1,4 +1,4 @@
-From 11b06a24c5fc79a3b669b96bc49a18897f687504 Mon Sep 17 00:00:00 2001
+From b3445acb5bcbd9908f73d239123e9fc81eade48a Mon Sep 17 00:00:00 2001
 From: Julian Bouzas <julian.bouzas@collabora.com>
 Date: Thu, 24 Jul 2025 14:25:46 -0400
 Subject: [PATCH 5/6] monitor: alsa: Dont set 'node.dont-remix' property to
@@ -11,10 +11,10 @@ with any number of channels.
  1 file changed, 1 deletion(-)
 
 diff --git a/src/scripts/monitors/alsa.lua b/src/scripts/monitors/alsa.lua
-index 443c03cf..17e95925 100644
+index c08bfe34..caf4463e 100644
 --- a/src/scripts/monitors/alsa.lua
 +++ b/src/scripts/monitors/alsa.lua
-@@ -70,7 +70,6 @@ function CreateLoopback (properties)
+@@ -78,7 +78,6 @@ function CreateLoopback (properties)
      ["audio.channels"] = channels,
      ["audio.position"] = position,
      ["alsa.loopback"] = true,
@@ -23,5 +23,5 @@ index 443c03cf..17e95925 100644
      ["node.dont-fallback"] = true,
      ["node.linger"] = true,
 -- 
-2.52.0
+2.55.0
 
