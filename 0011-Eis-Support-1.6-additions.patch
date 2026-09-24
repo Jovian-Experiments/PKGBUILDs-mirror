@@ -1,4 +1,4 @@
-From 198d9992817ab1b2c6183cb3e127c0814f9403a7 Mon Sep 17 00:00:00 2001
+From 3e369f07d77dd3091a7ceb56eb2defb2184ef1fc Mon Sep 17 00:00:00 2001
 From: David Edmundson <kde@davidedmundson.co.uk>
 Date: Mon, 20 Apr 2026 11:03:30 +0100
 Subject: [PATCH] Eis: Support 1.6 additions
@@ -16,13 +16,15 @@ This also adds a new unit test for libei.
  autotests/integration/libei_test.cpp        | 350 ++++++++++++++++++++
  src/inputmethod.cpp                         |   5 +
  src/inputmethod.h                           |   5 +
+ src/plugins/eis/CMakeLists.txt              |   3 +
+ src/plugins/eis/config-eis.h.in             |   1 +
  src/plugins/eis/eisbackend.cpp              |  15 +
  src/plugins/eis/eisbackend.h                |   1 +
- src/plugins/eis/eiscontext.cpp              |  73 +++-
- src/plugins/eis/eisdevice.cpp               |  82 +++++
+ src/plugins/eis/eiscontext.cpp              |  77 +++--
+ src/plugins/eis/eisdevice.cpp               |  84 ++++-
  src/plugins/eis/eisdevice.h                 |   7 +-
  src/plugins/eis/xwaylandeiscontext.cpp      |   6 +-
- 12 files changed, 535 insertions(+), 20 deletions(-)
+ 14 files changed, 543 insertions(+), 22 deletions(-)
  create mode 100644 autotests/integration/libei_test.cpp
 
 diff --git a/autotests/integration/CMakeLists.txt b/autotests/integration/CMakeLists.txt
@@ -457,6 +459,27 @@ index fa6806b241..fa85b8fc8b 100644
      void commitPendingText();
  
      // for use by the QPA
+diff --git a/src/plugins/eis/CMakeLists.txt b/src/plugins/eis/CMakeLists.txt
+index 052f0d9fc5..c6dbdf9c33 100644
+--- a/src/plugins/eis/CMakeLists.txt
++++ b/src/plugins/eis/CMakeLists.txt
+@@ -49,4 +49,7 @@ endif()
+ if (Libeis_VERSION VERSION_GREATER_EQUAL "1.5")
+     set(EIS_HAVE_GET_CLIENT_PID 1)
+ endif()
++if (Libeis_VERSION VERSION_GREATER_EQUAL "1.6")
++    set(EIS_HAVE_16 1)
++endif()
+ configure_file(config-eis.h.in config-eis.h)
+diff --git a/src/plugins/eis/config-eis.h.in b/src/plugins/eis/config-eis.h.in
+index 59f6bda28e..4186c150a5 100644
+--- a/src/plugins/eis/config-eis.h.in
++++ b/src/plugins/eis/config-eis.h.in
+@@ -1,3 +1,4 @@
+ #pragma once
+ #cmakedefine01 EIS_HAVE_GET_CLIENT_PID
++#cmakedefine01 EIS_HAVE_16
+ #cmakedefine PROMPTER_BIN "${PROMPTER_BIN}"
 diff --git a/src/plugins/eis/eisbackend.cpp b/src/plugins/eis/eisbackend.cpp
 index 1f3b05ca18..fbe38ae20d 100644
 --- a/src/plugins/eis/eisbackend.cpp
@@ -509,12 +532,13 @@ index 14d1319d04..f06f9cfe5f 100644
  private:
      QDBusServiceWatcher *m_serviceWatcher;
 diff --git a/src/plugins/eis/eiscontext.cpp b/src/plugins/eis/eiscontext.cpp
-index 0200d6d361..0d884fcc4d 100644
+index 0200d6d361..e1af29f111 100644
 --- a/src/plugins/eis/eiscontext.cpp
 +++ b/src/plugins/eis/eiscontext.cpp
-@@ -1,10 +1,15 @@
+@@ -1,10 +1,17 @@
  /*
-     SPDX-FileCopyrightText: 2024 David Redondo <kde@david-redondo>
+-    SPDX-FileCopyrightText: 2024 David Redondo <kde@david-redondo>
++    SPDX-FileCopyrightText: 2024 David Redondo <kde@david-redondo.de>
 +    SPDX-FileCopyrightText: 2026 David Edmundson <davidedmundson@kde.org>
  
      SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted-GPL
@@ -522,13 +546,15 @@ index 0200d6d361..0d884fcc4d 100644
  
  #include "eiscontext.h"
 +
-+#include "main.h"
++#include "config-eis.h"
++
 +#include "inputmethod.h"
++#include "main.h"
 +
  #include "eisbackend.h"
  #include "eisdevice.h"
  #include "libeis_logging.h"
-@@ -50,6 +55,9 @@ public:
+@@ -50,6 +57,9 @@ public:
      std::unique_ptr<EisDevice> absoluteDevice;
      std::unique_ptr<EisDevice> pointer;
      std::unique_ptr<EisDevice> keyboard;
@@ -538,7 +564,7 @@ index 0200d6d361..0d884fcc4d 100644
  };
  
  DbusEisContext::DbusEisContext(KWin::EisBackend *backend, QFlags<eis_device_capability> allowedCapabilities, int cookie, const QString &dbusService)
-@@ -90,6 +98,11 @@ EisContext::~EisContext()
+@@ -90,6 +100,11 @@ EisContext::~EisContext()
          if (client->keyboard) {
              Q_EMIT m_backend->deviceRemoved(client->keyboard.get());
          }
@@ -550,7 +576,7 @@ index 0200d6d361..0d884fcc4d 100644
      }
  
      eis_unref(m_eisContext);
-@@ -104,6 +117,11 @@ void EisContext::updateScreens()
+@@ -104,6 +119,11 @@ void EisContext::updateScreens()
      }
  }
  
@@ -562,7 +588,7 @@ index 0200d6d361..0d884fcc4d 100644
  void EisContext::updateKeymap()
  {
      for (const auto &client : m_clients) {
-@@ -127,7 +145,17 @@ void EisContext::connectClient(eis_client *client)
+@@ -127,7 +147,17 @@ void EisContext::connectClient(eis_client *client)
      const char *clientName = eis_client_get_name(client);
      eis_client_connect(client);
      auto seat = eis_client_new_seat(client, QByteArrayLiteral(" seat").prepend(clientName));
@@ -581,7 +607,7 @@ index 0200d6d361..0d884fcc4d 100644
      for (auto capability : allCapabilities) {
          if (m_allowedCapabilities & capability) {
              eis_seat_configure_capability(seat, capability);
-@@ -139,11 +167,6 @@ void EisContext::connectClient(eis_client *client)
+@@ -139,11 +169,6 @@ void EisContext::connectClient(eis_client *client)
      qCDebug(KWIN_EIS) << "New eis client" << clientName;
  }
  
@@ -593,7 +619,7 @@ index 0200d6d361..0d884fcc4d 100644
  void EisContext::handleEvents()
  {
      eis_dispatch(m_eisContext);
-@@ -197,6 +220,10 @@ void EisContext::handleEvents()
+@@ -197,6 +222,10 @@ void EisContext::handleEvents()
              updateDevice(clientSeat->absoluteDevice, &EisBackend::createAbsoluteDevice, eis_event_seat_has_capability(event, EIS_DEVICE_CAP_POINTER_ABSOLUTE) || eis_event_seat_has_capability(event, EIS_DEVICE_CAP_TOUCH));
              updateDevice(clientSeat->pointer, &EisBackend::createPointer, eis_event_seat_has_capability(event, EIS_DEVICE_CAP_POINTER));
              updateDevice(clientSeat->keyboard, &EisBackend::createKeyboard, eis_event_seat_has_capability(event, EIS_DEVICE_CAP_KEYBOARD));
@@ -604,7 +630,7 @@ index 0200d6d361..0d884fcc4d 100644
              break;
          }
          case EIS_EVENT_DEVICE_CLOSED: {
-@@ -209,6 +236,10 @@ void EisContext::handleEvents()
+@@ -209,6 +238,10 @@ void EisContext::handleEvents()
                  seat->keyboard.reset();
              } else if (device == seat->pointer.get()) {
                  seat->pointer.reset();
@@ -615,7 +641,7 @@ index 0200d6d361..0d884fcc4d 100644
              }
              break;
          }
-@@ -305,18 +336,7 @@ void EisContext::handleEvents()
+@@ -305,18 +338,7 @@ void EisContext::handleEvents()
          case EIS_EVENT_KEYBOARD_KEY: {
              const quint32 key = eis_event_keyboard_get_key(event);
              const bool press = eis_event_keyboard_get_key_is_press(event);
@@ -635,7 +661,7 @@ index 0200d6d361..0d884fcc4d 100644
              break;
          }
          case EIS_EVENT_TOUCH_DOWN: {
-@@ -347,8 +367,25 @@ void EisContext::handleEvents()
+@@ -347,8 +369,25 @@ void EisContext::handleEvents()
              Q_EMIT device->touchMotion(id, {x, y}, currentTime(), device);
              break;
          }
@@ -662,12 +688,13 @@ index 0200d6d361..0d884fcc4d 100644
          }
          eis_event_unref(event);
 diff --git a/src/plugins/eis/eisdevice.cpp b/src/plugins/eis/eisdevice.cpp
-index e30a446783..7b43debc48 100644
+index e30a446783..b5c1441ed5 100644
 --- a/src/plugins/eis/eisdevice.cpp
 +++ b/src/plugins/eis/eisdevice.cpp
 @@ -1,10 +1,12 @@
  /*
-     SPDX-FileCopyrightText: 2024 David Redondo <kde@david-redondo>
+-    SPDX-FileCopyrightText: 2024 David Redondo <kde@david-redondo>
++    SPDX-FileCopyrightText: 2024 David Redondo <kde@david-redondo.de>
 +    SPDX-FileCopyrightText: 2026 David Edmundson <davidedmundson@kde.org>
  
      SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted-GPL
