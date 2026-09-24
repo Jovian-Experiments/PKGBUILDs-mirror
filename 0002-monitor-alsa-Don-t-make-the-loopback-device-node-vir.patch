@@ -1,4 +1,4 @@
-From 9e0ecf47d22e041a24fa78c1e456fdf43b2fa9e8 Mon Sep 17 00:00:00 2001
+From df68a74d380c0a676e83a0fe490f5476782870ec Mon Sep 17 00:00:00 2001
 From: Julian Bouzas <julian.bouzas@collabora.com>
 Date: Mon, 2 Dec 2024 09:02:49 -0500
 Subject: [PATCH 2/6] monitor: alsa: Don't make the loopback device node
@@ -9,10 +9,10 @@ Subject: [PATCH 2/6] monitor: alsa: Don't make the loopback device node
  1 file changed, 1 insertion(+)
 
 diff --git a/src/scripts/monitors/alsa.lua b/src/scripts/monitors/alsa.lua
-index c5b20e9d..2a5776cc 100644
+index 1b1bef74..0b3eb9e7 100644
 --- a/src/scripts/monitors/alsa.lua
 +++ b/src/scripts/monitors/alsa.lua
-@@ -81,6 +81,7 @@ function CreateLoopback (properties)
+@@ -89,6 +89,7 @@ function CreateLoopback (properties)
    device_props = Json.Object {
      ["node.name"] = string.format ("alsa_loopback_device.%s", name),
      ["node.description"] = desc,
@@ -21,5 +21,5 @@ index c5b20e9d..2a5776cc 100644
      ["audio.channels"] = channels,
      ["audio.position"] = position,
 -- 
-2.52.0
+2.55.0
 

@@ -1,4 +1,4 @@
-From 251a7aa282cd55b9563ade370acb9948ae0c5f60 Mon Sep 17 00:00:00 2001
+From 0e3e22f6a263ec80bb826a904596592b76b766e6 Mon Sep 17 00:00:00 2001
 From: Julian Bouzas <julian.bouzas@collabora.com>
 Date: Thu, 26 Jun 2025 14:11:16 -0400
 Subject: [PATCH 4/6] monitor: alsa: Don't forward 'priority.driver' property
@@ -9,10 +9,10 @@ Subject: [PATCH 4/6] monitor: alsa: Don't forward 'priority.driver' property
  1 file changed, 2 deletions(-)
 
 diff --git a/src/scripts/monitors/alsa.lua b/src/scripts/monitors/alsa.lua
-index 8bb0bcce..443c03cf 100644
+index 173f1106..c08bfe34 100644
 --- a/src/scripts/monitors/alsa.lua
 +++ b/src/scripts/monitors/alsa.lua
-@@ -44,7 +44,6 @@ function CreateLoopback (properties)
+@@ -52,7 +52,6 @@ function CreateLoopback (properties)
    local dev_id = properties ["device.id"]
    local channels = properties ["audio.channels"]
    local position = properties ["audio.position"]
@@ -20,7 +20,7 @@ index 8bb0bcce..443c03cf 100644
    local pri_session = properties ["priority.session"]
    local cpd = properties ["card.profile.device"]
    local sts = properties ["session.suspend-timeout-seconds"]
-@@ -89,7 +88,6 @@ function CreateLoopback (properties)
+@@ -97,7 +96,6 @@ function CreateLoopback (properties)
      ["alsa.loopback"] = true,
      ["device.id"] = dev_id,
      ["card.profile.device"] = cpd,
@@ -29,5 +29,5 @@ index 8bb0bcce..443c03cf 100644
      ["session.suspend-timeout-seconds"] = sts
    }
 -- 
-2.52.0
+2.55.0
 

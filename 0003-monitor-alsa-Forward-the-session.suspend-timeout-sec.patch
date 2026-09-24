@@ -1,4 +1,4 @@
-From 3008cf7d21483456c4ed80727c3102a45e8a9fe0 Mon Sep 17 00:00:00 2001
+From 1005d949e2670d24f05e53ba281923b759b31025 Mon Sep 17 00:00:00 2001
 From: Julian Bouzas <julian.bouzas@collabora.com>
 Date: Mon, 16 Jun 2025 17:35:08 -0400
 Subject: [PATCH 3/6] monitor: alsa: Forward the
@@ -9,10 +9,10 @@ Subject: [PATCH 3/6] monitor: alsa: Forward the
  1 file changed, 3 insertions(+), 1 deletion(-)
 
 diff --git a/src/scripts/monitors/alsa.lua b/src/scripts/monitors/alsa.lua
-index 2a5776cc..8bb0bcce 100644
+index 0b3eb9e7..173f1106 100644
 --- a/src/scripts/monitors/alsa.lua
 +++ b/src/scripts/monitors/alsa.lua
-@@ -47,6 +47,7 @@ function CreateLoopback (properties)
+@@ -55,6 +55,7 @@ function CreateLoopback (properties)
    local pri_driver = properties ["priority.driver"]
    local pri_session = properties ["priority.session"]
    local cpd = properties ["card.profile.device"]
@@ -20,7 +20,7 @@ index 2a5776cc..8bb0bcce 100644
    local stream_media_class = nil
    local stream_props = nil
    local device_props = nil
-@@ -89,7 +90,8 @@ function CreateLoopback (properties)
+@@ -97,7 +98,8 @@ function CreateLoopback (properties)
      ["device.id"] = dev_id,
      ["card.profile.device"] = cpd,
      ["priority.driver"] = tonumber(pri_driver) + 1,
@@ -31,5 +31,5 @@ index 2a5776cc..8bb0bcce 100644
  
    -- Set args
 -- 
-2.52.0
+2.55.0
 
