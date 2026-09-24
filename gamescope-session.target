@@ -12,6 +12,5 @@ Upholds=steam-launcher.service
 
 Wants=ibus-gamescope.service
 Wants=steam-notif-daemon.service
-Wants=gamescope-xbindkeys.service
 Wants=galileo-mura-setup.service
 Wants=gamescope-mangoapp.service
