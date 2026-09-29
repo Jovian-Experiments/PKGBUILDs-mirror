@@ -8,7 +8,7 @@ pkgname=(
   libwireplumber
   wireplumber-docs
 )
-pkgver=0.5.17
+pkgver=0.5.18
 pkgrel=1.1
 pkgdesc="Session / policy manager implementation for PipeWire"
 url="https://pipewire.pages.freedesktop.org/wireplumber/"
@@ -50,7 +50,7 @@ source=(
   # More info: https://gitlab.steamos.cloud/holo-team/tasks/-/work_items/2049
   "0001-alsa-Add-new-monitor.alsa.enable-external-volume-con.patch"
 )
-b2sums=('4a1366497e42c80178a4abc6d6e361e44226dd12898b82782e1e0a446a6b6e38589c12e76b1f046bd278f5ea453f5726799f44fbf310471cf554c8d89a39ba00'
+b2sums=('eea6a3e022c0b8918a72b56a9cdb1c02bca4411a9394fc2a8732faad2c0c71d1443b2a37b22e60467aaab62c154150d18b185b2690271d1d4830dee6513e2e8c'
         'ecb34e07d114e738521f7827a13be84982a5d670e53d6ae179ec0d997ea9342b75ca89e9862d34c83ebab5c9dd93bebceec2d6407d896d22a485b8107a3e9782'
         '9f0bd1cfe6e0470f08b43a3d2709d698ba8dc1899348b6d9770049a42acb933bc768b51fa3dafc902bc8d3a0ce42d8d2dbc3f68514dd14442b0de3baa436c035'
         '7cb72d359ab4f534baa93af86476ff31c5f5b1af9299e6ebf15bb42c89e981cc348235d3e813181356de2920186c878958b631296c99adf33d9e9ec459d120e5'
