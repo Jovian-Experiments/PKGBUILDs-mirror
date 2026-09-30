@@ -2,11 +2,11 @@
 
 pkgname='holo-nix-offload'
 pkgver=0.3
-pkgrel=1
+pkgrel=2
 pkgdesc="Holo Nix Offload"
 arch=('any')
 license=('LGPL2.1')
-depends=('steamos-customizations-jupiter')
+depends=('steamos-customizations')
 source=("nix.mount")
 sha256sums=('5bd60a1a0911211b65edece545db83a5981a9c04c6e7b3f9d38fe6dbb2193a45')
 
