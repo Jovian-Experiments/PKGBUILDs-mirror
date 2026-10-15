@@ -1,7 +1,7 @@
 # Maintainer: Pierre-Loup A. Griffais (pgriffais@valvesoftware.com)
 
 pkgname=jupiter-hw-support
-_srctag=jupiter-3.8-20260807.1
+_srctag=jupiter-3.9-20260930.1
 _srcver=${_srctag#jupiter-}
 pkgver=${_srcver//-/.}
 pkgrel=1
@@ -10,7 +10,7 @@ url="https://gitlab.steamos.cloud/jupiter/jupiter-hw-support"
 pkgdesc="Jupiter HW support package"
 license=('MIT')
 depends=('python-evdev'
-         'python>=3.13' 'python<3.14'
+         'python>=3.14' 'python<3.15'
          'dmidecode' # for jupiter-biosupdate
          'python-crcmod' 'python-click' 'python-progressbar'
          'python-hid>=1.0.6-2' # for jupiter-controller-update
@@ -24,7 +24,7 @@ depends=('python-evdev'
 optdepends=('grub-steamos')
 makedepends=('rsync' 'git' 'openssh' 'xorg-xcursorgen')
 source=("git+ssh://git@gitlab.steamos.cloud/jupiter/jupiter-hw-support.git#tag=$_srctag")
-sha512sums=('bd56ef5a7cefd25abbfc6f01b1288fc872487fb9a745aa53c3f270c55f220798989ed9e9a9600510ed7dd5ad56c1b0b16fe54f6f6f14b3f029f89e8cf406d5f8')
+sha512sums=('d2b7ce3dd4111892dfecba7cae5ad6aebe5b199778a39d55c8d60b2f96ea4be6e3d57d0ec4dd378a4476c9d23b5c2c7ca15dd5347913940992c8dbd900e1bd59')
 # Some pre-compiled binaries such as `rfp-cli` break when touched by `strip` :-\
 options+=('!strip')
 
