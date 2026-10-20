@@ -3,7 +3,7 @@
 pkgname=gamescope
 _srctag=3.16.30
 pkgver=${_srctag//-/.}
-pkgrel=2
+pkgrel=3
 pkgdesc="gaming shell based on Xwayland, powered by Vulkan and DRM"
 arch=(x86_64)
 url="https://github.com/ValveSoftware/gamescope"
@@ -33,7 +33,9 @@ source=("galileo-mura-setup.service"
         # FIXME Upstream gamescope is just selecting master branch at build time, so we are arbitrarily snapshotting a
         #       revision when bumping the version here such that the build is reproducible.
         "git+https://github.com/nothings/stb.git#commit=af1a5bc352164740c1cc1354942b1c6b72eacb8a"
-        "git+https://github.com/g-truc/glm.git#commit=0af55ccecd98d4e5a8d1fad7de25ba429d60e863")
+        "git+https://github.com/g-truc/glm.git#commit=0af55ccecd98d4e5a8d1fad7de25ba429d60e863"
+	"0001-Turn-off-screen-during-system-sleep.patch" # Holo: Prevents frozen screen and looping sound on Steam Machine when hibernating in game mode. Submitted upstream at https://github.com/ValveSoftware/gamescope/pull/2480. See https://gitlab.steamos.cloud/holo-team/tasks/-/work_items/2320
+	)
 sha256sums=('2cfacf10f311a02d1c94ab5e927094639dfbb57bd322acc628374fef048a12bb'
             'e1499b725efd8afcf5693b5dc240d7311d2bbc389b92df1bb9eea8dd5688d23e'
             'fe515fce8f151a6c03a89e043044bfddf8cd6ee89027d2cfbcf6f6706c78ca76'
@@ -55,12 +57,20 @@ sha256sums=('2cfacf10f311a02d1c94ab5e927094639dfbb57bd322acc628374fef048a12bb'
             'SKIP'
             '03726f2fb44ae79e6a398e8f9aaaf8054800dda9b8298726157522fe5f7296b1'
             'e39e0c91b297bfd707afcda84ecdc15a08c22e2ad4c347fc3533b1ed98fb3f85'
-            '85f3e55fb527e9853bd4fc31300253587198831660a743eaa55f6b40fe1b9c90')
+            '85f3e55fb527e9853bd4fc31300253587198831660a743eaa55f6b40fe1b9c90'
+            'ae9a629d95e205121ca867ff9a0fa057ca50e4f714ea1a3bd8c54c79b593d0c1')
 
 install=gamescope.install
 
 prepare() {
 	cd "$pkgname"
+
+	local src
+	for src in "${source[@]}"; do
+		[[ $src = *.patch ]] || continue
+		echo "Applying patch $src..."
+		patch -Np1 -i "../$src"
+	done
 
 	# git submodules
 	git submodule init
