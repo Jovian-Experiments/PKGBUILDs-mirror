@@ -1,0 +1,43 @@
+From 6cfe7fed44ffb2046577c10ae6ead0408646051e Mon Sep 17 00:00:00 2001
+From: Xaver Hugl <xaver.hugl@kde.org>
+Date: Fri, 16 Oct 2026 14:08:11 +0200
+Subject: [PATCH 2/3] workspace: correctly delay suspend
+
+Apparently systemd always rejects delaying suspend in PrepareForSleep, so
+instead just always install the delay while screens are currently enabled.
+---
+ src/workspace.cpp | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/src/workspace.cpp b/src/workspace.cpp
+index b641686a4e0a..d6b3a67fc030 100644
+--- a/src/workspace.cpp
++++ b/src/workspace.cpp
+@@ -371,6 +371,8 @@ void Workspace::init()
+     connect(kwinApp()->session(), &Session::aboutToSleep, this, [this]() {
+         requestDpmsState(DpmsState::Off);
+     });
++
++    m_sleepInhibitor = kwinApp()->session()->delaySleep("turning screens off");
+ }
+ 
+ QString Workspace::outputLayoutId() const
+@@ -577,14 +579,12 @@ void Workspace::requestDpmsState(DpmsState state)
+         applyOutputConfiguration(cfg);
+         m_dpmsFilter.reset();
+         m_dpmsTimer.stop();
+-        m_sleepInhibitor.reset();
++        m_sleepInhibitor = kwinApp()->session()->delaySleep("turning screens off");
+     } else {
+         applyOutputConfiguration(cfg);
+         m_dpmsFilter = std::make_unique<DpmsInputEventFilter>();
+         input()->installInputEventFilter(m_dpmsFilter.get());
+         m_dpmsTimer.start(animationTime);
+-        // TODO only do this if sleep is actually requested
+-        m_sleepInhibitor = kwinApp()->session()->delaySleep("dpms animation");
+     }
+ 
+     Q_EMIT dpmsStateChanged(animationTime);
+-- 
+2.55.0
+

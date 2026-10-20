@@ -1,0 +1,29 @@
+From 7182f3bfccffe5b0bae2eec12d691bd84b745eab Mon Sep 17 00:00:00 2001
+From: Xaver Hugl <xaver.hugl@kde.org>
+Date: Fri, 16 Oct 2026 14:12:44 +0200
+Subject: [PATCH 3/3] workspace: remove sleep inhibition while no outputs are
+ connected
+
+---
+ src/workspace.cpp | 5 +++++
+ 1 file changed, 5 insertions(+)
+
+diff --git a/src/workspace.cpp b/src/workspace.cpp
+index d6b3a67fc030..22ca495eabd2 100644
+--- a/src/workspace.cpp
++++ b/src/workspace.cpp
+@@ -580,6 +580,11 @@ void Workspace::requestDpmsState(DpmsState state)
+         m_dpmsFilter.reset();
+         m_dpmsTimer.stop();
+         m_sleepInhibitor = kwinApp()->session()->delaySleep("turning screens off");
++    } else if (kwinApp()->outputBackend()->outputs().isEmpty()) {
++        // Immediately transition to dpms off, to avoid being stuck in the
++        // AboutToTurnOff state, inhibiting sleep forever.
++        m_dpms = DpmsState::Off;
++        m_sleepInhibitor.reset();
+     } else {
+         applyOutputConfiguration(cfg);
+         m_dpmsFilter = std::make_unique<DpmsInputEventFilter>();
+-- 
+2.55.0
+
