@@ -2,7 +2,7 @@
 # Maintainer: Vivek Das Mohapatra <vivek.dasmohapatra@collabora.com>
 
 pkgname=steamos-customizations-jupiter
-_srctag=jupiter-20260827.2
+_srctag=jupiter-3.9-20261021.1
 _srcver=${_srctag#jupiter-}
 pkgver=${_srcver//-/.}
 pkgrel=1
@@ -15,7 +15,7 @@ makedepends=('git' 'openssh' 'systemd')
 provides=("${pkgname%-git}")
 conflicts=("${pkgname%-git}")
 source=("${pkgname%-git}::git+ssh://git@gitlab.steamos.cloud/holo/steamos-customizations.git#tag=${_srctag}")
-sha256sums=('489d54e39bde9b8b00fb056e9ce64fb05163a426ea33391fa39472fc18898f9f')
+sha256sums=('7e0eca1e0e15a30dc31f250ef00182ddf3d340bb452fb06bb267516ad9ea75ad')
 
 package() {
 	cd "${pkgname%-git}"
