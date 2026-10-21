@@ -33,7 +33,7 @@ pkgname=(
   pulse-native-provider
 )
 pkgver=1.6.8
-pkgrel=1.7
+pkgrel=1.6
 epoch=1
 pkgdesc="Low-latency audio/video router and processor"
 url="https://pipewire.org"
@@ -158,9 +158,6 @@ source=(
 
     # Holo: Backport of https://gitlab.freedesktop.org/pipewire/pipewire/-/merge_requests/3054
     "0001-spa-bluez5-use-a-unique-serial-for-device-and-transp.patch"
-
-    # Holo: Backport of https://gitlab.freedesktop.org/pipewire/pipewire/-/merge_requests/3072
-    "0001-spa-alsa-Don-t-skip-ELD-recheck-for-profiles-with-in.patch"
   )
 b2sums=('f4425c8fa9ab33918e52bb0c1272079dd510e1c08b1d228802ad60e7080629f1e82ec30f19dd9e344cd6476803773d79f50957ddfeecfc01d657550a712fd6ba'
         'b999796fc69ecd661b7cd761b98daf81412e4a02e649d74d8d8ec7d2c6cf0169f6062ea03131313a5b03a50529e956289baf0068f0631ea58243d42f1fae4d6e'
@@ -198,8 +195,7 @@ b2sums=('f4425c8fa9ab33918e52bb0c1272079dd510e1c08b1d228802ad60e7080629f1e82ec30
         'e55d799ff1a6d2d6052f8cdc7126316541488e2350fb685ef48b0302a2a317fb1150450b3e8d4d56874c6314fba7452f2d1823d0e905daa5a92ab69d1bf9de3a'
         '72a9cc6a41103c95bd8cb673a753e0d303236bf2cfdc816e80728ea6730ccc8204e59c48a562f2fe41077bef92e8007369af10d48c1b8d7d3e71e81429edf876'
         '0f045e54f8dd5812c92aecf76f9513ee5dbfdaa0cab1100dc3f3a34f4080c12ad1fa9d9109b23999cbb176f8f4e70897afacb4bb423e6b703b7cebee1b1f0561'
-        '3bd2a2bd406aa4a1012b0949cddcff4eb395b6bb49544f9679c17435840748bd0ab5ff330c959afd27f0f23d5faf5d91c8b2134fe837fc7a09b516c378692c1d'
-        '5ac250741eb7ff5b16b37010eb21ecefef271ef5e7391b752138e247c09e9b51d9410105603a3eb1e67a4b01080583c9a136af3a3543485264327e0d2fc171b1')
+        '3bd2a2bd406aa4a1012b0949cddcff4eb395b6bb49544f9679c17435840748bd0ab5ff330c959afd27f0f23d5faf5d91c8b2134fe837fc7a09b516c378692c1d')
 
 prepare() {
   cd pipewire
