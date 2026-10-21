@@ -1,0 +1,599 @@
+From a912dc352090754a7f524cc493372228abb012ef Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?N=C3=ADcolas=20F=2E=20R=2E=20A=2E=20Prado?=
+ <nfraprado@collabora.com>
+Date: Fri, 9 Oct 2026 10:39:54 -0400
+Subject: [PATCH] Turn off screen during system sleep
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Hook into the PrepareForSleep D-Bus signal from logind and trigger
+screen sleep before the system goes to sleep. This improves the user
+experience when the system goes into hibernation, since currently
+during the time window between when userspace threads get frozen and the
+display driver in the kernel gets suspended, which can take a few
+seconds, the last image on the screen stays frozen. Furthermore, on some
+platforms like the Steam Machine, during this time window the last
+second of audio also gets repeated in a loop. By turning off the display
+early in the hibernation process, we avoid both issues and give a
+smoother experience to the user. This also mimicks the behavior from KDE
+plasma.
+
+In order to achieve this:
+
+* Extend the backend interface to expose screen sleep functionality
+  (which is currently only supported by the DRM backend) and make the
+  new code a no-op when the backend doesn't support it.
+* Spawn a new thread and rely on libsystemd to listen for the
+  PrepareForSleep signal from logind and turn the display off/on in
+  response, and take an inhibitor lock to delay system sleep until the
+  screen has been turned off.
+* In the DRM backend, make the atomic commit blocking for screen sleep
+  operations and update the sleep status after commit to allow callers
+  to wait for the sleep to actually be applied on hardware
+
+The introduced dependency on libsystemd is optional and in practice is
+not new: the only backend that currently supports screen sleep is DRM,
+and it already requires libsystemd indirectly, since it requires the
+libinput backend in wlroots, which requires libseat, which in turn
+requires libsystemd.
+
+Signed-off-by: Nícolas F. R. A. Prado <nfraprado@collabora.com>
+---
+ src/Backends/DRMBackend.cpp      |  57 ++++++++-
+ src/Backends/DeferredBackend.h   |   6 +
+ src/Backends/HeadlessBackend.cpp |   7 +-
+ src/Backends/OpenVRBackend.cpp   |   5 +
+ src/Backends/SDLBackend.cpp      |   5 +
+ src/Backends/WaylandBackend.cpp  |   5 +
+ src/backend.h                    |  16 +++
+ src/logind_sleep.cpp             | 196 +++++++++++++++++++++++++++++++
+ src/main.cpp                     |   8 ++
+ src/meson.build                  |   8 +-
+ src/steamcompmgr.cpp             |   8 ++
+ src/wlserver.cpp                 |   4 +-
+ 12 files changed, 317 insertions(+), 8 deletions(-)
+ create mode 100644 src/logind_sleep.cpp
+
+diff --git a/src/Backends/DRMBackend.cpp b/src/Backends/DRMBackend.cpp
+index 9aaab7b36de2..0dd6833f7391 100644
+--- a/src/Backends/DRMBackend.cpp
++++ b/src/Backends/DRMBackend.cpp
+@@ -13,9 +13,11 @@
+ #include <atomic>
+ #include <cassert>
+ #include <cinttypes>
++#include <chrono>
+ #include <climits>
+ #include <cstddef>
+ #include <cstdio>
++#include <condition_variable>
+ #include <cstring>
+ #include <map>
+ #include <mutex>
+@@ -599,6 +601,7 @@ static std::unordered_map< std::string, std::string > pnps = {};
+ 
+ static void drm_unset_mode( struct drm_t *drm, bool force );
+ static void drm_unset_connector( struct drm_t *drm );
++static void drm_update_screen_disabled( struct drm_t *drm );
+ 
+ static constexpr uint32_t s_kSteamDeckLCDRates[] =
+ {
+@@ -934,6 +937,8 @@ static bool refresh_state( drm_t *drm )
+ 	for ( std::unique_ptr< gamescope::CDRMPlane > &pPlane : drm->planes )
+ 		pPlane->RefreshState();
+ 
++	drm_update_screen_disabled( drm );
++
+ 	return true;
+ }
+ 
+@@ -1698,12 +1703,26 @@ gamescope::ConVar<bool> cv_drm_sleep_screens[] =
+ 	{ "drm_sleep_external_screen", false, "Force the external screen to be asleep", OnSleepScreenChanged },
+ };
+ 
+-void drm_sleep_screen( gamescope::GamescopeScreenType eType, bool bSleep )
++static std::mutex s_ScreenSleepMutex;
++static std::condition_variable s_ScreenSleepCV;
++static bool s_bScreenDisabled[ gamescope::GAMESCOPE_SCREEN_TYPE_COUNT ] = {};
++
++static void drm_update_screen_disabled( struct drm_t *drm )
+ {
+-	if ( cv_drm_sleep_screens[ eType ] == bSleep )
+-		return;
++	{
++		std::lock_guard lock( s_ScreenSleepMutex );
++		for ( bool &bDisabled : s_bScreenDisabled )
++			bDisabled = true;
+ 
+-	cv_drm_sleep_screens[ eType ] = bSleep;
++		for ( auto &iter : drm->connectors )
++		{
++			gamescope::CDRMConnector *pConnector = &iter.second;
++			if ( pConnector->GetModeConnector()->connection == DRM_MODE_CONNECTED &&
++			     pConnector->GetProperties().CRTC_ID->GetCurrentValue() != 0 )
++				s_bScreenDisabled[ pConnector->GetScreenType() ] = false;
++		}
++	}
++	s_ScreenSleepCV.notify_all();
+ }
+ 
+ 
+@@ -3279,6 +3298,10 @@ int drm_prepare( struct drm_t *drm, bool async, const struct FrameInfo_t *frameI
+ 
+ 		if ( bCurrentlyAsleep != bSleep )
+ 			needs_modeset = true;
++
++		// Make screen sleep commits synchronous so we can easily wait for them
++		if ( bSleep && bCurrentlyAsleep != bSleep )
++			flags &= ~DRM_MODE_ATOMIC_NONBLOCK;
+ 	}
+ 
+ 	if ( !bSleep )
+@@ -4305,6 +4328,30 @@ namespace gamescope
+ 			return g_bSupportsSyncObjs && !cv_drm_debug_disable_explicit_sync;
+ 		}
+ 
++		virtual bool SupportsScreenSleep() const override
++		{
++			return true;
++		}
++
++		void SleepScreen( gamescope::GamescopeScreenType eType, bool bSleep ) override
++		{
++			if ( cv_drm_sleep_screens[ eType ] == bSleep )
++				return;
++
++			cv_drm_sleep_screens[ eType ] = bSleep;
++		}
++
++		bool ScreenAsleep( gamescope::GamescopeScreenType eType ) override
++		{
++			return cv_drm_sleep_screens[ eType ];
++		}
++
++		bool WaitForScreenAsleep( gamescope::GamescopeScreenType eType, uint32_t uTimeoutMs ) override
++		{
++			std::unique_lock lock( s_ScreenSleepMutex );
++			return s_ScreenSleepCV.wait_for( lock, std::chrono::milliseconds( uTimeoutMs ), [ eType ]{ return s_bScreenDisabled[ eType ]; } );
++		}
++
+ 		virtual bool IsPaused() const override
+ 		{
+ 			return g_DRM.paused;
+@@ -4455,6 +4502,8 @@ namespace gamescope
+ 							oProperty->OnCommit();
+ 					}
+ 				}
++
++				drm_update_screen_disabled( drm );
+ 			}
+ 
+ 			// Update the draw time
+diff --git a/src/Backends/DeferredBackend.h b/src/Backends/DeferredBackend.h
+index 2829fdfb6c37..43ae123588be 100644
+--- a/src/Backends/DeferredBackend.h
++++ b/src/Backends/DeferredBackend.h
+@@ -239,6 +239,12 @@ namespace gamescope
+             return m_pChild->SupportsExplicitSync();
+ 		}
+ 
++		virtual bool SupportsScreenSleep() const override
++		{
++			// Doesn't need to be 'initted' for this check.
++			return m_pChild->SupportsScreenSleep();
++		}
++
+ 		virtual bool IsPaused() const override
+ 		{
+             {
+diff --git a/src/Backends/HeadlessBackend.cpp b/src/Backends/HeadlessBackend.cpp
+index 8e4540066e75..b50e2680322b 100644
+--- a/src/Backends/HeadlessBackend.cpp
++++ b/src/Backends/HeadlessBackend.cpp
+@@ -231,6 +231,11 @@ namespace gamescope
+ 			return true;
+ 		}
+ 
++		virtual bool SupportsScreenSleep() const override
++		{
++			return false;
++		}
++
+ 		virtual bool IsPaused() const override
+ 		{
+ 			return false;
+@@ -276,4 +281,4 @@ namespace gamescope
+ 		return Set( new CHeadlessBackend{} );
+ 	}
+ 
+-}
+\ No newline at end of file
++}
+diff --git a/src/Backends/OpenVRBackend.cpp b/src/Backends/OpenVRBackend.cpp
+index dae8cb32c630..4f6437da2b90 100644
+--- a/src/Backends/OpenVRBackend.cpp
++++ b/src/Backends/OpenVRBackend.cpp
+@@ -841,6 +841,11 @@ namespace gamescope
+             return true;
+         }
+ 
++        virtual bool SupportsScreenSleep() const override
++        {
++            return false;
++        }
++
+         virtual bool IsPaused() const override
+         {
+             return false;
+diff --git a/src/Backends/SDLBackend.cpp b/src/Backends/SDLBackend.cpp
+index d35e218eb296..6aa4232a957c 100644
+--- a/src/Backends/SDLBackend.cpp
++++ b/src/Backends/SDLBackend.cpp
+@@ -168,6 +168,11 @@ namespace gamescope
+ 		virtual bool IsSessionBased() const override;
+ 		virtual bool SupportsExplicitSync() const override;
+ 
++		virtual bool SupportsScreenSleep() const override
++		{
++			return false;
++		}
++
+ 		virtual bool IsPaused() const override;
+ 		virtual bool IsVisible() const override;
+ 
+diff --git a/src/Backends/WaylandBackend.cpp b/src/Backends/WaylandBackend.cpp
+index bc9293d86d6f..8199aa7f17af 100644
+--- a/src/Backends/WaylandBackend.cpp
++++ b/src/Backends/WaylandBackend.cpp
+@@ -703,6 +703,11 @@ namespace gamescope
+         virtual bool IsSessionBased() const override;
+         virtual bool SupportsExplicitSync() const override;
+ 
++        virtual bool SupportsScreenSleep() const override
++        {
++            return false;
++        }
++
+         virtual bool IsPaused() const override;
+         virtual bool IsVisible() const override;
+ 
+diff --git a/src/backend.h b/src/backend.h
+index a1546c1dbc7c..0ed11c92cd23 100644
+--- a/src/backend.h
++++ b/src/backend.h
+@@ -367,6 +367,22 @@ namespace gamescope
+ 
+         virtual bool SupportsExplicitSync() const = 0;
+ 
++        virtual bool SupportsScreenSleep() const = 0;
++
++        virtual void SleepScreen( gamescope::GamescopeScreenType eType, bool bSleep )
++        {
++        }
++
++        virtual bool ScreenAsleep( gamescope::GamescopeScreenType eType )
++        {
++            return false;
++        }
++
++        virtual bool WaitForScreenAsleep( gamescope::GamescopeScreenType eType, uint32_t uTimeoutMs )
++        {
++            return true;
++        }
++
+         // Dumb helper we should remove to support multi display someday.
+         gamescope::GamescopeScreenType GetScreenType()
+         {
+diff --git a/src/logind_sleep.cpp b/src/logind_sleep.cpp
+new file mode 100644
+index 000000000000..7405cf83dcfa
+--- /dev/null
++++ b/src/logind_sleep.cpp
+@@ -0,0 +1,196 @@
++#include <fcntl.h>
++#include <poll.h>
++#include <systemd/sd-bus.h>
++#include <thread>
++#include <unistd.h>
++
++#include "backend.h"
++
++static LogScope logind_sleep_log("logind_sleep");
++
++static const char *logind_service = "org.freedesktop.login1";
++static const char *logind_path = "/org/freedesktop/login1";
++static const char *logind_interface = "org.freedesktop.login1.Manager";
++
++static const uint32_t screen_sleep_timeout_ms = 2000;
++
++struct logind_sleep_state {
++	sd_bus *bus;
++	int inhibit_lock_fd;
++	int bus_fd;
++	int stop_pipe_fd[2];
++	bool previous_screen_sleep_status[gamescope::GAMESCOPE_SCREEN_TYPE_COUNT];
++};
++
++static struct logind_sleep_state logind_sleep_state = { .inhibit_lock_fd = { -1 }, .bus_fd = { -1 }, .stop_pipe_fd = { -1, -1 } };
++
++static int logind_sleep_take_inhibit_lock(sd_bus *bus, int *inhibit_lock_fd)
++{
++	sd_bus_message *reply = NULL;
++	int tmp_fd;
++	int ret;
++
++	ret = sd_bus_call_method(bus, logind_service, logind_path,
++			logind_interface, "Inhibit", NULL, &reply, "ssss",
++			"sleep", "Gamescope compositor", "Turn display off before sleep",
++			"delay");
++	if (ret < 0) {
++		logind_sleep_log.errorf("lock: sd_bus_call_method failed %d", ret);
++		goto unref_message;
++	}
++
++	ret = sd_bus_message_read(reply, "h", &tmp_fd);
++	if (ret < 0) {
++		logind_sleep_log.errorf("lock: sd_bus_message_read failed %d", ret);
++		goto unref_message;
++	}
++
++	ret = fcntl(tmp_fd, F_DUPFD_CLOEXEC, 3);
++	if (ret < 0) {
++		logind_sleep_log.errorf_errno("lock: fcntl failed");
++		goto unref_message;
++	}
++
++	*inhibit_lock_fd = ret;
++
++	logind_sleep_log.debugf("inhibit lock successfully taken");
++
++unref_message:
++	sd_bus_message_unref(reply);
++	return ret;
++}
++
++static int logind_sleep_prepare_for_sleep_cb(sd_bus_message *m, void *userdata, sd_bus_error *ret_error)
++{
++	struct logind_sleep_state *state = (struct logind_sleep_state*)userdata;
++	int going_to_sleep;
++	int ret;
++
++	ret = sd_bus_message_read(m, "b", &going_to_sleep);
++	if (ret < 0) {
++		logind_sleep_log.errorf("callback: sd_bus_message_read failed %d", ret);
++		return ret;
++	}
++
++	if (going_to_sleep) {
++		state->previous_screen_sleep_status[gamescope::GAMESCOPE_SCREEN_TYPE_EXTERNAL] = GetBackend()->ScreenAsleep(gamescope::GAMESCOPE_SCREEN_TYPE_EXTERNAL);
++		state->previous_screen_sleep_status[gamescope::GAMESCOPE_SCREEN_TYPE_INTERNAL] = GetBackend()->ScreenAsleep(gamescope::GAMESCOPE_SCREEN_TYPE_INTERNAL);
++		GetBackend()->SleepScreen(gamescope::GAMESCOPE_SCREEN_TYPE_EXTERNAL, true);
++		GetBackend()->SleepScreen(gamescope::GAMESCOPE_SCREEN_TYPE_INTERNAL, true);
++		if (!GetBackend()->WaitForScreenAsleep(gamescope::GAMESCOPE_SCREEN_TYPE_EXTERNAL, screen_sleep_timeout_ms) ||
++		    !GetBackend()->WaitForScreenAsleep(gamescope::GAMESCOPE_SCREEN_TYPE_INTERNAL, screen_sleep_timeout_ms))
++			logind_sleep_log.errorf("callback: timed out waiting for screen to sleep");
++		close(state->inhibit_lock_fd);
++		state->inhibit_lock_fd = -1;
++	} else {
++		logind_sleep_take_inhibit_lock(state->bus, &state->inhibit_lock_fd);
++		GetBackend()->SleepScreen(gamescope::GAMESCOPE_SCREEN_TYPE_EXTERNAL, state->previous_screen_sleep_status[gamescope::GAMESCOPE_SCREEN_TYPE_EXTERNAL]);
++		GetBackend()->SleepScreen(gamescope::GAMESCOPE_SCREEN_TYPE_INTERNAL, state->previous_screen_sleep_status[gamescope::GAMESCOPE_SCREEN_TYPE_INTERNAL]);
++	}
++
++	return 0;
++}
++
++static void logind_sleep_run(struct logind_sleep_state *state)
++{
++	int ret;
++	struct pollfd pollfds[2];
++
++	pthread_setname_np(pthread_self(), "gamescope-sleep");
++
++	logind_sleep_log.debugf("initializing D-Bus connection");
++
++	ret = sd_bus_default_system(&state->bus);
++	if (ret < 0) {
++		logind_sleep_log.errorf("run: sd_bus_default_system failed %d", ret);
++		goto exit;
++	}
++
++	ret = logind_sleep_take_inhibit_lock(state->bus, &state->inhibit_lock_fd);
++	if (ret < 0)
++		goto cleanup_bus;
++
++	ret = sd_bus_match_signal(state->bus, NULL, logind_service, logind_path,
++			logind_interface, "PrepareForSleep", logind_sleep_prepare_for_sleep_cb,
++			state);
++	if (ret < 0) {
++		logind_sleep_log.errorf("run: sd_bus_match_signal failed %d", ret);
++		goto cleanup_inhibit_fd;
++	}
++
++	state->bus_fd = sd_bus_get_fd(state->bus);
++	if (state->bus_fd < 0) {
++		logind_sleep_log.errorf("run: sd_bus_get_fd failed %d", state->bus_fd);
++		goto cleanup_inhibit_fd;
++	}
++
++	logind_sleep_log.debugf("D-Bus connection initialized");
++
++	pollfds[0] = { .fd = state->bus_fd, .events = POLLIN, };
++	pollfds[1] = { .fd = state->stop_pipe_fd[0], .events = POLLIN, };
++	while (true) {
++		ret = poll(pollfds, 2, -1);
++		if (ret < 0) {
++			logind_sleep_log.errorf_errno("poll failed");
++			goto cleanup_inhibit_fd;
++		}
++
++		if (pollfds[1].revents & POLLIN)
++			break;
++
++		if (pollfds[0].revents & POLLHUP) {
++			logind_sleep_log.errorf("run: lost connection to bus");
++			goto cleanup_inhibit_fd;
++		}
++
++		if (pollfds[0].revents & POLLIN) {
++			ret = sd_bus_process(state->bus, NULL);
++			if (ret < 0) {
++				logind_sleep_log.errorf("run: sd_bus_process failed %d", ret);
++				goto cleanup_inhibit_fd;
++			}
++		}
++	}
++
++cleanup_inhibit_fd:
++	if (state->inhibit_lock_fd >= 0)
++		close(state->inhibit_lock_fd);
++cleanup_bus:
++	sd_bus_flush_close_unref(state->bus);
++exit:
++	close(state->stop_pipe_fd[0]);
++	close(state->stop_pipe_fd[1]);
++	state->stop_pipe_fd[0] = -1;
++	state->stop_pipe_fd[1] = -1;
++	logind_sleep_log.debugf("stopping");
++}
++
++void logind_sleep_stop()
++{
++	struct logind_sleep_state *state = &logind_sleep_state;
++
++	if (!GetBackend()->SupportsScreenSleep())
++		return;
++
++	if (state->stop_pipe_fd[1] < 0)
++		return;
++
++	if (write(state->stop_pipe_fd[1], "\n", 1 ) < 0 )
++		logind_sleep_log.errorf_errno("stop: write failed");
++}
++
++void logind_sleep_init()
++{
++	struct logind_sleep_state *state = &logind_sleep_state;
++
++	if (!GetBackend()->SupportsScreenSleep())
++		return;
++
++	if (pipe2(state->stop_pipe_fd, O_CLOEXEC | O_NONBLOCK) != 0) {
++		logind_sleep_log.errorf_errno("init: pipe2 failed");
++		return;
++	}
++
++	std::thread thread(logind_sleep_run, state);
++	thread.detach();
++}
+diff --git a/src/main.cpp b/src/main.cpp
+index 6a0fdb139879..925936bf4ee0 100644
+--- a/src/main.cpp
++++ b/src/main.cpp
+@@ -712,6 +712,10 @@ char **g_argv;
+ 
+ extern char **environ;
+ 
++#if HAVE_SYSTEMD
++void logind_sleep_init();
++#endif
++
+ int main(int argc, char **argv)
+ {
+ 	g_argc = argc;
+@@ -1099,6 +1103,10 @@ int main(int argc, char **argv)
+ 	}
+ #endif
+ 
++#if HAVE_SYSTEMD
++	logind_sleep_init();
++#endif
++
+ 	std::thread steamCompMgrThread( steamCompMgrThreadRun, argc, argv );
+ 
+ 	handle_signal_action.sa_handler = handle_signal;
+diff --git a/src/meson.build b/src/meson.build
+index ae3ac1673219..0051e4db65d0 100644
+--- a/src/meson.build
++++ b/src/meson.build
+@@ -22,6 +22,7 @@ sdl2_dep = dependency('SDL2', required: get_option('sdl2_backend'))
+ avif_dep = dependency('libavif', version: '>=1.0.0', required: get_option('avif_screenshots'))
+ pixman_dep = dependency('pixman-1')
+ udev_dep = dependency('libudev')
++systemd_dep = dependency('libsystemd', required: false)
+ 
+ wlroots_dep = dependency(
+   'wlroots-0.20',
+@@ -148,6 +149,7 @@ if sdl2_dep.found()
+   src += 'Backends/SDLBackend.cpp'
+ endif
+ 
++gamescope_cpp_args += '-DHAVE_SYSTEMD=@0@'.format(systemd_dep.found().to_int())
+ gamescope_cpp_args += '-DHAVE_DRM=@0@'.format(drm_dep.found().to_int())
+ gamescope_cpp_args += '-DHAVE_SDL2=@0@'.format(sdl2_dep.found().to_int())
+ gamescope_cpp_args += '-DHAVE_AVIF=@0@'.format(avif_dep.found().to_int())
+@@ -163,6 +165,10 @@ if pipewire_dep.found()
+   src += 'pipewire.cpp'
+ endif
+ 
++if systemd_dep.found()
++  src += 'logind_sleep.cpp'
++endif
++
+ if openvr_dep.found()
+   src += 'Backends/OpenVRBackend.cpp'
+ endif
+@@ -200,7 +206,7 @@ gamescope_version = configure_file(
+       xkbcommon, thread_dep, sdl2_dep, wlroots_dep,
+       vulkan_dep, liftoff_dep, dep_xtst, dep_xmu, cap_dep, epoll_dep, pipewire_dep, librt_dep,
+       stb_dep, displayinfo_dep, openvr_dep, dep_xcursor, avif_dep, dep_xi,
+-      libdecor_dep, eis_dep, luajit_dep, libinput_dep, pixman_dep, udev_dep,
++      libdecor_dep, eis_dep, luajit_dep, libinput_dep, pixman_dep, udev_dep, systemd_dep,
+     ],
+     install: true,
+     cpp_args: gamescope_cpp_args,
+diff --git a/src/steamcompmgr.cpp b/src/steamcompmgr.cpp
+index f38ac2096421..551e304ad0cd 100644
+--- a/src/steamcompmgr.cpp
++++ b/src/steamcompmgr.cpp
+@@ -7752,11 +7752,19 @@ error(Display *dpy, XErrorEvent *ev)
+ 	return 0;
+ }
+ 
++#ifdef HAVE_SYSTEMD
++void logind_sleep_stop();
++#endif
++
+ static void
+ steamcompmgr_exit(void)
+ {
+ 	g_ImageWaiter.Shutdown();
+ 
++#ifdef HAVE_SYSTEMD
++	logind_sleep_stop();
++#endif
++
+ 	// Clean up any commits.
+ 	{
+ 		gamescope_xwayland_server_t *server = NULL;
+diff --git a/src/wlserver.cpp b/src/wlserver.cpp
+index 1d7684a2c91a..19762ec7bd5e 100644
+--- a/src/wlserver.cpp
++++ b/src/wlserver.cpp
+@@ -1311,10 +1311,10 @@ static void gamescope_control_display_sleep( struct wl_client *client, struct wl
+ 	{
+ 		const bool sleep = !!( flags & GAMESCOPE_CONTROL_DISPLAY_SLEEP_FLAGS_SLEEP );
+ 		if ( display_type_flags & GAMESCOPE_CONTROL_DISPLAY_TYPE_FLAGS_EXTERNAL_DISPLAY )
+-			drm_sleep_screen( gamescope::GAMESCOPE_SCREEN_TYPE_EXTERNAL, sleep );
++			GetBackend()->SleepScreen( gamescope::GAMESCOPE_SCREEN_TYPE_EXTERNAL, sleep );
+ 
+ 		if ( display_type_flags & GAMESCOPE_CONTROL_DISPLAY_TYPE_FLAGS_INTERNAL_DISPLAY )
+-			drm_sleep_screen( gamescope::GAMESCOPE_SCREEN_TYPE_INTERNAL, sleep );
++			GetBackend()->SleepScreen( gamescope::GAMESCOPE_SCREEN_TYPE_INTERNAL, sleep );
+ 	}
+ }
+ 
+-- 
+2.55.0
+
