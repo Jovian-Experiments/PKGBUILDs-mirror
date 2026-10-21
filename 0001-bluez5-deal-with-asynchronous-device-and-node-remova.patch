@@ -1,0 +1,206 @@
+From b7246d0d5ddc79cbab06e7e55f6dda37c446118d Mon Sep 17 00:00:00 2001
+From: Pauli Virtanen <pav@iki.fi>
+Date: Tue, 15 Sep 2026 03:28:52 +0300
+Subject: [PATCH 1/7] bluez5: deal with asynchronous device and node removal
+
+On Wireplumber 0.5.17, spa_device_emit_object_info(..., NULL) no longer
+removes the device/node SPA object synchronously.
+
+Instead, use explicit remove notices to do this.
+
+There is already spa_bt_device_events::destroy, so use it in
+bluez5-device.c to nullify this->bt_dev.  Add NULL checks where needed.
+
+Add spa_bt_transport_events::remove_node, and emit it before
+bluez5-device.c removes a node associated with the transport.  Handle
+the node removal event in media-sink/source.c by stopping, and releasing
+and dropping the transport, as the node will be removed soon.
+---
+ spa/plugins/bluez5/bluez5-device.c | 22 ++++++++++++++++++++++
+ spa/plugins/bluez5/defs.h          |  5 ++++-
+ spa/plugins/bluez5/media-sink.c    | 13 +++++++++++++
+ spa/plugins/bluez5/media-source.c  | 13 +++++++++++++
+ 4 files changed, 52 insertions(+), 1 deletion(-)
+
+diff --git a/spa/plugins/bluez5/bluez5-device.c b/spa/plugins/bluez5/bluez5-device.c
+index a2251db3e..d88997d56 100644
+--- a/spa/plugins/bluez5/bluez5-device.c
++++ b/spa/plugins/bluez5/bluez5-device.c
+@@ -893,6 +893,7 @@ static void dynamic_node_transport_state_changed(void *data,
+ 		if (SPA_FLAG_IS_SET(this->id, DYNAMIC_NODE_ID_FLAG)) {
+ 			SPA_FLAG_CLEAR(this->id, DYNAMIC_NODE_ID_FLAG);
+ 			spa_bt_transport_keepalive(t, false);
++			spa_bt_transport_emit_remove_node(t);
+ 			spa_device_emit_object_info(&impl->hooks, this->id, NULL);
+ 		}
+ 	}
+@@ -1311,6 +1312,9 @@ static int emit_nodes(struct impl *this)
+ {
+ 	struct spa_bt_transport *t;
+ 
++	if (!this->bt_dev)
++		return 0;
++
+ 	switch (this->profile) {
+ 	case DEVICE_PROFILE_BAP:
+ 	case DEVICE_PROFILE_BAP_SINK:
+@@ -1517,6 +1521,8 @@ static void emit_remove_nodes(struct impl *this)
+ 		struct node * node = &this->nodes[i];
+ 		node_offload_set_active(node, false);
+ 		if (node->transport) {
++			if (node->active)
++				spa_bt_transport_emit_remove_node(node->transport);
+ 			spa_hook_remove(&node->transport_listener);
+ 			node->transport = NULL;
+ 		}
+@@ -1860,6 +1866,15 @@ static void device_switch_profile(void *userdata)
+ 	set_profile(this, profile, 0, false);
+ }
+ 
++static void device_destroy(void *userdata)
++{
++	struct impl *this = userdata;
++
++	/* The device is being freed; it must not be dereferenced anymore. */
++	spa_hook_remove(&this->bt_dev_listener);
++	this->bt_dev = NULL;
++}
++
+ static const struct spa_bt_device_events bt_dev_events = {
+ 	SPA_VERSION_BT_DEVICE_EVENTS,
+ 	.connected = device_connected,
+@@ -1868,6 +1883,7 @@ static const struct spa_bt_device_events bt_dev_events = {
+ 	.profiles_changed = profiles_changed,
+ 	.device_set_changed = device_set_changed,
+ 	.switch_profile = device_switch_profile,
++	.destroy = device_destroy,
+ };
+ 
+ static int impl_add_listener(void *object,
+@@ -2935,6 +2951,9 @@ static int impl_enum_params(void *object, int seq,
+ 	spa_return_val_if_fail(this != NULL, -EINVAL);
+ 	spa_return_val_if_fail(num != 0, -EINVAL);
+ 
++	if (!this->bt_dev)
++		return -ENODEV;
++
+ 	result.id = id;
+ 	result.next = start;
+       next:
+@@ -3320,6 +3339,9 @@ static int impl_set_param(void *object,
+ 
+ 	spa_return_val_if_fail(this != NULL, -EINVAL);
+ 
++	if (!this->bt_dev)
++		return -ENODEV;
++
+ 	switch (id) {
+ 	case SPA_PARAM_Profile:
+ 	{
+diff --git a/spa/plugins/bluez5/defs.h b/spa/plugins/bluez5/defs.h
+index cb06551e7..ed3d84721 100644
+--- a/spa/plugins/bluez5/defs.h
++++ b/spa/plugins/bluez5/defs.h
+@@ -649,7 +649,7 @@ enum spa_bt_transport_state {
+ };
+ 
+ struct spa_bt_transport_events {
+-#define SPA_VERSION_BT_TRANSPORT_EVENTS	0
++#define SPA_VERSION_BT_TRANSPORT_EVENTS	1
+ 	uint32_t version;
+ 
+ 	void (*destroy) (void *data);
+@@ -657,6 +657,8 @@ struct spa_bt_transport_events {
+ 	void (*state_changed) (void *data, enum spa_bt_transport_state old,
+ 			enum spa_bt_transport_state state);
+ 	void (*volume_changed) (void *data);
++	/** The node using the transport will be removed */
++	void (*remove_node) (void *data);
+ };
+ 
+ struct spa_bt_transport_implementation {
+@@ -758,6 +760,7 @@ int spa_bt_transport_ensure_sco_io(struct spa_bt_transport *t, struct spa_loop *
+ #define spa_bt_transport_emit_delay_changed(t)		spa_bt_transport_emit(t, delay_changed, 0)
+ #define spa_bt_transport_emit_state_changed(t,...)	spa_bt_transport_emit(t, state_changed, 0, __VA_ARGS__)
+ #define spa_bt_transport_emit_volume_changed(t)		spa_bt_transport_emit(t, volume_changed, 0)
++#define spa_bt_transport_emit_remove_node(t)		spa_bt_transport_emit(t, remove_node, 1)
+ 
+ #define spa_bt_transport_add_listener(t,listener,events,data) \
+         spa_hook_list_append(&(t)->listener_list, listener, events, data)
+diff --git a/spa/plugins/bluez5/media-sink.c b/spa/plugins/bluez5/media-sink.c
+index 05d1eb65b..81fdc7988 100644
+--- a/spa/plugins/bluez5/media-sink.c
++++ b/spa/plugins/bluez5/media-sink.c
+@@ -2443,6 +2443,9 @@ static int do_transport_destroy(struct spa_loop *loop,
+ 				void *user_data)
+ {
+ 	struct impl *this = user_data;
++
++	if (this->transport)
++		spa_hook_remove(&this->transport_listener);
+ 	this->transport = NULL;
+ 	return 0;
+ }
+@@ -2454,6 +2457,15 @@ static void transport_destroy(void *data)
+ 	spa_loop_locked(this->data_loop, do_transport_destroy, 0, NULL, 0, this);
+ }
+ 
++static void transport_remove_node(void *data)
++{
++	struct impl *this = data;
++
++	spa_log_debug(this->log, "transport %p remove node", this->transport);
++	do_stop(this);
++	spa_loop_locked(this->data_loop, do_transport_destroy, 0, NULL, 0, this);
++}
++
+ static void transport_state_changed(void *data,
+ 	enum spa_bt_transport_state old,
+ 	enum spa_bt_transport_state state)
+@@ -2501,6 +2513,7 @@ static const struct spa_bt_transport_events transport_events = {
+ 	.delay_changed = transport_delay_changed,
+ 	.state_changed = transport_state_changed,
+ 	.destroy = transport_destroy,
++	.remove_node = transport_remove_node,
+ };
+ 
+ static int impl_get_interface(struct spa_handle *handle, const char *type, void **interface)
+diff --git a/spa/plugins/bluez5/media-source.c b/spa/plugins/bluez5/media-source.c
+index 4b34598ab..a131042e3 100644
+--- a/spa/plugins/bluez5/media-source.c
++++ b/spa/plugins/bluez5/media-source.c
+@@ -2085,6 +2085,9 @@ static int do_transport_destroy(struct spa_loop *loop,
+ 				void *user_data)
+ {
+ 	struct impl *this = user_data;
++
++	if (this->transport)
++		spa_hook_remove(&this->transport_listener);
+ 	this->transport = NULL;
+ 	return 0;
+ }
+@@ -2096,11 +2099,21 @@ static void transport_destroy(void *data)
+ 	spa_loop_locked(this->data_loop, do_transport_destroy, 0, NULL, 0, this);
+ }
+ 
++static void transport_remove_node(void *data)
++{
++	struct impl *this = data;
++
++	spa_log_debug(this->log, "transport %p remove node", this->transport);
++	do_stop(this);
++	spa_loop_locked(this->data_loop, do_transport_destroy, 0, NULL, 0, this);
++}
++
+ static const struct spa_bt_transport_events transport_events = {
+ 	SPA_VERSION_BT_TRANSPORT_EVENTS,
+ 	.delay_changed = transport_delay_changed,
+ 	.state_changed = transport_state_changed,
+         .destroy = transport_destroy,
++	.remove_node = transport_remove_node,
+ };
+ 
+ static int impl_get_interface(struct spa_handle *handle, const char *type, void **interface)
+-- 
+2.56.0
+
