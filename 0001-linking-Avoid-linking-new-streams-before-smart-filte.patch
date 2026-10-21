@@ -1,0 +1,111 @@
+From d6c013bc51128adc28a908db6ddabfd93ea4d25c Mon Sep 17 00:00:00 2001
+From: Julian Bouzas <julian.bouzas@collabora.com>
+Date: Wed, 7 Oct 2026 14:42:08 -0400
+Subject: [PATCH] linking: Avoid linking new streams before smart filters are
+ relinked
+
+A new stream that changes the 'filters' metadata (e.g. enabling a smart
+filter) was linked immediately, starting the graph before the rescan
+relinked the filters it depends on. This made it capture unfiltered
+audio for a short period of time.
+
+- module-standard-event-source: raise the metadata-changed event
+  priority from 50 to 300, so that it is handled before the
+  session-item-added event of the stream
+- filter-utils: rescan the filters data as soon as the filters metadata
+  changes, and track whether a linking rescan is pending since then
+- linking/rescan: skip immediate linking while that rescan is pending,
+  so the stream is linked after the filters
+
+Assisted-by: Claude:claude-opus-5-5
+---
+ modules/module-standard-event-source.c |  4 ++--
+ src/scripts/lib/filter-utils.lua       | 27 ++++++++++++++++++++++++++
+ src/scripts/linking/rescan.lua         |  6 ++++++
+ 3 files changed, 35 insertions(+), 2 deletions(-)
+
+diff --git a/modules/module-standard-event-source.c b/modules/module-standard-event-source.c
+index bb82eee0..f916fd29 100644
+--- a/modules/module-standard-event-source.c
++++ b/modules/module-standard-event-source.c
+@@ -170,10 +170,10 @@ get_default_event_priority (const gchar *event_type)
+     return -510;
+   else if (!g_strcmp0 (event_type, "node-state-changed"))
+     return 50;
+-  else if (!g_strcmp0 (event_type, "metadata-changed"))
+-    return 50;
+   else if (g_str_has_suffix (event_type, "-params-changed"))
+     return 50;
++  else if (!g_strcmp0 (event_type, "metadata-changed"))
++    return 300;
+   else if (g_str_has_prefix (event_type, "client-"))
+     return 200;
+   else if (g_str_has_prefix (event_type, "device-"))
+diff --git a/src/scripts/lib/filter-utils.lua b/src/scripts/lib/filter-utils.lua
+index 3a638468..9deacc37 100644
+--- a/src/scripts/lib/filter-utils.lua
++++ b/src/scripts/lib/filter-utils.lua
+@@ -12,6 +12,8 @@ local cutils = require ("common-utils")
+ local module = {
+   metadata = nil,
+   filters = {},
++  -- filters metadata changed and the graph has not been rescanned yet
++  rescan_pending = false,
+ }
+ 
+ local function getFilterSmart (metadata, node)
+@@ -362,9 +364,34 @@ SimpleEventHook {
+     local metadata_om = source:call ("get-object-manager", "metadata")
+ 
+     rescanFilters (om, metadata_om)
++    module.rescan_pending = false
+   end
+ }:register ()
+ 
++SimpleEventHook {
++  name = "lib/filter-utils/metadata-changed",
++  interests = {
++    EventInterest {
++      Constraint { "event.type", "=", "metadata-changed" },
++      Constraint { "metadata.name", "=", "filters" },
++    },
++  },
++  execute = function (event)
++    -- Update the filters data right away, so that streams added before the
++    -- next rescan are linked using the new filters configuration
++    local source = event:get_source ()
++    local om = source:call ("get-object-manager", "session-item")
++    local metadata_om = source:call ("get-object-manager", "metadata")
++
++    rescanFilters (om, metadata_om)
++    module.rescan_pending = true
++  end
++}:register ()
++
++function module.is_rescan_pending ()
++  return module.rescan_pending
++end
++
+ function module.is_filter_smart (direction, link_group)
+   -- Make sure direction and link_group is valid
+   if direction == nil or link_group == nil then
+diff --git a/src/scripts/linking/rescan.lua b/src/scripts/linking/rescan.lua
+index 7c53e31a..61d87ef0 100644
+--- a/src/scripts/linking/rescan.lua
++++ b/src/scripts/linking/rescan.lua
+@@ -131,6 +131,12 @@ SimpleEventHook {
+       return
+     end
+ 
++    -- Let the rescan link this, as filters may need to be relinked first
++    if futils.is_rescan_pending () then
++      source:call ("schedule-rescan", "linking")
++      return
++    end
++
+     -- Don't handle immediately if this this has node.link-group, because it
+     -- could affect others.
+     local node = si:get_associated_proxy ("node")
+-- 
+2.55.0
+
