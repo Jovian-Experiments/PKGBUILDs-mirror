@@ -1,5 +1,5 @@
 
-`main @ 20261021.1000`
+`main @ 20261026.1000`
 ======================
 
 Valve packages
@@ -12,6 +12,7 @@ Valve packages
  * [`bluez-libs` — `holo-main/bluez-5.87-2.4`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/bluez-5.87-2.4)
  * [`bluez-utils` — `holo-main/bluez-5.87-2.4`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/bluez-5.87-2.4)
  * [`breakpad` — `holo-main/breakpad-v2024.02.16-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/breakpad-v2024.02.16-2)
+ * [`brotli` — `holo-main/brotli-1.2.1-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/brotli-1.2.1-1.1)
  * [`bubblewrap` — `holo-main/bubblewrap-0.12.0-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/bubblewrap-0.12.0-1.1)
  * [`ca-certificates-mozilla` — `holo-main/ca-certificates-mozilla-3.131.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/ca-certificates-mozilla-3.131.1-1)
  * [`casync` — `holo-main/casync-2.r227.g99559cd-4.6`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/casync-2.r227.g99559cd-4.6)
@@ -68,8 +69,8 @@ Valve packages
  * [`paru` — `holo-main/paru-2.1.0.r67.g9ac3578-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/paru-2.1.0.r67.g9ac3578-1)
  * [`plasma-foreground-booster` — `holo-main/kcgroups-0.0.dmemcg.experimental.3-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/kcgroups-0.0.dmemcg.experimental.3-2)
  * [`plasma-pa` — `holo-main/plasma-pa-6.7.3-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/plasma-pa-6.7.3-1.1)
- * [`plasma-workspace` — `holo-main/plasma-workspace-6.7.3-2.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/plasma-workspace-6.7.3-2.1)
- * [`plasma-x11-session` — `holo-main/plasma-workspace-6.7.3-2.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/plasma-workspace-6.7.3-2.1)
+ * [`plasma-workspace` — `holo-main/plasma-workspace-6.7.3-2.2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/plasma-workspace-6.7.3-2.2)
+ * [`plasma-x11-session` — `holo-main/plasma-workspace-6.7.3-2.2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/plasma-workspace-6.7.3-2.2)
  * [`plymouth` — `holo-main/plymouth-22.02.122-7.7`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/plymouth-22.02.122-7.7)
  * [`podman` — `holo-main/podman-6.0.2-2.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/podman-6.0.2-2.1)
  * [`pulseaudio-qt` — `holo-main/pulseaudio-qt-1.8.1-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/pulseaudio-qt-1.8.1-1.1)
@@ -81,7 +82,7 @@ Valve packages
  * [`steamos-customizations` — `holo-main/steamos-customizations-20261021.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-customizations-20261021.1-1)
  * [`steamos-efi` — `holo-main/steamos-efi-20261012.1-3`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-efi-20261012.1-3)
  * [`steamos-kdumpst-layer` — `holo-main/steamos-kdumpst-layer-1.1-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-kdumpst-layer-1.1-2)
- * [`steamos-log-submitter` — `holo-main/steamos-log-submitter-0.8.3-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-log-submitter-0.8.3-1)
+ * [`steamos-log-submitter` — `holo-main/steamos-log-submitter-0.8.4-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-log-submitter-0.8.4-1)
  * [`steamos-manager` — `holo-main/steamos-manager-26.4.1-3`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-manager-26.4.1-3)
  * [`steamos-powerbuttond` — `holo-main/steamos-powerbuttond-4.2-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-powerbuttond-4.2-2)
  * [`steamos-reset` — `holo-main/steamos-reset-20260924.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/holo-main/steamos-reset-20260924.1-1)
@@ -108,7 +109,7 @@ Valve packages
  * [`ec-log` — `jupiter-main/ec-log-0.1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/ec-log-0.1-1)
  * [`filesystem` — `jupiter-main/filesystem-2021.12.07-1.20`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/filesystem-2021.12.07-1.20)
  * [`galileo-mura` — `jupiter-main/galileo-mura-v0.10-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/galileo-mura-v0.10-2)
- * [`gamescope` — `jupiter-main/gamescope-3.16.30-3`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/gamescope-3.16.30-3)
+ * [`gamescope` — `jupiter-main/gamescope-3.17.0-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/gamescope-3.17.0-1)
  * [`gpu-trace` — `jupiter-main/gpu-trace-2.17-1.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/gpu-trace-2.17-1.1)
  * [`ibus-anthy` — `jupiter-main/ibus-anthy-1.5.14-4.5`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/ibus-anthy-1.5.14-4.5)
  * [`ibus-pinyin` — `jupiter-main/ibus-pinyin-1.5.1-2.4`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/ibus-pinyin-1.5.1-2.4)
@@ -123,7 +124,7 @@ Valve packages
  * [`jupiter-steamos-log-submitter` — `jupiter-main/jupiter-steamos-log-submitter-1-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/jupiter-steamos-log-submitter-1-1)
  * [`kwin` — `jupiter-main/kwin-6.7.3-1.7`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/kwin-6.7.3-1.7)
  * [`libwireplumber` — `jupiter-main/wireplumber-0.5.18-1.2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/wireplumber-0.5.18-1.2)
- * [`linux-neptune-72` — `jupiter-main/linux-neptune-72-7.2.7.valve2-1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/linux-neptune-72-7.2.7.valve2-1)
+ * [`linux-neptune-72` — `jupiter-main/linux-neptune-72-7.2.7.valve2-2`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/linux-neptune-72-7.2.7.valve2-2)
  * [`mangohud` — `jupiter-main/mangohud-0.8.3.rc1.r24.g33c2c7dd-4`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/mangohud-0.8.3.rc1.r24.g33c2c7dd-4)
  * [`mesa` — `jupiter-main/mesa-26.1.2.221562.radeonsi_26.1.2-4`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/mesa-26.1.2.221562.radeonsi_26.1.2-4)
  * [`powerdevil` — `jupiter-main/powerdevil-6.7.3-2.1`](https://github.com/Jovian-Experiments/PKGBUILDs-mirror/tree/jupiter-main/powerdevil-6.7.3-2.1)
@@ -199,7 +200,6 @@ Arch Linux packages
  * [`breeze-gtk/6.7.3-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/breeze-gtk/-/tree/6.7.3-1)
  * [`breeze-icons/6.28.0-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/breeze-icons/-/tree/6.28.0-1)
  * [`brltty/6.9.1-3`](https://gitlab.archlinux.org/archlinux/packaging/packages/brltty/-/tree/6.9.1-3)
- * [`brotli/1.2.0-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/brotli/-/tree/1.2.0-1)
  * [`btop/1.4.7-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/btop/-/tree/1.4.7-1)
  * [`btrfs-progs/7.1-1`](https://gitlab.archlinux.org/archlinux/packaging/packages/btrfs-progs/-/tree/7.1-1)
  * [`bzip2/1.0.8-6`](https://gitlab.archlinux.org/archlinux/packaging/packages/bzip2/-/tree/1.0.8-6)
