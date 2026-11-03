@@ -1,0 +1,42 @@
+From f958ad11955638758c19170d9df4d67bf1ff8bcb Mon Sep 17 00:00:00 2001
+From: Lone_Wolf <lone_wolf@klaas-de-kat.nl>
+Date: Wed, 13 May 2026 22:54:45 +0200
+Subject: [PATCH] clc: fix build with LLVM23 (TargetRegistry::lookupTarget)
+
+See https://github.com/llvm/llvm-project/commit/d50631faad3003e73589528c83d3bbbad7ba72f1
+
+Closes: https://gitlab.freedesktop.org/mesa/mesa/-/work_items/15471
+Cc: mesa-stable
+Part-of: <https://gitlab.freedesktop.org/mesa/mesa/-/merge_requests/41558>
+---
+ src/compiler/clc/clc_helpers.cpp | 11 +++++------
+ 1 file changed, 5 insertions(+), 6 deletions(-)
+
+diff --git a/src/compiler/clc/clc_helpers.cpp b/src/compiler/clc/clc_helpers.cpp
+index 66d4af43a36a..e5c3d158b290 100644
+--- a/src/compiler/clc/clc_helpers.cpp
++++ b/src/compiler/clc/clc_helpers.cpp
+@@ -1186,15 +1186,14 @@ llvm_mod_to_spirv(std::unique_ptr<::llvm::Module> mod,
+    if (args->use_llvm_spirv_target) {
+       const char *triple = args->address_bits == 32 ? "spirv-unknown-unknown" : "spirv64-unknown-unknown";
+       std::string error_msg("");
+-      auto target = TargetRegistry::lookupTarget(triple, error_msg);
+-      if (target) {
+-         auto TM = target->createTargetMachine(
+ #if LLVM_VERSION_MAJOR >= 21
+-            llvm::Triple(triple),
++      auto temp_triple = llvm::Triple(triple);
+ #else
+-            triple,
++      auto temp_triple = triple;
+ #endif
+-            "", "", {}, std::nullopt, std::nullopt,
++      auto target = TargetRegistry::lookupTarget(temp_triple, error_msg);
++      if (target) {
++         auto TM = target->createTargetMachine(temp_triple, "", "", {}, std::nullopt, std::nullopt,
+ #if LLVM_VERSION_MAJOR >= 18
+             ::llvm::CodeGenOptLevel::None
+ #else
+-- 
+GitLab
+
