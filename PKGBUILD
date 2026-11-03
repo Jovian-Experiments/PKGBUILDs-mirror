@@ -2,7 +2,7 @@
 
 pkgname=steamos-log-submitter
 pkgver=0.8.4
-pkgrel=1
+pkgrel=2
 pkgdesc="SteamOS Log Submitter"
 url="https://gitlab.steamos.cloud/jupiter/steamos-log-submitter"
 arch=('any')
