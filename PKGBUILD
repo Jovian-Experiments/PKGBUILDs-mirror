@@ -4,7 +4,7 @@
 pkgbase=linux-neptune-72
 _tag=7.2.7-valve2
 pkgver=${_tag//-/.}
-pkgrel=2
+pkgrel=3
 pkgdesc='Linux'
 url="https://gitlab.steamos.cloud/jupiter/linux-integration/-/tree/$_tag"
 arch=(
