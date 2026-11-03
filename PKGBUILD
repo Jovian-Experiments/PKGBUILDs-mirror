@@ -4,9 +4,9 @@
 # Contributor: Andrea Scarpino <andrea@archlinux.org>
 
 pkgname=powerdevil
-pkgver=6.7.3
+pkgver=6.8.2
 _dirver=$(echo $pkgver | cut -d. -f1-3)
-pkgrel=2.1 # Holo: Hide unactionable message to install power-profiles-daemon
+pkgrel=1.1 # Holo: Hide unactionable message to install power-profiles-daemon
 pkgdesc='Manages the power consumption settings of a Plasma Shell'
 arch=(x86_64)
 url='https://kde.org/plasma-desktop/'
@@ -32,7 +32,6 @@ depends=(ddcutil
          libkscreen
          libplasma
          libstdc++
-         libxcb
          plasma-workspace
          qcoro
          qt6-base
@@ -50,7 +49,7 @@ groups=(plasma)
 source=(https://download.kde.org/stable/plasma/$_dirver/$pkgname-$pkgver.tar.xz{,.sig}
         0001-Hide-power-profiles-daemon-when-not-supported.patch  # See https://gitlab.steamos.cloud/holo-team/tasks/-/issues/1674
        )
-sha256sums=('72e362963d67488cb55b9d6c563a66bbe043553980269f2e2c2b691f023e2f35'
+sha256sums=('c663355adcfdfafe9824f48aa15881679fd71b0b16863a603a62ec0bce628d4a'
             'SKIP'
             '6d7063672c3d1900f012bc9f732cb8975eb38e19ba615da58cdf6f57ef08b39d')
 validpgpkeys=('E0A3EB202F8E57528E13E72FD7574483BB57B18D'  # Jonathan Esk-Riddell <jr@jriddell.org>
@@ -64,7 +63,7 @@ prepare() {
 
 build() {
   cmake -B build  -S $pkgname-$pkgver \
-    -DCMAKE_INSTALL_LIBEXECDIR=lib \
+    -DKDE_INSTALL_LIBEXECDIR=lib \
     -DBUILD_TESTING=OFF
   cmake --build build
 }
