@@ -13,7 +13,7 @@
 
 pkgname=renderdoc-minimal
 pkgver=1.46
-pkgrel=1.0
+pkgrel=1.1
 pkgdesc="OpenGL and Vulkan debugging tool (minimal, capture + replay server only)"
 arch=(x86_64)
 url="https://github.com/baldurk/renderdoc"
