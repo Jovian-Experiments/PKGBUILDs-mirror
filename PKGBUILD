@@ -1,6 +1,6 @@
 pkgname=ibus-table-cangjie-lite
 pkgver=1.8.8
-pkgrel=2.5
+pkgrel=2.6
 _commit=cc4a17fde8904c6e60ded3558c551c90d9b72454   # Some Valve specific changes not yet upstreamed
 pkgdesc="Some table-based input method of tables engines for IBus"
 arch=('any')
