@@ -31,7 +31,7 @@ _tag=radeonsi-26.1.2
 pkgver=26.1.2.221562.radeonsi_26.1.2
 #pkgver=25.3.0
 #_pkgver=${pkgver/[a-z]/-&}
-pkgrel=2
+pkgrel=3
 epoch=0
 pkgdesc="Open-source OpenGL drivers"
 url="https://www.mesa3d.org/"
@@ -104,6 +104,10 @@ source=(
   # SteamOS: Change source.
   "steamos-mesa::git+ssh://git@gitlab.steamos.cloud/jupiter/mesa.git#tag=$_tag"
 #  "https://archive.mesa3d.org/mesa-$_pkgver.tar.xz"{,.sig}
+
+  # Holo: Cherry-picked from upstream Mesa to fix build with LLVM 23.
+  # Should be dropped after updating pkgbuild to Mesa 26.2+
+  "0001-clc-fix-build-with-LLVM23-TargetRegistry-lookupTarget.patch"::"https://gitlab.freedesktop.org/mesa/mesa/-/commit/f958ad11955638758c19170d9df4d67bf1ff8bcb.patch"
 )
 validpgpkeys=(
   946D09B5E4C9845E63075FF1D961C596A7203456 # Andres Gomez <tanty@igalia.com>
@@ -160,6 +164,7 @@ for _crate in "${!_crates[@]}"; do
 done
 
 b2sums=('SKIP'
+        'eee98a6b40db130a3789f2e897a0b36c7c56f1b09fc19ca42cf06517bddb7d2a2376b3cb9a7231fec911a6e7c4c5b4cf88f0ed0c43383f135551ebadd765d9b6'
         '431439d31632d177aeb15f910b4f546efa76d54fc74fc8e140399dc5e54eca33fd606f11dbfb48fa83067c8474ee512e62751895d5948367b65ab08b984284e5'
         'a6d47c903be6094423d89b8ec3ca899d0a84df6dbd6e76632bb6c9b9f40ad9c216f8fa400310753d392f85072756b43ac3892e0a2c4d55f87ab6463002554823'
         '9a73962e1e38b84131ab2350b69a1f5d611c549533eec73e898c394a9b9442f357bb5d5f59e1be12270dd29bdf237dc2d21786c0c2210736e224ef5d48300dcf'
@@ -190,6 +195,7 @@ b2sums=('SKIP'
 
 # https://docs.mesa3d.org/relnotes.html
 sha256sums=('SKIP'
+            'd19c552c88733650781bd08074605dd8baa457d6638b9aff037f18425f30594e'
             '67914ab451f3bfd2e69e5e9d2ef3858484e7074d63f204fd166ec391b54de21d'
             'ed646292ffc8188ef8ea4d1e0e0150fb15a5c2e12ad9b8fc191ae7a8a7f3c4b9'
             '7f9f832470494906d1fca5329f8ab5791cc60beb230c74815dff541cbd2b5ca0'
