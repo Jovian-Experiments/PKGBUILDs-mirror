@@ -3,7 +3,7 @@
 
 pkgname=pyzy
 pkgver=1.1
-pkgrel=2.6
+pkgrel=2.7
 pkgdesc='The Chinese PinYin and Bopomofo conversion library'
 arch=('x86_64')
 license=('LGPL')
