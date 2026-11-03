@@ -7,7 +7,7 @@
 _basename=steam
 pkgname=steam-jupiter-oobe
 pkgver=1.0.0.79
-pkgrel=1.29
+pkgrel=1.30
 pkgdesc="Valve's digital software delivery system - Jupiter bootstrapped packaging"
 url='https://steampowered.com/'
 arch=('x86_64')
