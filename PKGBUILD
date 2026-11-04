@@ -6,7 +6,7 @@
 pkgname=kwin
 pkgver=6.8.2
 _dirver=$(echo $pkgver | cut -d. -f1-3)
-pkgrel=1.1
+pkgrel=1.2
 pkgdesc='An easy to use, but flexible, Wayland compositor'
 arch=(x86_64)
 url='https://kde.org/plasma-desktop/'
@@ -39,7 +39,7 @@ depends=(
   kpackage
   kquickcharts
   krunner
-  kscreenlocker
+  'kscreenlocker>=6.8.2'  # Holo: Enforce the correct rebuild order
   kservice
   ksvg
   kwayland
