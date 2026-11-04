@@ -1,0 +1,11 @@
+[Unit]
+Description=Enable the PAM dirlock modules before starting SDDM
+Before=sddm.service
+PartOf=sddm.service
+
+[Service]
+Type=oneshot
+ExecStart=/usr/lib/steamos/dirlock-pam-config
+
+[Install]
+WantedBy=sddm.service
