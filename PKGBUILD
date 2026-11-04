@@ -2,7 +2,7 @@
 # Maintainer: Jan Alexander Steffens (heftig) <heftig@archlinux.org>
 
 pkgbase=linux-neptune-72
-_tag=7.2.7-valve2
+_tag=7.2.10-valve1
 pkgver=${_tag//-/.}
 pkgrel=3
 pkgdesc='Linux'
@@ -52,10 +52,10 @@ validpgpkeys=(
   647F28654894E3BD457199BE38DBBDC86092693E  # Greg Kroah-Hartman
   83BC8889351B5DEBBB68416EB8AC08600F108CDF  # Jan Alexander Steffens (heftig)
 )
-sha256sums=('bb3b3a6cfa7a67e632364cdf800a8d815bfa0c59aba75d568ea1f42a7dbfe1c5'
+sha256sums=('45291a0df84208139139de184ed78bb08185e8c3866ad91b35fa6e29d09e53b0'
             'b91c3ed65067704c8fdb8289d44ed18aa62f98f52c3b6d91fb72bc5b1606ae79')
 sha256sums_x86_64=('ecd8c76eb203493e67ba4052e7bc1fa46f51c91566f102172e7a18d7de2dd5eb')
-b2sums=('29ec2c35102204c780f321d2171816d28df2fa573db8460c63e5702c8fd5f520257dd7e28a4add99fdd3dc134de4f822746802b44a593bf21fcbb8c20ab988f7'
+b2sums=('28ff929b248ca61fdf2aa16174046bf7c894f2884bf10d4fd6caaa83fd1b69834a912205663f99117c6bbc6f9611a549e6f74c8f7dba750a76019037414398f3'
         'c5bbcc97d48ed12574e8491211e4cfbadcf5f9e696c6c046e5f87f84550c2491950d1be0eca83cff6e35f74a0350d1cd2f8627e5fcd70d93bfc25ca96b4eddd1')
 b2sums_x86_64=('0564ea851810a155cd589bd3a5d74344f16ab2c7c5ea5aa740faaf6776230ccd115474b6164ebd32d89d8615e41d24d2612d649b987f1f2cde58476e5561fe5e')
 
