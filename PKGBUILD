@@ -1,9 +1,9 @@
 # Maintainer: Pierre-Loup A. Griffais <pgriffais@valvesoftware.com>
 
 pkgname=gamescope
-_srctag=3.16.30.1
+_srctag=3.16.30.2
 pkgver=${_srctag//-/.}
-pkgrel=2
+pkgrel=1
 pkgdesc="gaming shell based on Xwayland, powered by Vulkan and DRM"
 arch=(x86_64)
 url="https://github.com/ValveSoftware/gamescope"
@@ -33,9 +33,7 @@ source=("galileo-mura-setup.service"
         # FIXME Upstream gamescope is just selecting master branch at build time, so we are arbitrarily snapshotting a
         #       revision when bumping the version here such that the build is reproducible.
         "git+https://github.com/nothings/stb.git#commit=af1a5bc352164740c1cc1354942b1c6b72eacb8a"
-        "git+https://github.com/g-truc/glm.git#commit=0af55ccecd98d4e5a8d1fad7de25ba429d60e863"
-	"0001-Turn-off-screen-during-system-sleep.patch" # Holo: Prevents frozen screen and looping sound on Steam Machine when hibernating in game mode. Submitted upstream at https://github.com/ValveSoftware/gamescope/pull/2480. See https://gitlab.steamos.cloud/holo-team/tasks/-/work_items/2320
-	)
+        "git+https://github.com/g-truc/glm.git#commit=0af55ccecd98d4e5a8d1fad7de25ba429d60e863")
 sha256sums=('2cfacf10f311a02d1c94ab5e927094639dfbb57bd322acc628374fef048a12bb'
             'e1499b725efd8afcf5693b5dc240d7311d2bbc389b92df1bb9eea8dd5688d23e'
             'fe515fce8f151a6c03a89e043044bfddf8cd6ee89027d2cfbcf6f6706c78ca76'
@@ -52,13 +50,12 @@ sha256sums=('2cfacf10f311a02d1c94ab5e927094639dfbb57bd322acc628374fef048a12bb'
             '674367927b9d0665a1e1c57ebcd7373683659b1dc1020d2bffd4ab50e4af73fa'
             '525060896abef2da9db8d8294253b7444d60e48cf6cc0496ca48fc7084cc8590'
             'f57fcba25b211381a9402d3d0c4723301afaef185e9ecffc75839e5af2aee4c8'
-            'cef52d6bbeea71cca04b1e1058f7b8acffd8bfe44896beb47949a66bc0793e13'
+            'e2726ea9ac650a564aa3f321f45d3999a3d287314394f6d7471da041b2fcdd26'
             '6c8595da579a8df74bc307294c2485e90f5379b84390381f500da33ff3f276d2'
             'SKIP'
             '03726f2fb44ae79e6a398e8f9aaaf8054800dda9b8298726157522fe5f7296b1'
             'e39e0c91b297bfd707afcda84ecdc15a08c22e2ad4c347fc3533b1ed98fb3f85'
-            '85f3e55fb527e9853bd4fc31300253587198831660a743eaa55f6b40fe1b9c90'
-            'ae9a629d95e205121ca867ff9a0fa057ca50e4f714ea1a3bd8c54c79b593d0c1')
+            '85f3e55fb527e9853bd4fc31300253587198831660a743eaa55f6b40fe1b9c90')
 
 install=gamescope.install
 
