@@ -1,0 +1,32 @@
+From 588ae0033773ec5edfa225b589320b6b3058f566 Mon Sep 17 00:00:00 2001
+From: Xaver Hugl <xaver.hugl@kde.org>
+Date: Thu, 5 Nov 2026 16:41:38 +0100
+Subject: [PATCH] backends/libinput: list devices during setup
+
+Otherwise the output configuration store assumes there's no laptop lid, and the
+resulting default scale can end up being very wrong on laptops and handhelds.
+
+(cherry picked from commit 4e6a1ea8af21db0981ecbc4be4f9addfee9dc689)
+---
+ src/backends/libinput/connection.cpp | 5 ++++-
+ 1 file changed, 4 insertions(+), 1 deletion(-)
+
+diff --git a/src/backends/libinput/connection.cpp b/src/backends/libinput/connection.cpp
+index 9972b3d58ef..4966e7ce172 100644
+--- a/src/backends/libinput/connection.cpp
++++ b/src/backends/libinput/connection.cpp
+@@ -134,7 +134,10 @@ Connection::~Connection()
+ 
+ void Connection::setup()
+ {
+-    QMetaObject::invokeMethod(this, &Connection::doSetup, Qt::QueuedConnection);
++    // NOTE We need the initial device list for the startup of other parts of KWin,
++    // like tablet mode and output configuration
++    QMetaObject::invokeMethod(this, &Connection::doSetup, Qt::BlockingQueuedConnection);
++    processEvents();
+ }
+ 
+ void Connection::doSetup()
+-- 
+GitLab
+

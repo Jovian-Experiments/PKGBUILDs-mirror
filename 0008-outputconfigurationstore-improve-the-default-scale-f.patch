@@ -1,0 +1,75 @@
+From 91857c5299b5028d1776cd364f472efc32a7d806 Mon Sep 17 00:00:00 2001
+From: Xaver Hugl <xaver.hugl@kde.org>
+Date: Thu, 5 Nov 2026 18:26:14 +0100
+Subject: [PATCH] outputconfigurationstore: improve the default scale for
+ handhelds and tablets
+
+Currently they get treated like phones, and the resulting scale can be unusably
+large, like 190% on the Legion Go S (at 1080p). This change reduces the scale
+to be closer to be usable (150% on the Legion Go S).
+
+Since there's no good way to detect handheld devices atm, the check for
+handhelds simply depends on the screen size, and thus also applies to tablets.
+I think there it works out reasonably well too though.
+
+(cherry picked from commit c8a2cb4611944bc8fce930d37f9f064f74eb91e9)
+---
+ autotests/integration/outputchanges_test.cpp | 12 ++++++++++++
+ src/outputconfigurationstore.cpp             |  4 ++++
+ 2 files changed, 16 insertions(+)
+
+diff --git a/autotests/integration/outputchanges_test.cpp b/autotests/integration/outputchanges_test.cpp
+index 8748d06a333..13e088df118 100644
+--- a/autotests/integration/outputchanges_test.cpp
++++ b/autotests/integration/outputchanges_test.cpp
+@@ -42,6 +42,7 @@ enum class DeviceType {
+     Desktop,
+     Laptop,
+     Phone,
++    Handheld,
+ };
+ 
+ class LidSwitch : public InputDevice
+@@ -1470,6 +1471,7 @@ void OutputChangesTest::testGenerateConfigs_data()
+            }
+         << OutputModeline(QSize(3840, 2400), 60000, OutputModeline::Flag::Preferred) << 2.60 << true;
+ 
++    // the Steam Deck is considered a laptop because it has a (virtual) lid switch device
+     QTest::addRow("SteamDeck OLED")
+         << DeviceType::Laptop
+         << Test::OutputInfo{
+@@ -1481,6 +1483,16 @@ void OutputChangesTest::testGenerateConfigs_data()
+            }
+         << OutputModeline(QSize(800, 1280), 90000ul, OutputModeline::Flag::Preferred) << 1.0 << true;
+ 
++    QTest::addRow("Legion Go S")
++        << DeviceType::Handheld
++        << Test::OutputInfo{
++               .geometry = Rect(0, 0, 1920, 1080),
++               .internal = true,
++               .physicalSizeInMM = QSize(172, 107),
++               .modes = {OutputModeline(QSize(1920, 1080), 60000, OutputModeline::Flag::Preferred)},
++           }
++        << OutputModeline(QSize(1920, 1080), 60000ul, OutputModeline::Flag::Preferred) << 1.5 << true;
++
+     QTest::addRow("Pixel 3a")
+         << DeviceType::Phone
+         << Test::OutputInfo{
+diff --git a/src/outputconfigurationstore.cpp b/src/outputconfigurationstore.cpp
+index a8cb4bdf56d..9f625f942d7 100644
+--- a/src/outputconfigurationstore.cpp
++++ b/src/outputconfigurationstore.cpp
+@@ -901,6 +901,10 @@ double OutputConfigurationStore::chooseScale(BackendOutput *output, const QSize
+             // laptop screens: usually closer to the face than desktop monitors
+             targetDpi = 125;
+             minSize = 800;
++        } else if (std::min(output->physicalSize().width(), output->physicalSize().height()) > 90) {
++            // tablets and handhelds: closer than laptops, but need a larger minimum size than phones
++            targetDpi = 130;
++            minSize = 720;
+         } else {
+             // phone screens: even closer than laptops
+             targetDpi = 150;
+-- 
+GitLab
+
