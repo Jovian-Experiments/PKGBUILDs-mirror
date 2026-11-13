@@ -1,9 +1,9 @@
 # Maintainer David Edmundson (bluesystems@davidedmundson.co.uk)
 
 pkgname=steamdeck-kde-presets
-_srctag=3.9.4
+_srctag=3.9.6
 pkgver=${_srctag#jupiter-}
-pkgrel=2
+pkgrel=1
 arch=('any')
 url=""
 pkgdesc="Steamdeck KDE Presets"
@@ -14,7 +14,7 @@ optdepends=(
 )
 makedepends=('git' 'openssh')
 source=("git+ssh://git@gitlab.steamos.cloud/jupiter/steamdeck-kde-presets.git#tag=$_srctag")
-sha512sums=('7e0d49186a036ac2972b471e858ee1e0d7cc7897ad300f295a0645f9c741a1943a6d078c5becc4a66db75942283e43f42247ebf001d0b5bc7278c503158e7be3')
+sha512sums=('4258be571cfc6a845a1dccd663c6340bb3ea0f7ed1df59fa82ea9f146da8b58d23296fa1a233303321ff88ab621cb008dde95136dbf1884d037305ae1872aa8c')
 
 package() {
   local aliased=
