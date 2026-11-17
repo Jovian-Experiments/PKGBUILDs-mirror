@@ -1,0 +1,27 @@
+From e13034d702bb5a5cccb4bae7b7043f87dac9a9c4 Mon Sep 17 00:00:00 2001
+From: Julian Bouzas <julian.bouzas@collabora.com>
+Date: Wed, 4 Nov 2026 13:34:49 -0500
+Subject: [PATCH 1/2] alsa: acp: Also recheck ELD on initial read
+
+So that profile support does not depend on whether the ELD changed after the
+card was created.
+---
+ spa/plugins/alsa/acp/acp.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/spa/plugins/alsa/acp/acp.c b/spa/plugins/alsa/acp/acp.c
+index 5493ce000..1cf75adb2 100644
+--- a/spa/plugins/alsa/acp/acp.c
++++ b/spa/plugins/alsa/acp/acp.c
+@@ -1223,7 +1223,7 @@ static int hdmi_eld_changed(snd_mixer_elem_t *melem, unsigned int mask)
+ 	if (changed && mask != 0 && impl->events && impl->events->props_changed)
+ 		impl->events->props_changed(impl->user_data);
+ 
+-	if (changed && mask != 0) {
++	if (changed) {
+ 		pa_alsa_profile_set_recheck_hdmi_eld(impl->profile_set, impl->card.index, device, &eld);
+ 		update_profile_availabilities(impl);
+ 	}
+-- 
+2.56.0
+

@@ -1,0 +1,128 @@
+From d17cc1ea3dc7ce17f9b5dc343d8312cf176a0092 Mon Sep 17 00:00:00 2001
+From: Julian Bouzas <julian.bouzas@collabora.com>
+Date: Fri, 6 Nov 2026 11:11:21 -0500
+Subject: [PATCH 2/2] alsa: acp: Mark profiles with unconfirmed LPCM channels
+ as unknown
+
+Instead of disabling HDMI profiles whose channel count is only covered
+by compressed formats in the ELD, report them as unknown, so that they
+can still be selected while stereo remains the preferred profile.
+---
+ spa/plugins/alsa/acp/acp.c        |  3 +++
+ spa/plugins/alsa/acp/alsa-mixer.c | 20 +++++++++++++++++---
+ spa/plugins/alsa/acp/alsa-mixer.h |  2 ++
+ spa/plugins/alsa/acp/alsa-util.c  |  6 ++++++
+ spa/plugins/alsa/acp/alsa-util.h  |  1 +
+ 5 files changed, 29 insertions(+), 3 deletions(-)
+
+diff --git a/spa/plugins/alsa/acp/acp.c b/spa/plugins/alsa/acp/acp.c
+index 1cf75adb2..fe75ba9e6 100644
+--- a/spa/plugins/alsa/acp/acp.c
++++ b/spa/plugins/alsa/acp/acp.c
+@@ -856,6 +856,9 @@ input_port_found:
+ 		/* If hardware re-probe found this profile unsupported, force unavailable */
+ 		if (!(profile->profile.flags & ACP_PROFILE_PRO) && !profile->supported)
+ 			available = ACP_AVAILABLE_NO;
++		/* Mark as unknown if the LPCM channels are unconfirmed */
++		else if (profile->lpcm_channels_unconfirmed && available == ACP_AVAILABLE_YES)
++			available = ACP_AVAILABLE_UNKNOWN;
+ 
+ 		if (profile->profile.index == impl->card.active_profile_index)
+ 			active_available = available;
+diff --git a/spa/plugins/alsa/acp/alsa-mixer.c b/spa/plugins/alsa/acp/alsa-mixer.c
+index 13af1679f..47d2a6e66 100644
+--- a/spa/plugins/alsa/acp/alsa-mixer.c
++++ b/spa/plugins/alsa/acp/alsa-mixer.c
+@@ -5314,8 +5314,10 @@ void pa_alsa_profile_set_recheck_hdmi_eld(
+      * Other profiles are left untouched. */
+     PA_HASHMAP_FOREACH(p, ps->profiles, state) {
+         uint32_t idx;
++        bool has_hdmi_output_mapping = false;
+         bool supports_hdmi_output_mapping = false;
+         bool supports_input_mapping = true;
++        bool lpcm_channels_unconfirmed = false;
+ 
+         if (p->profile.flags & (ACP_PROFILE_OFF | ACP_PROFILE_PRO))
+             continue;
+@@ -5326,16 +5328,28 @@ void pa_alsa_profile_set_recheck_hdmi_eld(
+                 if (!pa_streq(m->device_strings[0], device_string))
+                     continue;
+ 
++                has_hdmi_output_mapping = true;
++
+                 if (eld->lpcm_channels < (int)m->channel_map.channels) {
+-                    p->supported = false;
+-                    pa_log_debug("HDMI profile %s disabled (ELD channels did not match)", p->name);
+-                    break;
++                    if (eld->max_channels < (int)m->channel_map.channels) {
++                        p->supported = false;
++                        pa_log_debug("HDMI profile %s disabled (ELD channels did not match)", p->name);
++                        break;
++                    }
++
++                    /* Only non-LPCM SADs have enough channels, so keep the
++                     * profile but do not report it as available */
++                    lpcm_channels_unconfirmed = true;
++                    pa_log_debug("HDMI profile %s availability unknown (only non-LPCM ELD channels matched)", p->name);
+                 }
+ 
+                 supports_hdmi_output_mapping = true;
+             }
+         }
+ 
++        if (has_hdmi_output_mapping)
++            p->lpcm_channels_unconfirmed = lpcm_channels_unconfirmed;
++
+         /* Mappings not affected by the ELD must have been opened during probing */
+         if (p->input_mappings) {
+             PA_IDXSET_FOREACH(m, p->input_mappings, idx) {
+diff --git a/spa/plugins/alsa/acp/alsa-mixer.h b/spa/plugins/alsa/acp/alsa-mixer.h
+index 7dc86f4f8..13df1b909 100644
+--- a/spa/plugins/alsa/acp/alsa-mixer.h
++++ b/spa/plugins/alsa/acp/alsa-mixer.h
+@@ -377,6 +377,8 @@ struct pa_alsa_profile {
+     bool supported:1;
+     bool fallback_input:1;
+     bool fallback_output:1;
++    /* ELD LPCM channels are too few, but other SADs have enough */
++    bool lpcm_channels_unconfirmed:1;
+ 
+     char **input_mapping_names;
+     char **output_mapping_names;
+diff --git a/spa/plugins/alsa/acp/alsa-util.c b/spa/plugins/alsa/acp/alsa-util.c
+index 6a74bd25c..018a56ab5 100644
+--- a/spa/plugins/alsa/acp/alsa-util.c
++++ b/spa/plugins/alsa/acp/alsa-util.c
+@@ -2027,11 +2027,17 @@ int pa_alsa_get_hdmi_eld(snd_hctl_elem_t *elem, pa_hdmi_eld *eld) {
+     eld->speakers = elddata[7] & 0x7f;
+ 
+     eld->lpcm_channels = 0;
++    eld->max_channels = 0;
+     eld->iec958_codecs = 0;
+ 
+     for (unsigned i = 0; i < sad_count; i++) {
+         uint8_t *sad = &elddata[20 + mnl + 3 * i];
+ 	uint8_t lpcm_channels;
++	/* Lowest 3 bits are channel count - 1, for all coding types */
++	uint8_t channels = (sad[0] & 0x07) + 1;
++
++	if (channels > eld->max_channels)
++		eld->max_channels = channels;
+ 
+         /* https://en.wikipedia.org/wiki/Extended_Display_Identification_Data#Audio_Data_Blocks */
+         switch ((sad[0] & 0x78) >> 3) {
+diff --git a/spa/plugins/alsa/acp/alsa-util.h b/spa/plugins/alsa/acp/alsa-util.h
+index ec1426ddb..22eef0ae8 100644
+--- a/spa/plugins/alsa/acp/alsa-util.h
++++ b/spa/plugins/alsa/acp/alsa-util.h
+@@ -33,6 +33,7 @@ struct pa_hdmi_eld {
+     uint8_t speakers;
+     uint64_t iec958_codecs;
+     uint8_t lpcm_channels;
++    uint8_t max_channels;
+ };
+ 
+ int pa_alsa_get_hdmi_eld(snd_hctl_elem_t *elem, pa_hdmi_eld *eld);
+-- 
+2.56.0
+

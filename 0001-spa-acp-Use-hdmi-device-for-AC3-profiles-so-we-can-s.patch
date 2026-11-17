@@ -1,0 +1,128 @@
+From 8bce026ad62e98bd35ef70650aae64c8a97efae7 Mon Sep 17 00:00:00 2001
+From: Arun Raghavan <arunr@valvesoftware.com>
+Date: Tue, 27 Oct 2026 18:43:07 -0700
+Subject: [PATCH] spa: acp: Use hdmi: device for AC3 profiles so we can set AES
+ bits
+
+Without the nonaudio bit being set, a receiver might incorrectly try to
+render AC3 audio as PCM. So instead of using the hw: device, we use the
+ALSA-provided hdmi: device, which allows us to set those bits. We set
+0x06, which is the default 0x04 + the nonaudio bit being set.
+
+Switching to the hdmi: devices means that we no longer use the PCM index
+for opening the device, but use the numeric index, and the
+HDA-Intel.conf parts of ALSA configuration plug in the right PCM index.
+---
+ .../alsa/mixer/profile-sets/hdmi-ac3.conf     | 24 ++++++++++---------
+ 1 file changed, 13 insertions(+), 11 deletions(-)
+
+diff --git a/spa/plugins/alsa/mixer/profile-sets/hdmi-ac3.conf b/spa/plugins/alsa/mixer/profile-sets/hdmi-ac3.conf
+index ea6cc9e73..de23e752e 100644
+--- a/spa/plugins/alsa/mixer/profile-sets/hdmi-ac3.conf
++++ b/spa/plugins/alsa/mixer/profile-sets/hdmi-ac3.conf
+@@ -21,9 +21,11 @@
+ 
+ .include default.conf
+ 
++# Use default AES arguments, but override AES0 to set the nonaudio bit
++
+ [Mapping hdmi-ac3-surround]
+ description = Digital Surround 5.1 (HDMI/AC3)
+-device-strings = plug:{SLAVE="a52:%f,'hw:%f,3'"}
++device-strings = plug:{SLAVE="a52:%f,'hdmi:%f,0,AES0=0x06'"}
+ paths-output = hdmi-output-0
+ channel-map = front-left,front-right,rear-left,rear-right,front-center,lfe
+ priority = 1
+@@ -31,7 +33,7 @@ direction = output
+ 
+ [Mapping hdmi-ac3-surround-extra1]
+ description = Digital Surround 5.1 (HDMI 2/AC3)
+-device-strings = plug:{SLAVE="a52:%f,'hw:%f,7'"}
++device-strings = plug:{SLAVE="a52:%f,'hdmi:%f,1,AES0=0x06'"}
+ paths-output = hdmi-output-1
+ channel-map = front-left,front-right,rear-left,rear-right,front-center,lfe
+ priority = 1
+@@ -39,7 +41,7 @@ direction = output
+ 
+ [Mapping hdmi-ac3-surround-extra2]
+ description = Digital Surround 5.1 (HDMI 3/AC3)
+-device-strings = plug:{SLAVE="a52:%f,'hw:%f,8'"}
++device-strings = plug:{SLAVE="a52:%f,'hdmi:%f,2,AES0=0x06'"}
+ paths-output = hdmi-output-2
+ channel-map = front-left,front-right,rear-left,rear-right,front-center,lfe
+ priority = 1
+@@ -47,7 +49,7 @@ direction = output
+ 
+ [Mapping hdmi-ac3-surround-extra3]
+ description = Digital Surround 5.1 (HDMI 4/AC3)
+-device-strings = plug:{SLAVE="a52:%f,'hw:%f,9'"}
++device-strings = plug:{SLAVE="a52:%f,'hdmi:%f,3,AES0=0x06'"}
+ paths-output = hdmi-output-3
+ channel-map = front-left,front-right,rear-left,rear-right,front-center,lfe
+ priority = 1
+@@ -55,7 +57,7 @@ direction = output
+ 
+ [Mapping hdmi-ac3-surround-extra4]
+ description = Digital Surround 5.1 (HDMI 5/AC3)
+-device-strings = plug:{SLAVE="a52:%f,'hw:%f,10'"}
++device-strings = plug:{SLAVE="a52:%f,'hdmi:%f,4,AES0=0x06'"}
+ paths-output = hdmi-output-4
+ channel-map = front-left,front-right,rear-left,rear-right,front-center,lfe
+ priority = 1
+@@ -63,7 +65,7 @@ direction = output
+ 
+ [Mapping hdmi-ac3-surround-extra5]
+ description = Digital Surround 5.1 (HDMI 6/AC3)
+-device-strings = plug:{SLAVE="a52:%f,'hw:%f,11'"}
++device-strings = plug:{SLAVE="a52:%f,'hdmi:%f,5,AES0=0x06'"}
+ paths-output = hdmi-output-5
+ channel-map = front-left,front-right,rear-left,rear-right,front-center,lfe
+ priority = 1
+@@ -71,7 +73,7 @@ direction = output
+ 
+ [Mapping hdmi-ac3-surround-extra6]
+ description = Digital Surround 5.1 (HDMI 7/AC3)
+-device-strings = plug:{SLAVE="a52:%f,'hw:%f,12'"}
++device-strings = plug:{SLAVE="a52:%f,'hdmi:%f,6,AES0=0x06'"}
+ paths-output = hdmi-output-6
+ channel-map = front-left,front-right,rear-left,rear-right,front-center,lfe
+ priority = 1
+@@ -79,7 +81,7 @@ direction = output
+ 
+ [Mapping hdmi-ac3-surround-extra7]
+ description = Digital Surround 5.1 (HDMI 8/AC3)
+-device-strings = plug:{SLAVE="a52:%f,'hw:%f,13'"}
++device-strings = plug:{SLAVE="a52:%f,'hdmi:%f,7,AES0=0x06'"}
+ paths-output = hdmi-output-7
+ channel-map = front-left,front-right,rear-left,rear-right,front-center,lfe
+ priority = 1
+@@ -87,7 +89,7 @@ direction = output
+ 
+ [Mapping hdmi-ac3-surround-extra8]
+ description = Digital Surround 5.1 (HDMI 9/AC3)
+-device-strings = plug:{SLAVE="a52:%f,'hw:%f,14'"}
++device-strings = plug:{SLAVE="a52:%f,'hdmi:%f,8,AES0=0x06'"}
+ paths-output = hdmi-output-8
+ channel-map = front-left,front-right,rear-left,rear-right,front-center,lfe
+ priority = 1
+@@ -95,7 +97,7 @@ direction = output
+ 
+ [Mapping hdmi-ac3-surround-extra9]
+ description = Digital Surround 5.1 (HDMI 10/AC3)
+-device-strings = plug:{SLAVE="a52:%f,'hw:%f,15'"}
++device-strings = plug:{SLAVE="a52:%f,'hdmi:%f,9,AES0=0x06'"}
+ paths-output = hdmi-output-9
+ channel-map = front-left,front-right,rear-left,rear-right,front-center,lfe
+ priority = 1
+@@ -103,7 +105,7 @@ direction = output
+ 
+ [Mapping hdmi-ac3-surround-extra10]
+ description = Digital Surround 5.1 (HDMI 11/AC3)
+-device-strings = plug:{SLAVE="a52:%f,'hw:%f,16'"}
++device-strings = plug:{SLAVE="a52:%f,'hdmi:%f,10,AES0=0x06'"}
+ paths-output = hdmi-output-10
+ channel-map = front-left,front-right,rear-left,rear-right,front-center,lfe
+ priority = 1
+-- 
+2.56.0
+
