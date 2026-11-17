@@ -1,0 +1,137 @@
+From 2556f706f0aa12ba15c10111115b55bdd254a41c Mon Sep 17 00:00:00 2001
+From: Julian Bouzas <julian.bouzas@collabora.com>
+Date: Tue, 3 Nov 2026 10:01:06 -0500
+Subject: [PATCH] create-item: register reconfigured audio adapters after all
+ are activated
+
+Streams were registered as soon as they were activated, and could be linked
+before their target devices were ready. This made them fail with no target
+and get destroyed when toggling the mono audio setting. The audio adapters
+are now reconfigured in a setting-changed event hook and only registered
+once all of them are activated.
+
+Assisted-by: Claude:claude-opus-5-5
+---
+ src/scripts/node/create-item.lua | 107 ++++++++++++++++++-------------
+ 1 file changed, 63 insertions(+), 44 deletions(-)
+
+diff --git a/src/scripts/node/create-item.lua b/src/scripts/node/create-item.lua
+index 1fd09db6..21a6db0b 100644
+--- a/src/scripts/node/create-item.lua
++++ b/src/scripts/node/create-item.lua
+@@ -158,49 +158,68 @@ SimpleEventHook {
+   end
+ }:register ()
+ 
+-function reconfigureAudioAdapters ()
+-  local ids = {}
+-
+-  -- Get the Id of all session items that are audio adapters
+-  for id, item in pairs(items) do
+-    local si_props = item.properties
+-    if si_props ["item.factory.name"] == "si-audio-adapter" then
+-      table.insert (ids, id)
+-    end
+-  end
+-
+-  -- Re-configure all audio adapters
+-  for _, id in pairs (ids) do
+-    local item = items[id]
+-    local node = item:get_associated_proxy ("node")
+-
+-    log:info (item, "Started re-configuring audio adapter")
+-
+-    -- Remove the session item so that it is unlinked
+-    items[id] = nil
+-    item:remove()
+-
+-    -- Configure the session item
+-    if not item:configure (configProperties (node)) then
+-      log:warning (item, "Could not re-configure audio adapter")
+-      goto skip_item
+-    end
+-
+-    -- Activate the session item so that it is linked again
+-    items[id] = item
+-    item:activate (Features.ALL, function (si, e)
+-      if e then
+-        log:warning (si, "Could not re-activate audio adapter")
+-      else
+-        log:info (si, "Successfully re-activated audio adapter")
+-        si:register ()
+-      end
+-    end)
++AsyncEventHook {
++  name = "node/reconfigure-audio-adapters",
++  interests = {
++    EventInterest {
++      Constraint { "event.type", "=", "setting-changed" },
++      Constraint { "event.subject.key", "#", "node.features.audio.*" },
++    },
++  },
++  steps = {
++    start = {
++      next = "none",
++      execute = function (event, transition)
++        local reconfigured = {}
++
++        -- Remove and re-configure all audio adapters, so that they are unlinked
++        for id, item in pairs (items) do
++          if item.properties ["item.factory.name"] == "si-audio-adapter" then
++            log:info (item, "Started re-configuring audio adapter")
++            item:remove ()
++            if item:configure (configProperties (
++                item:get_associated_proxy ("node"))) then
++              reconfigured [id] = item
++            else
++              log:warning (item, "Could not re-configure audio adapter")
++              items [id] = nil
++            end
++          end
++        end
+ 
+-    ::skip_item::
+-  end
+-end
++        -- Register the items only after all of them are activated, so that
++        -- streams are not linked before their target devices are available
++        local pending = 0
++        for _ in pairs (reconfigured) do
++          pending = pending + 1
++        end
++        if pending == 0 then
++          transition:advance ()
++          return
++        end
+ 
+-Settings.subscribe ("node.features.audio.*", function ()
+-  reconfigureAudioAdapters ()
+-end)
++        for id, item in pairs (reconfigured) do
++          item:activate (Features.ALL, function (si, e)
++            if e then
++              log:warning (si, "Could not re-activate audio adapter")
++              reconfigured [id] = nil
++            else
++              log:info (si, "Successfully re-activated audio adapter")
++            end
++
++            pending = pending - 1
++            if pending == 0 then
++              for rid, ritem in pairs (reconfigured) do
++                -- skip items whose node was removed in the meantime
++                if items [rid] == ritem then
++                  ritem:register ()
++                end
++              end
++              transition:advance ()
++            end
++          end)
++        end
++      end,
++    },
++  },
++}:register ()
+-- 
+2.55.0
+
