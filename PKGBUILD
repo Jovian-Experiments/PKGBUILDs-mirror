@@ -9,8 +9,8 @@
 # but should only apply to Deck. Should never be enabled by default in upstream PKGBUILD.
 
 pkgname=renderdoc
-pkgver=1.46
-pkgrel=1.1
+pkgver=1.47
+pkgrel=1.0
 pkgdesc="OpenGL and Vulkan debugging tool"
 arch=(x86_64)
 url="https://github.com/baldurk/renderdoc"
@@ -21,7 +21,7 @@ source=("https://github.com/baldurk/renderdoc/archive/v${pkgver}.tar.gz"
         "https://github.com/baldurk/renderdoc/releases/download/v${pkgver}/v${pkgver}.tar.gz.asc"
         "0001-Always-force-XCB-platform.patch")
 validpgpkeys=('1B039DB9A4718A2D699DE031AC612C3120C34695')
-sha384sums=('47465dd24c32c9afd475153ce05a2702dc7c5c6e24180364166d7fbbc590d8884823c99630cb0f1d9a2ba79decb9e3fa'
+sha384sums=('3d9cf5eb82e1ea9e85f285c39f2ffe0609cd2b1318a56b4347d5df493f9dbfede0f835ec6007b22dee3ee82110e980da'
             'SKIP'
             'SKIP')
 
