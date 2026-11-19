@@ -1,9 +1,9 @@
 # Maintainer: Umang Jain (uajain) <uajain@igalia.com>
 
 pkgbase=linux-neptune-72-devel
-_tag=7.2.4-valve1
+_tag=7.2.15-valve1
 pkgver=${_tag//-/.}
-pkgrel=2
+pkgrel=1
 pkgdesc='Linux'
 url="https://gitlab.steamos.cloud/jupiter/linux-integration/-/tree/$_tag"
 arch=(x86_64)
@@ -34,7 +34,7 @@ source=(
   config-neptune  # Jupiter: the neptune kernel fragment file (overrides 'config.x86_64' above)
   config-neptune-devel  # Jupiter: the neptune devel kernel fragment file
 )
-sha256sums=('b74c0ebb8f1390c38b7f91e27f13f033bdadc8c4cbeb67fb20ff449243afafb9'
+sha256sums=('ae2af1e4ab6b585b36995e61bbe26fcf91df1140803c4fd45b2ff4a7f5691e6e'
             'ecd8c76eb203493e67ba4052e7bc1fa46f51c91566f102172e7a18d7de2dd5eb'
             'b91c3ed65067704c8fdb8289d44ed18aa62f98f52c3b6d91fb72bc5b1606ae79'
             'a9e0f3aa421a4cd2ccc840853d52b7aaeb2e2792238e4e953d0776f0f3061bc6')
