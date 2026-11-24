@@ -6,7 +6,7 @@
 pkgname=kwin
 pkgver=6.8.2
 _dirver=$(echo $pkgver | cut -d. -f1-3)
-pkgrel=1.3
+pkgrel=1.4
 pkgdesc='An easy to use, but flexible, Wayland compositor'
 arch=(x86_64)
 url='https://kde.org/plasma-desktop/'
@@ -99,13 +99,17 @@ source=(
         0006-inputmethod-Skip-input-events-from-fake-input.patch #Currently deck specific, a workaround for the Steam OSK. Test CJK input with both SteamOSK and a physical keyboard both work before dropping
         0007-backends-libinput-list-devices-during-setup.patch
         0008-outputconfigurationstore-improve-the-default-scale-f.patch
+        0009-fix-input-crash.patch
+        0010-add-events-on-startup.patch
         )
 sha256sums=('ea5e68d957c7d70abed97222a592d4445fda29129e20942658badd224ee138b4'
             'SKIP'
             '81aabc16f054ba3cd47d0fe5d9169df17cd1f14d7dfc324786e86cbe08c84b48'
             'bf08aae2967d3cd4202ee27004eff2feedc98163626fd98f96b7d2acae40dc38'
             '91289ca857da621c4ece6fd24b51f0c43e8bf31dd567da261af0c7e71a4093a9'
-            'c2d164309123c2a743c2d2cd82031e031eb0a924df0eb06e9527c8e4911980e0')
+            'c2d164309123c2a743c2d2cd82031e031eb0a924df0eb06e9527c8e4911980e0'
+            '657c90be8f2051f742a583e4ce38388d502ecaf0e402f2b01743ceb358836f68'
+            'cd2d27071eabe7f055d3cd0ce55d51dd7016e98b24582b74659195b2fb1f4871')
 
 validpgpkeys=('E0A3EB202F8E57528E13E72FD7574483BB57B18D'  # Jonathan Esk-Riddell <jr@jriddell.org>
               '0AAC775BB6437A8D9AF7A3ACFE0784117FBCE11D'  # Bhushan Shah <bshah@kde.org>
@@ -118,6 +122,8 @@ prepare() {
   patch -p1 -d "$srcdir/$pkgname-$pkgver" -i "$srcdir/0006-inputmethod-Skip-input-events-from-fake-input.patch"
   patch -p1 -d "$srcdir/$pkgname-$pkgver" -i "$srcdir/0007-backends-libinput-list-devices-during-setup.patch"
   patch -p1 -d "$srcdir/$pkgname-$pkgver" -i "$srcdir/0008-outputconfigurationstore-improve-the-default-scale-f.patch"
+  patch -p1 -d "$srcdir/$pkgname-$pkgver" -i "$srcdir/0009-fix-input-crash.patch"
+  patch -p1 -d "$srcdir/$pkgname-$pkgver" -i "$srcdir/0010-add-events-on-startup.patch"
 }
 
 build() {
