@@ -28,8 +28,8 @@ pkgname=(
 # When updating the tag, consider if you are adding any shader compiler changes. If so,
 # or if you are not sure, regenerate the radv-build-id below. To update, see
 # https://gitlab.steamos.cloud/jupiter/docs/-/wikis/How-to-make-a-new-Mesa-release#updating-the-radv-build-id
-_tag=steamos-26.05.20
-pkgver=26.2.0_devel.222153.steamos_26.05.20
+_tag=steamos-26.05.21
+pkgver=26.2.0_devel.222155.steamos_26.05.21
 
 #pkgver=25.2.7
 #pkgver=${pkgver/[a-z]/-&}
@@ -167,7 +167,7 @@ for _crate in "${!_crates[@]}"; do
   )
 done
 
-sha256sums=('ac896fedae961e3513c6081b284c19e064103f20e20ba51baa38174dd6985b6b'
+sha256sums=('fc4754223e4eba89d45b851f8b3c7d9638f8f6a1758f3bec706668ab1ced4fc8'
             '67914ab451f3bfd2e69e5e9d2ef3858484e7074d63f204fd166ec391b54de21d'
             'ed646292ffc8188ef8ea4d1e0e0150fb15a5c2e12ad9b8fc191ae7a8a7f3c4b9'
             '7f9f832470494906d1fca5329f8ab5791cc60beb230c74815dff541cbd2b5ca0'
@@ -195,7 +195,7 @@ sha256sums=('ac896fedae961e3513c6081b284c19e064103f20e20ba51baa38174dd6985b6b'
             'db7d01726be8ab66ab32f9df467ae8b1148906685bbe75c82d1e65d7f5b3f841'
             '692fcb63b64b1758029e0a96ee63e049ce8c5948587f2f7208df04625e5f6b56'
             '25aa4ce346d03a6dcd68dd8b4010bcb74e54e62c90c573f394c46eae99aba32d')
-b2sums=('4d0a86085caf232f55b83ebcca64a2d813664fb47f5466fb3414de967acd31387d72a9170c5638933bfe1b75c6975683b40244128404a244021aa649e1c2b99c'
+b2sums=('d2d81967e394a398c216488ebc6586fb50e5bf6fe10f25b698b02e973f0606e0f8379155f065fa34dc5ec74cb6757420bbe6d208d6a2ae695aa69f6c985355b3'
         '431439d31632d177aeb15f910b4f546efa76d54fc74fc8e140399dc5e54eca33fd606f11dbfb48fa83067c8474ee512e62751895d5948367b65ab08b984284e5'
         'a6d47c903be6094423d89b8ec3ca899d0a84df6dbd6e76632bb6c9b9f40ad9c216f8fa400310753d392f85072756b43ac3892e0a2c4d55f87ab6463002554823'
         '9a73962e1e38b84131ab2350b69a1f5d611c549533eec73e898c394a9b9442f357bb5d5f59e1be12270dd29bdf237dc2d21786c0c2210736e224ef5d48300dcf'
