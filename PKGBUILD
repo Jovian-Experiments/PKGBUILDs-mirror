@@ -4,7 +4,7 @@
 pkgbase=linux-neptune-72
 _tag=7.2.15-valve1
 pkgver=${_tag//-/.}
-pkgrel=1
+pkgrel=2
 pkgdesc='Linux'
 url="https://gitlab.steamos.cloud/jupiter/linux-integration/-/tree/$_tag"
 arch=(
@@ -53,10 +53,10 @@ validpgpkeys=(
   83BC8889351B5DEBBB68416EB8AC08600F108CDF  # Jan Alexander Steffens (heftig)
 )
 sha256sums=('ae2af1e4ab6b585b36995e61bbe26fcf91df1140803c4fd45b2ff4a7f5691e6e'
-            'b91c3ed65067704c8fdb8289d44ed18aa62f98f52c3b6d91fb72bc5b1606ae79')
+            '75fbcf70ed33994939d1dd1b4a12737bf3970936fca29f3d5a4a1ea4e0b438f3')
 sha256sums_x86_64=('ecd8c76eb203493e67ba4052e7bc1fa46f51c91566f102172e7a18d7de2dd5eb')
 b2sums=('a67151346a976378c5ad74b7209e41db82577689a328ebbcdb23b80ba123b9bf5c8c73b614f96f006c50ead548d62ee5fcb8c1e8c691427400f5a83c1c4fb1bf'
-        'c5bbcc97d48ed12574e8491211e4cfbadcf5f9e696c6c046e5f87f84550c2491950d1be0eca83cff6e35f74a0350d1cd2f8627e5fcd70d93bfc25ca96b4eddd1')
+        '306070aad12ba1c98646946015ddf55bb7564986d90ba66c0757ed64211391000f201091bba53fc8f65e9191ffe87dc3a1581932614ccc3287205bac9e8c422f')
 b2sums_x86_64=('0564ea851810a155cd589bd3a5d74344f16ab2c7c5ea5aa740faaf6776230ccd115474b6164ebd32d89d8615e41d24d2612d649b987f1f2cde58476e5561fe5e')
 
 # https://www.kernel.org/pub/linux/kernel/v6.x/sha256sums.asc
