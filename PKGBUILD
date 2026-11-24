@@ -3,7 +3,7 @@
 pkgbase=linux-neptune-72-devel
 _tag=7.2.15-valve1
 pkgver=${_tag//-/.}
-pkgrel=1
+pkgrel=2
 pkgdesc='Linux'
 url="https://gitlab.steamos.cloud/jupiter/linux-integration/-/tree/$_tag"
 arch=(x86_64)
@@ -36,7 +36,7 @@ source=(
 )
 sha256sums=('ae2af1e4ab6b585b36995e61bbe26fcf91df1140803c4fd45b2ff4a7f5691e6e'
             'ecd8c76eb203493e67ba4052e7bc1fa46f51c91566f102172e7a18d7de2dd5eb'
-            'b91c3ed65067704c8fdb8289d44ed18aa62f98f52c3b6d91fb72bc5b1606ae79'
+            '75fbcf70ed33994939d1dd1b4a12737bf3970936fca29f3d5a4a1ea4e0b438f3'
             'a9e0f3aa421a4cd2ccc840853d52b7aaeb2e2792238e4e953d0776f0f3061bc6')
 
 export KBUILD_BUILD_HOST=archlinux
