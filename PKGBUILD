@@ -3,7 +3,7 @@
 pkgname=gamescope
 _srctag=3.16.30.2
 pkgver=${_srctag//-/.}
-pkgrel=1
+pkgrel=2
 pkgdesc="gaming shell based on Xwayland, powered by Vulkan and DRM"
 arch=(x86_64)
 url="https://github.com/ValveSoftware/gamescope"
@@ -62,12 +62,8 @@ install=gamescope.install
 prepare() {
 	cd "$pkgname"
 
-	local src
-	for src in "${source[@]}"; do
-		[[ $src = *.patch ]] || continue
-		echo "Applying patch $src..."
-		patch -Np1 -i "../$src"
-	done
+	# Holo: prevent frozen screen and looping sound on Steam Machine when hibernating in game mode
+	git cherry-pick -n a962a4dc136369708657605f87057ba3f9991fda
 
 	# git submodules
 	git submodule init
